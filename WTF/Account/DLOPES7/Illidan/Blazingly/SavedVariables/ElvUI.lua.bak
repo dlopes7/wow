@@ -1,0 +1,28 @@
+
+ElvCharacterDB = {
+	["ConvertKeybindings"] = true,
+	["ChatEditHistory"] = {
+		"/p ME, HUNTER, DH, RUGOE", -- [1]
+		"/p yo I dont need it", -- [2]
+		"/p sorry just saw the message", -- [3]
+		"/p im in valdraken", -- [4]
+		"/raid no one has ever died for lack of HPS in this raid on heroic difficulty", -- [5]
+		"/raid ever", -- [6]
+		"/raid blue", -- [7]
+		"/raid nice", -- [8]
+		"/key", -- [9]
+		"/p yoo", -- [10]
+		"/p Ill PI the lock", -- [11]
+		"/p ops", -- [12]
+		"/p mb just saw the chat", -- [13]
+		"/p I got ya", -- [14]
+		"/p skim get loickl", -- [15]
+		"/p let lock bait", -- [16]
+		"/p stack o nstalker please", -- [17]
+		"/raid oh why could it be", -- [18]
+		"/raid what a mistery", -- [19]
+		"/raid because you dont need the dumb legendarya", -- [20]
+	},
+	["ChatHistoryLog"] = {
+	},
+}

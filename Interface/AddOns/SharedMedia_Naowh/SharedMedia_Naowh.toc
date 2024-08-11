@@ -1,0 +1,8 @@
+## Interface: 100000
+## Title: |cff0091ed<SharedMedia>|r |cffffa300 <Naowh>|r
+
+libs\LibStub\LibStub.lua
+libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
+libs\LibSharedMedia-3.0\lib.xml
+embeds.xml
+NaowhMedia.lua 

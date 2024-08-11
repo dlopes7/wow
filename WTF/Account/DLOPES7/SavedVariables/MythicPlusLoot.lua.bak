@@ -1,0 +1,94 @@
+
+MythicPlusLootDB = {
+	["profileKeys"] = {
+		["Msery - Azralon"] = "Msery - Azralon",
+		["Gordonfreema - Stormrage"] = "Gordonfreema - Stormrage",
+		["Davidady - Stormrage"] = "Davidady - Stormrage",
+		["Adycita - Stormrage"] = "Adycita - Stormrage",
+		["Klarth - Stormrage"] = "Klarth - Stormrage",
+		["Demongordon - Stormrage"] = "Demongordon - Stormrage",
+		["Druidfreeman - Stormrage"] = "Druidfreeman - Stormrage",
+		["Gords - Stormrage"] = "Gords - Stormrage",
+		["Olhos - Stormrage"] = "Olhos - Stormrage",
+		["Davi - Stormrage"] = "Davi - Stormrage",
+		["Auntli - Stormrage"] = "Auntli - Stormrage",
+		["Gordonfreems - Stormrage"] = "Gordonfreems - Stormrage",
+		["Dragonfreema - Stormrage"] = "Dragonfreema - Stormrage",
+		["Adnade - Area 52"] = "Adnade - Area 52",
+		["Gordruid - Azralon"] = "Gordruid - Azralon",
+		["Doutora - Stormrage"] = "Doutora - Stormrage",
+		["Adnade - Azralon"] = "Adnade - Azralon",
+		["Daircane - Moon Guard"] = "Daircane - Moon Guard",
+		["Gordonfreema - Azralon"] = "Gordonfreema - Azralon",
+	},
+	["profiles"] = {
+		["Msery - Azralon"] = {
+			["v"] = 1,
+		},
+		["Gordonfreema - Stormrage"] = {
+			["v"] = 1,
+		},
+		["Davidady - Stormrage"] = {
+			["v"] = 1,
+		},
+		["Adycita - Stormrage"] = {
+			["v"] = 1,
+		},
+		["Klarth - Stormrage"] = {
+			["v"] = 1,
+		},
+		["Demongordon - Stormrage"] = {
+			["v"] = 1,
+		},
+		["Druidfreeman - Stormrage"] = {
+			["v"] = 1,
+		},
+		["Gords - Stormrage"] = {
+			["v"] = 1,
+		},
+		["Olhos - Stormrage"] = {
+			["v"] = 1,
+		},
+		["Davi - Stormrage"] = {
+			["v"] = 1,
+			["mythicLevel"] = 12,
+			["slot"] = 11,
+		},
+		["Auntli - Stormrage"] = {
+			["v"] = 1,
+		},
+		["Gordonfreems - Stormrage"] = {
+			["v"] = 1,
+			["class"] = "Shaman",
+			["mythicLevel"] = 7,
+			["slot"] = 5,
+		},
+		["Dragonfreema - Stormrage"] = {
+			["v"] = 1,
+		},
+		["Adnade - Area 52"] = {
+			["v"] = 1,
+		},
+		["Gordruid - Azralon"] = {
+			["v"] = 1,
+		},
+		["Doutora - Stormrage"] = {
+			["v"] = 1,
+		},
+		["Adnade - Azralon"] = {
+			["slot"] = 2,
+			["class"] = "Death Knight",
+			["spec"] = "Blood",
+			["mythicLevel"] = 14,
+			["v"] = 1,
+		},
+		["Daircane - Moon Guard"] = {
+			["v"] = 1,
+		},
+		["Gordonfreema - Azralon"] = {
+			["v"] = 1,
+			["mythicLevel"] = 9,
+			["slot"] = 9,
+		},
+	},
+}

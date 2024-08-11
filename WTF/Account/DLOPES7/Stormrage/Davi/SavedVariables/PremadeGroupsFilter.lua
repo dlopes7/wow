@@ -1,0 +1,52 @@
+
+PremadeGroupsFilterState = {
+	["version"] = 6,
+	["c1f4"] = {
+		["enabled"] = false,
+		["mini"] = {
+			["sorting"] = "",
+			["expression"] = "",
+		},
+		["minimized"] = false,
+	},
+	["c7f8"] = {
+		["enabled"] = false,
+		["mini"] = {
+			["sorting"] = "",
+			["expression"] = "",
+		},
+		["minimized"] = false,
+	},
+	["c6f4"] = {
+		["enabled"] = false,
+		["mini"] = {
+			["sorting"] = "",
+			["expression"] = "",
+		},
+		["minimized"] = false,
+	},
+	["c3f5"] = {
+		["minimized"] = false,
+		["mini"] = {
+			["sorting"] = "",
+			["expression"] = "",
+		},
+		["raid"] = {
+			["sorting"] = "",
+			["expression"] = "",
+		},
+		["enabled"] = true,
+	},
+	["c2f4"] = {
+		["minimized"] = false,
+		["enabled"] = true,
+		["mini"] = {
+			["sorting"] = "",
+			["expression"] = "",
+		},
+		["dungeon"] = {
+			["sorting"] = "",
+			["expression"] = "",
+		},
+	},
+}

@@ -1,0 +1,7 @@
+## Interface: 20008
+## Title: |cFFD96600NotUI Sound Pack|r
+
+libs\LibStub\LibStub.lua
+libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
+embeds.xml
+SharedMedia_NotUI.lua 

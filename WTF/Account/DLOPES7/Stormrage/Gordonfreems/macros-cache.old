@@ -1,0 +1,55 @@
+VER 3 0100000000000008 "asdsad" "134331"
+/script TradeSkillFrame.DetailsFrame:Create();
+/use 6
+/click StaticPopup1Button1
+END
+VER 3 0100000000000009 "disp" "136103"
+/rw ABOUT TO DISPEL MOVE CLOSER TO TORNADO PERSON/CENTER
+END
+VER 3 0100000000000005 "earth" "135806"
+/cast Earth Elemental
+/target Greater Earth Elemental
+/focus
+/targetlasttarget
+END
+VER 3 0100000000000007 "Explosive" "INV_MISC_QUESTIONMARK"
+#showtooltip Frost Shock
+/tar Explosive
+/cast [@focus] Frost Shock
+END
+VER 3 0100000000000004 "heal or ress" "136077"
+/cast [nodead] Healing Wave; Ancestral Spirit
+END
+VER 3 0100000000000006 "InterruptFocus" "INV_MISC_QUESTIONMARK"
+#showtooltip Wind Shear
+/cast [@focus] Wind Shear
+END
+VER 3 010000000000000D "T" "134400"
+/cast Feral Spirit
+/cast Ancestral Guidance
+/use 13
+/use Elemental Potion of Power
+END
+VER 3 010000000000000C "Talent" "132193"
+#showtooltip
+/cast [talent: 5/3] Wind Rush Totem
+END
+VER 3 010000000000000B "trinket" "INV_MISC_QUESTIONMARK"
+#showtooltip 14
+/use 14
+END
+VER 3 0100000000000003 "vuhdoboth" "136089"
+/castsequence Earth Shield
+/cast Unleash Life
+END
+VER 3 0100000000000001 "VuhDoDCShieldData" "Ability_Repair"
+P[x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x]1SR[x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x]
+END
+VER 3 0100000000000002 "VuhDoDCShieldNames" "Ability_Repair"
+N[x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x]Gor[x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x]
+END
+VER 3 010000000000000A "WindShear" "INV_MISC_QUESTIONMARK"
+#showtooltip Wind Shear
+/stopcasting
+/cast [@focus, exists, harm] Wind Shear; Wind Shear
+END

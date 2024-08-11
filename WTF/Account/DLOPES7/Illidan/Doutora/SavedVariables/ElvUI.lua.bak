@@ -1,0 +1,28 @@
+
+ElvCharacterDB = {
+	["ConvertKeybindings"] = true,
+	["ChatEditHistory"] = {
+		"/cw Purnima-Illidan any specific reason I was replaced there? I didn't understand what I did wrong", -- [1]
+		"/cw Qtpantts any reason I got replaced on volcaross? My cohealer died to avoidable damage", -- [2]
+		"/p one sec uninstalling an addon", -- [3]
+		"/rl", -- [4]
+		"/rc", -- [5]
+		"/cd 10", -- [6]
+		"/p all downstairs please", -- [7]
+		"/p do not LOS", -- [8]
+		"/p awalys sac me or evoker please", -- [9]
+		"/p yup", -- [10]
+		"/p put tank ass to wall pelase", -- [11]
+		"/p walk during consecration dont get clipped", -- [12]
+		"/p remove next bleed please voker", -- [13]
+		"/p let me do orbs on boss, ranged stay close to each other please", -- [14]
+		"/p dont let casts pass here", -- [15]
+		"/p gg", -- [16]
+		"/cw Drakusan-Tichondrius yeah but I let ppl die as well during dragon, and couldve feared that missed kick", -- [17]
+		"/cw Drakusan-Tichondrius well gg", -- [18]
+		"/p heya", -- [19]
+		"/who Morning", -- [20]
+	},
+	["ChatHistoryLog"] = {
+	},
+}

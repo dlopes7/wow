@@ -1,0 +1,23 @@
+VER 3 0100000000000006 "asdasd" "134400"
+#showtooltip
+/use [@mouseover,help,exists,nodead][] Leaf of the Ancient Protectors
+END
+VER 3 0100000000000001 "feather" "134400"
+#showtooltip Angelic Feather
+/cast [@player] Angelic Feather
+END
+VER 3 0100000000000005 "focs" "237543"
+/target focus
+END
+VER 3 0100000000000002 "Int" "134400"
+#showtooltip 
+/cast [@focus,exists,nodead][] Silence
+END
+VER 3 0100000000000004 "mindblast" "134400"
+#showtooltip
+/cast mind blast
+/focus
+END
+VER 3 0100000000000003 "pifocus" "135939"
+/cast [@focus] Power Infusion 
+END

@@ -1,0 +1,28 @@
+
+ElvCharacterDB = {
+	["ConvertKeybindings"] = true,
+	["ChatEditHistory"] = {
+		"/p vc que sabe btw", -- [1]
+		"/p s", -- [2]
+		"/p um seg vou de lock", -- [3]
+		"/key", -- [4]
+		"/p lust first boss please", -- [5]
+		"/mdt", -- [6]
+		"/p one sec switching chars", -- [7]
+		"bora precisa de dps ou tank?", -- [8]
+		"/bigwigs", -- [9]
+		"/cw Mingi Carry com 40k dps no boss? Seu RETARDADO MENTAL", -- [10]
+		"/who Mingi", -- [11]
+		"/who Dragonmaw", -- [12]
+		"/WA", -- [13]
+		"/p lust here and boss please", -- [14]
+		"/p mb", -- [15]
+		"/p 4 then 3", -- [16]
+		"/p LUST", -- [17]
+		"/rl", -- [18]
+		"/wa", -- [19]
+		"/macro", -- [20]
+	},
+	["ChatHistoryLog"] = {
+	},
+}

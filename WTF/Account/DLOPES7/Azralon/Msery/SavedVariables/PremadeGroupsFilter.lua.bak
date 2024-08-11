@@ -1,0 +1,4 @@
+
+PremadeGroupsFilterState = {
+	["version"] = 4,
+}
