@@ -215,6 +215,11 @@ local functionFactory = {
             dateUpdater = function(self)
                 local completed = 0
                 if (self.args.questIDs) and (type(self.args.questIDs) == "table") then
+                    -- lower than 0 means all quests need to be completed
+                    if self.args.checkAllCompleted then
+                        completed = 1 - #self.args.questIDs
+                    end
+
                     for _, questID in pairs(self.args.questIDs) do
                         if C_QuestLog_IsQuestFlaggedCompleted(questID) then
                             completed = completed + 1
@@ -251,7 +256,7 @@ local functionFactory = {
                         self.runningTip:SetText(self.args:runningTextUpdater())
                     end
                     self.runningTip:Show()
-                    if self.flash then
+                    if self.args.flash then
                         E:Flash(self.runningTip, 1, true)
                     end
                 else
@@ -271,7 +276,7 @@ local functionFactory = {
                         )
                     end
 
-                    if self.flash then
+                    if self.args.flash then
                         E:StopFlash(self.runningTip)
                     end
                     self.runningTip:Hide()
@@ -720,6 +725,7 @@ local eventData = {
         args = {
             icon = 3015740,
             type = "loopTimer",
+            checkAllCompleted = true,
             questIDs = {82676, 82689, 78938},
             -- hasWeeklyReward = true,
             duration = env.radiantEchoesInterval, -- always on
@@ -1399,13 +1405,9 @@ function ET:Initialize()
         self:RegisterEvent(event, "HandlerEvent")
     end
 
-    hooksecurefunc(
-        _G.WorldMapFrame,
-        "Show",
-        function()
-            ET:UpdateTrackers()
-        end
-    )
+    EventRegistry:RegisterCallback("WorldMapOnShow", self.UpdateTrackers, self)
+    EventRegistry:RegisterCallback("WorldMapMinimized", E.Delay, E, 0.1, self.UpdateTrackers, self)
+    EventRegistry:RegisterCallback("WorldMapMaximized", E.Delay, E, 0.1, self.UpdateTrackers, self)
 end
 
 function ET:ProfileUpdate()

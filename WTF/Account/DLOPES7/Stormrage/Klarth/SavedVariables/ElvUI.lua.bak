@@ -2,13 +2,6 @@
 ElvCharacterDB = {
 ["ConvertKeybindings"] = true,
 ["ChatEditHistory"] = {
-"/p mb",
-"é normal",
-"QUER VIR NUMA NORMAL",
-"LOL",
-"AFF",
-"/raid click the summons please",
-"/raid countdown lets goooooo",
 "/raid that clutch tremor totem",
 "/raid I trust",
 "/raid one sec please I died",
@@ -22,6 +15,13 @@ ElvCharacterDB = {
 "/cw Vyrk-BlackDragonflight I dont need the cape",
 "/cw Vyrk-BlackDragonflight I didnt get a cape either",
 "/cw Vyrk-BlackDragonflight gg ty",
+"/p ye",
+"/macro",
+"/p gg",
+"/key",
+"/p los down left",
+"/WAVE",
+"/p first pull and whenever its up.",
 },
 ["ChatHistoryLog"] = {
 },

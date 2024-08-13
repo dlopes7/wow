@@ -1,24 +1,35 @@
 # LittleWigs
 
-## [v11.0.10](https://github.com/BigWigsMods/LittleWigs/tree/v11.0.10) (2024-08-09)
-[Full Changelog](https://github.com/BigWigsMods/LittleWigs/compare/v11.0.9...v11.0.10) [Previous Releases](https://github.com/BigWigsMods/LittleWigs/releases)
+## [v11.0.11](https://github.com/BigWigsMods/LittleWigs/tree/v11.0.11) (2024-08-12)
+[Full Changelog](https://github.com/BigWigsMods/LittleWigs/compare/v11.0.10...v11.0.11) [Previous Releases](https://github.com/BigWigsMods/LittleWigs/releases)
 
-- bump min version  
-- Rename `NAMEPLATEBAR` to `NAMEPLATE`  
-- Shadowlands/MistsOfTirnaScithe/Tredova: Fix Consumption cast bar  
-- Shadowlands/MistsOfTirnaScithe/Tredova: Timer updates  
-- Shadowlands/MistsOfTirnaScithe/Trash: Sound and scoping updates, timers  
-- Shadowlands/MistsOfTirnaScithe/Mistcaller: Timer updates  
-- Shadowlands/MistsOfTirnaScithe/IngraMaloch: Timer updates  
-- Update zhCN (#1123)  
-- WarWithin/AraKara/Avanoxx: Insatiable duration is now 60s  
-- BfA/SiegeOfBoralus/Viqgoth: Suppress Eradication alert on win  
-- BfA/SiegeOfBoralus/Bainbridge: Rename Iron Gaze, fix module name  
-- BfA/SiegeOfBoralus/Darkfathom: Timer updates  
-- BfA/SiegeOfBoralus/Trash: Timers, remove obsolete abilities  
-- Shadowlands/TheNecroticWake/Trash: Clean up icons on death  
-- WarWithin/AraKara/Trash: Clean up icons on death  
-- Cataclysm/GrimBatol/Trash: Molten Wake, Lava Fist, timers  
-- Cataclysm/GrimBatol/Umbriss: Timer update  
-- WarWithin/AraKara/Trash: Timer improvements  
-- Shadowlands/TheNecroticWake/Trash: Death Burst, timers  
+- WarWithin/CinderbrewMeadery/Trash: Timers  
+- WarWithin/CinderbrewMeadery/BrewMasterAldryr: Happy Hour alert timing  
+- WarWithin/PrioryOfTheSacredFlame/PrioressMurrpray: Timer updates  
+- WarWithin/PrioryOfTheSacredFlame/Trash: Timer updates  
+- WarWithin/PrioryOfTheSacredFlame/BaronBraunpyke: Timer updates  
+- WarWithin/PrioryOfTheSacredFlame/CaptainDailcry: Savage Mauling updates, timer updates  
+- WarWithin/PrioryOfTheSacredFlame/Trash: Timers  
+- WarWithin/DarkflameCleft/Trash: Timers  
+- WarWithin/TheRookery/Trash: Timers  
+- WarWithin/TheDawnbreaker/Rashanan: Timer updates  
+- WarWithin/TheDawnbreaker/Anubikkaj: Timer improvements  
+- WarWithin/TheDawnbreaker/Trash: Additional mob ids  
+- Update zhCN (#1126)  
+- WarWithin/TheDawnbreaker/Trash: Umbral Barrier, timers  
+- WarWithin/TheDawnbreaker/Shadowcrown: Timer updates  
+- WarWithin/TheStonevault/VoidSpeakerEirich: Void Corruption updates, ability counts, timer updates  
+- WarWithin/TheStonevault/Trash: Timers  
+- WarWithin/TheStonevault/MasterMachinists: Rework all timers  
+- WarWithin/TheDawnbreaker: Locale cleanup  
+- WarWithin/TheStonevault/Trash: Timers, scoping updates  
+- WarWithin/TheStonevault/MasterMachinists: Silenced Speaker fixes  
+- WarWithin/TheStonevault/Skarmorak: Fortified Shell count, timer updates  
+- WarWithin/TheStonevault/EDNA: Refracting Beam event update  
+- WarWithin/CityOfThreads/Izo: Alert when Shifting Anomalies move  
+- WarWithin/CityOfThreads/Trash: Timers  
+- Update zhCN (#1125)  
+- WarWithin/CityOfThreads/Trash: Timers  
+- WarWithin/CityOfThreads/FangsOfTheQueen: Non-Mythic timer update  
+- WarWithin/CityOfThreads/Trash: Shadows of Doubt say countdown  
+- WarWithin/CityOfThreads/OratorKrixvizk: Shadows of Doubt say countdown  

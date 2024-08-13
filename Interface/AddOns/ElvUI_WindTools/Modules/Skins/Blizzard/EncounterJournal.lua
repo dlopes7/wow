@@ -77,6 +77,12 @@ function S:Blizzard_EncounterJournal()
             )
         end
     end
+
+    -- Monthly Activities
+    local MAF = _G.EncounterJournalMonthlyActivitiesFrame
+    if MAF and MAF.FilterList then
+        MAF.FilterList:SetTemplate("Transparent")
+    end
 end
 
 S:AddCallbackForAddon("Blizzard_EncounterJournal")

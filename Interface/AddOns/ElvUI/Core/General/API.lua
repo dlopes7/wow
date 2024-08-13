@@ -150,9 +150,9 @@ E.SpecName = { -- english locale
 	[257]	= 'Holy',
 	[258]	= 'Shadow',
 	-- Rogue
-	[259]	= 'Assasination',
+	[259]	= 'Assassination',
 	[260]	= 'Combat',
-	[261]	= 'Sublety',
+	[261]	= 'Subtlety',
 	-- Shaman
 	[262]	= 'Elemental',
 	[263]	= 'Enhancement',
@@ -843,6 +843,10 @@ function E:ClickGameMenu()
 	end
 end
 
+function E:ScaleGameMenu()
+	GameMenuFrame:SetScale(E.db.general.gameMenuScale or 1)
+end
+
 function E:SetupGameMenu()
 	if GameMenuFrame.ElvUI then return end
 
@@ -854,7 +858,7 @@ function E:SetupGameMenu()
 		GameMenuFrame.ElvUI = button
 		GameMenuFrame.MenuButtons = {}
 
-		GameMenuFrame:SetScale(E.private.general.gameMenuScale or 1)
+		E:ScaleGameMenu()
 
 		hooksecurefunc(GameMenuFrame, 'Layout', E.PositionGameMenuButton)
 	else
@@ -989,10 +993,11 @@ do -- complicated backwards compatible menu
 				local name = list.text or ('test'..depth)
 
 				local func = (list.arg1 or list.arg2) and (function() list.func(nil, list.arg1, list.arg2) end) or list.func
-				if list.notCheckable then
-					previous = root:CreateButton(list.text or name, func)
+				local checked = list.checked and (not list.notCheckable and function() return list.checked(list) end) or E.noop
+				if checked then
+					previous = root:CreateCheckbox(list.text or name, checked, func)
 				else
-					previous = root:CreateCheckbox(list.text or name, list.checked, func)
+					previous = root:CreateButton(list.text or name, func)
 				end
 			end
 

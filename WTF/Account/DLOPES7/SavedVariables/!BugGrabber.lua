@@ -1,7 +1,7 @@
 
 BugGrabberDB = {
 ["lastSanitation"] = 3,
-["session"] = 1301,
+["session"] = 1309,
 ["errors"] = {
 {
 ["message"] = "Lua error in aura '[INFUSION] - TRASH - SPEAR FLURRY CHANNEL': Custom Action\nWeakAuras Version: 5.8.4\nAura Version: 2.6.4\n[string \"return function() NUI.TTS(\"avoid\",5)\"]:1: attempt to call field 'TTS' (a nil value)",

@@ -20,12 +20,12 @@ local type = type
 local unpack = unpack
 
 local CreateFrame = CreateFrame
-local GetSpellInfo = C_Spell.GetSpellInfo
 local InCombatLockdown = InCombatLockdown
 local RegisterStateDriver = RegisterStateDriver
 local UnregisterStateDriver = UnregisterStateDriver
 
 local C_AddOns_IsAddOnLoaded = C_AddOns.IsAddOnLoaded
+local C_Spell_GetSpellInfo = C_Spell.GetSpellInfo
 
 -- 忽略列表
 local IgnoreList = {
@@ -311,7 +311,7 @@ function MB:SkinButton(frame)
     if name == "DBMMinimapButton" then
         frame:SetNormalTexture("Interface\\Icons\\INV_Helmet_87")
     elseif name == "SmartBuff_MiniMapButton" then
-        frame:SetNormalTexture(select(3, GetSpellInfo(12051)))
+        frame:SetNormalTexture(select(3, C_Spell_GetSpellInfo(12051)))
     elseif name == "ExpansionLandingPageMinimapButton" then
         if self.db.garrison then
             if not frame.isWindMinimapButton then
@@ -334,6 +334,14 @@ function MB:SkinButton(frame)
         frame:SetPushedTexture("")
         frame:SetDisabledTexture("")
         frame:GetHighlightTexture():Kill()
+    elseif name == "BtWQuestsMinimapButton" and _G.BtWQuestsMinimapButtonIcon then
+        for _, region in pairs({frame:GetRegions()}) do
+            if region ~= _G.BtWQuestsMinimapButtonIcon then
+                region:SetTexture(nil)
+                region:SetAlpha(0)
+                region:Hide()
+            end
+        end
     elseif tmp ~= 2 then
         frame:SetPushedTexture("")
         frame:SetDisabledTexture("")

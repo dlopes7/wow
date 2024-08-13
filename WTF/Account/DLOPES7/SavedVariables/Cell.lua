@@ -12,7 +12,20 @@ CellDB = {
 ["translit"] = false,
 ["showRaid"] = true,
 ["enableTooltips"] = true,
-["framePriority"] = "normal_spotlight_quickassist",
+["framePriority"] = {
+{
+"Main",
+true,
+},
+{
+"Spotlight",
+false,
+},
+{
+"Quick Assist",
+false,
+},
+},
 ["tooltipsPosition"] = {
 "BOTTOMLEFT",
 "Default",
@@ -3337,7 +3350,11 @@ false,
 },
 },
 },
-["quickCast"] = {
+["snippets"] = {
+[0] = {
+["autorun"] = true,
+["code"] = "-- snippets can be found at https://github.com/enderneko/Cell/tree/master/.snippets\n-- use \"/run CellDB['snippets'][0]=nil ReloadUI()\" to reset this snippet\n\n-- fade out unit button if hp percent < (number: 0-1)\nCELL_FADE_OUT_HEALTH_PERCENT = nil\n\n-- add summon icons to Status Icon indicator (boolean, retail only)\nCELL_SUMMON_ICONS_ENABLED = false\n\n-- use separate width and height for custom indicator icons (boolean)\nCELL_RECTANGULAR_CUSTOM_INDICATOR_ICONS = false\n\n-- Use nicknames from Details! Damage Meter (boolean, NickTag-1.0 library)\nCELL_NICKTAG_ENABLED = false\n\n-- remove raid setup details from the tooltip of the Raid button (boolean)\nCELL_TOOLTIP_REMOVE_RAID_SETUP_DETAILS = false\n\n-- border thickness: unit button and icon (number)\nCELL_BORDER_SIZE = 1\n\n-- unit button border color ({r, g, b, a}, number: 0-1)\nCELL_BORDER_COLOR = {0, 0, 0, 1}\n\n-- show raid pet owner name (\"VEHICLE\", \"NAME\", nil)\nCELL_SHOW_RAID_PET_OWNER_NAME = nil\n\n-- use LibHealComm (boolean, non-retail)\nCELL_USE_LIBHEALCOMM = false\n\n-- cooldown style for icon/block indicators (\"VERTICAL\", \"CLOCK\")\nCELL_COOLDOWN_STYLE = \"VERTICAL\"",
+},
 },
 ["quickAssist"] = {
 },
@@ -3645,7 +3662,122 @@ false,
 404369,
 382912,
 },
-["changelogsViewed"] = "r236-release",
+["spellRequest"] = {
+["enabled"] = false,
+["timeout"] = 10,
+["checkIfExists"] = true,
+["spells"] = {
+{
+["glowOptions"] = {
+"pixel",
+{
+{
+1,
+1,
+0,
+1,
+},
+0,
+0,
+9,
+0.25,
+8,
+2,
+},
+},
+["type"] = "icon",
+["spellId"] = 10060,
+["isBuiltIn"] = true,
+["buffId"] = 10060,
+["keywords"] = "Power Infusion",
+["icon"] = 135939,
+["iconColor"] = {
+1,
+1,
+0,
+1,
+},
+},
+{
+["glowOptions"] = {
+"pixel",
+{
+{
+0,
+1,
+1,
+1,
+},
+0,
+0,
+9,
+0.25,
+8,
+2,
+},
+},
+["type"] = "icon",
+["spellId"] = 29166,
+["isBuiltIn"] = true,
+["buffId"] = 29166,
+["keywords"] = "Innervate",
+["icon"] = 136048,
+["iconColor"] = {
+0,
+1,
+1,
+1,
+},
+},
+},
+["sharedIconOptions"] = {
+"beat",
+27,
+"BOTTOMRIGHT",
+"BOTTOMRIGHT",
+0,
+0,
+},
+["knownSpellsOnly"] = true,
+["responseType"] = "me",
+["replyCooldown"] = true,
+["freeCooldownOnly"] = true,
+},
+["quickCast"] = {
+},
+["changelogsViewed"] = "r238-release",
+["tools"] = {
+["fadeOut"] = false,
+["showBattleRes"] = true,
+["deathReport"] = {
+false,
+10,
+},
+["buffTracker"] = {
+false,
+"left-to-right",
+32,
+{
+},
+},
+["marks"] = {
+false,
+false,
+"both_h",
+{
+},
+},
+["readyAndPull"] = {
+false,
+"text_button",
+{
+"default",
+7,
+},
+{
+},
+},
+},
 ["indicatorPreview"] = {
 ["scale"] = 1,
 ["showAll"] = false,
@@ -3685,125 +3817,6 @@ false,
 },
 },
 },
-["tools"] = {
-["fadeOut"] = false,
-["showBattleRes"] = true,
-["deathReport"] = {
-false,
-10,
-},
-["buffTracker"] = {
-false,
-"left-to-right",
-32,
-{
-},
-},
-["marks"] = {
-false,
-false,
-"both_h",
-{
-},
-},
-["readyAndPull"] = {
-false,
-"text_button",
-{
-"default",
-7,
-},
-{
-},
-},
-},
-["snippets"] = {
-[0] = {
-["autorun"] = true,
-["code"] = "-- snippets can be found at https://github.com/enderneko/Cell/tree/master/.snippets\n-- use \"/run CellDB['snippets'][0]=nil ReloadUI()\" to reset this snippet\n\n-- fade out unit button if hp percent < (number: 0-1)\nCELL_FADE_OUT_HEALTH_PERCENT = nil\n\n-- add summon icons to Status Icon indicator (boolean, retail only)\nCELL_SUMMON_ICONS_ENABLED = false\n\n-- use separate width and height for custom indicator icons (boolean)\nCELL_RECTANGULAR_CUSTOM_INDICATOR_ICONS = false\n\n-- Use nicknames from Details! Damage Meter (boolean, NickTag-1.0 library)\nCELL_NICKTAG_ENABLED = false\n\n-- remove raid setup details from the tooltip of the Raid button (boolean)\nCELL_TOOLTIP_REMOVE_RAID_SETUP_DETAILS = false\n\n-- border thickness: unit button and icon (number)\nCELL_BORDER_SIZE = 1\n\n-- unit button border color ({r, g, b, a}, number: 0-1)\nCELL_BORDER_COLOR = {0, 0, 0, 1}\n\n-- show raid pet owner name (\"VEHICLE\", \"NAME\", nil)\nCELL_SHOW_RAID_PET_OWNER_NAME = nil\n\n-- use LibHealComm (boolean, non-retail)\nCELL_USE_LIBHEALCOMM = false\n\n-- cooldown style for icon/block indicators (\"VERTICAL\", \"CLOCK\")\nCELL_COOLDOWN_STYLE = \"VERTICAL\"",
-},
-},
-["spellRequest"] = {
-["enabled"] = false,
-["timeout"] = 10,
-["checkIfExists"] = true,
-["spells"] = {
-{
-["glowOptions"] = {
-"pixel",
-{
-{
-1,
-1,
-0,
-1,
-},
-0,
-0,
-9,
-0.25,
-8,
-2,
-},
-},
-["type"] = "icon",
-["spellId"] = 10060,
-["isBuiltIn"] = true,
-["iconColor"] = {
-1,
-1,
-0,
-1,
-},
-["buffId"] = 10060,
-["icon"] = 135939,
-["keywords"] = "Power Infusion",
-},
-{
-["glowOptions"] = {
-"pixel",
-{
-{
-0,
-1,
-1,
-1,
-},
-0,
-0,
-9,
-0.25,
-8,
-2,
-},
-},
-["type"] = "icon",
-["spellId"] = 29166,
-["isBuiltIn"] = true,
-["iconColor"] = {
-0,
-1,
-1,
-1,
-},
-["buffId"] = 29166,
-["icon"] = 136048,
-["keywords"] = "Innervate",
-},
-},
-["sharedIconOptions"] = {
-"beat",
-27,
-"BOTTOMRIGHT",
-"BOTTOMRIGHT",
-0,
-0,
-},
-["knownSpellsOnly"] = true,
-["responseType"] = "me",
-["replyCooldown"] = true,
-["freeCooldownOnly"] = true,
-},
 ["dispelBlacklist"] = {
 },
 ["layoutAutoSwitch"] = {
@@ -3812,7 +3825,7 @@ false,
 ["role"] = {
 ["DAMAGER"] = {
 ["raid_instance"] = "raid",
-["party"] = "Party",
+["party"] = "default",
 ["solo"] = "default",
 ["battleground40"] = "default",
 ["battleground15"] = "default",
@@ -3891,6 +3904,25 @@ true,
 0.31,
 0.31,
 1,
+},
+["gradientColorsLoss"] = {
+{
+1,
+0,
+0,
+},
+{
+1,
+0.7,
+0,
+},
+{
+0.7,
+1,
+0,
+},
+0.05,
+0.95,
 },
 ["fullColor"] = {
 false,
@@ -4125,7 +4157,7 @@ true,
 },
 },
 ["lastVersionCheck"] = 1723151509,
-["revise"] = "r236-release",
+["revise"] = "r238-release",
 ["targetedSpellsList"] = {
 106823,
 106841,
@@ -4178,9 +4210,9 @@ true,
 382836,
 },
 ["nicknames"] = {
+["mine"] = "",
 ["sync"] = false,
 ["custom"] = false,
-["mine"] = "",
 ["list"] = {
 },
 },

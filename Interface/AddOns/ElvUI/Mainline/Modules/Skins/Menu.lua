@@ -12,11 +12,11 @@ local function SkinFrame(frame)
 		frame.backdrop = backdrops[frame] -- relink it back
 	else
 		frame:CreateBackdrop('Transparent') -- :SetTemplate errors out
-		backdrops[frame] = frame.backdrop
-	end
+		backdrops[frame] = frame.backdrop -- keep below CreateBackdrop
 
-	if frame.ScrollBar then
-		S:HandleTrimScrollBar(frame.ScrollBar)
+		if frame.ScrollBar then
+			S:HandleTrimScrollBar(frame.ScrollBar)
+		end
 	end
 end
 
@@ -31,8 +31,10 @@ function S:Blizzard_Menu()
 	if not (E.private.skins.blizzard.enable and E.private.skins.blizzard.misc) then return end
 
 	local manager = _G.Menu.GetManager()
-	hooksecurefunc(manager, 'OpenMenu', OpenMenu)
-	hooksecurefunc(manager, 'OpenContextMenu', OpenMenu)
+	if manager then
+		hooksecurefunc(manager, 'OpenMenu', OpenMenu)
+		hooksecurefunc(manager, 'OpenContextMenu', OpenMenu)
+	end
 end
 
 S:AddCallbackForAddon('Blizzard_Menu')

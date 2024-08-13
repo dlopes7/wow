@@ -71,7 +71,7 @@ local function ReskinBarTemplate(bar)
 	if bar.backdrop then return end
 
 	bar:StripTextures()
-	bar:CreateBackdrop()
+	bar:CreateBackdrop('Transparent')
 	bar:SetStatusBarTexture(E.media.normTex)
 	E:RegisterStatusBar(bar)
 end
@@ -82,16 +82,25 @@ local function HandleProgressBar(tracker, key)
 
 	if bar then
 		ReskinBarTemplate(bar)
-	end
 
-	local icon = bar and bar.Icon
-	if icon and not icon.backdrop then
-		icon:SetMask('') -- This needs to be before S:HandleIcon
-		S:HandleIcon(icon, true)
+		local _, maxValue = bar:GetMinMaxValues()
+		S:StatusBarColorGradient(bar, bar:GetValue(), maxValue)
 
-		icon:ClearAllPoints()
-		icon:Point('TOPLEFT', bar, 'TOPRIGHT', 5, 0)
-		icon:Point('BOTTOMRIGHT', bar, 'BOTTOMRIGHT', 25, 0)
+		local icon = bar.Icon
+		if icon and icon:IsShown() and not icon.backdrop then
+			icon:SetMask('') -- This needs to be before S:HandleIcon
+			S:HandleIcon(icon, true)
+
+			icon:ClearAllPoints()
+			icon:Point('LEFT', bar, 'RIGHT', E.PixelMode and 3 or 7, 0)
+		end
+
+		local label = bar.Label
+		if label then
+			label:ClearAllPoints()
+			label:Point('CENTER', bar)
+			label:FontTemplate(nil, E.db.general.fontSize, E.db.general.fontStyle)
+		end
 	end
 end
 
@@ -104,20 +113,37 @@ local function HandleTimers(tracker, key)
 	end
 end
 
+local function SetCollapsed(header, collapsed)
+	local MinimizeButton = header.MinimizeButton
+	local normalTexture = MinimizeButton:GetNormalTexture()
+	local pushedTexture = MinimizeButton:GetPushedTexture()
+
+	if collapsed then
+		normalTexture:SetAtlas('UI-QuestTrackerButton-Secondary-Expand', true)
+		pushedTexture:SetAtlas('UI-QuestTrackerButton-Secondary-Expand-Pressed', true)
+	else
+		normalTexture:SetAtlas('UI-QuestTrackerButton-Secondary-Collapse', true)
+		pushedTexture:SetAtlas('UI-QuestTrackerButton-Secondary-Collapse-Pressed', true)
+	end
+end
+
 function S:Blizzard_ObjectiveTracker()
 	if not (E.private.skins.blizzard.enable and E.private.skins.blizzard.objectiveTracker) then return end
 
-	local MainHeader = _G.ObjectiveTrackerFrame.Header
-	SkinOjectiveTrackerHeaders(MainHeader)
+	local TrackerFrame = _G.ObjectiveTrackerFrame
+	local TrackerHeader = TrackerFrame and TrackerFrame.Header
+	if TrackerHeader then
+		SkinOjectiveTrackerHeaders(TrackerHeader)
 
-	-- FIX ME 11.0: Collapse state got changed
-	local MainMinimize = MainHeader.MinimizeButton
-	MainMinimize:StripTextures(nil, true)
-	MainMinimize:Size(16)
-	MainMinimize:SetHighlightTexture(130837, 'ADD') -- Interface\Buttons\UI-PlusButton-Hilight
-	MainMinimize.tex = MainMinimize:CreateTexture(nil, 'OVERLAY')
-	MainMinimize.tex:SetTexture(E.Media.Textures.MinusButton)
-	MainMinimize.tex:SetInside()
+		local MinimizeButton = TrackerHeader.MinimizeButton
+		if MinimizeButton then
+			MinimizeButton:Size(16)
+			MinimizeButton:SetHighlightAtlas('UI-QuestTrackerButton-Yellow-Highlight', 'ADD')
+
+			SetCollapsed(TrackerHeader, TrackerFrame.isCollapsed)
+			hooksecurefunc(TrackerHeader, 'SetCollapsed', SetCollapsed)
+		end
+	end
 
 	for _, tracker in pairs(trackers) do
 		SkinOjectiveTrackerHeaders(tracker.Header)

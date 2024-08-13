@@ -1,5 +1,5 @@
 --
--- RaiderIO Client Data. Generated on Sat Aug 10 2024 21:43:13 GMT+0000 (Coordinated Universal Time)
+-- RaiderIO Client Data. Generated on Mon Aug 12 2024 21:53:08 GMT+0000 (Coordinated Universal Time)
 --
 local _, ns = ...
 ns.CLIENT_CHARACTERS = {
@@ -293,22 +293,22 @@ ns.CLIENT_CHARACTERS = {
     },
     ["mythic_keystone"] = {
       ["all"] = {
-        ["score"] = 3368.9,
+        ["score"] = 3406.4,
         ["best"] = {
-          ["zone_id"] = 13954,
-          ["level"] = 16,
-          ["upgrades"] = 2,
-          ["fraction"] = 0.682,
-          ["score"] = 215.97029274557653,
-          ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/12372927-16-the-azure-vault?utm_source=client"
+          ["zone_id"] = 14063,
+          ["level"] = 17,
+          ["upgrades"] = 1,
+          ["fraction"] = 0.876,
+          ["score"] = 220.55364467165168,
+          ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/12527545-17-ruby-life-pools?utm_source=client"
         },
         ["bestFortified"] = {
-          ["zone_id"] = 13954,
-          ["level"] = 16,
-          ["upgrades"] = 2,
-          ["fraction"] = 0.682,
-          ["score"] = 215.97029274557653,
-          ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/12372927-16-the-azure-vault?utm_source=client"
+          ["zone_id"] = 14063,
+          ["level"] = 17,
+          ["upgrades"] = 1,
+          ["fraction"] = 0.876,
+          ["score"] = 220.55364467165168,
+          ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/12527545-17-ruby-life-pools?utm_source=client"
         },
         ["bestTyrannical"] = {
           ["zone_id"] = 14011,
@@ -345,11 +345,11 @@ ns.CLIENT_CHARACTERS = {
           },
           {
             ["zone_id"] = 13991,
-            ["level"] = 16,
+            ["level"] = 17,
             ["upgrades"] = 1,
-            ["fraction"] = 0.859,
-            ["score"] = 213.75744372082042,
-            ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/12192132-16-brackenhide-hollow?utm_source=client"
+            ["fraction"] = 0.972,
+            ["score"] = 219.34781073194227,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/12535036-17-brackenhide-hollow?utm_source=client"
           },
           {
             ["zone_id"] = 14011,
@@ -361,19 +361,19 @@ ns.CLIENT_CHARACTERS = {
           },
           {
             ["zone_id"] = 14032,
-            ["level"] = 15,
+            ["level"] = 17,
             ["upgrades"] = 1,
-            ["fraction"] = 0.808,
-            ["score"] = 207.40216158363435,
-            ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/9668657-15-algethar-academy?utm_source=client"
+            ["fraction"] = 0.916,
+            ["score"] = 220.05237561289724,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/12540616-17-algethar-academy?utm_source=client"
           },
           {
             ["zone_id"] = 14063,
-            ["level"] = 16,
+            ["level"] = 17,
             ["upgrades"] = 1,
-            ["fraction"] = 0.853,
-            ["score"] = 213.83461373382218,
-            ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/11638979-16-ruby-life-pools?utm_source=client"
+            ["fraction"] = 0.876,
+            ["score"] = 220.55364467165168,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/12527545-17-ruby-life-pools?utm_source=client"
           },
           {
             ["zone_id"] = 14082,

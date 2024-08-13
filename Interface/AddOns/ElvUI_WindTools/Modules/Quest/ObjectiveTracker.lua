@@ -158,8 +158,11 @@ function OT:ObjectiveTrackerModule_Update(tracker)
     if tracker and tracker.Header and tracker.Header.Text then
         self:CosmeticBar(tracker.Header)
         F.SetFontWithDB(tracker.Header.Text, self.db.header)
-        tracker.Header.Text:SetShadowColor(0, 0, 0, 0)
-        tracker.Header.Text.SetShadowColor = E.noop
+        if not tracker.Header.Text.__windUnbind then
+            tracker.Header.Text.__windUnbind = true
+            tracker.Header.Text:SetFontObject(nil)
+            tracker.Header.Text.SetFontObject = E.noop
+        end
 
         local r = self.db.header.classColor and W.ClassColor.r or self.db.header.color.r
         local g = self.db.header.classColor and W.ClassColor.g or self.db.header.color.g

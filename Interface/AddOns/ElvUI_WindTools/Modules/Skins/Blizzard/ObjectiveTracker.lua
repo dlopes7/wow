@@ -52,16 +52,7 @@ end
 
 function S:ReskinObjectiveTrackerBlock(_, block)
     for _, button in pairs {block.ItemButton, block.itemButton} do
-        if button then
-            -- Do not touch the button, it is so dangerous to cause taint
-            if not button.backdrop then
-                button.backdrop = CreateFrame("Frame", nil, E.UIParent)
-                button.backdrop:SetFrameStrata("BACKGROUND")
-                button.backdrop:SetFrameLevel(button:GetFrameLevel() - 2)
-                button.backdrop:SetAllPoints(button)
-            end
-            self:CreateBackdropShadow(button)
-        end
+        self:CreateShadow(button)
     end
 
     self:ReskinObjectiveTrackerBlockRightEdgeButton(_, block)
@@ -110,6 +101,8 @@ function S:Blizzard_ObjectiveTracker()
     if not self:CheckDB("objectiveTracker") then
         return
     end
+
+    self.questItemButtons = {}
 
     local MainHeader = _G.ObjectiveTrackerFrame.Header
     self:ReskinOjectiveTrackerHeader(MainHeader)
