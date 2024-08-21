@@ -1,10 +1,10 @@
 # BigWigs
 
-## [v352.1](https://github.com/BigWigsMods/BigWigs/tree/v352.1) (2024-08-13)
-[Full Changelog](https://github.com/BigWigsMods/BigWigs/compare/v352...v352.1) [Previous Releases](https://github.com/BigWigsMods/BigWigs/releases)
+## [v353.6](https://github.com/BigWigsMods/BigWigs/tree/v353.6) (2024-08-21)
+[Full Changelog](https://github.com/BigWigsMods/BigWigs/compare/v353.5...v353.6) [Previous Releases](https://github.com/BigWigsMods/BigWigs/releases)
 
-- NerubarPalace/Sikran: Add Decimate to Private Aura list  
-- NerubarPalace/Ansurek: Add NPC ID  
-- NerubarPalace: Remove load guards  
-- Update zhTW (#1744)  
-- Loader: Update current season checks (#1746)  
+- Plugins/Bars: Revert unintended locale change  
+- Plugins/Bars: Fix missing text for "enable" option (closes #1754)  
+- NerubarPalace/Ulgrax: Fix a wrong count variable  
+- NerubarPalace/Ulgrax: Add Digestive Acid timers  
+- NerubarPalace: Fix option files not loading  

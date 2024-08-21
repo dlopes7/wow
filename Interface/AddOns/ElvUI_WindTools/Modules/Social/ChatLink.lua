@@ -14,15 +14,16 @@ local unpack = unpack
 
 local ChatFrame_AddMessageEventFilter = ChatFrame_AddMessageEventFilter
 local GetAchievementInfo = GetAchievementInfo
-local GetItemInfoInstant = GetItemInfoInstant
 local GetPvpTalentInfoByID = GetPvpTalentInfoByID
-local GetSpellTexture = GetSpellTexture
 local GetTalentInfoByID = GetTalentInfoByID
 
 local C_ChallengeMode_GetMapUIInfo = C_ChallengeMode.GetMapUIInfo
 local C_CurrencyInfo_GetCurrencyInfo = C_CurrencyInfo.GetCurrencyInfo
+local C_Item_GetItemIconByID = C_Item.GetItemIconByID
+local C_Item_GetItemInfoInstant = C_Item.GetItemInfoInstant
 local C_Item_GetItemNameByID = C_Item.GetItemNameByID
 local C_Soulbinds_GetConduitCollectionData = C_Soulbinds.GetConduitCollectionData
+local C_Spell_GetSpellTexture = C_Spell.GetSpellTexture
 
 local ICON_STRING = "|T%s:16:18:0:0:64:64:4:60:7:57:255:255:255|t"
 
@@ -62,7 +63,7 @@ local tierColor = {
 }
 
 local function AddItemInfo(link)
-    local itemID, itemType, itemSubType, itemEquipLoc, icon, classID, subclassID = GetItemInfoInstant(link)
+    local itemID, itemType, itemSubType, itemEquipLoc, icon, classID, subclassID = C_Item_GetItemInfoInstant(link)
 
     if not itemID then
         return
@@ -165,7 +166,7 @@ local function AddConduitIcon(link)
         local conduitItemID = conduitCollectionData and conduitCollectionData.conduitItemID
 
         if conduitItemID then
-            local texture = select(5, GetItemInfoInstant(conduitItemID))
+            local texture = C_Item_GetItemIconByID(conduitItemID)
             local icon = texture and format(ICON_STRING, texture)
             if icon then
                 link = icon .. " " .. link
@@ -184,7 +185,7 @@ local function AddSpellInfo(link)
     end
 
     if CL.db.icon then
-        local texture = GetSpellTexture(tonumber(id))
+        local texture = C_Spell_GetSpellTexture(tonumber(id))
         local icon = texture and format(ICON_STRING, texture)
         if icon then
             link = icon .. " |cff71d5ff" .. link .. "|r" -- I dk why the color is needed, but worked!
@@ -202,7 +203,7 @@ local function AddEnchantInfo(link)
     end
 
     if CL.db.icon then
-        local texture = GetSpellTexture(tonumber(id))
+        local texture = C_Spell_GetSpellTexture(tonumber(id))
         local icon = texture and format(ICON_STRING, texture)
         if icon then
             link = icon .. " " .. link

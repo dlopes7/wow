@@ -111,10 +111,88 @@ function contextMenu:CreateContextMenu(bag)
 		text = addonName..' Dev Mode',
 		--@end-debug@]==]
 		--@non-debug@
-		text = addonName..' v0.1.91',
+		text = addonName..' v0.2.2',
 		--@end-non-debug@
     isTitle = true,
     notCheckable = true
+  })
+
+  table.insert(menuList, {
+    text = L:G("Bag Anchor"),
+    notCheckable = true,
+    hasArrow = true,
+    menuList = {
+      {
+        text = L:G("Enable"),
+        notCheckable = false,
+        checked = function() return bag.anchor:IsActive() end,
+        func = function()
+          bag.anchor:ToggleActive()
+          contextMenu:Hide()
+        end
+      },
+      {
+        text = L:G("Show"),
+        notCheckable = false,
+        checked = function() return bag.anchor.frame:IsShown() end,
+        func = function()
+          bag.anchor:ToggleShown()
+          contextMenu:Hide()
+        end
+      },
+      {
+        text = L:G("Manual Anchor"),
+        notCheckable = true,
+        hasArrow = true,
+        menuList = {
+          {
+            text = L:G("Top Left"),
+            notCheckable = false,
+            checked = function() return database:GetAnchorState(bag.kind).staticPoint == 'TOPLEFT' end,
+            func = function()
+              bag.anchor:SetStaticAnchorPoint('TOPLEFT')
+              contextMenu:Hide()
+            end
+          },
+          {
+            text = L:G("Top Right"),
+            notCheckable = false,
+            checked = function() return database:GetAnchorState(bag.kind).staticPoint == 'TOPRIGHT' end,
+            func = function()
+              bag.anchor:SetStaticAnchorPoint('TOPRIGHT')
+              contextMenu:Hide()
+            end
+          },
+          {
+            text = L:G("Bottom Left"),
+            notCheckable = false,
+            checked = function() return database:GetAnchorState(bag.kind).staticPoint == 'BOTTOMLEFT' end,
+            func = function()
+              bag.anchor:SetStaticAnchorPoint('BOTTOMLEFT')
+              contextMenu:Hide()
+            end
+          },
+          {
+            text = L:G("Bottom Right"),
+            notCheckable = false,
+            checked = function() return database:GetAnchorState(bag.kind).staticPoint == 'BOTTOMRIGHT' end,
+            func = function()
+              bag.anchor:SetStaticAnchorPoint('BOTTOMRIGHT')
+              contextMenu:Hide()
+            end
+          },
+          {
+            text = L:G("Automatic"),
+            notCheckable = false,
+            checked = function() return database:GetAnchorState(bag.kind).staticPoint == nil end,
+            func = function()
+              bag.anchor:SetStaticAnchorPoint(nil)
+              contextMenu:Hide()
+            end
+          }
+        }
+      }
+    }
   })
 
   -- Show bag slot toggle.

@@ -90,7 +90,7 @@ local gw2Theme = {
       local box = searchBox:CreateBox(frame.Owner.kind, decoration --[[@as Frame]])
       box.frame:SetPoint("TOPLEFT", decoration, "TOPLEFT", 0, -40)
       box.frame:SetPoint("BOTTOMRIGHT", decoration, "TOPRIGHT", -10, -60)
-      box.frame:SetFrameStrata("HIGH")
+      box.frame:SetFrameStrata("DIALOG")
       box.frame:SetFrameLevel(decoration:GetFrameLevel() + 1)
       gw.SkinBagSearchBox(box.textBox)
       decoration.search = box
@@ -177,6 +177,7 @@ local gw2Theme = {
 
       decoration:SetBackdrop(gw.BackdropTemplates.Default)
       decoration.title:ClearAllPoints()
+---@diagnostic disable-next-line: param-type-mismatch
       decoration.title:SetFont(DAMAGE_TEXT_FONT, 16, "")
       decoration.title:SetTextColor(255 / 255, 241 / 255, 209 / 255)
       decoration.title:SetPoint("TOP", decoration, "TOP", 0, -5)
@@ -204,6 +205,7 @@ local gw2Theme = {
 
       decoration:SetBackdrop(gw.BackdropTemplates.Default)
       decoration.title:ClearAllPoints()
+---@diagnostic disable-next-line: param-type-mismatch
       decoration.title:SetFont(DAMAGE_TEXT_FONT, 16, "")
       decoration.title:SetTextColor(255 / 255, 241 / 255, 209 / 255)
       decoration.title:SetPoint("TOP", decoration, "TOP", 0, -5)

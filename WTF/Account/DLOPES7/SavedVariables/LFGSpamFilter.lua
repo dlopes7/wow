@@ -6,7 +6,7 @@ LFGSpamFilterAddonConfig = {
 },
 ["ignoredCategories"] = {
 },
-["lastMaintenance"] = 1723103973,
+["lastMaintenance"] = 1723727044,
 ["version"] = 10,
 ["banButton"] = true,
 ["noVoice"] = false,

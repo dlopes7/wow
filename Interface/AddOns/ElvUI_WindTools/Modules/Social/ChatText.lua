@@ -40,8 +40,6 @@ local GetAchievementLink = GetAchievementLink
 local GetBNPlayerCommunityLink = GetBNPlayerCommunityLink
 local GetBNPlayerLink = GetBNPlayerLink
 local GetChannelName = GetChannelName
-local GetCVar = GetCVar
-local GetCVarBool = GetCVarBool
 local GetGuildRosterInfo = GetGuildRosterInfo
 local GetNumGroupMembers = GetNumGroupMembers
 local GetNumGuildMembers = GetNumGuildMembers
@@ -72,6 +70,8 @@ local C_ChatInfo_IsChannelRegionalForChannelID = C_ChatInfo.IsChannelRegionalFor
 local C_ChatInfo_IsChatLineCensored = C_ChatInfo.IsChatLineCensored
 local C_Club_GetClubInfo = C_Club.GetClubInfo
 local C_Club_GetInfoFromLastCommunityChatLine = C_Club.GetInfoFromLastCommunityChatLine
+local C_CVar_GetCVar = C_CVar.GetCVar
+local C_CVar_GetCVarBool = C_CVar.GetCVarBool
 local C_PartyInfo_InviteUnit = C_PartyInfo.InviteUnit
 local C_Texture_GetTitleIconTexture = C_Texture.GetTitleIconTexture
 local C_Timer_After = C_Timer.After
@@ -283,7 +283,7 @@ do --this can save some main file locals
     local z = {}
     specialChatIcons = z
 
-    local portal = GetCVar("portal")
+    local portal = C_CVar_GetCVar("portal")
     if portal == "US" then
         if E.Classic then
             -- Simpy (5099: Myzrael)
@@ -593,31 +593,32 @@ local windIcon = F.GetIconString(W.Media.Textures.smallLogo, 14)
 local authorIcons = {
     ["Tabimonk-暗影之月"] = windIcon,
     ["Tabideath-暗影之月"] = windIcon,
-    ["Tabiwarrior-暗影之月"] = windIcon,
     ["Tabidh-暗影之月"] = windIcon,
     ["Tabihunter-暗影之月"] = windIcon,
     ["Tabidruid-暗影之月"] = windIcon,
-    ["Tabievoker-暗影之月"] = windIcon,
     ["Tabilock-暗影之月"] = windIcon,
     ["Tabipaladin-暗影之月"] = windIcon,
+    ["Tabiwarrior-暗影之月"] = windIcon,
+    ["Tabievoker-暗影之月"] = windIcon,
     ["Tabirogue-暗影之月"] = windIcon,
     ["Tabipriest-暗影之月"] = windIcon,
     ["Tabishaman-暗影之月"] = windIcon,
     ["Tabimage-暗影之月"] = windIcon,
     ["Tabikaeru-暗影之月"] = windIcon,
-    ["雲遊武僧-語風"] = windIcon,
     ["Tabidk-暗影之月"] = windIcon,
-    ["雲遊牧師-暗影之月"] = windIcon,
-    ["雲遊倉庫-暗影之月"] = windIcon,
     ["Tabidh-水晶之刺"] = windIcon,
-    ["雲遊武僧-水晶之刺"] = windIcon,
     ["Tabideath-水晶之刺"] = windIcon,
     ["Tabidruid-水晶之刺"] = windIcon,
     ["Tabilock-水晶之刺"] = windIcon,
     ["Tabirogue-水晶之刺"] = windIcon,
     ["Tabishaman-水晶之刺"] = windIcon,
     ["Tabipaladin-水晶之刺"] = windIcon,
-    ["Tabievoker-水晶之刺"] = windIcon
+    ["Tabievoker-水晶之刺"] = windIcon,
+    ["Tabimonk-影之哀伤"] = windIcon,
+    ["Tabideath-影之哀伤"] = windIcon,
+    ["Tabidruid-影之哀伤"] = windIcon,
+    ["游学者-寒冰皇冠"] = windIcon,
+    ["争霸艾泽拉斯-罗宁"] = windIcon
 }
 
 CH:AddPluginIcons(
@@ -1149,8 +1150,8 @@ function CT:ChatFrame_MessageEventHandler(
                 return true
             elseif
                 frame.excludePrivateMessageList and frame.excludePrivateMessageList[strlower(arg2)] and
-                    ((chatGroup == "WHISPER" and GetCVar("whisperMode") ~= "popout_and_inline") or
-                        (chatGroup == "BN_WHISPER" and GetCVar("whisperMode") ~= "popout_and_inline"))
+                    ((chatGroup == "WHISPER" and C_CVar_GetCVar("whisperMode") ~= "popout_and_inline") or
+                        (chatGroup == "BN_WHISPER" and C_CVar_GetCVar("whisperMode") ~= "popout_and_inline"))
              then
                 return true
             end
@@ -1360,7 +1361,7 @@ function CT:ChatFrame_MessageEventHandler(
                     historyTime
                 )
             end
-            if arg1 == "INVITE" and GetCVarBool("blockChannelInvites") then
+            if arg1 == "INVITE" and C_CVar_GetCVarBool("blockChannelInvites") then
                 frame:AddMessage(
                     _G.CHAT_MSG_BLOCK_CHAT_CHANNEL_INVITE,
                     info.r,

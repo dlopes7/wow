@@ -206,6 +206,13 @@ function config:OnEnable()
     self:Open()
   end)
 
+  LibStub('AceConsole-3.0'):RegisterChatCommand("bbanchor", function()
+    addon.Bags.Backpack.anchor:Activate()
+    addon.Bags.Backpack.anchor:Show()
+    addon.Bags.Bank.anchor:Activate()
+    addon.Bags.Bank.anchor:Show()
+  end)
+
   events:RegisterMessage('categories/Changed', function()
     LibStub('AceConfigRegistry-3.0'):NotifyChange(addonName)
   end)

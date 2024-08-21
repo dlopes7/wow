@@ -1,52 +1,117 @@
 
 PremadeGroupsFilterState = {
-	["version"] = 6,
-	["c1f4"] = {
-		["enabled"] = false,
-		["mini"] = {
-			["sorting"] = "",
-			["expression"] = "",
-		},
-		["minimized"] = false,
-	},
-	["c7f8"] = {
-		["enabled"] = false,
-		["mini"] = {
-			["sorting"] = "",
-			["expression"] = "",
-		},
-		["minimized"] = false,
-	},
-	["c6f4"] = {
-		["enabled"] = false,
-		["mini"] = {
-			["sorting"] = "",
-			["expression"] = "",
-		},
-		["minimized"] = false,
-	},
-	["c3f5"] = {
-		["minimized"] = false,
-		["mini"] = {
-			["sorting"] = "",
-			["expression"] = "",
-		},
-		["raid"] = {
-			["sorting"] = "",
-			["expression"] = "",
-		},
-		["enabled"] = true,
-	},
-	["c2f4"] = {
-		["minimized"] = false,
-		["enabled"] = true,
-		["mini"] = {
-			["sorting"] = "",
-			["expression"] = "",
-		},
-		["dungeon"] = {
-			["sorting"] = "",
-			["expression"] = "",
-		},
-	},
+["version"] = 6,
+["c2f4"] = {
+["minimized"] = false,
+["mini"] = {
+["expression"] = "",
+["sorting"] = "",
+},
+["dungeon"] = {
+["mprating"] = {
+["max"] = "",
+["min"] = "",
+["act"] = false,
+},
+["tanks"] = {
+["max"] = "0",
+["min"] = "0",
+["act"] = true,
+},
+["difficulty"] = {
+},
+["heals"] = {
+["max"] = "",
+["min"] = "",
+["act"] = false,
+},
+["expression"] = "",
+["dps"] = {
+["max"] = "",
+["min"] = "",
+["act"] = false,
+},
+["members"] = {
+["max"] = "",
+["min"] = "",
+["act"] = false,
+},
+["sorting"] = "",
+},
+["enabled"] = true,
+},
+["c3f5"] = {
+["minimized"] = false,
+["mini"] = {
+["expression"] = "",
+["sorting"] = "",
+},
+["enabled"] = true,
+["raid"] = {
+["difficulty"] = {
+},
+["tanks"] = {
+["max"] = "",
+["min"] = "",
+["act"] = false,
+},
+["defeated"] = {
+["max"] = "",
+["min"] = "",
+["act"] = false,
+},
+["expression"] = "",
+["heals"] = {
+["max"] = "",
+["min"] = "",
+["act"] = false,
+},
+["dps"] = {
+["max"] = "",
+["min"] = "",
+["act"] = false,
+},
+["members"] = {
+["max"] = "",
+["min"] = "",
+["act"] = false,
+},
+["sorting"] = "",
+},
+},
+["c1f4"] = {
+["enabled"] = false,
+["mini"] = {
+["expression"] = "",
+["sorting"] = "",
+},
+["minimized"] = false,
+},
+["c7f8"] = {
+["enabled"] = false,
+["mini"] = {
+["expression"] = "",
+["sorting"] = "",
+},
+["minimized"] = false,
+},
+["c6f4"] = {
+["enabled"] = false,
+["mini"] = {
+["expression"] = "",
+["sorting"] = "",
+},
+["role"] = {
+["heals"] = {
+},
+["tanks"] = {
+},
+["dps"] = {
+},
+["members"] = {
+},
+["expression"] = "",
+},
+["minimized"] = false,
+},
 }

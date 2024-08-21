@@ -15,6 +15,9 @@ local debug = addon:GetModule('Debug')
 ---@class Events: AceModule
 local events = addon:GetModule('Events')
 
+---@class Async: AceModule
+local async = addon:GetModule('Async')
+
 ---@class Database: AceModule
 local db = addon:GetModule('Database')
 
@@ -295,7 +298,9 @@ function themes:GetTabButton(tab)
   local tabIndex = tab.index
   local decoration = self.tabs[tabIndex]
   if decoration then
-    decoration:Show()
+    async:AfterCombat(function()
+      decoration:Show()
+    end)
     return decoration
   end
   decoration = themes.CreateDefaultTabDecoration(tab)
@@ -303,10 +308,14 @@ function themes:GetTabButton(tab)
   return decoration
 end
 
----@param tab Button
+---@param tab TabButton
 ---@return PanelTabButtonTemplate
 function themes.CreateDefaultTabDecoration(tab)
-  local decoration = CreateFrame("button", tab:GetName() .. "default", tab, "PanelTabButtonTemplate") --[[@as PanelTabButtonTemplate]]
+  local decoration = CreateFrame("button", tab:GetName() .. "default", tab, "BetterBagsSecureBagTabTemplate") --[[@as PanelTabButtonTemplate]]
+  if tab.sabtClick then
+    decoration:SetAttribute("type", "click")
+    decoration:SetAttribute("clickbutton", tab.sabtClick)
+  end
   decoration:SetPoint("TOPLEFT", tab, "TOPLEFT", 0, 0)
   decoration:RegisterForClicks("LeftButtonDown", "RightButtonDown")
   return decoration
@@ -408,7 +417,11 @@ function themes.SetupBagButton(bag, decoration)
       GameTooltip:AddDoubleLine(L:G("Left Click"), L:G("Open Menu"), 1, 0.81, 0, 1, 1, 1)
       GameTooltip:AddDoubleLine(L:G("Shift Left Click"), L:G("Search Bags"), 1, 0.81, 0, 1, 1, 1)
       if addon.isRetail then
-        GameTooltip:AddDoubleLine(L:G("Right Click"), L:G("Deposit Warbank Items"), 1, 0.81, 0, 1, 1, 1)
+        if bag.bankTab == const.BANK_TAB.REAGENT then
+          GameTooltip:AddDoubleLine(L:G("Right Click"), L:G("Deposit Reagent Items"), 1, 0.81, 0, 1, 1, 1)
+        else
+          GameTooltip:AddDoubleLine(L:G("Right Click"), L:G("Deposit Warbank Items"), 1, 0.81, 0, 1, 1, 1)
+        end
       end
     end
 
@@ -448,7 +461,11 @@ function themes.SetupBagButton(bag, decoration)
       end
     elseif e == "RightButton" then
       if bag.kind == const.BAG_KIND.BANK and addon.isRetail then
-        C_Bank.AutoDepositItemsIntoBank(Enum.BankType.Account)
+        if bag.bankTab == const.BANK_TAB.REAGENT then
+          DepositReagentBank()
+        else
+          C_Bank.AutoDepositItemsIntoBank(Enum.BankType.Account)
+        end
       else
         bag:Sort()
       end

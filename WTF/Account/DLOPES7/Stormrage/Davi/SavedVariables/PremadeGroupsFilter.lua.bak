@@ -1,52 +1,52 @@
 
 PremadeGroupsFilterState = {
-	["version"] = 5,
-	["c3f5"] = {
-		["enabled"] = true,
-		["raid"] = {
-			["expression"] = "",
-			["sorting"] = "",
-		},
-		["minimized"] = false,
-		["expression"] = {
-			["expression"] = "",
-			["sorting"] = "",
-		},
-	},
-	["c2f4"] = {
-		["enabled"] = true,
-		["dungeon"] = {
-			["expression"] = "",
-			["sorting"] = "",
-		},
-		["minimized"] = false,
-		["expression"] = {
-			["expression"] = "",
-			["sorting"] = "",
-		},
-	},
-	["c6f4"] = {
-		["enabled"] = false,
-		["minimized"] = false,
-		["expression"] = {
-			["expression"] = "",
-			["sorting"] = "",
-		},
-	},
-	["c7f8"] = {
-		["enabled"] = false,
-		["minimized"] = false,
-		["expression"] = {
-			["expression"] = "",
-			["sorting"] = "",
-		},
-	},
-	["c1f4"] = {
-		["enabled"] = false,
-		["minimized"] = false,
-		["expression"] = {
-			["expression"] = "",
-			["sorting"] = "",
-		},
-	},
+["version"] = 6,
+["c1f4"] = {
+["enabled"] = false,
+["mini"] = {
+["sorting"] = "",
+["expression"] = "",
+},
+["minimized"] = false,
+},
+["c7f8"] = {
+["enabled"] = false,
+["mini"] = {
+["sorting"] = "",
+["expression"] = "",
+},
+["minimized"] = false,
+},
+["c6f4"] = {
+["enabled"] = false,
+["mini"] = {
+["sorting"] = "",
+["expression"] = "",
+},
+["minimized"] = false,
+},
+["c3f5"] = {
+["minimized"] = false,
+["mini"] = {
+["sorting"] = "",
+["expression"] = "",
+},
+["raid"] = {
+["sorting"] = "",
+["expression"] = "",
+},
+["enabled"] = true,
+},
+["c2f4"] = {
+["minimized"] = false,
+["mini"] = {
+["sorting"] = "",
+["expression"] = "",
+},
+["enabled"] = true,
+["dungeon"] = {
+["sorting"] = "",
+["expression"] = "",
+},
+},
 }

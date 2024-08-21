@@ -1,21 +1,73 @@
 
 PremadeGroupsFilterState = {
+["c2f5"] = {
+["mini"] = {
+["expression"] = "",
+["sorting"] = "",
+},
+},
 ["version"] = 6,
+["c3f5"] = {
+["minimized"] = false,
+["mini"] = {
+["expression"] = "",
+["sorting"] = "",
+},
+["enabled"] = true,
+["raid"] = {
+["difficulty"] = {
+},
+["tanks"] = {
+["max"] = "",
+["min"] = "",
+["act"] = false,
+},
+["expression"] = "",
+["defeated"] = {
+["max"] = "",
+["min"] = "",
+["act"] = false,
+},
+["heals"] = {
+["max"] = "",
+["min"] = "",
+["act"] = false,
+},
+["dps"] = {
+["max"] = "",
+["min"] = "",
+["act"] = false,
+},
+["members"] = {
+["max"] = "",
+["min"] = "",
+["act"] = false,
+},
+["sorting"] = "",
+},
+},
+["c1f4"] = {
+["enabled"] = false,
+["mini"] = {
+["expression"] = "",
+["sorting"] = "",
+},
+["minimized"] = false,
+},
 ["c6f4"] = {
 ["enabled"] = false,
 ["mini"] = {
-["sorting"] = "",
 ["expression"] = "",
+["sorting"] = "",
 },
 ["minimized"] = false,
 },
 ["c2f4"] = {
 ["minimized"] = false,
 ["mini"] = {
-["sorting"] = "",
 ["expression"] = "",
+["sorting"] = "",
 },
-["enabled"] = true,
 ["dungeon"] = {
 ["mprating"] = {
 ["max"] = "",
@@ -28,6 +80,7 @@ PremadeGroupsFilterState = {
 ["act"] = true,
 },
 ["dungeon6"] = false,
+["dungeon7"] = false,
 ["dps"] = {
 ["max"] = "",
 ["min"] = "",
@@ -42,66 +95,29 @@ PremadeGroupsFilterState = {
 ["difficulty"] = {
 },
 ["dungeon4"] = false,
+["dungeon2"] = false,
 ["dungeon1"] = false,
+["dungeon8"] = false,
+["tanks"] = {
+["max"] = "",
+["min"] = "",
+["act"] = false,
+},
 ["dungeon5"] = false,
-["tanks"] = {
-["max"] = "",
-["min"] = "",
-["act"] = false,
-},
 ["sorting"] = "",
-},
-},
-["c1f4"] = {
-["enabled"] = false,
-["mini"] = {
-["sorting"] = "",
-["expression"] = "",
-},
-["minimized"] = false,
-},
-["c3f5"] = {
-["minimized"] = false,
-["mini"] = {
-["sorting"] = "",
-["expression"] = "",
-},
-["raid"] = {
-["difficulty"] = {
-},
-["tanks"] = {
-["max"] = "",
-["min"] = "",
-["act"] = false,
-},
-["sorting"] = "",
-["members"] = {
-["max"] = "",
-["min"] = "",
-["act"] = false,
-},
-["heals"] = {
-["max"] = "",
-["min"] = "",
-["act"] = false,
-},
-["dps"] = {
-["max"] = "",
-["min"] = "",
-["act"] = false,
-},
-["defeated"] = {
-["max"] = "",
-["min"] = "",
-["act"] = false,
-},
-["expression"] = "",
 },
 ["enabled"] = true,
 },
-["c2f5"] = {
-["mini"] = {
-["sorting"] = "",
+["c2f69"] = {
+["role"] = {
+["heals"] = {
+},
+["tanks"] = {
+},
+["dps"] = {
+},
+["members"] = {
+},
 ["expression"] = "",
 },
 },

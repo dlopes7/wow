@@ -82,6 +82,9 @@ local themes = addon:GetModule('Themes')
 ---@class WindowGroup: AceModule
 local windowGroup = addon:GetModule('WindowGroup')
 
+---@class Anchor: AceModule
+local anchor = addon:GetModule('Anchor')
+
 ---@class Tabs: AceModule
 local tabs = addon:GetModule('Tabs')
 
@@ -96,6 +99,7 @@ local tabs = addon:GetModule('Tabs')
 ---@field kind BagKind
 ---@field currentView View
 ---@field frame Frame The fancy frame of the bag.
+---@field anchor AnchorFrame The anchor frame for the bag.
 ---@field bottomBar Frame The bottom bar of the bag.
 ---@field recentItems Section The recent items section.
 ---@field currencyFrame CurrencyFrame The currency frame.
@@ -134,9 +138,7 @@ function bagFrame.bagProto:GenerateWarbankTabs()
   end
 
   if not self.tabs:TabExists("Purchase Warbank Tab") then
-    self.tabs:AddTab("Purchase Warbank Tab", nil, function()
-      StaticPopup_Show("CONFIRM_BUY_BANK_TAB", nil, nil, { bankType = Enum.BankType.Account })
-    end)
+    self.tabs:AddTab("Purchase Warbank Tab", nil, nil, AccountBankPanel.PurchasePrompt.TabCostFrame.PurchaseButton)
   end
 
   if C_Bank.HasMaxBankTabs(Enum.BankType.Account) then
@@ -328,6 +330,15 @@ end
 function bagFrame.bagProto:OnResize()
   if database:GetBagView(self.kind) == const.BAG_VIEW.LIST and self.currentView ~= nil then
     self.currentView:UpdateListSize(self)
+  end
+  if self.anchor:IsActive() then
+    self.frame:ClearAllPoints()
+    self.frame:SetPoint(self.anchor.anchorPoint, self.anchor.frame, self.anchor.anchorPoint)
+    --- HACKFIX(lobato): This fixes a bug in the WoW rendering engine.
+    -- The frame needs to be polled in some way for it to render correctly in the pipeline,
+    -- otherwise relative frames will not always render correctly across the bottom edge.
+    self.frame:GetBottom()
+    return
   end
   --Window.RestorePosition(self.frame)
   if self.previousSize and database:GetBagView(self.kind) ~= const.BAG_VIEW.LIST and self.loaded then
@@ -638,6 +649,7 @@ function bagFrame:Create(kind)
     b:OnResize()
   end)
 
+  b.anchor = anchor:New(kind, b.frame, name)
   -- Load the bag position from settings.
   Window.RestorePosition(b.frame)
   b.previousSize = b.frame:GetBottom()

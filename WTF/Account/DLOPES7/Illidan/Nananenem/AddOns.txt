@@ -176,3 +176,4 @@ Blizzard_CombatText: enabled
 Cell: enabled
 BigWigs_MistsOfPandaria: disabled
 HandyNotes_Shadowlands: disabled
+LittleWigs_Dragonflight: enabled

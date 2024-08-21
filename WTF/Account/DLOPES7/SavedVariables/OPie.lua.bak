@@ -1,11 +1,11 @@
 
 OneRing_Config = nil
 OPie_SavedData = {
-["_GameVersion"] = "11.0.0",
+["_GameVersion"] = "11.0.2",
 ["CharProfiles"] = {
 },
 ["_TimeBand"] = 0.9921875,
-["_OPieVersion"] = "Zeta 8a (4.126)",
+["_OPieVersion"] = "Ælling 4 (4.128)",
 ["ProfileStorage"] = {
 ["default"] = {
 ["Bindings"] = {

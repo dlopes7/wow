@@ -1,19 +1,5 @@
 
 PremadeGroupsFilterState = {
-["version"] = 6,
-["c6f4"] = {
-["role"] = {
-["heals"] = {
-},
-["tanks"] = {
-},
-["dps"] = {
-},
-["members"] = {
-},
-["expression"] = "",
-},
-},
 ["c3f5"] = {
 ["enabled"] = true,
 ["raid"] = {
@@ -43,6 +29,19 @@ PremadeGroupsFilterState = {
 ["max"] = "",
 ["min"] = "",
 ["act"] = false,
+},
+["expression"] = "",
+},
+},
+["c6f4"] = {
+["role"] = {
+["heals"] = {
+},
+["tanks"] = {
+},
+["dps"] = {
+},
+["members"] = {
 },
 ["expression"] = "",
 },
@@ -86,4 +85,5 @@ PremadeGroupsFilterState = {
 },
 ["enabled"] = true,
 },
+["version"] = 6,
 }

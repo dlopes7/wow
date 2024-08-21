@@ -12,30 +12,19 @@ local tinsert = tinsert
 local tostring = tostring
 local wipe = wipe
 
-local GetLocale = GetLocale
-local GetMaxLevelForPlayerExpansion = GetMaxLevelForPlayerExpansion
 local InCombatLockdown = InCombatLockdown
 local C_AddOns_IsAddOnLoaded = C_AddOns.IsAddOnLoaded
 
-local C_CVar_GetCVarBool = C_CVar.GetCVarBool
 local C_LFGList = C_LFGList
 local C_UI_Reload = C_UI.Reload
 
 local ACCEPT = _G.ACCEPT
 local CANCEL = _G.CANCEL
 
-W.Title = L["WindTools"]
-W.PlainTitle = gsub(W.Title, "|c........([^|]+)|r", "%1")
-W.Locale = GetLocale()
-W.ChineseLocale = strsub(W.Locale, 0, 2) == "zh"
-W.MaxLevelForPlayerExpansion = GetMaxLevelForPlayerExpansion()
-W.SupportElvUIVersion = 13.73
-W.ClassColor = _G.RAID_CLASS_COLORS[E.myclass]
-
 W.RegisteredModules = {}
 W.Changelog = {}
 
-W.UseKeyDown = C_CVar_GetCVarBool("ActionButtonUseKeyDown")
+W:InitializeMetadata()
 
 -- Alerts
 E.PopupDialogs.WINDTOOLS_ELVUI_OUTDATED = {
@@ -145,47 +134,6 @@ function W:CheckInstalledVersion()
 end
 
 function W:GameFixing()
-    -- -- fix duplicated party in lfg frame
-    -- -- from: https://wago.io/tWVx_hIx3/4
-    if E.global.WT.core.noDuplicatedParty then
-        if not _G["ShowLFGRemoveDuplicates"] and not C_AddOns_IsAddOnLoaded("LFMPlus") then
-            hooksecurefunc(
-                "LFGListUtil_SortSearchResults",
-                function(results, ...)
-                    if (not _G.LFGListFrame.SearchPanel:IsShown()) then
-                        return
-                    end
-
-                    local applications = {}
-
-                    for _, resultId in ipairs(_G.LFGListFrame.SearchPanel.applications) do
-                        applications[resultId] = true
-                    end
-
-                    local resultCount = #results
-                    local filteredCount = 0
-                    local filtered = {}
-
-                    for _, resultId in ipairs(results) do
-                        if not applications[resultId] then
-                            filteredCount = filteredCount + 1
-                            filtered[filteredCount] = resultId
-                        end
-                    end
-                    if filteredCount < resultCount then
-                        wipe(results)
-
-                        for i = 1, filteredCount do
-                            results[i] = filtered[i]
-                        end
-                    end
-                end
-            )
-
-            _G["ShowLFGRemoveDuplicates"] = true
-        end
-    end
-
     -- fix playstyle string
     -- from Premade Groups Filter & LFMPlus
 

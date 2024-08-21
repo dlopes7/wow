@@ -29,9 +29,6 @@ local CloseMenus = CloseMenus
 local CreateFrame = CreateFrame
 local CreateFromMixins = CreateFromMixins
 local GetGameTime = GetGameTime
-local GetItemCooldown = GetItemCooldown
-local GetItemCount = GetItemCount
-local GetItemIcon = GetItemIcon
 local GetNumGuildMembers = GetNumGuildMembers
 local GetTime = GetTime
 local HideUIPanel = HideUIPanel
@@ -48,7 +45,6 @@ local ResetCPUUsage = ResetCPUUsage
 local Screenshot = Screenshot
 local ShowUIPanel = ShowUIPanel
 local SpellBookFrame = SpellBookFrame
-local ToggleAchievementFrame = ToggleAchievementFrame
 local ToggleCalendar = ToggleCalendar
 local ToggleCharacter = ToggleCharacter
 local ToggleFriendsFrame = ToggleFriendsFrame
@@ -68,6 +64,9 @@ local C_CVar_SetCVar = C_CVar.SetCVar
 local C_FriendList_GetNumFriends = C_FriendList.GetNumFriends
 local C_FriendList_GetNumOnlineFriends = C_FriendList.GetNumOnlineFriends
 local C_Garrison_GetCompleteMissions = C_Garrison.GetCompleteMissions
+local C_Item_GetItemCooldown = C_Item.GetItemCooldown
+local C_Item_GetItemCount = C_Item.GetItemCount
+local C_Item_GetItemIconByID = C_Item.GetItemIconByID
 local C_Timer_NewTicker = C_Timer.NewTicker
 local C_ToyBox_IsToyUsable = C_ToyBox.IsToyUsable
 local C_UI_Reload = C_UI.Reload
@@ -170,9 +169,9 @@ local function AddDoubleLineForItem(itemID, prefix)
         return
     end
 
-    local texture = GetItemIcon(itemID)
+    local texture = C_Item_GetItemIconByID(itemID)
     local icon = format(IconString .. ":255:255:255|t", texture)
-    local startTime, duration = GetItemCooldown(itemID)
+    local startTime, duration = C_Item_GetItemCooldown(itemID)
     local cooldownTime = startTime + duration - GetTime()
     local canUse = cooldownTime <= 0
     local cooldownTimeString
@@ -183,7 +182,7 @@ local function AddDoubleLineForItem(itemID, prefix)
     end
 
     if itemID == 180817 then
-        local charge = GetItemCount(itemID, nil, true)
+        local charge = C_Item_GetItemCount(itemID, nil, true)
         name = name .. format(" (%d)", charge)
     end
 
@@ -328,34 +327,35 @@ local ButtonTypes = {
             end
         },
         additionalText = function()
-            local numBNOnlineFriend = select(2, BNGetNumFriends())
+            local numBNOnline, numWoWOnline = 0, 0
 
-            if GB and GB.db and GB.db.friends and GB.db.friends.showAllFriends then
-                local friendsOnline = C_FriendList_GetNumFriends() or 0
-                local totalOnline = friendsOnline + numBNOnlineFriend
-                return totalOnline
-            end
-
-            local number = C_FriendList_GetNumOnlineFriends() or 0
-
-            for i = 1, numBNOnlineFriend do
+            for i = 1, BNGetNumFriends() do
                 local accountInfo = C_BattleNet_GetFriendAccountInfo(i)
                 if accountInfo and accountInfo.gameAccountInfo and accountInfo.gameAccountInfo.isOnline then
                     local numGameAccounts = C_BattleNet_GetFriendNumGameAccounts(i)
+                    numBNOnline = numBNOnline + 1
                     if numGameAccounts and numGameAccounts > 0 then
                         for j = 1, numGameAccounts do
                             local gameAccountInfo = C_BattleNet_GetFriendGameAccountInfo(i, j)
                             if gameAccountInfo.clientProgram and gameAccountInfo.clientProgram == "WoW" then
-                                number = number + 1
+                                numWoWOnline = numWoWOnline + 1
                             end
                         end
                     elseif accountInfo.gameAccountInfo.clientProgram == "WoW" then
-                        number = number + 1
+                        numWoWOnline = numWoWOnline + 1
                     end
                 end
             end
 
-            return number > 0 and number or ""
+            local result
+            if GB and GB.db and GB.db.friends and GB.db.friends.showAllFriends then
+                local friendsOnline = C_FriendList_GetNumFriends() or 0
+                result = friendsOnline + numBNOnline
+            else
+                result = numWoWOnline
+            end
+
+            return result > 0 and result or ""
         end,
         tooltips = "Friends",
         events = {
@@ -1533,7 +1533,7 @@ function GB:UpdateHearthStoneTable()
                 function()
                     local id = itemEngine:GetItemID()
                     if hearthstonesTable[id] then
-                        if GetItemCount(id) >= 1 or PlayerHasToy(id) and C_ToyBox_IsToyUsable(id) then
+                        if C_Item_GetItemCount(id) >= 1 or PlayerHasToy(id) and C_ToyBox_IsToyUsable(id) then
                             tinsert(availableHearthstones, id)
                         end
                     end

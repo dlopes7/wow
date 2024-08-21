@@ -12,6 +12,7 @@ local SA = W:GetModule("SpellActivationAlert")
 local LL = W:GetModule("LFGList")
 
 local format = format
+local pairs = pairs
 local select = select
 local tonumber = tonumber
 local tostring = tostring
@@ -740,57 +741,97 @@ do
             tag = "[absorbs-long]",
             text = L["The amount of absorbs without math unit"]
         },
-        noSign = {
+        absorbsPercent0 = {
+            order = 1,
+            tag = "[absorbs:percent-0]",
+            text = L["The percentage of absorbs"] .. format(" (%s = 0)", L["Decimal Length"])
+        },
+        absorbsPercent1 = {
             order = 2,
+            tag = "[absorbs:percent-1]",
+            text = L["The percentage of absorbs"] .. format(" (%s = 1)", L["Decimal Length"])
+        },
+        absorbsPercent2 = {
+            order = 3,
+            tag = "[absorbs:percent-2]",
+            text = L["The percentage of absorbs"] .. format(" (%s = 2)", L["Decimal Length"])
+        },
+        absorbsPercent3 = {
+            order = 4,
+            tag = "[absorbs:percent-3]",
+            text = L["The percentage of absorbs"] .. format(" (%s = 3)", L["Decimal Length"])
+        },
+        absorbsPercentNosign0 = {
+            order = 5,
+            tag = "[absorbs:percent-nosign-0]",
+            text = L["The percentage of absorbs without percent sign"] .. format(" (%s = 0)", L["Decimal Length"])
+        },
+        absorbsPercentNosign1 = {
+            order = 6,
+            tag = "[absorbs:percent-nosign-1]",
+            text = L["The percentage of absorbs without percent sign"] .. format(" (%s = 1)", L["Decimal Length"])
+        },
+        absorbsPercentNosign2 = {
+            order = 7,
+            tag = "[absorbs:percent-nosign-2]",
+            text = L["The percentage of absorbs without percent sign"] .. format(" (%s = 2)", L["Decimal Length"])
+        },
+        absorbsPercentNosign3 = {
+            order = 8,
+            tag = "[absorbs:percent-nosign-3]",
+            text = L["The percentage of absorbs without percent sign"] .. format(" (%s = 3)", L["Decimal Length"])
+        },
+        noSign = {
+            order = 9,
             tag = "[health:percent-nostatus]",
             text = L["The percentage of current health without status"] .. format(" (%s)", L["Follow ElvUI Setting"])
         },
         noSign0 = {
-            order = 3,
+            order = 10,
             tag = "[health:percent-nostatus-0]",
             text = L["The percentage of current health without status"] .. format(" (%s = 0)", L["Decimal Length"])
         },
         noSign1 = {
-            order = 4,
+            order = 11,
             tag = "[health:percent-nostatus-1]",
             text = L["The percentage of current health without status"] .. format(" (%s = 1)", L["Decimal Length"])
         },
         noSign2 = {
-            order = 5,
+            order = 12,
             tag = "[health:percent-nostatus-2]",
             text = L["The percentage of current health without status"] .. format(" (%s = 2)", L["Decimal Length"])
         },
         noSign3 = {
-            order = 6,
+            order = 13,
             tag = "[health:percent-nostatus-3]",
             text = L["The percentage of current health without status"] .. format(" (%s = 3)", L["Decimal Length"])
         },
         noStatusNoSign = {
-            order = 7,
+            order = 14,
             tag = "[health:percent-nostatus-nosign]",
             text = L["The percentage of health without percent sign and status"] ..
                 format(" (%s)", L["Follow ElvUI Setting"])
         },
         noStatusNoSign0 = {
-            order = 8,
+            order = 15,
             tag = "[health:percent-nostatus-nosign-0]",
             text = L["The percentage of health without percent sign and status"] ..
                 format(" (%s = 0)", L["Decimal Length"])
         },
         noStatusNoSign1 = {
-            order = 9,
+            order = 16,
             tag = "[health:percent-nostatus-nosign-1]",
             text = L["The percentage of health without percent sign and status"] ..
                 format(" (%s = 1)", L["Decimal Length"])
         },
         noStatusNoSign2 = {
-            order = 10,
+            order = 17,
             tag = "[health:percent-nostatus-nosign-2]",
             text = L["The percentage of health without percent sign and status"] ..
                 format(" (%s = 2)", L["Decimal Length"])
         },
         noStatusNoSign3 = {
-            order = 11,
+            order = 18,
             tag = "[health:percent-nostatus-nosign-3]",
             text = L["The percentage of health without percent sign and status"] ..
                 format(" (%s = 3)", L["Decimal Length"])
@@ -1407,6 +1448,12 @@ options.gameBar = {
                     type = "toggle",
                     name = L["Show All Friends"],
                     desc = L["Show all friends rather than only friends who are currently playing WoW."]
+                },
+                countSubAccounts = {
+                    order = 2,
+                    type = "toggle",
+                    name = L["Count Sub Accounts"],
+                    desc = L["Count active WoW sub accounts rather than Battle.net Accounts."]
                 }
             }
         },
@@ -2036,6 +2083,191 @@ options.spellActivationAlert = {
                 E.db.WT.misc.spellActivationAlert[info[#info]] = value
                 SA:Update()
                 SA:Preview()
+            end
+        }
+    }
+}
+
+options.cooldownTextOffset = {
+    order = 10,
+    type = "group",
+    name = L["Cooldown Text Offset"],
+    get = function(info)
+        return E.db.WT.misc.cooldownTextOffset[info[#info]]
+    end,
+    set = function(info, value)
+        E.db.WT.misc.cooldownTextOffset[info[#info]] = value
+        M:UpdateCooldownTextOffset()
+    end,
+    disabled = function()
+        return not E.db.cooldown.enable
+    end,
+    args = {
+        desc = {
+            order = 1,
+            type = "group",
+            inline = true,
+            name = L["Description"],
+            args = {
+                feature = {
+                    order = 1,
+                    type = "description",
+                    name = L["Customize the ElvUI cooldown text offset."],
+                    fontSize = "medium"
+                }
+            }
+        },
+        enable = {
+            order = 2,
+            type = "toggle",
+            name = L["Enable"]
+        },
+        offsetX = {
+            order = 3,
+            type = "range",
+            name = L["X-Offset"],
+            min = -100,
+            max = 100,
+            step = 1,
+            disabled = function()
+                return not E.db.WT.misc.cooldownTextOffset.enable
+            end
+        },
+        offsetY = {
+            order = 4,
+            type = "range",
+            name = L["Y-Offset"],
+            min = -100,
+            max = 100,
+            step = 1,
+            disabled = function()
+                return not E.db.WT.misc.cooldownTextOffset.enable
+            end
+        }
+    }
+}
+
+local selected, fromHotKey, toHotKey = nil, nil, nil
+
+options.keybindAlias = {
+    order = 11,
+    type = "group",
+    name = L["Keybind Alias"],
+    get = function(info)
+        return E.db.WT.misc.keybindAlias[info[#info]]
+    end,
+    set = function(info, value)
+        E.db.WT.misc.keybindAlias[info[#info]] = value
+        M:UpdateAllKeybindText()
+    end,
+    args = {
+        desc = {
+            order = 1,
+            type = "group",
+            inline = true,
+            name = L["Description"],
+            args = {
+                feature = {
+                    order = 1,
+                    type = "description",
+                    name = L["Custom hotkey alias for keybinding."],
+                    fontSize = "medium"
+                }
+            }
+        },
+        enable = {
+            order = 2,
+            type = "toggle",
+            name = L["Enable"],
+            width = "full"
+        },
+        dropdown = {
+            order = 3,
+            type = "select",
+            name = L["Active Aliases"],
+            width = 1.5,
+            values = function()
+                local list = {}
+                for k, v in pairs(E.db.WT.misc.keybindAlias.list) do
+                    list[k] = C.StringByTemplate(v, "primary") .. ": " .. k
+                end
+                return list
+            end,
+            get = function()
+                return selected
+            end,
+            set = function(_, value)
+                selected = value
+            end,
+            disabled = function()
+                return not E.db.WT.misc.keybindAlias.enable
+            end
+        },
+        remove = {
+            order = 4,
+            type = "execute",
+            name = L["Remove"],
+            desc = L["Remove the selected alias."],
+            func = function()
+                if selected then
+                    E.db.WT.misc.keybindAlias.list[selected] = nil
+                    selected = nil
+                    M:UpdateAllKeybindText()
+                end
+            end,
+            disabled = function()
+                return not E.db.WT.misc.keybindAlias.enable
+            end
+        },
+        devide = {
+            order = 5,
+            type = "description",
+            name = " ",
+            width = "full"
+        },
+        hotKey = {
+            order = 6,
+            type = "keybinding",
+            name = L["Hot Key"],
+            desc = L["The hotkey you want to set alias for."],
+            get = function()
+                return fromHotKey
+            end,
+            set = function(_, value)
+                fromHotKey = value
+            end,
+            disabled = function()
+                return not E.db.WT.misc.keybindAlias.enable
+            end
+        },
+        alias = {
+            order = 7,
+            type = "input",
+            name = L["Alias"],
+            desc = L["The alias you want to set for the hotkey."],
+            get = function()
+                return toHotKey
+            end,
+            set = function(_, value)
+                toHotKey = value
+            end,
+            disabled = function()
+                return not E.db.WT.misc.keybindAlias.enable
+            end
+        },
+        addOrUpdate = {
+            order = 8,
+            type = "execute",
+            name = L["Add / Update"],
+            func = function()
+                if fromHotKey and toHotKey then
+                    E.db.WT.misc.keybindAlias.list[fromHotKey] = toHotKey
+                    fromHotKey, toHotKey = nil, nil
+                    M:UpdateAllKeybindText()
+                end
+            end,
+            disabled = function()
+                return not E.db.WT.misc.keybindAlias.enable
             end
         }
     }

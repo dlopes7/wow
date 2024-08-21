@@ -210,3 +210,4 @@ TwitchEmotes: disabled
 WagoAppCompanion: disabled
 WorldMarkerKeyBindings: disabled
 WorldQuestTracker: disabled
+LittleWigs_Dragonflight: enabled

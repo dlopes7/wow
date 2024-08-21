@@ -236,6 +236,13 @@ P.announcement = {
                 raidWarning = false,
                 text = L["%player% used %spell%"]
             },
+            ["290154"] = {
+                -- 塑形師道標
+                enable = true,
+                includePlayer = true,
+                raidWarning = false,
+                text = L["%player% used %spell%"]
+            },
             ["376664"] = {
                 -- 歐胡納鷹棲所
                 enable = true,
@@ -982,12 +989,12 @@ P.social = {
     },
     contextMenu = {
         enable = true,
-        armory = E.global.general.locale ~= "zhCN",
+        sectionTitle = true,
+        armory = W.Locale ~= "zhCN",
         armoryOverride = {},
-        addFriend = true,
         guildInvite = true,
         who = true,
-        reportStats = true
+        reportStats = false
     },
     smartTab = {
         enable = true,
@@ -1038,11 +1045,31 @@ P.quest = {
 }
 
 P.tooltips = {
+    elvUITweaks = {
+        forceItemLevel = true,
+        raceIcon = {
+            enable = true,
+            iconWidth = 16,
+            iconHeight = 16
+        },
+        specIcon = {
+            enable = true,
+            iconWidth = 16,
+            iconHeight = 14
+        },
+        betterMythicPlusInfo = {
+            enable = true,
+            icon = true,
+            iconWidth = 18,
+            iconHeight = 16
+        }
+    },
     yOffsetOfHealthBar = 0,
     yOffsetOfHealthText = 0,
     groupInfo = {
         enable = false,
         title = true,
+        excludeDungeon = true,
         mode = "NORMAL",
         classIconStyle = "flat",
         template = "{{classIcon:18}} {{specIcon:14,18}} {{classColorStart}}{{className}} ({{specName}}){{classColorEnd}}{{amountStart}} x {{amount}}{{amountEnd}}"
@@ -1088,7 +1115,8 @@ P.misc = {
         visibility = "[petbattle] hide; show",
         tooltipsAnchor = "ANCHOR_BOTTOM",
         friends = {
-            showAllFriends = false
+            showAllFriends = false,
+            countSubAccounts = true
         },
         time = {
             localTime = true,
@@ -1144,5 +1172,14 @@ P.misc = {
         acceptResurrect = false,
         acceptCombatResurrect = false,
         confirmSummon = false
+    },
+    cooldownTextOffset = {
+        enable = false,
+        offsetX = 0,
+        offsetY = 0
+    },
+    keybindAlias = {
+        enable = false,
+        list = {}
     }
 }

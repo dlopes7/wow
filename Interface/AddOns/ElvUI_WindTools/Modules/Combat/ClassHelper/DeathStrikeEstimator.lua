@@ -15,28 +15,24 @@ local GetTime = GetTime
 local GetVersatilityBonus = GetVersatilityBonus
 local InCombatLockdown = InCombatLockdown
 local IsPlayerSpell = IsPlayerSpell
-local UnitAura = UnitAura
 local UnitHealth = UnitHealth
 local UnitHealthMax = UnitHealthMax
 local UnitIsDeadOrGhost = UnitIsDeadOrGhost
 
 local C_ClassTalents_GetActiveConfigID = C_ClassTalents.GetActiveConfigID
 local C_Traits_GetNodeInfo = C_Traits.GetNodeInfo
+local C_UnitAuras_GetAuraDataByIndex = C_UnitAuras.GetAuraDataByIndex
 
 local CR_VERSATILITY_DAMAGE_DONE = CR_VERSATILITY_DAMAGE_DONE
 
 -------------------------------------------------------------------------------
 -- Functions
 -------------------------------------------------------------------------------
-local function getPlayerAura(spell, filter)
+local function getPlayerAura(spellID, filter)
     for i = 1, 255 do
-        local name, _, stacks, _, _, _, _, _, _, spellId = UnitAura("player", i, filter)
-        if not name then
-            return
-        end
-
-        if spell == spellId then
-            return name, stacks
+        local auraData = C_UnitAuras_GetAuraDataByIndex("player", i, filter)
+        if auraData and auraData.spellId == spellID then
+            return auraData.name, auraData.applications
         end
     end
 end
@@ -260,8 +256,8 @@ function damageDB:calculate()
 
     -- Multiply Auras
     local aura_mult = 1
-    for spellId, param in pairs(helper.env.auras) do
-        local name, stacks = getPlayerAura(spellId, param.isDebuff and "HARMFUL" or "HELPFUL")
+    for spellID, param in pairs(helper.env.auras) do
+        local name, stacks = getPlayerAura(spellID, param.isDebuff and "HARMFUL" or "HELPFUL")
         if name then
             aura_mult = aura_mult * (1 + (param.mod * (param.perStack and stacks or 1)))
         end

@@ -12,6 +12,8 @@ local QueryParser = addon:GetModule('QueryParser')
 ---@class Debug: AceModule
 local debug = addon:GetModule('Debug')
 
+---@class Binding: AceModule
+local binding = addon:GetModule('Binding')
 
 ---@class Trees: AceModule
 local trees = addon:GetModule('Trees')
@@ -50,6 +52,8 @@ function search:OnInitialize()
   self:CreateIndex('expansion')
   self:CreateIndex('equipmentset')
   self:CreateIndex('bagName')
+  self:CreateIndex('guid')
+  self:CreateIndex('binding')
 
   -- Number indexes
   self:CreateIndex('level')
@@ -61,10 +65,13 @@ function search:OnInitialize()
   self:CreateIndex('subclass')
   self:CreateIndex('bagid')
   self:CreateIndex('slotid')
+  self:CreateIndex('bindtype')
+  self:CreateIndex('bonusid')
 
   -- Boolean indexes
   self:CreateIndex('reagent')
-  self:CreateIndex('bound')
+  self:CreateIndex('isbound') -- from C_Item
+  self:CreateIndex('bound') -- from Binding
   self:CreateIndex('quest')
   self:CreateIndex('activequest')
 
@@ -73,14 +80,15 @@ function search:OnInitialize()
     'type',
     'category',
     'subtype',
-    'equipmentlocation'
+    'equipmentlocation',
+    'binding',
   }
 
   self.indexLookup = {
     exp = self.indicies.expansion,
     slot = self.indicies.equipmentlocation,
     ilvl = self.indicies.level,
-    count = self.indicies.stackCount,
+    count = self.indicies.stackcount,
   }
 end
 
@@ -88,6 +96,8 @@ end
 function search:Wipe()
   for _, index in pairs(self.indicies) do
     index.ngrams = {}
+    index.fullText = {}
+    index.bools = {}
     index.numbers = trees.NewIntervalTree()
   end
 end
@@ -174,10 +184,13 @@ function search:Add(item)
   search:addStringToIndex(self.indicies.type, item.itemInfo.itemType, item.slotkey)
   search:addStringToIndex(self.indicies.subtype, item.itemInfo.itemSubType, item.slotkey)
   search:addStringToIndex(self.indicies.category, item.itemInfo.category, item.slotkey)
+  search:addStringToIndex(self.indicies.guid, item.itemInfo.itemGUID, item.slotkey)
   --search:addStringToIndex(self.indicies.bagName, item.bagName, item.slotkey)
 
-  if item.itemInfo.equipmentSet ~= nil then
-    search:addStringToIndex(self.indicies.equipmentset, item.itemInfo.equipmentSet, item.slotkey)
+  if item.itemInfo.equipmentSets ~= nil then
+    for _, set in ipairs(item.itemInfo.equipmentSets) do
+      search:addStringToIndex(self.indicies.equipmentset, set, item.slotkey)
+    end
   end
 
   if item.itemInfo.expacID ~= nil and const.BRIEF_EXPANSION_MAP[item.itemInfo.expacID] ~= nil then
@@ -190,6 +203,10 @@ function search:Add(item)
     search:addStringToIndex(self.indicies.equipmentlocation, _G[item.itemInfo.itemEquipLoc], item.slotkey)
   end
 
+  if const.BINDING_MAP[item.bindingInfo.binding] ~= "" then
+    search:addStringToIndex(self.indicies.binding, const.BINDING_MAP[item.bindingInfo.binding], item.slotkey)
+  end
+
   search:addNumberToIndex(self.indicies.level, item.itemInfo.currentItemLevel, item.slotkey)
   search:addNumberToIndex(self.indicies.rarity, item.itemInfo.itemQuality, item.slotkey)
   search:addNumberToIndex(self.indicies.id, item.itemInfo.itemID, item.slotkey)
@@ -198,9 +215,15 @@ function search:Add(item)
   search:addNumberToIndex(self.indicies.subclass, item.itemInfo.subclassID, item.slotkey)
   search:addNumberToIndex(self.indicies.bagid, item.bagid, item.slotkey)
   search:addNumberToIndex(self.indicies.slotid, item.slotid, item.slotkey)
+  search:addNumberToIndex(self.indicies.bindtype, item.itemInfo.bindType, item.slotkey)
+  for _, bonusID in ipairs(item.itemLinkInfo.bonusIDs) do
+    local bonusNum = tonumber(bonusID)
+    if bonusNum then search:addNumberToIndex(self.indicies.bonusid, bonusNum, item.slotkey) end
+  end
 
   search:addBoolToIndex(self.indicies.reagent, item.itemInfo.isCraftingReagent, item.slotkey)
-  search:addBoolToIndex(self.indicies.bound, item.itemInfo.isBound, item.slotkey)
+  search:addBoolToIndex(self.indicies.isbound, item.itemInfo.isBound, item.slotkey)
+  search:addBoolToIndex(self.indicies.bound, item.bindingInfo.bound, item.slotkey)
   search:addBoolToIndex(self.indicies.quest, item.questInfo.isQuestItem, item.slotkey)
   search:addBoolToIndex(self.indicies.activequest, item.questInfo.isActive, item.slotkey)
 end
@@ -211,10 +234,13 @@ function search:Remove(item)
   search:removeStringFromIndex(self.indicies.type, item.itemInfo.itemType, item.slotkey)
   search:removeStringFromIndex(self.indicies.subtype, item.itemInfo.itemSubType, item.slotkey)
   search:removeStringFromIndex(self.indicies.category, item.itemInfo.category, item.slotkey)
+  search:removeStringFromIndex(self.indicies.guid, item.itemInfo.itemGUID, item.slotkey)
   --search:removeStringFromIndex(self.indicies.bagName, item.bagName, item.slotkey)
 
-  if item.itemInfo.equipmentSet ~= nil then
-    search:removeStringFromIndex(self.indicies.equipmentset, item.itemInfo.equipmentSet, item.slotkey)
+  if item.itemInfo.equipmentSets ~= nil then
+    for _, set in ipairs(item.itemInfo.equipmentSets) do
+      search:removeStringFromIndex(self.indicies.equipmentset, set, item.slotkey)
+    end
   end
 
   if item.itemInfo.expacID ~= nil and const.BRIEF_EXPANSION_MAP[item.itemInfo.expacID] ~= nil then
@@ -227,6 +253,10 @@ function search:Remove(item)
     search:removeStringFromIndex(self.indicies.equipmentlocation, _G[item.itemInfo.itemEquipLoc], item.slotkey)
   end
 
+  if const.BINDING_MAP[item.bindingInfo.binding] ~= "" then
+    search:removeStringFromIndex(self.indicies.binding, const.BINDING_MAP[item.bindingInfo.binding], item.slotkey)
+  end
+
   search:removeNumberFromIndex(self.indicies.level, item.itemInfo.currentItemLevel, item.slotkey)
   search:removeNumberFromIndex(self.indicies.rarity, item.itemInfo.itemQuality, item.slotkey)
   search:removeNumberFromIndex(self.indicies.id, item.itemInfo.itemID, item.slotkey)
@@ -235,9 +265,15 @@ function search:Remove(item)
   search:removeNumberFromIndex(self.indicies.subclass, item.itemInfo.subclassID, item.slotkey)
   search:removeNumberFromIndex(self.indicies.bagid, item.bagid, item.slotkey)
   search:removeNumberFromIndex(self.indicies.slotid, item.slotid, item.slotkey)
+  search:removeNumberFromIndex(self.indicies.bindtype, item.itemInfo.bindType, item.slotkey)
+  for _, bonusID in ipairs(item.itemLinkInfo.bonusIDs) do
+    local bonusNum = tonumber(bonusID)
+    if bonusNum then search:removeNumberFromIndex(self.indicies.bonusid, bonusNum, item.slotkey) end
+  end
 
   search:removeBoolFromIndex(self.indicies.reagent, item.itemInfo.isCraftingReagent, item.slotkey)
-  search:removeBoolFromIndex(self.indicies.bound, item.itemInfo.isBound, item.slotkey)
+  search:removeBoolFromIndex(self.indicies.isbound, item.itemInfo.isBound, item.slotkey)
+  search:removeBoolFromIndex(self.indicies.bound, item.bindingInfo.bound, item.slotkey)
   search:removeBoolFromIndex(self.indicies.quest, item.questInfo.isQuestItem, item.slotkey)
   search:removeBoolFromIndex(self.indicies.activequest, item.questInfo.isActive, item.slotkey)
 end
@@ -438,10 +474,11 @@ end
 function search:isFullTextMatch(name, value)
   local index = self:GetIndex(name)
   if not index then return {} end
+  local lower = string.lower(value)
   ---@type table<string, boolean>
   local results = {}
   for text, slots in pairs(index.fullText or {}) do
-    if string.match(text, value) then
+    if string.find(text, lower, 1, true) then
       for k, v in pairs(slots) do
         results[k] = v
       end

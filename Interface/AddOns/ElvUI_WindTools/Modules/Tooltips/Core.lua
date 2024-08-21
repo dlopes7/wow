@@ -2,44 +2,38 @@ local W, F, E, L = unpack((select(2, ...)))
 local ET = E:GetModule("Tooltip")
 local T = W.Modules.Tooltips
 
-local _G = _G
 local next = next
 local pairs = pairs
 local select = select
+
 local strsplit = strsplit
 local tinsert = tinsert
 local type = type
 local xpcall = xpcall
 
 local CanInspect = CanInspect
-local GameTooltip =GameTooltip
+local GameTooltip = GameTooltip
 local InCombatLockdown = InCombatLockdown
 local IsAltKeyDown = IsAltKeyDown
 local IsControlKeyDown = IsControlKeyDown
 local IsShiftKeyDown = IsShiftKeyDown
-local UnitGUID = UnitGUID
+local UnitClass = UnitClass
+local UnitExists = UnitExists
+local UnitIsPlayer = UnitIsPlayer
 
-T.load = {} -- 毋须等待插件的函数表
-T.updateProfile = {} -- 配置更新后的函数表
+local RAID_CLASS_COLORS_PRIEST = RAID_CLASS_COLORS.PRIEST
+
+T.load = {} -- functions that need to be called when module is loaded
+T.updateProfile = {} -- functions that need to be called when profile is updated
 T.modifierInspect = {}
 T.normalInspect = {}
 T.clearInspect = {}
 T.eventCallback = {}
 
---[[
-    注册回调
-    @param {string} name 函数名
-    @param {function} [func=T.name] 回调函数
-]]
 function T:AddCallback(name, func)
     tinsert(self.load, func or self[name])
 end
 
---[[
-    注册更新回调
-    @param {string} name 函数名
-    @param {function} [func=T.name] 回调函数
-]]
 function T:AddCallbackForUpdate(name, func)
     tinsert(self.updateProfile, func or self[name])
 end
@@ -108,40 +102,55 @@ function T:InspectInfo(tt, data, triedTimes)
         return
     end
 
+    triedTimes = triedTimes or 0
+
     local unit = select(2, tt:GetUnit())
+
+    if not unit then
+        local GMF = E:GetMouseFocus()
+        local focusUnit = GMF and GMF.GetAttribute and GMF:GetAttribute("unit")
+        if focusUnit then
+            unit = focusUnit
+        end
+        if not unit or not UnitExists(unit) then
+            return
+        end
+    end
 
     if not unit or not data or not data.guid then
         return
     end
+
+    local inCombatLockdown = InCombatLockdown()
+    local isShiftKeyDown = IsShiftKeyDown()
+    local isPlayerUnit = UnitIsPlayer(unit)
 
     -- Run all registered callbacks (normal)
     for _, func in next, self.normalInspect do
         xpcall(func, F.Developer.ThrowError, self, tt, unit, data.guid)
     end
 
+    -- Item Level
+    local itemLevelAvailable = isPlayerUnit and not inCombatLockdown and ET.db.inspectDataEnable
+
+    if self.profiledb.elvUITweaks.forceItemLevel then
+        if not isShiftKeyDown and itemLevelAvailable and not tt.ItemLevelShown then
+            local _, class = UnitClass(unit)
+            local color = class and E:ClassColor(class) or RAID_CLASS_COLORS_PRIEST
+            ET:AddInspectInfo(tt, unit, 0, color.r, color.g, color.b)
+        end
+    end
+
+    -- Modifier callbacks pre-check
     if not self:CheckModifier() or not CanInspect(unit) then
         return
     end
 
-    -- If ElvUI is inspecting, just wait for 4 seconds
-    triedTimes = triedTimes or 0
-    if triedTimes > 20 then
-        return
-    end
-
-    if not InCombatLockdown() and IsShiftKeyDown() and ET.db.inspectDataEnable then
-        local isElvUITooltipItemLevelInfoAlreadyAdded = false
-        for i = #(data.lines), tt:NumLines() do
-            local leftTip = _G["GameTooltipTextLeft" .. i]
-            local leftTipText = leftTip:GetText()
-            if leftTipText and leftTipText == L["Item Level:"] and leftTip:IsShown() then
-                isElvUITooltipItemLevelInfoAlreadyAdded = true
-                break
-            end
-        end
-
-        if not isElvUITooltipItemLevelInfoAlreadyAdded then
-            return E:Delay(0.2, T.InspectInfo, T, ET, tt, data, triedTimes + 1)
+    -- It ElvUI Item Level is enabled, we need to delay the modifier callbacks
+    if self.db.forceItemLevel or isShiftKeyDown and itemLevelAvailable then
+        if not tt.ItemLevelShown and triedTimes <= 4 then
+            E:Delay(0.33, T.InspectInfo, T, tt, data, triedTimes + 1)
+            return
         end
     end
 
@@ -189,6 +198,7 @@ end
 
 function T:Initialize()
     self.db = E.private.WT.tooltips
+    self.profiledb = E.db.WT.tooltips
     for index, func in next, self.load do
         xpcall(func, F.Developer.ThrowError, self)
         self.load[index] = nil
@@ -198,6 +208,8 @@ function T:Initialize()
         T:RegisterEvent(name, "Event")
     end
 
+    T:RawHook(ET, "AddMythicInfo")
+    T:SecureHook(ET, "SetUnitText", "SetUnitText")
     T:SecureHook(ET, "RemoveTrashLines", "ElvUIRemoveTrashLines")
     T:SecureHookScript(GameTooltip, "OnTooltipCleared", "ClearInspectInfo")
 
@@ -205,6 +217,7 @@ function T:Initialize()
 end
 
 function T:ProfileUpdate()
+    self.profiledb = E.db.WT.tooltips
     for index, func in next, self.updateProfile do
         xpcall(func, F.Developer.ThrowError, self)
         self.updateProfile[index] = nil

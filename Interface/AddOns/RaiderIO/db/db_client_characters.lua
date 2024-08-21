@@ -1,5 +1,5 @@
 --
--- RaiderIO Client Data. Generated on Mon Aug 12 2024 21:53:08 GMT+0000 (Coordinated Universal Time)
+-- RaiderIO Client Data. Generated on Mon Aug 19 2024 23:17:00 GMT+0000 (Coordinated Universal Time)
 --
 local _, ns = ...
 ns.CLIENT_CHARACTERS = {
@@ -153,7 +153,7 @@ ns.CLIENT_CHARACTERS = {
     },
     ["mythic_keystone"] = {
       ["all"] = {
-        ["score"] = 1616.7,
+        ["score"] = 1617,
         ["best"] = {
           ["zone_id"] = 13954,
           ["level"] = 8,
@@ -163,12 +163,12 @@ ns.CLIENT_CHARACTERS = {
           ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/11825026-8-the-azure-vault?utm_source=client"
         },
         ["bestFortified"] = {
-          ["zone_id"] = 14082,
+          ["zone_id"] = 13991,
           ["level"] = 8,
-          ["upgrades"] = 2,
-          ["fraction"] = 0.603,
-          ["score"] = 150.96437052088078,
-          ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/11637279-8-halls-of-infusion?utm_source=client"
+          ["upgrades"] = 3,
+          ["fraction"] = 0.53,
+          ["score"] = 151.00000698864682,
+          ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/12543714-8-brackenhide-hollow?utm_source=client"
         },
         ["bestTyrannical"] = {
           ["zone_id"] = 13954,
@@ -206,10 +206,10 @@ ns.CLIENT_CHARACTERS = {
           {
             ["zone_id"] = 13991,
             ["level"] = 8,
-            ["upgrades"] = 2,
-            ["fraction"] = 0.615,
-            ["score"] = 150.8067252768802,
-            ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/11635904-8-brackenhide-hollow?utm_source=client"
+            ["upgrades"] = 3,
+            ["fraction"] = 0.53,
+            ["score"] = 151.00000698864682,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/12543714-8-brackenhide-hollow?utm_source=client"
           },
           {
             ["zone_id"] = 14011,
@@ -238,10 +238,10 @@ ns.CLIENT_CHARACTERS = {
           {
             ["zone_id"] = 14082,
             ["level"] = 8,
-            ["upgrades"] = 2,
-            ["fraction"] = 0.603,
-            ["score"] = 150.96437052088078,
-            ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/11637279-8-halls-of-infusion?utm_source=client"
+            ["upgrades"] = 3,
+            ["fraction"] = 0.569,
+            ["score"] = 151.0000030527097,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/12545272-8-halls-of-infusion?utm_source=client"
           },
           {
             ["zone_id"] = 1000010,
@@ -293,14 +293,14 @@ ns.CLIENT_CHARACTERS = {
     },
     ["mythic_keystone"] = {
       ["all"] = {
-        ["score"] = 3406.4,
+        ["score"] = 3515,
         ["best"] = {
-          ["zone_id"] = 14063,
-          ["level"] = 17,
+          ["zone_id"] = 13991,
+          ["level"] = 18,
           ["upgrades"] = 1,
-          ["fraction"] = 0.876,
-          ["score"] = 220.55364467165168,
-          ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/12527545-17-ruby-life-pools?utm_source=client"
+          ["fraction"] = 0.833,
+          ["score"] = 228.09164188083858,
+          ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/12630962-18-brackenhide-hollow?utm_source=client"
         },
         ["bestFortified"] = {
           ["zone_id"] = 14063,
@@ -311,45 +311,45 @@ ns.CLIENT_CHARACTERS = {
           ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/12527545-17-ruby-life-pools?utm_source=client"
         },
         ["bestTyrannical"] = {
-          ["zone_id"] = 14011,
-          ["level"] = 16,
+          ["zone_id"] = 13991,
+          ["level"] = 18,
           ["upgrades"] = 1,
-          ["fraction"] = 0.948,
-          ["score"] = 212.65328150089928,
-          ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/9575915-16-neltharus?utm_source=client"
+          ["fraction"] = 0.833,
+          ["score"] = 228.09164188083858,
+          ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/12630962-18-brackenhide-hollow?utm_source=client"
         },
         ["runs"] = {
           {
             ["zone_id"] = 13954,
-            ["level"] = 16,
-            ["upgrades"] = 2,
-            ["fraction"] = 0.682,
-            ["score"] = 215.97029274557653,
-            ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/12372927-16-the-azure-vault?utm_source=client"
+            ["level"] = 18,
+            ["upgrades"] = 1,
+            ["fraction"] = 0.923,
+            ["score"] = 226.9657989630382,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/12634444-18-the-azure-vault?utm_source=client"
           },
           {
             ["zone_id"] = 13968,
-            ["level"] = 16,
+            ["level"] = 17,
             ["upgrades"] = 1,
-            ["fraction"] = 0.858,
-            ["score"] = 213.76887875720075,
-            ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/12356632-16-uldaman-legacy-of-tyr?utm_source=client"
+            ["fraction"] = 0.965,
+            ["score"] = 219.43316298579867,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/12604280-17-uldaman-legacy-of-tyr?utm_source=client"
           },
           {
             ["zone_id"] = 13982,
-            ["level"] = 16,
+            ["level"] = 17,
             ["upgrades"] = 1,
-            ["fraction"] = 0.951,
-            ["score"] = 212.60980346097602,
-            ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/9269474-16-the-nokhud-offensive?utm_source=client"
+            ["fraction"] = 0.828,
+            ["score"] = 221.15384304616538,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/12823135-17-the-nokhud-offensive?utm_source=client"
           },
           {
             ["zone_id"] = 13991,
-            ["level"] = 17,
+            ["level"] = 18,
             ["upgrades"] = 1,
-            ["fraction"] = 0.972,
-            ["score"] = 219.34781073194227,
-            ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/12535036-17-brackenhide-hollow?utm_source=client"
+            ["fraction"] = 0.833,
+            ["score"] = 228.09164188083858,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/12630962-18-brackenhide-hollow?utm_source=client"
           },
           {
             ["zone_id"] = 14011,
@@ -370,18 +370,18 @@ ns.CLIENT_CHARACTERS = {
           {
             ["zone_id"] = 14063,
             ["level"] = 17,
-            ["upgrades"] = 1,
-            ["fraction"] = 0.876,
-            ["score"] = 220.55364467165168,
-            ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/12527545-17-ruby-life-pools?utm_source=client"
+            ["upgrades"] = 2,
+            ["fraction"] = 0.713,
+            ["score"] = 222.58737706128653,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/12632606-17-ruby-life-pools?utm_source=client"
           },
           {
             ["zone_id"] = 14082,
-            ["level"] = 16,
+            ["level"] = 17,
             ["upgrades"] = 1,
-            ["fraction"] = 0.908,
-            ["score"] = 213.15415928327428,
-            ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/12192493-16-halls-of-infusion?utm_source=client"
+            ["fraction"] = 0.85,
+            ["score"] = 220.88034953848145,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/12624397-17-halls-of-infusion?utm_source=client"
           },
           {
             ["zone_id"] = 1000010,

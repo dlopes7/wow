@@ -9,6 +9,11 @@ local L = addon:GetModule('Localization')
 ---@class Constants: AceModule
 local const = addon:NewModule('Constants')
 
+---@class AnchorState
+---@field enabled boolean
+---@field shown boolean
+---@field staticPoint? string
+
 -- Constants for detecting WoW version.
 addon.isRetail = WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
 addon.isClassic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
@@ -34,13 +39,46 @@ const.BANK_TAB = {
   ACCOUNT_BANK_5 = Enum.BagIndex.AccountBankTab_5,
 }
 
----@enum MovementFlow
+---@enum MovementFlowType
 const.MOVEMENT_FLOW = {
   UNDEFINED = -1,
   BANK = 0,
-  SENDMAIL = 1,
-  TRADE = 2,
-  NPCSHOP = 3
+  REAGENT = 1,
+  WARBANK = 2,
+  SENDMAIL = 3,
+  TRADE = 4,
+  NPCSHOP = 5
+}
+
+---@enum BindingScope  -- similar. but distinct from ItemBind
+const.BINDING_SCOPE = {
+  UNKNOWN = -1,
+  NONBINDING = 0,
+  BOUND = 1,
+  BOE = 2,
+  BOU = 3,
+  QUEST = 4,
+  SOULBOUND = 5,
+  REFUNDABLE = 6,
+  ACCOUNT = 7,
+  BNET = 8,
+  WUE = 9,
+}
+
+---@class BindingMap
+---@type table<number, string>
+const.BINDING_MAP = {
+  [const.BINDING_SCOPE.UNKNOWN] = "",
+  [const.BINDING_SCOPE.NONBINDING] = "nonbinding",
+  [const.BINDING_SCOPE.BOUND] = "",
+  [const.BINDING_SCOPE.BOE] = "boe",
+  [const.BINDING_SCOPE.BOU] = "bou",
+  [const.BINDING_SCOPE.QUEST] = "quest",
+  [const.BINDING_SCOPE.SOULBOUND] = "soulbound",
+  [const.BINDING_SCOPE.REFUNDABLE] = "refundable",
+  [const.BINDING_SCOPE.ACCOUNT] = "warbound",
+  [const.BINDING_SCOPE.BNET] = "bnet",
+  [const.BINDING_SCOPE.WUE] = "wue",
 }
 
 -- BANK_BAGS contains all the bags that are part of the bank, including
@@ -453,6 +491,10 @@ const.DATABASE_DEFAULTS = {
       [const.BAG_KIND.BACKPACK] = false,
       [const.BAG_KIND.BANK] = false,
     },
+    extraGlowyButtons = {
+      [const.BAG_KIND.BACKPACK] = false,
+      [const.BAG_KIND.BANK] = false,
+    },
     newItems = {
       [const.BAG_KIND.BACKPACK] = {
         markRecentItems = false,
@@ -492,6 +534,21 @@ const.DATABASE_DEFAULTS = {
     positions = {
       [const.BAG_KIND.BACKPACK] = {},
       [const.BAG_KIND.BANK] = {},
+    },
+    anchorPositions = {
+      [const.BAG_KIND.BACKPACK] = {},
+      [const.BAG_KIND.BANK] = {},
+    },
+    ---@type table<BagKind, AnchorState>
+    anchorState = {
+      [const.BAG_KIND.BACKPACK] = {
+        enabled = false,
+        shown = false,
+      },
+      [const.BAG_KIND.BANK] = {
+        enabled = false,
+        shown = false,
+      },
     },
     sectionSort = {
       [const.BAG_KIND.BACKPACK] = {

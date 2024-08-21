@@ -1,4 +1,3 @@
-if not BigWigsLoader.isBeta then return end
 --------------------------------------------------------------------------------
 -- Module Declaration
 --
@@ -109,7 +108,7 @@ function mod:OnBossEnable()
 	-- Reno Jackson
 	self:Log("SPELL_CAST_START", "SkullCracker", 398749)
 	self:Log("SPELL_CAST_START", "SpikeTraps", 400335)
-	self:Log("SPELL_CREATE", "SupplyBag", 447392) -- Reno Jackson defeated
+	self:Log("SPELL_CAST_SUCCESS", "SupplyBag", 447392) -- Reno Jackson defeated
 
 	-- Sir Finley Mrgglton (pulls with Reno Jackson)
 	self:Log("SPELL_CAST_START", "Consecration", 461741)

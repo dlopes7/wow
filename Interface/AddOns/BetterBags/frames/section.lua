@@ -37,7 +37,7 @@ local db = addon:GetModule('Database')
 ---@class Items: AceModule
 local items = addon:GetModule('Items')
 
----@class movementFlow: AceModule
+---@class MovementFlow: AceModule
 local movementFlow = addon:GetModule('MovementFlow')
 
 -------
@@ -243,7 +243,7 @@ function sectionFrame:OnTitleClickOrDrop(section)
   ---@cast itemID number
   if cursorType ~= "item" then return end
   local category = section.title:GetText()
-  categories:AddItemToCategory(itemID, category)
+  categories:AddPermanentItemToCategory(itemID, category)
   ClearCursor()
   events:SendMessage('bags/FullRefreshAll')
 end
@@ -286,21 +286,14 @@ function sectionFrame:OnTitleRightClick(section)
     list = newlist
   end
 
+  -- Only DF since warbank has Enum.BankType 
+  local containerType = nil
+  if Enum.BankType and flow == const.MOVEMENT_FLOW.WARBANK then
+    containerType = Enum.BankType.Account
+  end
+
   for _, item in pairs(list) do
-    -- safecheking: does the bag/slot still hold 'this' item?
-    local itemId = C_Container.GetContainerItemID(item.bagid, item.slotid)
-    if itemId ~= item.itemInfo.itemID then
-      -- print("Item "..item.itemId.." is not in bag/slot "..item.bagid.."/"..item.slotid..". Aborting.")
-      return
-    end
-    -- safechecking: are we on the same flow as we started?
-    local newFlow = movementFlow:GetMovementFlow()
-    if newFlow ~= flow then
-      -- print("Flow changed from "..flow.." to "..newFlow..". Aborting.")
-      return
-    end
-    -- if everything seems ok, move the item
-    C_Container.UseContainerItem(item.bagid, item.slotid)
+    C_Container.UseContainerItem(item.bagid, item.slotid, nil, containerType, flow == const.MOVEMENT_FLOW.REAGENT)
   end
 end
 

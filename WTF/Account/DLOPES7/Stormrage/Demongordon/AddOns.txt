@@ -180,3 +180,5 @@ BugSack: enabled
 Cell: enabled
 GladiatorlosSA2: disabled
 Hekili: disabled
+LittleWigs_Dragonflight: enabled
+BigWigs_Dragonflight: enabled

@@ -152,7 +152,7 @@ options.help = {
         },
         contributors = {
             order = 7,
-            name = L["Contributors (Github.com)"],
+            name = L["Contributors (GitHub.com)"],
             type = "group",
             inline = true,
             args = {
@@ -239,6 +239,16 @@ options.help = {
                     order = 13,
                     type = "description",
                     name = "mattiagraziani-it"
+                },
+                ["ylt"] = {
+                    order = 14,
+                    type = "description",
+                    name = format(
+                        "%s: %s | %s",
+                        "ylt",
+                        E.InfoColor .. "Joe" .. "|r",
+                        F.CreateClassColorString("Shaype @ " .. "Draenor" .. " (EU)", "DRUID")
+                    )
                 }
             }
         },

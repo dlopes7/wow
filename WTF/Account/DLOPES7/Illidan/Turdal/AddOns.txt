@@ -176,3 +176,4 @@ TomCats-LunarFestival: disabled
 TomCats-Noblegarden: disabled
 Blizzard_CombatText: enabled
 Cell: enabled
+LittleWigs_Dragonflight: enabled

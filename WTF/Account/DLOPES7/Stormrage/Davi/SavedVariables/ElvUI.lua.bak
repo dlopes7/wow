@@ -1,28 +1,28 @@
 
 ElvCharacterDB = {
-	["ConvertKeybindings"] = true,
-	["ChatEditHistory"] = {
-		"/s WILL NO JOKE REMOVE YOU", -- [1]
-		"quer ir uma 20 pra vault?", -- [2]
-		"/p try to single target the big birds", -- [3]
-		"se o lucas nao vier sim", -- [4]
-		"ja fiz 8/8 no shaman", -- [5]
-		"/key", -- [6]
-		"/p bora essa RLP 21 aqui?", -- [7]
-		"/p yoo alright", -- [8]
-		"/p yoo", -- [9]
-		"/p lets shroud thsi first dude yes please", -- [10]
-		"/rc", -- [11]
-		"/cd 10", -- [12]
-		"/p LOL", -- [13]
-		"/p tongue casters please", -- [14]
-		"shaman ruin da porra", -- [15]
-		"sempre sem mana", -- [16]
-		"/cd 5", -- [17]
-		"/cd 3", -- [18]
-		"/p why didnt you take the ress there?", -- [19]
-		"/p I eng ressed", -- [20]
-	},
-	["ChatHistoryLog"] = {
-	},
+["ConvertKeybindings"] = true,
+["ChatEditHistory"] = {
+"/p try to single target the big birds",
+"se o lucas nao vier sim",
+"ja fiz 8/8 no shaman",
+"/key",
+"/p bora essa RLP 21 aqui?",
+"/p yoo alright",
+"/p yoo",
+"/p lets shroud thsi first dude yes please",
+"/rc",
+"/cd 10",
+"/p LOL",
+"/p tongue casters please",
+"shaman ruin da porra",
+"sempre sem mana",
+"/cd 5",
+"/cd 3",
+"/p why didnt you take the ress there?",
+"/p I eng ressed",
+"/wa",
+"/rl",
+},
+["ChatHistoryLog"] = {
+},
 }

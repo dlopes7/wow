@@ -203,3 +203,5 @@ TrueStatValues: disabled
 TwitchEmotes: disabled
 WarpDeplete: disabled
 WorldMarkerKeyBindings: disabled
+LittleWigs_Dragonflight: enabled
+BigWigs_Dragonflight: enabled

@@ -1619,6 +1619,17 @@ do
 end
 
 do
+	local UnitIsDeadOrGhost = loader.UnitIsDeadOrGhost
+	--- Returns true if the unit is dead or in ghost form.
+	-- @string unit unit token or name
+	-- @return boolean
+	function boss:UnitIsDeadOrGhost(unit)
+		local isDeadOrGhost = UnitIsDeadOrGhost(unit)
+		return isDeadOrGhost
+	end
+end
+
+do
 	local UnitName = loader.UnitName
 	--- Get the full name of a unit.
 	-- @string unit unit token or name
@@ -2464,10 +2475,10 @@ function boss:MessageOld(key, color, sound, text, icon)
 	end
 end
 
-function boss:Message(key, color, text, icon, disableEmphasize)
+function boss:Message(key, color, text, icon, disableEmphasize, customDisplayTime)
 	if checkFlag(self, key, C.MESSAGE) then
 		local isEmphasized = not disableEmphasize and band(self.db.profile[key], C.EMPHASIZE) == C.EMPHASIZE
-		self:SendMessage("BigWigs_Message", self, key, type(text) == "string" and text or spells[text or key], color, icon ~= false and icons[icon or key], isEmphasized)
+		self:SendMessage("BigWigs_Message", self, key, type(text) == "string" and text or spells[text or key], color, icon ~= false and icons[icon or key], isEmphasized, customDisplayTime)
 	end
 end
 

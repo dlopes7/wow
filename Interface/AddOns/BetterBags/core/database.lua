@@ -28,6 +28,18 @@ function DB:GetBagPosition(kind)
 end
 
 ---@param kind BagKind
+---@return table
+function DB:GetAnchorPosition(kind)
+  return DB.data.profile.anchorPositions[kind]
+end
+
+---@param kind BagKind
+---@return AnchorState
+function DB:GetAnchorState(kind)
+  return DB.data.profile.anchorState[kind]
+end
+
+---@param kind BagKind
 ---@return BagView
 function DB:GetBagView(kind)
   return DB.data.profile.views[kind]
@@ -179,6 +191,18 @@ function DB:SetSectionSortType(kind, view, sort)
 end
 
 ---@param kind BagKind
+---@return boolean
+function DB:GetExtraGlowyButtons(kind)
+  return DB.data.profile.extraGlowyButtons[kind]
+end
+
+---@param kind BagKind
+---@param value boolean
+function DB:SetExtraGlowyButtons(kind, value)
+  DB.data.profile.extraGlowyButtons[kind] = value
+end
+
+---@param kind BagKind
 ---@param view BagView
 ---@return ItemSortType
 function DB:GetItemSortType(kind, view)
@@ -260,9 +284,9 @@ function DB:GetItemCategory(category)
 end
 
 ---@param category string
----@return CustomCategoryFilter
+---@return CustomCategoryFilter?
 function DB:GetEphemeralItemCategory(category)
-  return DB.data.profile.ephemeralCategoryFilters[category] or {}
+  return DB.data.profile.ephemeralCategoryFilters[category]
 end
 
 function DB:GetAllEphemeralItemCategories()
@@ -292,6 +316,7 @@ function DB:CreateOrUpdateCategory(category)
     DB.data.profile.ephemeralCategoryFilters[category.name] = {
       name = category.name,
       enabled = category.enabled,
+      dynamic = category.dynamic,
       itemList = {},
     }
   end

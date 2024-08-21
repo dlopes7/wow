@@ -19,6 +19,7 @@ local tinsert = tinsert
 local math_pow = math.pow
 
 local CreateFrame = CreateFrame
+local EventRegistry = EventRegistry
 local GetCurrentRegion = GetCurrentRegion
 local GetServerTime = GetServerTime
 local PlaySoundFile = PlaySoundFile
@@ -65,15 +66,6 @@ local env = {
         [4203] = 1,
         [4317] = 2
     },
-    radiantEchoesInterval = (function()
-        -- compare to TW region reset time (T_T always the last resion)
-        local isBeforeIntervalChange = GetServerTime() < 1723676384
-        -- 432000 = 5 days, US player if already reset, the interval should be updated to 30 minutes
-        if C_DateAndTime_GetSecondsUntilWeeklyReset() > 5 * 24 * 60 * 60 then
-            isBeforeIntervalChange = false
-        end
-        return isBeforeIntervalChange and 60 * 60 or 30 * 60
-    end)(),
     radiantEchoesZoneRotation = {
         C_Map_GetMapInfo(32),
         C_Map_GetMapInfo(70),
@@ -372,6 +364,27 @@ local functionFactory = {
                     )
                 else
                     _G.GameTooltip:AddDoubleLine(L["Status"], C.StringByTemplate(L["Waiting"], "greyLight"), 1, 1, 1)
+                end
+
+                if self.args.questProgress then
+                    _G.GameTooltip:AddLine(" ")
+                    _G.GameTooltip:AddLine(L["Quest Progress"])
+                    for _, data in ipairs(self.args.questProgress) do
+                        if data.questID then
+                            local isCompleted = C_QuestLog_IsQuestFlaggedCompleted(data.questID)
+                            local color = isCompleted and "success" or "danger"
+                            local label = type(data.label) == "function" and data:label() or data.label
+                            if type(label) == "string" then
+                                _G.GameTooltip:AddDoubleLine(
+                                    label,
+                                    C.StringByTemplate(isCompleted and L["Completed"] or L["Not Completed"], color),
+                                    1,
+                                    1,
+                                    1
+                                )
+                            end
+                        end
+                    end
                 end
 
                 if self.args.hasWeeklyReward then
@@ -726,15 +739,47 @@ local eventData = {
             icon = 3015740,
             type = "loopTimer",
             checkAllCompleted = true,
+            questProgress = {
+                {
+                    questID = 78938,
+                    mapID = 32,
+                    label = function()
+                        return format(
+                            L["Daily Quest at %s"],
+                            C.StringByTemplate(env.radiantEchoesZoneRotation[1].name, "info")
+                        )
+                    end
+                },
+                {
+                    questID = 82676,
+                    mapID = 70,
+                    label = function()
+                        return format(
+                            L["Daily Quest at %s"],
+                            C.StringByTemplate(env.radiantEchoesZoneRotation[2].name, "info")
+                        )
+                    end
+                },
+                {
+                    questID = 82689,
+                    mapID = 115,
+                    label = function()
+                        return format(
+                            L["Daily Quest at %s"],
+                            C.StringByTemplate(env.radiantEchoesZoneRotation[3].name, "info")
+                        )
+                    end
+                }
+            },
             questIDs = {82676, 82689, 78938},
-            -- hasWeeklyReward = true,
-            duration = env.radiantEchoesInterval, -- always on
-            interval = env.radiantEchoesInterval,
+            hasWeeklyReward = false,
+            duration = 60 * 60, -- always on
+            interval = 60 * 60,
             barColor = colorPlatte.blue,
             flash = false,
             runningBarColor = colorPlatte.radiantEchoes,
             eventName = L["Radiant Echoes"],
-            currentMapIndex = function(args) -- only exist for this event
+            currentMapIndex = function(args)
                 return floor((GetServerTime() - args.startTimestamp) / args.interval) % 3 + 1
             end,
             currentLocation = function(args)
@@ -746,7 +791,23 @@ local eventData = {
             label = L["Echoes"],
             runningText = L["In Progress"],
             runningTextUpdater = function(args)
-                return env.radiantEchoesZoneRotation[args:currentMapIndex()].name
+                local map = env.radiantEchoesZoneRotation[args:currentMapIndex()]
+                local isCompleted = false
+                for _, data in pairs(args.questProgress) do
+                    if data.mapID == map.mapID then
+                        if C_QuestLog_IsQuestFlaggedCompleted(data.questID) then
+                            isCompleted = true
+                        end
+                        break
+                    end
+                end
+
+                if not isCompleted then
+                    local iconTex = [[Interface\ICONS\Achievement_Quests_Completed_Daily_08]]
+                    return map.name .. " " .. F.GetTextureString(iconTex, 14, 14, true)
+                end
+
+                return map.name
             end,
             filter = function(args)
                 if args.stopAlertIfPlayerNotEnteredDragonlands and not C_QuestLog_IsQuestFlaggedCompleted(67700) then
@@ -1408,6 +1469,8 @@ function ET:Initialize()
     EventRegistry:RegisterCallback("WorldMapOnShow", self.UpdateTrackers, self)
     EventRegistry:RegisterCallback("WorldMapMinimized", E.Delay, E, 0.1, self.UpdateTrackers, self)
     EventRegistry:RegisterCallback("WorldMapMaximized", E.Delay, E, 0.1, self.UpdateTrackers, self)
+    self:SecureHook(_G.QuestMapFrame, "Show", "UpdateTrackers")
+    self:SecureHook(_G.QuestMapFrame, "Hide", "UpdateTrackers")
 end
 
 function ET:ProfileUpdate()

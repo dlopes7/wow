@@ -7,9 +7,9 @@ local _G = _G
 local ceil = ceil
 local floor = floor
 local min = min
+local pcall = pcall
 local pairs = pairs
 local print = print
-local select = select
 local sort = sort
 local strfind = strfind
 local strlen = strlen
@@ -25,9 +25,8 @@ local RegisterStateDriver = RegisterStateDriver
 local UnregisterStateDriver = UnregisterStateDriver
 
 local C_AddOns_IsAddOnLoaded = C_AddOns.IsAddOnLoaded
-local C_Spell_GetSpellInfo = C_Spell.GetSpellInfo
+local C_Spell_GetSpellTexture = C_Spell.GetSpellTexture
 
--- 忽略列表
 local IgnoreList = {
     full = {
         "AsphyxiaUIMinimapHelpButton",
@@ -74,7 +73,6 @@ local TexCoordIgnoreList = {
     ["ZygorGuidesViewerMapIcon"] = true
 }
 
--- 框架名白名单
 local whiteList = {}
 
 local acceptedFrames = {
@@ -82,6 +80,26 @@ local acceptedFrames = {
 }
 
 local moveButtons = {}
+
+function MB:OnButtonSetShown(button, shown)
+    local btnName = button:GetName()
+
+    for i, moveButtonName in pairs(moveButtons) do
+        if btnName == moveButtonName then
+            if shown then
+                return -- already in the list
+            end
+            tremove(moveButtons, i)
+            break
+        end
+    end
+
+    if shown then
+        tinsert(moveButtons, btnName)
+    end
+
+    self:UpdateLayout()
+end
 
 function MB:HandleLibDBIconButton(button, name)
     if not strsub(name, 1, strlen("LibDBIcon")) == "LibDBIcon" then
@@ -96,14 +114,7 @@ function MB:HandleLibDBIconButton(button, name)
         button,
         "Hide",
         function()
-            for i, moveButtonName in pairs(moveButtons) do
-                if name == moveButtonName then
-                    tremove(moveButtons, i)
-                    break
-                end
-            end
-
-            self:UpdateLayout()
+            self:OnButtonSetShown(button, false)
         end
     )
 
@@ -111,16 +122,11 @@ function MB:HandleLibDBIconButton(button, name)
         button,
         "Show",
         function()
-            for _, moveButtonName in pairs(moveButtons) do
-                if name == moveButtonName then
-                    return
-                end
-            end
-
-            tinsert(moveButtons, name)
-            self:UpdateLayout()
+            self:OnButtonSetShown(button, true)
         end
     )
+
+    self:SecureHook(button, "SetShown", "OnButtonSetShown")
 
     return button:IsShown()
 end
@@ -311,7 +317,7 @@ function MB:SkinButton(frame)
     if name == "DBMMinimapButton" then
         frame:SetNormalTexture("Interface\\Icons\\INV_Helmet_87")
     elseif name == "SmartBuff_MiniMapButton" then
-        frame:SetNormalTexture(select(3, C_Spell_GetSpellInfo(12051)))
+        frame:SetNormalTexture(C_Spell_GetSpellTexture(12051))
     elseif name == "ExpansionLandingPageMinimapButton" then
         if self.db.garrison then
             if not frame.isWindMinimapButton then
@@ -390,8 +396,10 @@ function MB:SkinButton(frame)
                         region:SetTexture("Interface\\AddOns\\BagSync\\media\\icon")
                     end
 
-                    if not TexCoordIgnoreList[name] then
-                        region:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+                    if not TexCoordIgnoreList[name] and region:GetNumMaskTextures() == 0 then
+                        -- even checked the mask textures, some icons still have mask textures???
+                        -- ignore the error for now
+                        pcall(region.SetTexCoord, region, 0.1, 0.9, 0.1, 0.9)
                     end
 
                     region:ClearAllPoints()
@@ -622,19 +630,18 @@ function MB:SkinMinimapButtons()
 end
 
 function MB:UpdateMouseOverConfig()
-    -- 鼠标显隐功能
     if self.db.mouseOver then
         self.bar:SetScript(
             "OnEnter",
-            function(self)
-                E:UIFrameFadeIn(self, (1 - self:GetAlpha()) * 0.382, self:GetAlpha(), 1)
+            function(bar)
+                E:UIFrameFadeIn(bar, (1 - bar:GetAlpha()) * 0.382, bar:GetAlpha(), 1)
             end
         )
 
         self.bar:SetScript(
             "OnLeave",
-            function(self)
-                E:UIFrameFadeOut(self, self:GetAlpha() * 0.382, self:GetAlpha(), 0)
+            function(bar)
+                E:UIFrameFadeOut(bar, bar:GetAlpha() * 0.382, bar:GetAlpha(), 0)
             end
         )
 

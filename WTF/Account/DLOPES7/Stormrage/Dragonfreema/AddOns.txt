@@ -194,3 +194,5 @@ SharedMedia_NotUI: enabled
 TalentLoadoutsEx: disabled
 TomTom: disabled
 WorldMarkerKeyBindings: disabled
+LittleWigs_Dragonflight: enabled
+BigWigs_Dragonflight: enabled

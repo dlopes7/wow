@@ -176,3 +176,4 @@ BigWigs_MistsOfPandaria: disabled
 BigWigs_NerubarPalace: enabled
 BigWigs_WrathOfTheLichKing: disabled
 HandyNotes_Shadowlands: disabled
+LittleWigs_Dragonflight: enabled

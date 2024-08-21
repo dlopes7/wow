@@ -27,6 +27,9 @@ local search = addon:GetModule('Search')
 ---@class Localization: AceModule
 local L = addon:GetModule('Localization')
 
+---@class Binding: AceModule
+local binding = addon:GetModule("Binding")
+
 ---@class Debug: AceModule
 local debug = addon:GetModule('Debug')
 
@@ -59,6 +62,7 @@ local debug = addon:GetModule('Debug')
 ---@field transmogInfoMixin? ItemTransmogInfoMixin
 ---@field itemAppearanceID number
 ---@field itemModifiedAppearanceID number
+---@field hasTransmog boolean
 
 -- ItemData contains all the information about an item in a bag or bank.
 ---@class (exact) ItemData
@@ -67,6 +71,7 @@ local debug = addon:GetModule('Debug')
 ---@field containerInfo ContainerItemInfo
 ---@field questInfo ItemQuestInfo
 ---@field transmogInfo TransmogInfo
+---@field bindingInfo BindingInfo
 ---@field bagid number
 ---@field slotid number
 ---@field slotkey string
@@ -461,8 +466,10 @@ function items:LoadItems(ctx, kind, dataCache)
     local newCategory = self:GetSearchCategory(kind, currentItem.slotkey)
     if newCategory then
       local oldCategory = currentItem.itemInfo.category
-      currentItem.itemInfo.category = newCategory
-      search:UpdateCategoryIndex(currentItem, oldCategory)
+      if oldCategory ~= L:G("Recent Items") then
+        currentItem.itemInfo.category = newCategory
+        search:UpdateCategoryIndex(currentItem, oldCategory)
+      end
     end
   end
 end
@@ -684,7 +691,7 @@ end
 ---@return string
 function items:GenerateItemHash(data)
   local stackOpts = database:GetStackingOptions(data.kind)
-  local hash = format("%d%s%s%s%s%s%s%s%s%s%s%s%s%d%d",
+  local hash = format("%d%s%s%s%s%s%s%s%s%s%s%s%s%d%d%d",
     data.itemLinkInfo.itemID,
     data.itemLinkInfo.enchantID,
     data.itemLinkInfo.gemID1,
@@ -698,6 +705,7 @@ function items:GenerateItemHash(data)
     table.concat(data.itemLinkInfo.relic3BonusIDs, ","),
     data.itemLinkInfo.crafterGUID or "",
     data.itemLinkInfo.extraEnchantID or "",
+    data.bindingInfo.binding,
     data.itemInfo.currentItemLevel,
     stackOpts.dontMergeTransmog and data.transmogInfo.transmogInfoMixin and data.transmogInfo.transmogInfoMixin.appearanceID or 0
   )
@@ -721,8 +729,8 @@ function items:GetCategory(data)
   end
 
   -- Check for equipment sets first, as it doesn't make sense to put them anywhere else.
-  if data.itemInfo.equipmentSet and database:GetCategoryFilter(data.kind, "GearSet") then
-    return "Gear: " .. data.itemInfo.equipmentSet
+  if data.itemInfo.equipmentSets and database:GetCategoryFilter(data.kind, "GearSet") then
+    return "Gear: " .. data.itemInfo.equipmentSets[1] -- Always use the first set, for now.
   end
 
   -- Return the custom category if it exists next.
@@ -792,6 +800,17 @@ function items:GetCategory(data)
   return category
 end
 
+---@param itemLink string
+---@return Enum.ItemBind?
+function items:GetBindTypeFromLink(itemLink)
+  -- itemLink has better information for items, but no information for pet or keystone links
+  local bindType = nil
+  if (strfind(itemLink, "item:")) then
+    bindType, _, _, _ = select(14, C_Item.GetItemInfo(itemLink))
+  end
+  return bindType
+end
+
 ---@param data ItemData
 ---@param kind BagKind
 ---@return ItemData
@@ -816,6 +835,7 @@ function items:AttachItemInfo(data, kind)
   itemStackCount, itemEquipLoc, itemTexture,
   sellPrice, classID, subclassID, bindType, expacID,
   setID, isCraftingReagent = C_Item.GetItemInfo(itemID)
+  bindType = self:GetBindTypeFromLink(itemLink) or bindType  --link overrides itemID if set
   local itemQuality = C_Item.GetItemQuality(itemLocation) --[[@as Enum.ItemQuality]]
   local effectiveIlvl, isPreview, baseIlvl = C_Item.GetDetailedItemLevelInfo(itemID)
   data.containerInfo = C_Container.GetContainerItemInfo(bagid, slotid)
@@ -831,7 +851,10 @@ function items:AttachItemInfo(data, kind)
     },
     itemAppearanceID = itemAppearanceID,
     itemModifiedAppearanceID = itemModifiedAppearanceID,
+    hasTransmog = C_TransmogCollection and C_TransmogCollection.PlayerHasTransmog(itemID, itemModifiedAppearanceID)
   }
+
+  data.bindingInfo = binding.GetItemBinding(itemLocation, bindType)
 
   data.itemInfo = {
     itemID = itemID,
@@ -863,7 +886,7 @@ function items:AttachItemInfo(data, kind)
     currentItemCount = C_Item.GetStackCount(itemLocation),
     category = "",
     currentItemLevel = C_Item.GetCurrentItemLevel(itemLocation) --[[@as number]],
-    equipmentSet = equipmentSets:GetItemSet(bagid, slotid),
+    equipmentSets = equipmentSets:GetItemSets(bagid, slotid),
   }
 
   --if database:GetItemLock(data.itemInfo.itemGUID) then

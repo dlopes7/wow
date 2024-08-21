@@ -77,3 +77,6 @@ ElvUI_BuffHighlight: disabled
 kExtraBossFrames: disabled
 WeakAurasCompanion: enabled
 Blizzard_CombatText: enabled
+OPie_Classic: disabled
+LittleWigs_Dragonflight: enabled
+BigWigs_Dragonflight: enabled
