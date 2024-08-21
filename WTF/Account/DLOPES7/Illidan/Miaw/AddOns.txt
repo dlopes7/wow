@@ -97,7 +97,7 @@ LittleWigs_WarlordsOfDraenor: enabled
 LittleWigs_WrathOfTheLichKing: enabled
 MRT: disabled
 Myslot: disabled
-MythicDungeonTools: disabled
+MythicDungeonTools: enabled
 NameplateAuras: disabled
 NaowhUI_Installer: disabled
 Narcissus: disabled

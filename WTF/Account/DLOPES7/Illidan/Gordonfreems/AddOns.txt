@@ -77,7 +77,7 @@ LittleWigs_MistsOfPandaria: enabled
 LittleWigs_WrathOfTheLichKing: enabled
 MRT: disabled
 ExRT: disabled
-MythicDungeonTools: disabled
+MythicDungeonTools: enabled
 MplusAdventureGuide: disabled
 PremadeGroupsFilter: enabled
 PremadeRegions: enabled

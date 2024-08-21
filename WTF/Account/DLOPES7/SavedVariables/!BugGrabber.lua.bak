@@ -1,6 +1,6 @@
 
 BugGrabberDB = {
-["session"] = 1342,
+["session"] = 1344,
 ["lastSanitation"] = 3,
 ["errors"] = {
 {
@@ -4408,24 +4408,32 @@ BugGrabberDB = {
 ["time"] = "2024/08/21 12:25:44",
 ["locals"] = "(for state) = <table> {\n 1 = <table> {\n }\n 2 = <table> {\n }\n 3 = <table> {\n }\n 4 = <table> {\n }\n 5 = <table> {\n }\n 6 = <table> {\n }\n 7 = <table> {\n }\n 8 = <table> {\n }\n 9 = <table> {\n }\n 10 = <table> {\n }\n 11 = <table> {\n }\n 12 = <table> {\n }\n 13 = <table> {\n }\n 14 = <table> {\n }\n 15 = <table> {\n }\n 16 = <table> {\n }\n 17 = <table> {\n }\n 18 = <table> {\n }\n 19 = <table> {\n }\n 20 = <table> {\n }\n 21 = <table> {\n }\n 22 = <table> {\n }\n 23 = <table> {\n }\n 24 = <table> {\n }\n 25 = <table> {\n }\n 26 = <table> {\n }\n 27 = <table> {\n }\n 28 = <table> {\n }\n 29 = <table> {\n }\n 30 = <table> {\n }\n 31 = <table> {\n }\n 32 = <table> {\n }\n 33 = <table> {\n }\n 34 = <table> {\n }\n 35 = <table> {\n }\n 36 = <table> {\n }\n 37 = <table> {\n }\n 38 = <table> {\n }\n 39 = <table> {\n }\n 40 = <table> {\n }\n}\n(for control) = 20\n_ = 20\nv = <table> {\n tank = true\n active = true\n intduration = 0\n duration = 19.400000\n spelltrigger = \"0\"\n overwrite = 0\n casttype = 1\n offsetnum = \"\"\n npcIDoffset = \"\"\n mdps = true\n desynch = 0\n combattimer = 7\n hideafter = 10\n desc = \"Aqueous Barrier\"\n npcID = \"190405\"\n progressive = \"0\"\n heal = true\n oncombat = true\n repeating = false\n rdps = true\n spelltimer = \"0\"\n loop = false\n spellID = 377402\n}\n(*temporary) = <table> {\n}\n(*temporary) = 377402\n(*temporary) = <table> {\n active = true\n}\n(*temporary) = 3\n(*temporary) = nil\n(*temporary) = 377402\n(*temporary) = \"attempt to call global 'GetSpellInfo' (a nil value)\"\n",
 ["stack"] = "[string \"return function() aura_env.spells = {}\"]:13: in function <[string \"return function() aura_env.spells = {}\"]:1>\n[string \"=[C]\"]: in function `xpcall'\n[string \"@Interface/AddOns/WeakAuras/AuraEnvironment.lua\"]:374: in function `ActivateAuraEnvironment'\n[string \"@Interface/AddOns/WeakAuras/GenericTrigger.lua\"]:1080: in function `ScanWithFakeEvent'\n[string \"@Interface/AddOns/WeakAuras/GenericTrigger.lua\"]:1439: in function `LoadDisplays'\n[string \"@Interface/AddOns/WeakAuras/WeakAuras.lua\"]:2038: in function `LoadDisplays'\n[string \"@Interface/AddOns/WeakAuras/WeakAuras.lua\"]:1820: in function <Interface/AddOns/WeakAuras/WeakAuras.lua:1664>\n[string \"@Interface/AddOns/WeakAuras/WeakAuras.lua\"]:1863: in function `ScanForLoads'\n[string \"@Interface/AddOns/WeakAuras/WeakAuras.lua\"]:1933: in function <Interface/AddOns/WeakAuras/WeakAuras.lua:1931>",
-["session"] = 1342,
-["counter"] = 1,
+["session"] = 1343,
+["counter"] = 2,
 },
 {
 ["message"] = "Lua error in aura 'Halls of Infusion ': Trigger 1\nWeakAuras Version: 5.16.1\nAura Version: 1.0.11\nStack trace:\n[string \"return function(states, e, ...)\"]:168: attempt to call field 'onstart' (a nil value)",
 ["time"] = "2024/08/21 12:25:45",
 ["locals"] = "states = <table> {\n}\ne = \"UNIT_SPELLCAST_START\"\nunit = \"nameplate3\"\nsubevent = \"Cast-3-3883-2527-3428-393432-0000C62319\"\nspellIDUNIT = 393432\nsourceGUID = nil\nsourceName = nil\nsflags = nil\n_ = nil\ndestGUID = nil\n_ = nil\ndflags = nil\n_ = nil\nspellIDCLEU = nil\n_ = nil\n_ = nil\nspellIDINT = nil\nGUID = \"Creature-0-3883-2527-3428-190340-0000462316\"\ncreature = \"Creature\"\n_ = \"0\"\n_ = \"3883\"\n_ = \"2527\"\n_ = \"3428\"\nnpcID = \"190340\"\n(*temporary) = nil\n(*temporary) = 393432\n(*temporary) = \"Creature-0-3883-2527-3428-190340-0000462316\"\n(*temporary) = \"attempt to call field 'onstart' (a nil value)\"\n",
 ["stack"] = "[string \"return function(states, e, ...)\"]:168: in function <[string \"return function(states, e, ...)\"]:1>\n[string \"=[C]\"]: in function `xpcall'\n[string \"@Interface/AddOns/WeakAuras/GenericTrigger.lua\"]:640: in function <Interface/AddOns/WeakAuras/GenericTrigger.lua:625>\n[string \"@Interface/AddOns/WeakAuras/GenericTrigger.lua\"]:864: in function `ScanUnitEvents'\n[string \"@Interface/AddOns/WeakAuras/GenericTrigger.lua\"]:1155: in function <Interface/AddOns/WeakAuras/GenericTrigger.lua:1151>",
-["session"] = 1342,
-["counter"] = 27,
+["session"] = 1343,
+["counter"] = 33,
 },
 {
 ["message"] = "Lua error in aura 'Halls of Infusion ': Trigger 1\nWeakAuras Version: 5.16.1\nAura Version: 1.0.11\nStack trace:\n[string \"return function(states, e, ...)\"]:166: attempt to call field 'onsuccess' (a nil value)",
 ["time"] = "2024/08/21 12:25:47",
 ["locals"] = "states = <table> {\n}\ne = \"UNIT_SPELLCAST_SUCCEEDED\"\nunit = \"nameplate3\"\nsubevent = \"Cast-3-3883-2527-3428-393432-0000C62319\"\nspellIDUNIT = 393432\nsourceGUID = nil\nsourceName = nil\nsflags = nil\n_ = nil\ndestGUID = nil\n_ = nil\ndflags = nil\n_ = nil\nspellIDCLEU = nil\n_ = nil\n_ = nil\nspellIDINT = nil\nGUID = \"Creature-0-3883-2527-3428-190340-0000462316\"\ncreature = \"Creature\"\n_ = \"0\"\n_ = \"3883\"\n_ = \"2527\"\n_ = \"3428\"\nnpcID = \"190340\"\n(*temporary) = nil\n(*temporary) = 393432\n(*temporary) = \"Creature-0-3883-2527-3428-190340-0000462316\"\n(*temporary) = \"Refti Defender\"\n(*temporary) = false\n(*temporary) = \"attempt to call field 'onsuccess' (a nil value)\"\n",
 ["stack"] = "[string \"return function(states, e, ...)\"]:166: in function <[string \"return function(states, e, ...)\"]:1>\n[string \"=[C]\"]: in function `xpcall'\n[string \"@Interface/AddOns/WeakAuras/GenericTrigger.lua\"]:640: in function <Interface/AddOns/WeakAuras/GenericTrigger.lua:625>\n[string \"@Interface/AddOns/WeakAuras/GenericTrigger.lua\"]:864: in function `ScanUnitEvents'\n[string \"@Interface/AddOns/WeakAuras/GenericTrigger.lua\"]:1155: in function <Interface/AddOns/WeakAuras/GenericTrigger.lua:1151>",
-["session"] = 1342,
-["counter"] = 27,
+["session"] = 1343,
+["counter"] = 33,
+},
+{
+["message"] = "Lua error in aura 'The Azure Vault ': init\nWeakAuras Version: 5.16.1\nAura Version: 1.0.11\nStack trace:\n[string \"return function() aura_env.spells = {}\"]:13: attempt to call global 'GetSpellInfo' (a nil value)",
+["time"] = "2024/08/21 15:40:53",
+["locals"] = "(for state) = <table> {\n 1 = <table> {\n }\n 2 = <table> {\n }\n 3 = <table> {\n }\n 4 = <table> {\n }\n 5 = <table> {\n }\n 6 = <table> {\n }\n 7 = <table> {\n }\n 8 = <table> {\n }\n 9 = <table> {\n }\n 10 = <table> {\n }\n 11 = <table> {\n }\n 12 = <table> {\n }\n 13 = <table> {\n }\n 14 = <table> {\n }\n 15 = <table> {\n }\n 16 = <table> {\n }\n 17 = <table> {\n }\n 18 = <table> {\n }\n 19 = <table> {\n }\n 20 = <table> {\n }\n 21 = <table> {\n }\n 22 = <table> {\n }\n 23 = <table> {\n }\n 24 = <table> {\n }\n 25 = <table> {\n }\n 26 = <table> {\n }\n 27 = <table> {\n }\n 28 = <table> {\n }\n 29 = <table> {\n }\n 30 = <table> {\n }\n 31 = <table> {\n }\n 32 = <table> {\n }\n 33 = <table> {\n }\n 34 = <table> {\n }\n 35 = <table> {\n }\n 36 = <table> {\n }\n 37 = <table> {\n }\n}\n(for control) = 1\n_ = 1\nv = <table> {\n tank = true\n active = true\n intduration = 0\n duration = 49\n spelltrigger = \"0\"\n overwrite = 0\n casttype = 1\n offsetnum = \"\"\n npcIDoffset = \"\"\n mdps = true\n oncombat = true\n hideafter = 10\n desc = \"Leymor - Infused Strike\"\n npcID = \"186644\"\n loop = false\n progressive = \"0\"\n heal = true\n spelltimer = \"0\"\n rdps = true\n repeating = false\n combattimer = 10\n spellID = 374789\n}\n(*temporary) = <table> {\n}\n(*temporary) = 374789\n(*temporary) = <table> {\n}\n(*temporary) = 3\n(*temporary) = nil\n(*temporary) = 374789\n(*temporary) = \"attempt to call global 'GetSpellInfo' (a nil value)\"\n",
+["stack"] = "[string \"return function() aura_env.spells = {}\"]:13: in function <[string \"return function() aura_env.spells = {}\"]:1>\n[string \"=[C]\"]: in function `xpcall'\n[string \"@Interface/AddOns/WeakAuras/AuraEnvironment.lua\"]:374: in function `ActivateAuraEnvironment'\n[string \"@Interface/AddOns/WeakAuras/GenericTrigger.lua\"]:1080: in function `ScanWithFakeEvent'\n[string \"@Interface/AddOns/WeakAuras/GenericTrigger.lua\"]:1439: in function `LoadDisplays'\n[string \"@Interface/AddOns/WeakAuras/WeakAuras.lua\"]:2038: in function `LoadDisplays'\n[string \"@Interface/AddOns/WeakAuras/WeakAuras.lua\"]:1820: in function <Interface/AddOns/WeakAuras/WeakAuras.lua:1664>\n[string \"@Interface/AddOns/WeakAuras/WeakAuras.lua\"]:1863: in function `ScanForLoads'\n[string \"@Interface/AddOns/WeakAuras/WeakAuras.lua\"]:1933: in function <Interface/AddOns/WeakAuras/WeakAuras.lua:1931>",
+["session"] = 1344,
+["counter"] = 2,
 },
 },
 }

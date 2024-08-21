@@ -78,3 +78,4 @@ kExtraBossFrames: disabled
 WeakAurasCompanion: enabled
 Blizzard_CombatText: enabled
 LittleWigs_Dragonflight: enabled
+MythicDungeonTools: enabled

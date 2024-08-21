@@ -24,16 +24,18 @@ RaiderIO_Config = {
 }
 RaiderIO_LastCharacter = "us-Gordonfreems-illidan"
 RaiderIO_MissingCharacters = {
-["us-Waterrboy-illidan"] = true,
-["us-Racheltony-area-52"] = true,
-["us-Stringblaz-thrall"] = true,
-["us-Grymaize-area-52"] = true,
-["us-Nytheriea-area-52"] = true,
-["us-Zinsura-illidan"] = true,
-["us-Tenivash-illidan"] = true,
-["us-Sleepyktwo-area-52"] = true,
-["us-Bromelia-illidan"] = true,
-["us-Riddlevoker-area-52"] = true,
+["us-Lenarín-illidan"] = true,
+["us-Shadamdh-ragnaros"] = true,
+["us-Terminite-illidan"] = true,
+["us-Lewandk-Quel"] = true,
+["us-Daisylock-quelthalas"] = true,
+["us-Babawls-illidan"] = true,
+["us-Xctfusion-area-52"] = true,
+["us-Elitebo-thrall"] = true,
+["us-Focola-azralon"] = true,
+["us-Meltbrain-illidan"] = true,
+["us-Eldano-illidan"] = true,
+["us-Lichiba-illidan"] = true,
 }
 RaiderIO_MissingServers = {
 }

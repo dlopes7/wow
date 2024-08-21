@@ -2,10 +2,6 @@
 ElvCharacterDB = {
 ["ConvertKeybindings"] = true,
 ["ChatEditHistory"] = {
-"/cd 10",
-"/wa",
-"/p yoo",
-"/p yoo I will always get the withering cast, get dem bolts please",
 "/p ye",
 "/p and knockback for sanguine",
 "/p dont interrupt heal only bolts",
@@ -22,6 +18,10 @@ ElvCharacterDB = {
 "/cw Lewandk-Quel'Thalas Que ruta es esa",
 "/p yo mage you frost?",
 "/p yo",
+"/p hi",
+"/p frost sanguineee",
+"/p I cry every time",
+"/p frost mage on sanguine week",
 },
 ["ChatHistoryLog"] = {
 },
