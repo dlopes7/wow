@@ -1423,19 +1423,11 @@ function E:UpdateDB()
 	E.db = E.data.profile
 
 	E:DBConversions()
+	E:SetupDB()
 
-	Auras.db = E.db.auras
-	ActionBars.db = E.db.actionbar
-	Bags.db = E.db.bags
-	Chat.db = E.db.chat
-	DataBars.db = E.db.databars
-	DataTexts.db = E.db.datatexts
-	NamePlates.db = E.db.nameplates
-	Tooltip.db = E.db.tooltip
-	UnitFrames.db = E.db.unitframe
-	TotemTracker.db = E.db.general.totems
-
-	--Not part of staggered update
+	-- default the non thing pixel border color to 191919, otherwise its 000000
+	if not E.PixelMode then P.general.bordercolor = { r = 0.1, g = 0.1, b = 0.1 } end
+	if not E.db.unitframe.thinBorders then P.unitframe.colors.borderColor = { r = 0.1, g = 0.1, b = 0.1 } end
 end
 
 function E:UpdateMoverPositions()
@@ -1839,11 +1831,11 @@ do
 end
 
 function E:CallLoadedModule(obj, silent, object, index)
-	local name, func
-	if type(obj) == 'table' then name, func = unpack(obj) else name = obj end
-	local module = name and E:GetModule(name, silent)
+	local name, func = obj.name, obj.func
 
+	local module = name and E:GetModule(name, silent)
 	if not module then return end
+
 	if func and type(func) == 'string' then
 		E:CallLoadFunc(module[func], module)
 	elseif func and type(func) == 'function' then
@@ -1852,18 +1844,26 @@ function E:CallLoadedModule(obj, silent, object, index)
 		E:CallLoadFunc(module.Initialize, module)
 	end
 
-	if object and index then object[index] = nil end
+	if object and index then
+		object[index] = nil
+	end
 end
 
 function E:RegisterInitialModule(name, func)
-	E.RegisteredInitialModules[#E.RegisteredInitialModules + 1] = (func and {name, func}) or name
+	E.RegisteredInitialModules[#E.RegisteredInitialModules + 1] = { name = name, func = func }
 end
 
-function E:RegisterModule(name, func)
-	if E.initialized then
-		E:CallLoadedModule((func and {name, func}) or name)
-	else
-		E.RegisteredModules[#E.RegisteredModules + 1] = (func and {name, func}) or name
+do
+	local loaded = {}
+	function E:RegisterModule(name, func)
+		if E.initialized then
+			loaded.name = name
+			loaded.func = func
+
+			E:CallLoadedModule(loaded)
+		else
+			E.RegisteredModules[#E.RegisteredModules + 1] = { name = name, func = func }
+		end
 	end
 end
 
@@ -1915,15 +1915,6 @@ function E:ConvertActionBarKeybinds()
 	end
 end
 
-function E:RefreshModulesDB()
-	-- this function is specifically used to reference the new database
-	-- onto the unitframe module, its useful dont delete! D:
-	if UnitFrames.db then
-		wipe(UnitFrames.db) --old ref, dont need so clear it
-		UnitFrames.db = E.db.unitframe --new ref
-	end
-end
-
 do
 	-- Shamelessly taken from AceDB-3.0 and stripped down by Simpy
 	function E:CopyDefaults(dest, src)
@@ -1971,25 +1962,18 @@ function E:Initialize()
 	E.data.RegisterCallback(E, 'OnProfileChanged', 'StaggeredUpdateAll')
 	E.data.RegisterCallback(E, 'OnProfileCopied', 'StaggeredUpdateAll')
 	E.data.RegisterCallback(E, 'OnProfileReset', 'OnProfileReset')
+
 	E.charSettings = E.Libs.AceDB:New('ElvPrivateDB', E.privateVars)
 	E.charSettings.RegisterCallback(E, 'OnProfileChanged', ReloadUI)
 	E.charSettings.RegisterCallback(E, 'OnProfileCopied', ReloadUI)
 	E.charSettings.RegisterCallback(E, 'OnProfileReset', 'OnPrivateProfileReset')
-	E.private = E.charSettings.profile
-	E.global = E.data.global
-	E.db = E.data.profile
 
-	-- default the non thing pixel border color to 191919, otherwise its 000000
-	if not E.PixelMode then P.general.bordercolor = { r = 0.1, g = 0.1, b = 0.1 } end
-	if not E.db.unitframe.thinBorders then P.unitframe.colors.borderColor = { r = 0.1, g = 0.1, b = 0.1 } end
-
-	E:DBConversions()
+	E:UpdateDB()
 	E:UIScale()
 	E:BuildPrefixValues()
 	E:LoadAPI()
 	E:LoadCommands()
 	E:InitializeModules()
-	E:RefreshModulesDB()
 	E:LoadMovers()
 	E:UpdateMedia()
 	E:UpdateDispelColors()

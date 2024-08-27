@@ -1,5 +1,5 @@
 --
--- RaiderIO Client Colors. Generated on Tue Aug 20 2024 08:33:58 GMT+0000 (Coordinated Universal Time)
+-- RaiderIO Client Colors. Generated on Sun Aug 25 2024 12:59:59 GMT+0000 (Coordinated Universal Time)
 --
 local _, ns = ...
 ns.CLIENT_COLORS = {
@@ -404,7 +404,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 2735,
+    ["score"] = 2730,
     ["color"] = {
       0.6,
       0.25,
@@ -438,15 +438,15 @@ ns.CLIENT_COLORS = {
   {
     ["score"] = 2635,
     ["color"] = {
-      0.51,
-      0.32,
+      0.52,
+      0.31,
       0.91
     }
   },
   {
-    ["score"] = 2615,
+    ["score"] = 2610,
     ["color"] = {
-      0.49,
+      0.5,
       0.33,
       0.91
     }
@@ -454,69 +454,77 @@ ns.CLIENT_COLORS = {
   {
     ["score"] = 2590,
     ["color"] = {
-      0.47,
-      0.35,
-      0.9
+      0.48,
+      0.34,
+      0.91
     }
   },
   {
     ["score"] = 2565,
     ["color"] = {
-      0.44,
-      0.36,
+      0.45,
+      0.35,
       0.9
     }
   },
   {
     ["score"] = 2540,
     ["color"] = {
-      0.42,
-      0.37,
+      0.43,
+      0.36,
       0.9
     }
   },
   {
     ["score"] = 2515,
     ["color"] = {
-      0.39,
-      0.38,
+      0.41,
+      0.37,
       0.89
     }
   },
   {
-    ["score"] = 2495,
+    ["score"] = 2490,
     ["color"] = {
-      0.36,
-      0.39,
+      0.38,
+      0.38,
       0.89
     }
   },
   {
     ["score"] = 2470,
     ["color"] = {
-      0.33,
-      0.4,
+      0.35,
+      0.39,
       0.89
     }
   },
   {
     ["score"] = 2445,
     ["color"] = {
-      0.29,
-      0.41,
+      0.32,
+      0.4,
       0.88
     }
   },
   {
     ["score"] = 2420,
     ["color"] = {
-      0.25,
-      0.42,
+      0.28,
+      0.41,
       0.88
     }
   },
   {
     ["score"] = 2395,
+    ["color"] = {
+      0.24,
+      0.42,
+      0.88
+    }
+  },
+  {
+    ["score"] = 2370,
     ["color"] = {
       0.2,
       0.42,
@@ -524,15 +532,15 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 2375,
+    ["score"] = 2350,
     ["color"] = {
-      0.14,
+      0.13,
       0.43,
       0.87
     }
   },
   {
-    ["score"] = 2350,
+    ["score"] = 2325,
     ["color"] = {
       0,
       0.44,
@@ -540,7 +548,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 2270,
+    ["score"] = 2245,
     ["color"] = {
       0.08,
       0.45,
@@ -548,7 +556,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 2245,
+    ["score"] = 2220,
     ["color"] = {
       0.13,
       0.46,
@@ -556,7 +564,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 2220,
+    ["score"] = 2195,
     ["color"] = {
       0.16,
       0.47,
@@ -564,7 +572,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 2195,
+    ["score"] = 2170,
     ["color"] = {
       0.19,
       0.48,
@@ -572,7 +580,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 2175,
+    ["score"] = 2150,
     ["color"] = {
       0.21,
       0.49,
@@ -580,7 +588,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 2150,
+    ["score"] = 2125,
     ["color"] = {
       0.23,
       0.5,
@@ -588,7 +596,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 2125,
+    ["score"] = 2100,
     ["color"] = {
       0.24,
       0.51,
@@ -596,7 +604,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 2100,
+    ["score"] = 2075,
     ["color"] = {
       0.26,
       0.51,
@@ -604,7 +612,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 2075,
+    ["score"] = 2050,
     ["color"] = {
       0.27,
       0.53,
@@ -612,7 +620,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 2055,
+    ["score"] = 2030,
     ["color"] = {
       0.28,
       0.53,
@@ -620,7 +628,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 2030,
+    ["score"] = 2005,
     ["color"] = {
       0.29,
       0.55,
@@ -628,7 +636,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 2005,
+    ["score"] = 1980,
     ["color"] = {
       0.3,
       0.55,
@@ -636,7 +644,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1980,
+    ["score"] = 1955,
     ["color"] = {
       0.31,
       0.56,
@@ -644,7 +652,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1955,
+    ["score"] = 1930,
     ["color"] = {
       0.32,
       0.57,
@@ -652,7 +660,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1935,
+    ["score"] = 1910,
     ["color"] = {
       0.33,
       0.58,
@@ -660,7 +668,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1910,
+    ["score"] = 1885,
     ["color"] = {
       0.33,
       0.59,
@@ -668,7 +676,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1885,
+    ["score"] = 1860,
     ["color"] = {
       0.34,
       0.6,
@@ -676,7 +684,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1860,
+    ["score"] = 1835,
     ["color"] = {
       0.35,
       0.61,
@@ -684,7 +692,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1835,
+    ["score"] = 1810,
     ["color"] = {
       0.35,
       0.62,
@@ -692,7 +700,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1815,
+    ["score"] = 1790,
     ["color"] = {
       0.36,
       0.63,
@@ -700,7 +708,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1790,
+    ["score"] = 1765,
     ["color"] = {
       0.36,
       0.64,
@@ -708,7 +716,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1765,
+    ["score"] = 1740,
     ["color"] = {
       0.36,
       0.65,
@@ -716,7 +724,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1740,
+    ["score"] = 1715,
     ["color"] = {
       0.36,
       0.66,
@@ -724,7 +732,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1715,
+    ["score"] = 1690,
     ["color"] = {
       0.37,
       0.67,
@@ -732,7 +740,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1695,
+    ["score"] = 1670,
     ["color"] = {
       0.37,
       0.68,
@@ -740,7 +748,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1670,
+    ["score"] = 1645,
     ["color"] = {
       0.37,
       0.69,
@@ -748,7 +756,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1645,
+    ["score"] = 1620,
     ["color"] = {
       0.37,
       0.7,
@@ -756,7 +764,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1620,
+    ["score"] = 1595,
     ["color"] = {
       0.37,
       0.71,
@@ -764,7 +772,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1595,
+    ["score"] = 1570,
     ["color"] = {
       0.37,
       0.72,
@@ -772,7 +780,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1575,
+    ["score"] = 1550,
     ["color"] = {
       0.37,
       0.73,
@@ -780,7 +788,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1550,
+    ["score"] = 1525,
     ["color"] = {
       0.37,
       0.74,
@@ -788,7 +796,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1525,
+    ["score"] = 1500,
     ["color"] = {
       0.37,
       0.75,
@@ -796,7 +804,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1500,
+    ["score"] = 1475,
     ["color"] = {
       0.37,
       0.76,
@@ -804,7 +812,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1475,
+    ["score"] = 1450,
     ["color"] = {
       0.37,
       0.77,
@@ -812,7 +820,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1455,
+    ["score"] = 1430,
     ["color"] = {
       0.37,
       0.78,
@@ -820,7 +828,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1430,
+    ["score"] = 1405,
     ["color"] = {
       0.36,
       0.79,
@@ -828,7 +836,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1405,
+    ["score"] = 1380,
     ["color"] = {
       0.36,
       0.8,
@@ -836,7 +844,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1380,
+    ["score"] = 1355,
     ["color"] = {
       0.36,
       0.82,
@@ -844,7 +852,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1355,
+    ["score"] = 1330,
     ["color"] = {
       0.35,
       0.82,
@@ -852,7 +860,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1335,
+    ["score"] = 1310,
     ["color"] = {
       0.35,
       0.84,
@@ -860,7 +868,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1310,
+    ["score"] = 1285,
     ["color"] = {
       0.34,
       0.84,
@@ -868,7 +876,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1285,
+    ["score"] = 1260,
     ["color"] = {
       0.34,
       0.85,
@@ -876,7 +884,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1260,
+    ["score"] = 1235,
     ["color"] = {
       0.33,
       0.87,
@@ -884,7 +892,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1235,
+    ["score"] = 1210,
     ["color"] = {
       0.32,
       0.87,
@@ -892,7 +900,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1215,
+    ["score"] = 1190,
     ["color"] = {
       0.31,
       0.89,
@@ -900,7 +908,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1190,
+    ["score"] = 1165,
     ["color"] = {
       0.31,
       0.9,
@@ -908,7 +916,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1165,
+    ["score"] = 1140,
     ["color"] = {
       0.29,
       0.91,
@@ -916,7 +924,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1140,
+    ["score"] = 1115,
     ["color"] = {
       0.28,
       0.92,
@@ -924,7 +932,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1115,
+    ["score"] = 1090,
     ["color"] = {
       0.27,
       0.93,
@@ -932,7 +940,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1095,
+    ["score"] = 1070,
     ["color"] = {
       0.26,
       0.94,
@@ -940,7 +948,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1070,
+    ["score"] = 1045,
     ["color"] = {
       0.24,
       0.95,
@@ -948,7 +956,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1045,
+    ["score"] = 1020,
     ["color"] = {
       0.22,
       0.96,
@@ -956,7 +964,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 1020,
+    ["score"] = 995,
     ["color"] = {
       0.2,
       0.97,
@@ -964,7 +972,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 995,
+    ["score"] = 970,
     ["color"] = {
       0.18,
       0.98,
@@ -972,7 +980,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 975,
+    ["score"] = 950,
     ["color"] = {
       0.15,
       0.99,
@@ -980,7 +988,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 950,
+    ["score"] = 925,
     ["color"] = {
       0.12,
       1,
@@ -988,7 +996,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 925,
+    ["score"] = 900,
     ["color"] = {
       0.22,
       1,
@@ -996,23 +1004,23 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 900,
+    ["score"] = 875,
     ["color"] = {
-      0.28,
+      0.29,
       1,
       0.18
     }
   },
   {
-    ["score"] = 875,
+    ["score"] = 850,
     ["color"] = {
-      0.33,
+      0.34,
       1,
-      0.23
+      0.24
     }
   },
   {
-    ["score"] = 850,
+    ["score"] = 825,
     ["color"] = {
       0.38,
       1,
@@ -1020,7 +1028,7 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 825,
+    ["score"] = 800,
     ["color"] = {
       0.42,
       1,
@@ -1028,15 +1036,15 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 800,
+    ["score"] = 775,
     ["color"] = {
-      0.45,
+      0.46,
       1,
-      0.34
+      0.35
     }
   },
   {
-    ["score"] = 775,
+    ["score"] = 750,
     ["color"] = {
       0.49,
       1,
@@ -1044,113 +1052,105 @@ ns.CLIENT_COLORS = {
     }
   },
   {
-    ["score"] = 750,
-    ["color"] = {
-      0.52,
-      1,
-      0.41
-    }
-  },
-  {
     ["score"] = 725,
     ["color"] = {
-      0.55,
+      0.53,
       1,
-      0.44
+      0.42
     }
   },
   {
     ["score"] = 700,
     ["color"] = {
-      0.58,
+      0.56,
       1,
-      0.47
+      0.45
     }
   },
   {
     ["score"] = 675,
     ["color"] = {
-      0.6,
+      0.58,
       1,
-      0.49
+      0.48
     }
   },
   {
     ["score"] = 650,
     ["color"] = {
-      0.63,
+      0.61,
       1,
-      0.52
+      0.51
     }
   },
   {
     ["score"] = 625,
     ["color"] = {
-      0.65,
+      0.64,
       1,
-      0.55
+      0.53
     }
   },
   {
     ["score"] = 600,
     ["color"] = {
-      0.68,
+      0.67,
       1,
-      0.58
+      0.56
     }
   },
   {
     ["score"] = 575,
     ["color"] = {
-      0.7,
+      0.69,
       1,
-      0.61
+      0.59
     }
   },
   {
     ["score"] = 550,
     ["color"] = {
-      0.73,
+      0.71,
       1,
-      0.63
+      0.62
     }
   },
   {
     ["score"] = 525,
     ["color"] = {
-      0.75,
+      0.74,
       1,
-      0.66
+      0.65
     }
   },
   {
     ["score"] = 500,
     ["color"] = {
-      0.77,
+      0.76,
       1,
-      0.69
+      0.67
     }
   },
   {
     ["score"] = 475,
     ["color"] = {
-      0.79,
+      0.78,
       1,
-      0.71
+      0.7
     }
   },
   {
     ["score"] = 450,
     ["color"] = {
-      0.81,
+      0.8,
       1,
-      0.74
+      0.73
     }
   },
   {
     ["score"] = 425,
     ["color"] = {
-      0.83,
+      0.82,
       1,
       0.76
     }
@@ -1160,7 +1160,7 @@ ns.CLIENT_COLORS = {
     ["color"] = {
       0.85,
       1,
-      0.79
+      0.78
     }
   },
   {
@@ -1168,7 +1168,7 @@ ns.CLIENT_COLORS = {
     ["color"] = {
       0.87,
       1,
-      0.82
+      0.81
     }
   },
   {

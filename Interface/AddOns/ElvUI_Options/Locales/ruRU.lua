@@ -7,6 +7,8 @@ L["SHIFT"] = "Shift"
 L["NONE"] = "Нет"
 L["GROUP"] = "Группа"
 
+-----------  Position  -----------
+L["CENTER"] = true
 L["BOTTOM"] = "Внизу"
 L["BOTTOMLEFT"] = "Внизу слева"
 L["BOTTOMRIGHT"] = "Внизу справа"
@@ -15,7 +17,19 @@ L["TOPRIGHT"] = "Вверху справа"
 L["LEFT"] = "Слева"
 L["RIGHT"] = "Справа"
 L["TOP"] = "Вверху"
+------------  Strata  ------------
+L["BACKGROUND"] = true
+L["DIALOG"] = true
+L["HIGH"] = true
+L["LOW"] = true
+L["MEDIUM"] = true
+L["TOOLTIP"] = true
+----------------------------------
 
+L["Add Aura ID"] = true
+L["Remove Aura"] = true
+L["Select Aura"] = true
+L["Add an aura to the filter. Aura IDs can be acquired using the tooltip to find the correct ID."] = true
 L["Primary Unit"] = "Основная цель"
 L["Requires the unit to be the primary target to display."] = "Отображается, когда юнит является основной целью"
 L["Pet Specific"] = "Только для пета"

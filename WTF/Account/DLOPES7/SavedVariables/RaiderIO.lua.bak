@@ -17,25 +17,23 @@ RaiderIO_Config = {
 ["x"] = -223.9988861083984,
 ["point"] = "BOTTOMRIGHT",
 },
-["previouslyEnabledLogging"] = true,
+["previouslyEnabledLogging"] = false,
 ["lockReplay"] = true,
 ["enableReplay"] = false,
 ["displayWeeklyGuildBest"] = false,
 }
 RaiderIO_LastCharacter = "us-Gordonfreems-illidan"
 RaiderIO_MissingCharacters = {
-["us-Lenarín-illidan"] = true,
-["us-Shadamdh-ragnaros"] = true,
-["us-Terminite-illidan"] = true,
-["us-Lewandk-Quel"] = true,
-["us-Daisylock-quelthalas"] = true,
-["us-Babawls-illidan"] = true,
-["us-Xctfusion-area-52"] = true,
-["us-Elitebo-thrall"] = true,
-["us-Focola-azralon"] = true,
-["us-Meltbrain-illidan"] = true,
-["us-Eldano-illidan"] = true,
-["us-Lichiba-illidan"] = true,
+["us-Sagarrees-tanaris"] = true,
+["us-Simpie-sargeras"] = true,
+["us-Palilum-sargeras"] = true,
+["us-Colbý-sargeras"] = true,
+["us-Drowena-malganis"] = true,
+["us-Thúñdër-stormrage"] = true,
+["us-Scyllinie-stormrage"] = true,
+["us-Gordonfreems-illidan"] = true,
+["us-Iisfp-tichondrius"] = true,
+["us-Spellrobber-stormrage"] = true,
 }
 RaiderIO_MissingServers = {
 }

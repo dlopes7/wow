@@ -7,6 +7,8 @@ L["SHIFT"] = true
 L["NONE"] = true
 L["GROUP"] = true
 
+-----------  Position  -----------
+L["CENTER"] = true
 L["BOTTOM"] = true
 L["BOTTOMLEFT"] = true
 L["BOTTOMRIGHT"] = true
@@ -15,7 +17,19 @@ L["TOPRIGHT"] = true
 L["LEFT"] = true
 L["RIGHT"] = true
 L["TOP"] = true
+------------  Strata  ------------
+L["BACKGROUND"] = true
+L["DIALOG"] = true
+L["HIGH"] = true
+L["LOW"] = true
+L["MEDIUM"] = true
+L["TOOLTIP"] = true
+----------------------------------
 
+L["Add Aura ID"] = true
+L["Remove Aura"] = true
+L["Select Aura"] = true
+L["Add an aura to the filter. Aura IDs can be acquired using the tooltip to find the correct ID."] = true
 L["Primary Unit"] = true
 L["Requires the unit to be the primary target to display."] = true
 L["Pet Specific"] = true
@@ -1871,7 +1885,6 @@ L["You are about to reset paging. Are you sure?"] = true
 L["You are going to copy settings for |cffD3CF00\"%s\"|r from your current |cff4beb2c\"%s\"|r profile to |cff4beb2c\"%s\"|r profile. Are you sure?"] = "你將進行 |cffD3CF00\"%s\"|r 的設定拷貝, 從當前配置文件 |cff4beb2c\"%s\"|r 到配置文件 |cff4beb2c\"%s\"|r. 你確定麼?"
 L["You are going to copy settings for |cffD3CF00\"%s\"|r from |cff4beb2c\"%s\"|r profile to your current |cff4beb2c\"%s\"|r profile. Are you sure?"] = "你將進行 |cffD3CF00\"%s\"|r 的設定拷貝, 從配置文件 |cff4beb2c\"%s\"|r 到你當前配置文件 |cff4beb2c\"%s\"|r. 你確定麼?"
 L["You cannot copy settings from the same unit."] = "你不能從相同的單位複制設定"
-L["You cannot copy settings from the same unit."] = true
 L["You do not need to use Is Casting Anything or Is Channeling Anything for these spells to trigger."] = "你不需要為這些法術使用觸發器正在施法或正在引導."
 L["You must be targeting a player."] = "你必須以一名玩家為目標."
 L["Your Auras First"] = "自身光環優先"

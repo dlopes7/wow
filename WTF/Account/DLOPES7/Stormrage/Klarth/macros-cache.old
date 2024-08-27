@@ -11,7 +11,7 @@ VER 3 0100000000000007 "guillotine" "134400"
 /use [known:Guillotine, @cursor] Guillotine
 END
 VER 3 0100000000000009 "Insta summon" "134400"
-#showtooltip
+#showtooltip Summon Felguard
 /cast Fel Domination
 /cast Summon Felguard
 END

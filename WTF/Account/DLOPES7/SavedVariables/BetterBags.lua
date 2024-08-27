@@ -23,9 +23,9 @@ nil,
 },
 ["positions"] = {
 [0] = {
-["y"] = -99.00048828125,
-["x"] = -188.697021484375,
-["point"] = "TOPRIGHT",
+["y"] = 159.2992248535156,
+["x"] = -574.096435546875,
+["point"] = "RIGHT",
 ["scale"] = 1,
 },
 },
@@ -69,6 +69,16 @@ true,
 ["itemList"] = {
 },
 ["name"] = "Back",
+["dynamic"] = true,
+},
+["Profession"] = {
+["enabled"] = {
+true,
+[0] = true,
+},
+["itemList"] = {
+},
+["name"] = "Profession",
 ["dynamic"] = true,
 },
 ["Leatherworking"] = {
@@ -251,6 +261,16 @@ true,
 ["name"] = "Recent Items",
 ["dynamic"] = true,
 },
+["Wrist"] = {
+["enabled"] = {
+true,
+[0] = true,
+},
+["itemList"] = {
+},
+["name"] = "Wrist",
+["dynamic"] = true,
+},
 ["Optional Reagents"] = {
 ["enabled"] = {
 true,
@@ -259,6 +279,16 @@ true,
 ["itemList"] = {
 },
 ["name"] = "Optional Reagents",
+["dynamic"] = true,
+},
+["Herbalism"] = {
+["enabled"] = {
+true,
+[0] = true,
+},
+["itemList"] = {
+},
+["name"] = "Herbalism",
 ["dynamic"] = true,
 },
 ["Mining"] = {
@@ -271,14 +301,14 @@ true,
 ["name"] = "Mining",
 ["dynamic"] = true,
 },
-["Wrist"] = {
+["Jewelcrafting"] = {
 ["enabled"] = {
 true,
 [0] = true,
 },
 ["itemList"] = {
 },
-["name"] = "Wrist",
+["name"] = "Jewelcrafting",
 ["dynamic"] = true,
 },
 ["Miscellaneous"] = {
@@ -321,6 +351,16 @@ true,
 ["name"] = "Gem",
 ["dynamic"] = true,
 },
+["Main Hand"] = {
+["enabled"] = {
+true,
+[0] = true,
+},
+["itemList"] = {
+},
+["name"] = "Main Hand",
+["dynamic"] = true,
+},
 ["Finishing Reagents"] = {
 ["enabled"] = {
 true,
@@ -331,24 +371,14 @@ true,
 ["name"] = "Finishing Reagents",
 ["dynamic"] = true,
 },
-["Jewelcrafting"] = {
+["Recipe"] = {
 ["enabled"] = {
 true,
 [0] = true,
 },
 ["itemList"] = {
 },
-["name"] = "Jewelcrafting",
-["dynamic"] = true,
-},
-["Main Hand"] = {
-["enabled"] = {
-true,
-[0] = true,
-},
-["itemList"] = {
-},
-["name"] = "Main Hand",
+["name"] = "Recipe",
 ["dynamic"] = true,
 },
 ["Shoulder"] = {
@@ -361,14 +391,14 @@ true,
 ["name"] = "Shoulder",
 ["dynamic"] = true,
 },
-["Recipe"] = {
+["Junk"] = {
 ["enabled"] = {
 true,
 [0] = true,
 },
 ["itemList"] = {
 },
-["name"] = "Recipe",
+["name"] = "Junk",
 ["dynamic"] = true,
 },
 },
@@ -546,14 +576,14 @@ true,
 },
 ["name"] = "Consumable",
 },
-["Gem"] = {
+["Item Enhancement"] = {
 ["enabled"] = {
 true,
 [0] = true,
 },
 ["itemList"] = {
 },
-["name"] = "Gem",
+["name"] = "Item Enhancement",
 },
 ["Recent Items"] = {
 ["enabled"] = {
@@ -573,14 +603,14 @@ true,
 },
 ["name"] = "Engineering",
 },
-["Item Enhancement"] = {
+["Gem"] = {
 ["enabled"] = {
 true,
 [0] = true,
 },
 ["itemList"] = {
 },
-["name"] = "Item Enhancement",
+["name"] = "Gem",
 },
 ["Recipe"] = {
 ["enabled"] = {

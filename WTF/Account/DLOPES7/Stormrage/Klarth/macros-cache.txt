@@ -16,8 +16,8 @@ VER 3 0100000000000009 "Insta summon" "134400"
 /cast Summon Felguard
 END
 VER 3 010000000000000D "Int" "134400"
-#showtooltip
-/cast [target=focus] Spell Lock
+#showtooltip Spell Lock
+/cast [@focus,harm,nodead][] Spell Lock
 END
 VER 3 0100000000000003 "Mill" "INV_MISC_QUESTIONMARK"
 /use Milling

@@ -370,12 +370,16 @@ P.databars.azerite.hideAtMaxLevel = true
 --Bags
 P.bags = {
 	sortInverted = true,
+	warbandCombined = true,
+	warbandSize = 32,
 	bagSize = 34,
 	bagButtonSpacing = 1,
 	bankButtonSpacing = 1,
+	warbandButtonSpacing = 1,
 	bankSize = 34,
-	bagWidth = 406,
-	bankWidth = 406,
+	bagWidth = 600,
+	bankWidth = 600,
+	warbandWidth = 800,
 	currencyFormat = 'ICON_TEXT_ABBR',
 	moneyFormat = 'SMART',
 	moneyCoins = true,
@@ -460,8 +464,10 @@ P.bags = {
 	split = {
 		bagSpacing = 5,
 		bankSpacing = 5,
+		warbandSpacing = 5,
 		player = false,
 		bank = false,
+		warband = false,
 	},
 	shownBags = {},
 	autoToggle = {
@@ -503,6 +509,10 @@ for i = -3, 12 do
 	if i >= 1 then
 		P.bags.split[name] = false
 	end
+end
+
+for id = 14, 17 do -- ignore first bag (13)
+	P.bags.split['warband'..id] = false
 end
 
 local NP_Auras = {
@@ -1261,6 +1271,8 @@ P.tooltip = {
 	guildRanks = true,
 	itemQuality = false,
 	itemCount = 'BAGS_ONLY',
+	includeReagents = true,
+	includeWarband = true,
 	modifierCount = true,
 	showMount = true,
 	modifierID = 'SHOW',
@@ -2856,7 +2868,7 @@ P.actionbar.bar1.paging.ROGUE = '[bonusbar:1] 7;'..(E.Cata and ' [bonusbar:2] 8;
 P.actionbar.bar1.paging.WARLOCK = E.Cata and '[form:1] 7;' or nil
 P.actionbar.bar1.paging.DRUID = '[bonusbar:1,nostealth] 7; [bonusbar:1,stealth] 8; [bonusbar:2] 10; [bonusbar:3] 9; [bonusbar:4] 10;'
 P.actionbar.bar1.paging.EVOKER = '[bonusbar:1] 7;'
-P.actionbar.bar1.paging.PRIEST = E.Classic and '[form:1] 7;' or '[bonusbar:1] 7;'
+P.actionbar.bar1.paging.PRIEST = (E.Retail or E.Classic) and '[form:1] 7;' or '[bonusbar:1] 7;'
 P.actionbar.bar1.paging.WARRIOR = '[bonusbar:1] 7; [bonusbar:2] 8; [bonusbar:3] 9;'
 
 P.actionbar.bar3.enabled = true

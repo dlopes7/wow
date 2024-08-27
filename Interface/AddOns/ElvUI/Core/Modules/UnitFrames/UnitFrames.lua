@@ -1270,6 +1270,15 @@ do
 		end
 	end
 
+	function UF:DisableBlizzard_InitializeForGroup()
+		if self:IsForbidden() then return end
+
+		local disable = E.private.unitframe.disabledBlizzardFrames
+		if disable.raid then
+			self:UnregisterAllEvents()
+		end
+	end
+
 	function UF:DisableBlizzard_SetUpFrame(func)
 		if not AllowedFuncs[func] then return end
 
@@ -1837,7 +1846,6 @@ function UF:Setup()
 end
 
 function UF:Initialize()
-	UF.db = E.db.unitframe
 	UF.thinBorders = UF.db.thinBorders
 	UF.maxAllowedGroups = 8
 
@@ -1856,6 +1864,7 @@ function UF:Initialize()
 	UF:RegisterEvent('SOUNDKIT_FINISHED')
 	UF:DisableBlizzard()
 
+	hooksecurefunc('CompactRaidGroup_InitializeForGroup', UF.DisableBlizzard_InitializeForGroup)
 	hooksecurefunc('CompactUnitFrame_SetUpFrame', UF.DisableBlizzard_SetUpFrame)
 	hooksecurefunc('CompactUnitFrame_SetUnit', UF.DisableBlizzard_SetUnit)
 

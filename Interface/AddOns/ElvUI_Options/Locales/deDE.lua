@@ -7,6 +7,8 @@ L["SHIFT"] = true --No need to translate
 L["NONE"] = "Nichts"
 L["GROUP"] = "Gruppe"
 
+-----------  Position  -----------
+L["CENTER"] = true
 L["BOTTOM"] = "Unten"
 L["BOTTOMLEFT"] = "Unten Links"
 L["BOTTOMRIGHT"] = "Unten Rechts"
@@ -15,7 +17,19 @@ L["TOPRIGHT"] = "Oben Rechts"
 L["LEFT"] = "Links"
 L["RIGHT"] = "Rechts"
 L["TOP"] = "Oben"
+------------  Strata  ------------
+L["BACKGROUND"] = true
+L["DIALOG"] = true
+L["HIGH"] = true
+L["LOW"] = true
+L["MEDIUM"] = true
+L["TOOLTIP"] = true
+----------------------------------
 
+L["Add Aura ID"] = "Aura ID hinzufügen"
+L["Remove Aura"] = "Aura entfernen"
+L["Select Aura"] = "Aura auswählen"
+L["Add an aura to the filter. Aura IDs can be acquired using the tooltip to find the correct ID."] = "Fügt eine Aura zum Filter hinzu. Aura IDs können mit dem Tooltip gefunden werden."
 L["Primary Unit"] = true
 L["Requires the unit to be the primary target to display."] = true
 L["Pet Specific"] = true
@@ -1868,7 +1882,6 @@ L["Yell"] = "Schreien"
 L["You are about to reset paging. Are you sure?"] = "Du bist im Begriff, die Paging Funktion zurückzusetzen. Bist Du Dir sicher?"
 L["You are going to copy settings for |cffD3CF00\"%s\"|r from your current |cff4beb2c\"%s\"|r profile to |cff4beb2c\"%s\"|r profile. Are you sure?"] = "Du möchtest Einstellungen für |cffD3CF00\"%s\"|r von deinem derzeitigen |cff4beb2c\"%s\"|r Profil zu |cff4beb2c\"%s\"|r Profil kopieren. Bist du sicher?"
 L["You are going to copy settings for |cffD3CF00\"%s\"|r from |cff4beb2c\"%s\"|r profile to your current |cff4beb2c\"%s\"|r profile. Are you sure?"] = "Du möchtest Einstellungen für |cffD3CF00\"%s\"|r Profil zu deinem aktuellem |cff4beb2c\"%s\"|r Profil kopieren. Bist du sicher?"
-L["You cannot copy settings from the same unit."] = "Du kannst keine Einstellungen vom selben Gerät kopieren."
 L["You cannot copy settings from the same unit."] = "Du kannst keine Einstellungen von der gleichen Einheit kopieren."
 L["You do not need to use Is Casting Anything or Is Channeling Anything for these spells to trigger."] = "Du brauchst nicht Ist irgendetwas am Zaubern oder Ist irgendetwas am Kanalisieren für die Zauber auswählen um Auszulösen."
 L["You must be targeting a player."] = "Du musst einen Spieler anvisiert haben."

@@ -114,7 +114,7 @@ function A:UpdateButton(button)
 	if threshold == -1 then
 		return
 	elseif button.timeLeft > threshold then
-		E:StopFlash(button)
+		E:StopFlash(button, 1)
 	else
 		E:Flash(button, 1)
 	end
@@ -253,6 +253,8 @@ function A:ClearAuraTime(button, expired)
 	button.timeLeft = nil
 
 	button.text:SetText('')
+
+	E:StopFlash(button, 1)
 
 	if not expired and button.statusBar:IsShown() then
 		button.statusBar:SetMinMaxValues(0, 1)
@@ -567,7 +569,6 @@ function A:Initialize()
 	if not E.private.auras.enable then return end
 
 	A.Initialized = true
-	A.db = E.db.auras
 
 	local xoffset = -(6 + E.Border)
 	if E.private.auras.buffsHeader then

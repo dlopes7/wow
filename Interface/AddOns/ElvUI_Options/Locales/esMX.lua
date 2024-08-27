@@ -7,15 +7,29 @@ L["SHIFT"] = true
 L["NONE"] = true
 L["GROUP"] = true
 
-L["BOTTOM"] = true
-L["BOTTOMLEFT"] = true
-L["BOTTOMRIGHT"] = true
-L["TOPLEFT"] = true
-L["TOPRIGHT"] = true
-L["LEFT"] = true
-L["RIGHT"] = true
-L["TOP"] = true
+-----------  Position  -----------
+L["CENTER"] = "Centro"
+L["BOTTOM"] = "Abajo"
+L["BOTTOMLEFT"] = "Inferior Izquierda"
+L["BOTTOMRIGHT"] = "Inferior Derecha"
+L["TOPLEFT"] = "Arriba Izquierda"
+L["TOPRIGHT"] = "Arriba Derecha"
+L["LEFT"] = "Izquierda"
+L["RIGHT"] = "Derecha"
+L["TOP"] = "Arriba"
+------------  Strata  ------------
+L["BACKGROUND"] = "Fondo"
+L["DIALOG"] = "Diálogo"
+L["HIGH"] = "Alta"
+L["LOW"] = "Baja"
+L["MEDIUM"] = "Medio"
+L["TOOLTIP"] = "Descripción Emergente"
+----------------------------------
 
+L["Add Aura ID"] = true
+L["Remove Aura"] = true
+L["Select Aura"] = true
+L["Add an aura to the filter. Aura IDs can be acquired using the tooltip to find the correct ID."] = true
 L["Primary Unit"] = "Unidad primaria"
 L["Requires the unit to be the primary target to display."] = "Requiere que la unidad sea el objetivo principal a mostrar."
 L["Pet Specific"] = "Específico para Mascotas"
@@ -1870,7 +1884,6 @@ L["You are about to reset paging. Are you sure?"] = true
 L["You are going to copy settings for |cffD3CF00\"%s\"|r from your current |cff4beb2c\"%s\"|r profile to |cff4beb2c\"%s\"|r profile. Are you sure?"] = true
 L["You are going to copy settings for |cffD3CF00\"%s\"|r from |cff4beb2c\"%s\"|r profile to your current |cff4beb2c\"%s\"|r profile. Are you sure?"] = true
 L["You cannot copy settings from the same unit."] = "No puedes copiar la configuración desde la misma unidad"
-L["You cannot copy settings from the same unit."] = true
 L["You do not need to use Is Casting Anything or Is Channeling Anything for these spells to trigger."] = true
 L["You must be targeting a player."] = "Debes enfocar a un jugador."
 L["Your Auras First"] = "Tus Auras Primero"

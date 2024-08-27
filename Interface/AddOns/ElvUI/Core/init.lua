@@ -116,7 +116,7 @@ end
 function E:ParseVersionString(addon)
 	local version = GetAddOnMetadata(addon, 'Version')
 	if strfind(version, 'project%-version') then
-		return 13.74, '13.74-git', nil, true
+		return 13.75, '13.75-git', nil, true
 	else
 		local release, extra = strmatch(version, '^v?([%d.]+)(.*)')
 		return tonumber(release), release..extra, extra ~= ''
@@ -302,6 +302,32 @@ function E:OnEnable()
 	E:Initialize()
 end
 
+do
+	local info = {
+		Auras = 'auras',
+		ActionBars = 'actionbar',
+		Bags = 'bags',
+		Chat = 'chat',
+		DataBars = 'databars',
+		DataTexts = 'datatexts',
+		NamePlates = 'nameplates',
+		Tooltip = 'tooltip',
+		UnitFrames = 'unitframe'
+	}
+
+	function E:SetupDB()
+		for key, value in next, info do
+			local module = E[key]
+			if module then
+				module.db = E.db[value]
+			end
+		end
+
+		E.TotemTracker.db = E.db.general.totems
+		E.Skins.db = E.private.skins
+	end
+end
+
 function E:OnInitialize()
 	if not ElvCharacterDB then
 		ElvCharacterDB = {}
@@ -343,6 +369,7 @@ function E:OnInitialize()
 	E.Spacing = E.PixelMode and 0 or 1
 	E.loadedtime = GetTime()
 
+	E:SetupDB()
 	E:UIMult()
 	E:UpdateMedia()
 	E:InitializeInitialModules()

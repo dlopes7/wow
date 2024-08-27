@@ -5,7 +5,7 @@
 		Name = 'AddOnName',
 		tutorialImage = 'TexturePath',
 		tutorialImageSize = {x,y},
-		tutorialImagetutorialImagePoint = {xOffset,yOffset},
+		tutorialImagePoint = {xOffset,yOffset},
 		Pages = {
 			function1,
 			function2,
@@ -535,10 +535,10 @@ function PI:RunInstall()
 
 	if #PI.Installs > 1 then
 		f.pending:Show()
-		E:Flash(f.pending, 0.53, true)
+		E:Flash(f.pending, 0.5, true)
 	else
 		f.pending:Hide()
-		E:StopFlash(f.pending)
+		E:StopFlash(f.pending, 1)
 	end
 end
 

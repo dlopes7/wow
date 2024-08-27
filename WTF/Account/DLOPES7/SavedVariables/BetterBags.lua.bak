@@ -181,6 +181,16 @@ true,
 ["name"] = "Back",
 ["dynamic"] = true,
 },
+["Profession"] = {
+["enabled"] = {
+true,
+[0] = true,
+},
+["itemList"] = {
+},
+["name"] = "Profession",
+["dynamic"] = true,
+},
 ["Leatherworking"] = {
 ["enabled"] = {
 true,
@@ -361,6 +371,16 @@ true,
 ["name"] = "Recent Items",
 ["dynamic"] = true,
 },
+["Junk"] = {
+["enabled"] = {
+true,
+[0] = true,
+},
+["itemList"] = {
+},
+["name"] = "Junk",
+["dynamic"] = true,
+},
 ["Optional Reagents"] = {
 ["enabled"] = {
 true,
@@ -369,6 +389,16 @@ true,
 ["itemList"] = {
 },
 ["name"] = "Optional Reagents",
+["dynamic"] = true,
+},
+["Herbalism"] = {
+["enabled"] = {
+true,
+[0] = true,
+},
+["itemList"] = {
+},
+["name"] = "Herbalism",
 ["dynamic"] = true,
 },
 ["Mining"] = {
@@ -620,14 +650,14 @@ true,
 },
 ["name"] = "Mining",
 },
-["Gem"] = {
+["Item Enhancement"] = {
 ["enabled"] = {
 true,
 [0] = true,
 },
 ["itemList"] = {
 },
-["name"] = "Gem",
+["name"] = "Item Enhancement",
 },
 ["Miscellaneous"] = {
 ["enabled"] = {
@@ -656,14 +686,14 @@ true,
 },
 ["name"] = "Consumable",
 },
-["Item Enhancement"] = {
+["Gem"] = {
 ["enabled"] = {
 true,
 [0] = true,
 },
 ["itemList"] = {
 },
-["name"] = "Item Enhancement",
+["name"] = "Gem",
 },
 ["Recent Items"] = {
 ["enabled"] = {

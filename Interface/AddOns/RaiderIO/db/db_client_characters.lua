@@ -1,5 +1,5 @@
 --
--- RaiderIO Client Data. Generated on Mon Aug 19 2024 23:17:00 GMT+0000 (Coordinated Universal Time)
+-- RaiderIO Client Data. Generated on Mon Aug 26 2024 18:55:52 GMT+0000 (Coordinated Universal Time)
 --
 local _, ns = ...
 ns.CLIENT_CHARACTERS = {
@@ -33,12 +33,105 @@ ns.CLIENT_CHARACTERS = {
     },
     ["mythic_keystone"] = {
       ["all"] = {
-        ["score"] = 0,
-        ["best"] = nil,
-        ["bestFortified"] = nil,
+        ["score"] = 169.5,
+        ["best"] = {
+          ["zone_id"] = 14063,
+          ["level"] = 4,
+          ["upgrades"] = 3,
+          ["fraction"] = 0.507,
+          ["score"] = 113.00000926143768,
+          ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/12958149-4-ruby-life-pools?utm_source=client"
+        },
+        ["bestFortified"] = {
+          ["zone_id"] = 14063,
+          ["level"] = 4,
+          ["upgrades"] = 3,
+          ["fraction"] = 0.507,
+          ["score"] = 113.00000926143768,
+          ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/12958149-4-ruby-life-pools?utm_source=client"
+        },
         ["bestTyrannical"] = nil,
         ["runs"] = {
-
+          {
+            ["zone_id"] = 13954,
+            ["level"] = 0,
+            ["upgrades"] = 0,
+            ["fraction"] = 0,
+            ["score"] = 0,
+            ["url"] = nil
+          },
+          {
+            ["zone_id"] = 13968,
+            ["level"] = 0,
+            ["upgrades"] = 0,
+            ["fraction"] = 0,
+            ["score"] = 0,
+            ["url"] = nil
+          },
+          {
+            ["zone_id"] = 13982,
+            ["level"] = 0,
+            ["upgrades"] = 0,
+            ["fraction"] = 0,
+            ["score"] = 0,
+            ["url"] = nil
+          },
+          {
+            ["zone_id"] = 13991,
+            ["level"] = 0,
+            ["upgrades"] = 0,
+            ["fraction"] = 0,
+            ["score"] = 0,
+            ["url"] = nil
+          },
+          {
+            ["zone_id"] = 14011,
+            ["level"] = 0,
+            ["upgrades"] = 0,
+            ["fraction"] = 0,
+            ["score"] = 0,
+            ["url"] = nil
+          },
+          {
+            ["zone_id"] = 14032,
+            ["level"] = 0,
+            ["upgrades"] = 0,
+            ["fraction"] = 0,
+            ["score"] = 0,
+            ["url"] = nil
+          },
+          {
+            ["zone_id"] = 14063,
+            ["level"] = 4,
+            ["upgrades"] = 3,
+            ["fraction"] = 0.507,
+            ["score"] = 113.00000926143768,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-df-4/12958149-4-ruby-life-pools?utm_source=client"
+          },
+          {
+            ["zone_id"] = 14082,
+            ["level"] = 0,
+            ["upgrades"] = 0,
+            ["fraction"] = 0,
+            ["score"] = 0,
+            ["url"] = nil
+          },
+          {
+            ["zone_id"] = 1000010,
+            ["level"] = 0,
+            ["upgrades"] = 0,
+            ["fraction"] = 0,
+            ["score"] = 0,
+            ["url"] = nil
+          },
+          {
+            ["zone_id"] = 1000011,
+            ["level"] = 0,
+            ["upgrades"] = 0,
+            ["fraction"] = 0,
+            ["score"] = 0,
+            ["url"] = nil
+          }
         }
       }
     }
