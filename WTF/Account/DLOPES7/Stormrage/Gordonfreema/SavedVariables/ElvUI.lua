@@ -2,12 +2,6 @@
 ElvCharacterDB = {
 ["ConvertKeybindings"] = true,
 ["ChatEditHistory"] = {
-"/p lets fdo fat boy",
-"/p dont pull triangle",
-"/p al lthe way to boss",
-"/p lust first pull and second boss please..",
-"/p mb",
-"/cd 5",
 "/p monk on fire",
 "/p gg",
 "/p ill freedom the voker",
@@ -22,6 +16,12 @@ ElvCharacterDB = {
 "/p wm",
 "/p set to mythic please",
 "/p wait at entrance please will bring shit here",
+"/elvui",
+"/omnicd",
+"/wa",
+"tamo upando spamando dunge quer vir?",
+"ah",
+"/plater",
 },
 ["ChatHistoryLog"] = {
 },

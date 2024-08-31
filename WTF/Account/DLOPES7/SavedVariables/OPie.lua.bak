@@ -16,61 +16,6 @@ OPie_SavedData = {
 },
 ["PersistentStorage"] = {
 ["RingKeeper"] = {
-["OPieFlagStore"] = {
-["StoreVersion"] = 3,
-},
-["Teleports"] = {
-{
-"item",
-140192,
-["sliceToken"] = "ABuebtsANJ4",
-},
-{
-"item",
-6948,
-["sliceToken"] = "ABuebtsANJh",
-},
-{
-["sliceToken"] = "ABuebtsANJf",
-["id"] = 131204,
-},
-{
-["sliceToken"] = "ABuebtsANJd",
-["id"] = 393764,
-},
-{
-["sliceToken"] = "ABuebtsANJ3",
-["id"] = 393262,
-},
-{
-["sliceToken"] = "ABuebtsANJs",
-["id"] = 393766,
-},
-{
-["sliceToken"] = "ABuebtsANJa",
-["id"] = 159899,
-},
-{
-["sliceToken"] = "ABuebtnf7=1",
-["id"] = 393279,
-},
-{
-["sliceToken"] = "ABuebyeiPue",
-["id"] = 393256,
-},
-{
-["sliceToken"] = "ABuebtIsB8e",
-["id"] = 393273,
-},
-{
-"mount",
-460,
-["sliceToken"] = "ABuebtnf7=r",
-},
-["name"] = "Teleports",
-["save"] = true,
-["hotkey"] = ",",
-},
 ["eleportsS2"] = {
 {
 ["id"] = 410074,
@@ -108,6 +53,61 @@ OPie_SavedData = {
 ["save"] = true,
 ["hotkey"] = ".",
 ["limit"] = "Gordonfreems-Stormrage",
+},
+["Teleports"] = {
+{
+"item",
+140192,
+["sliceToken"] = "ABuebtsANJ4",
+},
+{
+"item",
+6948,
+["sliceToken"] = "ABuebtsANJh",
+},
+{
+["id"] = 131204,
+["sliceToken"] = "ABuebtsANJf",
+},
+{
+["id"] = 393764,
+["sliceToken"] = "ABuebtsANJd",
+},
+{
+["id"] = 393262,
+["sliceToken"] = "ABuebtsANJ3",
+},
+{
+["id"] = 393766,
+["sliceToken"] = "ABuebtsANJs",
+},
+{
+["id"] = 159899,
+["sliceToken"] = "ABuebtsANJa",
+},
+{
+["id"] = 393279,
+["sliceToken"] = "ABuebtnf7=1",
+},
+{
+["id"] = 393256,
+["sliceToken"] = "ABuebyeiPue",
+},
+{
+["id"] = 393273,
+["sliceToken"] = "ABuebtIsB8e",
+},
+{
+"mount",
+460,
+["sliceToken"] = "ABuebtnf7=r",
+},
+["save"] = true,
+["name"] = "Teleports",
+["hotkey"] = ",",
+},
+["OPieFlagStore"] = {
+["StoreVersion"] = 3,
 },
 },
 },

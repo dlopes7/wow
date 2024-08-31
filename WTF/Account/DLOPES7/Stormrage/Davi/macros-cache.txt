@@ -24,7 +24,7 @@ VER 3 0100000000000001 "Ravager" "INV_MISC_QUESTIONMARK"
 END
 VER 3 0100000000000003 "Spear" "INV_MISC_QUESTIONMARK"
 #showtooltip
-/cast [@cursor] Spear of Bastion
+/cast [@cursor] Champion's Spear
 END
 VER 3 0100000000000006 "Stance" "132341"
 #showtooltip 

@@ -71,7 +71,7 @@ ElvUI_Libraries: enabled
 ElvUI_Options: enabled
 ElvUI_WindTools: enabled
 ExtraQuestButton: disabled
-GatherMate2: disabled
+GatherMate2: enabled
 GladiatorlosSA2: disabled
 GlobalIgnoreList: disabled
 HandyNotes: disabled

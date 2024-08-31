@@ -576,14 +576,14 @@ true,
 },
 ["name"] = "Consumable",
 },
-["Item Enhancement"] = {
+["Gem"] = {
 ["enabled"] = {
 true,
 [0] = true,
 },
 ["itemList"] = {
 },
-["name"] = "Item Enhancement",
+["name"] = "Gem",
 },
 ["Recent Items"] = {
 ["enabled"] = {
@@ -603,14 +603,14 @@ true,
 },
 ["name"] = "Engineering",
 },
-["Gem"] = {
+["Item Enhancement"] = {
 ["enabled"] = {
 true,
 [0] = true,
 },
 ["itemList"] = {
 },
-["name"] = "Gem",
+["name"] = "Item Enhancement",
 },
 ["Recipe"] = {
 ["enabled"] = {

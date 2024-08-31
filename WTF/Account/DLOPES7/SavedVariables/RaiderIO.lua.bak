@@ -24,16 +24,13 @@ RaiderIO_Config = {
 }
 RaiderIO_LastCharacter = "us-Gordonfreems-illidan"
 RaiderIO_MissingCharacters = {
-["us-Sagarrees-tanaris"] = true,
-["us-Simpie-sargeras"] = true,
-["us-Palilum-sargeras"] = true,
-["us-Colbý-sargeras"] = true,
-["us-Drowena-malganis"] = true,
-["us-Thúñdër-stormrage"] = true,
-["us-Scyllinie-stormrage"] = true,
-["us-Gordonfreems-illidan"] = true,
-["us-Iisfp-tichondrius"] = true,
-["us-Spellrobber-stormrage"] = true,
+["us-Zpjuicer-illidan"] = true,
+["us-Kpitanpotato-illidan"] = true,
+["us-Glforever-illidan"] = true,
+["us-Soothella-illidan"] = true,
+["us-Bigblackbone-illidan"] = true,
+["us-Stickyfingèr-illidan"] = true,
+["us-Kònekò-illidan"] = true,
 }
 RaiderIO_MissingServers = {
 }

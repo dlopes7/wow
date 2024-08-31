@@ -1,3 +1,8 @@
+VER 3 0100000000000008 "avatar" "134400"
+#showtooltip avatar
+/use Colossus Smash
+/use Avatar
+END
 VER 3 0100000000000004 "Belt" "INV_MISC_QUESTIONMARK"
 #showtooltip
 /use [@player] Difficult Wrist Protectors

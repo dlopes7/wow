@@ -178,7 +178,7 @@ DataStore_Talents: disabled
 Details_ExplosiveOrbs: disabled
 Doom_CooldownPulse: disabled
 ElvUI_Libraries: enabled
-GatherMate2: disabled
+GatherMate2: enabled
 GladiatorlosSA2: disabled
 GlobalIgnoreList: disabled
 HandyNotes: disabled

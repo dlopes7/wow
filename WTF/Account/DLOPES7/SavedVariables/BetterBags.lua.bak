@@ -133,9 +133,9 @@ nil,
 },
 ["positions"] = {
 [0] = {
-["y"] = -99.00048828125,
-["x"] = -188.697021484375,
-["point"] = "TOPRIGHT",
+["y"] = 159.2992248535156,
+["x"] = -574.096435546875,
+["point"] = "RIGHT",
 ["scale"] = 1,
 },
 },
@@ -650,14 +650,14 @@ true,
 },
 ["name"] = "Mining",
 },
-["Item Enhancement"] = {
+["Gem"] = {
 ["enabled"] = {
 true,
 [0] = true,
 },
 ["itemList"] = {
 },
-["name"] = "Item Enhancement",
+["name"] = "Gem",
 },
 ["Miscellaneous"] = {
 ["enabled"] = {
@@ -686,14 +686,14 @@ true,
 },
 ["name"] = "Consumable",
 },
-["Gem"] = {
+["Item Enhancement"] = {
 ["enabled"] = {
 true,
 [0] = true,
 },
 ["itemList"] = {
 },
-["name"] = "Gem",
+["name"] = "Item Enhancement",
 },
 ["Recent Items"] = {
 ["enabled"] = {

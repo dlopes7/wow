@@ -167,6 +167,10 @@ local BlizzardFramesOnDemand = {
 	["Blizzard_DeathRecap"] = {
 		"DeathRecapFrame",
 	},
+	["Blizzard_DelvesCompanionConfiguration"] = {
+		"DelvesCompanionConfigurationFrame",
+		"DelvesCompanionAbilityListFrame",
+	},
 	["Blizzard_EncounterJournal"] = {
 		["EncounterJournal"] = {
 			"EncounterJournal.instanceSelect.ScrollBox",
@@ -258,7 +262,9 @@ local BlizzardFramesOnDemand = {
 		"OrderHallTalentFrame",
 	},
 	["Blizzard_PlayerSpells"] = {
+		"HeroTalentsSelectionDialog",
 		["PlayerSpellsFrame"] = {
+			"PlayerSpellsFrame.TalentsFrame.ButtonsParent",
 			"PlayerSpellsFrame.SpecFrame.DisabledOverlay",
 		},
 	},

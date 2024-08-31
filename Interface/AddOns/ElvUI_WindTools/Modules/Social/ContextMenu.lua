@@ -30,7 +30,6 @@ local GetSpecialization = GetSpecialization
 local GetSpecializationInfo = GetSpecializationInfo
 local GetSpellCritChance = GetSpellCritChance
 local GetVersatilityBonus = GetVersatilityBonus
-local GuildInvite = GuildInvite
 local SendChatMessage = SendChatMessage
 local UnitClass = UnitClass
 local UnitHealthMax = UnitHealthMax
@@ -41,6 +40,7 @@ local C_BattleNet_GetFriendGameAccountInfo = C_BattleNet.GetFriendGameAccountInf
 local C_BattleNet_GetFriendNumGameAccounts = C_BattleNet.GetFriendNumGameAccounts
 local C_Club_GetGuildClubId = C_Club.GetGuildClubId
 local C_FriendList_SendWho = C_FriendList.SendWho
+local C_GuildInfo_Invite = C_GuildInfo.Invite
 local Menu_ModifyMenu = Menu.ModifyMenu
 
 local CR_VERSATILITY_DAMAGE_DONE = CR_VERSATILITY_DAMAGE_DONE
@@ -126,14 +126,16 @@ CM.Features = {
 									and gameAccountInfo.clientProgram == "WoW"
 									and gameAccountInfo.wowProjectID == 1
 								then
-									GuildInvite(gameAccountInfo.characterName .. "-" .. gameAccountInfo.realmName)
+									C_GuildInfo_Invite(
+										gameAccountInfo.characterName .. "-" .. gameAccountInfo.realmName
+									)
 								end
 							end
 						elseif
 							accountInfo.gameAccountInfo.clientProgram == "WoW"
 							and accountInfo.gameAccountInfo.wowProjectID == 1
 						then
-							GuildInvite(
+							C_GuildInfo_Invite(
 								accountInfo.gameAccountInfo.characterName
 									.. "-"
 									.. accountInfo.gameAccountInfo.realmName
@@ -143,13 +145,13 @@ CM.Features = {
 					end
 				end
 			elseif contextData.chatTarget then
-				GuildInvite(contextData.chatTarget)
+				C_GuildInfo_Invite(contextData.chatTarget)
 			elseif contextData.name then
 				local playerName = contextData.name
 				if contextData.server and contextData.server ~= E.myrealm then
 					playerName = playerName .. "-" .. contextData.server
 				end
-				GuildInvite(playerName)
+				C_GuildInfo_Invite(playerName)
 			else
 				CM:Log("debug", "Cannot get the name.")
 			end
@@ -318,10 +320,10 @@ CM.Features = {
 		},
 		func = function(contextData)
 			local name
-			local SendChatMessage = SendChatMessage
+			local _SendChatMessage = SendChatMessage
 
 			if contextData.bnetIDAccount then
-				SendChatMessage = function(message)
+				_SendChatMessage = function(message)
 					BNSendWhisper(contextData.bnetIDAccount, message)
 				end
 				name = "BN"
@@ -361,7 +363,7 @@ CM.Features = {
 				format(" * %s:%.2f%%", STAT_LIFESTEAL, GetLifesteal()),
 			}) do
 				E:Delay(0.1 + i * 0.2, function()
-					SendChatMessage(message, "WHISPER", nil, name)
+					_SendChatMessage(message, "WHISPER", nil, name)
 				end)
 			end
 		end,
@@ -400,31 +402,23 @@ for feature, featureConfig in pairs(CM.Features) do
 end
 
 function CM:GetArmoryBaseURL()
-	local host = "https://worldofwarcraft.com/"
-
 	local language = strlower(W.Locale)
-	local languageURL = format("%s-%s/", strsub(language, 1, 2), strsub(language, 3, 4))
-	host = host .. languageURL .. "character/"
-
-	local serverLocation = "us"
-
-	if W.Locale ~= "enUS" then
-		if W.Locale == "zhTW" or W.Locale == "zhTW" then
-			serverLocation = "tw"
-		elseif W.Locale == "koKR" then
-			serverLocation = "kr"
-		else
-			serverLocation = "eu"
-		end
+	if language == "zhcn" then
+		language = "zhtw" -- There is no simplified Chinese armory
 	end
 
-	if self.db and self.db.armoryOverride[E.myrealm] then
-		serverLocation = self.db.armoryOverride[E.myrealm]
+	local region = self.db and self.db.armoryOverride[E.myrealm] or W.RealRegion
+	if region == "CN" then
+		region = "TW" -- Fix taiwan server region issue
 	end
+	region = strlower(region or "US")
 
-	host = host .. serverLocation .. "/"
-
-	return host
+	return format(
+		"https://worldofwarcraft.com/%s-%s/character/%s/",
+		strsub(language, 1, 2),
+		strsub(language, 3, 4),
+		region
+	)
 end
 
 function CM:GetAvailableButtonTypes(contextData)

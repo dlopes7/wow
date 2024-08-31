@@ -135,6 +135,26 @@ function W:UpdateScripts()
 		end
 	end
 
+	if profileVersion < 3.72 then
+		if E.db.WT.social.friendList then
+			E.db.WT.social.friendList.client = nil
+			E.db.WT.social.friendList.factionIcon = nil
+
+			UpdateMessage(L["Friend List"] .. " - " .. L["Update Database"], profileVersion)
+		end
+
+		if E.db.WT.social.chatBar and E.db.WT.social.chatBar.channels and E.db.WT.social.chatBar.channels.world then
+			E.db.WT.social.chatBar.channels.world.enable = false
+			if W.RealRegion == "CN" or W.RealRegion == "TW" and W.CurrentRealmID == 963 then
+				E.db.WT.social.chatBar.channels.world.enable = true
+			end
+			E.db.WT.social.chatBar.channels.world.autoJoin = nil
+			E.db.WT.social.chatBar.channels.world.name = nil
+
+			UpdateMessage(L["Chat Bar"] .. " - " .. L["Update Database"], profileVersion)
+		end
+	end
+
 	if not isFirstLine then
 		F.PrintGradientLine()
 	end
