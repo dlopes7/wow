@@ -12,11 +12,18 @@ local events = addon:GetModule('Events')
 ---@class Constants: AceModule
 local const = addon:GetModule('Constants')
 
+---@class Context: AceModule
+local context = addon:GetModule('Context')
+
 ---@class Search: AceModule
 local search = addon:GetModule('Search')
 
 ---@class SearchCategoryConfig: AceModule
 local searchCategoryConfig = addon:GetModule('SearchCategoryConfig')
+
+---@class Database: AceModule
+local database = addon:GetModule('Database')
+
 
 ---@class SearchBox: AceModule
 ---@field searchFrame SearchFrame
@@ -39,17 +46,19 @@ searchBox.searchProto = {}
 -- BetterBags_ToggleSearch toggles the search view. This function is used in the
 -- search key bind.
 function BetterBags_ToggleSearch()
-  searchBox.searchFrame:Toggle()
+  local ctx = context:New('BetterBags_ToggleSearch')
+  searchBox.searchFrame:Toggle(ctx)
 end
 
-function searchBox.searchProto:Toggle()
+---@param ctx Context
+function searchBox.searchProto:Toggle(ctx)
   if self.frame:IsShown() then
     self.textBox:SetText("")
     self.textBox:ClearFocus()
     self.fadeOutGroup:Play()
   else
     self.textBox:ClearFocus()
-    addon.Bags.Backpack:Show()
+    addon.Bags.Backpack:Show(ctx)
     self.fadeInGroup:Play()
   end
 end
@@ -85,7 +94,8 @@ function searchBox.searchProto:SetShown(shown)
   end
 end
 
-function searchBox.searchProto:UpdateSearch()
+---@param ctx Context
+function searchBox.searchProto:UpdateSearch(ctx)
   local text = self.textBox:GetText()
   if text == "" then
     if self.helpTextFadeIn then
@@ -114,31 +124,31 @@ function searchBox.searchProto:UpdateSearch()
   if self.kind ~= nil then
     if self.kind == const.BAG_KIND.BACKPACK then
       if text == "" then
-        addon.Bags.Backpack:ResetSearch()
+        addon.Bags.Backpack:ResetSearch(ctx)
       else
         local results = search:Search(text)
-        addon.Bags.Backpack:Search(results)
+        addon.Bags.Backpack:Search(ctx, results)
       end
     else
       if text == "" then
-        addon.Bags.Bank:ResetSearch()
+        addon.Bags.Bank:ResetSearch(ctx)
       else
         local results = search:Search(text)
-        addon.Bags.Bank:Search(results)
+        addon.Bags.Bank:Search(ctx, results)
       end
     end
   else
     if text == "" then
       self.enterLabelFadeOut:Play()
-      addon.Bags.Backpack:ResetSearch()
-      addon.Bags.Bank:ResetSearch()
+      addon.Bags.Backpack:ResetSearch(ctx)
+      addon.Bags.Bank:ResetSearch(ctx)
     else
       if not self.enterLabel:IsShown() then
         self.enterLabelFadeIn:Play()
       end
       local results = search:Search(text)
-      addon.Bags.Backpack:Search(results)
-      addon.Bags.Bank:Search(results)
+      addon.Bags.Backpack:Search(ctx, results)
+      addon.Bags.Bank:Search(ctx, results)
     end
   end
 end
@@ -147,9 +157,10 @@ function searchBox:GetText()
   return self.searchFrame.textBox:GetText()
 end
 
+---@param ctx Context
 ---@param parent Frame
 ---@return SearchFrame
-function searchBox:Create(parent)
+function searchBox:Create(ctx, parent)
   local sf = setmetatable({}, {__index = searchBox.searchProto})
   local f = CreateFrame("Frame", "BetterBagsSearchFrame", UIParent, "BetterBagsSearchPanelTemplate") --[[@as Frame]]
   f:SetSize(400, 75)
@@ -180,22 +191,24 @@ function searchBox:Create(parent)
   textBox:SetScript("OnEscapePressed", function(me)
     ---@cast me +EditBox
     me:ClearFocus()
-    sf:Toggle()
+    sf:Toggle(ctx)
   end)
 
-  textBox:SetScript("OnTextChanged", function()
-    sf:UpdateSearch()
+  addon.SetScript(textBox, "OnTextChanged", function(ectx)
+    sf:UpdateSearch(ectx)
   end)
 
   textBox:SetScript("OnEnterPressed", function()
-    searchCategoryConfig:Open({
-      name = "",
-      itemList = {},
-      priority = 10,
-      searchCategory = {
-        query = searchBox:GetText(),
-      }
-    })
+    if database:GetEnterToMakeCategory() then
+      searchCategoryConfig:Open({
+        name = "",
+        itemList = {},
+        priority = 10,
+        searchCategory = {
+          query = searchBox:GetText(),
+        }
+      })
+    end
   end)
 
   local helpText = textBox:CreateFontString("BetterBagsSearchHelpText", "ARTWORK", "GameFontDisableLarge")
@@ -241,19 +254,21 @@ function searchBox:CreateBox(kind, parent)
     ---@cast me +EditBox
     me:ClearFocus()
   end)
-  textBox:SetScript("OnTextChanged", function()
-    sf:UpdateSearch()
+  addon.SetScript(textBox, "OnTextChanged", function(ctx)
+    sf:UpdateSearch(ctx)
   end)
 
   textBox:SetScript("OnEnterPressed", function()
-    searchCategoryConfig:Open({
-      name = "",
-      itemList = {},
-      priority = 10,
-      searchCategory = {
-        query = textBox:GetText(),
-      }
-    })
+    if database:GetEnterToMakeCategory() then
+      searchCategoryConfig:Open({
+        name = "",
+        itemList = {},
+        priority = 10,
+        searchCategory = {
+          query = textBox:GetText(),
+        }
+      })
+    end
   end)
 
   textBox:SetAllPoints()

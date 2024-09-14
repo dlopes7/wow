@@ -450,7 +450,7 @@ options.chatBar = {
 							},
 						},
 						removeConfig = {
-							order = 4,
+							order = 5,
 							type = "group",
 							inline = true,
 							name = L["Remove Config"],
@@ -932,7 +932,7 @@ do
 						type = "description",
 						name = L["Modify the chat text style."] .. "\n" .. C.StringByTemplate(
 							format(
-							L["You must enable ElvUI Chat - %s to use abbreviation feature."],
+								L["You must enable ElvUI Chat - %s to use abbreviation feature."],
 								L["Short Channels"]
 							),
 							"warning"
@@ -1637,6 +1637,19 @@ options.friendList = {
 				return not E.db.WT.social.friendList.enable
 			end,
 			args = {
+				hideRealm = {
+					order = 1,
+					type = "toggle",
+					name = L["Hide Realm"],
+					desc = L["Hide the realm name of friends."],
+					get = function()
+						return E.db.WT.social.friendList.hideRealm
+					end,
+					set = function(_, value)
+						E.db.WT.social.friendList.hideRealm = value
+						FriendsFrame_Update()
+					end,
+				},
 				font = {
 					order = 2,
 					type = "group",

@@ -18,10 +18,10 @@ ElvCharacterDB = {
 "/p wait at entrance please will bring shit here",
 "/elvui",
 "/omnicd",
-"/wa",
 "tamo upando spamando dunge quer vir?",
 "ah",
 "/plater",
+"/wa",
 },
 ["ChatHistoryLog"] = {
 },

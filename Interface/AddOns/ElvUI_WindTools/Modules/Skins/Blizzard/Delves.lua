@@ -2,6 +2,7 @@ local W, F, E, L = unpack((select(2, ...)))
 local S = W.Modules.Skins
 
 local _G = _G
+local pairs = pairs
 
 function S:Blizzard_DelvesDifficultyPicker()
 	if not self:CheckDB("lfg", "delves") then
@@ -26,6 +27,15 @@ function S:Blizzard_DelvesCompanionConfiguration()
 		self:CreateShadow(CompanionConfigurationFrame)
 		CompanionConfigurationFrame.CloseButton:ClearAllPoints()
 		CompanionConfigurationFrame.CloseButton:SetPoint("TOPRIGHT", CompanionConfigurationFrame, "TOPRIGHT", -3, -3)
+
+		for _, frame in pairs({
+			CompanionConfigurationFrame.CompanionCombatRoleSlot,
+			CompanionConfigurationFrame.CompanionUtilityTrinketSlot,
+			CompanionConfigurationFrame.CompanionCombatTrinketSlot,
+		}) do
+			self:CreateShadow(frame.OptionsList)
+			self:HighAlphaTransparent(frame.OptionsList)
+		end
 	end
 
 	local CompanionAbilityListFrame = _G.DelvesCompanionAbilityListFrame

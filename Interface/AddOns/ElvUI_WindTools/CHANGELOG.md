@@ -1,120 +1,123 @@
-# Version: 3.72
-2024/08/29 Released
+# Version: 3.76
+2024/09/08 Released
 ## ❗ Important
-- [Chat Bar] The settings of the world channel now support separate settings based on region, realm, and faction.
-- [Chat Bar] Due to major changes in the settings of the world channel, the previous settings have been reset and are now disabled by default. Please read the setting instructions carefully before enabling them.
-- [Friend List] Due to the default game client icons of Blizzard now changed to flat style, the previous game icon pack is removed in this version.
-- [Friend List] Game icon modification is now limited to WoW game icons only, and you can switch between Blizzard style, patch icons, and faction icons.
-- Remove some outdated APIs. Thanks to DakJaniels
+- Starting from this version, if you haven't clicked the confirm button in the latest change log, the change log reading reminder will appear every time you enter the game.
+- [Advanced] Add an option to switch the change log to a popup. Default to chat text mode
+- [Advanced] Add an option to switch the ElvUI version expiration reminder to a popup. Default to popup mode
+- [Chat Bar] Due to the chaos of various blocked add-ons on the CN server, the world channel button will not be automatically turned on or off according to the region, and it is turned off by default.
+- [Chat Bar] Due to the chaos of various blocked add-ons on the CN server, the default configuration of the world channel is now automatically added according to the client language, not the region.
+- Update LibOpenRaid.
+- Update LibObjectiveProgress
 ## ✳️ New
-- [Extra Item Bar] Added a new item group DELVE for available items in Delve. Thanks to mcc
-- Add developer functions for DevTool.
+- [Core] Added a task scheduling function for developers, which can disperse task execution load according to frames or time.
 ## 💪 Improvement
-- [Skins] Optimized the BugSack skin.
-- [Context Menu] Updated the logic for generating Hero List links, now it will generate links more accurately.
-- [Chat Text] No longer append incorrect spaces when not using player icons.
-- [Chat Text] For players on CN and TW realms, common world channels can now be automatically abbreviated under the default configuration.
-- [Chat Bar] For players on CN and Shadowmoon-TW, common world channels can now be used under the default configuration.
-- [Extra Item Bar] Add more items that can be enabled. Thanks to mcc
-- [Extra Item Bar] Add new healing stones and utility items in TWW. Thanks to LvWind
-- [Extra Item Bar] Complete the cooking items for TWW.
-- [World Map] Fix a bug that may cause Blizzard map errors.
-- [Minimap Buttons] Optimize the processing logic of some icons.
+- Removed the use of the What's New icon in the settings to prevent conflicts with the ElvUI What's New feature.
+- [Game Bar] Organized and updated the Hearthstone toy list.
+- [Game Bar] Widened the settings interface of the home button, and added an icon for easy identification.
+- [Extra Items Bar] Update the professional item list.
+- [Skins] Slightly enlarge the text size of the world quest completion prompt.
+- [Misc] The achievement screenshot will no longer be taken repeatedly.
+- [Misc] The guild achievement will no longer be automatically screenshot when it alert out due to the Blizzard bug.
+- [Misc] Optimize the guild news item level feature, which can prevent redundant calls caused by the refresh of guild information due to errors in some other plugins. (Improve FPS!)
+- [Event Tracker] Remove the incorrect weekly tracking.
+- [Event Tracker] Optimize the quest ID of the meta story line weekly tracking.
 
 ------
-# 版本: 3.72
-2024/08/29 发布
+# 版本: 3.76
+2024/09/08 发布
 ## ❗ 重要
-- [聊天条] 世界频道的设定现在支持根据地区，服务器，阵营来分开设定。
-- [聊天条] 世界频道的设定由于大幅改动，之前的设定已经被重置，国服台服默认开启。
-- [好友名单] 由于暴雪默认的游戏客户端图标现在已经更改为扁平风格，之前的游戏图标包在此版本中移除。
-- [好友名单] 游戏图标修改现在仅限魔兽世界游戏图标，可以在暴雪图标，版本图标和阵营图标中切换。
-- 移除了部分过时的 API。感谢 DakJaniels
+- 从此版本开始，如果你没有在最新版本的更新记录中点击确认按钮，那么更新记录的阅读提示将在你每次进入游戏时出现。
+- [高级] 新增了切换更新记录为弹窗的选项。默认为聊天文本模式
+- [高级] 新增了切换 ElvUI 版本过期提示为弹窗的选项。 默认为弹窗模式
+- [聊天条] 由于国服反和谐插件过于混乱，现在不会根据地区自动开启关闭世界频道按钮了，默认关闭，你需要手动进行打开。
+- [聊天条] 由于国服反和谐插件过于混乱，现在不会根据地区而是根据客户端语言来自动添加世界频道的默认配置。
+- 更新 LibOpenRaid。
+- 更新 LibObjectiveProgress
 ## ✳️ 新增
-- [额外物品条] 新增地下堡可用物品分组 DELVE。感谢 mcc
-- 新增用于 DevTool 的开发者便利函数。
+- [核心] 新增一个面向开发者的任务计划功能，可以根据帧或时间分散任务执行负载。
 ## 💪 改善
-- [美化外观] 优化 BugSack 皮肤。
-- [右键菜单] 更新了英雄榜链接生成逻辑，现在会更加准确的生成链接。
-- [聊天文字] 在未使用玩家图标时，不会再附加错误的空格了。
-- [聊天文字] 对于国服和台服玩家，现在默认配置下可以自动缩写常见的世界频道了。
-- [聊天条] 对于国服和台服暗影之月的玩家，现在默认配置下可以使用常见的世界频道了。
-- [额外物品条] 添加更多的可开启物品。感谢 mcc
-- [额外物品条] 添加地心之战的治疗石和实用物品。感谢 LvWind
-- [额外物品条] 补全地心之战的烹饪物品。
-- [世界地图] 修复了一个可能导致暴雪地图错误的 Bug。
-- [小地图按键] 优化了部分图标的处理逻辑。
+- 移除了设定中新内容图标的使用，防止和 ElvUI 新内容功能冲突。
+- [游戏条] 整理更新了炉石玩具列表。
+- [游戏条] 拓宽了家按钮的设定界面，同时添加了图标便于识别。
+- [额外物品条] 更新专业物品列表。
+- [美化皮肤] 稍微放大了世界任务完成提示的文字大小。
+- [其他] 成就截图不会再重复了。
+- [其他] 公会成就因为 Bug 跳出时不会再自动截图了。
+- [其他] 优化公会成就装等功能，可以防止因为部分其他插件错误导致的公会信息刷新造成的冗余调用。(提升 FPS！)
+- [事件追踪器] 移除了世界之魂周常追踪。
+- [事件追踪器] 优化了主线周常追踪的任务 ID。
 
 ------
-# 版本: 3.72
-2024/08/29 發布
+# 版本: 3.76
+2024/09/08 發布
 ## ❗ 重要
-- [聊天條] 世界頻道的設定現在支援根據地區，伺服器，陣營來分開設定。
-- [聊天條] 世界頻道的設定由於大幅改動，之前的設定已經被重置，國服台服默認啟用。
-- [好友名單] 由於暴雪默認的遊戲客戶端圖標現在已經更改為扁平風格，之前的遊戲圖標包在此版本中移除。
-- [好友名單] 遊戲圖標修改現在僅限魔獸世界遊戲圖標，可以在暴雪圖標，版本圖標和陣營圖標中切換。
-- 移除了部分過時的 API。感謝 DakJaniels
+- 從此版本開始，如果你沒有在最新版本的更新記錄中點擊確認按鈕，那麼更新記錄的閱讀提示將在你每次進入遊戲時出現。
+- [進階] 新增了切換更新記錄為彈窗的選項. 默認為聊天文本模式
+- [進階] 新增了切換 ElvUI 版本過期提示為彈窗的選項. 默認為彈窗模式。
+- [聊天條] 由於國服反和諧插件過於混亂，現在不會根據地區自動開啟關閉世界頻道按鈕了，默認關閉，你需要手動進行打開。
+- [聊天條] 由於國服反和諧插件過於混亂，現在不會根據地區而是根據客戶端語言來自動添加世界頻道的默認配置。
+- 更新 LibOpenRaid。
+- 更新 LibObjectiveProgress
 ## ✳️ 新增
-- [額外物品條] 新增探究可用物品分組 DELVE。感謝 mcc
-- 新增用於 DevTool 的開發者便利函數。
+- [核心] 新增一個面向開發者的任務計劃功能，可以根據幀或時間分散任務執行負載。
 ## 💪 改善
-- [美化外觀] 優化 BugSack 皮膚。
-- [右鍵選單] 更新了英雄榜連結生成邏輯，現在會更加準確的生成連結。
-- [聊天文字] 在未使用玩家圖標時，不會再附加錯誤的空格了。
-- [聊天文字] 對於國服和台服玩家，現在默認配置下可以自動縮寫常見的世界頻道了。
-- [聊天條] 對於國服和台服暗影之月的玩家，現在默認配置下可以使用常見的世界頻道了。
-- [額外物品條] 添加更多的可開啟物品。感謝 mcc
-- [額外物品條] 添加地心之戰的治療石和實用物品。感謝 LvWind
-- [額外物品條] 補全地心之戰的烹飪物品。
-- [世界地圖] 修復了一個可能導致暴雪地圖錯誤的 Bug。
-- [小地圖按鍵] 優化了部分圖標的處理邏輯。
+- 移除了設定中新玩意圖示的使用，防止和 ElvUI 新玩意功能衝突。
+- [游戲條] 整理更新了爐石玩具列表。
+- [游戲條] 拓寬了家按鍵的設定介面，同時添加了圖示便於識別。
+- [額外物品條] 更新專業物品列表。
+- [美化皮膚] 稍微放大了世界任務完成提示的文字大小。
+- [其他] 成就截圖不會再重複了。
+- [其他] 公會成就因為 Bug 跳出時不會再自動截圖了。
+- [其他] 優化公會成就裝等功能，可以防止因為部分其他插件錯誤導致的公會信息刷新造成的冗余調用。(提升 FPS！)
+- [事件追蹤器] 移除了世界之魂周常追蹤。
+- [事件追蹤器] 優化了主綫周常追蹤的任務 ID。
 
 ------
-# 버전: 3.72
-2024/08/29 Released
+# 버전: 3.76
+2024/09/08 Released
 ## ❗ 중요 사항
-- [채팅 바] 세계 채널의 설정은 이제 지역, 서버 및 진영별로 별도의 설정을 지원합니다.
-- [채팅 바] 세계 채널의 설정이 크게 변경되어 이전 설정이 재설정되었으며 기본적으로 비활성화됩니다. 활성화하기 전에 설정 지침을 주의 깊게 읽어주세요.
-- [친구 목록] 블리자드의 기본 게임 클라이언트 아이콘이 이제 평면 스타일로 변경되었기 때문에 이전의 게임 아이콘 팩은 이 버전에서 제거되었습니다.
-- [친구 목록] 게임 아이콘 수정은 이제 WoW 게임 아이콘에만 제한되며 블리자드 스타일, 패치 아이콘 및 진영 아이콘 사이를 전환할 수 있습니다.
-- 일부 오래된 API를 제거했습니다. DakJaniels에게 감사드립니다.
+- 이 버전부터 최신 변경 로그에서 확인 버튼을 클릭하지 않은 경우, 변경 로그 읽기 알림이 게임에 들어갈 때마다 표시됩니다.
+- [고급] 업데이트 로그를 팝업으로 전환하는 옵션을 추가합니다. 기본값은 채팅 텍스트 모드입니다
+- [고급] ElvUI 버전 만료 알림을 팝업으로 전환하는 옵션을 추가합니다. 기본값은 팝업 모드입니다
+- [채팅 바] CN 서버의 다양한 차단 애드온의 혼란 때문에 세계 채널 버튼은 더 이상 지역에 따라 자동으로 켜거나 끄지 않으며 기본적으로 꺼져 있습니다.
+- [채팅 바] CN 서버의 다양한 차단 애드온의 혼란 때문에 세계 채널의 기본 구성은 이제 지역이 아닌 클라이언트 언어에 따라 자동으로 추가됩니다.
+- LibOpenRaid 업데이트.
+- LibObjectiveProgress 업데이트
 ## ✳️ 신규 사항
-- [추가 아이템 바] Delve에서 사용 가능한 항목을위한 새로운 항목 그룹 DELVE가 추가되었습니다. mcc에게 감사드립니다.
-- DevTool을 위한 개발자 기능 추가.
+- [코어] 개발자를 위한 작업 스케줄링 기능을 추가했습니다. 프레임 또는 시간에 따라 작업 실행 부하를 분산할 수 있습니다.
 ## 💪 개선 사항
-- [스킨] BugSack 스킨을 최적화했습니다.
-- [컨텍스트 메뉴] 영웅 목록 링크 생성 로직을 업데이트하여 더 정확한 링크를 생성합니다.
-- [채팅 텍스트] 플레이어 아이콘을 사용하지 않을 때 더 이상 잘못된 공백을 추가하지 않습니다.
-- [채팅 텍스트] CN 및 TW 서버의 플레이어를위한 공통 세계 채널이 기본 구성에서 자동으로 약어로 사용됩니다.
-- [채팅 바] CN 및 Shadowmoon-TW 플레이어를위한 공통 세계 채널이 기본 구성에서 사용할 수 있습니다.
-- [추가 아이템 바] 활성화 할 수있는 항목을 추가했습니다. mcc에게 감사드립니다.
-- [추가 아이템 바] TWW의 새로운 치유 돌 및 유틸리티 항목을 추가했습니다. LvWind에게 감사드립니다.
-- [추가 아이템 바] TWW의 요리 항목을 완료했습니다.
-- [세계 지도] 블리자드 지도 오류를 일으킬 수있는 버그를 수정했습니다.
-- [미니맵 버튼] 일부 아이콘의 처리 로직을 최적화했습니다.
+- ElvUI의 새로운 기능과 충돌을 방지하기 위해 설정에서 새로운 아이콘 사용을 제거했습니다.
+- [게임 바] 하스스톤 장난감 목록을 정리하고 업데이트했습니다.
+- [게임 바] 홈 버튼의 설정 인터페이스를 넓히고 쉽게 식별할 수 있는 아이콘을 추가했습니다.
+- [추가 아이템 바] 전문가 아이템 목록을 업데이트했습니다.
+- [스킨] 세계 퀘스트 완료 알림의 텍스트 크기를 약간 확대했습니다.
+- [기타] 업적 스크린샷이 더 이상 반복되지 않습니다.
+- [기타] 블리자드 버그로 인해 길드 업적이 튕겨 나올 때 더 이상 자동으로 스크린샷을 찍지 않습니다.
+- [기타] 다른 플러그인의 오류로 인해 길드 정보가 새로 고침되는 것으로 인한 중복 호출을 방지할 수 있는 길드 업적 아이템 레벨 기능을 최적화했습니다. (FPS 향상!)
+- [이벤트 추적기] 잘못된 주간 추적을 제거했습니다.
 
 ------
-# Версия: 3.72
-2024/08/29 Релиз
+# Версия: 3.76
+2024/09/08 Релиз
 ## ❗ Важные
-- [Панель чата] Теперь настройки мирового канала поддерживают отдельные настройки на основе региона, сервера и фракции.
-- [Панель чата] Из-за кардинальных изменений в настройках мирового канала предыдущие настройки были сброшены и теперь отключены по умолчанию. Пожалуйста, внимательно прочитайте инструкции по настройке перед их включением.
-- [Список друзей] Из-за того, что значки игровых клиентов Blizzard теперь изменены на плоский стиль по умолчанию, предыдущий пакет значков игр был удален в этой версии.
-- [Список друзей] Изменение значков игр теперь ограничено только значками игры WoW, и вы можете переключаться между стилем Blizzard, значками патчей и значками фракций.
-- Удалены некоторые устаревшие API. Спасибо DakJaniels
+- Начиная с этой версии, если вы не нажали кнопку подтверждения в последнем журнале изменений, напоминание о прочтении журнала изменений будет появляться каждый раз при входе в игру.
+- [Дополнительно] Добавлена ​​возможность переключать журнал изменений во всплывающее окно. По умолчанию используется текстовый режим чата.
+- [Дополнительно] Добавлена ​​возможность переключать уведомления об истечении срока действия версии ElvUI во всплывающее окно. По умолчанию используется всплывающий режим.
+- [Панель чата] Из-за хаоса различных заблокированных аддонов на сервере CN кнопка мирового канала больше не будет автоматически включаться или отключаться в зависимости от региона, и по умолчанию она отключена.
+- [Панель чата] Из-за хаоса различных заблокированных аддонов на сервере CN конфигурация мирового канала теперь автоматически добавляется в соответствии с языком клиента, а не регионом.
+- Обновление LibOpenRaid.
+- Обновление LibObjectiveProgress
 ## ✳️ Новые
-- [Дополнительная панель предметов] Добавлена новая группа предметов DELVE для доступных предметов в Delve. Спасибо mcc
-- Добавлены функции разработчика для DevTool.
+- [Ядро] Добавлена ​​функция планирования задач для разработчиков, которая может распределять нагрузку выполнения задач в соответствии с кадрами или временем.
 ## 💪 Улучшения
-- [Скины] Оптимизирован скин BugSack.
-- [Контекстное меню] Обновлена логика генерации ссылок на список героев, теперь она будет генерировать ссылки более точно.
-- [Текст чата] Больше не добавляет неверные пробелы при отсутствии значков игрока.
-- [Текст чата] Для игроков на серверах CN и TW общие мировые каналы теперь могут быть автоматически сокращены в рамках настроек по умолчанию.
-- [Панель чата] Для игроков на серверах CN и Shadowmoon-TW общие мировые каналы теперь могут быть использованы в рамках настроек по умолчанию.
-- [Дополнительная панель предметов] Добавлены дополнительные предметы, которые можно включить. Спасибо mcc
-- [Дополнительная панель предметов] Добавлены новые камни и предметы для лечения в TWW. Спасибо LvWind
-- [Дополнительная панель предметов] Добавлены предметы для приготовления пищи для TWW.
-- [Карта мира] Исправлена ошибка, которая могла вызвать ошибки карт Blizzard.
-- [Кнопки миникарты] Оптимизирована логика обработки некоторых значков.
+- Удалено использование иконки "Что нового" в настройках, чтобы избежать конфликтов с функцией "Что нового" ElvUI.
+- [Панель игры] Организован и обновлен список игрушек Хартстоуна.
+- [Панель игры] Расширили интерфейс настроек кнопки домой и добавили иконку для удобной идентификации.
+- [Дополнительная панель предметов] Обновлен список профессиональных предметов.
+- [Скины] Немного увеличен размер текста всплывающего уведомления о завершении мирового задания.
+- [Разное] Скриншот достижения больше не будет делаться повторно.
+- [Разное] Скриншот гильдейского достижения больше не будет делаться автоматически, когда он появляется из-за ошибки Blizzard.
+- [Разное] Оптимизирована функция уровня предметов гильдейских достижений, которая может предотвратить избыточные вызовы, вызванные обновлением информации о гильдии из-за ошибок в некоторых других плагинах. (Улучшение FPS!)
+- [Отслеживание событий] Удалено неверное еженедельное отслеживание.
 
 ------

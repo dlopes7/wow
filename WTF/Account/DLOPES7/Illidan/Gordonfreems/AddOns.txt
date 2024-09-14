@@ -75,7 +75,7 @@ LittleWigs_Cataclysm: enabled
 LittleWigs_Classic: enabled
 LittleWigs_MistsOfPandaria: enabled
 LittleWigs_WrathOfTheLichKing: enabled
-MRT: disabled
+MRT: enabled
 ExRT: disabled
 MythicDungeonTools: enabled
 MplusAdventureGuide: disabled

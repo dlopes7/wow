@@ -85,3 +85,4 @@ ElvUI_SecondsToBuff: disabled
 ElvUI_BuffHighlight: disabled
 kExtraBossFrames: disabled
 Blizzard_CombatText: enabled
+OPie_Classic: disabled

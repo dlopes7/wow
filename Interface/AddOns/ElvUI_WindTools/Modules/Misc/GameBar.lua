@@ -99,20 +99,24 @@ local hearthstones = {
 	168907, -- 全像數位化爐石
 	172179, -- 永恆旅人的爐石
 	188952, -- 統御的爐石
+	190196, -- 受啟迪的爐石
 	190237, -- 仲介者傳送矩陣
 	193588, -- 時光行者的爐石
-	200630, -- 雍伊爾風之賢者爐石,
-	209035, -- 烈焰炉石
+	200630, -- 雍伊爾風之賢者爐石
+	206195, -- 那魯之道
+	208704, -- 深淵居者的大地爐石
+	209035, -- 烈焰爐石
+	212337, -- 爐石之石
 }
 
 local hearthstoneAndToyIDList = {
+	-- Special Hearthstones
 	6948, -- 爐石
+	-- Hearthstones Toys
+	-- https://www.wowhead.com/items?filter=107:216:17;0:1:-2324;%3CHearthstone+Location%3E:0:0
 	54452, -- 以太傳送門
 	64488, -- 旅店老闆的女兒
 	93672, -- 黑暗之門
-	110560, -- 要塞爐石
-	140192, -- 達拉然爐石
-	141605, -- 飛行管理員的哨子
 	142542, -- 城鎮傳送之書
 	162973, -- 冬天爺爺的爐石
 	163045, -- 無頭騎士的爐石
@@ -126,13 +130,24 @@ local hearthstoneAndToyIDList = {
 	180290, -- 暗夜妖精的爐石
 	182773, -- 死靈領主爐石
 	183716, -- 汎希爾罪孽石
-	184353, -- 琪瑞安族爐石
+	184353, -- 琪瑞安爐石
 	188952, -- 統御的爐石
+	190196, -- 受啟迪的爐石
 	190237, -- 仲介者傳送矩陣
 	193588, -- 時光行者的爐石
 	200630, -- 雍伊爾風之賢者爐石
+	206195, -- 那魯之道
+	208704, -- 深淵居者的大地爐石
 	209035, -- 烈焰爐石
-	---------------------
+	210455, -- 德萊尼全像寶石
+	212337, -- 爐石之石
+	-- Patch Items
+	110560, -- 要塞爐石
+	140192, -- 達拉然爐石
+	141605, -- 飛行管理員的哨子
+	180817, -- 移轉暗語
+	-- Engineering Wormholes
+	-- https://www.wowhead.com/items/name:Generator?filter=86:195;5:2;0:0
 	48933, -- 蟲洞產生器：北裂境
 	87215, -- 蟲洞產生器：潘達利亞
 	132517, -- 達拉然內部蟲洞產生器
@@ -141,11 +156,8 @@ local hearthstoneAndToyIDList = {
 	168807, -- 蟲洞產生器：庫爾提拉斯
 	168808, -- 蟲洞產生器：贊達拉
 	172924, -- 蟲洞產生器：暗影之境
-	180817, -- 移轉暗語
-	190196, -- 受啟迪的爐石
-	198156, -- 龍洞產生器
-	208704, -- 深居者的土土石
-	212337, -- 炉边之石
+	198156, -- 龍洞產生器：巨龍群島
+	221966, -- 蟲洞產生器：卡茲阿爾加
 }
 
 local hearthstonesAndToysData
@@ -288,23 +300,23 @@ local function AddDoubleLineForItem(itemID, prefix)
 
 	prefix = prefix and prefix .. " " or ""
 
-	local name = hearthstonesAndToysData[tostring(itemID)]
-	if not name then
+	local data = hearthstonesAndToysData[tostring(itemID)]
+	if not data then
 		return
 	end
 
-	local texture = C_Item_GetItemIconByID(itemID)
-	local icon = format(IconString .. ":255:255:255|t", texture)
+	local icon = format(IconString .. ":255:255:255|t", data.icon)
 	local startTime, duration = C_Item_GetItemCooldown(itemID)
 	local cooldownTime = startTime + duration - GetTime()
 	local canUse = cooldownTime <= 0
 	local cooldownTimeString
 	if not canUse then
-		local min = floor(cooldownTime / 60)
-		local sec = floor(mod(cooldownTime, 60))
-		cooldownTimeString = format("%02d:%02d", min, sec)
+		local m = floor(cooldownTime / 60)
+		local s = floor(mod(cooldownTime, 60))
+		cooldownTimeString = format("%02d:%02d", m, s)
 	end
 
+	local name = data.name
 	if itemID == 180817 then
 		local charge = C_Item_GetItemCount(itemID, nil, true)
 		name = name .. format(" (%d)", charge)
@@ -361,6 +373,10 @@ local VirtualDT = {
 			return false
 		end,
 	},
+}
+
+local sharedCache = {
+	friends = {},
 }
 
 local ButtonTypes = {
@@ -495,7 +511,14 @@ local ButtonTypes = {
 					return
 				end
 			end
-			button.additionalText:SetFormattedText(button.additionalTextFormat, button.additionalTextFunc())
+			local now = GetTime()
+			local cache = sharedCache.friends
+			if now - (cache.lastEvent or 0) > 1 then
+				cache.lastEvent = now
+				E:Delay(1, function()
+					button.additionalText:SetFormattedText(button.additionalTextFormat, button.additionalTextFunc())
+				end)
+			end
 		end,
 	},
 	GAMEMENU = {
@@ -1495,14 +1518,20 @@ function GB:HandleRandomHomeButton(button, mouseButton, item)
 end
 
 function GB:UpdateHomeButton()
+	local left = hearthstonesAndToysData[self.db.home.left]
+	local right = hearthstonesAndToysData[self.db.home.right]
+
 	ButtonTypes.HOME.item = {
-		item1 = hearthstonesAndToysData[self.db.home.left],
-		item2 = hearthstonesAndToysData[self.db.home.right],
+		item1 = left and left.name,
+		item2 = right and right.name,
 	}
 end
 
 function GB:UpdateHearthStoneTable()
-	hearthstonesAndToysData = { ["RANDOM"] = L["Random Hearthstone"] }
+	hearthstonesAndToysData = { ["RANDOM"] = {
+		name = L["Random Hearthstone"],
+		icon = 134400,
+	} }
 
 	local hearthstonesTable = {}
 	for i = 1, #hearthstones do
@@ -1510,7 +1539,7 @@ function GB:UpdateHearthStoneTable()
 		hearthstonesTable[itemID] = true
 	end
 
-	local specialHearthstones = {
+	local covenantHearthstones = {
 		[1] = 184353, -- 琪瑞安族爐石
 		[2] = 183716, -- 汎希爾罪孽石
 		[3] = 180290, -- 暗夜妖精的爐石
@@ -1521,12 +1550,24 @@ function GB:UpdateHearthStoneTable()
 		local level = self.covenantCache[E.myrealm]
 			and self.covenantCache[E.myrealm][E.myname]
 			and self.covenantCache[E.myrealm][E.myname][tostring(i)]
-		local toyID = specialHearthstones[i]
+		local toyID = covenantHearthstones[i]
 		local hasToy = PlayerHasToy(toyID) and C_ToyBox_IsToyUsable(toyID)
 
 		-- here we don't check the current active covenant.
 		-- because `/castrandom` cannot the current active covenant hearthstone.
 		hearthstonesTable[toyID] = (hasToy and level and level == 80) and true or false
+	end
+
+	local raceHeartstones = {
+		[210455] = {
+			-- 德萊尼全像寶石
+			["Draenei"] = true,
+			["LightforgedDraenei"] = true,
+		},
+	}
+
+	for itemID, acceptableRaces in pairs(raceHeartstones) do
+		hearthstonesTable[itemID] = acceptableRaces[E.myrace] and true or false
 	end
 
 	availableHearthstones = {}
@@ -1546,7 +1587,10 @@ function GB:UpdateHearthStoneTable()
 					end
 				end
 
-				hearthstonesAndToysData[tostring(hearthstoneAndToyIDList[index])] = itemEngine:GetItemName()
+				hearthstonesAndToysData[tostring(hearthstoneAndToyIDList[index])] = {
+					name = itemEngine:GetItemName(),
+					icon = itemEngine:GetItemIcon(),
+				}
 				GetNextHearthStoneInfo()
 			end)
 		else

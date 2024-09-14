@@ -1,4 +1,4 @@
--- Generated from CurseForge on Sat Aug 31 09:21:17 UTC 2024
+-- Generated from CurseForge on Fri Sep 13 18:44:29 UTC 2024
 local ns = select(2, ...) ---@class ns @The addon namespace.
 
 if ns:IsSameLocale("frFR") then
@@ -25,6 +25,8 @@ L["API_INVALID_DATABASE"] = [=[|cffFF0000Attention!|r Une base de données Raide
  rafraîchir toutes les régions et factions du client RaiderIO, ou réinstallez l'Addon manuellement. ]=]
 L["AUTO_COMBATLOG"] = "Activer Automatiquement le Journal de Combat dans les Raids et Donjons"
 L["AUTO_COMBATLOG_DESC"] = "Active ou Désactive Automatiquement le Journalisation de Combat quand vous entrez et sortez des Raids et Donjons pris en charge."
+--[[Translation missing --]]
+--[[ L["AUTO_COMBATLOG_DISABLED_DESC"] = ""--]] 
 L["BEST_FOR_DUNGEON"] = "Meilleure clé pour le donjon"
 L["BEST_RUN"] = "Meilleure clé"
 L["BEST_SCORE"] = "Meilleur Score M+ (%s)"
@@ -84,17 +86,25 @@ L["DPS"] = "DPS"
 L["DUNGEON_SHORT_NAME_AA"] = "AA"
 L["DUNGEON_SHORT_NAME_AD"] = "AD"
 --[[Translation missing --]]
+--[[ L["DUNGEON_SHORT_NAME_ARAK"] = ""--]] 
+--[[Translation missing --]]
 --[[ L["DUNGEON_SHORT_NAME_AV"] = ""--]] 
 --[[Translation missing --]]
 --[[ L["DUNGEON_SHORT_NAME_BH"] = ""--]] 
 L["DUNGEON_SHORT_NAME_BRH"] = "BdF"
 L["DUNGEON_SHORT_NAME_COS"] = "CoS"
+--[[Translation missing --]]
+--[[ L["DUNGEON_SHORT_NAME_COT"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["DUNGEON_SHORT_NAME_DAWN"] = ""--]] 
 L["DUNGEON_SHORT_NAME_DHT"] = "FS"
 L["DUNGEON_SHORT_NAME_DOS"] = "AC"
 L["DUNGEON_SHORT_NAME_EB"] = "LFé"
 L["DUNGEON_SHORT_NAME_FALL"] = "AdIRdG"
 --[[Translation missing --]]
 --[[ L["DUNGEON_SHORT_NAME_FH"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["DUNGEON_SHORT_NAME_GB"] = ""--]] 
 --[[Translation missing --]]
 --[[ L["DUNGEON_SHORT_NAME_GD"] = ""--]] 
 --[[Translation missing --]]
@@ -121,9 +131,13 @@ L["DUNGEON_SHORT_NAME_RISE"] = "AdIcdM"
 --[[Translation missing --]]
 --[[ L["DUNGEON_SHORT_NAME_SBG"] = ""--]] 
 L["DUNGEON_SHORT_NAME_SD"] = "SD"
+--[[Translation missing --]]
+--[[ L["DUNGEON_SHORT_NAME_SIEGE"] = ""--]] 
 L["DUNGEON_SHORT_NAME_SOA"] = "SOA"
 --[[Translation missing --]]
 --[[ L["DUNGEON_SHORT_NAME_STRT"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["DUNGEON_SHORT_NAME_SV"] = ""--]] 
 --[[Translation missing --]]
 --[[ L["DUNGEON_SHORT_NAME_TJS"] = ""--]] 
 L["DUNGEON_SHORT_NAME_TOP"] = "TOP"
@@ -199,6 +213,10 @@ L["MAINS_BEST_SCORE_BEST_SEASON"] = "Meilleur score M+ du personnage principal (
 L["MAINS_RAID_PROGRESS"] = "Progression du personnage principal "
 L["MAINS_SCORE"] = "Score du personnage principal"
 --[[Translation missing --]]
+--[[ L["MINIMAP_SHORTCUT_BROKER_ENABLE"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["MINIMAP_SHORTCUT_BROKER_ENABLE_DESC"] = ""--]] 
+--[[Translation missing --]]
 --[[ L["MINIMAP_SHORTCUT_ENABLE"] = ""--]] 
 --[[Translation missing --]]
 --[[ L["MINIMAP_SHORTCUT_ENABLE_DESC"] = ""--]] 
@@ -216,6 +234,12 @@ L["MAINS_SCORE"] = "Score du personnage principal"
 --[[ L["MINIMAP_SHORTCUT_HELP_SETTINGS"] = ""--]] 
 --[[Translation missing --]]
 --[[ L["MINIMAP_SHORTCUT_LOCK"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["MINIMAP_SHORTCUT_MINIMAP_ENABLE"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["MINIMAP_SHORTCUT_MINIMAP_ENABLE_DESC"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["MINIMAP_SHORTCUT_MINIMAP_LOCK"] = ""--]] 
 L["MODULE_AMERICAS"] = "Amérique"
 L["MODULE_EUROPE"] = "Europe"
 L["MODULE_KOREA"] = "Corée"
@@ -447,6 +471,22 @@ L["RAID_BOSS_CN_9"] = "Généraux de la Légion de Pierre"
 --[[Translation missing --]]
 --[[ L["RAID_BOSS_ICC_9"] = ""--]] 
 --[[Translation missing --]]
+--[[ L["RAID_BOSS_NP_1"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_NP_2"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_NP_3"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_NP_4"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_NP_5"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_NP_6"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_NP_7"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_NP_8"] = ""--]] 
+--[[Translation missing --]]
 --[[ L["RAID_BOSS_RS_1"] = ""--]] 
 --[[Translation missing --]]
 --[[ L["RAID_BOSS_SFO_1"] = ""--]] 
@@ -531,6 +571,8 @@ L["RAID_DIFFICULTY_SUFFIX_NORMAL"] = "N"
 L["RAID_ENCOUNTERS_DEFEATED_TITLE"] = "Rencontres de Raid vaincues"
 --[[Translation missing --]]
 --[[ L["RAID_ICC"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_NP"] = ""--]] 
 --[[Translation missing --]]
 --[[ L["RAID_RS"] = ""--]] 
 --[[Translation missing --]]
@@ -692,6 +734,10 @@ L["SHOW_SCORE_IN_COMBAT"] = "Afficher le score en combat"
 L["SHOW_SCORE_IN_COMBAT_DESC"] = "Le désactiver pour diminuer l'impact sur les performances lorsque l'on survole un joueur en combat."
 L["SHOW_SCORE_WITH_MODIFIER"] = "Montre l'Info-bulle Raider.IO avec modificateur"
 L["SHOW_SCORE_WITH_MODIFIER_DESC"] = "Désactive l'Affichage des Données lors du survol des joueurs, sauf si une touche de modification est maintenue."
+--[[Translation missing --]]
+--[[ L["SHOW_WARBAND_SCORE"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["SHOW_WARBAND_SCORE_DESC"] = ""--]] 
 L["TANK"] = "Tank"
 --[[Translation missing --]]
 --[[ L["TEAM_LF_MPLUS_DEFAULT"] = ""--]] 
@@ -701,6 +747,10 @@ L["TIMED_10_RUNS"] = "10-14+ dans les temps"
 L["TIMED_15_RUNS"] = "15+ dans les temps"
 L["TIMED_20_RUNS"] = "20+ dans les temps"
 L["TIMED_5_RUNS"] = "5-9+ dans les temps"
+--[[Translation missing --]]
+--[[ L["TIMED_RUNS_MINIMUM"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["TIMED_RUNS_RANGE"] = ""--]] 
 L["TOOLTIP_PROFILE"] = "Modification du Profil"
 L["UNKNOWN_SERVER_FOUND"] = "|cffFFFFFF%s|r a rencontré une erreur. S'il vous plait, écrivez ces informations |cffFF9999{|r |cffFFFFFF%s|r |cffFF9999,|r |cffFFFFFF%s|r |cffFF9999}|r et reporter le aux développers. Merci !"
 L["UNLOCKING_PROFILE_FRAME"] = "RaiderIO: Déverrouiller le cadre de profil M+."
@@ -708,6 +758,10 @@ L["USE_ENGLISH_ABBREVIATION"] = "Forcer les abréviations anglaises pour les Don
 L["USE_ENGLISH_ABBREVIATION_DESC"] = "Lorsque cette option est activée, les abréviations utilisées pour les Donjons seront les versions anglaises et non celles de votre langue actuelle."
 L["USE_RAIDERIO_CLIENT_LIVE_TRACKING_SETTINGS"] = "Autorise le client Raider.IO à contrôler le Journal de Combat"
 L["USE_RAIDERIO_CLIENT_LIVE_TRACKING_SETTINGS_DESC"] = "Autorise le client Raider.IO (si présent) à contrôler automatiquement vos paramètres de Journal de Combat."
+--[[Translation missing --]]
+--[[ L["WARBAND_BEST_SCORE_BEST_SEASON"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["WARBAND_SCORE"] = ""--]] 
 L["WARNING_DEBUG_MODE_ENABLE"] = "|cffFFFFFF%s|r Le mode de débogage est activé. Vous pouvez le désactiver en tapant |cffFFFFFF/raiderio debug|r."
 L["WARNING_LOCK_POSITION_FRAME_AUTO"] = "RaiderIO: Vous devez d'abord désactiver le positionnement automatique pour le profil RaiderIO."
 --[[Translation missing --]]

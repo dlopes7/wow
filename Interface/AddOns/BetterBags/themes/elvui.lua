@@ -50,8 +50,8 @@ local theme = {
       decoration:SetAllPoints()
       decoration:SetFrameLevel(frame:GetFrameLevel() - 1)
       decoration.CloseButton = CreateFrame("Button", frame:GetName().."CloseButton", decoration) --[[@as Button]]
-      decoration.CloseButton:SetScript("OnClick", function()
-        frame.Owner:Hide()
+      addon.SetScript(decoration.CloseButton, "OnClick", function(ctx)
+        frame.Owner:Hide(ctx)
       end)
       decoration.CloseButton:SetPoint("TOPRIGHT", decoration, "TOPRIGHT", -4, -4)
       decoration.CloseButton:SetSize(24,24)
@@ -204,6 +204,8 @@ local theme = {
     if button.Cooldown then
       E:RegisterCooldown(button.Cooldown, 'bags')
     end
+    button.UpgradeIcon:SetTexture(E.Media.Textures.BagUpgradeIcon)
+    button.UpgradeIcon:SetScale(1.2)
     button.backdrop:SetFrameLevel(0)
     itemButtons[buttonName] = button --[[@as ItemButton]]
     return button --[[@as ItemButton]]

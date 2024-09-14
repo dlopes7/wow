@@ -87,7 +87,7 @@ LittleWigs_MistsOfPandaria: enabled
 LittleWigs_Shadowlands: enabled
 LittleWigs_WarlordsOfDraenor: enabled
 LittleWigs_WrathOfTheLichKing: enabled
-MRT: disabled
+MRT: enabled
 Myslot: disabled
 MythicDungeonTools: enabled
 NameplateAuras: disabled

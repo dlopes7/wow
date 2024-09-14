@@ -36,6 +36,12 @@ local const = addon:GetModule('Constants')
 ---@class Themes: AceModule
 local themes = addon:GetModule('Themes')
 
+---@class Context: AceModule
+local context = addon:GetModule('Context')
+
+---@class Debug: AceModule
+local debug = addon:GetModule('Debug')
+
 ---@class SectionItemList: AceModule
 local sectionItemList = addon:NewModule('SectionItemList')
 
@@ -81,28 +87,32 @@ function sectionItemListFrame:IsShown()
   return self.frame:IsShown()
 end
 
-function sectionItemListFrame:OnReceiveDrag()
+---@param ctx Context
+function sectionItemListFrame:OnReceiveDrag(ctx)
   local kind, id = GetCursorInfo()
   if kind ~= "item" or not tonumber(id) then return end
   ClearCursor()
   local itemid = tonumber(id) --[[@as number]]
-  categories:AddPermanentItemToCategory(itemid, self.currentCategory)
-  events:SendMessage('bags/FullRefreshAll')
+  categories:AddPermanentItemToCategory(ctx, itemid, self.currentCategory)
+  events:SendMessage(ctx, 'bags/FullRefreshAll')
 end
 
-function sectionItemListFrame:OnItemClick(b, elementData)
+---@param ctx Context
+---@param b string
+---@param elementData table
+function sectionItemListFrame:OnItemClick(ctx, b, elementData)
   if b == "LeftButton" then
-    self:OnReceiveDrag()
+    self:OnReceiveDrag(ctx)
     return
   end
   ClearCursor()
-  contextMenu:Show({{
+  contextMenu:Show(ctx, {{
     text = L:G("Remove"),
     notCheckable = true,
     hasArrow = false,
     func = function()
-      database:DeleteItemFromCategory(elementData.data.itemInfo.itemID, elementData.category)
-      events:SendMessage('bags/FullRefreshAll')
+      database:DeleteItemFromCategory(elementData.id, elementData.category)
+      events:SendMessage(ctx, 'bags/FullRefreshAll')
     end
   }})
 end
@@ -110,35 +120,43 @@ end
 ---@param frame BetterBagsSectionConfigItemFrame
 ---@param elementData table
 function sectionItemListFrame:initSectionItem(frame, elementData)
+  local ctx = context:New("SectionItemList_Init")
   if frame.item == nil then
-    frame.item = itemRowFrame:Create()
+    frame.item = itemRowFrame:Create(ctx)
     frame.item.frame:SetParent(frame)
     frame.item.frame:SetPoint("LEFT", frame, "LEFT", 4, 0)
     frame.item.frame:SetPoint("RIGHT", frame, "RIGHT", -9, 0)
   end
 
-  local click = function(_, b)
-    self:OnItemClick(b, elementData)
-  end
+  addon.SetScript(frame.item.rowButton, "OnReceiveDrag", function(ectx)
+    self:OnReceiveDrag(ectx)
+  end)
+  addon.SetScript(frame.item.button.button, "OnReceiveDrag", function(ectx)
+    self:OnReceiveDrag(ectx)
+  end)
 
-  local drag = function()
-    self:OnReceiveDrag()
-  end
+  addon.SetScript(frame.item.rowButton, "OnMouseDown", function(ectx, _, b)
+    self:OnItemClick(ectx, b, elementData)
+  end)
 
-  frame.item.rowButton:SetScript("OnReceiveDrag", drag)
-  frame.item.button.button:SetScript("OnReceiveDrag", drag)
+  addon.SetScript(frame.item.button.button, "OnMouseDown", function(ectx, _, b)
+    self:OnItemClick(ectx, b, elementData)
+  end)
 
-  frame.item.rowButton:SetScript("OnMouseDown", click)
-  frame.item.button.button:SetScript("OnMouseDown", click)
-  frame.item:SetStaticItemFromData(elementData.data)
+  items:GetItemData(ctx, {elementData.id}, function(ectx, itemData)
+    frame.item:SetStaticItemFromData(ectx, itemData[1])
+  end)
+
+  frame.item:SetStaticItemFromData(ctx, elementData.data)
 end
 
 ---@param frame BetterBagsSectionConfigItemFrame
 ---@param elementData table
 function sectionItemListFrame:resetSectionItem(frame, elementData)
   _ = elementData
+  local ctx = context:New("SectionItemList_Reset")
   if frame.item then
-    frame.item:ClearItem()
+    frame.item:ClearItem(ctx)
     frame.item.rowButton:SetScript("OnMouseDown", nil)
   end
 end
@@ -178,21 +196,14 @@ function sectionItemListFrame:ShowCategory(category, redraw)
     return
   end
 
-  local itemIDs = {}
-  for id in pairs(itemDataList.itemList) do
-    table.insert(itemIDs, id)
-  end
+  self.content:Wipe()
 
-  items:GetItemData(itemIDs, function(itemData)
-    self.content:Wipe()
-    ---@cast itemData +ItemData[]
-    for _, data in pairs(itemData) do
-      self.content:AddToStart({data = data, category = category})
-    end
-    if not self:IsShown() then
-      self:Show()
-    end
-  end)
+  for id in pairs(itemDataList.itemList) do
+    self.content:AddToStart({id = id, category = category})
+  end
+  if not self:IsShown() then
+    self:Show()
+  end
 end
 
 ---@param parent Frame
@@ -204,11 +215,12 @@ function sectionItemList:Create(parent)
   sc.frame:SetPoint('TOPRIGHT', parent, 'TOPLEFT', -10, 0)
   sc.frame:SetWidth(300)
   sc.frame:EnableMouse(true)
-  sc.frame:SetScript("OnReceiveDrag", function()
-    sc:OnReceiveDrag()
+
+  addon.SetScript(sc.frame, "OnReceiveDrag", function(ctx)
+    sc:OnReceiveDrag(ctx)
   end)
-  sc.frame:SetScript("OnMouseDown", function()
-    sc:OnReceiveDrag()
+  addon.SetScript(sc.frame, "OnMouseDown", function(ctx)
+    sc:OnReceiveDrag(ctx)
   end)
 
   themes:RegisterSimpleWindow(sc.frame, L:G("Items"))

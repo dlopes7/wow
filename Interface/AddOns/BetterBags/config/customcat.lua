@@ -18,6 +18,9 @@ local config = addon:GetModule('Config')
 ---@class Localization: AceModule
 local L = addon:GetModule('Localization')
 
+---@class Context: AceModule
+local context = addon:GetModule('Context')
+
 ---@param category string
 ---@return AceConfig.OptionsTable
 function config:CreateCustomCategoryConfig(category)
@@ -40,7 +43,8 @@ function config:CreateCustomCategoryConfig(category)
         confirmText = L:G("Are you sure you want to delete this category?"),
         order = 2,
         func = function()
-          categories:DeleteCategory(category)
+          local ctx = context:New('DeleteCategory_Menu')
+          categories:DeleteCategory(ctx, category)
         end,
       }
     },
@@ -70,6 +74,11 @@ function config:GetCustomCategoryConfig()
             name = L:G("Categories you create can be enabled and disabled just like the default categories in the configuration menu option for the bag (Backpack or Bank) on the left. Once you have created a category, you can configure it by selecting it on the menu on the left."),
             order = 1,
           },
+          afterHelp = {
+            type = "description",
+            name = L:G("After creating a category, you can use the side menu via the bag menu, Configure Categories, to add or remove items"),
+            order = 2,
+          },
           name = {
             name = L:G("New Category Name"),
             type = "input",
@@ -80,7 +89,8 @@ function config:GetCustomCategoryConfig()
             end,
             set = function(_, value)
               if value == "" then return end
-              categories:CreateCategory({
+              local ctx = context:New('CreateCategory_Menu')
+              categories:CreateCategory(ctx, {
                 name = value,
                 save = true,
                 enabled = {
@@ -96,9 +106,5 @@ function config:GetCustomCategoryConfig()
       }
     },
   }
-
-  for category, _ in pairs(categories:GetAllCategories()) do
-    options.args[category] = config:CreateCustomCategoryConfig(category)
-  end
   return options
 end

@@ -92,3 +92,4 @@ Blizzard_CombatText: enabled
 ElvUI_ExtraDataTexts: disabled
 ElvUI_SecondsToBuff: disabled
 ElvUI_BuffHighlight: disabled
+OPie_Classic: disabled

@@ -382,7 +382,7 @@ do
 	function mod:VoidspeakerDeath(args)
 		if args.time - prev > 2 then
 			prev = args.time
-			self:Message("stages", "cyan", CL.killed:format(args.sourceName), false)
+			self:Message("stages", "cyan", CL.killed:format(args.destName), false)
 		end
 	end
 end
@@ -395,7 +395,7 @@ function mod:GloomTouchApplied(args)
 end
 
 function mod:WorshipperDeath(args)
-	self:Message("stages", "cyan", CL.killed:format(args.sourceName), false) -- XXX Count how many?
+	self:Message("stages", "cyan", CL.killed:format(args.destName), false) -- XXX Count how many?
 end
 
 function mod:Oust(args)
@@ -403,7 +403,8 @@ function mod:Oust(args)
 		self:Message(args.spellId, "red")
 		self:PlaySound(args.spellId, "warning")
 	end
-	--self:Nameplate(args.spellId, 10, args.sourceGUID)
+	self:Nameplate(args.spellId, 1, args.sourceGUID) -- fixme
+	self:ClearNameplate(args.sourceGUID)
 end
 
 do
@@ -411,9 +412,9 @@ do
 	function mod:GuardianDeath(args)
 		if args.time - prev > 2 then
 			prev = args.time
-			self:Message("stages", "cyan", CL.killed:format(args.sourceName), false)
+			self:Message("stages", "cyan", CL.killed:format(args.destName), false)
 		end
-		self:ClearNameplate(args.sourceGUID)
+		self:ClearNameplate(args.destGUID)
 	end
 end
 
@@ -423,7 +424,8 @@ function mod:ExpulsionBeam(args)
 		self:Message(args.spellId, "yellow")
 		self:PlaySound(args.spellId, "alert")
 	end
-	--self:Nameplate(args.spellId, 10, args.sourceGUID)
+	self:Nameplate(args.spellId, 1, args.sourceGUID) -- fixme
+	self:ClearNameplate(args.sourceGUID)
 end
 
 do
@@ -431,9 +433,9 @@ do
 	function mod:ExpellerDeath(args)
 		if args.time - prev > 2 then
 			prev = args.time
-			self:Message("stages", "cyan", CL.killed:format(args.sourceName), false)
+			self:Message("stages", "cyan", CL.killed:format(args.destName), false)
 		end
-		self:ClearNameplate(args.sourceGUID)
+		self:ClearNameplate(args.destGUID)
 	end
 end
 

@@ -76,22 +76,15 @@ local context = addon:GetModule('Context')
 ---@class Anchor: AceModule
 local anchor = addon:GetModule('Anchor')
 
-function bagFrame.bagProto:SwitchToBankAndWipe()
+---@param ctx Context
+function bagFrame.bagProto:SwitchToBankAndWipe(ctx)
   if self.kind == const.BAG_KIND.BACKPACK then return end
   self.bankTab = const.BANK_TAB.BANK
   BankFrame.selectedTab = 1
-  local ctx = context:New()
   ctx:Set('wipe', true)
   --self.frame:SetTitle(L:G("Bank"))
   items:ClearBankCache(ctx)
-  self:Wipe()
-end
-
-function bagFrame.bagProto:Sort()
-  PlaySound(SOUNDKIT.UI_BAG_SORTING_01)
-  if _G.SortBags ~= nil then
-    events:SendMessage('bags/SortBackpackClassic')
-  end
+  self:Wipe(ctx)
 end
 
 -------
@@ -99,9 +92,10 @@ end
 -------
 
 --- Create creates a new bag view.
+---@param ctx Context
 ---@param kind BagKind
 ---@return Bag
-function bagFrame:Create(kind)
+function bagFrame:Create(ctx, kind)
   ---@class Bag
   local b = {}
   setmetatable(b, { __index = bagFrame.bagProto })
@@ -165,14 +159,14 @@ function bagFrame:Create(kind)
   -- Setup the context menu.
   b.menuList = contextMenu:CreateContextMenu(b)
 
-  local slots = bagSlots:CreatePanel(kind)
+  local slots = bagSlots:CreatePanel(ctx, kind)
   slots.frame:SetPoint("BOTTOMLEFT", b.frame, "TOPLEFT", 0, 8)
   slots.frame:SetParent(b.frame)
   slots.frame:Hide()
   b.slots = slots
 
   if kind == const.BAG_KIND.BACKPACK then
-    b.searchFrame = searchBox:Create(b.frame)
+    b.searchFrame = searchBox:Create(ctx, b.frame)
   end
 
   if kind == const.BAG_KIND.BACKPACK then
@@ -223,19 +217,26 @@ function bagFrame:Create(kind)
   b:KeepBagInBounds()
 
   if b.kind == const.BAG_KIND.BACKPACK then
-    events:BucketEvent('BAG_UPDATE_COOLDOWN',function(_) b:OnCooldown() end)
+    events:BucketEvent('BAG_UPDATE_COOLDOWN',function(ectx) b:OnCooldown(ectx) end)
   end
 
-  events:RegisterEvent('ITEM_LOCKED', function(_, bagid, slotid)
-    b:OnLock(bagid, slotid)
+  events:RegisterEvent('ITEM_LOCKED', function(ectx, _, bagid, slotid)
+    b:OnLock(ectx, bagid, slotid)
   end)
 
-  events:RegisterEvent('ITEM_UNLOCKED', function(_, bagid, slotid)
-    b:OnUnlock(bagid, slotid)
+  events:RegisterEvent('ITEM_UNLOCKED', function(ectx, _, bagid, slotid)
+    b:OnUnlock(ectx, bagid, slotid)
   end)
 
-  events:RegisterMessage('search/SetInFrame', function (_, shown)
-    themes:SetSearchState(b.frame, shown)
+  events:RegisterMessage('search/SetInFrame', function (ectx, shown)
+    themes:SetSearchState(ectx, b.frame, shown)
+  end)
+
+  events:RegisterMessage('bag/RedrawIcons', function(ectx)
+    if not b.currentView then return end
+    for _, item in pairs(b.currentView:GetItemsByBagAndSlot()) do
+      item:UpdateUpgrade(ectx)
+    end
   end)
 
   return b

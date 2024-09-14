@@ -54,7 +54,7 @@ function W:Initialize()
 		return
 	end
 
-	for name, module in self:IterateModules() do
+	for _, module in self:IterateModules() do
 		addon[2].Developer.InjectLogger(module)
 	end
 
@@ -64,7 +64,8 @@ function W:Initialize()
 
 	self.initialized = true
 
-	self:UpdateScripts() -- Database need update first
+	self:AddCustomLinkSupport()
+	self:UpdateScripts()
 	self:InitializeModules()
 
 	EP:RegisterPlugin(addonName, W.OptionsCallback)
@@ -75,9 +76,8 @@ end
 do
 	local checked = false
 	function W:PLAYER_ENTERING_WORLD(_, isInitialLogin, isReloadingUi)
-		E:Delay(7, self.CheckInstalledVersion, self)
-
 		if isInitialLogin then
+			E:Delay(6, self.ChangelogReadAlert, self)
 			if E.global.WT.core.loginMessage then
 				local icon = addon[2].GetIconString(self.Media.Textures.smallLogo, 14)
 				print(

@@ -48,7 +48,7 @@ LittleWigs_Legion: enabled
 LittleWigs_MistsOfPandaria: enabled
 LittleWigs_WarlordsOfDraenor: enabled
 LittleWigs_WrathOfTheLichKing: enabled
-MRT: disabled
+MRT: enabled
 MythicDungeonTools: enabled
 MplusAdventureGuide: disabled
 Plater: enabled

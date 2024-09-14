@@ -1,0 +1,10 @@
+## Interface: 110000,110002
+## Title: guess
+## Notes: Mists of Tirna Scithe maze guessing game textures.
+## Author: Saxayone
+## Version: 1.0
+
+libs\LibStub\LibStub.lua
+libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
+embeds.xml
+guess.lua 

@@ -80,3 +80,4 @@ Blizzard_CombatText: enabled
 LittleWigs_Dragonflight: enabled
 MythicDungeonTools: enabled
 GatherMate2: enabled
+MRT: enabled

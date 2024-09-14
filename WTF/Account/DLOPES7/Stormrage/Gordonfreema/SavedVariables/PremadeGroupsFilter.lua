@@ -1,64 +1,6 @@
 
 PremadeGroupsFilterState = {
 ["version"] = 6,
-["c6f4"] = {
-["enabled"] = false,
-["mini"] = {
-["expression"] = "",
-["sorting"] = "",
-},
-["minimized"] = false,
-["role"] = {
-["heals"] = {
-},
-["tanks"] = {
-},
-["dps"] = {
-},
-["members"] = {
-},
-["expression"] = "",
-},
-},
-["c2f4"] = {
-["minimized"] = false,
-["mini"] = {
-["expression"] = "",
-["sorting"] = "",
-},
-["enabled"] = true,
-["dungeon"] = {
-["mprating"] = {
-["max"] = "",
-["min"] = "",
-["act"] = false,
-},
-["tanks"] = {
-["max"] = "",
-["min"] = "",
-["act"] = false,
-},
-["expression"] = "",
-["heals"] = {
-["max"] = "",
-["min"] = "",
-["act"] = false,
-},
-["difficulty"] = {
-},
-["dps"] = {
-["max"] = "",
-["min"] = "",
-["act"] = false,
-},
-["members"] = {
-["max"] = "",
-["min"] = "",
-["act"] = false,
-},
-["sorting"] = "",
-},
-},
 ["c1f4"] = {
 ["role"] = {
 ["heals"] = {
@@ -75,21 +17,22 @@ PremadeGroupsFilterState = {
 ["c3f5"] = {
 ["minimized"] = false,
 ["mini"] = {
-["expression"] = "",
 ["sorting"] = "",
+["expression"] = "",
 },
+["enabled"] = true,
 ["raid"] = {
 ["difficulty"] = {
-["val"] = 2,
 ["act"] = true,
+["val"] = 2,
 },
 ["tanks"] = {
 ["max"] = "1",
 ["min"] = "0",
 ["act"] = true,
 },
-["expression"] = "",
-["defeated"] = {
+["sorting"] = "",
+["members"] = {
 ["max"] = "",
 ["min"] = "",
 ["act"] = false,
@@ -104,16 +47,20 @@ PremadeGroupsFilterState = {
 ["min"] = "",
 ["act"] = false,
 },
-["members"] = {
+["defeated"] = {
 ["max"] = "",
 ["min"] = "",
 ["act"] = false,
 },
+["expression"] = "",
+},
+},
+["c6f4"] = {
+["enabled"] = false,
+["mini"] = {
 ["sorting"] = "",
+["expression"] = "",
 },
-["enabled"] = true,
-},
-["c2f5"] = {
 ["role"] = {
 ["heals"] = {
 },
@@ -125,9 +72,62 @@ PremadeGroupsFilterState = {
 },
 ["expression"] = "",
 },
+["minimized"] = false,
+},
+["c2f4"] = {
+["minimized"] = false,
 ["mini"] = {
-["expression"] = "",
 ["sorting"] = "",
+["expression"] = "",
+},
+["dungeon"] = {
+["mprating"] = {
+["max"] = "",
+["min"] = "",
+["act"] = false,
+},
+["tanks"] = {
+["max"] = "",
+["min"] = "",
+["act"] = false,
+},
+["sorting"] = "",
+["heals"] = {
+["max"] = "",
+["min"] = "",
+["act"] = false,
+},
+["difficulty"] = {
+},
+["dps"] = {
+["max"] = "",
+["min"] = "",
+["act"] = false,
+},
+["members"] = {
+["max"] = "",
+["min"] = "",
+["act"] = false,
+},
+["expression"] = "",
+},
+["enabled"] = true,
+},
+["c2f5"] = {
+["mini"] = {
+["sorting"] = "",
+["expression"] = "",
+},
+["role"] = {
+["heals"] = {
+},
+["tanks"] = {
+},
+["dps"] = {
+},
+["members"] = {
+},
+["expression"] = "",
 },
 },
 }

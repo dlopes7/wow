@@ -2,6 +2,7 @@ local L = BigWigsAPI:NewLocale("BigWigs: Plugins", "koKR")
 if not L then return end
 
 L.general = "일반"
+L.advanced = "고급"
 L.comma = ", "
 
 L.positionX = "X 위치"
@@ -189,10 +190,10 @@ L.blockTalkingHeadTimewalking = "시간여행 (던전 및 레이드)"
 L.blockTalkingHeadScenarios = "시나리오"
 
 L.redirectPopups = "BigWigs 메시지에 표시되는 팝업 배너"
-L.redirectPopupsDesc = "'|cFF33FF99금고 슬롯 잠금 해제됨|r' 배너 또는 신화 쐐기돌 던전에 입장할 때 표시되는 배너와 같이 화면 중앙에 있는 팝업 배너는 차단되고 대신 BigWigs 메시지로 표시됩니다. 이러한 배너는 상당히 클 수 있으며 오래 지속될 수 있습니다. 시간이 오래 걸리고 클릭 연결 기능이 차단됩니다."
+L.redirectPopupsDesc = "화면 중앙에 나타나는 '|cFF33FF99금고 슬롯이 잠금 해제됨|r' 등의 팝업 배너가 대신 BigWigs 메시지로 표시됩니다. 이러한 배너는 크기가 크고, 오래 지속되며, 클릭을 방해할 수 있습니다."
 L.redirectPopupsColor = "표시되는 팝업 배너의 색상"
 L.blockDungeonPopups = "던전 팝업 배너 차단"
-L.blockDungeonPopupsDesc = "던전 입장 시 표시되는 팝업 배너에 텍스트가 매우 긴 경우가 있습니다. 이 기능을 활성화하면 BigWigs 메시지로 표시되는 대신 완전히 차단됩니다."
+L.blockDungeonPopupsDesc = "던전에 입장할 때 표시되는 팝업 배너는 때때로 매우 긴 텍스트를 포함할 수 있습니다. 이 기능을 활성화하면 이러한 팝업 배너가 완전히 차단됩니다."
 L.itemLevel = "아이템 레벨: %d"
 
 L.userNotifySfx = "우두머리 기능 차단으로 비활성화된 음향 효과를 강제로 다시 활성화합니다."
@@ -328,9 +329,8 @@ L.showBorder = "테두리 표시"
 L.showBorderDesc = "아이콘 주위에 테두리를 표시합니다."
 L.borderColor = "테두리 색상"
 L.borderSize = "테두리 크기"
-L.timer = "타이머"
-L.showTimer = "타이머 표시"
-L.showTimerDesc = "아이콘에 텍스트 타이머를 표시합니다."
+L.showNumbers = "숫자 표시"
+L.showNumbersDesc = "아이콘에 숫자 표시."
 L.cooldown = "쿨다운"
 L.showCooldownSwipe = "회전 애니메이션 표시"
 L.showCooldownSwipeDesc = "쿨다운이 활성화된 경우 아이콘에 회전 애니메이션을 표시합니다."
@@ -338,7 +338,7 @@ L.showCooldownEdge = "가장자리 표시"
 L.showCooldownEdgeDesc = "쿨다운이 활성화된 경우 가장자리를 표시합니다."
 L.inverse = "반전"
 L.inverseSwipeDesc = "쿨다운 애니메이션을 반전시킵니다."
-L.iconGlow = "아이콘 반짝임"
+L.glow = "반짝임"
 L.enableExpireGlow = "만료 반짝임 활성화"
 L.enableExpireGlowDesc = "쿨다운이 만료된 경우 아이콘 주위에 반짝임를 표시합니다."
 L.glowColor = "반짝임 색상"
@@ -348,6 +348,8 @@ L.resetNameplateIconsDesc = "이름표 아이콘과 관련된 모든 옵션을 �
 L.nameplateTextSettings = "텍스트 설정"
 L.fixate_test = "고정 테스트" -- Text that displays to test on the frame
 L.resetNameplateTextDesc = "이름표 텍스트와 관련된 모든 옵션을 초기화합니다."
+L.autoScale = "자동 크기 조정"
+L.autoScaleDesc = "이름표 크기에 따라 자동으로 크기을 변경합니다."
 
 -- Glow types as part of LibCustomGlow
 L.pixelGlow = "픽셀 반짝임"

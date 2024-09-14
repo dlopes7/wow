@@ -1,12 +1,13 @@
 local W, F, E, L, V, P, G = unpack((select(2, ...)))
-local options = W.options.information.args
-local ACH = E.Libs.ACH
+local C = W.Utilities.Color
 
-local _G = _G
+local options = W.options.information.args
+
 local format = format
 local gsub = gsub
 local ipairs = ipairs
 local pairs = pairs
+local tonumber = tonumber
 local tostring = tostring
 local type = type
 local unpack = unpack
@@ -52,7 +53,7 @@ options.help = {
 			order = 5,
 			type = "description",
 			fontSize = "medium",
-			name = E.NewSign .. " |cffe74c3c" .. format(
+			name = "|cffe74c3c" .. format(
 				L["Before you submit a bug, please enable debug mode with %s and test it one more time."],
 				"|cff00d1b2/wtdebug on|r"
 			) .. "|r",
@@ -629,13 +630,14 @@ options.changelog = {
 }
 
 local function renderChangeLogLine(line)
-	line = gsub(line, "%[!%]", E.NewSign)
 	line = gsub(line, "%[[^%[]+%]", blue)
 	return line
 end
 
 for version, data in pairs(W.Changelog) do
 	local versionString = format("%d.%02d", version / 100, mod(version, 100))
+	local changelogVer = tonumber(versionString)
+	local addonVer = tonumber(W.Version)
 	local dateTable = { strsplit("/", data.RELEASE_DATE) }
 	local dateString = data.RELEASE_DATE
 	if #dateTable == 3 then
@@ -730,4 +732,41 @@ for version, data in pairs(W.Changelog) do
 			fontSize = "medium",
 		}
 	end
+
+	page.beforeConfirm1 = {
+		order = 9,
+		type = "description",
+		name = " ",
+		width = "full",
+		hidden = function()
+			local dbVer = E.global.WT and E.global.WT.changelogRead and tonumber(E.global.WT.changelogRead)
+			return dbVer and dbVer >= changelogVer or addonVer < changelogVer
+		end,
+	}
+
+	page.beforeConfirm2 = {
+		order = 10,
+		type = "description",
+		name = " ",
+		width = "full",
+		hidden = function()
+			local dbVer = E.global.WT and E.global.WT.changelogRead and tonumber(E.global.WT.changelogRead)
+			return dbVer and dbVer >= changelogVer or addonVer < changelogVer
+		end,
+	}
+
+	page.confirm = {
+		order = 11,
+		type = "execute",
+		name = C.StringByTemplate(L["I got it!"], "primary"),
+		desc = L["Mark as read, the changelog message will be hidden when you login next time."],
+		width = "full",
+		hidden = function()
+			local dbVer = E.global.WT and E.global.WT.changelogRead and tonumber(E.global.WT.changelogRead)
+			return dbVer and dbVer >= changelogVer or addonVer < changelogVer
+		end,
+		func = function()
+			E.global.WT.changelogRead = versionString
+		end,
+	}
 end

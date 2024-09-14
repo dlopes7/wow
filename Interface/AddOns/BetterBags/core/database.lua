@@ -341,6 +341,16 @@ function DB:GetCategoryOptions(category)
   return options
 end
 
+---@return boolean
+function DB:GetEnterToMakeCategory()
+  return DB.data.profile.enterToMakeCategory
+end
+
+---@param value boolean
+function DB:SetEnterToMakeCategory(value)
+  DB.data.profile.enterToMakeCategory = value
+end
+
 ---@param kind BagKind
 function DB:ClearCustomSectionSort(kind)
   DB.data.profile.customSectionSort[kind] = {}
@@ -465,6 +475,16 @@ function DB:GetTheme()
   return DB.data.profile.theme
 end
 
+---@return string
+function DB:GetUpgradeIconProvider()
+  return DB.data.profile.upgradeIconProvider
+end
+
+---@param value string
+function DB:SetUpgradeIconProvider(value)
+  DB.data.profile.upgradeIconProvider = value
+end
+
 ---@param kind BagKind
 ---@return boolean
 function DB:GetShowAllFreeSpace(kind)
@@ -490,11 +510,11 @@ function DB:Migrate()
     Do not remove before Q1'25.
   ]]--
   if DB:GetBagView(const.BAG_KIND.BACKPACK) ~= const.BAG_VIEW.SECTION_GRID and DB:GetBagView(const.BAG_KIND.BACKPACK) ~= const.BAG_VIEW.SECTION_ALL_BAGS then
-    DB:SetBagView(const.BAG_KIND.BACKPACK, const.BAG_VIEW.GRID)
+    DB:SetBagView(const.BAG_KIND.BACKPACK, const.BAG_VIEW.SECTION_GRID)
   end
 
   if DB:GetBagView(const.BAG_KIND.BANK) ~= const.BAG_VIEW.SECTION_GRID and DB:GetBagView(const.BAG_KIND.BANK) ~= const.BAG_VIEW.SECTION_ALL_BAGS then
-    DB:SetBagView(const.BAG_KIND.BANK, const.BAG_VIEW.GRID)
+    DB:SetBagView(const.BAG_KIND.BANK, const.BAG_VIEW.SECTION_GRID)
   end
 
   --[[

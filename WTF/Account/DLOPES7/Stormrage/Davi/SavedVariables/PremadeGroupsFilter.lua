@@ -1,47 +1,13 @@
 
 PremadeGroupsFilterState = {
 ["version"] = 6,
-["c1f4"] = {
-["enabled"] = false,
-["mini"] = {
-["sorting"] = "",
-["expression"] = "",
-},
-["minimized"] = false,
-},
-["c7f8"] = {
-["enabled"] = false,
-["mini"] = {
-["sorting"] = "",
-["expression"] = "",
-},
-["minimized"] = false,
-},
-["c6f4"] = {
-["enabled"] = false,
-["mini"] = {
-["sorting"] = "",
-["expression"] = "",
-},
-["minimized"] = false,
-["role"] = {
-["heals"] = {
-},
-["tanks"] = {
-},
-["dps"] = {
-},
-["members"] = {
-},
-["expression"] = "",
-},
-},
 ["c3f5"] = {
 ["minimized"] = false,
 ["mini"] = {
-["sorting"] = "",
 ["expression"] = "",
+["sorting"] = "",
 },
+["enabled"] = true,
 ["raid"] = {
 ["difficulty"] = {
 },
@@ -50,8 +16,8 @@ PremadeGroupsFilterState = {
 ["min"] = "",
 ["act"] = false,
 },
-["sorting"] = "",
-["members"] = {
+["expression"] = "",
+["defeated"] = {
 ["max"] = "",
 ["min"] = "",
 ["act"] = false,
@@ -66,22 +32,20 @@ PremadeGroupsFilterState = {
 ["min"] = "",
 ["act"] = false,
 },
-["defeated"] = {
+["members"] = {
 ["max"] = "",
 ["min"] = "",
 ["act"] = false,
 },
-["expression"] = "",
+["sorting"] = "",
 },
-["enabled"] = true,
 },
 ["c2f4"] = {
 ["minimized"] = false,
 ["mini"] = {
-["sorting"] = "",
 ["expression"] = "",
+["sorting"] = "",
 },
-["enabled"] = true,
 ["dungeon"] = {
 ["mprating"] = {
 ["max"] = "",
@@ -93,7 +57,7 @@ PremadeGroupsFilterState = {
 ["min"] = "0",
 ["act"] = true,
 },
-["sorting"] = "",
+["expression"] = "",
 ["heals"] = {
 ["max"] = "",
 ["min"] = "",
@@ -111,7 +75,43 @@ PremadeGroupsFilterState = {
 ["min"] = "",
 ["act"] = false,
 },
+["sorting"] = "",
+},
+["enabled"] = true,
+},
+["c6f4"] = {
+["enabled"] = false,
+["mini"] = {
+["expression"] = "",
+["sorting"] = "",
+},
+["role"] = {
+["heals"] = {
+},
+["tanks"] = {
+},
+["dps"] = {
+},
+["members"] = {
+},
 ["expression"] = "",
 },
+["minimized"] = false,
+},
+["c7f8"] = {
+["enabled"] = false,
+["mini"] = {
+["expression"] = "",
+["sorting"] = "",
+},
+["minimized"] = false,
+},
+["c1f4"] = {
+["enabled"] = false,
+["mini"] = {
+["expression"] = "",
+["sorting"] = "",
+},
+["minimized"] = false,
 },
 }

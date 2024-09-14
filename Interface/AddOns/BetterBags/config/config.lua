@@ -13,6 +13,9 @@ local DB = addon:GetModule('Database')
 ---@class Constants: AceModule
 local const = addon:GetModule('Constants')
 
+---@class Context: AceModule
+local context = addon:GetModule('Context')
+
 ---@class HelpText
 ---@field title string
 ---@field text string
@@ -27,9 +30,6 @@ local config = addon:NewModule('Config')
 
 ---@class Events: AceModule
 local events = addon:GetModule('Events')
-
-
-local GUI = LibStub('AceGUI-3.0')
 
 ---@param info table
 ---@return any, string, string
@@ -77,13 +77,26 @@ function config:GetGeneralOptions()
         end,
         set = function(_, value)
           DB:SetInBagSearch(value)
-          events:SendMessage('search/SetInFrame', value)
+          events:SendMessage(context:New('OnClick_InBagSearch'), 'search/SetInFrame', value)
+        end,
+      },
+      enableEnterToMakeCategory = {
+        type = "toggle",
+        width = "full",
+        order = 1,
+        name = L:G("Enable Enter to Make Category"),
+        desc = L:G("If enabled, pressing Enter with a search query will open the make category menu."),
+        get = function()
+          return DB:GetEnterToMakeCategory()
+        end,
+        set = function(_, value)
+          DB:SetEnterToMakeCategory(value)
         end,
       },
       categorySell = {
         type = "toggle",
         width = "full",
-        order = 1,
+        order = 2,
         name = L:G("Enable Category Sell"),
         desc = L:G("If enabled, right-clicking a category header at a NPC shop will sell all its contents (limited to 10 stacks to allow buy-backs)."),
         get = function()
@@ -96,7 +109,7 @@ function config:GetGeneralOptions()
       showBagButton = {
         type = "toggle",
         width = "full",
-        order = 2,
+        order = 3,
         name = L:G("Show Blizzard Bag Button"),
         desc = L:G("Show or hide the default Blizzard bag button."),
         get = DB.GetShowBagButton,
@@ -110,9 +123,28 @@ function config:GetGeneralOptions()
           DB:SetShowBagButton(value)
         end,
       },
+      upgradeIconProvider = {
+        type = "select",
+        width = "double",
+        order = 4,
+        name = L:G("Upgrade Icon Provider"),
+        desc = L:G("Select the provider for the upgrade icon."),
+        values = {
+          ["None"] = L:G("None"),
+          ["BetterBags"] = L:G("BetterBags"),
+        },
+        get = function()
+          return DB:GetUpgradeIconProvider()
+        end,
+        set = function(_, value)
+          DB:SetUpgradeIconProvider(value)
+          local ctx = context:New('on_click')
+          events:SendMessage(ctx, 'bag/RedrawIcons')
+        end,
+      },
       newItemTime = {
         type = "range",
-        order = 3,
+        order = 5,
         name = L:G("New Item Duration"),
         desc = L:G("The time, in minutes, to consider an item a new item."),
         min = 0,
@@ -192,13 +224,13 @@ end
 
 function config:Open()
   LibStub("AceConfigDialog-3.0"):Open(addonName)
-  events:SendMessage('config/Opened')
+  local ctx = context:New('on_click')
+  events:SendMessage(ctx, 'config/Opened')
 end
 
 function config:OnEnable()
   self.helpText = {}
   self:CreateAllHelp()
-  GUI:RegisterWidgetType("ItemList", config.CreateItemListWidget, 1)
   LibStub('AceConfig-3.0'):RegisterOptionsTable(addonName, function() return self:GetOptions() end)
   self.frame, self.category = LibStub("AceConfigDialog-3.0"):AddToBlizOptions(addonName, "BetterBags")
   LibStub("AceConfigDialog-3.0"):SetDefaultSize(addonName, 700, 800)
@@ -223,7 +255,8 @@ function config:OnEnable()
 
   LibStub('AceConsole-3.0'):RegisterChatCommand("bbdb", function()
     DB:SetDebugMode(not DB:GetDebugMode())
-    events:SendMessage('config/DebugMode', DB:GetDebugMode())
+    local ctx = context:New('on_click')
+    events:SendMessage(ctx, 'config/DebugMode', DB:GetDebugMode())
   end)
 end
 

@@ -2,6 +2,7 @@ local L = BigWigsAPI:NewLocale("BigWigs: Plugins", "zhTW")
 if not L then return end
 
 L.general = "一般"
+L.advanced = "進階"
 L.comma = "，"
 
 L.positionX = "X 座標"
@@ -188,11 +189,11 @@ L.blockTalkingHeadRaids = "團隊副本"
 L.blockTalkingHeadTimewalking = "時光漫遊（地城 & 團隊副本）"
 L.blockTalkingHeadScenarios = "事件"
 
-L.redirectPopups = "以 BigWigs 訊息取代地城橫幅"
-L.redirectPopupsDesc = "封鎖地城中的彈出式橫幅，改為以 BigWigs 訊息顯示其文本。彈出式橫幅是傳奇鑰石地城開始時顯示的副本訊息、或者其他副本提示例如「|cFF33FF99寶庫已解鎖|r」；它會懸浮在畫面中央數秒，遮擋你的視野，妨礙你點擊被橫幅蓋住的目標。"
+L.redirectPopups = "以 BigWigs 訊息取代通知橫幅"
+L.redirectPopupsDesc = "以 BigWigs 訊息取代螢幕中央的通知橫幅，例如「|cFF33FF99寶庫欄位解鎖|r」。這些通知橫幅範圍太大、顯示時間太長，會遮擋介面上的其他元素，導致你無法點擊橫幅之後的東西。"
 L.redirectPopupsColor = "橫幅替代訊息顏色"
-L.blockDungeonPopups = "封鎖地城橫幅"
-L.blockDungeonPopupsDesc = "有時候，進入地城彈出的橫幅會顯示很長的文本，啟用此選項可以完全隱藏橫幅，而非以 BigWigs 訊息替代。"
+L.blockDungeonPopups = "封鎖地城通知橫幅"
+L.blockDungeonPopupsDesc = "有時候，進入地城彈出的通知橫幅會顯示很長的文本，啟用此選項可以完全隱藏它們。"
 L.itemLevel = "物品等級%d"
 
 L.userNotifySfx = "音效原被「首領戰訊息封鎖」功能關閉，現已強制重啟。"
@@ -328,9 +329,8 @@ L.showBorder = "顯示邊框"
 L.showBorderDesc = "替圖示顯示邊框。"
 L.borderColor = "邊框顏色"
 L.borderSize = "邊框大小"
-L.timer = "計時"
-L.showTimer = "顯示倒數計時"
-L.showTimerDesc = "為圖示顯示計時文字。"
+L.showNumbers = "數字"
+L.showNumbersDesc = "替圖示顯示數字。"
 L.cooldown = "冷卻"
 L.showCooldownSwipe = "顯示冷卻動畫"
 L.showCooldownSwipeDesc = "當圖示代表的技能正在冷卻中，顯示轉圈的冷卻動畫效果。"
@@ -338,7 +338,7 @@ L.showCooldownEdge = "顯示冷卻指針" -- not sure there' s a term in zh alre
 L.showCooldownEdgeDesc = "當圖示代表的技能正在冷卻中，顯示轉圈的發光指針效果。"
 L.inverse = "反轉"
 L.inverseSwipeDesc = "反轉冷卻動畫效果。"
-L.iconGlow = "圖示高亮"
+L.glow = "發光效果"
 L.enableExpireGlow = "啟用結束發光效果"
 L.enableExpireGlowDesc = "當技能冷卻結束，在圖示周圍顯示發光動畫效果。"
 L.glowColor = "發光顏色"
@@ -348,6 +348,8 @@ L.resetNameplateIconsDesc = "將名條的圖示設定全部重設為預設值。
 L.nameplateTextSettings = "文字設定"
 L.fixate_test = "鎖定" -- Text that displays to test on the frame
 L.resetNameplateTextDesc = "將名條的文字設定全部重設為預設值。"
+--L.autoScale = "Auto Scale"
+--L.autoScaleDesc = "Automatically change scale according to the nameplate scale."
 
 -- Glow types as part of LibCustomGlow
 L.pixelGlow = "像素發光"

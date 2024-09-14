@@ -1,4 +1,4 @@
--- Generated from CurseForge on Sat Aug 31 09:21:15 UTC 2024
+-- Generated from CurseForge on Fri Sep 13 18:44:27 UTC 2024
 local ns = select(2, ...) ---@class ns @The addon namespace.
 
 if ns:IsSameLocale("esES") then
@@ -26,6 +26,8 @@ L["API_INVALID_DATABASE"] = [=[|cffFF0000Warning!|r Se detectó una base de dato
 ]=]
 L["AUTO_COMBATLOG"] = "Habilitar automáticamente los registros de combate en Bandas y Mazmorras"
 L["AUTO_COMBATLOG_DESC"] = "Activa o desactiva los registros de combate automáticamente al entrar y salir de las mazmorras y bandas admitidas."
+--[[Translation missing --]]
+--[[ L["AUTO_COMBATLOG_DISABLED_DESC"] = ""--]] 
 L["BEST_FOR_DUNGEON"] = "Mejor en esta mazmorra"
 L["BEST_RUN"] = "Mejor mazmorra"
 L["BEST_SCORE"] = "Mejor puntuacion M + (% s)"
@@ -68,10 +70,16 @@ L["DISABLE_RWF_MODE_RELOAD"] = "Estás desactivando el modo Race World First. Al
 L["DPS"] = "DPS"
 L["DUNGEON_SHORT_NAME_AA"] = "Academia Algeth'ar - AA"
 L["DUNGEON_SHORT_NAME_AD"] = "Atal'Dazar - AD"
+--[[Translation missing --]]
+--[[ L["DUNGEON_SHORT_NAME_ARAK"] = ""--]] 
 L["DUNGEON_SHORT_NAME_AV"] = "Cámara Azur - AV"
 L["DUNGEON_SHORT_NAME_BH"] = "Hondonada Frondacuero - BH"
 L["DUNGEON_SHORT_NAME_BRH"] = "Torreón Grajo Negro - BRH"
 L["DUNGEON_SHORT_NAME_COS"] = "Corte de las Estrellas - COS"
+--[[Translation missing --]]
+--[[ L["DUNGEON_SHORT_NAME_COT"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["DUNGEON_SHORT_NAME_DAWN"] = ""--]] 
 L["DUNGEON_SHORT_NAME_DHT"] = "Arboleda Corazón Oscuro - DHT"
 L["DUNGEON_SHORT_NAME_DOS"] = "El Otro Lado - DOS"
 L["DUNGEON_SHORT_NAME_EB"] = "El Vergel Eterno - EB"
@@ -79,6 +87,8 @@ L["DUNGEON_SHORT_NAME_EB"] = "El Vergel Eterno - EB"
 --[[ L["DUNGEON_SHORT_NAME_FALL"] = ""--]] 
 --[[Translation missing --]]
 --[[ L["DUNGEON_SHORT_NAME_FH"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["DUNGEON_SHORT_NAME_GB"] = ""--]] 
 L["DUNGEON_SHORT_NAME_GD"] = "Terminal Malavía - GD"
 L["DUNGEON_SHORT_NAME_GMBT"] = "Tazavesh: Gambito - GMBT"
 L["DUNGEON_SHORT_NAME_HOA"] = "Salas de la Expiación - HOA"
@@ -99,8 +109,12 @@ L["DUNGEON_SHORT_NAME_PF"] = "Bajapeste - PF"
 --[[Translation missing --]]
 --[[ L["DUNGEON_SHORT_NAME_SBG"] = ""--]] 
 L["DUNGEON_SHORT_NAME_SD"] = "Cavernas Sanguinas - SD"
+--[[Translation missing --]]
+--[[ L["DUNGEON_SHORT_NAME_SIEGE"] = ""--]] 
 L["DUNGEON_SHORT_NAME_SOA"] = "Agujas de Ascensión - SOA"
 L["DUNGEON_SHORT_NAME_STRT"] = "Tazavesh: Calles - STRT"
+--[[Translation missing --]]
+--[[ L["DUNGEON_SHORT_NAME_SV"] = ""--]] 
 --[[Translation missing --]]
 --[[ L["DUNGEON_SHORT_NAME_TJS"] = ""--]] 
 L["DUNGEON_SHORT_NAME_TOP"] = "Teatro del Dolor - TOP"
@@ -165,6 +179,10 @@ L["MAINS_BEST_SCORE_BEST_SEASON"] = "Mejor puntuación en M+ con el main (%s)"
 L["MAINS_RAID_PROGRESS"] = "Progreso de personaje principal"
 L["MAINS_SCORE"] = "Puntuación de personaje principal"
 --[[Translation missing --]]
+--[[ L["MINIMAP_SHORTCUT_BROKER_ENABLE"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["MINIMAP_SHORTCUT_BROKER_ENABLE_DESC"] = ""--]] 
+--[[Translation missing --]]
 --[[ L["MINIMAP_SHORTCUT_ENABLE"] = ""--]] 
 --[[Translation missing --]]
 --[[ L["MINIMAP_SHORTCUT_ENABLE_DESC"] = ""--]] 
@@ -182,6 +200,12 @@ L["MAINS_SCORE"] = "Puntuación de personaje principal"
 --[[ L["MINIMAP_SHORTCUT_HELP_SETTINGS"] = ""--]] 
 --[[Translation missing --]]
 --[[ L["MINIMAP_SHORTCUT_LOCK"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["MINIMAP_SHORTCUT_MINIMAP_ENABLE"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["MINIMAP_SHORTCUT_MINIMAP_ENABLE_DESC"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["MINIMAP_SHORTCUT_MINIMAP_LOCK"] = ""--]] 
 L["MODULE_AMERICAS"] = "América"
 L["MODULE_EUROPE"] = "Europa"
 L["MODULE_KOREA"] = "Corea"
@@ -390,6 +414,22 @@ L["RAID_BOSS_FSOD_9"] = "Kel'Thuzad"
 --[[Translation missing --]]
 --[[ L["RAID_BOSS_ICC_9"] = ""--]] 
 --[[Translation missing --]]
+--[[ L["RAID_BOSS_NP_1"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_NP_2"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_NP_3"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_NP_4"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_NP_5"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_NP_6"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_NP_7"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_NP_8"] = ""--]] 
+--[[Translation missing --]]
 --[[ L["RAID_BOSS_RS_1"] = ""--]] 
 L["RAID_BOSS_SFO_1"] = "Guardián vigilante"
 L["RAID_BOSS_SFO_10"] = "Rygelon"
@@ -461,6 +501,8 @@ L["RAID_DIFFICULTY_SUFFIX_NORMAL"] = "N"
 L["RAID_ENCOUNTERS_DEFEATED_TITLE"] = "Encuentros de banda derrotados"
 --[[Translation missing --]]
 --[[ L["RAID_ICC"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_NP"] = ""--]] 
 --[[Translation missing --]]
 --[[ L["RAID_RS"] = ""--]] 
 --[[Translation missing --]]
@@ -616,6 +658,10 @@ L["SHOW_SCORE_IN_COMBAT"] = "Mostrar puntuación en combate"
 L["SHOW_SCORE_IN_COMBAT_DESC"] = "Desactiva esta opción para mejorar el rendimiento al pasar el ratón por encima de jugadores cuando estás en combate."
 L["SHOW_SCORE_WITH_MODIFIER"] = "Mostrar Raider.IO en la información sobre herramientas con modificador"
 L["SHOW_SCORE_WITH_MODIFIER_DESC"] = "Desactiva la visualización de datos al colocar el cursor sobre un jugadores a menos que se mantenga presionada una tecla modificada."
+--[[Translation missing --]]
+--[[ L["SHOW_WARBAND_SCORE"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["SHOW_WARBAND_SCORE_DESC"] = ""--]] 
 L["TANK"] = "Tanque"
 --[[Translation missing --]]
 --[[ L["TEAM_LF_MPLUS_DEFAULT"] = ""--]] 
@@ -625,6 +671,10 @@ L["TIMED_10_RUNS"] = "+10-14 en tiempo"
 L["TIMED_15_RUNS"] = "+15 en tiempo"
 L["TIMED_20_RUNS"] = "+20 en tiempo"
 L["TIMED_5_RUNS"] = "+5-9 en tiempo"
+--[[Translation missing --]]
+--[[ L["TIMED_RUNS_MINIMUM"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["TIMED_RUNS_RANGE"] = ""--]] 
 L["TOOLTIP_PROFILE"] = "Personalización del marco de perfil"
 L["UNKNOWN_SERVER_FOUND"] = "|cffFFFFFF%s|r ha encontrado un nuevo servidor. Por favor, apunta esta información |cffFF9999{|r |cffFFFFFF%s|r |cffFF9999,|r |cffFFFFFF%s|r |cffFF9999}|r y envíasela a los desarrolladores. ¡Gracias!"
 L["UNLOCKING_PROFILE_FRAME"] = "RaiderIO: desbloqueando el marco de perfil de M+."
@@ -632,6 +682,10 @@ L["USE_ENGLISH_ABBREVIATION"] = "Forzar abreviaturas en inglés para mazmorras"
 L["USE_ENGLISH_ABBREVIATION_DESC"] = "Cuando está activado, se sustituyen las abreviaturas usadas para referirse a las mazmorras por sus versiones en inglés, en vez de usar las de tu idioma actual."
 L["USE_RAIDERIO_CLIENT_LIVE_TRACKING_SETTINGS"] = "Permitir que el cliente Raider.IO controle el registro de combate"
 L["USE_RAIDERIO_CLIENT_LIVE_TRACKING_SETTINGS_DESC"] = "Permita que el Cliente Raider.IO (cuando esté presente) controle la configuración del Registro de combate automáticamente."
+--[[Translation missing --]]
+--[[ L["WARBAND_BEST_SCORE_BEST_SEASON"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["WARBAND_SCORE"] = ""--]] 
 L["WARNING_DEBUG_MODE_ENABLE"] = "|cffFFFFFF%s|r El modo depuración está activado. Puedes desactivarlo escribiendo |cffFFFFFF/raiderio debug|r."
 L["WARNING_LOCK_POSITION_FRAME_AUTO"] = "RaiderIO: primero debes deshabilitar el posicionamiento automático del marco de perfil de RaiderIO."
 --[[Translation missing --]]

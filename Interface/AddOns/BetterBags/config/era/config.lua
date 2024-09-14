@@ -19,6 +19,9 @@ local config = addon:GetModule('Config')
 ---@class Events: AceModule
 local events = addon:GetModule('Events')
 
+---@class Context: AceModule
+local context = addon:GetModule('Context')
+
 ---@return AceConfig.OptionsTable
 function config:GetGeneralOptions()
   ---@type AceConfig.OptionsTable
@@ -38,7 +41,7 @@ function config:GetGeneralOptions()
         end,
         set = function(_, value)
           DB:SetInBagSearch(value)
-          events:SendMessage('search/SetInFrame', value)
+          events:SendMessage(context:New('OnClick_InBagSearch'), 'search/SetInFrame', value)
         end,
       },
       categorySell = {
@@ -52,6 +55,25 @@ function config:GetGeneralOptions()
         end,
         set = function(_, value)
           DB:SetCategorySell(value)
+        end,
+      },
+      upgradeIconProvider = {
+        type = "select",
+        width = "double",
+        order = 4,
+        name = L:G("Upgrade Icon Provider"),
+        desc = L:G("Select the provider for the upgrade icon."),
+        values = {
+          ["None"] = L:G("None"),
+          ["BetterBags"] = L:G("BetterBags"),
+        },
+        get = function()
+          return DB:GetUpgradeIconProvider()
+        end,
+        set = function(_, value)
+          DB:SetUpgradeIconProvider(value)
+          local ctx = context:New('on_click')
+          events:SendMessage(ctx, 'bag/RedrawIcons')
         end,
       },
       newItemTime = {

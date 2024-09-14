@@ -1,6 +1,7 @@
 local W, F, E, L = unpack((select(2, ...)))
 local M = W.Modules.Misc
 
+local _G = _G
 local format = format
 local gsub = gsub
 local hooksecurefunc = hooksecurefunc
@@ -10,6 +11,10 @@ local cache = {}
 
 local function ModifyGuildNews(button, _, text, name, link, ...)
 	if not E.private.WT.misc.guildNewsItemLevel then
+		return
+	end
+
+	if not _G.CommunitiesFrame or not _G.CommunitiesFrame.IsShown or not _G.CommunitiesFrame:IsShown() then
 		return
 	end
 

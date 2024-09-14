@@ -58,7 +58,7 @@ options.general = {
 		resourcePage = {
 			order = 2,
 			type = "execute",
-			name = E.NewSign .. " " .. F.GetWindStyleText(L["More Resources"]),
+			name = F.GetWindStyleText(L["More Resources"]),
 			desc = format(
 				"%s\n%s\n\n|cff00d1b2%s|r (%s)\n%s\n%s\n%s",
 				L["Open the project page and download more resources."],
@@ -550,11 +550,6 @@ options.blizzard = {
 			order = 10,
 			type = "toggle",
 			name = L["Chromie Time"],
-		},
-		classTalent = {
-			order = 10,
-			type = "toggle",
-			name = L["Class Talent"],
 		},
 		collections = {
 			order = 10,

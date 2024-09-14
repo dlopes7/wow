@@ -1,4 +1,4 @@
--- Generated from CurseForge on Sat Aug 31 09:21:26 UTC 2024
+-- Generated from CurseForge on Fri Sep 13 18:44:39 UTC 2024
 local ns = select(2, ...) ---@class ns @The addon namespace.
 
 if ns:IsSameLocale("zhCN") then
@@ -21,6 +21,8 @@ L["API_DEPRECATED_WITH"] = "|cffFF0000Warning!|r 插件 |cffFFFFFF%s|r 正在调
 L["API_INVALID_DATABASE"] = "|cffFF0000警告!|r 在|cffffffff%s|r检测到无效的 Raider.IO 数据库， 请在Raider.IO的客户端刷新所有支持的地区以及阵营数据库, 或者手动安装所有插件。"
 L["AUTO_COMBATLOG"] = "自动在团队副本&地下城里打开战斗日志"
 L["AUTO_COMBATLOG_DESC"] = "在进入或离开支持的团队副本&地下城时自动打开和关闭战斗日志"
+--[[Translation missing --]]
+--[[ L["AUTO_COMBATLOG_DISABLED_DESC"] = ""--]] 
 L["BEST_FOR_DUNGEON"] = "最佳地下城 "
 L["BEST_RUN"] = "最高记录 "
 L["BEST_SCORE"] = "最高大秘境分数 (%s)"
@@ -63,15 +65,23 @@ L["DISABLE_RWF_MODE_RELOAD"] = "你正在禁用冲击世界首杀模式。点击
 L["DPS"] = "伤害输出"
 L["DUNGEON_SHORT_NAME_AA"] = "艾杰斯亚学院"
 L["DUNGEON_SHORT_NAME_AD"] = "阿塔达萨"
+--[[Translation missing --]]
+--[[ L["DUNGEON_SHORT_NAME_ARAK"] = ""--]] 
 L["DUNGEON_SHORT_NAME_AV"] = "碧蓝魔馆"
 L["DUNGEON_SHORT_NAME_BH"] = "蕨皮山谷"
 L["DUNGEON_SHORT_NAME_BRH"] = "黑鸦堡垒"
 L["DUNGEON_SHORT_NAME_COS"] = "群星庭院"
+--[[Translation missing --]]
+--[[ L["DUNGEON_SHORT_NAME_COT"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["DUNGEON_SHORT_NAME_DAWN"] = ""--]] 
 L["DUNGEON_SHORT_NAME_DHT"] = "黑心林地"
 L["DUNGEON_SHORT_NAME_DOS"] = "彼界"
 L["DUNGEON_SHORT_NAME_EB"] = "永茂林地"
 L["DUNGEON_SHORT_NAME_FALL"] = "永恒：陨落"
 L["DUNGEON_SHORT_NAME_FH"] = "自由镇"
+--[[Translation missing --]]
+--[[ L["DUNGEON_SHORT_NAME_GB"] = ""--]] 
 L["DUNGEON_SHORT_NAME_GD"] = "恐轨车站"
 L["DUNGEON_SHORT_NAME_GMBT"] = "集市（后三）"
 L["DUNGEON_SHORT_NAME_HOA"] = "赎罪大厅"
@@ -89,8 +99,12 @@ L["DUNGEON_SHORT_NAME_RISE"] = "永恒：崛起"
 L["DUNGEON_SHORT_NAME_RLP"] = "红玉新生法池"
 L["DUNGEON_SHORT_NAME_SBG"] = "影月墓地"
 L["DUNGEON_SHORT_NAME_SD"] = "赤红深渊"
+--[[Translation missing --]]
+--[[ L["DUNGEON_SHORT_NAME_SIEGE"] = ""--]] 
 L["DUNGEON_SHORT_NAME_SOA"] = "晋升高塔"
 L["DUNGEON_SHORT_NAME_STRT"] = "集市（前五）"
+--[[Translation missing --]]
+--[[ L["DUNGEON_SHORT_NAME_SV"] = ""--]] 
 L["DUNGEON_SHORT_NAME_TJS"] = "青龙寺"
 L["DUNGEON_SHORT_NAME_TOP"] = "伤逝剧场"
 L["DUNGEON_SHORT_NAME_TOTT"] = "潮汐王座"
@@ -142,6 +156,10 @@ L["LOCKING_PROFILE_FRAME"] = "Raider.IO：锁定大秘境个人页面框体"
 L["MAINS_BEST_SCORE_BEST_SEASON"] = "大号最高大秘境分数 (%s)"
 L["MAINS_RAID_PROGRESS"] = "大号团本进度"
 L["MAINS_SCORE"] = "大号大秘境分数"
+--[[Translation missing --]]
+--[[ L["MINIMAP_SHORTCUT_BROKER_ENABLE"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["MINIMAP_SHORTCUT_BROKER_ENABLE_DESC"] = ""--]] 
 L["MINIMAP_SHORTCUT_ENABLE"] = "开启按钮"
 L["MINIMAP_SHORTCUT_ENABLE_DESC"] = "启用后可在小地图周围显示图标。"
 L["MINIMAP_SHORTCUT_HEADER"] = "小地图"
@@ -151,6 +169,12 @@ L["MINIMAP_SHORTCUT_HELP_RIGHT_CLICK"] = "右键点击"
 L["MINIMAP_SHORTCUT_HELP_SEARCH"] = "搜索"
 L["MINIMAP_SHORTCUT_HELP_SETTINGS"] = "设置"
 L["MINIMAP_SHORTCUT_LOCK"] = "锁定按钮"
+--[[Translation missing --]]
+--[[ L["MINIMAP_SHORTCUT_MINIMAP_ENABLE"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["MINIMAP_SHORTCUT_MINIMAP_ENABLE_DESC"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["MINIMAP_SHORTCUT_MINIMAP_LOCK"] = ""--]] 
 L["MODULE_AMERICAS"] = "美洲"
 L["MODULE_EUROPE"] = "欧洲"
 L["MODULE_KOREA"] = "韩国"
@@ -286,6 +310,22 @@ L["RAID_BOSS_ICC_6"] = "腐面"
 L["RAID_BOSS_ICC_7"] = "普崔塞德教授"
 L["RAID_BOSS_ICC_8"] = "鲜血王子议会"
 L["RAID_BOSS_ICC_9"] = "鲜血女王兰娜瑟尔"
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_NP_1"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_NP_2"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_NP_3"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_NP_4"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_NP_5"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_NP_6"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_NP_7"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_NP_8"] = ""--]] 
 L["RAID_BOSS_RS_1"] = "海里昂"
 L["RAID_BOSS_SFO_1"] = "警戒卫士"
 L["RAID_BOSS_SFO_10"] = "莱葛隆"
@@ -336,6 +376,8 @@ L["RAID_DIFFICULTY_SUFFIX_NORMAL10"] = "10PT"
 L["RAID_DIFFICULTY_SUFFIX_NORMAL25"] = "25PT"
 L["RAID_ENCOUNTERS_DEFEATED_TITLE"] = "已击杀团队副本首领"
 L["RAID_ICC"] = "冰冠堡垒"
+--[[Translation missing --]]
+--[[ L["RAID_NP"] = ""--]] 
 L["RAID_RS"] = "红玉圣所"
 L["RAID_TOTFW"] = "风神王座"
 L["RAIDERIO_AVERAGE_PLAYER_SCORE"] = "能限时%s层的平均分数"
@@ -444,6 +486,10 @@ L["SHOW_SCORE_IN_COMBAT"] = "在战斗中显示Raider.IO的鼠标提示信息"
 L["SHOW_SCORE_IN_COMBAT_DESC"] = "关闭后会降低你在战斗中鼠标滑过一名玩家时对性能的影响"
 L["SHOW_SCORE_WITH_MODIFIER"] = "用快捷键显示Raider.IO鼠标提示信息"
 L["SHOW_SCORE_WITH_MODIFIER_DESC"] = "除非按下快捷键，不然鼠标滑过玩家时不会显示数据"
+--[[Translation missing --]]
+--[[ L["SHOW_WARBAND_SCORE"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["SHOW_WARBAND_SCORE_DESC"] = ""--]] 
 L["TANK"] = "坦克"
 L["TEAM_LF_MPLUS_DEFAULT"] = "正在招募大秘境成员"
 L["TEAM_LF_MPLUS_WITH_SCORE"] = "正在招募分数%d+的大秘境成员"
@@ -451,6 +497,10 @@ L["TIMED_10_RUNS"] = "10-14层限时通关次数"
 L["TIMED_15_RUNS"] = "15层以上限时通关次数"
 L["TIMED_20_RUNS"] = "20层以上限时通关次数"
 L["TIMED_5_RUNS"] = "5-9层限时通关次数"
+--[[Translation missing --]]
+--[[ L["TIMED_RUNS_MINIMUM"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["TIMED_RUNS_RANGE"] = ""--]] 
 L["TOOLTIP_PROFILE"] = "自定义Raider.IO个人页面鼠标提示"
 L["UNKNOWN_SERVER_FOUND"] = "|cffFFFFFF%s|r发现了新服务器。请记录下这条信息|cffFF9999{|r |cffFFFFFF%s|r |cffFF9999,|r |cffFFFFFF%s|r |cffFF9999}|r並且发送给开发者，非常感谢！"
 L["UNLOCKING_PROFILE_FRAME"] = "Raider.IO：解锁大秘境页面框架"
@@ -458,6 +508,10 @@ L["USE_ENGLISH_ABBREVIATION"] = "强制显示地下城英文缩写"
 L["USE_ENGLISH_ABBREVIATION_DESC"] = "当设置后，会强制地下城缩写为英文。"
 L["USE_RAIDERIO_CLIENT_LIVE_TRACKING_SETTINGS"] = "允许Raider.IO客户端控制战斗日志"
 L["USE_RAIDERIO_CLIENT_LIVE_TRACKING_SETTINGS_DESC"] = "允许Raider.IO客户端（运行时）自动控制你的战斗日志设置。"
+--[[Translation missing --]]
+--[[ L["WARBAND_BEST_SCORE_BEST_SEASON"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["WARBAND_SCORE"] = ""--]] 
 L["WARNING_DEBUG_MODE_ENABLE"] = "|cffFFFFFF%s|r Debug模式已经开启. 输入 |cffFFFFFF/raiderio debug|r 关闭debug模式"
 L["WARNING_LOCK_POSITION_FRAME_AUTO"] = "Raider.IO：你必须先关闭Raider.IO个人页面的自动定位"
 L["WARNING_RWF_MODE_ENABLE"] = "|cffFFFFFF%s|r 首杀争夺赛模式已开启。你可以通过使用 |cffFFFFFF/raiderio rwf |r来关闭它。"

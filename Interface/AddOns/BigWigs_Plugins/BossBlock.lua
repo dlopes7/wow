@@ -531,16 +531,15 @@ do
 				elseif tbl.eventToastID == 183 then -- Discovery
 					-- tbl.title is "Discovery"
 					-- tbl.subtitle is "Respawn Point Unlocked!"
-					tbl.subtitle = CL.other:format(tbl.title, tbl.subtitle) -- Combine, without uppercase
-					tbl.title = nil
-					tbl.bwDuration = 3
+					tbl.title = nil -- Remove title, keep subtitle only
+					tbl.bwDuration = 4
 					printMessage(self, tbl)
 				elseif branSkills[tbl.eventToastID] then -- Brann Ability, Brann power increase
 					-- tbl.title is "Combat Curios" / "Explorer's Ammunition Journal"
 					-- tbl.subtitle is "Brann Ability Unlocked!" / "Brann's power increased!"
 					tbl.subtitle = CL.other:format(tbl.subtitle, tbl.title) -- Combine, without uppercase
 					tbl.title = nil
-					tbl.bwDuration = 2.5
+					tbl.bwDuration = 3
 					printMessage(self, tbl)
 				elseif tbl.eventToastID == 5 then -- Dungeon zone in popup
 					if not self.db.profile.blockZoneInToasts then
@@ -859,7 +858,7 @@ do
 		[203125]=true,[203126]=true,[203127]=true,
 
 		-- Ara-Kara
-		[247684]=true,
+		[247684]=true,[250798]=true,
 		-- Cinderbrew Meadery
 		[251845]=true,[251846]=true,
 		-- City of Threads
@@ -867,7 +866,7 @@ do
 		[250781]=true,[250782]=true,[250790]=true,[250791]=true,[250795]=true,
 		-- Priory of the Sacred Flame
 		[251154]=true,[251155]=true,[251156]=true,[251157]=true,[251162]=true,[251163]=true,[251169]=true,[251170]=true,
-		[251171]=true,[251176]=true,
+		[251171]=true,[251176]=true,[251177]=true,
 		-- The Dawnbreaker
 		[251195]=true,[251196]=true,[251197]=true,[251198]=true,[247638]=true,[251199]=true,[251200]=true,[251201]=true,
 		[251202]=true,[251203]=true,[251204]=true,[251205]=true,[251206]=true,[251207]=true,[251208]=true,[251184]=true,

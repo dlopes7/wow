@@ -6,7 +6,6 @@ local strsplit = strsplit
 local strupper = strupper
 
 local BNConnected = BNConnected
-local BNet_GetClientAtlas = BNet_GetClientAtlas
 local FriendsFrame_Update = FriendsFrame_Update
 local GetQuestDifficultyColor = GetQuestDifficultyColor
 local TimerunningUtil_AddSmallIcon = TimerunningUtil.AddSmallIcon
@@ -332,6 +331,10 @@ function FL:UpdateFriendButton(button)
 
 		-- area
 		if area then
+			if self.db.hideRealm then
+				server = ""
+			end
+
 			if area and area ~= "" and server and server ~= "" and server ~= E.myrealm then
 				buttonText = F.CreateColorString(area .. " - " .. server, self.db.areaColor)
 			elseif area and area ~= "" then
@@ -361,6 +364,7 @@ function FL:UpdateFriendButton(button)
 			end
 
 			if texOrAtlas then
+				button.gameIcon:SetAlpha(1)
 				button.gameIcon:SetTexture(texOrAtlas)
 				button.gameIcon:SetTexCoord(0.15, 0.85, 0.15, 0.85)
 			end

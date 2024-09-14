@@ -2,6 +2,7 @@ local L = BigWigsAPI:NewLocale("BigWigs: Plugins", "esMX")
 if not L then return end
 
 L.general = "General"
+--L.advanced = "Advanced"
 L.comma = ", "
 
 L.positionX = "Posición X"
@@ -189,10 +190,10 @@ L.blockTalkingHeadTimewalking = "Cronoviaje (Calabozos & Bandas)"
 L.blockTalkingHeadScenarios = "Escenarios"
 
 L.redirectPopups = "Redirigir carteles emergentes a mensajes de BigWigs"
-L.redirectPopupsDesc = "Los carteles emergentes en el medio de la pantalla como '|cFF33FF99recompensa de la gran cámara desbloqueada|r' o que ves al entrar a un calabozo Mítico+, se bloquearán y se mostrarán como mensajes de BigWigs. Estos carteles pueden ser bastante grandes, durar mucho tiempo y bloquear la posibilidad de hacer clic en ellos."
+--L.redirectPopupsDesc = "Popup banners in the middle of your screen such as the '|cFF33FF99vault slot unlocked|r' banner will instead be displayed as BigWigs messages. Estos carteles pueden ser bastante grandes, durar mucho tiempo y bloquear la posibilidad de hacer clic en ellos."
 L.redirectPopupsColor = "Color del mensaje redirigido"
 L.blockDungeonPopups = "Bloquear carteles emergentes de calabozos"
-L.blockDungeonPopupsDesc = "Los carteles emergentes que se muestran al entrar a un calabozo a veces pueden contener texto muy largo. Al activar esta función los bloqueará completamente en lugar de ser redirigidos a los mensajes de BigWigs."
+L.blockDungeonPopupsDesc = "Los carteles emergentes que se muestran al entrar a un calabozo a veces pueden contener texto muy largo. Al activar esta función los bloqueará completamente."
 L.itemLevel = "Nivel de objeto %d"
 
 L.userNotifySfx = "BossBlock desactivó los efectos de sonido, lo que obligó a volver a activarlos."
@@ -328,9 +329,8 @@ L.fadeTimeDesc = "Cuánto tiempo tardará en desaparecer un mensaje, en segundos
 --L.showBorderDesc = "Show a border around the icon."
 --L.borderColor = "Border Color"
 --L.borderSize = "Border Size"
---L.timer = "Timer"
---L.showTimer = "Show Timer"
---L.showTimerDesc = "Show a text timer on the icon."
+--L.showNumbers = "Show Numbers"
+--L.showNumbersDesc = "Show numbers on the icon."
 --L.cooldown = "Cooldown"
 --L.showCooldownSwipe = "Show Swipe"
 --L.showCooldownSwipeDesc = "Show a swipe on the icon when the cooldown is active."
@@ -338,7 +338,7 @@ L.fadeTimeDesc = "Cuánto tiempo tardará en desaparecer un mensaje, en segundos
 --L.showCooldownEdgeDesc = "Show an edge on the cooldown when the cooldown is active."
 --L.inverse = "Inverse"
 --L.inverseSwipeDesc = "Invert the cooldown animations."
---L.iconGlow = "Icon Glow"
+--L.glow = "Glow"
 --L.enableExpireGlow = "Enable Expire Glow"
 --L.enableExpireGlowDesc = "Show a glow around the icon when the cooldown has expired."
 --L.glowColor = "Glow Color"
@@ -348,6 +348,8 @@ L.fadeTimeDesc = "Cuánto tiempo tardará en desaparecer un mensaje, en segundos
 --L.nameplateTextSettings = "Text Settings"
 --L.fixate_test = "Fixate Test" -- Text that displays to test on the frame
 --L.resetNameplateTextDesc = "Reset all the options related to nameplate text."
+--L.autoScale = "Auto Scale"
+--L.autoScaleDesc = "Automatically change scale according to the nameplate scale."
 
 -- Glow types as part of LibCustomGlow
 --L.pixelGlow = "Pixel Glow"

@@ -214,6 +214,7 @@ const.SECTION_SORT_TYPE = {
 const.ITEM_SORT_TYPE = {
   ALPHABETICALLY_THEN_QUALITY = 1,
   QUALITY_THEN_ALPHABETICALLY = 2,
+  ITEM_LEVEL = 3,
 }
 
 ---@enum ExpansionType
@@ -461,6 +462,34 @@ const.EQUIPMENT_SLOTS = {
   INVSLOT_WRIST,
 }
 
+---@type table<number, number[]>
+const.INVENTORY_TYPE_TO_INVENTORY_SLOTS = {
+  [Enum.InventoryType.IndexHeadType] = {INVSLOT_HEAD},
+  [Enum.InventoryType.IndexNeckType] = {INVSLOT_NECK},
+  [Enum.InventoryType.IndexShoulderType] = {INVSLOT_SHOULDER},
+  [Enum.InventoryType.IndexBodyType] = {INVSLOT_BODY},
+  [Enum.InventoryType.IndexChestType] = {INVSLOT_CHEST},
+  [Enum.InventoryType.IndexWaistType] = {INVSLOT_WAIST},
+  [Enum.InventoryType.IndexLegsType] = {INVSLOT_LEGS},
+  [Enum.InventoryType.IndexFeetType] = {INVSLOT_FEET},
+  [Enum.InventoryType.IndexWristType] = {INVSLOT_WRIST},
+  [Enum.InventoryType.IndexHandType] = {INVSLOT_HAND},
+  [Enum.InventoryType.IndexFingerType] = {INVSLOT_FINGER1, INVSLOT_FINGER2},
+  [Enum.InventoryType.IndexTrinketType] = {INVSLOT_TRINKET1, INVSLOT_TRINKET2},
+  [Enum.InventoryType.IndexWeaponType] = {INVSLOT_MAINHAND, INVSLOT_OFFHAND},
+  [Enum.InventoryType.IndexShieldType] = {INVSLOT_OFFHAND},
+  [Enum.InventoryType.IndexRangedType] = {INVSLOT_MAINHAND},
+  [Enum.InventoryType.IndexCloakType] = {INVSLOT_BACK},
+  [Enum.InventoryType.Index2HweaponType] = {INVSLOT_MAINHAND},
+  [Enum.InventoryType.IndexTabardType] = {INVSLOT_TABARD},
+  [Enum.InventoryType.IndexRobeType] = {INVSLOT_CHEST},
+  [Enum.InventoryType.IndexWeaponmainhandType] = {INVSLOT_MAINHAND},
+  [Enum.InventoryType.IndexWeaponoffhandType] = {INVSLOT_OFFHAND},
+  [Enum.InventoryType.IndexHoldableType] = {INVSLOT_OFFHAND},
+  [Enum.InventoryType.IndexThrownType] = {INVSLOT_MAINHAND},
+  [Enum.InventoryType.IndexRangedrightType] = {INVSLOT_MAINHAND},
+}
+
 ---@class SizeInfo
 ---@field columnCount number
 ---@field itemsPerRow number
@@ -482,6 +511,8 @@ const.DATABASE_DEFAULTS = {
     inBagSearch = true,
     categorySell = false,
     showKeybindWarning = true,
+    enterToMakeCategory = true,
+    upgradeIconProvider = 'None',
     theme = 'Default',
     showFullSectionNames = {
       [const.BAG_KIND.BACKPACK] = false,
@@ -497,11 +528,11 @@ const.DATABASE_DEFAULTS = {
     },
     newItems = {
       [const.BAG_KIND.BACKPACK] = {
-        markRecentItems = false,
+        markRecentItems = true,
         showNewItemFlash = false,
       },
       [const.BAG_KIND.BANK] = {
-        markRecentItems = false,
+        markRecentItems = true,
         showNewItemFlash = false,
       },
     },

@@ -15,7 +15,7 @@ Altoholic_Guild: disabled
 Altoholic_Options: disabled
 Altoholic_Search: disabled
 Altoholic_Summary: disabled
-AngryKeystones: disabled
+AngryKeystones: enabled
 AngryWorldQuests: disabled
 AstralKeys: disabled
 BadBoy: disabled
@@ -64,16 +64,16 @@ Details_EncounterDetails: enabled
 Details_ExplosiveOrbs: disabled
 Details_RaidCheck: enabled
 Details_DataStorage: enabled
-Details_Streamer: disabled
-Details_TinyThreat: disabled
-Details_Vanguard: disabled
+Details_Streamer: enabled
+Details_TinyThreat: enabled
+Details_Vanguard: enabled
 Doom_CooldownPulse: disabled
 ElvUI: enabled
 ElvUI_Libraries: enabled
 ElvUI_Options: enabled
 ElvUI_WindTools: enabled
 ExtraQuestButton: disabled
-GatherMate2: disabled
+GatherMate2: enabled
 GladiatorlosSA2: disabled
 GlobalIgnoreList: disabled
 HandyNotes: disabled
@@ -95,7 +95,7 @@ LittleWigs_MistsOfPandaria: enabled
 LittleWigs_Shadowlands: enabled
 LittleWigs_WarlordsOfDraenor: enabled
 LittleWigs_WrathOfTheLichKing: enabled
-MRT: disabled
+MRT: enabled
 Myslot: disabled
 MythicDungeonTools: enabled
 NameplateAuras: disabled
@@ -166,3 +166,6 @@ OPie_Classic: disabled
 Blizzard_CombatText: enabled
 LittleWigs_Dragonflight: enabled
 BigWigs_Dragonflight: enabled
+SharedMedia_Causese: enabled
+IncentiveProgram: enabled
+SharedMedia: enabled

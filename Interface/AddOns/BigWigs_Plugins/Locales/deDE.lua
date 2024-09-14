@@ -2,6 +2,7 @@ local L = BigWigsAPI:NewLocale("BigWigs: Plugins", "deDE")
 if not L then return end
 
 L.general = "Allgemein"
+L.advanced = "Erweitert"
 L.comma = ", "
 
 L.positionX = "X-Position"
@@ -189,10 +190,10 @@ L.blockTalkingHeadTimewalking = "Zeitwanderung (Dungeons & Schlachtzüge)"
 L.blockTalkingHeadScenarios = "Szenarien"
 
 L.redirectPopups = "Popup Banner als BigWigs Nachrichten ausgeben"
-L.redirectPopupsDesc = "Popup Banner in der Mitte des Bildschirms wie das '|cFF33FF99Platz für Schatzkammer aufgewertet|r' Banner oder das Banner beim Betreten einer Mythisch+ Instanz werden blockiert und stattdessen als BigWigs Nachrichten angezeigt. Diese Banner können recht groß und lange Zeit angezeigt werden, was Fähigkeiten daran hindert durch diese hindurch zu Klicken."
+L.redirectPopupsDesc = "Popup Banner in der Mitte des Bildschirms wie das '|cFF33FF99Platz für Schatzkammer aufgewertet|r' Banner werden stattdessen als BigWigs Nachrichten angezeigt. Diese Banner können recht groß und lange Zeit angezeigt werden, was die Möglichkeit blockiert durch diese hindurch zu Klicken."
 L.redirectPopupsColor = "Farbe der ausgegebenen Nachricht"
 L.blockDungeonPopups = "Popup Banner in Instanzen blockieren"
-L.blockDungeonPopupsDesc = "Die Popup Banner beim Betreten einer Instanz können sehr lange Texte enthalten. Die Aktivierung dieser Option blockiert diese komplett, statt diese als BigWigs Nachrichten auszugeben."
+L.blockDungeonPopupsDesc = "Die Popup Banner beim Betreten einer Instanz können sehr lange Texte enthalten. Die Aktivierung dieser Option blockiert diese komplett."
 L.itemLevel = "Gegenstandsstufe %d"
 
 L.userNotifySfx = "Soundeffekte wurden von BossBlock deaktiviert, Aktivierung wird erzwungen."
@@ -328,9 +329,8 @@ L.showBorder = "Rand anzeigen"
 L.showBorderDesc = "Zeigt einen Rand um das Symbol."
 L.borderColor = "Randfarbe"
 L.borderSize = "Randgröße"
-L.timer = "Timer"
-L.showTimer = "Timer anzeigen"
-L.showTimerDesc = "Zeigt einen Text-Timer auf dem Symbol."
+L.showNumbers = "Zahlen anzeigen"
+L.showNumbersDesc = "Zeigt Zahlen auf dem Symbol an."
 L.cooldown = "Abklingzeit"
 L.showCooldownSwipe = "Zirkel anzeigen"
 L.showCooldownSwipeDesc = "Zeigt einen Zirkel auf der Abklingzeit, wenn diese aktiv ist."
@@ -338,7 +338,7 @@ L.showCooldownEdge = "Kante hervorheben"
 L.showCooldownEdgeDesc = "Hebt die Kante des Zirkels auf der Abklingzeit hervor, wenn diese aktiv ist."
 L.inverse = "Invertieren"
 L.inverseSwipeDesc = "Invertiert die Abklingzeit Animationen."
-L.iconGlow = "Symbolleuchten"
+L.glow = "Leuchten"
 L.enableExpireGlow = "Aktiviere Leuchten beim Ablaufen"
 L.enableExpireGlowDesc = "Zeigt ein Leuchten um das Symbol wenn die Abklingzeit abgelaufen ist."
 L.glowColor = "Leuchtfarbe"
@@ -348,6 +348,8 @@ L.resetNameplateIconsDesc = "Setzt alle Optionen für Namensplaketten-Symbole zu
 L.nameplateTextSettings = "Texteinstellungen"
 L.fixate_test = "Fixierung Test" -- Text that displays to test on the frame
 L.resetNameplateTextDesc = "Setzt die Optionen für Namensplaketten-Texte zurück."
+L.autoScale = "Automatischer Maßstab"
+L.autoScaleDesc = "Ändert den Maßstab automatisch in Abhängigkeit vom Maßstab der Namensplakette."
 
 -- Glow types as part of LibCustomGlow
 L.pixelGlow = "Pixel-Leuchten"

@@ -155,7 +155,7 @@ HidingBar_Options: disabled
 KeyCount: disabled
 LittleWigs_Shadowlands: enabled
 LittleWigs_WrathOfTheLichKing: enabled
-MRT: disabled
+MRT: enabled
 Myslot: disabled
 MythicDungeonTools: enabled
 NameplateAuras: disabled

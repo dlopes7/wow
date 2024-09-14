@@ -1,6 +1,6 @@
 # BetterBags
 
-## [v0.2.2](https://github.com/Cidan/BetterBags/tree/v0.2.2) (2024-08-18)
-[Full Changelog](https://github.com/Cidan/BetterBags/compare/v0.2.1...v0.2.2) [Previous Releases](https://github.com/Cidan/BetterBags/releases)
+## [v0.3.15](https://github.com/Cidan/BetterBags/tree/v0.3.15) (2024-09-05)
+[Full Changelog](https://github.com/Cidan/BetterBags/compare/v0.3.14...v0.3.15) [Previous Releases](https://github.com/Cidan/BetterBags/releases)
 
-- Fixed in-combat taint. (#610)  
+- Added back the ability to create categories from the options menu (but not configure them).  

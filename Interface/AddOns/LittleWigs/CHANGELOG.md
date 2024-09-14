@@ -1,9 +1,13 @@
 # LittleWigs
 
-## [v11.0.18](https://github.com/BigWigsMods/LittleWigs/tree/v11.0.18) (2024-08-25)
-[Full Changelog](https://github.com/BigWigsMods/LittleWigs/compare/v11.0.17...v11.0.18) [Previous Releases](https://github.com/BigWigsMods/LittleWigs/releases)
+## [v11.0.23](https://github.com/BigWigsMods/LittleWigs/tree/v11.0.23) (2024-09-10)
+[Full Changelog](https://github.com/BigWigsMods/LittleWigs/compare/v11.0.22...v11.0.23) [Previous Releases](https://github.com/BigWigsMods/LittleWigs/releases)
 
-- Cataclysm/GrimBatol/Erudax: Depth's Grasp  
-- Cataclysm/GrimBatol/Drahga: Shadowflame Bolt  
-- WarWithin/TheDawnbreaker/Shadowcrown: Shadow Bolt  
-- WarWithin/TheStonevault/MasterMachinists: Timer updates, ability counts  
+- Delves/ZekvirsLair/Zekvir: Add boss module (#1146)  
+- toc updates  
+- bump toc  
+- Update frFR (#1145)  
+- Update frFR (#1142)  
+- Update zhTW  
+- Delves/Trash/Kobyss: Additional auto-gossip id  
+- Delves: Localization  

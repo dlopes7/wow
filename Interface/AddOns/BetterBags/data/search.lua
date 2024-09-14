@@ -180,6 +180,7 @@ end
 
 ---@param item ItemData
 function search:Add(item)
+  if item.isItemEmpty then return end
   search:addStringToIndex(self.indicies.name, item.itemInfo.itemName, item.slotkey)
   search:addStringToIndex(self.indicies.type, item.itemInfo.itemType, item.slotkey)
   search:addStringToIndex(self.indicies.subtype, item.itemInfo.itemSubType, item.slotkey)
@@ -203,7 +204,7 @@ function search:Add(item)
     search:addStringToIndex(self.indicies.equipmentlocation, _G[item.itemInfo.itemEquipLoc], item.slotkey)
   end
 
-  if const.BINDING_MAP[item.bindingInfo.binding] ~= "" then
+  if item.bindingInfo and item.bindingInfo.binding ~= nil and const.BINDING_MAP[item.bindingInfo.binding] ~= "" then
     search:addStringToIndex(self.indicies.binding, const.BINDING_MAP[item.bindingInfo.binding], item.slotkey)
   end
 
@@ -230,6 +231,7 @@ end
 
 ---@param item ItemData
 function search:Remove(item)
+  if item.isItemEmpty then return end
   search:removeStringFromIndex(self.indicies.name, item.itemInfo.itemName, item.slotkey)
   search:removeStringFromIndex(self.indicies.type, item.itemInfo.itemType, item.slotkey)
   search:removeStringFromIndex(self.indicies.subtype, item.itemInfo.itemSubType, item.slotkey)
@@ -253,7 +255,7 @@ function search:Remove(item)
     search:removeStringFromIndex(self.indicies.equipmentlocation, _G[item.itemInfo.itemEquipLoc], item.slotkey)
   end
 
-  if const.BINDING_MAP[item.bindingInfo.binding] ~= "" then
+  if item.bindingInfo and item.bindingInfo.binding ~= nil and const.BINDING_MAP[item.bindingInfo.binding] ~= "" then
     search:removeStringFromIndex(self.indicies.binding, const.BINDING_MAP[item.bindingInfo.binding], item.slotkey)
   end
 
@@ -561,7 +563,7 @@ function search:EvaluateAST(node)
       elseif operator == "<" then
         return self:isLess(field, value)
       else
-        error("Unknown operator: " .. operator)
+        return {}
       end
   end
 
