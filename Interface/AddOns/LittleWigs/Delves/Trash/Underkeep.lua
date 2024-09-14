@@ -30,6 +30,10 @@ end
 -- Initialization
 --
 
+function mod:OnRegister()
+	self:SetSpellRename(450714, CL.frontal_cone) -- Jagged Barbs (Frontal Cone)
+end
+
 local autotalk = mod:AddAutoTalkOption(true)
 function mod:GetOptions()
 	return {
@@ -40,16 +44,18 @@ function mod:GetOptions()
 		450714, -- Jagged Barbs
 		450637, -- Leeching Swarm
 		-- Crazed Abomination
-		448179, -- Armored Shell
-		448155, -- Shockwave Tremors
-		{448161, "DISPEL"}, -- Enrage
+		{448179, "NAMEPLATE"}, -- Armored Shell
+		{448155, "NAMEPLATE"}, -- Shockwave Tremors
+		{448161, "DISPEL", "NAMEPLATE"}, -- Enrage
 		-- Web Marauder
 		453149, -- Gossamer Webbing
-	}, {
+	},{
 		[451913] = L.ascended_webfriar,
 		[450714] = L.deepwalker_guardian,
 		[448179] = L.crazed_abomination,
 		[453149] = L.web_marauder,
+	},{
+		[450714] = CL.frontal_cone, -- Jagged Barbs (Frontal Cone)
 	}
 end
 
@@ -68,6 +74,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "ArmoredShell", 448179)
 	self:Log("SPELL_CAST_START", "ShockwaveTremors", 448155)
 	self:Log("SPELL_AURA_APPLIED", "Enrage", 448161)
+	self:Death("CrazedAbominationDeath", 219454)
 
 	-- Web Marauder
 	self:Log("SPELL_CAST_START", "GossamerWebbing", 453149)
@@ -103,7 +110,7 @@ end
 -- Deepwalker Guardian
 
 function mod:JaggedBarbs(args)
-	self:Message(args.spellId, "orange")
+	self:Message(args.spellId, "orange", CL.frontal_cone)
 	self:PlaySound(args.spellId, "alarm")
 end
 
@@ -116,19 +123,26 @@ end
 
 function mod:ArmoredShell(args)
 	self:Message(args.spellId, "red", CL.casting:format(args.spellName))
+	self:Nameplate(args.spellId, 13.0, args.sourceGUID)
 	self:PlaySound(args.spellId, "alert")
 end
 
 function mod:ShockwaveTremors(args)
 	self:Message(args.spellId, "orange")
+	self:Nameplate(args.spellId, 8.5, args.sourceGUID)
 	self:PlaySound(args.spellId, "alarm")
 end
 
 function mod:Enrage(args)
 	if self:Dispeller("enrage", true, args.spellId) then
 		self:Message(args.spellId, "yellow", CL.other:format(args.spellName, args.destName))
+		self:Nameplate(args.spellId, 23.1, args.sourceGUID)
 		self:PlaySound(args.spellId, "info")
 	end
+end
+
+function mod:CrazedAbominationDeath(args)
+	self:ClearNameplate(args.destGUID)
 end
 
 -- Web Marauder

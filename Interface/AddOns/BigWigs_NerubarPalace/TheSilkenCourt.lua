@@ -34,73 +34,77 @@ local intermissionSpellCount = 1
 local SKIP_CAST_THRESHOLD = 2
 local checkTimer = nil
 
-local timersNormal = {
+local timersNormal = { -- 14:02 (enrage)
 	{ -- Stage 1
-		[438801] = {12.8, 64.9, 0}, -- Call of the Swarm
-		[438218] = {17.8, 20.0, 20.0, 23.0, 38.0, 0}, -- Piercing Strike
-		[440504] = {29.8, 33.0, 31.0, 0}, -- Impaling Eruption
-		[440246] = {43.7, 60.0, 0}, -- Reckless Charge
-		[438656] = {7.4, 31.9, 30.3, 30.3, 0}, -- Venomous Rain
-		[450045] = {16.6, 30.2, 30.3, 30.3, 0}, -- Skittering Leap
-		[439838] = {24.1, 33.4, 33.3, 0}, -- Web Bomb
+		[438801] = {12.0, 54.0, 0}, -- Call of the Swarm
+		[438218] = {10.1, 19.9, 28.0, 20.0, 39.0, 0}, -- Piercing Strike
+		[440504] = {22.0, 38.0, 25.0, 0}, -- Impaling Eruption
+		[441791] = {32.0, 57.9, 0}, -- Burrowed Eruption
+		[440246] = {35.8, 58.0, 0}, -- Reckless Charge
+		[438656] = {6.2, 37.9, 37.7, 36.1, 0}, -- Venomous Rain
+		[450045] = {40.9, 58.3, 0}, -- Skittering Leap
+		[439838] = {16.3, 59.2, 0}, -- Web Bomb
 	},
 	{ -- Stage 2
-		[440504] = {9.0, 40.0, 40.0, 0}, -- Impaling Eruption
-		[438218] = {14.0, 20.0, 20.0, 20.0, 20.0, 20.0, 0}, -- Piercing Strike
-		[438801] = {26.0, 51.0, 0}, -- Call of the Swarm
-		[438677] = {46.0, 50.0, 0}, -- Stinging Swarm
-		[441782] = {18.2, 75.4, 0}, -- Strands of Reality
-		[450483] = {27.2, 26.7, 25.2, 23.6, 0}, -- Void Step
-		[441626] = {32.3, 49.8, 0}, -- Web Vortex
-		[450129] = {35.0, 49.8, 0}, -- Entropic Desolation
-		[438355] = {56.9, 48.8, 0}, -- Cataclysmic Entropy
+		[440504] = {18.0, 39.0, 39.0, 0}, -- Impaling Eruption
+		[438218] = {16.0, 20.0, 26.0, 20.0, 20.0, 20.0, 0}, -- Piercing Strike
+		[438801] = {12.0, 54.0, 0}, -- Call of the Swarm
+		[438677] = {33.0, 58.0, 0}, -- Stinging Swarm
+		[441782] = {24.3, 65.6, 0}, -- Strands of Reality
+		[450483] = {42.7, 29.1, 25.6, 0}, -- Void Step
+		[441626] = {31.7, 43.1, 0}, -- Web Vortex
+		[450129] = {34.5, 43.2, 0}, -- Entropic Desolation
+		[438355] = {45.8, 54.7, 0}, -- Cataclysmic Entropy
 	},
 	{ -- Stage 3
-		[443068] = {45.1, 63.0, 63.0}, -- Spike Eruption
-		[442994] = {30.0, 119.0}, -- Unleashed Swarm
-		[438218] = {25.1, 23.0, 40.0, 23.0, 56.0, 20.0}, -- Piercing Strike
-		[440246] = {58.9, 75.0}, -- Reckless Charge
-		[438677] = {75.1, 100.0}, -- Stinging Swarm
-		[450483] = {37.4, 24.7, 25.2, 26.1, 24.7, 25.2, 24.2}, -- Void Step
-		[450129] = {45.2, 74.0}, -- Entropic Desolation
-		[441626] = {42.5, 73.9}, -- Web Vortex
-		[441782] = {26.4, 77.9, 76.2}, -- Strands of Reality
-		[438355] = {90.3, 100.2}, -- Cataclysmic Entropy
+		[443068] = {45.0, 63.0, 63.0, 76.5, 63.0, 63.0, 0}, -- Spike Eruption
+		[442994] = {30.0, 202.5, 0}, -- Unleashed Swarm
+		[438218] = {25.0, 23.0, 40.0, 23.0, 56.0, 20.0, 40.5, 23.0, 40.0, 23.0, 56.0, 20.0, 0}, -- Piercing Strike
+		[441791] = {55.0, 75.0, 127.5, 75.0, 0}, -- Burrowed Eruption
+		[440246] = {59.0, 74.9, 127.5, 75.1, 0}, -- Reckless Charge
+		[438677] = {75.0, 100.0, 102.5, 100.0, 0}, -- Stinging Swarm
+		[450483] = {63.0, 25.2, 24.6, 26.2, 48.8, 77.7, 25.1, 24.6, 26.1, 49.0, 0}, -- Void Step
+		[450129] = {44.7, 75.8, 126.6, 75.9, 0}, -- Entropic Desolation
+		[441626] = {41.9, 75.8, 126.6, 75.9, 0}, -- Web Vortex
+		[441782] = {26.3, 154.0, 48.9, 78.5, 75.1, 0}, -- Strands of Reality
+		[438355] = {91.2, 99.6, 102.9, 99.7, 0}, -- Cataclysmic Entropy
 	},
 }
 
-local timersHeroic = {
+local timersHeroic = { -- 12:14
 	{ -- Stage 1
-		[438801] = {17.9, 65.0, 0}, -- Call of the Swarm
-		[438218] = {15.0, 20.0, 28.0, 18.0, 0}, -- Piercing Strike
-		[440504] = {20.9, 37.1, 28.9, 31.0, 0}, -- Impaling Eruption
-		[440246] = {43.5, 60.0, 0}, -- Reckless Charge
-		[438656] = {7.4, 31.5, 31.5, 29.6, 0}, -- Venomous Rain
-		[450045] = {15.4, 31.9, 28.1, 15.7, 16.2, 0}, -- Skittering Leap
-		[439838] = {25.2, 36.0, 0}, -- Web Bomb
+		[438801] = {12.1, 54.0, 0}, -- Call of the Swarm
+		[438218] = {10.1, 20.0, 27.0, 21.0, 38.0, 0}, -- Piercing Strike
+		[440504] = {19.1, 40.0, 26.0, 33.0, 0}, -- Impaling Eruption
+		[441791] = {32.0, 58.0, 0}, -- Burrowed Eruption
+		[440246] = {35.3, 58.0, 0}, -- Reckless Charge
+		[438656] = {6.2, 38.1, 36.1, 37.8, 0}, -- Venomous Rain
+		[450045] = {39.3, 58.7, 0}, -- Skittering Leap
+		[439838] = {16.3, 56.4, 0}, -- Web Bomb
 	},
 	{ -- Stage 2
-		[440504] = {9.0, 40.0, 40.0, 0}, -- Impaling Eruption
-		[438218] = {15.0, 24.4, 15.5, 19.0, 21.0, 0}, -- Piercing Strike
-		[438801] = {31.0, 37.0, 0}, -- Call of the Swarm
-		[438677] = {41.0, 35.0, 0}, -- Stinging Swarm
-		[441782] = {14.2, 34.7, 32.8, 0}, -- Strands of Reality
-		[450483] = {27.2, 25.2, 26.0, 24.2, 0}, -- Void Step
-		[441626] = {32.2, 37.2, 36.2, 0}, -- Web Vortex
-		[450129] = {36.1, 36.4, 36.2, 0}, -- Entropic Desolation
-		[438355] = {55.6, 59.4, 0}, -- Cataclysmic Entropy
+		[440504] = {13.0, 40.0, 27.0, 30.0, 0}, -- Impaling Eruption
+		[438218] = {18.0, 20.0, 20.0, 20.0, 20.0, 20.0, 0}, -- Piercing Strike
+		[438801] = {20.0, 54.0, 0}, -- Call of the Swarm
+		[438677] = {29.0, 58.0, 0}, -- Stinging Swarm
+		[441782] = {31.6, 35.7, 25.5, 0}, -- Strands of Reality
+		[450483] = {38.2, 34.2, 25.1, 29.1, 0}, -- Void Step
+		[441626] = {20.3, 55.1, 0}, -- Web Vortex
+		[450129] = {23.0, 55.1, 0}, -- Entropic Desolation
+		[438355] = {41.2, 59.3, 0}, -- Cataclysmic Entropy
 	},
 	{ -- Stage 3
-		[443068] = {20.0, 111.0}, -- Spike Eruption
-		[442994] = {30.0, 89.0}, -- Unleashed Swarm
-		[438218] = {25.0, 20.0, 30.0, 21.0, 20.0, 20.4, 19.6}, -- Piercing Strike
-		[440246] = {59.2, 109.8}, -- Reckless Charge
-		[438677] = {93.0, 69.0}, -- Stinging Swarm
-		[450483] = {37.4, 26.1, 25.0, 25.7, 23.2, 25.1, 9.1, 13.3, 2.9}, -- Void Step
-		[450129] = {45.6, 98.7}, -- Entropic Desolation
-		[441626] = {42.7, 98.7}, -- Web Vortex
-		[441782] = {28.6, 63.4, 58.4}, -- Strands of Reality
-		[438355] = {115.3, 76.4}, -- Cataclysmic Entropy
+		[443068] = {40.1, 30.9, 64.0, 85.0, 31.0, 64.00}, -- Spike Eruption
+		[442994] = {23.1, 75.0, 70.0, 35.0, 75.0, 70.0}, -- Unleashed Swarm
+		[438218] = {20.1, 48.0, 20.0, 23.0, 19.9, 35.0, 34.0, 48.0, 20.0, 23.0, 20.0, 35.0}, -- Piercing Strike
+		[441791] = {43.1, 97.9, 82.1, 98.0}, -- Burrowed Eruption
+		[440246] = {46.0, 97.9, 82.0, 98.2}, -- Reckless Charge
+		[438677] = {81.0, 57.1, 123.0, 57.0}, -- Stinging Swarm
+		[450483] = {50.9, 38.9, 29.2, 29.5, 2.6, 79.7, 38.9, 29.1, 29.5, 2.8}, -- Void Step
+		[450129] = {36.1, 97.7, 82.3, 97.6}, -- Entropic Desolation
+		[441626] = {33.4, 97.6, 82.3, 97.6}, -- Web Vortex
+		[441782] = {22.3, 33.2, 21.2, 47.3, 78.7, 32.7, 21.2, 47.2}, -- Strands of Reality
+		[438355] = {92.8, 61.3, 118.6, 61.3}, -- Cataclysmic Entropy
 	},
 }
 
@@ -109,6 +113,7 @@ local timersMythic = {
 		[438801] = {22.9, 50.0, 0}, -- Call of the Swarm
 		[438218] = {14.9, 23.0, 25.0, 24.0, 0}, -- Piercing Strike
 		[440504] = {7.9, 24.0, 25.0, 23.0, 0}, -- Impaling Eruption
+		[441791] = {39.9, 60.0, 0}, -- Burrowed Eruption
 		[440246] = {42.8, 60.1, 0}, -- Reckless Charge
 		[438656] = {15.1, 41.9, 32.8, 0}, -- Venomous Rain
 		[450045] = {19.1, 27.3, 59.6, 0}, -- Skittering Leap
@@ -129,6 +134,7 @@ local timersMythic = {
 		[443068] = {0}, -- Spike Eruption
 		[442994] = {0}, -- Unleashed Swarm
 		[438218] = {0}, -- Piercing Strike
+		[441791] = {0}, -- Burrowed Eruption
 		[440246] = {0}, -- Reckless Charge
 		[438677] = {0}, -- Stinging Swarm
 		[450483] = {0}, -- Void Step
@@ -169,24 +175,24 @@ function mod:GetOptions()
 		"stages",
 		-- Stage One: Clash of Rivals
 			-- Anub'arash
-			{438218, "TANK"}, -- Piercing Strike
-			438801, -- Call of the Swarm
-			shattershellScarabMarker,
 			440246, -- Reckless Charge
 				440178, -- Reckless Impact
 				440179, -- Entangled
 			441791, -- Burrowed Eruption
+			438801, -- Call of the Swarm
+			shattershellScarabMarker,
 			440504, -- Impaling Eruption
 				449857, -- Impaled
+			{438218, "TANK"}, -- Piercing Strike
 
 			-- Skeinspinner Takazj
-			{438200, "TANK"}, -- Poison Bolt
-			438656, -- Venomous Rain
 			439838, -- Web Bomb
+			438656, -- Venomous Rain
 				440001, -- Binding Webs
 			450045, -- Skittering Leap
+			{438200, "TANK"}, -- Poison Bolt
 
-		-- Transition: Void Ascension (Takazj)
+		-- Intermission: Void Ascension (Takazj)
 		450980, -- Shatter Existence
 		460600, -- Entropic Barrage
 
@@ -197,14 +203,14 @@ function mod:GetOptions()
 				456245, -- Stinging Delirium
 
 			-- Skeinspinner Takazj
-			{441772, "TANK"}, -- Void Bolt
+			438355, -- Cataclysmic Entropy
 			441626, -- Web Vortex
 			450129, -- Entropic Desolation
 			441782, -- Strands of Reality
 			450483, -- Void Step
-			438355, -- Cataclysmic Entropy
+			{441772, "TANK"}, -- Void Bolt
 
-		-- Transition: Raging Fury (Anub'arash)
+		-- Intermission: Raging Fury (Anub'arash)
 		451277, -- Spike Storm
 		460364, -- Seismic Upheaval
 
@@ -212,6 +218,7 @@ function mod:GetOptions()
 			-- Anub'arash
 			443068, -- Spike Eruption
 			442994, -- Unleashed Swarm
+			443598, -- Uncontrollable Rage
 
 		-- Mythic
 		455849, -- Mark of Paranoia
@@ -220,11 +227,11 @@ function mod:GetOptions()
 		460281, -- Burning Rage
 		455863, -- Mark of Death
 	}, {
-		[438218] = -29011, -- Stage 1
-		[438200] = "", -- boss split
+		[440246] = -29011, -- Stage 1
+		[439838] = "", -- boss split
 		[450980] = -29726, -- Intermission 1
 		[438677] = -29021, -- Stage 2
-		[441772] = "", -- boss split
+		[438355] = "", -- boss split
 		[451277] = -29728, -- Intermission 2
 		[443068] = -29022, -- Stage 3
 		[455849] = "mythic",
@@ -283,13 +290,16 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "StingingDeliriumApplied", 456245, 456235) -- boss/player
 	self:Log("SPELL_AURA_REMOVED", "StingingDeliriumRemoved", 456245, 456235)
 
-	self:Log("SPELL_CAST_START", "UncontrollableRage", 443598)
 	self:Log("SPELL_AURA_APPLIED", "SpikeStormApplied", 451277)
 	self:Log("SPELL_AURA_REMOVED", "SpikeStormRemoved", 451277)
-	self:Log("SPELL_CAST_SUCCESS", "SeismicUpheaval", 460364)
+	self:Log("SPELL_AURA_APPLIED", "SeismicUpheavalApplied", 460364)
 
+	self:Log("SPELL_CAST_START", "BurrowTransition", 456174)
 	self:Log("SPELL_CAST_START", "SpikeEruption", 443068)
 	self:Log("SPELL_CAST_START", "UnleashedSwarm", 442994)
+
+	self:Log("SPELL_CAST_START", "UncontrollableRage", 443598)
+	self:Log("SPELL_CAST_SUCCESS", "UncontrollableRageSuccess", 443598)
 
 	-- Skeinspinner Takazj
 	self:Log("SPELL_AURA_APPLIED_DOSE", "PoisonBoltApplied", 438200)
@@ -303,7 +313,8 @@ function mod:OnBossEnable()
 
 	self:Log("SPELL_AURA_APPLIED", "ShatterExistenceApplied", 450980)
 	self:Log("SPELL_AURA_REMOVED", "ShatterExistenceRemoved", 450980)
-	self:Log("SPELL_CAST_SUCCESS", "EntropicBarrage", 460600)
+	self:Log("SPELL_AURA_APPLIED", "EntropicBarrageApplied", 460600)
+	self:Log("SPELL_AURA_REFRESH", "EntropicBarrageApplied", 460600)
 
 	self:Log("SPELL_CAST_START", "VoidStep", 450483)
 	self:Log("SPELL_CAST_START", "StrandsOfReality", 441782)
@@ -325,13 +336,13 @@ function mod:OnEngage()
 	self:SetStage(1)
 
 	-- Anub'arash
+	callOfTheSwarmCount = 1
 	piercingStrikeCount = 1
 	impalingEruptionCount = 1
-	callOfTheSwarmCount = 1
+	burrowedEruptionCount = 1
 	recklessChargeCount = 1
 	stingingSwarmCount = 1
 	unleashedSwarmCount = 1
-	burrowedEruptionCount = 1
 
 	self:Bar(438801, timers[1][438801][1], CL.count:format(CL.adds, callOfTheSwarmCount)) -- Call of the Swarm
 	self:Bar(438218, timers[1][438218][1], CL.count:format(self:SpellName(438218), piercingStrikeCount)) -- Piercing Strike
@@ -340,8 +351,8 @@ function mod:OnEngage()
 	self:Bar(440246, timers[1][440246][1], CL.count:format(CL.charge, recklessChargeCount)) -- Reckless Charge
 
 	-- Skeinspinner Takazj
-	skitteringLeapCount = 1
 	venomousRainCount = 1
+	skitteringLeapCount = 1
 	webBombCount = 1
 	strandsOfRealityCount = 1
 	cataclysmicEntropyCount = 1
@@ -416,8 +427,8 @@ end
 
 function mod:BurrowedEruption(args)
 	self:StopBar(CL.count:format(L.burrowed_eruption, burrowedEruptionCount))
-	self:Message(args.spellId, "yellow", CL.count:format(L.burrowed_eruption, burrowedEruptionCount))
-	self:PlaySound(args.spellId, "alert")
+	self:Message(args.spellId, "cyan", CL.count:format(L.burrowed_eruption, burrowedEruptionCount))
+	--self:PlaySound(args.spellId, "alert")
 	burrowedEruptionCount = burrowedEruptionCount + 1
 	self:Bar(args.spellId, timers[self:GetStage()][args.spellId][burrowedEruptionCount], CL.count:format(L.burrowed_eruption, burrowedEruptionCount))
 end
@@ -437,6 +448,7 @@ function mod:RecklessImpactApplied(args)
 end
 
 function mod:RecklessImpactRemoved(args)
+	self:StopBar(args.spellName)
 	self:Message(args.spellId, "green", CL.over:format(args.spellName))
 	self:PlaySound(args.spellId, "info")
 end
@@ -444,10 +456,11 @@ end
 function mod:EntangledApplied(args)
 	self:Message(args.spellId, "green")
 	self:PlaySound(args.spellId, "long") -- success
-	self:Bar(args.spellId, 7)
+	self:Bar(args.spellId, 12)
 end
 
 function mod:EntangledRemoved(args)
+	self:StopBar(args.spellName)
 	self:Message(args.spellId, "green", CL.over:format(args.spellName))
 	self:PlaySound(args.spellId, "info")
 end
@@ -460,7 +473,7 @@ function mod:PoisonBoltApplied(args)
 	end
 end
 
-function mod:VenomousRain(args)
+function mod:VenomousRain()
 	self:StopBar(CL.count:format(L.venomous_rain, venomousRainCount))
 	self:Message(438656, "orange", CL.count:format(L.venomous_rain, venomousRainCount))
 	venomousRainCount = venomousRainCount + 1
@@ -513,48 +526,46 @@ end
 
 function mod:VoidStepTransition()
 	self:StopBar(CL.count:format(CL.intermission, 1))
-	self:SetStage(1.5)
 
+	self:SetStage(1.5)
 	self:Message("stages", "cyan", CL.count:format(CL.intermission, 1), false)
 	self:PlaySound("stages", "long")
-	-- intermissionSpellCount = 1
+
+	intermissionSpellCount = 1
 end
 
-function mod:EntropicBarrage(args)
-	self:StopBar(args.spellId, CL.count:format(args.spellName, intermissionSpellCount))
-	intermissionSpellCount = intermissionSpellCount + 1
-	self:Bar(args.spellId, 12, CL.count:format(args.spellName, intermissionSpellCount))
+do
+	local prev = 0
+	function mod:EntropicBarrageApplied(args)
+		if args.time - prev > 3 then
+			prev = args.time
+			self:StopBar(CL.count:format(args.spellName, intermissionSpellCount))
+			intermissionSpellCount = intermissionSpellCount + 1
+			self:Bar(args.spellId, self:LFR() and 16 or self:Normal() and 14 or 13, CL.count:format(args.spellName, intermissionSpellCount))
+		end
+	end
 end
 
 do
 	local appliedTime = 0
 	function mod:ShatterExistenceApplied(args)
-		if self:GetStage() == 1 then  -- XXX make sure we kill the bar
-			self:StopBar(CL.count:format(CL.intermission, 1))
-			self:SetStage(1.5)
-			self:PlaySound("stages", "long")
-		else
-			self:PlaySound(args.spellId, "info")
-		end
-
 		appliedTime = args.time
 		self:Message(args.spellId, "cyan")
+		self:PlaySound(args.spellId, "alert")
 	end
 
 	function mod:ShatterExistenceRemoved(args)
+		self:StopBar(CL.count:format(self:SpellName(460600), intermissionSpellCount)) -- Entropic Barrage
 		if args.amount == 0 then
 			self:Message(args.spellId, "green", CL.removed_after:format(args.spellName, args.time - appliedTime))
 			self:PlaySound(args.spellId, "long")
 
-			self:StopBar(args.spellId, CL.count:format(self:SpellName(460600), intermissionSpellCount)) -- Entropic Barrage
-			intermissionSpellCount = 1
-
 			self:SetStage(2)
 			-- Skeinspinner Takazj
-			skitteringLeapCount = 1 -- Skittering Leap -> Void Step
-			venomousRainCount = 1 -- Venomus Rain -> Entropic Desolation
-			webBombCount = 1 -- Web Bomb -> Web Vortex
 			strandsOfRealityCount = 1
+			skitteringLeapCount = 1 -- Skittering Leap -> Void Step
+			webBombCount = 1 -- Web Bomb -> Web Vortex
+			venomousRainCount = 1 -- Venomus Rain -> Entropic Desolation
 			cataclysmicEntropyCount = 1
 
 			self:Bar(441782, timers[2][441782][1], CL.count:format(L.strands_of_reality, strandsOfRealityCount)) -- Strands of Reality
@@ -563,11 +574,11 @@ do
 			self:Bar(450129, timers[2][450129][1], CL.count:format(L.entropic_desolation, venomousRainCount)) -- Entropic Desolation
 			self:Bar(438355, timers[2][438355][1], CL.count:format(L.cataclysmic_entropy, cataclysmicEntropyCount)) -- Cataclysmic Entropy
 			checkTimer = self:ScheduleTimer("CataclysmicEntropyCheck", timers[2][438355][1] + SKIP_CAST_THRESHOLD, cataclysmicEntropyCount)
-			self:CDBar("stages", 133.0, CL.count:format(CL.intermission, 2), 451277) -- Transition: Raging Fury (Spike Storm)
+			self:CDBar("stages", 131.2, CL.count:format(CL.intermission, 2), 451277) -- Transition: Raging Fury (Spike Storm)
 
 			-- Anub'arash
-			piercingStrikeCount = 1
 			impalingEruptionCount = 1
+			piercingStrikeCount = 1
 			callOfTheSwarmCount = 1
 			stingingSwarmCount = 1
 
@@ -698,63 +709,59 @@ end
 
 -- Transistion: Raging Fury
 
-function mod:UncontrollableRage()
-	if self:GetStage() == 2 then -- Transition cast
-		self:StopBar(CL.count:format(CL.intermission, 2))
-		self:SetStage(2.5)
+function mod:BurrowTransition()
+	self:StopBar(CL.count:format(CL.intermission, 2))
 
-		self:Message("stages", "cyan", CL.count:format(CL.intermission, 2), false)
-		self:PlaySound("stages", "long")
-		-- intermissionSpellCount = 1
-	end
+	self:SetStage(2.5)
+	self:Message("stages", "cyan", CL.count:format(CL.intermission, 2), false)
+	self:PlaySound("stages", "long")
+
+	intermissionSpellCount = 1
 end
 
-function mod:SeismicUpheaval(args)
-	self:StopBar(args.spellId, CL.count:format(args.spellName, intermissionSpellCount))
-	intermissionSpellCount = intermissionSpellCount + 1
-	self:Bar(args.spellId, 15, CL.count:format(args.spellName, intermissionSpellCount))
+do
+	local prev = 0
+	function mod:SeismicUpheavalApplied(args)
+		if args.time - prev > 3 then
+			prev = args.time
+			self:StopBar(CL.count:format(args.spellName, intermissionSpellCount))
+			intermissionSpellCount = intermissionSpellCount + 1
+			self:Bar(args.spellId, self:LFR() and 27 or self:Normal() and 24 or 20, CL.count:format(args.spellName, intermissionSpellCount))
+		end
+	end
 end
 
 do
 	local appliedTime = 0
 	function mod:SpikeStormApplied(args)
-		if self:GetStage() == 2 then -- XXX make sure we kill the bar
-			self:StopBar(CL.count:format(CL.intermission, 2))
-			self:SetStage(2.5)
-			self:PlaySound(args.spellId, "long")
-		else
-			self:PlaySound(args.spellId, "info")
-		end
-
 		appliedTime = args.time
 		self:Message(args.spellId, "cyan")
-
-		impalingEruptionCount = 1
+		self:PlaySound(args.spellId, "alert")
 	end
 
 	function mod:SpikeStormRemoved(args)
+		self:StopBar(CL.count:format(self:SpellName(460364), intermissionSpellCount)) -- Seismic Upheaval
 		if args.amount == 0 then
 			self:Message(args.spellId, "green", CL.removed_after:format(args.spellName, args.time - appliedTime))
 			self:PlaySound(args.spellId, "long")
-
-			self:StopBar(args.spellId, CL.count:format(self:SpellName(460364), intermissionSpellCount)) -- Seismic Upheaval
-			intermissionSpellCount = 1
 
 			self:SetStage(3)
 			-- Anub'arash
 			impalingEruptionCount = 1 -- Impaling Eruption -> Spike Eruption
 			callOfTheSwarmCount = 1 -- Call of the Swarm -> Unleashed Swarm
 			piercingStrikeCount = 1
+			burrowedEruptionCount = 1
 			recklessChargeCount = 1
 			stingingSwarmCount = 1
 
 			self:Bar(443068, timers[3][443068][1], CL.count:format(L.spike_eruption, impalingEruptionCount)) -- Spike Eruption
 			self:Bar(442994, timers[3][442994][1], CL.count:format(L.unleashed_swarm, callOfTheSwarmCount)) -- Unleashed Swarm
 			self:Bar(438218, timers[3][438218][1], CL.count:format(self:SpellName(438218), piercingStrikeCount)) -- Piercing Strike
+			self:Bar(441791, timers[3][441791][1], CL.count:format(self:SpellName(460360), burrowedEruptionCount)) -- Burrowed Eruption
 			self:Bar(440246, timers[3][440246][1], CL.count:format(CL.charge, recklessChargeCount)) -- Reckless Charge
 			self:Bar(438677, timers[3][438677][1], CL.count:format(L.stinging_swarm, stingingSwarmCount)) -- Stinging Swarm
-			if self:Mythic() then
-				self:Bar("stages", 203.0, 26662, 26662) -- Berserk?
+			if not self:LFR() then
+				self:Bar(443598, self:Mythic() and 180 or 410) -- Uncontrollable Rage
 			end
 
 			-- Skeinspinner Takazj
@@ -794,6 +801,17 @@ function mod:UnleashedSwarm(args)
 	self:PlaySound(args.spellId, "alarm")
 	callOfTheSwarmCount = callOfTheSwarmCount + 1
 	self:Bar(args.spellId, timers[3][args.spellId][callOfTheSwarmCount], CL.count:format(L.unleashed_swarm, callOfTheSwarmCount))
+end
+
+function mod:UncontrollableRage(args)
+	self:StopBar(args.spellName)
+	self:Message(args.spellId, "red", CL.casting:format(args.spellName))
+	self:PlaySound(args.spellId, "long")
+end
+
+function mod:UncontrollableRageSuccess(args)
+	self:Message(args.spellId, "red")
+	self:PlaySound(args.spellId, "alarm")
 end
 
 -- Mythic

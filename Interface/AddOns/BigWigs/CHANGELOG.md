@@ -1,12 +1,10 @@
 # BigWigs
 
-## [v357.3](https://github.com/BigWigsMods/BigWigs/tree/v357.3) (2024-09-10)
-[Full Changelog](https://github.com/BigWigsMods/BigWigs/compare/v357.2...v357.3) [Previous Releases](https://github.com/BigWigsMods/BigWigs/releases)
+## [v358.4](https://github.com/BigWigsMods/BigWigs/tree/v358.4) (2024-09-13)
+[Full Changelog](https://github.com/BigWigsMods/BigWigs/compare/v358.3...v358.4) [Previous Releases](https://github.com/BigWigsMods/BigWigs/releases)
 
-- Update deDE (#1805)  
-- Update encounter locale (#1801)  
-- Update ruRU (#1803)  
-- Update ruRU (#1802)  
-- Update toc data  
-- bump toc  
-- Update frFR (#1798)  
+- Plugins/BossBlock: Support more toasts  
+- Plugins/Nameplates: Fix comment typo  
+- NerubarPalace/Ovinax: Fix a wrong spellname  
+- NerubarPalace/Ovinax: Fix Experimental Dosage bars  
+- Update zhCN (#1819)  

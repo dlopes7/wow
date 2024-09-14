@@ -12,7 +12,7 @@ local strfind = string.find
 -- Generate our version variables
 --
 
-local BIGWIGS_VERSION = 357
+local BIGWIGS_VERSION = 358
 local BIGWIGS_RELEASE_STRING, BIGWIGS_VERSION_STRING
 local versionQueryString, versionResponseString = "Q^%d^%s^%d^%s", "V^%d^%s^%d^%s"
 local customGuildName = false
@@ -39,7 +39,7 @@ do
 	local ALPHA = "ALPHA"
 
 	local releaseType
-	local myGitHash = "1509ecf" -- The ZIP packager will replace this with the Git hash.
+	local myGitHash = "3dae8a1" -- The ZIP packager will replace this with the Git hash.
 	local releaseString
 	--[=[@alpha@
 	-- The following code will only be present in alpha ZIPs.
@@ -159,6 +159,7 @@ local fakeZones = { -- Fake zones used as GUI menus
 	[-947]=true, -- Azeroth
 	[-1647]=true, -- Shadowlands
 	[-1978]=true, -- Dragon Isles
+	[-2274]=true, -- Khaz Algar
 }
 
 do
@@ -344,6 +345,7 @@ do
 		[2569] = df, -- Aberrus, the Shadowed Crucible
 		[2549] = df, -- Amirdrassil, the Dream's Hope
 		--[[ BigWigs: The War Within ]]--
+		[-2274] = tww, -- Khaz Algar (Fake Menu)
 		[2657] = tww, -- Nerub'ar Palace
 
 		--[[ LittleWigs: Classic ]]--
@@ -539,6 +541,7 @@ do
 		[-942] = -947, -- Azeroth/BfA
 		[-1536] = -1647, [-1565] = -1647, [-1525] = -1647, [-1533] = -1647, -- Shadowlands
 		[-2022] = -1978, [-2023] = -1978, [-2024] = -1978, [-2085] = -1978, -- Dragon Isles
+		[-2214] = -2274, -- Khaz Algar
 	}
 end
 
@@ -1461,9 +1464,9 @@ end
 --
 
 do
-	local DBMdotRevision = "20240903061113" -- The changing version of the local client, changes with every new zip using the project-date-integer packager replacement.
-	local DBMdotDisplayVersion = "11.0.5" -- "N.N.N" for a release and "N.N.N alpha" for the alpha duration.
-	local DBMdotReleaseRevision = "20240903000000" -- Hardcoded time, manually changed every release, they use it to track the highest release version, a new DBM release is the only time it will change.
+	local DBMdotRevision = "20240912083714" -- The changing version of the local client, changes with every new zip using the project-date-integer packager replacement.
+	local DBMdotDisplayVersion = "11.0.8" -- "N.N.N" for a release and "N.N.N alpha" for the alpha duration.
+	local DBMdotReleaseRevision = "20240912000000" -- Hardcoded time, manually changed every release, they use it to track the highest release version, a new DBM release is the only time it will change.
 	local protocol = 3
 	local versionPrefix = "V"
 	local PForceDisable = 14

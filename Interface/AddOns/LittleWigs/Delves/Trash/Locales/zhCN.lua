@@ -30,6 +30,7 @@ if L then
 	L.kobyss_witherer = "唇鱼人枯败者"
 	L.wandering_gutter = "游荡的开膛者"
 	L.crazed_predator = "狂乱掠食者"
+	L.deepwater_makura = "深水龙虾人"
 end
 
 L = BigWigs:NewBossLocale("Nerubian Delve Trash", "zhCN")
@@ -78,4 +79,5 @@ if L then
 	L.tala = "塔拉"
 	L.velo = "威罗"
 	L.anubvir = "阿努布维尔"
+	--L.zekvir = "Zekvir (Random Spawn)"
 end

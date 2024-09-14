@@ -20,11 +20,13 @@ BigWigs:AddSounds("Kobold Delve Trash", {
 })
 
 BigWigs:AddSounds("Kobyss Delve Trash", {
+	[374898] = "info",
 	[430037] = "alert",
 	[440622] = "alert",
 	[445252] = "alarm",
 	[445407] = {"info","warning"},
 	[445492] = "alarm",
+	[445771] = "alarm",
 	[445774] = "alert",
 	[455932] = "alarm",
 })
@@ -61,13 +63,16 @@ BigWigs:AddSounds("The Underkeep Trash", {
 
 BigWigs:AddSounds("Delve Rares", {
 	[400335] = "alarm",
-	[415250] = "alert",
+	[415250] = "warning",
 	[415253] = "alarm",
 	[418295] = "alarm",
 	[418297] = "alert",
 	[445718] = "alert",
 	[445781] = "alarm",
 	[449038] = "alarm",
+	[450492] = "alarm",
+	[450505] = {"alert","info"},
+	[450519] = "alarm",
 	[458090] = "alarm",
 	[458099] = "alert",
 	[458104] = "alert",
