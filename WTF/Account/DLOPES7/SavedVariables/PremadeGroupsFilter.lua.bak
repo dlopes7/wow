@@ -1,9 +1,9 @@
 
 PremadeGroupsFilterSettings = {
 ["signupOnEnter"] = false,
-["classNamesInTooltip"] = true,
-["ratingInfo"] = true,
 ["persistSignUpNote"] = true,
+["ratingInfo"] = true,
+["specIcon"] = false,
 ["oneClickSignUp"] = true,
 ["dialogMovable"] = true,
 ["leaderCrown"] = false,
@@ -13,5 +13,5 @@ PremadeGroupsFilterSettings = {
 ["coloredGroupTexts"] = true,
 ["classCircle"] = false,
 ["skipSignUpDialog"] = false,
-["specIcon"] = false,
+["classNamesInTooltip"] = true,
 }

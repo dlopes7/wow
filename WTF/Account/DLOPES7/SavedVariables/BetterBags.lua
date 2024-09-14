@@ -718,14 +718,14 @@ true,
 },
 ["name"] = "Mining",
 },
-["Item Enhancement"] = {
+["Gem"] = {
 ["enabled"] = {
 true,
 [0] = true,
 },
 ["itemList"] = {
 },
-["name"] = "Item Enhancement",
+["name"] = "Gem",
 },
 ["Miscellaneous"] = {
 ["enabled"] = {
@@ -754,14 +754,14 @@ true,
 },
 ["name"] = "Consumable",
 },
-["Gem"] = {
+["Item Enhancement"] = {
 ["enabled"] = {
 true,
 [0] = true,
 },
 ["itemList"] = {
 },
-["name"] = "Gem",
+["name"] = "Item Enhancement",
 },
 ["Recent Items"] = {
 ["enabled"] = {

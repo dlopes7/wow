@@ -2,12 +2,6 @@
 ElvCharacterDB = {
 ["ConvertKeybindings"] = true,
 ["ChatEditHistory"] = {
-"/rw g1 square g2 triangle",
-"/rw dont release",
-"/raid we will move to your spot if we need to get hit second",
-"/raid g2 get out of there",
-"/raid and vice versa",
-"/rw try again",
 "/rw but positioniung was good",
 "/raid kill the add summoners first",
 "/raid tank add last",
@@ -22,6 +16,12 @@ ElvCharacterDB = {
 "/rc",
 "/sleep",
 "/i why would you do that",
+"/wa",
+"/bigwigs",
+"/raid Ive set up a bigwigs alarm for that as well, can pump him a bit more",
+"/raid blood dk will be busted here",
+"/raid topping the tank is so hard",
+"/raid Gri your purpose in life is to be at 100% hp before the debuff expires |cff66bbff|Hjournal:2:28995:15|h[Volatile Concoction]|h|r",
 },
 ["ChatHistoryLog"] = {
 },

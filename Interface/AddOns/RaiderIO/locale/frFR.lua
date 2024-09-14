@@ -1,4 +1,4 @@
--- Generated from CurseForge on Fri Sep 13 18:44:29 UTC 2024
+-- Generated from CurseForge on Sat Sep 14 06:41:02 UTC 2024
 local ns = select(2, ...) ---@class ns @The addon namespace.
 
 if ns:IsSameLocale("frFR") then

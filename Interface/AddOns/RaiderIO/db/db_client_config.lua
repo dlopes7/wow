@@ -1,11 +1,11 @@
 --
--- Raider.IO Client Config - Auto Generated On 2024-09-14T01:22:13Z
+-- Raider.IO Client Config - Auto Generated On 2024-09-14T14:28:39Z
 --
 -- DO NOT MODIFY
 --
 local _, ns = ...
 ns.CLIENT_CONFIG = {
-	["lastModified"] = "2024-09-14T01:22:13Z",
+	["lastModified"] = "2024-09-14T14:28:39Z",
 	["enableCombatLogTracking"] = true,
 	["shortcutLookupEntity"] = "CommandOrControl+Shift+L",
 	["syncMode"] = "all",

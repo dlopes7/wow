@@ -393,9 +393,9 @@ IncentiveProgramDB = {
 ["dungeonName"] = "The Black Forge",
 ["dungeonType"] = 3,
 },
-[611] = {
-["dungeonName"] = "Forgotten Depths",
-["dungeonType"] = 3,
+[434] = {
+["dungeonName"] = "Random Hour of Twilight Heroic",
+["dungeonType"] = 1,
 },
 [2345] = {
 ["dungeonName"] = "Cornerstone of Creation",
@@ -505,9 +505,9 @@ IncentiveProgramDB = {
 ["dungeonName"] = "Random Heroic (Battle for Azeroth)",
 ["dungeonType"] = 1,
 },
-[434] = {
-["dungeonName"] = "Random Hour of Twilight Heroic",
-["dungeonType"] = 1,
+[611] = {
+["dungeonName"] = "Forgotten Depths",
+["dungeonType"] = 3,
 },
 [1289] = {
 ["dungeonName"] = "Rift of Aln",

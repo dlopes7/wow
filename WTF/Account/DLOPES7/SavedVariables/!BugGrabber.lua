@@ -1,6 +1,6 @@
 
 BugGrabberDB = {
-["session"] = 1510,
+["session"] = 1512,
 ["lastSanitation"] = 3,
 ["errors"] = {
 {
@@ -4724,14 +4724,6 @@ BugGrabberDB = {
 ["counter"] = 1,
 },
 {
-["message"] = "...face/AddOns/Blizzard_InspectUI/InspectGuildFrame.lua:22: bad argument #2 to 'SetFormattedText' (string expected, got nil)",
-["time"] = "2024/09/13 08:14:33",
-["locals"] = "(*temporary) = InspectGuildFrameGuildRealmName {\n}\n(*temporary) = \"Realm: %s\"\n(*temporary) = nil\n(*temporary) = \"string expected, got nil\"\n",
-["stack"] = "[string \"=[C]\"]: in function `SetFormattedText'\n[string \"@Interface/AddOns/Blizzard_InspectUI/InspectGuildFrame.lua\"]:22: in function `InspectGuildFrame_Update'\n[string \"@Interface/AddOns/Blizzard_InspectUI/InspectGuildFrame.lua\"]:8: in function <...face/AddOns/Blizzard_InspectUI/InspectGuildFrame.lua:6>",
-["session"] = 1505,
-["counter"] = 1,
-},
-{
 ["message"] = "[ADDON_ACTION_BLOCKED] AddOn 'ElvUI' tried to call the protected function 'Frame:SetPassThroughButtons()'.",
 ["time"] = "2024/02/06 15:55:52",
 ["locals"] = "_ = Frame {\n RegisterEvent = <function> defined @Interface/AddOns/!BugGrabber/BugGrabber.lua:491\n 0 = <userdata>\n UnregisterEvent = <function> defined @Interface/AddOns/!BugGrabber/BugGrabber.lua:491\n SetScript = <function> defined @Interface/AddOns/!BugGrabber/BugGrabber.lua:491\n}\nevent = \"ADDON_ACTION_BLOCKED\"\nevents = <table> {\n ADDON_ACTION_BLOCKED = <function> defined @Interface/AddOns/!BugGrabber/BugGrabber.lua:557\n ADDON_ACTION_FORBIDDEN = <function> defined @Interface/AddOns/!BugGrabber/BugGrabber.lua:557\n PLAYER_LOGIN = <function> defined @Interface/AddOns/!BugGrabber/BugGrabber.lua:551\n LUA_WARNING = <function> defined @Interface/AddOns/!BugGrabber/BugGrabber.lua:566\n ADDON_LOADED = <function> defined @Interface/AddOns/!BugGrabber/BugGrabber.lua:511\n}\n",
@@ -4754,6 +4746,14 @@ BugGrabberDB = {
 ["stack"] = "[string \"@Interface/AddOns/!BugGrabber/BugGrabber.lua\"]:485: in function <Interface/AddOns/!BugGrabber/BugGrabber.lua:485>\n[string \"=[C]\"]: in function `SetPoint'\n[string \"@Interface/AddOns/MRT/RaidCheck.lua\"]:3525: in function `Update'\n[string \"@Interface/AddOns/MRT/RaidCheck.lua\"]:3935: in function <Interface/AddOns/MRT/RaidCheck.lua:3933>",
 ["session"] = 1507,
 ["counter"] = 1,
+},
+{
+["message"] = "...face/AddOns/Blizzard_InspectUI/InspectGuildFrame.lua:22: bad argument #2 to 'SetFormattedText' (string expected, got nil)",
+["time"] = "2024/09/13 08:14:33",
+["locals"] = "(*temporary) = InspectGuildFrameGuildRealmName {\n}\n(*temporary) = \"Realm: %s\"\n(*temporary) = nil\n(*temporary) = \"string expected, got nil\"\n",
+["stack"] = "[string \"=[C]\"]: in function `SetFormattedText'\n[string \"@Interface/AddOns/Blizzard_InspectUI/InspectGuildFrame.lua\"]:22: in function `InspectGuildFrame_Update'\n[string \"@Interface/AddOns/Blizzard_InspectUI/InspectGuildFrame.lua\"]:8: in function <...face/AddOns/Blizzard_InspectUI/InspectGuildFrame.lua:6>",
+["session"] = 1512,
+["counter"] = 3,
 },
 },
 }

@@ -385,13 +385,13 @@ IncentiveProgramDB = {
 ["dungeonName"] = "Ephemeral Plains",
 ["dungeonType"] = 3,
 },
-[434] = {
-["dungeonName"] = "Random Hour of Twilight Heroic",
-["dungeonType"] = 1,
-},
 [611] = {
 ["dungeonName"] = "Forgotten Depths",
 ["dungeonType"] = 3,
+},
+[434] = {
+["dungeonName"] = "Random Hour of Twilight Heroic",
+["dungeonType"] = 1,
 },
 [2345] = {
 ["dungeonName"] = "Cornerstone of Creation",

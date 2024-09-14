@@ -1,4 +1,4 @@
--- Generated from CurseForge on Fri Sep 13 18:44:35 UTC 2024
+-- Generated from CurseForge on Sat Sep 14 06:41:10 UTC 2024
 local ns = select(2, ...) ---@class ns @The addon namespace.
 
 if ns:IsSameLocale("ptBR") then
@@ -9,10 +9,8 @@ if ns:IsSameLocale("ptBR") then
 	L.LOCALE_NAME = "ptBR"
 
 L["ALLOW_IN_LFD"] = "Permitir no localizador de masmorras."
---[[Translation missing --]]
---[[ L["ALLOW_IN_LFD_CLASSIC"] = ""--]] 
---[[Translation missing --]]
---[[ L["ALLOW_IN_LFD_CLASSIC_DESC"] = ""--]] 
+L["ALLOW_IN_LFD_CLASSIC"] = "Permitir no Localizador de Grupos"
+L["ALLOW_IN_LFD_CLASSIC_DESC"] = "Clique com o botão direito em grupos ou candidatos no Localizador de Grupos para copiar a URL do perfil Raider.IO."
 L["ALLOW_IN_LFD_DESC"] = "Clique-direito em grupos ou candidatos no localizador de masmorras para copiar o URL do perfil Raider.IO."
 L["ALLOW_ON_PLAYER_UNITS"] = "Permitir em retratos de jogador"
 L["ALLOW_ON_PLAYER_UNITS_DESC"] = "Clique-direito no retrato do jogador para copiar a URL do perfil Raider.IO."
@@ -23,8 +21,7 @@ L["API_DEPRECATED_WITH"] = "|cffFF0000Warning!|r O Addon |cffFFFFFF%s|r está ch
 L["API_INVALID_DATABASE"] = "|cffFF0000Warning!|r Detectou um banco de dados Raider.IO inválido em |cffffffff%s|r. Atualize todas as regiões e facções no cliente Raider.IO ou reinstale o addon manualmente."
 L["AUTO_COMBATLOG"] = "Habilita Automaticamente o Log de Combate em Raides e Masmorras"
 L["AUTO_COMBATLOG_DESC"] = "Habilitar e desabilitar o Registro de Combate quando entrar ou sair de masmorras e raids suportadas."
---[[Translation missing --]]
---[[ L["AUTO_COMBATLOG_DISABLED_DESC"] = ""--]] 
+L["AUTO_COMBATLOG_DISABLED_DESC"] = "O Log de Combate está desabilitado em um Timerunner."
 L["BEST_FOR_DUNGEON"] = "Melhor por Masmorra"
 L["BEST_RUN"] = "Melhor M+"
 L["BEST_SCORE"] = "Melhor Pontuação de M+ (%s)"
@@ -65,23 +62,19 @@ L["DISABLE_RWF_MODE_RELOAD"] = "Você está desabilitando o modo Race World Firs
 L["DPS"] = "DPS"
 L["DUNGEON_SHORT_NAME_AA"] = "Academia Algeth'ar"
 L["DUNGEON_SHORT_NAME_AD"] = "Atal'Dazar"
---[[Translation missing --]]
---[[ L["DUNGEON_SHORT_NAME_ARAK"] = ""--]] 
+L["DUNGEON_SHORT_NAME_ARAK"] = "Ara-Kara"
 L["DUNGEON_SHORT_NAME_AV"] = "Câmara Lazúli"
 L["DUNGEON_SHORT_NAME_BH"] = "Clareira de Courambaia"
 L["DUNGEON_SHORT_NAME_BRH"] = "Castelo Corvo Negro"
 L["DUNGEON_SHORT_NAME_COS"] = "Pátio das Estrelas"
---[[Translation missing --]]
---[[ L["DUNGEON_SHORT_NAME_COT"] = ""--]] 
---[[Translation missing --]]
---[[ L["DUNGEON_SHORT_NAME_DAWN"] = ""--]] 
+L["DUNGEON_SHORT_NAME_COT"] = "Cidade das Tramas"
+L["DUNGEON_SHORT_NAME_DAWN"] = "Alvorada"
 L["DUNGEON_SHORT_NAME_DHT"] = "Bosque Corenegro"
 L["DUNGEON_SHORT_NAME_DOS"] = "Outro Lado"
 L["DUNGEON_SHORT_NAME_EB"] = "Floretérnia"
 L["DUNGEON_SHORT_NAME_FALL"] = "Ruína de Galakrond"
 L["DUNGEON_SHORT_NAME_FH"] = "Angra do Facão"
---[[Translation missing --]]
---[[ L["DUNGEON_SHORT_NAME_GB"] = ""--]] 
+L["DUNGEON_SHORT_NAME_GB"] = "Grim Batol"
 L["DUNGEON_SHORT_NAME_GD"] = "Central do Carrilcruel"
 L["DUNGEON_SHORT_NAME_GMBT"] = "Gambito de So'leah"
 L["DUNGEON_SHORT_NAME_HOA"] = "Salões"
@@ -89,22 +82,20 @@ L["DUNGEON_SHORT_NAME_HOI"] = "Salões da Infusão"
 L["DUNGEON_SHORT_NAME_HOV"] = "Salões da Bravura"
 L["DUNGEON_SHORT_NAME_ID"] = "Docas de Ferro"
 L["DUNGEON_SHORT_NAME_LOWR"] = "Karazhan: Inferior "
-L["DUNGEON_SHORT_NAME_MISTS"] = "Brumas"
+L["DUNGEON_SHORT_NAME_MISTS"] = "Brumas de Tirna Scithe"
 L["DUNGEON_SHORT_NAME_NELT"] = "Neltharus"
 L["DUNGEON_SHORT_NAME_NL"] = "Covil de Neltharion"
 L["DUNGEON_SHORT_NAME_NO"] = "Ofensiva Nokhid"
-L["DUNGEON_SHORT_NAME_NW"] = "Chaga"
+L["DUNGEON_SHORT_NAME_NW"] = "Chaga Necrótica"
 L["DUNGEON_SHORT_NAME_PF"] = "Empéstia"
 L["DUNGEON_SHORT_NAME_RISE"] = "Ascensão de Murozond"
 L["DUNGEON_SHORT_NAME_RLP"] = "Poços da Vida Rubi"
 L["DUNGEON_SHORT_NAME_SBG"] = "Sepulcrário da Lua Negra"
 L["DUNGEON_SHORT_NAME_SD"] = "Profundezas"
---[[Translation missing --]]
---[[ L["DUNGEON_SHORT_NAME_SIEGE"] = ""--]] 
+L["DUNGEON_SHORT_NAME_SIEGE"] = "Cerco de Boralus"
 L["DUNGEON_SHORT_NAME_SOA"] = "Torres"
 L["DUNGEON_SHORT_NAME_STRT"] = "Ruas das Maravilhas"
---[[Translation missing --]]
---[[ L["DUNGEON_SHORT_NAME_SV"] = ""--]] 
+L["DUNGEON_SHORT_NAME_SV"] = "Abóboda de Pedra"
 L["DUNGEON_SHORT_NAME_TJS"] = "Templo da Serpente de Jade"
 L["DUNGEON_SHORT_NAME_TOP"] = "Teatro"
 L["DUNGEON_SHORT_NAME_TOTT"] = "Trono das Marés"
@@ -200,7 +191,7 @@ L["OUTDATED_EXPIRES_IN_MINUTES"] = "Dados do Raider.IO expiram em %d Minutos"
 L["OUTDATED_PROFILE_TOOLTIP_MESSAGE"] = [=[Atualize seu Addon agora para ver os dados mais precisos. Os jogadores trabalham duro para melhorar seu progresso, e exibir dados muito antigos é um desserviço para eles. Você pode usar o Raider.IO Client para manter seus dados sincronizados automaticamente.
 ]=]
 L["PREVIOUS_SCORE"] = "Pontuação anterior de M+ (%s)"
-L["PROFILE_BEST_RUNS"] = "Melhores Runs por Masmorra"
+L["PROFILE_BEST_RUNS"] = "Melhores M+ concluídas por masmorra"
 L["PROFILE_TOOLTIP_ANCHOR_TOOLTIP"] = "Tranque o Quadro de Perfil do Raider.IO ou ative o Posicionamento Automático para ocultar esta âncora."
 L["PROVIDER_NOT_LOADED"] = "|cffFF0000Warning:|r |cffFFFFFF%s|r não pode encontrar dados para sua facção atual. Verifique suas configurações |cffFFFFFF/raiderio|r e ative os dados da ferramenta para |cffFFFFFF%s|r."
 L["PVP_DATA_HEADER"] = "Raider.IO Perfil de PvP"
@@ -338,22 +329,14 @@ L["RAID_BOSS_FSOD_9"] = "Kel'Thuzad"
 --[[ L["RAID_BOSS_ICC_8"] = ""--]] 
 --[[Translation missing --]]
 --[[ L["RAID_BOSS_ICC_9"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_NP_1"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_NP_2"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_NP_3"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_NP_4"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_NP_5"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_NP_6"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_NP_7"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_NP_8"] = ""--]] 
+L["RAID_BOSS_NP_1"] = "Ulgrax"
+L["RAID_BOSS_NP_2"] = "O Terror Sanguino"
+L["RAID_BOSS_NP_3"] = "Sikran"
+L["RAID_BOSS_NP_4"] = "Rasha'nan"
+L["RAID_BOSS_NP_5"] = "Ovi'nax"
+L["RAID_BOSS_NP_6"] = "Princesa do Nexus Ky'veza"
+L["RAID_BOSS_NP_7"] = "A Corte Sedosa"
+L["RAID_BOSS_NP_8"] = "Rainha Ansurek"
 --[[Translation missing --]]
 --[[ L["RAID_BOSS_RS_1"] = ""--]] 
 L["RAID_BOSS_SFO_1"] = "Guardião Vigilante"
@@ -389,43 +372,29 @@ L["RAID_BOSS_VOTI_5"] = "Dathea, Ascendida"
 L["RAID_BOSS_VOTI_6"] = "Kurog Temível Totem"
 L["RAID_BOSS_VOTI_7"] = "Guarda-prole Diurna"
 L["RAID_BOSS_VOTI_8"] = "Raszageth, a Devoradora de Tempestade"
---[[Translation missing --]]
---[[ L["RAID_BOT"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BWD"] = ""--]] 
+L["RAID_BOT"] = "Bastião do Crepúsculo"
+L["RAID_BWD"] = "Descenso do Asa Negra"
 L["RAID_DIFFICULTY_NAME_HEROIC"] = "Heroico"
---[[Translation missing --]]
---[[ L["RAID_DIFFICULTY_NAME_HEROIC10"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_DIFFICULTY_NAME_HEROIC25"] = ""--]] 
+L["RAID_DIFFICULTY_NAME_HEROIC10"] = "Heroico 10"
+L["RAID_DIFFICULTY_NAME_HEROIC25"] = "Heroico 25"
 L["RAID_DIFFICULTY_NAME_MYTHIC"] = "Mítico"
 L["RAID_DIFFICULTY_NAME_NORMAL"] = "Normal"
---[[Translation missing --]]
---[[ L["RAID_DIFFICULTY_NAME_NORMAL10"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_DIFFICULTY_NAME_NORMAL25"] = ""--]] 
+L["RAID_DIFFICULTY_NAME_NORMAL10"] = "Normal 10"
+L["RAID_DIFFICULTY_NAME_NORMAL25"] = "Normal 25"
 L["RAID_DIFFICULTY_SUFFIX_HEROIC"] = "H"
---[[Translation missing --]]
---[[ L["RAID_DIFFICULTY_SUFFIX_HEROIC10"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_DIFFICULTY_SUFFIX_HEROIC25"] = ""--]] 
+L["RAID_DIFFICULTY_SUFFIX_HEROIC10"] = "H10"
+L["RAID_DIFFICULTY_SUFFIX_HEROIC25"] = "H25"
 L["RAID_DIFFICULTY_SUFFIX_MYTHIC"] = "M"
 L["RAID_DIFFICULTY_SUFFIX_NORMAL"] = "N"
---[[Translation missing --]]
---[[ L["RAID_DIFFICULTY_SUFFIX_NORMAL10"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_DIFFICULTY_SUFFIX_NORMAL25"] = ""--]] 
+L["RAID_DIFFICULTY_SUFFIX_NORMAL10"] = "N10"
+L["RAID_DIFFICULTY_SUFFIX_NORMAL25"] = "N25"
 L["RAID_ENCOUNTERS_DEFEATED_TITLE"] = "Encontros de Raide Derrotados"
---[[Translation missing --]]
---[[ L["RAID_ICC"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_NP"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_RS"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_TOTFW"] = ""--]] 
+L["RAID_ICC"] = "Cidadela da Coroa de Gelo"
+L["RAID_NP"] = "Palácio Nerub-ar"
+L["RAID_RS"] = "Santuário Rubi"
+L["RAID_TOTFW"] = "Trono dos Quatro Ventos"
 L["RAIDERIO_AVERAGE_PLAYER_SCORE"] = "Pontuações Médias para Runs Dentro do Tempo +%s"
-L["RAIDERIO_BEST_RUN"] = "Raider.IO Melhor Run M+"
+L["RAIDERIO_BEST_RUN"] = "Raider.IO Melhor Mítica+"
 L["RAIDERIO_CLIENT_CUSTOMIZATION"] = "Personalização do cliente Raider.IO."
 L["RAIDERIO_LIVE_TRACKING"] = "Rastreamento ao vivo do Raider.IO"
 L["RAIDERIO_MP_BASE_SCORE"] = "Raider.IO Pontuação Base de M+"
@@ -488,8 +457,8 @@ L["SHOW_AVERAGE_PLAYER_SCORE_INFO"] = "Mostrar Pontuação Média das runs feita
 L["SHOW_AVERAGE_PLAYER_SCORE_INFO_DESC"] = "Mostra a pontuação média do Raider.IO vista em membros de runs feitas no tempo. Isso é visível nas Tooltips da Pedra-chave e nas Tooltips do Jogador no Localizador de Masmorras."
 L["SHOW_BEST_MAINS_SCORE"] = "Mostrar a pontuação de Mítica+ do main na Melhor Season"
 L["SHOW_BEST_MAINS_SCORE_DESC"] = "Mostra a pontuação de Mythic+ da melhor season do Main do jogador e o progresso de Raid na Tooltip. Os jogadores devem ter se registrado no Raider.IO e declarado um personagem como seu main."
-L["SHOW_BEST_RUN"] = "Mostrar Melhor Run de M+ como título"
-L["SHOW_BEST_RUN_DESC"] = "Mostre a melhor Run de Mítica+ do jogador da season atual como o título da dica (tooltip)."
+L["SHOW_BEST_RUN"] = "Mostrar Melhor M+ concluída como título"
+L["SHOW_BEST_RUN_DESC"] = "Mostre a melhor Mítica+ concluída pelo jogador da temporada atual como o título da tooltip."
 L["SHOW_BEST_SEASON"] = "Mostrar melhor pontuação da season de Mythic+ como título."
 L["SHOW_BEST_SEASON_DESC"] = "Mostra a melhor pontuação da season de Mítica+ do jogador como o título da dica (tooltip). Se a pontuação for de uma temporada anterior, a temporada será indicada como parte do título da dica (tooltip)."
 L["SHOW_CHESTS_AS_MEDALS"] = "Mostrar ícones de medalhas de Mythic+"
@@ -501,9 +470,8 @@ L["SHOW_CURRENT_SEASON"] = "Mostrar a pontuação atual da season de Mythic+ com
 L["SHOW_CURRENT_SEASON_DESC"] = "Mostra a pontuação atual da temporada de Mythic+ do jogador como o título da tooltip."
 L["SHOW_IN_FRIENDS"] = "Mostrar nas dicas (tooltips) da lista de amigos"
 L["SHOW_IN_FRIENDS_DESC"] = "Mostre a pontuação de  Mythic+ ao passar o mouse sobre seus amigos."
-L["SHOW_IN_LFD"] = "Mostrar nas dicas (tooltips) do localizador de masmorras."
---[[Translation missing --]]
---[[ L["SHOW_IN_LFD_CLASSIC"] = ""--]] 
+L["SHOW_IN_LFD"] = "Mostrar nas tooltips do localizador de masmorras."
+L["SHOW_IN_LFD_CLASSIC"] = "Mostrar nas tooltips do localizador de grupos."
 L["SHOW_IN_LFD_DESC"] = "Mostre a pontuação de  Mythic+ ao passar o mouse sobre grupos ou candidatos."
 L["SHOW_IN_SLASH_WHO_RESULTS"] = "Mostrar nos resultados do \"/who\""
 L["SHOW_IN_SLASH_WHO_RESULTS_DESC"] = "Mostre a pontuação de Mythic+ quando você \"/who\" alguém específico."
@@ -521,33 +489,28 @@ L["SHOW_ON_PLAYER_UNITS"] = "Mostrar nas dicas (tooltips) de Jogadores"
 L["SHOW_ON_PLAYER_UNITS_DESC"] = "Mostre a pontuação de Mítica+ ao passar o mouse sobre as unidades de jogador."
 L["SHOW_RAID_ENCOUNTERS_IN_PROFILE"] = "Mostrar encontros de raid na dica (tooltip) do perfil"
 L["SHOW_RAID_ENCOUNTERS_IN_PROFILE_DESC"] = "Quando ativado, isso mostrará o progresso dos encontros de Raid nas dicas (tooltips) do perfil Raider.IO."
-L["SHOW_RAIDERIO_BESTRUN_FIRST"] = "(Experimental) Priorize mostrar a melhor run do Raider.IO"
-L["SHOW_RAIDERIO_BESTRUN_FIRST_DESC"] = "Este é um recurso experimental. Em vez de mostrar a pontuação do Raider.IO como a primeira linha, mostre a melhor run do jogador."
+L["SHOW_RAIDERIO_BESTRUN_FIRST"] = "(Experimental) Priorize mostrar a melhor mítica+ concluída do Raider.IO"
+L["SHOW_RAIDERIO_BESTRUN_FIRST_DESC"] = "Este é um recurso experimental. Em vez de mostrar a pontuação do Raider.IO como a primeira linha, mostre a melhor mítica+ concluída pelo jogador."
 L["SHOW_RAIDERIO_PROFILE"] = "Mostrar dica (tooltip) de perfil do Raider.IO"
 L["SHOW_RAIDERIO_PROFILE_DESC"] = "Mostra a dica (tooltip) de perfil do Raider.IO"
---[[Translation missing --]]
---[[ L["SHOW_RAIDERIO_PROFILE_OPTION"] = ""--]] 
+L["SHOW_RAIDERIO_PROFILE_OPTION"] = "Mostrar Perfil do Raider.IO"
 L["SHOW_ROLE_ICONS"] = "Mostrar ícones de função nas dicas (tooltips)"
 L["SHOW_ROLE_ICONS_DESC"] = "Quando ativado, as principais funções do jogador em Mythic+ serão exibidas em suas dicas (tooltips)."
 L["SHOW_SCORE_IN_COMBAT"] = "Mostra a dica (tooltip) do Raider.IO durante o combate"
 L["SHOW_SCORE_IN_COMBAT_DESC"] = "Desative isso para minimizar o impacto no desempenho ao pairar sobre os jogadores durante o combate."
 L["SHOW_SCORE_WITH_MODIFIER"] = "Mostrar informações de dica (tooltip) do Raider.IO com modificador"
 L["SHOW_SCORE_WITH_MODIFIER_DESC"] = "Desative a exibição de dados ao passar o mouse sobre jogadores, a menos que uma tecla modificadora seja pressionada."
---[[Translation missing --]]
---[[ L["SHOW_WARBAND_SCORE"] = ""--]] 
---[[Translation missing --]]
---[[ L["SHOW_WARBAND_SCORE_DESC"] = ""--]] 
+L["SHOW_WARBAND_SCORE"] = "Mostrar Pontuação e Progresso Beligerante de M+ nas Tooltips"
+L["SHOW_WARBAND_SCORE_DESC"] = "Mostra a pontuação Beligerante de Mítica+ do jogador na temporada atual e o progresso de raide nas tooltips. Os jogadores devem ter se registrado no Raider.IO e sincronizado seu BNET para que o progresso beligerante funcione."
 L["TANK"] = "Tank"
 L["TEAM_LF_MPLUS_DEFAULT"] = "Recrutando Jogadores para Mítica+"
 L["TEAM_LF_MPLUS_WITH_SCORE"] = "Recrutando %d+ jogadores de Mítica+"
-L["TIMED_10_RUNS"] = "Runs +10-14 Dentro do Tempo"
-L["TIMED_15_RUNS"] = "Runs 15+ Dentro do Tempo"
-L["TIMED_20_RUNS"] = "Runs +20 Dentro do Tempo"
-L["TIMED_5_RUNS"] = "Runs +5-9 Dentro do Tempo"
---[[Translation missing --]]
---[[ L["TIMED_RUNS_MINIMUM"] = ""--]] 
---[[Translation missing --]]
---[[ L["TIMED_RUNS_RANGE"] = ""--]] 
+L["TIMED_10_RUNS"] = "Míticas +10-14 concluídas"
+L["TIMED_15_RUNS"] = "Míticas 15+ concluídas"
+L["TIMED_20_RUNS"] = "Míticas +20 concluídas"
+L["TIMED_5_RUNS"] = "Míticas +5-9 concluídas"
+L["TIMED_RUNS_MINIMUM"] = "Míticas %d+ concluídas"
+L["TIMED_RUNS_RANGE"] = "Míticas +%d-%d concluídas"
 L["TOOLTIP_PROFILE"] = "Perfil de personalização da dica (tooltip) do Raider.IO"
 L["UNKNOWN_SERVER_FOUND"] = "|cffFFFFFF%s|r encontrou um novo servidor. Por favor, anote esta informação |cffFF9999{|r |cffFFFFFF%s|r |cffFF9999,|r |cffFFFFFF%s|r |cffFF9999}|r e informe aos desenvolvedores. Obrigado!"
 L["UNLOCKING_PROFILE_FRAME"] = "Raider.IO: Desbloqueando o quadro de perfil M+."
@@ -555,10 +518,8 @@ L["USE_ENGLISH_ABBREVIATION"] = "Forçar Abreviações em Inglês para Masmorras
 L["USE_ENGLISH_ABBREVIATION_DESC"] = "Quando ativado, isso substituirá as abreviações usadas para masmorras para serem as versões em inglês, em vez do seu idioma atual."
 L["USE_RAIDERIO_CLIENT_LIVE_TRACKING_SETTINGS"] = "Permite que o cliente Raider.IO controle o Registro de Combate."
 L["USE_RAIDERIO_CLIENT_LIVE_TRACKING_SETTINGS_DESC"] = "Permite que o cliente Raider.IO (quando possível) controle as configurações de seu Registro de Combate automaticamente"
---[[Translation missing --]]
---[[ L["WARBAND_BEST_SCORE_BEST_SEASON"] = ""--]] 
---[[Translation missing --]]
---[[ L["WARBAND_SCORE"] = ""--]] 
+L["WARBAND_BEST_SCORE_BEST_SEASON"] = "Melhor Pontuação Beligerante de M+ (%s)"
+L["WARBAND_SCORE"] = "Pontuação Beligerante de M+"
 L["WARNING_DEBUG_MODE_ENABLE"] = "|cffFFFFFF%s|r Modo de Depuração está habilitado. Você pode desabilitá-lo ao digitar |cffFFFFFF/raiderio debug|r"
 L["WARNING_LOCK_POSITION_FRAME_AUTO"] = "Raider.IO: Você deve primeiro desabilitar o Posicionamento Automático para o Perfil do Raider.IO"
 L["WARNING_RWF_MODE_ENABLE"] = "|cffFFFFFF%s|r O modo Race World First está ativado. Você pode desativá-lo digitando |cffFFFFFF/raiderio rwf|r."
