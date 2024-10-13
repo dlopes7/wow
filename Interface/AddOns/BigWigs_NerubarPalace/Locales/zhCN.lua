@@ -17,7 +17,6 @@ end
 
 L = BigWigs:NewBossLocale("Rasha'nan", "zhCN")
 if L then
-	L.rolling_acid = "波浪"
 	L.spinnerets_strands = "丝线"
 	L.enveloping_webs = "蛛网"
 	L.enveloping_web_say = "蛛网" -- Singular of Webs
@@ -49,17 +48,22 @@ end
 
 L = BigWigs:NewBossLocale("The Silken Court", "zhCN")
 if L then
-	L.skipped_cast = "跳舞 %s (%d)"
+	L.skipped_cast = "跳过 %s (%d)"
+	L.intermission_trigger = "巅峰之力！" -- Skeinspinner Takazj 100 energy yell
 
 	L.venomous_rain = "毒雨"
 	L.burrowed_eruption = "钻地"
 	L.stinging_swarm = "驱散减益"
 	L.strands_of_reality = "正面 [塔卡]" -- S for Skeinspinner Takazj 使用了首领名字前二个字“塔卡兹基”
+	L.strands_of_reality_message = "正面 [纺束者塔卡兹基]"
 	L.impaling_eruption = "正面 [阿努]" -- A for Anub'arash 使用了首领名字前二个字“阿努巴拉什”
+	L.impaling_eruption_message = "正面 [阿努巴拉什]"
 	L.entropic_desolation = "熵能"  --使用技能名称。
 	L.cataclysmic_entropy = "大爆炸" -- Interrupt before it casts
 	L.spike_eruption = "尖刺"
 	L.unleashed_swarm = "虫群"
+	L.void_degeneration = "蓝球"
+	L.burning_rage = "红球"
 end
 
 L = BigWigs:NewBossLocale("Queen Ansurek", "zhCN")
@@ -67,6 +71,13 @@ if L then
 	L.stacks_onboss = "首领：%d层 %s"
 
 	L.reactive_toxin = "毒素"
+	L.reactive_toxin_say = "毒素"
+	L.venom_nova = "新星"  -- 剧毒新星，暂时用新星，也可以用毒环
+	L.web_blades = "网刃"  -- 中文技能名称短直接使用技能名称
 	L.silken_tomb = "缠绕" -- Raid being rooted in place
 	L.wrest = "拉扯"
+	L.royal_condemnation = "镣铐"
+	L.frothing_gluttony = "能量环"
+
+	L.stage_two_end_message_storymode = "快进传送门"
 end

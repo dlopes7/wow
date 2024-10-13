@@ -44,7 +44,7 @@ function mod:OnRegister()
 	self:SetSpellRename(434281, CL.explosion) -- Echo of Renilash (Explosion)
 end
 
-local autotalk = mod:AddAutoTalkOption(true)
+local autotalk = mod:AddAutoTalkOption(false)
 function mod:GetOptions()
 	return {
 		autotalk,
@@ -94,6 +94,12 @@ function mod:OnBossEnable()
 
 	-- Shadow Elemental
 	self:Log("SPELL_CAST_START", "InflictDeath", 440205, 470593)
+
+	-- also enable the Rares module
+	local raresModule = BigWigs:GetBossModule("Delve Rares", true)
+	if raresModule then
+		raresModule:Enable()
+	end
 end
 
 --------------------------------------------------------------------------------
@@ -103,9 +109,7 @@ end
 -- Autotalk
 
 function mod:GOSSIP_SHOW()
-	local info = self:GetWidgetInfo("delve", 6183)
-	local level = info and tonumber(info.tierText)
-	if (not level or level > 3) and self:GetOption(autotalk) then
+	if self:GetOption(autotalk) then
 		if self:GetGossipID(120767) then -- Nightfall Sanctum, start Delve (Great Kyron)
 			-- 120767:|cFF0000FF(Delve)|r I'll hop on a ballista to recover the oil in order to destroy the cult's barrier.
 			self:SelectGossipID(120767)

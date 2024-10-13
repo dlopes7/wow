@@ -20,6 +20,7 @@ BigWigs:AddSounds("Fangs of the Queen", {
 BigWigs:AddSounds("The Coaglamation", {
 	[441289] = "long",
 	[441395] = "alert",
+	[461825] = "underyou",
 	[461842] = "alert",
 	[461880] = "alarm",
 })
@@ -38,6 +39,7 @@ BigWigs:AddSounds("City of Threads Trash", {
 	[443430] = "alert",
 	[443437] = "alarm",
 	[443500] = "alarm",
+	[443507] = "info",
 	[445813] = "long",
 	[446086] = "alert",
 	[446717] = "alert",

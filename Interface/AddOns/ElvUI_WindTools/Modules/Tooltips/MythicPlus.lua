@@ -71,7 +71,7 @@ function T:GetMythicPlusData(unit)
 end
 
 function T:AddMythicInfo(mod, tt, unit)
-	local db = self.profiledb and self.profiledb.elvUITweaks.betterMythicPlusInfo
+	local db = self.profiledb and self.profiledb.elvUITweaks and self.profiledb.elvUITweaks.betterMythicPlusInfo
 
 	if not db or not db.enable then
 		return self.hooks[mod].AddMythicInfo(mod, tt, unit)
@@ -106,7 +106,7 @@ function T:AddMythicInfo(mod, tt, unit)
 				bestRunLevelText = format("|cff%s%s|r", run.bestRunLevelColor, run.bestRunLevel)
 			end
 			if bestRunLevelText then
-				if run.upgrades > 0 then
+				if run.upgrades and run.upgrades > 0 then
 					bestRunLevelText = strrep("+", run.upgrades) .. bestRunLevelText
 				end
 

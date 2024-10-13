@@ -84,3 +84,4 @@ kExtraBossFrames: disabled
 WeakAurasCompanion: enabled
 OPie_Classic: disabled
 Blizzard_CombatText: enabled
+BigWigs_KhazAlgar: enabled

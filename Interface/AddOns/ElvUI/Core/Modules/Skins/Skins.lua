@@ -1139,14 +1139,14 @@ function S:HandleDropDownBox(frame, width, template, old)
 	end
 
 	frame:Width(width)
-	frame:StripTextures()
+	frame:StripTextures(true)
 
 	if not frame.backdrop then
 		frame:CreateBackdrop(template)
 		frame:SetFrameLevel(frame:GetFrameLevel() + 2)
 	end
 
-	if E.Retail and not old then
+	if not E.Cata and not old then
 		if frame.Arrow then
 			frame.Arrow:SetAlpha(0)
 		end

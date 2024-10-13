@@ -9,6 +9,7 @@ if L then
 	L.infected_beast = "Bête infestée"
 	L.fungal_gutter = "Éventreur fongique"
 	L.fungarian_flinger = "Lanceur fongicien"
+	L.fungal_rotcaster = "Lance-putréfaction fongique"
 	L.particularly_bad_guy = "Gros vilain méchant"
 end
 
@@ -30,7 +31,7 @@ if L then
 	L.kobyss_witherer = "Flétrisseur kobyss"
 	L.wandering_gutter = "Éventreur errant"
 	L.crazed_predator = "Prédateur fou"
-	--L.deepwater_makura = "Deepwater Makura"
+	L.deepwater_makura = "Makrura eaux-profondes"
 end
 
 L = BigWigs:NewBossLocale("Nerubian Delve Trash", "frFR")
@@ -79,5 +80,9 @@ if L then
 	L.tala = "Tala"
 	L.velo = "Velo"
 	L.anubvir = "Anub'vir"
-	--L.zekvir = "Zekvir (Random Spawn)"
+	L.zekvir = "Zekvir"
+	--L.zekvirs_influence = "Zekvir's Influence"
+	L.zekvir_random = "Zekvir (Apparition aléatoire)"
+	--L.zekvir_breach = "Zekvir incoming"
+	--L.zekvir_breach_desc = "Show an alert when Zekvir is spawning in the Delve."
 end

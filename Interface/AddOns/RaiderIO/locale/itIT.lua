@@ -1,4 +1,4 @@
--- Generated from CurseForge on Sat Sep 14 06:41:04 UTC 2024
+-- Generated from CurseForge on Sun Oct 13 07:38:48 UTC 2024
 local ns = select(2, ...) ---@class ns @The addon namespace.
 
 if ns:IsSameLocale("itIT") then
@@ -79,10 +79,8 @@ L["DUNGEON_SHORT_NAME_AV"] = "CA"
 L["DUNGEON_SHORT_NAME_BH"] = "CDF"
 L["DUNGEON_SHORT_NAME_BRH"] = "FC"
 L["DUNGEON_SHORT_NAME_COS"] = "CDS"
---[[Translation missing --]]
---[[ L["DUNGEON_SHORT_NAME_COT"] = ""--]] 
---[[Translation missing --]]
---[[ L["DUNGEON_SHORT_NAME_DAWN"] = ""--]] 
+L["DUNGEON_SHORT_NAME_COT"] = "CDF"
+L["DUNGEON_SHORT_NAME_DAWN"] = "ALBA"
 L["DUNGEON_SHORT_NAME_DHT"] = "BC"
 L["DUNGEON_SHORT_NAME_DOS"] = "DOS"
 L["DUNGEON_SHORT_NAME_EB"] = "VE"
@@ -101,24 +99,22 @@ L["DUNGEON_SHORT_NAME_HOV"] = "SDV"
 --[[ L["DUNGEON_SHORT_NAME_ID"] = ""--]] 
 --[[Translation missing --]]
 --[[ L["DUNGEON_SHORT_NAME_LOWR"] = ""--]] 
-L["DUNGEON_SHORT_NAME_MISTS"] = "MISTS"
+L["DUNGEON_SHORT_NAME_MISTS"] = "NEBBIE"
 --[[Translation missing --]]
 --[[ L["DUNGEON_SHORT_NAME_NELT"] = ""--]] 
 L["DUNGEON_SHORT_NAME_NL"] = "ADN"
 L["DUNGEON_SHORT_NAME_NO"] = "ODN"
-L["DUNGEON_SHORT_NAME_NW"] = "NW"
+L["DUNGEON_SHORT_NAME_NW"] = "SN"
 L["DUNGEON_SHORT_NAME_PF"] = "PF"
 L["DUNGEON_SHORT_NAME_RISE"] = "ADM"
 L["DUNGEON_SHORT_NAME_RLP"] = "PDVDR"
 L["DUNGEON_SHORT_NAME_SBG"] = "TDT"
 L["DUNGEON_SHORT_NAME_SD"] = "SD"
---[[Translation missing --]]
---[[ L["DUNGEON_SHORT_NAME_SIEGE"] = ""--]] 
+L["DUNGEON_SHORT_NAME_SIEGE"] = "ASSEDIO"
 L["DUNGEON_SHORT_NAME_SOA"] = "SOA"
 --[[Translation missing --]]
 --[[ L["DUNGEON_SHORT_NAME_STRT"] = ""--]] 
---[[Translation missing --]]
---[[ L["DUNGEON_SHORT_NAME_SV"] = ""--]] 
+L["DUNGEON_SHORT_NAME_SV"] = "VDP"
 L["DUNGEON_SHORT_NAME_TJS"] = "TDSDG"
 L["DUNGEON_SHORT_NAME_TOP"] = "TOP"
 L["DUNGEON_SHORT_NAME_TOTT"] = "TDM"
@@ -176,8 +172,7 @@ L["LOCKING_PROFILE_FRAME"] = "RaiderIO: Blocco della finestra Profilo M+."
 L["MAINS_BEST_SCORE_BEST_SEASON"] = "miglior punteggio M+ del PG principale (%s)"
 L["MAINS_RAID_PROGRESS"] = "Progresso PG Principale"
 L["MAINS_SCORE"] = "Punteggio PG Principale"
---[[Translation missing --]]
---[[ L["MINIMAP_SHORTCUT_BROKER_ENABLE"] = ""--]] 
+L["MINIMAP_SHORTCUT_BROKER_ENABLE"] = "Abilita il pulsante del compartimento dell'addon"
 --[[Translation missing --]]
 --[[ L["MINIMAP_SHORTCUT_BROKER_ENABLE_DESC"] = ""--]] 
 L["MINIMAP_SHORTCUT_ENABLE"] = "Abilita il Pulsante"
@@ -392,20 +387,15 @@ L["RAID_BOSS_CN_9"] = "Generali della Legione di Pietra "
 --[[ L["RAID_BOSS_ICC_9"] = ""--]] 
 --[[Translation missing --]]
 --[[ L["RAID_BOSS_NP_1"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_NP_2"] = ""--]] 
+L["RAID_BOSS_NP_2"] = "Orrore Vincolasangue"
 --[[Translation missing --]]
 --[[ L["RAID_BOSS_NP_3"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_NP_4"] = ""--]] 
+L["RAID_BOSS_NP_4"] = "Rasha'nan"
 --[[Translation missing --]]
 --[[ L["RAID_BOSS_NP_5"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_NP_6"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_NP_7"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_NP_8"] = ""--]] 
+L["RAID_BOSS_NP_6"] = "Principessa del Nexus"
+L["RAID_BOSS_NP_7"] = "Corte della Seta"
+L["RAID_BOSS_NP_8"] = "Regina Ansurek"
 --[[Translation missing --]]
 --[[ L["RAID_BOSS_RS_1"] = ""--]] 
 --[[Translation missing --]]
@@ -485,12 +475,9 @@ L["RAID_DIFFICULTY_SUFFIX_NORMAL"] = "NM"
 --[[Translation missing --]]
 --[[ L["RAID_DIFFICULTY_SUFFIX_NORMAL25"] = ""--]] 
 L["RAID_ENCOUNTERS_DEFEATED_TITLE"] = "Boss Incursione Sconfitti"
---[[Translation missing --]]
---[[ L["RAID_ICC"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_NP"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_RS"] = ""--]] 
+L["RAID_ICC"] = "Rocca della Corona di Ghiaccio "
+L["RAID_NP"] = "Palazzo dei Nerub'ar"
+L["RAID_RS"] = "Santuario di Rubino"
 --[[Translation missing --]]
 --[[ L["RAID_TOTFW"] = ""--]] 
 L["RAIDERIO_AVERAGE_PLAYER_SCORE"] = "Media Punteggio per +%s in Tempo"
@@ -628,10 +615,8 @@ L["USE_ENGLISH_ABBREVIATION"] = "Forza Abbreviazioni dei Dungeon in Inglese"
 L["USE_ENGLISH_ABBREVIATION_DESC"] = "Quando selezionato, verranno usate le abbreviazioni per i nomi dei dungeon in Inglese, al posto della lingua corrente."
 L["USE_RAIDERIO_CLIENT_LIVE_TRACKING_SETTINGS"] = "Permetti al Client di Raider.IO a controllare il Log Combattimento"
 L["USE_RAIDERIO_CLIENT_LIVE_TRACKING_SETTINGS_DESC"] = "Permetti al Client di Raider.IO (quando presente) di controllare le impostazioni del Logging di Combattimento automaticamente."
---[[Translation missing --]]
---[[ L["WARBAND_BEST_SCORE_BEST_SEASON"] = ""--]] 
---[[Translation missing --]]
---[[ L["WARBAND_SCORE"] = ""--]] 
+L["WARBAND_BEST_SCORE_BEST_SEASON"] = "Punteggio M+ migliore della Brigata (%s)"
+L["WARBAND_SCORE"] = "Punteggio M+ della Brigata"
 L["WARNING_DEBUG_MODE_ENABLE"] = "|cffFFFFFF%s|r La modalità Debug è abilitata. Per disabilitarla digita /raiderio debug|r"
 L["WARNING_LOCK_POSITION_FRAME_AUTO"] = "RaiderIO: Devi prima Disabilitare \"Posizionamento Automatico\" per il Profilo RaiderIO."
 L["WARNING_RWF_MODE_ENABLE"] = "|cffFFFFFF%s|r La modalità Race World First è abilitata. Puoi disabilitarlo digitando |cffFFFFFF/raiderio rwf|r."

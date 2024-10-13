@@ -2,19 +2,20 @@
 BetterBagsDB = {
 ["profileKeys"] = {
 ["Pedrado - Stormrage"] = "Default",
+["Turdal - Illidan"] = "Default",
 ["Alvein - Anvilmar"] = "Default",
 ["Fajitas - Azralon"] = "Default",
 ["Adyfiend - Illidan"] = "Default",
 ["Coroio - Illidan"] = "Default",
 ["Gordonfreema - Stormrage"] = "Default",
 ["Babylucca - Illidan"] = "Default",
-["Davi - Stormrage"] = "Default",
+["Gordonfreems - Illidan"] = "Default",
 ["Nananenem - Illidan"] = "Default",
 ["Casasbahia - Illidan"] = "Default",
 ["Klarth - Stormrage"] = "Default",
-["Gordonfreems - Illidan"] = "Default",
+["Davi - Stormrage"] = "Default",
 ["Blazingly - Illidan"] = "Default",
-["Turdal - Illidan"] = "Default",
+["Doutora - Illidan"] = "Default",
 },
 ["profiles"] = {
 ["Default"] = {
@@ -24,132 +25,19 @@ nil,
 2,
 },
 },
-["categoryOptions"] = {
-["Waist"] = {
-["shown"] = true,
-},
-["Legs"] = {
-["shown"] = true,
-},
-["Main Hand"] = {
-["shown"] = true,
-},
-["Profession"] = {
-["shown"] = true,
-},
-["Hands"] = {
-["shown"] = true,
-},
-["Leatherworking"] = {
-["shown"] = true,
-},
-["Quest"] = {
-["shown"] = true,
-},
-["Enchanting"] = {
-["shown"] = true,
-},
-["Tailoring"] = {
-["shown"] = true,
-},
-["Tradeskill"] = {
-["shown"] = true,
-},
-["Elemental"] = {
-["shown"] = true,
-},
-["Head"] = {
-["shown"] = true,
-},
-["Feet"] = {
-["shown"] = true,
-},
-["Chest"] = {
-["shown"] = true,
-},
-["Item Enhancement"] = {
-["shown"] = true,
-},
-["Engineering"] = {
-["shown"] = true,
-},
-["Weapon"] = {
-["shown"] = true,
-},
-["Other"] = {
-["shown"] = true,
-},
-["Held In Off-hand"] = {
-["shown"] = true,
-},
-["Jewelcrafting"] = {
-["shown"] = true,
-},
-["One-Hand"] = {
-["shown"] = true,
-},
-["Cooking"] = {
-["shown"] = true,
-},
-["Reagent"] = {
-["shown"] = true,
-},
-["Armor"] = {
-["shown"] = true,
-},
-["Recent Items"] = {
-["shown"] = true,
-},
-["Inscription"] = {
-["shown"] = true,
-},
-["Wrist"] = {
-["shown"] = true,
-},
-["Finishing Reagents"] = {
-["shown"] = true,
-},
-["Optional Reagents"] = {
-["shown"] = true,
-},
-["Two-Hand"] = {
-["shown"] = true,
-},
-["Mining"] = {
-["shown"] = true,
-},
-["Recipe"] = {
-["shown"] = true,
-},
-["Miscellaneous"] = {
-["shown"] = true,
-},
-["Free Space"] = {
-["shown"] = true,
-},
-["Consumable"] = {
-["shown"] = true,
-},
-["Gem"] = {
-["shown"] = true,
-},
-["Back"] = {
-["shown"] = true,
-},
-["Neck"] = {
-["shown"] = true,
-},
-["Junk"] = {
-["shown"] = true,
-},
-["Shoulder"] = {
-["shown"] = true,
-},
-["Herbalism"] = {
-["shown"] = true,
+["itemSort"] = {
+[0] = {
+nil,
+3,
 },
 },
 ["positions"] = {
+{
+["y"] = 7.9998779296875,
+["x"] = -350.3999938964844,
+["point"] = "CENTER",
+["scale"] = 1,
+},
 [0] = {
 ["y"] = -114.30078125,
 ["x"] = -594.896728515625,
@@ -419,14 +307,14 @@ true,
 ["name"] = "Recent Items",
 ["dynamic"] = true,
 },
-["Inscription"] = {
+["Jewelcrafting"] = {
 ["enabled"] = {
 true,
 [0] = true,
 },
 ["itemList"] = {
 },
-["name"] = "Inscription",
+["name"] = "Jewelcrafting",
 ["dynamic"] = true,
 },
 ["Wrist"] = {
@@ -439,14 +327,14 @@ true,
 ["name"] = "Wrist",
 ["dynamic"] = true,
 },
-["Herbalism"] = {
+["Junk"] = {
 ["enabled"] = {
 true,
 [0] = true,
 },
 ["itemList"] = {
 },
-["name"] = "Herbalism",
+["name"] = "Junk",
 ["dynamic"] = true,
 },
 ["Optional Reagents"] = {
@@ -479,14 +367,14 @@ true,
 ["name"] = "Mining",
 ["dynamic"] = true,
 },
-["Recipe"] = {
+["Main Hand"] = {
 ["enabled"] = {
 true,
 [0] = true,
 },
 ["itemList"] = {
 },
-["name"] = "Recipe",
+["name"] = "Main Hand",
 ["dynamic"] = true,
 },
 ["Miscellaneous"] = {
@@ -539,24 +427,24 @@ true,
 ["name"] = "Finishing Reagents",
 ["dynamic"] = true,
 },
-["Main Hand"] = {
+["Recipe"] = {
 ["enabled"] = {
 true,
 [0] = true,
 },
 ["itemList"] = {
 },
-["name"] = "Main Hand",
+["name"] = "Recipe",
 ["dynamic"] = true,
 },
-["Junk"] = {
+["Herbalism"] = {
 ["enabled"] = {
 true,
 [0] = true,
 },
 ["itemList"] = {
 },
-["name"] = "Junk",
+["name"] = "Herbalism",
 ["dynamic"] = true,
 },
 ["Shoulder"] = {
@@ -569,14 +457,14 @@ true,
 ["name"] = "Shoulder",
 ["dynamic"] = true,
 },
-["Jewelcrafting"] = {
+["Inscription"] = {
 ["enabled"] = {
 true,
 [0] = true,
 },
 ["itemList"] = {
 },
-["name"] = "Jewelcrafting",
+["name"] = "Inscription",
 ["dynamic"] = true,
 },
 },
@@ -700,14 +588,14 @@ true,
 },
 ["name"] = "Optional Reagents",
 },
-["Recipe"] = {
+["Herbalism"] = {
 ["enabled"] = {
 true,
 [0] = true,
 },
 ["itemList"] = {
 },
-["name"] = "Recipe",
+["name"] = "Herbalism",
 },
 ["Mining"] = {
 ["enabled"] = {
@@ -718,14 +606,14 @@ true,
 },
 ["name"] = "Mining",
 },
-["Gem"] = {
+["Finishing Reagents"] = {
 ["enabled"] = {
 true,
 [0] = true,
 },
 ["itemList"] = {
 },
-["name"] = "Gem",
+["name"] = "Finishing Reagents",
 },
 ["Miscellaneous"] = {
 ["enabled"] = {
@@ -754,14 +642,14 @@ true,
 },
 ["name"] = "Consumable",
 },
-["Item Enhancement"] = {
+["Gem"] = {
 ["enabled"] = {
 true,
 [0] = true,
 },
 ["itemList"] = {
 },
-["name"] = "Item Enhancement",
+["name"] = "Gem",
 },
 ["Recent Items"] = {
 ["enabled"] = {
@@ -781,23 +669,23 @@ true,
 },
 ["name"] = "Engineering",
 },
-["Finishing Reagents"] = {
+["Item Enhancement"] = {
 ["enabled"] = {
 true,
 [0] = true,
 },
 ["itemList"] = {
 },
-["name"] = "Finishing Reagents",
+["name"] = "Item Enhancement",
 },
-["Herbalism"] = {
+["Recipe"] = {
 ["enabled"] = {
 true,
 [0] = true,
 },
 ["itemList"] = {
 },
-["name"] = "Herbalism",
+["name"] = "Recipe",
 },
 ["Weapon"] = {
 ["enabled"] = {
@@ -813,8 +701,132 @@ true,
 [0] = {
 ["TradeSkill"] = true,
 ["EquipmentLocation"] = false,
-["Subtype"] = false,
 ["GearSet"] = false,
+},
+},
+["categoryOptions"] = {
+["Waist"] = {
+["shown"] = true,
+},
+["Legs"] = {
+["shown"] = true,
+},
+["Main Hand"] = {
+["shown"] = true,
+},
+["Profession"] = {
+["shown"] = true,
+},
+["Hands"] = {
+["shown"] = true,
+},
+["Leatherworking"] = {
+["shown"] = true,
+},
+["Quest"] = {
+["shown"] = true,
+},
+["Enchanting"] = {
+["shown"] = true,
+},
+["Tailoring"] = {
+["shown"] = true,
+},
+["Tradeskill"] = {
+["shown"] = true,
+},
+["Elemental"] = {
+["shown"] = true,
+},
+["Head"] = {
+["shown"] = true,
+},
+["Feet"] = {
+["shown"] = true,
+},
+["Chest"] = {
+["shown"] = true,
+},
+["Item Enhancement"] = {
+["shown"] = true,
+},
+["Engineering"] = {
+["shown"] = true,
+},
+["Weapon"] = {
+["shown"] = true,
+},
+["Other"] = {
+["shown"] = true,
+},
+["Held In Off-hand"] = {
+["shown"] = true,
+},
+["Jewelcrafting"] = {
+["shown"] = true,
+},
+["One-Hand"] = {
+["shown"] = true,
+},
+["Cooking"] = {
+["shown"] = true,
+},
+["Reagent"] = {
+["shown"] = true,
+},
+["Armor"] = {
+["shown"] = true,
+},
+["Recent Items"] = {
+["shown"] = true,
+},
+["Herbalism"] = {
+["shown"] = true,
+},
+["Wrist"] = {
+["shown"] = true,
+},
+["Junk"] = {
+["shown"] = true,
+},
+["Optional Reagents"] = {
+["shown"] = true,
+},
+["Two-Hand"] = {
+["shown"] = true,
+},
+["Mining"] = {
+["shown"] = true,
+},
+["Neck"] = {
+["shown"] = true,
+},
+["Miscellaneous"] = {
+["shown"] = true,
+},
+["Free Space"] = {
+["shown"] = true,
+},
+["Consumable"] = {
+["shown"] = true,
+},
+["Gem"] = {
+["shown"] = true,
+},
+["Back"] = {
+["shown"] = true,
+},
+["Recipe"] = {
+["shown"] = true,
+},
+["Finishing Reagents"] = {
+["shown"] = true,
+},
+["Shoulder"] = {
+["shown"] = true,
+},
+["Inscription"] = {
+["shown"] = true,
 },
 },
 },

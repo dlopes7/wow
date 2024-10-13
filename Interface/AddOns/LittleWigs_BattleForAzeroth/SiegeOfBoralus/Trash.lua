@@ -45,6 +45,10 @@ if L then
 	L.pillager = "Bilge Rat Pillager"
 	L.tempest = "Bilge Rat Tempest"
 	L.invader = "Ashvane Invader"
+
+	L.gate_open = CL.gate_open
+	L.gate_open_desc = "Show a bar indicating when the Kul Tiran Wavetender will open the gate after Dread Captain Lockwood."
+	L.gate_open_icon = "achievement_dungeon_siegeofboralus"
 end
 
 --------------------------------------------------------------------------------
@@ -53,13 +57,17 @@ end
 
 function mod:GetOptions()
 	return {
+		-- RP Timers
+		"gate_open",
 		-- Scrimshaw Enforcer / Kul Tiran Halberd
 		{256627, "NAMEPLATE"}, -- Slobber Knocker
+		{257732, "NAMEPLATE"}, -- Shattering Bellow
 		-- Blacktar Bomber
 		{256640, "NAMEPLATE"}, -- Burning Tar
 		-- Irontide Waveshaper / Kul Tiran Wavetender
 		{256957, "NAMEPLATE"}, -- Watertight Shell
 		-- Irontide Raider
+		{272662, "NAMEPLATE"}, -- Iron Hook
 		{257170, "NAMEPLATE"}, -- Savage Tempest
 		-- Kul Tiran Vanguard
 		{257288, "NAMEPLATE"}, -- Heavy Slash
@@ -83,7 +91,7 @@ function mod:GetOptions()
 		[256627] = L.halberd.." / "..L.enforcer,
 		[256640] = L.bomber,
 		[256957] = L.wavetender.." / "..L.waveshaper,
-		[257170] = L.raider,
+		[272662] = L.raider,
 		[257288] = L.vanguard,
 		[454437] = L.commander,
 		[272421] = L.spotter,
@@ -96,12 +104,9 @@ function mod:GetOptions()
 end
 
 function mod:OnBossEnable()
-	-- Interrupts
-	self:Log("SPELL_INTERRUPT", "Interrupt", "*")
-
 	-- Scrimshaw Enforcer / Kul Tiran Halberd
 	self:Log("SPELL_CAST_START", "SlobberKnocker", 256627)
-	self:Log("SPELL_CAST_SUCCESS", "SlobberKnockerSuccess", 256627)
+	self:Log("SPELL_CAST_START", "ShatteringBellow", 257732)
 	self:Death("KulTiranHalberdDeath", 141283, 129374) -- Enforcer, Halberd
 
 	-- Blacktar Bomber
@@ -110,11 +115,13 @@ function mod:OnBossEnable()
 
 	-- Irontide Waveshaper / Kul Tiran Wavetender
 	self:Log("SPELL_CAST_START", "WatertightShell", 256957)
+	self:Log("SPELL_INTERRUPT", "WatertightShellInterrupt", 256957)
 	self:Log("SPELL_CAST_SUCCESS", "WatertightShellSuccess", 256957)
 	self:Log("SPELL_AURA_APPLIED", "WatertightShellApplied", 256957)
 	self:Death("KulTiranWavetenderDeath", 129370, 141284) -- Waveshaper, Wavetender
 
 	-- Irontide Raider
+	self:Log("SPELL_CAST_START", "IronHook", 272662)
 	self:Log("SPELL_CAST_START", "SavageTempest", 257170)
 	self:Death("IrontideRaiderDeath", 129369)
 
@@ -123,8 +130,10 @@ function mod:OnBossEnable()
 	self:Death("KulTiranVanguardDeath", 138019)
 
 	-- Ashvane Commander
-	self:Log("SPELL_AURA_APPLIED", "AzeriteCharge", 454437)
+	self:Log("SPELL_CAST_SUCCESS", "AzeriteCharge", 454437)
+	self:Log("SPELL_AURA_APPLIED", "AzeriteChargeApplied", 454437)
 	self:Log("SPELL_CAST_START", "BolsteringShout", 275826)
+	self:Log("SPELL_INTERRUPT", "BolsteringShoutInterrupt", 275826)
 	self:Log("SPELL_CAST_SUCCESS", "BolsteringShoutSuccess", 275826)
 	self:Death("AshvaneCommanderDeath", 128969)
 
@@ -149,6 +158,7 @@ function mod:OnBossEnable()
 
 	-- Bilge Rat Tempest
 	self:Log("SPELL_CAST_START", "ChokingWaters", 272571)
+	self:Log("SPELL_INTERRUPT", "ChokingWatersInterrupt", 272571)
 	self:Log("SPELL_CAST_SUCCESS", "ChokingWatersSuccess", 272571)
 	self:Death("BilgeRatTempestDeath", 129367)
 
@@ -161,27 +171,25 @@ end
 -- Event Handlers
 --
 
--- Interrupts
+-- RP Timers
 
-function mod:Interrupt(args)
-	if args.extraSpellId == 256957 then -- Watertight Shell
-		self:Nameplate(256957, 46.3, args.destGUID)
-	elseif args.extraSpellId == 275826 then -- Bolstering Shout
-		self:Nameplate(275826, 15.3, args.destGUID)
-	elseif args.extraSpellId == 272571 then -- Choking Waters
-		self:Nameplate(272571, 21.8, args.destGUID)
-	end
+-- triggered from Dread Captain Lockwood's :OnWin
+function mod:LockwoodDefeated()
+	self:Bar("gate_open", 4.8, L.gate_open, L.gate_open_icon)
 end
 
 -- Scrimshaw Enforcer / Kul Tiran Halberd
 
 function mod:SlobberKnocker(args)
 	self:Message(args.spellId, "purple")
+	self:Nameplate(args.spellId, 20.6, args.sourceGUID)
 	self:PlaySound(args.spellId, "alarm")
 end
 
-function mod:SlobberKnockerSuccess(args)
-	self:Nameplate(args.spellId, 15.4, args.sourceGUID)
+function mod:ShatteringBellow(args)
+	self:Message(args.spellId, "yellow")
+	self:Nameplate(args.spellId, 27.9, args.sourceGUID)
+	self:PlaySound(args.spellId, "alert")
 end
 
 function mod:KulTiranHalberdDeath(args)
@@ -211,12 +219,16 @@ end
 
 function mod:WatertightShell(args)
 	self:Message(args.spellId, "red", CL.casting:format(args.spellName))
-	self:PlaySound(args.spellId, "alert")
 	self:Nameplate(args.spellId, 0, args.sourceGUID)
+	self:PlaySound(args.spellId, "alert")
+end
+
+function mod:WatertightShellInterrupt(args)
+	self:Nameplate(256957, 30.9, args.destGUID)
 end
 
 function mod:WatertightShellSuccess(args)
-	self:Nameplate(args.spellId, 46.3, args.sourceGUID)
+	self:Nameplate(args.spellId, 30.9, args.sourceGUID)
 end
 
 function mod:WatertightShellApplied(args)
@@ -232,10 +244,19 @@ end
 
 -- Irontide Raider
 
+function mod:IronHook(args)
+	-- this is also cast by the first boss in the Alliance version (Chopper Redhook)
+	if self:MobId(args.sourceGUID) == 129369 then -- Irontide Raider
+		self:Message(args.spellId, "cyan")
+		self:Nameplate(args.spellId, 23.0, args.sourceGUID)
+		self:PlaySound(args.spellId, "info")
+	end
+end
+
 function mod:SavageTempest(args)
 	self:Message(args.spellId, "yellow")
+	self:Nameplate(args.spellId, 23.0, args.sourceGUID)
 	self:PlaySound(args.spellId, "long")
-	self:Nameplate(args.spellId, 19.4, args.sourceGUID)
 end
 
 function mod:IrontideRaiderDeath(args)
@@ -259,13 +280,16 @@ end
 -- Ashvane Commander
 
 function mod:AzeriteCharge(args)
+	self:Nameplate(args.spellId, 15.8, args.sourceGUID)
+end
+
+function mod:AzeriteChargeApplied(args)
 	if self:Player(args.destFlags) then -- can be cast on friendly NPCs during RP fighting
 		self:TargetMessage(args.spellId, "orange", args.destName)
 		self:PlaySound(args.spellId, "alarm", nil, args.destName)
 		if self:Me(args.destGUID) then
 			self:Say(args.spellId, nil, nil, "Azerite Charge")
 		end
-		self:Nameplate(args.spellId, 15.0, args.sourceGUID)
 	end
 end
 
@@ -273,6 +297,10 @@ function mod:BolsteringShout(args)
 	self:Message(args.spellId, "red", CL.casting:format(args.spellName))
 	self:PlaySound(args.spellId, "alert")
 	self:Nameplate(args.spellId, 0, args.sourceGUID)
+end
+
+function mod:BolsteringShoutInterrupt(args)
+	self:Nameplate(275826, 15.3, args.destGUID)
 end
 
 function mod:BolsteringShoutSuccess(args)
@@ -371,6 +399,10 @@ function mod:ChokingWaters(args)
 	self:Message(args.spellId, "red", CL.casting:format(args.spellName))
 	self:PlaySound(args.spellId, "alert")
 	self:Nameplate(args.spellId, 0, args.sourceGUID)
+end
+
+function mod:ChokingWatersInterrupt(args)
+	self:Nameplate(272571, 21.8, args.destGUID)
 end
 
 function mod:ChokingWatersSuccess(args)

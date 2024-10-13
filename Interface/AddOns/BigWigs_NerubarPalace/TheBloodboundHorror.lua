@@ -44,9 +44,9 @@ function mod:GetOptions()
 		444363, -- Gruesome Disgorge
 		443612, -- Gruesome Disgorge (Debuff)
 		445570, -- Unseeming Blight
-		445936, -- Spewing Hemorrhage
+		{445936, "CASTBAR"}, -- Spewing Hemorrhage
 		459444, -- Internal Hemorrhage
-		442530, -- Goresplatter
+		{442530, "CASTBAR"}, -- Goresplatter
 		443203, -- Crimson Rain
 		{443042, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Grasp From Beyond
 		445518, -- Black Blood
@@ -185,6 +185,7 @@ function mod:SpewingHemorrhage(args)
 	self:StopBar(CL.count:format(CL.beams, spewingHemorrhageCount))
 	self:Message(args.spellId, "orange", CL.count:format(CL.beams, spewingHemorrhageCount))
 	self:PlaySound(args.spellId, "alert")
+	self:CastBar(args.spellId, 26, CL.count:format(CL.beams, spewingHemorrhageCount))
 	spewingHemorrhageCount = spewingHemorrhageCount + 1
 	local cd = spewingHemorrhageCount % 2 == 9 and 49 or 79
 	if self:Mythic() then
@@ -204,6 +205,7 @@ function mod:Goresplatter(args)
 	self:StopBar(CL.count:format(L.goresplatter, goresplatterCount))
 	self:Message(args.spellId, "red", CL.casting:format(L.goresplatter))
 	self:PlaySound(args.spellId, "warning")
+	self:CastBar(args.spellId, 8, CL.count:format(L.goresplatter, goresplatterCount))
 	goresplatterCount = goresplatterCount + 1
 	self:Bar(args.spellId, 128, CL.count:format(L.goresplatter, goresplatterCount))
 end
@@ -241,6 +243,7 @@ do
 			self:Bar(args.spellId, cd, CL.count:format(L.grasp_from_beyond, graspFromBeyondCount))
 		end
 		if self:Me(args.destGUID) then
+			self:PersonalMessage(args.spellId, nil, L.grasp_from_beyond)
 			self:Say(args.spellId, L.grasp_from_beyond_say, nil, "Tentacles")
 			self:SayCountdown(args.spellId, 12)
 			self:PlaySound(args.spellId, "warning")

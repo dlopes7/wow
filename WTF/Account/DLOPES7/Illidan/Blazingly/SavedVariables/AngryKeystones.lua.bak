@@ -1,4 +1,4 @@
 
 AngryKeystones_CharacterConfig = {
-	["__version"] = 1,
+["__version"] = 1,
 }

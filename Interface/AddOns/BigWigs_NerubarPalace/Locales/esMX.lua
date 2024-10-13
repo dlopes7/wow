@@ -17,7 +17,6 @@ end
 
 L = BigWigs:NewBossLocale("Rasha'nan", "esMX")
 if L then
-	--L.rolling_acid = "Waves"
 	--L.spinnerets_strands = "Strands"
 	--L.enveloping_webs = "Webs"
 	--L.enveloping_web_say = "Web" -- Singular of Webs
@@ -50,14 +49,35 @@ end
 L = BigWigs:NewBossLocale("The Silken Court", "esMX")
 if L then
 	--L.skipped_cast = "Skipped %s (%d)"
+	--L.intermission_trigger = "Apex of power!" -- Skeinspinner Takazj 100 energy yell
 
 	--L.venomous_rain = "Rain"
 	--L.burrowed_eruption = "Burrow"
 	--L.stinging_swarm = "Dispel Debuffs"
 	--L.strands_of_reality = "Frontal [S]" -- S for Skeinspinner Takazj
+	--L.strands_of_reality_message = "Frontal [Skeinspinner Takazj]"
 	--L.impaling_eruption = "Frontal [A]" -- A for Anub'arash
+	--L.impaling_eruption_message = "Frontal [Anub'arash]"
 	--L.entropic_desolation = "Run Out"
 	--L.cataclysmic_entropy = "Big Boom" -- Interrupt before it casts
 	--L.spike_eruption = "Spikes"
 	--L.unleashed_swarm = "Swarm"
+	--L.void_degeneration = "Blue Orb"
+	--L.burning_rage = "Red Orb"
+end
+
+L = BigWigs:NewBossLocale("Queen Ansurek", "esMX")
+if L then
+	--L.stacks_onboss = "%dx %s on BOSS"
+
+	--L.reactive_toxin = "Toxins"
+	--L.reactive_toxin_say = "Toxin"
+	--L.venom_nova = "Nova"
+	--L.web_blades = "Blades"
+	--L.silken_tomb = "Roots" -- Raid being rooted in place
+	--L.wrest = "Pull In"
+	--L.royal_condemnation = "Shackles"
+	--L.frothing_gluttony = "Ring"
+
+	--L.stage_two_end_message_storymode = "Run into the portal"
 end

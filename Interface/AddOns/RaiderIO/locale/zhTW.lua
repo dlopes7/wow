@@ -1,4 +1,4 @@
--- Generated from CurseForge on Sat Sep 14 06:41:18 UTC 2024
+-- Generated from CurseForge on Sun Oct 13 07:38:57 UTC 2024
 local ns = select(2, ...) ---@class ns @The addon namespace.
 
 if ns:IsSameLocale("zhTW") then
@@ -303,10 +303,8 @@ L["RAID_BOSS_ICC_12"] = "巫妖王"
 --[[ L["RAID_BOSS_ICC_3"] = ""--]] 
 --[[Translation missing --]]
 --[[ L["RAID_BOSS_ICC_4"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_ICC_5"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_ICC_6"] = ""--]] 
+L["RAID_BOSS_ICC_5"] = "膿腸"
+L["RAID_BOSS_ICC_6"] = "腐臉"
 --[[Translation missing --]]
 --[[ L["RAID_BOSS_ICC_7"] = ""--]] 
 --[[Translation missing --]]
@@ -320,7 +318,7 @@ L["RAID_BOSS_NP_4"] = "菈夏南"
 L["RAID_BOSS_NP_5"] = "歐維納斯"
 L["RAID_BOSS_NP_6"] = "奧核公主"
 L["RAID_BOSS_NP_7"] = "絲綢宮廷"
-L["RAID_BOSS_NP_8"] = "女王安蘇芮克"
+L["RAID_BOSS_NP_8"] = "安蘇芮克女王"
 --[[Translation missing --]]
 --[[ L["RAID_BOSS_RS_1"] = ""--]] 
 L["RAID_BOSS_SFO_1"] = "戒備守護者"

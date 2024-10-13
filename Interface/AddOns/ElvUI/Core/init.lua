@@ -36,7 +36,7 @@ local CallbackHandler = _G.LibStub('CallbackHandler-1.0')
 local AddOnName, Engine = ...
 local E = AceAddon:NewAddon(AddOnName, 'AceConsole-3.0', 'AceEvent-3.0', 'AceTimer-3.0', 'AceHook-3.0')
 E.DF = {profile = {}, global = {}}; E.privateVars = {profile = {}} -- Defaults
-E.Options = {type = 'group', args = {}, childGroups = 'ElvUI_HiddenTree'}
+E.Options = {type = 'group', args = {}, childGroups = 'ElvUI_HiddenTree', get = E.noop, name = ''}
 E.callbacks = E.callbacks or CallbackHandler:New(E)
 E.wowpatch, E.wowbuild, E.wowdate, E.wowtoc = GetBuildInfo()
 E.locale = GetLocale()
@@ -116,7 +116,7 @@ end
 function E:ParseVersionString(addon)
 	local version = GetAddOnMetadata(addon, 'Version')
 	if strfind(version, 'project%-version') then
-		return 13.77, '13.77-git', nil, true
+		return 13.78, '13.78-git', nil, true
 	else
 		local release, extra = strmatch(version, '^v?([%d.]+)(.*)')
 		return tonumber(release), release..extra, extra ~= ''

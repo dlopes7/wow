@@ -5,14 +5,12 @@ local LSM = E.Libs.LSM
 local TI = W:GetModule("TurnIn")
 local SB = W:GetModule("SwitchButtons")
 local OT = W:GetModule("ObjectiveTracker")
-local PR = W:GetModule("ParagonReputation")
 
 local pairs = pairs
 local tonumber = tonumber
 local tostring = tostring
 
 local C_QuestLog_SortQuestWatches = C_QuestLog.SortQuestWatches
-local ReputationFrame_Update = ReputationFrame_Update
 
 local customListSelected
 
@@ -651,8 +649,67 @@ options.objectiveTracker = {
 				},
 			},
 		},
-		info = {
+		infoColor = {
 			order = 8,
+			type = "group",
+			inline = true,
+			name = L["Information Color"],
+			disabled = function()
+				return not E.private.WT.quest.objectiveTracker.enable
+			end,
+			get = function(info)
+				return E.private.WT.quest.objectiveTracker.infoColor[info[#info]]
+			end,
+			set = function(info, value)
+				E.private.WT.quest.objectiveTracker.infoColor[info[#info]] = value
+				E:StaticPopup_Show("PRIVATE_RL")
+			end,
+			args = {
+				enable = {
+					order = 1,
+					type = "toggle",
+					name = L["Enable"],
+					desc = L["Change the color of quest titles."],
+				},
+				classColor = {
+					order = 2,
+					type = "toggle",
+					name = L["Use Class Color"],
+				},
+				customColorNormal = {
+					order = 3,
+					type = "color",
+					name = L["Normal Color"],
+					hasAlpha = false,
+					get = function(info)
+						local db = E.private.WT.quest.objectiveTracker.infoColor.customColorNormal
+						local default = V.quest.objectiveTracker.infoColor.customColorNormal
+						return db.r, db.g, db.b, nil, default.r, default.g, default.b, nil
+					end,
+					set = function(info, r, g, b)
+						local db = E.private.WT.quest.objectiveTracker.infoColor.customColorNormal
+						db.r, db.g, db.b = r, g, b
+					end,
+				},
+				customColorHighlight = {
+					order = 4,
+					type = "color",
+					name = L["Highlight Color"],
+					hasAlpha = false,
+					get = function(info)
+						local db = E.private.WT.quest.objectiveTracker.infoColor.customColorHighlight
+						local default = V.quest.objectiveTracker.infoColor.customColorHighlight
+						return db.r, db.g, db.b, nil, default.r, default.g, default.b, nil
+					end,
+					set = function(info, r, g, b)
+						local db = E.private.WT.quest.objectiveTracker.infoColor.customColorHighlight
+						db.r, db.g, db.b = r, g, b
+					end,
+				},
+			},
+		},
+		info = {
+			order = 9,
 			type = "group",
 			inline = true,
 			name = L["Information"],
@@ -701,7 +758,7 @@ options.objectiveTracker = {
 			},
 		},
 		backdrop = {
-			order = 9,
+			order = 10,
 			type = "group",
 			inline = true,
 			name = L["Backdrop"],
@@ -797,7 +854,7 @@ options.objectiveTracker = {
 			},
 		},
 		menuTitle = {
-			order = 10,
+			order = 11,
 			type = "group",
 			inline = true,
 			name = L["Menu Title"] .. " (" .. L["it shows when objective tracker be collapsed."] .. ")",
@@ -1245,121 +1302,6 @@ options.switchButtons = {
 					type = "toggle",
 					name = L["Turn In"],
 					width = 1.667,
-				},
-			},
-		},
-	},
-}
-
-options.paragonReputation = {
-	order = 4,
-	type = "group",
-	name = L["Paragon Reputation"],
-	get = function(info)
-		return E.db.WT.quest.paragonReputation[info[#info]]
-	end,
-	set = function(info, value)
-		E.db.WT.quest.paragonReputation[info[#info]] = value
-	end,
-	args = {
-		desc = {
-			order = 1,
-			type = "group",
-			inline = true,
-			name = L["Description"],
-			args = {
-				feature = {
-					order = 1,
-					type = "description",
-					name = L["Better visualization of Paragon Factions on the Reputation Frame."],
-					fontSize = "medium",
-				},
-			},
-		},
-		enable = {
-			order = 2,
-			type = "toggle",
-			name = L["Enable"],
-			set = function(info, value)
-				E.db.WT.quest.paragonReputation[info[#info]] = value
-				PR:ProfileUpdate()
-			end,
-		},
-		reputation_panel = {
-			order = 3,
-			name = L["Reputation panel"],
-			type = "group",
-			inline = true,
-			disabled = function()
-				return not E.db.WT.quest.paragonReputation.enable
-			end,
-			set = function(info, value)
-				E.db.WT.quest.paragonReputation[info[#info]] = value
-				ReputationFrame_Update()
-			end,
-			args = {
-				color = {
-					order = 1,
-					name = L["Color"],
-					type = "color",
-					hasAlpha = false,
-					get = function(info)
-						local t = E.db.WT.quest.paragonReputation.color
-						return t.r, t.g, t.b, 1, 0, 0.5, 0.9, 1
-					end,
-					set = function(info, r, g, b)
-						local t = E.db.WT.quest.paragonReputation.color
-						t.r, t.g, t.b = r, g, b
-						ReputationFrame_Update()
-					end,
-				},
-				text = {
-					order = 2,
-					name = L["Format"],
-					type = "select",
-					values = {
-						PARAGON = L["Paragon"] .. " (100/10000)",
-						EXALTED = L["Exalted"] .. " (100/10000)",
-						PARAGONPLUS = L["Paragon"] .. " x 1" .. " (100/10000)",
-						CURRENT = "100 (100/10000)",
-						VALUE = "100/10000",
-						DEFICIT = "9900",
-					},
-				},
-			},
-		},
-		toast = {
-			order = 4,
-			name = L["Toast"],
-			type = "group",
-			inline = true,
-			disabled = function()
-				return not E.db.WT.quest.paragonReputation.enable
-			end,
-			get = function(info)
-				return E.db.WT.quest.paragonReputation[info[#info - 1]][info[#info]]
-			end,
-			set = function(info, value)
-				E.db.WT.quest.paragonReputation[info[#info - 1]][info[#info]] = value
-			end,
-			args = {
-				enable = {
-					order = 1,
-					type = "toggle",
-					name = L["Enable"],
-				},
-				sound = {
-					order = 2,
-					type = "toggle",
-					name = L["Sound"],
-				},
-				fade_time = {
-					order = 3,
-					type = "range",
-					name = L["Fade Time"],
-					min = 1,
-					max = 15.0,
-					step = 0.01,
 				},
 			},
 		},

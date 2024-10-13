@@ -28,11 +28,11 @@ local difficultyTable = {
 	[148] = "normal", -- 20 Player (AQ20/ZG)
 	[175] = "N10", -- 10 Player (Ulduar 10 & Karazhan)
 	[176] = "N25", -- 25 Player (Ulduar 25 & TBC raids)
-	[186] = "SOD", -- 40 Player (Onyxia - Classic Season of Discovery)
+	[186] = "SOD", -- 40 Player (Onyxia & BWL - Classic Season of Discovery)
 	[198] = "SOD", -- Normal (10 player Blackfathom Deeps/Gnomeregan - Classic Season of Discovery)
 	[215] = "SOD", -- Normal (20 player Sunken Temple - Classic Season of Discovery)
 	[220] = "story", -- Story
-	[226] = "SOD", -- 20 Player (Molten Core - Classic Season of Discovery)
+	[226] = "SOD", -- 20 Player (Molten Core & ZG - Classic Season of Discovery)
 }
 local SPELL_DURATION_SEC = SPELL_DURATION_SEC -- "%.2f sec"
 local GetTime, date = GetTime, BigWigsLoader.date
@@ -113,7 +113,7 @@ local dontPrint = { -- Don't print a warning message for these difficulties
 193. 10 Player (Heroic)
 194. 25 Player (Heroic)
 
-1.15.3
+1.15.4
 1. Normal
 9. 40 Player
 148. 20 Player
@@ -131,6 +131,7 @@ local dontPrint = { -- Don't print a warning message for these difficulties
 214. DNT - Internal only
 215. Normal
 226. 20 Player
+231. Normal
 
 /run for i=1, 1000 do local n = GetDifficultyInfo(i) if n then print(i..".", n) end end
 ]]--

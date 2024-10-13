@@ -1,5 +1,5 @@
 SharedMedia_Naowh: enabled
-AngryKeystones: enabled
+AngryKeystones: disabled
 BetterBags: enabled
 BigWigs: enabled
 BigWigs_Aberrus: enabled
@@ -81,3 +81,6 @@ LittleWigs_Dragonflight: enabled
 MythicDungeonTools: enabled
 GatherMate2: enabled
 MRT: enabled
+DejaCharacterStats: enabled
+Simulationcraft: enabled
+TrueStatValues: enabled

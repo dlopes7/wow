@@ -4,71 +4,23 @@ Blizzard_Console_SavedVars = {
 ["height"] = 299.9998168945313,
 ["messageHistory"] = {
 {
-"Proficiency in item class 2 set to 0x000000c003",
+"Skill 101 increased from 375 to 380",
 0,
 },
 {
-"Proficiency in item class 2 set to 0x000000c403",
+"Skill 183 increased from 375 to 380",
 0,
 },
 {
-"Proficiency in item class 4 set to 0x0000000061",
+"Skill 804 increased from 375 to 380",
 0,
 },
 {
-"Proficiency in item class 4 set to 0x0000000069",
+"Skill 228 increased from 375 to 380",
 0,
 },
 {
-"Proficiency in item class 4 set to 0x000000006d",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x000000c423",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x000000e423",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x000010e423",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x000010e433",
-0,
-},
-{
-"Proficiency in item class 4 set to 0x000000006f",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x000010e433",
-0,
-},
-{
-"Proficiency in item class 4 set to 0x000000006f",
-0,
-},
-{
-"Weather changed to 1, intensity 0.000000\n",
-0,
-},
-{
-"Time set to 9/13/2024 (Fri) 10:37",
-0,
-},
-{
-"Gamespeed set from 0.017 to 0.017",
-0,
-},
-{
-"Got new connection 3",
-0,
-},
-{
-"Weather changed to 1, intensity 0.000000\n",
+"Skill 2732 increased from 375 to 380",
 0,
 },
 {
@@ -88,11 +40,395 @@ Blizzard_Console_SavedVars = {
 0,
 },
 {
-"World transfer pending...",
+"Test CVar test_cameraTargetFocusInteractEnable has been set to 1 (default 0)",
 0,
 },
 {
-"Got new connection 3",
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraHeadMovementStrength has been set to 0 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 1.5 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthYaw has been set to 0 (default 1.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 7.2 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.023559765769618 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.059654825315491 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.13467799404307 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.19817058828837 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.26538785847103 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.32094362173383 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.38848076375656 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.44838323713743 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.50226555459786 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.56078353489347 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.59664517286019 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.62155806258094 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.64104788383587 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.6577697474556 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.6730125402573 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.68797470277119 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.703766806581 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.7181263239885 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.73218639972898 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.75938490263939 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.77151357992725 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.78628845688118 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.79874055876918 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.81177789815294 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 1.5 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.82442266892462 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.84009357751492 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.85016851289079 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.86154058769423 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.87172742849031 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.8815507795971 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.89100654490988 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.90009078159848 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.90814319317897 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.91775464441525 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.92626576904981 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.93488765732839 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.94299055243926 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.95008103482405 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.95625372777469 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.9624552504314 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.96858317416769 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.97417339902024 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.97922282163383 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.98372863887396 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.98817492780275 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99151307631195 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99413210569429 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.9967928654299 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99848910081395 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99950656231774 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99996915814022 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 1 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 0.70760454682571 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 1.6568554425035 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 2.4110142830259 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 3.0717523310881 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 3.5618520723741 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 3.9301016418642 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 4.2217336344103 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 4.4251770327569 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 4.5397225925732 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 4.6106521394901 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 4.6211196157069 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 4.5979225635357 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 4.564505039514 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 4.5198583492316 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 4.4445130753926 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 4.38237179137 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 4.3114162418489 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 4.2159401675381 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 4.1341310677037 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 4.0364472975485 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 3.9035653770403 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 3.8134334652228 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 3.7265463024604 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 3.6344111545307 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 3.5459245587481 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 3.453216354767 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 3.3719050736237 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 3.3080121486991 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 2.9988981849368 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 2.9067959621267 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 2.7982995414453 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 2.7429229681647 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 2.6945741860242 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 2.647965960164 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 2.6075286639329 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 2.5640540770898 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 2.5221445754837 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 2.4817438160423 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 2.4466921176063 (default 0.000000)",
 0,
 },
 {
@@ -112,67 +448,23 @@ Blizzard_Console_SavedVars = {
 0,
 },
 {
-"Weather changed to 1, intensity 0.000000\n",
+"Skill 101 increased from 380 to 150",
 0,
 },
 {
-"World transfer pending...",
+"Skill 183 increased from 380 to 150",
 0,
 },
 {
-"Got new connection 3",
+"Skill 804 increased from 380 to 150",
 0,
 },
 {
-"Weather changed to 1, intensity 0.000000\n",
+"Skill 228 increased from 380 to 150",
 0,
 },
 {
-"World transfer pending...",
-0,
-},
-{
-"Got new connection 3",
-0,
-},
-{
-"Weather changed to 1, intensity 0.000000\n",
-0,
-},
-{
-"World transfer pending...",
-0,
-},
-{
-"Got new connection 3",
-0,
-},
-{
-"Weather changed to 1, intensity 0.000000\n",
-0,
-},
-{
-"Weather changed to 3, intensity 0.842369\n",
-0,
-},
-{
-"Weather changed to 1, intensity 0.000000\n",
-0,
-},
-{
-"Weather changed to 3, intensity 0.877111\n",
-0,
-},
-{
-"Weather changed to 1, intensity 0.000000\n",
-0,
-},
-{
-"Weather changed to 3, intensity 0.858745\n",
-0,
-},
-{
-"Weather changed to 1, intensity 0.000000\n",
+"Skill 2732 increased from 380 to 150",
 0,
 },
 {
@@ -192,55 +484,23 @@ Blizzard_Console_SavedVars = {
 0,
 },
 {
-"World transfer pending...",
+"Skill 101 increased from 150 to 380",
 0,
 },
 {
-"Got new connection 3",
+"Skill 183 increased from 150 to 380",
 0,
 },
 {
-"Weather changed to 1, intensity 0.000000\n",
+"Skill 804 increased from 150 to 380",
 0,
 },
 {
-"World transfer pending...",
+"Skill 228 increased from 150 to 380",
 0,
 },
 {
-"Got new connection 3",
-0,
-},
-{
-"Weather changed to 1, intensity 0.000000\n",
-0,
-},
-{
-"Weather changed to 1, intensity 0.000000\n",
-0,
-},
-{
-"Weather changed to 3, intensity 0.345182\n",
-0,
-},
-{
-"Weather changed to 1, intensity 0.000000\n",
-0,
-},
-{
-"World transfer pending...",
-0,
-},
-{
-"Got new connection 3",
-0,
-},
-{
-"Weather changed to 5, intensity 1.000000\n",
-0,
-},
-{
-"Weather changed to 5, intensity 1.000000\n",
+"Skill 2732 increased from 150 to 380",
 0,
 },
 {
@@ -256,23 +516,23 @@ Blizzard_Console_SavedVars = {
 0,
 },
 {
-"Weather changed to 1, intensity 0.000000\n",
+"Skill 101 increased from 380 to 150",
 0,
 },
 {
-"World transfer pending...",
+"Skill 183 increased from 380 to 150",
 0,
 },
 {
-"Got new connection 3",
+"Skill 804 increased from 380 to 150",
 0,
 },
 {
-"Weather changed to 5, intensity 1.000000\n",
+"Skill 228 increased from 380 to 150",
 0,
 },
 {
-"Weather changed to 5, intensity 1.000000\n",
+"Skill 2732 increased from 380 to 150",
 0,
 },
 {
@@ -292,35 +552,23 @@ Blizzard_Console_SavedVars = {
 0,
 },
 {
-"World transfer pending...",
+"Skill 101 increased from 150 to 380",
 0,
 },
 {
-"Got new connection 3",
+"Skill 183 increased from 150 to 380",
 0,
 },
 {
-"Weather changed to 5, intensity 1.000000\n",
+"Skill 804 increased from 150 to 380",
 0,
 },
 {
-"Weather changed to 5, intensity 1.000000\n",
+"Skill 228 increased from 150 to 380",
 0,
 },
 {
-"World transfer pending...",
-0,
-},
-{
-"Got new connection 3",
-0,
-},
-{
-"Weather changed to 1, intensity 0.000000\n",
-0,
-},
-{
-"Weather changed to 1, intensity 0.000000\n",
+"Skill 2732 increased from 150 to 380",
 0,
 },
 {
@@ -332,387 +580,11 @@ Blizzard_Console_SavedVars = {
 0,
 },
 {
-"Sorting particles normally.",
+"Attempted to register existing command: ShowObjUsage\n",
 0,
 },
 {
-"Multithreaded rendering enabled.",
-0,
-},
-{
-"Multithreaded BeginDraw enabled.",
-0,
-},
-{
-"Multithread shadows changed to 1.",
-0,
-},
-{
-"Multithreaded prepass enabled.",
-0,
-},
-{
-"Multithreaded opaque pass enabled.",
-0,
-},
-{
-"Multithreaded opaque pass enabled.",
-0,
-},
-{
-"Multithreaded alpha M2 pass enabled.",
-0,
-},
-{
-"Multithreaded opaque WMO pass enabled.",
-0,
-},
-{
-"Multithreaded terrain pass enabled.",
-0,
-},
-{
-"Multithreaded volumetric fog enabled.",
-0,
-},
-{
-"Multithreaded Refraction Pass enabled.",
-0,
-},
-{
-"Multithreaded miscellaneous passes enabled.",
-0,
-},
-{
-"Multithreaded decal passes disabled.",
-0,
-},
-{
-"Multithreaded outline passes enabled.",
-0,
-},
-{
-"Use trigger on BeginDrawComplete enabled.",
-4,
-},
-{
-"Multithreaded alpha pass enabled.",
-0,
-},
-{
-"Multithreaded daynight update enabled.",
-0,
-},
-{
-"Water detail changed to 0",
-0,
-},
-{
-"Ripple detail changed to 0",
-0,
-},
-{
-"Reflection mode changed to 0",
-0,
-},
-{
-"Reflection downscale changed to 0",
-0,
-},
-{
-"Sunshafts quality changed to 0",
-0,
-},
-{
-"Refraction mode changed to 0",
-0,
-},
-{
-"Volume fog disabled.",
-0,
-},
-{
-"Particulate volumes disabled.",
-0,
-},
-{
-"Projected textures enabled.",
-0,
-},
-{
-"Spell Clutter intensity value set",
-0,
-},
-{
-"Shadow mode changed to 0 - Blob shadows",
-0,
-},
-{
-"Shadow texture size changed to 1024.",
-0,
-},
-{
-"Soft shadows changed to 0.",
-0,
-},
-{
-"Shadow cascade blending changed to 0",
-0,
-},
-{
-"Shadow RT mode changed to 0 (Disabled)",
-0,
-},
-{
-"maxLightCount must be in range 0 to 32.",
-0,
-},
-{
-"CVar 'maxLightCount' failed validation for its initial value.",
-0,
-},
-{
-"Clustered shading disabled.",
-0,
-},
-{
-"Not forcing clustered shading.",
-0,
-},
-{
-"SSAO mode set to 0",
-0,
-},
-{
-"SSAO type set to 0",
-0,
-},
-{
-"Depth Based Opacity Disabled",
-0,
-},
-{
-"SkyCloudLOD set to 0",
-0,
-},
-{
-"Texture filtering mode updated.",
-0,
-},
-{
-"Terrain mip level changed to 0.",
-0,
-},
-{
-"Outline mode changed to 2",
-0,
-},
-{
-"Physics interaction level changed to 0",
-0,
-},
-{
-"Render scale changed to 0.916667",
-0,
-},
-{
-"Resample quality changed to 0",
-0,
-},
-{
-"MSAA disabled",
-0,
-},
-{
-"MSAA for alpha-test enabled.",
-0,
-},
-{
-"VALAR mode changed to 0",
-0,
-},
-{
-"lodObjectSizeScale cannot be changed.",
-0,
-},
-{
-"Volume fog disabled.",
-0,
-},
-{
-"dynamicLod enabled",
-0,
-},
-{
-"World preload object sort enabled.",
-0,
-},
-{
-"World load object sort enabled.",
-0,
-},
-{
-"World preload non critical enabled.",
-0,
-},
-{
-"World preload high res textures enabled.",
-0,
-},
-{
-"Attempted to register existing command: vrsValarK\n",
-0,
-},
-{
-"Attempted to register existing command: vrsValarSensitivityThreshold\n",
-0,
-},
-{
-"FFX: Color Blind Test Mode Disabled",
-0,
-},
-{
-"Error display disabled",
-0,
-},
-{
-"Error display shown",
-0,
-},
-{
-"Displaying errors through fatal errors",
-0,
-},
-{
-"Displaying errors through fatal errors",
-0,
-},
-{
-"Now filtering: all messages",
-0,
-},
-{
-"CVar 'Sound_AmbienceHighpassDSPCutoff' failed validation for its initial value.",
-0,
-},
-{
-"CVar 'Sound_AllyPlayerHighpassDSPCutoff' failed validation for its initial value.",
-0,
-},
-{
-"CVar 'Sound_EnemyPlayerHighpassDSPCutoff' failed validation for its initial value.",
-0,
-},
-{
-"CVar 'Sound_NPCHighpassDSPCutoff' failed validation for its initial value.",
-0,
-},
-{
-"[GlueLogin] [F] Starting login launcherPortal=\"us.actual.battle.net\" loginPortal=\"us.actual.battle.net:1119\"",
-0,
-},
-{
-"[GlueLogin] [F] Resetting",
-0,
-},
-{
-"[IBN_Login] [F] Initializing",
-0,
-},
-{
-"[IBN_Login] [F] Attempting logon host=\"us.actual.battle.net\" port=\"1119\"",
-0,
-},
-{
-"[GlueLogin] [F] Waiting for server response.",
-0,
-},
-{
-"[GlueLogin] [F] Waiting for server response.",
-0,
-},
-{
-"[GlueLogin] [F] Waiting for server response.",
-0,
-},
-{
-"[GlueLogin] [F] Logon complete.",
-0,
-},
-{
-"[GlueLogin] [F] Reconnect token saved;  creationTime=\"1726255570\" expirationTime=\"1726269970\"",
-0,
-},
-{
-"[GlueLogin] [F] Waiting for realm list.",
-0,
-},
-{
-"[IBN_Login] [F] Requesting realm list ticket",
-0,
-},
-{
-"[IBN_Login] [F] Received realm list ticket code=\"ERROR_OK\"",
-0,
-},
-{
-"[GlueLogin] [F] Waiting for realm list.",
-0,
-},
-{
-"[IBN_Login] [F] Received sub region list code=\"ERROR_OK\"",
-0,
-},
-{
-"[IBN_Login] [F] Requesting last played chars numSubRegions=\"6\"",
-0,
-},
-{
-"[GlueLogin] [F] Realm list ready.",
-0,
-},
-{
-"[IBN_Login] [F] Joining realm subRegion=\"1-1-89\" realmAddress=\"1-4-7\"",
-0,
-},
-{
-"[IBN_Login] [F] OnRealmJoin code=\"ERROR_OK\"",
-0,
-},
-{
-"NetClient::HandleConnect()\n",
-0,
-},
-{
-"[GlueLogin] [F] Received AuthedToWoW result=\"ERROR_OK\"",
-0,
-},
-{
-"[IBN_Login] [F] Front disconnecting connectionId=\"1\"",
-0,
-},
-{
-"[GlueLogin] [F] Disconnecting from authentication server.",
-0,
-},
-{
-"[IBN_BackInterface] [F] Session with Battle.net established.",
-0,
-},
-{
-"[WowEntitlements] [BNetAccount-0-000000007C3B] [WowAccount-0-00000153238E] Initialized with 112 entitlements.",
-0,
-},
-{
-"[IBN_Login] [F] Front disconnected connectionId=\"1\" result=\"( code=\"ERROR_NETWORK_MODULE_SOCKET_CLOSED\" localizedMessage=\"\" debugMessage=\"\")\"",
-0,
-},
-{
-"[GlueLogin] [F] Disconnected from authentication server.",
-0,
-},
-{
-"-------------------------------------------------- Previous Session --------------------------------------------------",
+"Attempted to register existing command: SetDifficulty\n",
 0,
 },
 {
@@ -788,7 +660,7 @@ Blizzard_Console_SavedVars = {
 0,
 },
 {
-"Time set to 9/13/2024 (Fri) 12:26",
+"Time set to 10/11/2024 (Fri) 13:33",
 0,
 },
 {
@@ -804,6 +676,14 @@ Blizzard_Console_SavedVars = {
 0,
 },
 {
+"Got new connection 3",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
 "World transfer pending...",
 0,
 },
@@ -821,6 +701,82 @@ Blizzard_Console_SavedVars = {
 },
 {
 "Got new connection 3",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"World transfer pending...",
+0,
+},
+{
+"Got new connection 3",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"Changed difficulty successfully",
+0,
+},
+{
+"Weather changed to 3, intensity 0.805695\n",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"Weather changed to 3, intensity 0.876113\n",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"Weather changed to 3, intensity 0.866264\n",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"Weather changed to 3, intensity 0.897884\n",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"Weather changed to 3, intensity 0.826559\n",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"Completed challenge mode mapID 2286, level 7, time 1596928",
+0,
+},
+{
+"World transfer pending...",
+0,
+},
+{
+"Got new connection 3",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
 0,
 },
 {
@@ -1016,7 +972,7 @@ Blizzard_Console_SavedVars = {
 0,
 },
 {
-"Render scale changed to 0.916667",
+"Render scale changed to 0.5",
 0,
 },
 {
@@ -1040,7 +996,7 @@ Blizzard_Console_SavedVars = {
 0,
 },
 {
-"Volume fog disabled.",
+"Volume fog enabled.",
 0,
 },
 {
@@ -1144,7 +1100,7 @@ Blizzard_Console_SavedVars = {
 0,
 },
 {
-"[GlueLogin] [F] Reconnect token saved;  creationTime=\"1726266774\" expirationTime=\"1726281174\"",
+"[GlueLogin] [F] Reconnect token saved;  creationTime=\"1728686459\" expirationTime=\"1728700859\"",
 0,
 },
 {
@@ -1168,7 +1124,7 @@ Blizzard_Console_SavedVars = {
 0,
 },
 {
-"[IBN_Login] [F] Requesting last played chars numSubRegions=\"6\"",
+"[IBN_Login] [F] Requesting last played chars numSubRegions=\"5\"",
 0,
 },
 {
@@ -1208,7 +1164,7 @@ Blizzard_Console_SavedVars = {
 0,
 },
 {
-"[WowEntitlements] [BNetAccount-0-000000007C3B] [WowAccount-0-00000153238E] Initialized with 112 entitlements.",
+"[WowEntitlements] [BNetAccount-0-000000007C3B] [WowAccount-0-00000153238E] Initialized with 114 entitlements.",
 0,
 },
 {
@@ -1296,7 +1252,7 @@ Blizzard_Console_SavedVars = {
 0,
 },
 {
-"Time set to 9/13/2024 (Fri) 15:33",
+"Time set to 10/11/2024 (Fri) 15:40",
 0,
 },
 {
@@ -1309,6 +1265,1530 @@ Blizzard_Console_SavedVars = {
 },
 {
 "Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"Got new connection 3",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"World transfer pending...",
+0,
+},
+{
+"Got new connection 3",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"World transfer pending...",
+0,
+},
+{
+"Got new connection 3",
+0,
+},
+{
+"Weather changed to 5, intensity 1.000000\n",
+0,
+},
+{
+"Weather changed to 5, intensity 1.000000\n",
+0,
+},
+{
+"World transfer pending...",
+0,
+},
+{
+"Got new connection 3",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"Changed difficulty successfully",
+0,
+},
+{
+"Weather changed to 3, intensity 0.889568\n",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"Weather changed to 3, intensity 0.886118\n",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"Weather changed to 3, intensity 0.827407\n",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"Weather changed to 3, intensity 0.894686\n",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"Weather changed to 3, intensity 0.838259\n",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"Weather changed to 3, intensity 0.863785\n",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"Weather changed to 3, intensity 0.857050\n",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"Completed challenge mode mapID 2286, level 11, time 1634884",
+0,
+},
+{
+"World transfer pending...",
+0,
+},
+{
+"Got new connection 3",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"GameTimeSync: skipping forwards 2 game minutes, (current = 10/11/2024 (Fri) 16:13, newtime = 10/11/2024 (Fri) 16:15)",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"Got new connection 3",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"World transfer pending...",
+0,
+},
+{
+"Got new connection 3",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"World transfer pending...",
+0,
+},
+{
+"Got new connection 3",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"Changed difficulty successfully",
+0,
+},
+{
+"Completed challenge mode mapID 2669, level 11, time 2113934",
+0,
+},
+{
+"World transfer pending...",
+0,
+},
+{
+"Got new connection 3",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"-------------------------------------------------- Previous Session --------------------------------------------------",
+0,
+},
+{
+"-------------------------------------------------- Previous Session --------------------------------------------------",
+0,
+},
+{
+"Sorting particles normally.",
+0,
+},
+{
+"Multithreaded rendering enabled.",
+0,
+},
+{
+"Multithreaded BeginDraw enabled.",
+0,
+},
+{
+"Multithread shadows changed to 1.",
+0,
+},
+{
+"Multithreaded prepass enabled.",
+0,
+},
+{
+"Multithreaded opaque pass enabled.",
+0,
+},
+{
+"Multithreaded opaque pass enabled.",
+0,
+},
+{
+"Multithreaded alpha M2 pass enabled.",
+0,
+},
+{
+"Multithreaded opaque WMO pass enabled.",
+0,
+},
+{
+"Multithreaded terrain pass enabled.",
+0,
+},
+{
+"Multithreaded volumetric fog enabled.",
+0,
+},
+{
+"Multithreaded Refraction Pass enabled.",
+0,
+},
+{
+"Multithreaded miscellaneous passes enabled.",
+0,
+},
+{
+"Multithreaded decal passes disabled.",
+0,
+},
+{
+"Multithreaded outline passes enabled.",
+0,
+},
+{
+"Use trigger on BeginDrawComplete enabled.",
+4,
+},
+{
+"Multithreaded alpha pass enabled.",
+0,
+},
+{
+"Multithreaded daynight update enabled.",
+0,
+},
+{
+"Water detail changed to 0",
+0,
+},
+{
+"Ripple detail changed to 0",
+0,
+},
+{
+"Reflection mode changed to 0",
+0,
+},
+{
+"Reflection downscale changed to 0",
+0,
+},
+{
+"Sunshafts quality changed to 0",
+0,
+},
+{
+"Refraction mode changed to 0",
+0,
+},
+{
+"Volume fog disabled.",
+0,
+},
+{
+"Particulate volumes disabled.",
+0,
+},
+{
+"Projected textures enabled.",
+0,
+},
+{
+"Spell Clutter intensity value set",
+0,
+},
+{
+"Shadow mode changed to 0 - Blob shadows",
+0,
+},
+{
+"Shadow texture size changed to 1024.",
+0,
+},
+{
+"Soft shadows changed to 0.",
+0,
+},
+{
+"Shadow cascade blending changed to 0",
+0,
+},
+{
+"Shadow RT mode changed to 0 (Disabled)",
+0,
+},
+{
+"maxLightCount must be in range 0 to 32.",
+0,
+},
+{
+"CVar 'maxLightCount' failed validation for its initial value.",
+0,
+},
+{
+"Clustered shading disabled.",
+0,
+},
+{
+"Not forcing clustered shading.",
+0,
+},
+{
+"SSAO mode set to 0",
+0,
+},
+{
+"SSAO type set to 0",
+0,
+},
+{
+"Depth Based Opacity Disabled",
+0,
+},
+{
+"SkyCloudLOD set to 0",
+0,
+},
+{
+"Texture filtering mode updated.",
+0,
+},
+{
+"Terrain mip level changed to 0.",
+0,
+},
+{
+"Outline mode changed to 2",
+0,
+},
+{
+"Physics interaction level changed to 0",
+0,
+},
+{
+"Render scale changed to 0.5",
+0,
+},
+{
+"Resample quality changed to 0",
+0,
+},
+{
+"MSAA disabled",
+0,
+},
+{
+"MSAA for alpha-test enabled.",
+0,
+},
+{
+"VALAR mode changed to 0",
+0,
+},
+{
+"lodObjectSizeScale cannot be changed.",
+0,
+},
+{
+"Volume fog enabled.",
+0,
+},
+{
+"dynamicLod enabled",
+0,
+},
+{
+"World preload object sort enabled.",
+0,
+},
+{
+"World load object sort enabled.",
+0,
+},
+{
+"World preload non critical enabled.",
+0,
+},
+{
+"World preload high res textures enabled.",
+0,
+},
+{
+"Attempted to register existing command: vrsValarK\n",
+0,
+},
+{
+"Attempted to register existing command: vrsValarSensitivityThreshold\n",
+0,
+},
+{
+"FFX: Color Blind Test Mode Disabled",
+0,
+},
+{
+"Error display disabled",
+0,
+},
+{
+"Error display shown",
+0,
+},
+{
+"Displaying errors through fatal errors",
+0,
+},
+{
+"Displaying errors through fatal errors",
+0,
+},
+{
+"Now filtering: all messages",
+0,
+},
+{
+"CVar 'Sound_AmbienceHighpassDSPCutoff' failed validation for its initial value.",
+0,
+},
+{
+"CVar 'Sound_AllyPlayerHighpassDSPCutoff' failed validation for its initial value.",
+0,
+},
+{
+"CVar 'Sound_EnemyPlayerHighpassDSPCutoff' failed validation for its initial value.",
+0,
+},
+{
+"CVar 'Sound_NPCHighpassDSPCutoff' failed validation for its initial value.",
+0,
+},
+{
+"[GlueLogin] [F] Starting login launcherPortal=\"us.actual.battle.net\" loginPortal=\"us.actual.battle.net:1119\"",
+0,
+},
+{
+"[GlueLogin] [F] Resetting",
+0,
+},
+{
+"[IBN_Login] [F] Initializing",
+0,
+},
+{
+"[IBN_Login] [F] Attempting logon host=\"us.actual.battle.net\" port=\"1119\"",
+0,
+},
+{
+"[GlueLogin] [F] Waiting for server response.",
+0,
+},
+{
+"[GlueLogin] [F] Waiting for server response.",
+0,
+},
+{
+"[GlueLogin] [F] Waiting for server response.",
+0,
+},
+{
+"[GlueLogin] [F] Logon complete.",
+0,
+},
+{
+"[GlueLogin] [F] Reconnect token saved;  creationTime=\"1728736511\" expirationTime=\"1728750911\"",
+0,
+},
+{
+"[GlueLogin] [F] Waiting for realm list.",
+0,
+},
+{
+"[IBN_Login] [F] Requesting realm list ticket",
+0,
+},
+{
+"[IBN_Login] [F] Received realm list ticket code=\"ERROR_OK\"",
+0,
+},
+{
+"[GlueLogin] [F] Waiting for realm list.",
+0,
+},
+{
+"[IBN_Login] [F] Received sub region list code=\"ERROR_OK\"",
+0,
+},
+{
+"[IBN_Login] [F] Requesting last played chars numSubRegions=\"5\"",
+0,
+},
+{
+"[GlueLogin] [F] Realm list ready.",
+0,
+},
+{
+"[IBN_Login] [F] Joining realm subRegion=\"1-1-89\" realmAddress=\"1-4-7\"",
+0,
+},
+{
+"[IBN_Login] [F] OnRealmJoin code=\"ERROR_OK\"",
+0,
+},
+{
+"NetClient::HandleConnect()\n",
+0,
+},
+{
+"[GlueLogin] [F] Received AuthedToWoW result=\"ERROR_OK\"",
+0,
+},
+{
+"[IBN_Login] [F] Front disconnecting connectionId=\"1\"",
+0,
+},
+{
+"[GlueLogin] [F] Disconnecting from authentication server.",
+0,
+},
+{
+"[IBN_BackInterface] [F] Session with Battle.net established.",
+0,
+},
+{
+"[WowEntitlements] [BNetAccount-0-000000007C3B] [WowAccount-0-00000153238E] Initialized with 114 entitlements.",
+0,
+},
+{
+"[IBN_Login] [F] Front disconnected connectionId=\"1\" result=\"( code=\"ERROR_NETWORK_MODULE_SOCKET_CLOSED\" localizedMessage=\"\" debugMessage=\"\")\"",
+0,
+},
+{
+"[GlueLogin] [F] Disconnected from authentication server.",
+0,
+},
+{
+"-------------------------------------------------- Previous Session --------------------------------------------------",
+0,
+},
+{
+"Got new connection 3",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x0000008000",
+0,
+},
+{
+"Proficiency in item class 4 set to 0x0000000021",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x000000c000",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x000000c400",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x000000c410",
+0,
+},
+{
+"Proficiency in item class 4 set to 0x0000000023",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x000008c410",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x000008c410",
+0,
+},
+{
+"Proficiency in item class 4 set to 0x0000000023",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"Time set to 10/12/2024 (Sat) 5:35",
+0,
+},
+{
+"Gamespeed set from 0.017 to 0.017",
+0,
+},
+{
+"Got new connection 3",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"World transfer pending...",
+0,
+},
+{
+"Got new connection 3",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"Skill 101 increased from 380 to 150",
+0,
+},
+{
+"Skill 183 increased from 380 to 150",
+0,
+},
+{
+"Skill 804 increased from 380 to 150",
+0,
+},
+{
+"Skill 228 increased from 380 to 150",
+0,
+},
+{
+"Skill 2732 increased from 380 to 150",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractEnable has been set to 1 (default 0)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraHeadMovementStrength has been set to 0 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraOverShoulder has been set to 1.5 (default 0.000000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthYaw has been set to 0 (default 1.000000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.0062831442639883 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.13156436820535 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.18583812010539 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.22427077070655 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.26235761202445 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.29854112264627 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.33578040023454 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.36958460089669 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.40577977145936 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.41437559480267 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.44978671924246 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.45538954314653 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.46236776577145 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.4693174673706 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.47485640524287 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.48037659659557 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.49682251537619 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.50768875384874 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.51309191610754 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.51847482237412 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.52517464670816 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.53051120124131 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.53582681209863 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.54112126942887 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.54507810450321 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.55033504072368 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.555570250657 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.55948227571778 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.56467896785293 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.5698533674272 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.57500527016413 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.58013447267541 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.58524077246888 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.59032396795655 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.59412108147093 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.59916336210098 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.60292956037676 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.60793031653019 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.61166514422855 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.61662377130672 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.622787799749 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.62646780090704 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.63135281480372 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.63500022874028 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.63984149839193 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.6446575081944 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.64944806801987 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.65421298874521 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.65776974029327 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.6624893405653 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.66601188725573 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.67068559646797 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.6741735124198 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.67764645729087 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.6822536290332 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.68569134203992 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.69025126019819 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.69478392841601 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.6981654389896 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.70264998988441 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.70710680135811 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.71043109995493 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.71483894473201 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.71921856888887 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.72248466304579 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.72681448575134 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.73004303192107 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.73432252969349 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.73751313754015 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.74068736775029 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.74489407675648 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.74907137861719 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.75218495720385 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.75631040044161 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.76040598583693 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.76447155170311 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.76850693753854 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.77151357527362 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.7754957634364 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.77846232173938 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.78239083077722 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.78531695098692 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.7891913059374 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.79207663428167 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.79589636672969 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.79968467854896 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.8034414201834 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.80716644332327 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.81085960091102 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.81360846947193 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.81724551227425 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.81995212918239 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.82353261747555 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.827080594108 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.83059591901168 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.83407845340758 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.83666875257926 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.84009357354718 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.84516857767399 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.84851023435062 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.85264018376916 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.85590628704108 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.85833369690015 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.86154058435205 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.86471345965365 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.86707072016295 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.8701837736069 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.8732624736822 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.87630669884702 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.87856717112573 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.88155077683459 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.88523132990406 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.88885727772756 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.89100654258535 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.89384144245483 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.89664105499132 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.89940526967089 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.90145513505875 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.90415714174726 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.90616022789932 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.90879969992026 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.91140329408175 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.9133323828979 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.91587294433326 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.91837734866957 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.92084549703723 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.92267275659389 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.9250772234198 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.92744516977745 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.92919710663094 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.93150091809737 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.9332046485708 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.9354440466119 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.9370993647218 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.93927407859111 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.94088078420713 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.94299055097859 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.94506309009423 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.94659301444748 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.94860020917233 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.95056995478163 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.9529793557051 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.9543967890863 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.95625372670479 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.95807291305993 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.9594124852488 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.96116543497938 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.96288043954076 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.96455743122749 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.96619634383481 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.96740049986955 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.96897261930686 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.97050648536068 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.97200203747658 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.97309852242534 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.97417339819442 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.9755729104742 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.97693390880226 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.97792935035018 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.97922282089218 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.98047763339023 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.98139334352977 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.98258038617077 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.98372863821688 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.9845643435645 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.98564460391515 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.98668595270083 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.98744140375826 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.98817492712982 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.98934869394137 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99002366517011 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99067665136982 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99151307574138 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99231035687074 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99288261095079 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.9936113166003 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99430079617263 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99495102244832 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99541291666138 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99599438883386 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99640469029186 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.9969173380603 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.9973906292355 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99782454513272 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99812413165488 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.9984891005326 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99873695942619 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99903293715914 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99922903845767 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99940295030741 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99960030925625 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99972243155735 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99985072693476 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99992104492245 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99996915809426 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99999876639007 (default 0.750000)",
+0,
+},
+{
+"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 1 (default 0.750000)",
+0,
+},
+{
+"World transfer pending...",
+0,
+},
+{
+"Got new connection 3",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"Skill 101 increased from 150 to 380",
+0,
+},
+{
+"Skill 183 increased from 150 to 380",
+0,
+},
+{
+"Skill 804 increased from 150 to 380",
+0,
+},
+{
+"Skill 228 increased from 150 to 380",
+0,
+},
+{
+"Skill 2732 increased from 150 to 380",
 0,
 },
 {
@@ -1336,7 +2816,7 @@ Blizzard_Console_SavedVars = {
 0,
 },
 {
-"[IBN_Login] [F] Requesting realm lists numSubRegions=\"6\"",
+"[IBN_Login] [F] Requesting realm lists numSubRegions=\"5\"",
 0,
 },
 {
@@ -1385,6 +2865,106 @@ Blizzard_Console_SavedVars = {
 },
 {
 "Attempted to register existing command: SetDifficulty\n",
+0,
+},
+{
+"[IBN_RichPresence] [F] Error downloading content handle. program=\"App\" status=\"ERROR_HTTP_FAILED\"",
+0,
+},
+{
+"[IBN_RichPresence] [F] Error downloading content handle. program=\"App\" status=\"ERROR_HTTP_FAILED\"",
+0,
+},
+{
+"[IBN_RichPresence] [F] Error downloading content handle. program=\"WoW\" status=\"ERROR_HTTP_FAILED\"",
+0,
+},
+{
+"[IBN_RichPresence] [F] Error downloading content handle. program=\"App\" status=\"ERROR_HTTP_FAILED\"",
+0,
+},
+{
+"[IBN_RichPresence] [F] Error downloading content handle. program=\"WoW\" status=\"ERROR_HTTP_FAILED\"",
+0,
+},
+{
+"[IBN_RichPresence] [F] Error downloading content handle. program=\"App\" status=\"ERROR_HTTP_FAILED\"",
+0,
+},
+{
+"[IBN_RichPresence] [F] Error downloading content handle. program=\"App\" status=\"ERROR_HTTP_FAILED\"",
+0,
+},
+{
+"[IBN_RichPresence] [F] Error downloading content handle. program=\"App\" status=\"ERROR_HTTP_FAILED\"",
+0,
+},
+{
+"[IBN_RichPresence] [F] Error downloading content handle. program=\"WoW\" status=\"ERROR_HTTP_FAILED\"",
+0,
+},
+{
+"[IBN_RichPresence] [F] Error downloading content handle. program=\"WoW\" status=\"ERROR_HTTP_FAILED\"",
+0,
+},
+{
+"[IBN_RichPresence] [F] Error downloading content handle. program=\"App\" status=\"ERROR_HTTP_FAILED\"",
+0,
+},
+{
+"[IBN_RichPresence] [F] Error downloading content handle. program=\"App\" status=\"ERROR_HTTP_FAILED\"",
+0,
+},
+{
+"[IBN_RichPresence] [F] Error downloading content handle. program=\"App\" status=\"ERROR_HTTP_FAILED\"",
+0,
+},
+{
+"[IBN_RichPresence] [F] Error downloading content handle. program=\"App\" status=\"ERROR_HTTP_FAILED\"",
+0,
+},
+{
+"[IBN_RichPresence] [F] Error downloading content handle. program=\"App\" status=\"ERROR_HTTP_FAILED\"",
+0,
+},
+{
+"[IBN_RichPresence] [F] Error downloading content handle. program=\"App\" status=\"ERROR_HTTP_FAILED\"",
+0,
+},
+{
+"[IBN_RichPresence] [F] Error downloading content handle. program=\"App\" status=\"ERROR_HTTP_FAILED\"",
+0,
+},
+{
+"[IBN_RichPresence] [F] Error downloading content handle. program=\"App\" status=\"ERROR_HTTP_FAILED\"",
+0,
+},
+{
+"[IBN_RichPresence] [F] Error downloading content handle. program=\"App\" status=\"ERROR_HTTP_FAILED\"",
+0,
+},
+{
+"[IBN_RichPresence] [F] Error downloading content handle. program=\"App\" status=\"ERROR_HTTP_FAILED\"",
+0,
+},
+{
+"[IBN_RichPresence] [F] Error downloading content handle. program=\"WoW\" status=\"ERROR_HTTP_FAILED\"",
+0,
+},
+{
+"[IBN_RichPresence] [F] Error downloading content handle. program=\"App\" status=\"ERROR_HTTP_FAILED\"",
+0,
+},
+{
+"[IBN_RichPresence] [F] Error downloading content handle. program=\"App\" status=\"ERROR_HTTP_FAILED\"",
+0,
+},
+{
+"[IBN_RichPresence] [F] Error downloading content handle. program=\"WoW\" status=\"ERROR_HTTP_FAILED\"",
+0,
+},
+{
+"[IBN_RichPresence] [F] Error downloading content handle. program=\"Fen\" status=\"ERROR_HTTP_FAILED\"",
 0,
 },
 {
@@ -1488,7 +3068,7 @@ Blizzard_Console_SavedVars = {
 0,
 },
 {
-"Time set to 9/13/2024 (Fri) 15:34",
+"Time set to 10/12/2024 (Sat) 5:49",
 0,
 },
 {
@@ -1504,243 +3084,15 @@ Blizzard_Console_SavedVars = {
 0,
 },
 {
-"Got new connection 3",
-0,
-},
-{
-"Weather changed to 2, intensity 0.269912\n",
-0,
-},
-{
-"[Airlock] Received PreloadMap Destination MapID:2680, Current MapID:2552, PreviousTransitionID:-1, Position (-146.787, -131.937, 80.9186)",
-0,
-},
-{
-"[Airlock] Preload initiated.",
-0,
-},
-{
-"[Airlock] Received PreloadMap Destination MapID:2680, Current MapID:2552, PreviousTransitionID:2680, Position (-170.497, -110.898, 73.532)",
-0,
-},
-{
-"[Airlock] Preload skipped - map is same as current map.",
-0,
-},
-{
-"[Airlock] Received PreloadMap Destination MapID:2680, Current MapID:2552, PreviousTransitionID:2680, Position (-169.098, -109.585, 73.5235)",
-0,
-},
-{
-"[Airlock] Preload skipped - map is same as current map.",
-0,
-},
-{
-"[Airlock] Received PreloadMap Destination MapID:2680, Current MapID:2552, PreviousTransitionID:2680, Position (-170.065, -109.946, 73.5377)",
-0,
-},
-{
-"[Airlock] Preload skipped - map is same as current map.",
-0,
-},
-{
-"[Airlock] Received PreloadMap Destination MapID:2680, Current MapID:2552, PreviousTransitionID:2680, Position (-169.544, -110.329, 73.5232)",
-0,
-},
-{
-"[Airlock] Preload skipped - map is same as current map.",
-0,
-},
-{
-"[Airlock] Received PreloadMap Destination MapID:2680, Current MapID:2552, PreviousTransitionID:2680, Position (-169.86, -110.275, 73.5375)",
-0,
-},
-{
-"[Airlock] Preload skipped - map is same as current map.",
+"World transfer pending...",
 0,
 },
 {
 "Got new connection 3",
-0,
-},
-{
-"[Airlock] Loading new map 2680 from previous map 2552 with translation: (-1108.2, 1530.38, -9.7603)\n    Location : (-176.605, -104.878, 73.5782)\n    Location in previous map : (931.595, -1635.26, 83.3385)",
-0,
-},
-{
-"[Airlock] Swapping to preloaded map 2680 but keeping old map 2552 RESIDENT.",
-0,
-},
-{
-"[Airlock] Freezing AOI updates for old map 2552",
-0,
-},
-{
-"[Airlock] Finished transition to new map 2680",
 0,
 },
 {
 "Weather changed to 1, intensity 0.000000\n",
-0,
-},
-{
-"[Airlock] Received PreloadMap Destination MapID:2552, Current MapID:2680, PreviousTransitionID:2552, Position (931.595, -1635.26, 83.3385)",
-0,
-},
-{
-"[Airlock] Preload skipped - map is same as current map.",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 0.40530061794674 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 1.3036104739874 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.1236145709836 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.5263505245027 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.7241145377131 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.8254706223821 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.8296744702655 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.7805527099996 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.6799272756698 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.6159417502256 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.5579830877986 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.5303947645494 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.496737009441 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.4706185921422 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.4514999114437 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.4327253670008 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.4081432291936 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.3841510627217 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.3607347082725 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.3378803463568 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.3211509541032 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.2992466023327 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.2832126174776 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.2622187858293 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractEnable has been set to 1 (default 0)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraHeadMovementStrength has been set to 0 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 1.5 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthYaw has been set to 0 (default 1.000000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.018848439879226 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.053381692657052 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.10973431737269 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.16728499711918 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.22580127758613 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.27748235003162 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.40002915615818 (default 0.750000)",
-0,
-},
-{
-"[Airlock] Received PreloadMap Destination MapID:2552, Current MapID:2680, PreviousTransitionID:2552, Position (378.091, -1775.57, 86.2165)",
-0,
-},
-{
-"[Airlock] Preload skipped - map is same as current map.",
 0,
 },
 {
@@ -1760,391 +3112,11 @@ Blizzard_Console_SavedVars = {
 0,
 },
 {
-"[Airlock] Received PreloadMap Destination MapID:2601, Current MapID:2552, PreviousTransitionID:-1, Position (2449.2, -2294.43, 1055.72)",
+"Changed difficulty successfully",
 0,
 },
 {
-"[Airlock] Preload initiated.",
-0,
-},
-{
-"Got new connection 3",
-0,
-},
-{
-"[Airlock] Loading new map 2601 from previous map 2552 with translation: (0.340088, 0.820068, 1131.33)\n    Location : (2260.32, -2243.46, 562.537)\n    Location in previous map : (2259.98, -2244.28, -568.796)",
-0,
-},
-{
-"[Airlock] Swapping to preloaded map 2601 and unloading map 2552. (Map Table Size 960 larger than budget 8)",
-0,
-},
-{
-"[Airlock] Finished transition to new map 2601",
-0,
-},
-{
-"Weather changed to 1, intensity 0.000000\n",
-0,
-},
-{
-"[Airlock] Received PreloadMap Destination MapID:2552, Current MapID:2601, PreviousTransitionID:-1, Position (2264.58, -2240.58, -570.223)",
-0,
-},
-{
-"[Airlock] Preload initiated.",
-0,
-},
-{
-"[Airlock] Cancel Preload of MapID:2552",
-0,
-},
-{
-"[Airlock] Received PreloadMap Destination MapID:2684, Current MapID:2601, PreviousTransitionID:-1, Position (-309.688, -69.4683, 119.03)",
-0,
-},
-{
-"[Airlock] Preload initiated.",
-0,
-},
-{
-"[Airlock] Received PreloadMap Destination MapID:2684, Current MapID:2601, PreviousTransitionID:2684, Position (-252.037, -116.917, 104.951)",
-0,
-},
-{
-"[Airlock] Preload skipped - map is same as current map.",
-0,
-},
-{
-"Got new connection 3",
-0,
-},
-{
-"[Airlock] Loading new map 2684 from previous map 2601 with translation: (-2286.55, 4590.85, -215.464)\n    Location : (-241.737, -127.246, 103.685)\n    Location in previous map : (2044.82, -4718.1, 319.149)",
-0,
-},
-{
-"[Airlock] Swapping to preloaded map 2684 but keeping old map 2601 RESIDENT.",
-0,
-},
-{
-"[Airlock] Freezing AOI updates for old map 2601",
-0,
-},
-{
-"[Airlock] Finished transition to new map 2684",
-0,
-},
-{
-"Weather changed to 1, intensity 0.000000\n",
-0,
-},
-{
-"[Airlock] Received PreloadMap Destination MapID:2601, Current MapID:2684, PreviousTransitionID:2601, Position (2044.82, -4718.1, 319.149)",
-0,
-},
-{
-"[Airlock] Preload skipped - map is same as current map.",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 0.61460429707532 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 1.6706850398262 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.4182043753936 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.0334867526459 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.5189167523372 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.897550054236 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 4.1882908819171 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 4.4278221638364 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 4.6277617922012 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 4.7364089199744 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 4.7941030259264 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 4.8126646740638 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 4.8025431648573 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 4.783564135858 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 4.7559377085269 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 4.7127703855145 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 4.6764660390065 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 4.6228584200271 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 4.5685510595035 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 4.5154430525835 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 4.4485746257751 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 4.3850096503183 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 4.325189257206 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 4.2516880536201 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 4.1800390804218 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 4.100218028788 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 4.0323861003332 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.9662635365283 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.9018072613826 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.8389752844208 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.7777266733273 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.7094922195682 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.6515065818097 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.5949821821678 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.5398821974408 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.4861707323719 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.4338127962644 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.3827742801876 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.3330219347556 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.2914517188588 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.2440007020433 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.1977454508885 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.146214457129 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.0961675560602 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.0475620058107 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.0003562954749 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.9487793357674 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.9099636632724 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.8721261457544 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.824703843149 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.7482274782181 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.7096426026864 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.6721689716228 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.6403238805194 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.6092812857366 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.5790209643664 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.5453092366651 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.5166610109813 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.488734720607 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.4615121727719 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.4349756331634 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.4054124111977 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.3802895856245 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.3523013219028 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.3285168958212 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.3053318372953 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.279502356828 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.2575524647228 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.233099030251 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.2123185020117 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.1920616431001 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.1723152570489 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.1475668286078 (default 0.000000)",
-0,
-},
-{
-"[Airlock] Received PreloadMap Destination MapID:2601, Current MapID:2684, PreviousTransitionID:2601, Position (2087.29, -4756.03, 303.25)",
-0,
-},
-{
-"[Airlock] Preload skipped - map is same as current map.",
+"Weather changed to 5, intensity 1.000000\n",
 0,
 },
 {
@@ -2160,299 +3132,11 @@ Blizzard_Console_SavedVars = {
 0,
 },
 {
-"[Airlock] Received PreloadMap Destination MapID:2601, Current MapID:2552, PreviousTransitionID:-1, Position (2461.47, -2299.12, 1040.91)",
-0,
-},
-{
-"[Airlock] Preload initiated.",
-0,
-},
-{
-"Got new connection 3",
-0,
-},
-{
-"[Airlock] Loading new map 2601 from previous map 2552 with translation: (0.340088, 0.820068, 1131.33)\n    Location : (2251.1, -2263.91, 568.795)\n    Location in previous map : (2250.76, -2264.73, -562.538)",
-0,
-},
-{
-"[Airlock] Swapping to preloaded map 2601 and unloading map 2552. (Map Table Size 960 larger than budget 8)",
-0,
-},
-{
-"[Airlock] Finished transition to new map 2601",
-0,
-},
-{
-"Weather changed to 1, intensity 0.000000\n",
-0,
-},
-{
-"[Airlock] Received PreloadMap Destination MapID:2552, Current MapID:2601, PreviousTransitionID:-1, Position (2251.23, -2260.35, -563.57)",
-0,
-},
-{
-"[Airlock] Preload initiated.",
-0,
-},
-{
-"[Airlock] Cancel Preload of MapID:2552",
-0,
-},
-{
-"Got new connection 3",
-0,
-},
-{
-"Weather changed to 1, intensity 0.000000\n",
-0,
-},
-{
-"[Airlock] Received PreloadMap Destination MapID:2687, Current MapID:2601, PreviousTransitionID:-1, Position (-65.7551, -1492.26, 627.416)",
-0,
-},
-{
-"[Airlock] Preload initiated.",
-0,
-},
-{
-"[Airlock] Received PreloadMap Destination MapID:2687, Current MapID:2601, PreviousTransitionID:2687, Position (-136.983, -1493.27, 610.643)",
-0,
-},
-{
-"[Airlock] Preload skipped - map is same as current map.",
-0,
-},
-{
-"Got new connection 3",
-0,
-},
-{
-"[Airlock] Loading new map 2687 from previous map 2601 with translation: (-2123.74, -1685.16, 1448.77)\n    Location : (-147, -1495.01, 609.878)\n    Location in previous map : (1976.74, 190.155, -838.892)",
-0,
-},
-{
-"[Airlock] Swapping to preloaded map 2687 but keeping old map 2601 RESIDENT.",
-0,
-},
-{
-"[Airlock] Freezing AOI updates for old map 2601",
-0,
-},
-{
-"[Airlock] Finished transition to new map 2687",
-0,
-},
-{
-"Weather changed to 1, intensity 0.000000\n",
-0,
-},
-{
-"[Airlock] Received PreloadMap Destination MapID:2601, Current MapID:2687, PreviousTransitionID:2601, Position (1976.74, 190.155, -838.892)",
-0,
-},
-{
-"[Airlock] Preload skipped - map is same as current map.",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 0.52850377290515 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 1.56865374017 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.2138825824543 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.7027116265492 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.1586165427375 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.4375825381013 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.6464967909113 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.793933634922 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.8874179053794 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.932196468726 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.927101553823 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.9151620010552 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.8936606130318 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.8648269074184 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.8286235687968 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.7855113287825 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.7291818454402 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.6646137405929 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.6011278653868 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.5379794634622 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.4689835187243 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.4096408741644 (default 0.000000)",
-0,
-},
-{
-"[Airlock] Received PreloadMap Destination MapID:2601, Current MapID:2687, PreviousTransitionID:2601, Position (1617.59, 208.09, -1026.92)",
-0,
-},
-{
-"[Airlock] Preload skipped - map is same as current map.",
-0,
-},
-{
-"Got new connection 3",
-0,
-},
-{
-"[Airlock] Loading new map 2601 from previous map 2687 with translation: (2123.74, 1685.16, -1448.77)\n    Location : (2014.42, 197.697, -836.239)\n    Location in previous map : (-109.323, -1487.47, 612.531)",
-0,
-},
-{
-"[Airlock] Swapping to preloaded map 2601 and unloading map 2687. (Map Table Size 960 larger than budget 8)",
-0,
-},
-{
-"[Airlock] Finished transition to new map 2601",
-0,
-},
-{
-"Weather changed to 1, intensity 0.000000\n",
-0,
-},
-{
-"[Airlock] Received Cancel Preload for MapID 2687, but we have not preloaded it. Current preloaded map: -1",
-0,
-},
-{
 "Weather changed to 1, intensity 0.000000\n",
 0,
 },
 {
 "Got new connection 3",
-0,
-},
-{
-"Weather changed to 1, intensity 0.000000\n",
-0,
-},
-{
-"[Airlock] Received PreloadMap Destination MapID:2688, Current MapID:2601, PreviousTransitionID:-1, Position (-515.542, -63.3654, 73.3462)",
-0,
-},
-{
-"[Airlock] Preload initiated.",
-0,
-},
-{
-"[Airlock] Received PreloadMap Destination MapID:2688, Current MapID:2601, PreviousTransitionID:2688, Position (-418.571, -37.5089, 51.9473)",
-0,
-},
-{
-"[Airlock] Preload skipped - map is same as current map.",
-0,
-},
-{
-"Got new connection 3",
-0,
-},
-{
-"[Airlock] Loading new map 2688 from previous map 2601 with translation: (-1093.71, 590.992, 1048.87)\n    Location : (-411.772, -36.4344, 52.0549)\n    Location in previous map : (681.935, -627.426, -996.815)",
-0,
-},
-{
-"[Airlock] Swapping to preloaded map 2688 but keeping old map 2601 RESIDENT.",
-0,
-},
-{
-"[Airlock] Freezing AOI updates for old map 2601",
-0,
-},
-{
-"[Airlock] Finished transition to new map 2688",
-0,
-},
-{
-"Weather changed to 1, intensity 0.000000\n",
-0,
-},
-{
-"[Airlock] Received PreloadMap Destination MapID:2601, Current MapID:2688, PreviousTransitionID:2601, Position (681.935, -627.426, -996.815)",
-0,
-},
-{
-"[Airlock] Preload skipped - map is same as current map.",
-0,
-},
-{
-"[Airlock] Received PreloadMap Destination MapID:2601, Current MapID:2688, PreviousTransitionID:2601, Position (765.999, -605.974, -996.923)",
-0,
-},
-{
-"[Airlock] Preload skipped - map is same as current map.",
-0,
-},
-{
-"World transfer pending...",
-0,
-},
-{
-"Got new connection 3",
-0,
-},
-{
-"Weather changed to 1, intensity 0.000000\n",
 0,
 },
 {
@@ -2648,7 +3332,7 @@ Blizzard_Console_SavedVars = {
 0,
 },
 {
-"Render scale changed to 0.916667",
+"Render scale changed to 0.5",
 0,
 },
 {
@@ -2672,7 +3356,7 @@ Blizzard_Console_SavedVars = {
 0,
 },
 {
-"Volume fog disabled.",
+"Volume fog enabled.",
 0,
 },
 {
@@ -2776,7 +3460,7 @@ Blizzard_Console_SavedVars = {
 0,
 },
 {
-"[GlueLogin] [F] Reconnect token saved;  creationTime=\"1726293944\" expirationTime=\"1726308344\"",
+"[GlueLogin] [F] Reconnect token saved;  creationTime=\"1728748230\" expirationTime=\"1728762630\"",
 0,
 },
 {
@@ -2800,7 +3484,7 @@ Blizzard_Console_SavedVars = {
 0,
 },
 {
-"[IBN_Login] [F] Requesting last played chars numSubRegions=\"6\"",
+"[IBN_Login] [F] Requesting last played chars numSubRegions=\"5\"",
 0,
 },
 {
@@ -2836,7 +3520,7 @@ Blizzard_Console_SavedVars = {
 0,
 },
 {
-"[WowEntitlements] [BNetAccount-0-000000007C3B] [WowAccount-0-00000153238E] Initialized with 112 entitlements.",
+"[WowEntitlements] [BNetAccount-0-000000007C3B] [WowAccount-0-00000153238E] Initialized with 114 entitlements.",
 0,
 },
 {
@@ -2868,7 +3552,7 @@ Blizzard_Console_SavedVars = {
 0,
 },
 {
-"[IBN_Login] [F] Requesting realm lists numSubRegions=\"6\"",
+"[IBN_Login] [F] Requesting realm lists numSubRegions=\"5\"",
 0,
 },
 {
@@ -2908,1099 +3592,7 @@ Blizzard_Console_SavedVars = {
 0,
 },
 {
-"-------------------------------------------------- Previous Session --------------------------------------------------",
-0,
-},
-{
-"[IBN_RichPresence] [F] Error downloading content handle. program=\"WoW\" status=\"ERROR_HTTP_FAILED\"",
-0,
-},
-{
-"[IBN_RichPresence] [F] Error downloading content handle. program=\"WoW\" status=\"ERROR_HTTP_FAILED\"",
-0,
-},
-{
-"[IBN_RichPresence] [F] Error downloading content handle. program=\"WoW\" status=\"ERROR_HTTP_FAILED\"",
-0,
-},
-{
-"[IBN_RichPresence] [F] Error downloading content handle. program=\"WoW\" status=\"ERROR_HTTP_FAILED\"",
-0,
-},
-{
-"[IBN_RichPresence] [F] Error downloading content handle. program=\"WoW\" status=\"ERROR_HTTP_FAILED\"",
-0,
-},
-{
-"[IBN_RichPresence] [F] Error downloading content handle. program=\"WoW\" status=\"ERROR_HTTP_FAILED\"",
-0,
-},
-{
-"Got new connection 3",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x0000000001",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x0000008001",
-0,
-},
-{
-"Proficiency in item class 4 set to 0x0000000021",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x000000c001",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x000000c003",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x000000c403",
-0,
-},
-{
-"Proficiency in item class 4 set to 0x0000000061",
-0,
-},
-{
-"Proficiency in item class 4 set to 0x0000000069",
-0,
-},
-{
-"Proficiency in item class 4 set to 0x000000006d",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x000000c423",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x000000e423",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x000010e423",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x000010e433",
-0,
-},
-{
-"Proficiency in item class 4 set to 0x000000006f",
-0,
-},
-{
-"Proficiency in item class 2 set to 0x000010e433",
-0,
-},
-{
-"Proficiency in item class 4 set to 0x000000006f",
-0,
-},
-{
-"Weather changed to 1, intensity 0.000000\n",
-0,
-},
-{
-"Time set to 9/13/2024 (Fri) 23:06",
-0,
-},
-{
-"Gamespeed set from 0.017 to 0.017",
-0,
-},
-{
-"Got new connection 3",
-0,
-},
-{
-"Weather changed to 1, intensity 0.000000\n",
-0,
-},
-{
-"Got new connection 3",
-0,
-},
-{
-"Weather changed to 1, intensity 0.000000\n",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractEnable has been set to 1 (default 0)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraHeadMovementStrength has been set to 0 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 1.5 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthYaw has been set to 0 (default 1.000000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.015707318423501 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.043968121135643 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.0612227501722 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.10973431737269 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.15333079132357 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.17502306720248 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.21507624600066 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.2547707353935 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.26992830519978 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.30752270884219 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.32243092394977 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.36081083925819 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.40002915079511 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.41580467500474 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.48312959323488 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.52383725951748 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.55948227450525 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.59159113103233 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.62769137840954 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.63863353981172 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.65064170770477 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.67068559538287 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.68340122017985 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.69365332571609 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.70264998988441 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.71263853932771 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.72030904529672 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.72896864797088 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.73751313803413 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.74594116621229 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.75425140162189 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.76244253198031 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.77051326381297 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.77846232265764 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.78628845326567 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.79399041980019 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.80156700603128 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.80901701552804 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.81724551353885 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.8244226664407 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.83146963343414 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.83838530172129 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.84432794638433 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.85181839482557 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.85833369840137 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.8647134611232 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.87018377504854 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.87630670025656 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.88302953774747 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.88957589632404 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.89524566804678 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.90009078096108 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.90549476763304 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.91650244056807 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.92447952814842 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.93150091916161 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.93764651619151 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.94351218058623 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.94860021079276 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.9529793572567 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.95762166123793 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.96159774780596 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.96538165311694 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.96935967612829 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.97236993358002 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.97557291208104 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.97825634096577 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.98078529181928 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.98315936529087 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.98564460527359 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.98768835006956 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.98957612741059 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99130763919473 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99306846431428 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99541291750114 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99666593326774 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99771975918355 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99840155380188 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99910076990779 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99960030954575 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99987663354418 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 0.99999506541624 (default 0.750000)",
-0,
-},
-{
-"Test CVar test_cameraTargetFocusInteractStrengthPitch has been set to 1 (default 0.750000)",
-0,
-},
-{
-"Weather changed to 1, intensity 0.104906\n",
-0,
-},
-{
-"Weather changed to 2, intensity 0.208871\n",
-0,
-},
-{
-"World transfer pending...",
-0,
-},
-{
-"Got new connection 3",
-0,
-},
-{
-"Weather changed to 1, intensity 0.000000\n",
-0,
-},
-{
-"World transfer pending...",
-0,
-},
-{
-"Got new connection 3",
-0,
-},
-{
-"Weather changed to 1, intensity 0.000000\n",
-0,
-},
-{
-"Weather changed to 1, intensity 0.000000\n",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 1.1070771873278 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 1.6750941564616 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.0718007767257 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.4458699384614 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 2.8365433310345 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.1654278451572 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.5096969969224 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 3.7991598530888 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 4.1319183144285 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 4.3841688013967 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 4.5916841527172 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 4.8086312649283 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 4.9860310684335 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 5.338419898467 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 5.5199759108801 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 5.718817997238 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 5.8975154720498 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 6.0272619803064 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 6.129766332537 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 6.2916798287434 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 6.3825751692649 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 6.4568876346776 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 6.5096554780008 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 6.5499630013429 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 6.5791905920268 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 6.5964946967534 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 6.6001486433812 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 6.5943344723285 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 6.5801596169864 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 6.5602865003893 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 6.5304436233502 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 6.4970384019399 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 6.4566476673904 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 6.3979184997595 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 6.3318670879202 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 6.2671054220596 (default 0.000000)",
-0,
-},
-{
-"Test CVar test_cameraOverShoulder has been set to 6.1960088425707 (default 0.000000)",
-0,
-},
-{
-"World transfer pending...",
-0,
-},
-{
-"Got new connection 3",
-0,
-},
-{
-"Weather changed to 1, intensity 0.000000\n",
-0,
-},
-{
-"Weather changed to 1, intensity 0.000000\n",
-0,
-},
-{
-"Weather changed to 1, intensity 0.000000\n",
-0,
-},
-{
-"World transfer pending...",
-0,
-},
-{
-"Got new connection 3",
-0,
-},
-{
-"Weather changed to 1, intensity 0.000000\n",
-0,
-},
-{
-"Weather changed to 1, intensity 0.000000\n",
-0,
-},
-{
-"World transfer pending...",
-0,
-},
-{
-"Got new connection 3",
-0,
-},
-{
-"Weather changed to 1, intensity 0.000000\n",
-0,
-},
-{
-"GameTimeSync: skipping forwards 2 game minutes, (current = 9/13/2024 (Fri) 23:35, newtime = 9/13/2024 (Fri) 23:37)",
-0,
-},
-{
-"-------------------------------------------------- Previous Session --------------------------------------------------",
-0,
-},
-{
-"Sorting particles normally.",
-0,
-},
-{
-"Multithreaded rendering enabled.",
-0,
-},
-{
-"Multithreaded BeginDraw enabled.",
-0,
-},
-{
-"Multithread shadows changed to 1.",
-0,
-},
-{
-"Multithreaded prepass enabled.",
-0,
-},
-{
-"Multithreaded opaque pass enabled.",
-0,
-},
-{
-"Multithreaded opaque pass enabled.",
-0,
-},
-{
-"Multithreaded alpha M2 pass enabled.",
-0,
-},
-{
-"Multithreaded opaque WMO pass enabled.",
-0,
-},
-{
-"Multithreaded terrain pass enabled.",
-0,
-},
-{
-"Multithreaded volumetric fog enabled.",
-0,
-},
-{
-"Multithreaded Refraction Pass enabled.",
-0,
-},
-{
-"Multithreaded miscellaneous passes enabled.",
-0,
-},
-{
-"Multithreaded decal passes disabled.",
-0,
-},
-{
-"Multithreaded outline passes enabled.",
-0,
-},
-{
-"Use trigger on BeginDrawComplete enabled.",
-4,
-},
-{
-"Multithreaded alpha pass enabled.",
-0,
-},
-{
-"Multithreaded daynight update enabled.",
-0,
-},
-{
-"Water detail changed to 0",
-0,
-},
-{
-"Ripple detail changed to 0",
-0,
-},
-{
-"Reflection mode changed to 0",
-0,
-},
-{
-"Reflection downscale changed to 0",
-0,
-},
-{
-"Sunshafts quality changed to 0",
-0,
-},
-{
-"Refraction mode changed to 0",
-0,
-},
-{
-"Volume fog disabled.",
-0,
-},
-{
-"Particulate volumes disabled.",
-0,
-},
-{
-"Projected textures enabled.",
-0,
-},
-{
-"Spell Clutter intensity value set",
-0,
-},
-{
-"Shadow mode changed to 0 - Blob shadows",
-0,
-},
-{
-"Shadow texture size changed to 1024.",
-0,
-},
-{
-"Soft shadows changed to 0.",
-0,
-},
-{
-"Shadow cascade blending changed to 0",
-0,
-},
-{
-"Shadow RT mode changed to 0 (Disabled)",
-0,
-},
-{
-"maxLightCount must be in range 0 to 32.",
-0,
-},
-{
-"CVar 'maxLightCount' failed validation for its initial value.",
-0,
-},
-{
-"Clustered shading disabled.",
-0,
-},
-{
-"Not forcing clustered shading.",
-0,
-},
-{
-"SSAO mode set to 0",
-0,
-},
-{
-"SSAO type set to 0",
-0,
-},
-{
-"Depth Based Opacity Disabled",
-0,
-},
-{
-"SkyCloudLOD set to 0",
-0,
-},
-{
-"Texture filtering mode updated.",
-0,
-},
-{
-"Terrain mip level changed to 0.",
-0,
-},
-{
-"Outline mode changed to 2",
-0,
-},
-{
-"Physics interaction level changed to 0",
-0,
-},
-{
-"Render scale changed to 0.916667",
-0,
-},
-{
-"Resample quality changed to 0",
-0,
-},
-{
-"MSAA disabled",
-0,
-},
-{
-"MSAA for alpha-test enabled.",
-0,
-},
-{
-"VALAR mode changed to 0",
-0,
-},
-{
-"lodObjectSizeScale cannot be changed.",
-0,
-},
-{
-"Volume fog disabled.",
-0,
-},
-{
-"dynamicLod enabled",
-0,
-},
-{
-"World preload object sort enabled.",
-0,
-},
-{
-"World load object sort enabled.",
-0,
-},
-{
-"World preload non critical enabled.",
-0,
-},
-{
-"World preload high res textures enabled.",
-0,
-},
-{
-"Attempted to register existing command: vrsValarK\n",
-0,
-},
-{
-"Attempted to register existing command: vrsValarSensitivityThreshold\n",
-0,
-},
-{
-"FFX: Color Blind Test Mode Disabled",
-0,
-},
-{
-"Error display disabled",
-0,
-},
-{
-"Error display shown",
-0,
-},
-{
-"Displaying errors through fatal errors",
-0,
-},
-{
-"Displaying errors through fatal errors",
-0,
-},
-{
-"Now filtering: all messages",
-0,
-},
-{
-"CVar 'Sound_AmbienceHighpassDSPCutoff' failed validation for its initial value.",
-0,
-},
-{
-"CVar 'Sound_AllyPlayerHighpassDSPCutoff' failed validation for its initial value.",
-0,
-},
-{
-"CVar 'Sound_EnemyPlayerHighpassDSPCutoff' failed validation for its initial value.",
-0,
-},
-{
-"CVar 'Sound_NPCHighpassDSPCutoff' failed validation for its initial value.",
-0,
-},
-{
-"[GlueLogin] [F] Starting login launcherPortal=\"us.actual.battle.net\" loginPortal=\"us.actual.battle.net:1119\"",
-0,
-},
-{
-"[GlueLogin] [F] Resetting",
-0,
-},
-{
-"[IBN_Login] [F] Initializing",
-0,
-},
-{
-"[IBN_Login] [F] Attempting logon host=\"us.actual.battle.net\" port=\"1119\"",
-0,
-},
-{
-"[GlueLogin] [F] Waiting for server response.",
-0,
-},
-{
-"[GlueLogin] [F] Waiting for server response.",
-0,
-},
-{
-"[GlueLogin] [F] Waiting for server response.",
-0,
-},
-{
-"[GlueLogin] [F] Logon complete.",
-0,
-},
-{
-"[GlueLogin] [F] Reconnect token saved;  creationTime=\"1726319775\" expirationTime=\"1726334175\"",
-0,
-},
-{
-"[GlueLogin] [F] Waiting for realm list.",
-0,
-},
-{
-"[IBN_Login] [F] Requesting realm list ticket",
-0,
-},
-{
-"[IBN_Login] [F] Received realm list ticket code=\"ERROR_OK\"",
-0,
-},
-{
-"[GlueLogin] [F] Waiting for realm list.",
-0,
-},
-{
-"[IBN_Login] [F] Received sub region list code=\"ERROR_OK\"",
-0,
-},
-{
-"[IBN_Login] [F] Requesting last played chars numSubRegions=\"6\"",
-0,
-},
-{
-"[GlueLogin] [F] Realm list ready.",
-0,
-},
-{
-"[IBN_Login] [F] Joining realm subRegion=\"1-1-89\" realmAddress=\"1-4-7\"",
-0,
-},
-{
-"[IBN_Login] [F] OnRealmJoin code=\"ERROR_OK\"",
-0,
-},
-{
-"NetClient::HandleConnect()\n",
-0,
-},
-{
-"[GlueLogin] [F] Received AuthedToWoW result=\"ERROR_OK\"",
-0,
-},
-{
-"[IBN_Login] [F] Front disconnecting connectionId=\"1\"",
-0,
-},
-{
-"[GlueLogin] [F] Disconnecting from authentication server.",
-0,
-},
-{
-"[IBN_BackInterface] [F] Session with Battle.net established.",
-0,
-},
-{
-"[WowEntitlements] [BNetAccount-0-000000007C3B] [WowAccount-0-00000153238E] Initialized with 112 entitlements.",
-0,
-},
-{
-"[IBN_Login] [F] Front disconnected connectionId=\"1\" result=\"( code=\"ERROR_NETWORK_MODULE_SOCKET_CLOSED\" localizedMessage=\"\" debugMessage=\"\")\"",
-0,
-},
-{
-"[GlueLogin] [F] Disconnected from authentication server.",
+"Got new connection 2",
 0,
 },
 {
@@ -4080,7 +3672,7 @@ Blizzard_Console_SavedVars = {
 0,
 },
 {
-"Time set to 9/14/2024 (Sat) 6:17",
+"Time set to 10/12/2024 (Sat) 8:51",
 0,
 },
 {
@@ -4088,6 +3680,90 @@ Blizzard_Console_SavedVars = {
 0,
 },
 {
+"Got new connection 3",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"-------------------------------------------------- Previous Session --------------------------------------------------",
+0,
+},
+{
+"-------------------------------------------------- Previous Session --------------------------------------------------",
+0,
+},
+{
+"Attempted to register existing command: ShowObjUsage\n",
+0,
+},
+{
+"Attempted to register existing command: SetDifficulty\n",
+0,
+},
+{
+"Got new connection 3",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x0000008000",
+0,
+},
+{
+"Proficiency in item class 4 set to 0x0000000021",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x000000c000",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x000000c400",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x000000c410",
+0,
+},
+{
+"Proficiency in item class 4 set to 0x0000000023",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x000008c410",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x000008c410",
+0,
+},
+{
+"Proficiency in item class 4 set to 0x0000000023",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"Time set to 10/12/2024 (Sat) 8:52",
+0,
+},
+{
+"Gamespeed set from 0.017 to 0.017",
+0,
+},
+{
+"Got new connection 3",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
 "World transfer pending...",
 0,
 },
@@ -4100,55 +3776,23 @@ Blizzard_Console_SavedVars = {
 0,
 },
 {
-"Weather changed to 1, intensity 0.180257\n",
+"Skill 101 increased from 380 to 150",
 0,
 },
 {
-"[Airlock] Received PreloadMap Destination MapID:2601, Current MapID:2552, PreviousTransitionID:-1, Position (2445.44, -2299.26, 1049.12)",
+"Skill 183 increased from 380 to 150",
 0,
 },
 {
-"[Airlock] Preload initiated.",
+"Skill 804 increased from 380 to 150",
 0,
 },
 {
-"Weather changed to 2, intensity 0.239733\n",
+"Skill 228 increased from 380 to 150",
 0,
 },
 {
-"Got new connection 3",
-0,
-},
-{
-"[Airlock] Loading new map 2601 from previous map 2552 with translation: (0.340088, 0.820068, 1131.33)\n    Location : (2251.34, -2273.62, 569.931)\n    Location in previous map : (2251, -2274.44, -561.402)",
-0,
-},
-{
-"[Airlock] Destination 2601 had not finished preload at position (2251.34, -2273.62, 569.931), putting up loading screen\n",
-0,
-},
-{
-"[Airlock] Swapping to preloaded map 2601 and unloading map 2552. (Map Table Size 960 larger than budget 8)",
-0,
-},
-{
-"[Airlock] Finished transition to new map 2601",
-0,
-},
-{
-"Weather changed to 1, intensity 0.000000\n",
-0,
-},
-{
-"[Airlock] Received PreloadMap Destination MapID:2552, Current MapID:2601, PreviousTransitionID:-1, Position (2251, -2274.44, -561.402)",
-0,
-},
-{
-"[Airlock] Preload initiated.",
-0,
-},
-{
-"[Airlock] Cancel Preload of MapID:2552",
+"Skill 2732 increased from 380 to 150",
 0,
 },
 {
@@ -4164,6 +3808,166 @@ Blizzard_Console_SavedVars = {
 0,
 },
 {
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"Skill 101 increased from 150 to 385",
+0,
+},
+{
+"Skill 183 increased from 150 to 385",
+0,
+},
+{
+"Skill 804 increased from 150 to 385",
+0,
+},
+{
+"Skill 228 increased from 150 to 385",
+0,
+},
+{
+"Skill 2732 increased from 150 to 385",
+0,
+},
+{
+"-------------------------------------------------- Previous Session --------------------------------------------------",
+0,
+},
+{
+"-------------------------------------------------- Previous Session --------------------------------------------------",
+0,
+},
+{
+"Attempted to register existing command: ShowObjUsage\n",
+0,
+},
+{
+"Attempted to register existing command: SetDifficulty\n",
+0,
+},
+{
+"Got new connection 3",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x0000000001",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x0000008001",
+0,
+},
+{
+"Proficiency in item class 4 set to 0x0000000021",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x000000c001",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x000000c003",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x000000c403",
+0,
+},
+{
+"Proficiency in item class 4 set to 0x0000000061",
+0,
+},
+{
+"Proficiency in item class 4 set to 0x0000000069",
+0,
+},
+{
+"Proficiency in item class 4 set to 0x000000006d",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x000000c423",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x000000e423",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x000010e423",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x000010e433",
+0,
+},
+{
+"Proficiency in item class 4 set to 0x000000006f",
+0,
+},
+{
+"Proficiency in item class 2 set to 0x000010e433",
+0,
+},
+{
+"Proficiency in item class 4 set to 0x000000006f",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"Time set to 10/12/2024 (Sat) 9:02",
+0,
+},
+{
+"Gamespeed set from 0.017 to 0.017",
+0,
+},
+{
+"Got new connection 3",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"World transfer pending...",
+0,
+},
+{
+"Got new connection 3",
+0,
+},
+{
+"Weather changed to 5, intensity 1.000000\n",
+0,
+},
+{
+"Weather changed to 5, intensity 1.000000\n",
+0,
+},
+{
+"Weather changed to 5, intensity 1.000000\n",
+0,
+},
+{
 "World transfer pending...",
 0,
 },
@@ -4173,6 +3977,34 @@ Blizzard_Console_SavedVars = {
 },
 {
 "Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"World transfer pending...",
+0,
+},
+{
+"Got new connection 3",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"Weather changed to 1, intensity 0.000000\n",
+0,
+},
+{
+"Changed difficulty successfully",
+0,
+},
+{
+"-------------------------------------------------- Previous Session --------------------------------------------------",
 0,
 },
 },

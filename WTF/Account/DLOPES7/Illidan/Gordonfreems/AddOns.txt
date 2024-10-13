@@ -54,7 +54,7 @@ BigWigs_SepulcherOfTheFirstOnes: disabled
 ZygorGuidesViewer: disabled
 AdiBags: disabled
 AdiBags_Config: disabled
-AngryKeystones: enabled
+AngryKeystones: disabled
 BigWigs: enabled
 BigWigs_DragonIsles: enabled
 BigWigs_VaultOfTheIncarnates: enabled
@@ -93,7 +93,7 @@ WeakAurasModelPaths: enabled
 WeakAurasOptions: enabled
 WeakAurasTemplates: enabled
 ZerethMortisPuzzleHelper: disabled
-DejaCharacterStats: disabled
+DejaCharacterStats: enabled
 ElvUI_UnitFramePlugin: disabled
 Blizzard_ObjectiveTracker: enabled
 Blizzard_CompactRaidFrames: enabled
@@ -202,10 +202,10 @@ Narcissus_GamePad: disabled
 SharedMedia_NotUI: enabled
 OPie: disabled
 Postal: disabled
-Simulationcraft: disabled
+Simulationcraft: enabled
 TalentLoadoutsEx: disabled
 TomTom: disabled
-TrueStatValues: disabled
+TrueStatValues: enabled
 TwitchEmotes: disabled
 WagoAppCompanion: disabled
 WorldMarkerKeyBindings: disabled

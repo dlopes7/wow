@@ -2,10 +2,10 @@ local W, F, E, L = unpack((select(2, ...)))
 local ET = E:GetModule("Tooltip")
 local T = W.Modules.Tooltips
 
+local _G = _G
 local next = next
 local pairs = pairs
 local select = select
-
 local strsplit = strsplit
 local tinsert = tinsert
 local type = type
@@ -124,6 +124,7 @@ function T:InspectInfo(tt, data, triedTimes)
 	local inCombatLockdown = InCombatLockdown()
 	local isShiftKeyDown = IsShiftKeyDown()
 	local isPlayerUnit = UnitIsPlayer(unit)
+	local isInspecting = _G.InspectPaperDollFrame and _G.InspectPaperDollFrame:IsShown()
 
 	-- Run all registered callbacks (normal)
 	for _, func in next, self.normalInspect do
@@ -133,7 +134,7 @@ function T:InspectInfo(tt, data, triedTimes)
 	-- Item Level
 	local itemLevelAvailable = isPlayerUnit and not inCombatLockdown and ET.db.inspectDataEnable
 
-	if self.profiledb.elvUITweaks.forceItemLevel then
+	if self.profiledb.elvUITweaks.forceItemLevel and not isInspecting then
 		if not isShiftKeyDown and itemLevelAvailable and not tt.ItemLevelShown then
 			local _, class = UnitClass(unit)
 			local color = class and E:ClassColor(class) or RAID_CLASS_COLORS_PRIEST

@@ -48,7 +48,7 @@ function mod:OnRegister()
 	self:SetSpellRename(445407, CL.fixate) -- Bloodthirsty (Fixate)
 end
 
-local autotalk = mod:AddAutoTalkOption(true)
+local autotalk = mod:AddAutoTalkOption(false)
 function mod:GetOptions()
 	return {
 		autotalk,
@@ -106,6 +106,12 @@ function mod:OnBossEnable()
 
 	-- Deepwater Makura
 	self:Log("SPELL_CAST_START", "BubbleSurge", 445771)
+
+	-- also enable the Rares module
+	local raresModule = BigWigs:GetBossModule("Delve Rares", true)
+	if raresModule then
+		raresModule:Enable()
+	end
 end
 
 function mod:VerifyEnable(_, mobId)
@@ -121,9 +127,7 @@ end
 -- Autotalk
 
 function mod:GOSSIP_SHOW()
-	local info = self:GetWidgetInfo("delve", 6183)
-	local level = info and tonumber(info.tierText)
-	if (not level or level > 3) and self:GetOption(autotalk) then
+	if self:GetOption(autotalk) then
 		if self:GetGossipID(121578) then -- The Sinkhole, start Delve (Raen Dawncavalyr)
 			-- 121578:|cFF0000FF(Delve)|r I'll take your special boots and recover missing relics from the kobyss.
 			self:SelectGossipID(121578)
@@ -172,9 +176,15 @@ end
 
 -- Kobyss Witherer
 
-function mod:CurseOfTheDepths(args)
-	self:Message(440622, "yellow", CL.casting:format(CL.curse))
-	self:PlaySound(440622, "alert")
+do
+	local prev = 0
+	function mod:CurseOfTheDepths(args)
+		if args.time - prev > 2 then
+			prev = args.time
+			self:Message(440622, "yellow", CL.casting:format(CL.curse))
+			self:PlaySound(440622, "alert")
+		end
+	end
 end
 
 -- Wandering Gutter

@@ -15,8 +15,15 @@ mod:RegisterEnableMob(
 	227513, -- Tala
 	227514, -- Velo
 	227573, -- Anub'vir
-	217208 -- Zekvir
+	227471, -- Zekvir (unattackable)
+	217208 -- Zekvir (random spawn)
 )
+
+--------------------------------------------------------------------------------
+-- Locals
+--
+
+local zekvirEngaged = false
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -36,7 +43,12 @@ if L then
 	L.tala = "Tala"
 	L.velo = "Velo"
 	L.anubvir = "Anub'vir"
-	L.zekvir = "Zekvir (Random Spawn)"
+	L.zekvir = "Zekvir"
+	L.zekvirs_influence = "Zekvir's Influence"
+	L.zekvir_random = "Zekvir (Random Spawn)"
+	L.zekvir_breach = "Zekvir incoming"
+	L.zekvir_breach_desc = "Show an alert when Zekvir is spawning in the Delve."
+	L.zekvir_breach_icon = "INV_Achievement_RaidNerubian_NerubianHulk"
 end
 
 --------------------------------------------------------------------------------
@@ -48,10 +60,11 @@ function mod:OnRegister()
 	self:SetSpellRename(445781, CL.frontal_cone) -- Lava Blast (Frontal Cone)
 	self:SetSpellRename(415253, CL.frontal_cone) -- Fungal Breath (Frontal Cone)
 	self:SetSpellRename(415250, CL.explosion) -- Fungal Bloom (Explosion)
+	self:SetSpellRename(449038, CL.spikes) -- Impaling Spikes (Spikes)
 	self:SetSpellRename(450492, CL.fear) -- Horrendous Roar (Fear)
 end
 
-local autotalk = mod:AddAutoTalkOption(true, "boss")
+local autotalk = mod:AddAutoTalkOption(false, "boss")
 function mod:GetOptions()
 	return {
 		autotalk,
@@ -83,7 +96,11 @@ function mod:GetOptions()
 		458099, -- Grasping Darkness
 		-- Anub'vir
 		449038, -- Impaling Spikes
+		-- Zekvir's Influence
+		457880, -- Ascension
+		457448, -- Shadow Eruption
 		-- Zekvir
+		"zekvir_breach",
 		450519, -- Angler's Web
 		450492, -- Horrendous Roar
 		450505, -- Enfeebling Spittle
@@ -98,11 +115,13 @@ function mod:GetOptions()
 		[458104] = L.tala,
 		[458090] = L.velo,
 		[449038] = L.anubvir,
-		[450519] = L.zekvir,
+		[457880] = L.zekvirs_influence,
+		["zekvir_breach"] = L.zekvir_random,
 	},{
 		[445781] = CL.frontal_cone, -- Lava Blast (Frontal Cone)
 		[415253] = CL.frontal_cone, -- Fungal Breath (Frontal Cone)
 		[415250] = CL.explosion, -- Fungal Bloom (Explosion)
+		[449038] = CL.spikes, -- Impaling Spikes (Spikes)
 		[450492] = CL.fear, -- Horrendous Roar (Fear)
 	}
 end
@@ -162,14 +181,19 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "ImpalingSpikes", 449038)
 	self:Death("AnubvirDeath", 227573)
 
-	-- Zekvir
+	-- Zekvir's Influence
+	self:Log("SPELL_CAST_START", "Ascension", 457880) -- cast by any Zekvir-empowered mob
+	self:Log("SPELL_CAST_START", "ShadowEruption", 457448) -- cast by any Zekvir-empowered mob
+	self:Log("SPELL_CAST_START", "AnglersWebImage", 457881) -- cast by untargetable Zekvir 227471
+
+	-- Zekvir (random spawn)
+	self:RegisterEvent("CHAT_MSG_RAID_BOSS_EMOTE") -- Zekvir incoming or Zekvir leaving
 	self:Log("SPELL_CAST_START", "EnfeeblingSpittle", 450505)
 	self:Log("SPELL_INTERRUPT", "EnfeeblingSpittleInterrupt", 450505)
 	self:Log("SPELL_CAST_SUCCESS", "EnfeeblingSpittleSuccess", 450505)
 	self:Log("SPELL_AURA_APPLIED", "EnfeeblingSpittleApplied", 450505)
 	self:Log("SPELL_CAST_START", "HorrendousRoar", 450492)
 	self:Log("SPELL_CAST_START", "AnglersWeb", 450519)
-	self:Death("ZekvirDeath", 217208)
 end
 
 --------------------------------------------------------------------------------
@@ -179,9 +203,7 @@ end
 -- Autotalk
 
 function mod:GOSSIP_SHOW()
-	local info = self:GetWidgetInfo("delve", 6183)
-	local level = info and tonumber(info.tierText)
-	if (not level or level > 3) and self:GetOption(autotalk) then
+	if self:GetOption(autotalk) then
 		if self:GetGossipID(123520) then -- Reno Jackson, start combat
 			-- 123520:Let's fight!
 			self:SelectGossipID(123520)
@@ -499,13 +521,15 @@ do
 	local timer
 
 	function mod:ImpalingSpikes(args)
-		if timer then
-			self:CancelTimer(timer)
+		if self:MobId(args.sourceGUID) == 227573 then -- Cast by others
+			if timer then
+				self:CancelTimer(timer)
+			end
+			self:Message(args.spellId, "yellow", CL.spikes)
+			self:CDBar(args.spellId, 13.3, CL.spikes)
+			timer = self:ScheduleTimer("AnubvirDeath", 30)
+			self:PlaySound(args.spellId, "warning")
 		end
-		self:Message(args.spellId, "yellow")
-		self:PlaySound(args.spellId, "alarm")
-		self:CDBar(args.spellId, 13.3)
-		timer = self:ScheduleTimer("AnubvirDeath", 30)
 	end
 
 	function mod:AnubvirDeath()
@@ -513,14 +537,57 @@ do
 			self:CancelTimer(timer)
 			timer = nil
 		end
-		self:StopBar(449038) -- Impaling Spikes
+		self:StopBar(CL.spikes) -- Impaling Spikes
 	end
+end
+
+-- Zekvir's Influence
+
+do
+	local prev = 0
+	function mod:Ascension(args)
+		if args.time - prev > 2.5 then
+			prev = args.time
+			self:Message(args.spellId, "yellow", CL.casting:format(args.spellName))
+			self:PlaySound(args.spellId, "long")
+		end
+	end
+end
+
+do
+	local prev = 0
+	function mod:ShadowEruption(args)
+		if args.time - prev > 2.5 then
+			prev = args.time
+			self:Message(args.spellId, "orange")
+			self:PlaySound(args.spellId, "alarm")
+		end
+	end
+end
+
+function mod:AnglersWebImage()
+	self:Message(450519, "orange")
+	self:PlaySound(450519, "alarm")
 end
 
 -- Zekvir
 
 do
 	local timer
+
+	function mod:CHAT_MSG_RAID_BOSS_EMOTE(_, msg)
+		-- [CHAT_MSG_RAID_BOSS_EMOTE] |TInterface\\ICONS\\INV_Achievement_RaidNerubian_NerubianHulk.BLP:36|t Zekvir has breached the Delve!#Zekvir
+		-- [CHAT_MSG_RAID_BOSS_EMOTE] |TInterface\\ICONS\\INV_Achievement_RaidNerubian_NerubianHulk.BLP:36|t Zekvir burrows into the ground and escapes!#Zekvir
+		if msg:find("INV_Achievement_RaidNerubian_NerubianHulk", nil, true) then
+			if not zekvirEngaged then
+				zekvirEngaged = true
+				self:Message("zekvir_breach", "cyan", CL.incoming:format(L.zekvir), L.zekvir_breach_icon)
+				self:PlaySound("zekvir_breach", "long")
+			else
+				self:ZekvirRetreat()
+			end
+		end
+	end
 
 	function mod:EnfeeblingSpittle(args)
 		if self:MobId(args.sourceGUID) == 217208 then -- Zekvir rare spawn
@@ -536,7 +603,7 @@ do
 				timer = nil
 			end
 			self:CDBar(450505, 15.3)
-			timer = self:ScheduleTimer("ZekvirDeath", 30)
+			timer = self:ScheduleTimer("ZekvirRetreat", 30)
 		end
 	end
 
@@ -547,7 +614,7 @@ do
 				timer = nil
 			end
 			self:CDBar(args.spellId, 15.3)
-			timer = self:ScheduleTimer("ZekvirDeath", 30)
+			timer = self:ScheduleTimer("ZekvirRetreat", 30)
 		end
 	end
 
@@ -568,7 +635,7 @@ do
 			end
 			self:Message(args.spellId, "yellow", CL.fear)
 			self:CDBar(args.spellId, 18.2, CL.fear)
-			timer = self:ScheduleTimer("ZekvirDeath", 30)
+			timer = self:ScheduleTimer("ZekvirRetreat", 30)
 			self:PlaySound(args.spellId, "alarm")
 		end
 	end
@@ -581,12 +648,13 @@ do
 			end
 			self:Message(args.spellId, "orange")
 			self:CDBar(args.spellId, 23.1)
-			timer = self:ScheduleTimer("ZekvirDeath", 30)
+			timer = self:ScheduleTimer("ZekvirRetreat", 30)
 			self:PlaySound(args.spellId, "alarm")
 		end
 	end
 
-	function mod:ZekvirDeath()
+	function mod:ZekvirRetreat()
+		zekvirEngaged = false
 		if timer then
 			self:CancelTimer(timer)
 			timer = nil

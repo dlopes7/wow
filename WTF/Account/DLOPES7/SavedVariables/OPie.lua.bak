@@ -1,11 +1,13 @@
 
 OneRing_Config = nil
 OPie_SavedData = {
-["_GameVersion"] = "11.0.2",
 ["CharProfiles"] = {
 },
-["_TimeBand"] = 0.9921875,
-["_OPieVersion"] = "Ælling 5 (4.129)",
+["_OPieVersion"] = "Ørred 1a (4.131)",
+["_StoreVersion"] = 122,
+["_GameLocale"] = "enUS",
+["_StoreVersion2"] = 122,
+["_GameVersion"] = "11.0.2",
 ["ProfileStorage"] = {
 ["default"] = {
 ["Bindings"] = {
@@ -111,5 +113,5 @@ OPie_SavedData = {
 },
 },
 },
-["_GameLocale"] = "enUS",
+["_TimeBand"] = 0.9921875,
 }

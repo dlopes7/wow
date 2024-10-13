@@ -8,6 +8,7 @@ local min = min
 local pairs = pairs
 local pcall = pcall
 local print = print
+local select = select
 local strfind = strfind
 local strmatch = strmatch
 local tonumber = tonumber
@@ -16,7 +17,10 @@ local tremove = tremove
 local type = type
 local unpack = unpack
 
+local GenerateFlatClosure = GenerateFlatClosure
 local GetClassColor = GetClassColor
+local GetInstanceInfo = GetInstanceInfo
+local RunNextFrame = RunNextFrame
 
 --[[
     从数据库设定字体样式
@@ -304,4 +308,67 @@ function F.Or(val, default)
 		return default
 	end
 	return val
+end
+
+function F.DelvesEventFix(original, func)
+	local isWaiting = false
+
+	return function(...)
+		local difficulty = select(3, GetInstanceInfo())
+		if not difficulty or difficulty ~= 208 then
+			return original(...)
+		end
+
+		if isWaiting then
+			return
+		end
+
+		local f = GenerateFlatClosure(original, ...)
+
+		RunNextFrame(function()
+			if not isWaiting then
+				isWaiting = true
+				E:Delay(3, function()
+					f()
+					isWaiting = false
+				end)
+			end
+		end)
+	end
+end
+
+function F.WaitFor(condition, callback, interval, leftTimes)
+	leftTimes = (leftTimes or 10) - 1
+	interval = interval or 0.1
+
+	if condition() then
+		callback()
+		return
+	end
+
+	if leftTimes and leftTimes <= 0 then
+		return
+	end
+
+	E:Delay(interval, F.WaitFor, condition, callback, interval, leftTimes)
+end
+
+function F.MoveFrameWithOffset(frame, x, y)
+	if not frame or not frame.ClearAllPoints then
+		return
+	end
+
+	local pointsData = {}
+
+	for i = 1, frame:GetNumPoints() do
+		local point, relativeTo, relativePoint, xOfs, yOfs = frame:GetPoint(i)
+		pointsData[i] = { point, relativeTo, relativePoint, xOfs, yOfs }
+	end
+
+	frame:ClearAllPoints()
+
+	for _, data in pairs(pointsData) do
+		local point, relativeTo, relativePoint, xOfs, yOfs = unpack(data)
+		frame:SetPoint(point, relativeTo, relativePoint, xOfs + x, yOfs + y)
+	end
 end

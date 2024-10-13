@@ -966,6 +966,7 @@ local eventData = {
 				82516, -- 世界之魂：締結合約
 				82659, -- 世界之魂：奈幽巴宮殿
 				82678, -- 文庫：第一張圓盤
+				82679, -- 文庫：尋覓歷史
 				82708, -- 探究：奈幽蟲族威脅
 			},
 			hasWeeklyReward = true,
@@ -982,7 +983,7 @@ local eventData = {
 			icon = 5788303,
 			type = "loopTimer",
 			questIDs = {
-				83240, -- 劇團 
+				83240, -- 劇團
 			},
 			hasWeeklyReward = true,
 			duration = 15 * 60,

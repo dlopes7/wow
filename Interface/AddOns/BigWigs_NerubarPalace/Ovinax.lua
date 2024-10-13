@@ -47,13 +47,15 @@ end
 -- Initialization
 --
 
+local experimentalDosageMarker = mod:AddMarkerOption(false, "player", 8, 442526, 6, 4, 3, 7) -- Experimental Dosage
 local voraciousWormMarker = mod:AddMarkerOption(false, "npc", 8, -28999, 8, 7, 6, 5) -- Voracious Worm
 function mod:GetOptions()
 	return {
 		"berserk",
 		{442526, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Experimental Dosage
-		442660, -- Experimental Dosage (was rupture/healing absorb)
-		"custom_on_experimental_dosage_marks",
+			442660, -- Experimental Dosage (was rupture/healing absorb)
+			"custom_on_experimental_dosage_marks",
+			experimentalDosageMarker,
 		442432, -- Ingest Black Blood
 			443274, -- Unstable Infusion
 		442799, -- Sanguine Overflow (Damage)
@@ -195,11 +197,11 @@ do
 
 	local function sortPriority(first, second)
 		if first and second then
-			if first.melee ~= second.melee then
-				return first.melee and not second.melee
-			end
 			if first.healer ~= second.healer then
 				return not first.healer and second.healer
+			end
+			if first.melee ~= second.melee then
+				return first.melee and not second.melee
 			end
 			return first.index < second.index
 		end
@@ -219,12 +221,15 @@ do
 				self:Message(442526, "blue", text)
 				self:PlaySound(442526, "warning")
 				self:Say(442526, text, nil, icon and CL.rticon:format("Break Egg", icon) or "Break Egg")
-				self:SayCountdown(442526, self:Easy() and 10 or self:Mythic() and 6 or 8, icon)
+				self:SayCountdown(442526, self:Easy() and 10 or 8, icon)
 			end
 			-- 8 names in mythic may be a bit much, maybe infobox (bleh)?
 			playerList[#playerList+1] = player
 			playerList[player] = icon
 			self:TargetsMessage(442526, "yellow", playerList, nil, CL.count:format(self:SpellName(442526), experimentalDosageCount - 1))
+			if not self:Mythic() then
+				self:CustomIcon(experimentalDosageMarker, player, icon)
+			end
 		end
 	end
 
@@ -232,11 +237,11 @@ do
 		self:StopBar(CL.count:format(L.experimental_dosage, experimentalDosageCount))
 		self:Message(args.spellId, "orange", CL.casting:format(CL.count:format(L.experimental_dosage, experimentalDosageCount)))
 		self:PlaySound(args.spellId, "alert")
-		local debuffDuration = self:Easy() and 10 or self:Mythic() and 6 or 8
+		local debuffDuration = self:Easy() and 10 or 8
 		self:Bar(args.spellId, 1.5 + debuffDuration, CL.count:format(CL.adds, experimentalDosageCount)) -- 1.5s Cast + debuffDuration
 		experimentalDosageCount = experimentalDosageCount + 1
 
-		if experimentalDosageCount < 9 and experimentalDosageCount % 3 ~= 1 then -- No more than 9, starting every 3rd on Ingest Black Blood
+		if experimentalDosageCount < 10 and experimentalDosageCount % 3 ~= 1 then -- No more than 9, starting every 3rd on Ingest Black Blood
 			self:Bar(args.spellId, 50.0, CL.count:format(L.experimental_dosage, experimentalDosageCount))
 		end
 
@@ -261,6 +266,9 @@ do
 	function mod:ExperimentalDosageRemoved(args)
 		if self:Me(args.destGUID) then
 			self:CancelSayCountdown(442526)
+		end
+		if not self:Mythic() then
+			self:CustomIcon(experimentalDosageMarker, args.destName)
 		end
 	end
 end
@@ -321,7 +329,7 @@ function mod:StickyWeb(args)
 	stickyWebCount = stickyWebCount + 1
 	local cd = 30
 	local ingestTimeLeft = nextIngest - GetTime()
-	if ingestTimeLeft > cd then
+	if ingestTimeLeft > cd or ingestBlackBloodCount > 3 then
 		self:Bar(446349, cd, CL.count:format(args.spellName, stickyWebCount))
 	end
 end

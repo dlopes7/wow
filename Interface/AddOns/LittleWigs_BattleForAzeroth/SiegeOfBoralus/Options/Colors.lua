@@ -6,7 +6,7 @@ BigWigs:AddColors("Chopper Redhook", {
 	[257459] = {"blue","yellow"},
 	[257585] = "orange",
 	[273721] = {"green","orange"},
-	["adds"] = "yellow",
+	[274002] = "yellow",
 })
 
 BigWigs:AddColors("Sergeant Bainbridge", {
@@ -14,9 +14,9 @@ BigWigs:AddColors("Sergeant Bainbridge", {
 	[260924] = "orange",
 	[260954] = {"blue","yellow"},
 	[261428] = {"blue","red"},
+	[274002] = "yellow",
 	[277965] = {"green","orange"},
 	[279761] = "orange",
-	["adds"] = "yellow",
 })
 
 BigWigs:AddColors("Dread Captain Lockwood", {
@@ -53,10 +53,12 @@ BigWigs:AddColors("Siege of Boralus Trash", {
 	[257169] = "red",
 	[257170] = "yellow",
 	[257288] = "orange",
+	[257732] = "yellow",
 	[268260] = "orange",
 	[272421] = {"blue","yellow"},
 	[272546] = "orange",
 	[272571] = "red",
+	[272662] = "cyan",
 	[272711] = "yellow",
 	[275826] = {"red","yellow"},
 	[275835] = "purple",

@@ -168,3 +168,4 @@ LittleWigs_Dragonflight: enabled
 BigWigs_Dragonflight: disabled
 SharedMedia_Causese: disabled
 SharedMedia: disabled
+BigWigs_KhazAlgar: enabled

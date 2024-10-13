@@ -76,7 +76,7 @@ ExRT: disabled
 Plumber: disabled
 BigWigs_DragonIsles: enabled
 Details_Compare2: enabled
-AngryKeystones: enabled
+AngryKeystones: disabled
 AstralKeys: disabled
 SharedMedia_Naowh: enabled
 AddonFactory: disabled
@@ -126,7 +126,7 @@ DataStore_Reputations: disabled
 DataStore_Spells: disabled
 DataStore_Stats: disabled
 DataStore_Talents: disabled
-DejaCharacterStats: disabled
+DejaCharacterStats: enabled
 Details_ExplosiveOrbs: disabled
 Doom_CooldownPulse: disabled
 ElvUI_Libraries: enabled
@@ -171,10 +171,10 @@ RaiderIO_DB_US_M: enabled
 RaiderIO: enabled
 RaiderIO_DB_US_R: enabled
 RaiderIO_DB_US_F: enabled
-Simulationcraft: disabled
+Simulationcraft: enabled
 TalentLoadoutsEx: disabled
 TomTom: disabled
-TrueStatValues: disabled
+TrueStatValues: enabled
 TwitchEmotes: disabled
 WagoAppCompanion: disabled
 WarpDeplete: disabled

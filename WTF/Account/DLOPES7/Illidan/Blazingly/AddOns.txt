@@ -76,7 +76,7 @@ ElvUI_Options: enabled
 LittleWigs_MistsOfPandaria: enabled
 Immersion: disabled
 AstralKeys: disabled
-AngryKeystones: enabled
+AngryKeystones: disabled
 AngryWorldQuests: disabled
 BetterWardrobe_SourceData: disabled
 BigWigs_VaultOfTheIncarnates: enabled
@@ -84,7 +84,7 @@ LittleWigs_Cataclysm: enabled
 BigWigs_Aberrus: enabled
 ExRT: disabled
 BigWigs_Amirdrassil: enabled
-DejaCharacterStats: disabled
+DejaCharacterStats: enabled
 PGFinder: disabled
 PremadeGroupsFilter: enabled
 BigWigs_DragonIsles: enabled
@@ -174,7 +174,7 @@ RaiderIO_DB_US_M: enabled
 RaiderIO: enabled
 RaiderIO_DB_US_R: enabled
 RaiderIO_DB_US_F: enabled
-Simulationcraft: disabled
+Simulationcraft: enabled
 TalentLoadoutsEx: disabled
 TomCats: disabled
 TomTom: disabled

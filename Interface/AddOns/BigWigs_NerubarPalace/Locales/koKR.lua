@@ -17,7 +17,6 @@ end
 
 L = BigWigs:NewBossLocale("Rasha'nan", "koKR")
 if L then
-	L.rolling_acid = "파도"
 	L.spinnerets_strands = "가닥"
 	L.enveloping_webs = "거미줄"
 	L.enveloping_web_say = "거미줄" -- Singular of Webs
@@ -50,14 +49,35 @@ end
 L = BigWigs:NewBossLocale("The Silken Court", "koKR")
 if L then
 	L.skipped_cast = "건너뛴 %s (%d)"
+	L.intermission_trigger = "힘의 정점!" -- Skeinspinner Takazj 100 energy yell
 
 	L.venomous_rain = "맹독의 비"
 	L.burrowed_eruption = "잠복"
 	L.stinging_swarm = "디버프 해제"
 	L.strands_of_reality = "전방 [S]" -- S for Skeinspinner Takazj
+	L.strands_of_reality_message = "전방 [타래직공 타카즈]"
 	L.impaling_eruption = "전방 [A]" -- A for Anub'arash
+	L.impaling_eruption_message = "전방 [아눕아라쉬]"
 	L.entropic_desolation = "밖으로 도망"
 	L.cataclysmic_entropy = "큰 폭발" -- Interrupt before it casts
 	L.spike_eruption = "가시"
 	L.unleashed_swarm = "무리"
+	L.void_degeneration = "파란 구슬"
+	L.burning_rage = "빨간 구슬"
+end
+
+L = BigWigs:NewBossLocale("Queen Ansurek", "koKR")
+if L then
+	L.stacks_onboss = "넴드 %dx %s"
+
+	L.reactive_toxin = "독소"
+	L.reactive_toxin_say = "독소"
+	L.venom_nova = "회오리"
+	L.web_blades = "칼날"
+	L.silken_tomb = "이동 불가" -- Raid being rooted in place
+	L.wrest = "끌어당김"
+	L.royal_condemnation = "족쇄"
+	L.frothing_gluttony = "고리"
+
+	L.stage_two_end_message_storymode = "포털로 이동"
 end

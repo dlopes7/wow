@@ -1,10 +1,15 @@
 # BigWigs
 
-## [v358.4](https://github.com/BigWigsMods/BigWigs/tree/v358.4) (2024-09-13)
-[Full Changelog](https://github.com/BigWigsMods/BigWigs/compare/v358.3...v358.4) [Previous Releases](https://github.com/BigWigsMods/BigWigs/releases)
+## [v366](https://github.com/BigWigsMods/BigWigs/tree/v366) (2024-10-10)
+[Full Changelog](https://github.com/BigWigsMods/BigWigs/compare/v365.3...v366) [Previous Releases](https://github.com/BigWigsMods/BigWigs/releases)
 
-- Plugins/BossBlock: Support more toasts  
-- Plugins/Nameplates: Fix comment typo  
-- NerubarPalace/Ovinax: Fix a wrong spellname  
-- NerubarPalace/Ovinax: Fix Experimental Dosage bars  
-- Update zhCN (#1819)  
+- Core/BossPrototype: Parse any nameplates that may already be showing on the first call to `RegisterEngageMob`  
+- Core/BossPrototype: Add `:RegisterEngageMob` (#1872)  
+- Update option files  
+- bump version  
+- Options/Sharing: Make sure we store values set to false  
+- Loader: Remove a locale print  
+- Update ptBR (#1876)  
+- Options/Sharing: Prevent a potential error when importing an older string that lacks newer settings  
+- KhazAlgar/Kordac: Import module  
+- KhazAlgar/Orta: Fix a sound  

@@ -273,6 +273,7 @@ do --this can save some main file locals
 			z['Player-5-0E8301B7']		= itsElv -- Mage
 			z['Player-5-0E885971']		= itsElv -- Shaman
 			-- Repooc
+			z['Dapooc-Spirestone']		= itsPooc	-- [Alliance] Druid
 			z['Sifpooc-Stormrage']		= itsPooc	-- [Alliance] DH
 			z['Fragmented-Stormrage']	= itsPooc	-- [Alliance] Warlock
 			z['Sifupooc-Stormrage']		= itsPooc	-- [Alliance] Monk
@@ -386,15 +387,15 @@ do --this can save some main file locals
 		end
 	elseif portal == 'EU' then
 		if E.Classic then
-			-- Luckyone Seasonal (5826: Lone Wolf EU, 5827: Living Flame EU)
-			z['Player-5826-0202765F']	= ElvGreen -- [Alliance] Hunter
-			z['Player-5826-020F7F10']	= ElvGreen -- [Alliance] Paladin
-			z['Player-5826-02172E79']	= ElvGreen -- [Alliance] Warlock
-			z['Player-5826-0234253E']	= ElvGreen -- [Alliance] Mage
-			z['Player-5826-02342508']	= ElvGreen -- [Alliance] Priest
-			z['Player-5826-023424EF']	= ElvGreen -- [Alliance] Druid
-			z['Player-5826-02342520']	= ElvGreen -- [Alliance] Rogue
-			z['Player-5826-02342556']	= ElvGreen -- [Alliance] Warrior
+			-- Luckyone Seasonal (5827: Living Flame EU)
+			z['Player-5827-0273D732']	= ElvGreen -- [Alliance] Hunter
+			z['Player-5827-0273D63E']	= ElvGreen -- [Alliance] Paladin
+			z['Player-5827-0273D63D']	= ElvGreen -- [Alliance] Warlock
+			z['Player-5827-0273D649']	= ElvGreen -- [Alliance] Mage
+			z['Player-5827-0273D661']	= ElvGreen -- [Alliance] Priest
+			z['Player-5827-0273D65D']	= ElvGreen -- [Alliance] Druid
+			z['Player-5827-0273D63F']	= ElvGreen -- [Alliance] Rogue
+			z['Player-5827-0273D638']	= ElvGreen -- [Alliance] Warrior
 			z['Player-5827-02331C4B']	= ElvGreen -- [Horde] Shaman
 			-- Luckyone Hardcore (5261: Nek'Rosh)
 			z['Player-5261-01ADAC25']	= ElvGreen -- [Horde] Rogue
@@ -3652,11 +3653,11 @@ function CH:FCF_Tab_OnClick(button)
 
 		_G.CURRENT_CHAT_FRAME_ID = self:GetID()
 
-		if E.Retail then
-			_G.FCF_Tab_SetupMenu(self)
-		else
+		if E.Cata then
 			local tabName = self:GetName()
 			_G.ToggleDropDownMenu(1, nil, _G[tabName..'DropDown'], tabName, 0, 0)
+		else
+			_G.FCF_Tab_SetupMenu(self)
 		end
 	elseif button == 'MiddleButton' then
 		if (E.Retail or (chat ~= _G.DEFAULT_CHAT_FRAME and not _G.IsCombatLog(chat))) and not _G.IsBuiltinChatWindow(chat) then -- Dynamic between classic/wrath/retail ~Simpy

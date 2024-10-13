@@ -196,3 +196,4 @@ TomTom: disabled
 WorldMarkerKeyBindings: disabled
 LittleWigs_Dragonflight: enabled
 BigWigs_Dragonflight: enabled
+BigWigs_KhazAlgar: enabled

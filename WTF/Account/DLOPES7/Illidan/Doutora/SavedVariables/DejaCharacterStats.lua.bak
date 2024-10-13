@@ -1,5 +1,5 @@
 
 DejaCharacterStatsDBPC = {
-	["dcsdefaults"] = {
-	},
+["dcsdefaults"] = {
+},
 }

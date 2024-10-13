@@ -215,11 +215,11 @@ do -- Add options for bars
 					name = L["Button Groups"],
 					args = {
 						include = {
-							order = 15,
+							order = 16,
 							type = "input",
 							name = L["Button Groups"],
 							desc = format(
-								"%s %s\n" .. strrep("\n%s", 30),
+								"%s %s\n" .. strrep("\n%s", 33),
 								L["Set the type and order of button groups."],
 								L["You can separate the groups with a comma."],
 								desc("QUEST", L["Quest Items"]),
@@ -252,6 +252,8 @@ do -- Add options for bars
 									)
 								),
 								desc("MAGEFOOD", format("%s (%s)|r", L["Food"], L["Crafted by mage"])),
+								desc("FISHING", format("%s (%s)", L["Fishing"], L["All Versions"])),
+								desc("FISHINGTWW", format("%s |cffffdd57[%s]|r", L["Fishing"], L["The War Within"])),
 								desc("BANNER", L["Banners"]),
 								desc("UTILITY", L["Utilities"]),
 								desc("OPENABLE", L["Openable Items"]),
@@ -259,7 +261,8 @@ do -- Add options for bars
 								desc("SEEDS", L["Dream Seeds"]),
 								desc("BIGDIG", L["Big Dig"]),
 								desc("MOPREMIX", L["MoP Remixed Items"]),
-								desc("DELVE", L["Delves"])
+								desc("DELVE", L["Delves"]),
+								desc("HOLIDAY", L["Holiday Reward Boxes"])
 							),
 							width = "full",
 						},

@@ -166,3 +166,4 @@ OPie_Classic: disabled
 Blizzard_CombatText: enabled
 LittleWigs_Dragonflight: enabled
 BigWigs_Dragonflight: enabled
+BigWigs_KhazAlgar: enabled

@@ -1,28 +1,28 @@
 
 ElvCharacterDB = {
-	["ConvertKeybindings"] = true,
-	["ChatEditHistory"] = {
-		"/p ME, HUNTER, DH, RUGOE", -- [1]
-		"/p yo I dont need it", -- [2]
-		"/p sorry just saw the message", -- [3]
-		"/p im in valdraken", -- [4]
-		"/raid no one has ever died for lack of HPS in this raid on heroic difficulty", -- [5]
-		"/raid ever", -- [6]
-		"/raid blue", -- [7]
-		"/raid nice", -- [8]
-		"/key", -- [9]
-		"/p yoo", -- [10]
-		"/p Ill PI the lock", -- [11]
-		"/p ops", -- [12]
-		"/p mb just saw the chat", -- [13]
-		"/p I got ya", -- [14]
-		"/p skim get loickl", -- [15]
-		"/p let lock bait", -- [16]
-		"/p stack o nstalker please", -- [17]
-		"/raid oh why could it be", -- [18]
-		"/raid what a mistery", -- [19]
-		"/raid because you dont need the dumb legendarya", -- [20]
-	},
-	["ChatHistoryLog"] = {
-	},
+["ConvertKeybindings"] = true,
+["ChatEditHistory"] = {
+"/p I got ya",
+"/p skim get loickl",
+"/p let lock bait",
+"/p stack o nstalker please",
+"/raid oh why could it be",
+"/raid what a mistery",
+"/raid because you dont need the dumb legendarya",
+"/p guuuuys",
+"/p you can stun and damage them with that circle aoe btw",
+"/p mage wetf..",
+"/p please AWAYS be on top of me",
+"/p bait this shit properly",
+"/s STAY",
+"/p YOU NEED A COOLDOWN FOR THAT TANK",
+"/run local function _(a)if a.regionType==\"model\"then return 1 end for i,s in pairs(a.subRegions or{})do if s.type==\"submodel\"then return 1 end end end for n,a in pairs(WeakAurasSaved.displays)do if _(a)then print(n)end end",
+"/omnicd",
+"/wa",
+"/plater",
+"/i use coioldowns on trash bois",
+"/i we have 9 minutes",
+},
+["ChatHistoryLog"] = {
+},
 }

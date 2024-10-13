@@ -1,4 +1,4 @@
--- Generated from CurseForge on Sat Sep 14 06:41:16 UTC 2024
+-- Generated from CurseForge on Sun Oct 13 07:38:54 UTC 2024
 local ns = select(2, ...) ---@class ns @The addon namespace.
 
 if ns:IsSameLocale("zhCN") then
@@ -21,8 +21,7 @@ L["API_DEPRECATED_WITH"] = "|cffFF0000Warning!|r 插件 |cffFFFFFF%s|r 正在调
 L["API_INVALID_DATABASE"] = "|cffFF0000警告!|r 在|cffffffff%s|r检测到无效的 Raider.IO 数据库， 请在Raider.IO的客户端刷新所有支持的地区以及阵营数据库, 或者手动安装所有插件。"
 L["AUTO_COMBATLOG"] = "自动在团队副本&地下城里打开战斗日志"
 L["AUTO_COMBATLOG_DESC"] = "在进入或离开支持的团队副本&地下城时自动打开和关闭战斗日志"
---[[Translation missing --]]
---[[ L["AUTO_COMBATLOG_DISABLED_DESC"] = ""--]] 
+L["AUTO_COMBATLOG_DISABLED_DESC"] = "一名时空奔行者禁用了战斗日志"
 L["BEST_FOR_DUNGEON"] = "最佳地下城 "
 L["BEST_RUN"] = "最高记录 "
 L["BEST_SCORE"] = "最高大秘境分数 (%s)"
@@ -65,23 +64,19 @@ L["DISABLE_RWF_MODE_RELOAD"] = "你正在禁用冲击世界首杀模式。点击
 L["DPS"] = "伤害输出"
 L["DUNGEON_SHORT_NAME_AA"] = "艾杰斯亚学院"
 L["DUNGEON_SHORT_NAME_AD"] = "阿塔达萨"
---[[Translation missing --]]
---[[ L["DUNGEON_SHORT_NAME_ARAK"] = ""--]] 
+L["DUNGEON_SHORT_NAME_ARAK"] = "回响之城"
 L["DUNGEON_SHORT_NAME_AV"] = "碧蓝魔馆"
 L["DUNGEON_SHORT_NAME_BH"] = "蕨皮山谷"
 L["DUNGEON_SHORT_NAME_BRH"] = "黑鸦堡垒"
 L["DUNGEON_SHORT_NAME_COS"] = "群星庭院"
---[[Translation missing --]]
---[[ L["DUNGEON_SHORT_NAME_COT"] = ""--]] 
---[[Translation missing --]]
---[[ L["DUNGEON_SHORT_NAME_DAWN"] = ""--]] 
+L["DUNGEON_SHORT_NAME_COT"] = "千丝之城"
+L["DUNGEON_SHORT_NAME_DAWN"] = "破晨号"
 L["DUNGEON_SHORT_NAME_DHT"] = "黑心林地"
 L["DUNGEON_SHORT_NAME_DOS"] = "彼界"
 L["DUNGEON_SHORT_NAME_EB"] = "永茂林地"
 L["DUNGEON_SHORT_NAME_FALL"] = "永恒：陨落"
 L["DUNGEON_SHORT_NAME_FH"] = "自由镇"
---[[Translation missing --]]
---[[ L["DUNGEON_SHORT_NAME_GB"] = ""--]] 
+L["DUNGEON_SHORT_NAME_GB"] = "格瑞姆巴托"
 L["DUNGEON_SHORT_NAME_GD"] = "恐轨车站"
 L["DUNGEON_SHORT_NAME_GMBT"] = "集市（后三）"
 L["DUNGEON_SHORT_NAME_HOA"] = "赎罪大厅"
@@ -99,12 +94,10 @@ L["DUNGEON_SHORT_NAME_RISE"] = "永恒：崛起"
 L["DUNGEON_SHORT_NAME_RLP"] = "红玉新生法池"
 L["DUNGEON_SHORT_NAME_SBG"] = "影月墓地"
 L["DUNGEON_SHORT_NAME_SD"] = "赤红深渊"
---[[Translation missing --]]
---[[ L["DUNGEON_SHORT_NAME_SIEGE"] = ""--]] 
+L["DUNGEON_SHORT_NAME_SIEGE"] = "围攻"
 L["DUNGEON_SHORT_NAME_SOA"] = "晋升高塔"
 L["DUNGEON_SHORT_NAME_STRT"] = "集市（前五）"
---[[Translation missing --]]
---[[ L["DUNGEON_SHORT_NAME_SV"] = ""--]] 
+L["DUNGEON_SHORT_NAME_SV"] = "矶石宝库"
 L["DUNGEON_SHORT_NAME_TJS"] = "青龙寺"
 L["DUNGEON_SHORT_NAME_TOP"] = "伤逝剧场"
 L["DUNGEON_SHORT_NAME_TOTT"] = "潮汐王座"
@@ -310,22 +303,14 @@ L["RAID_BOSS_ICC_6"] = "腐面"
 L["RAID_BOSS_ICC_7"] = "普崔塞德教授"
 L["RAID_BOSS_ICC_8"] = "鲜血王子议会"
 L["RAID_BOSS_ICC_9"] = "鲜血女王兰娜瑟尔"
---[[Translation missing --]]
---[[ L["RAID_BOSS_NP_1"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_NP_2"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_NP_3"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_NP_4"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_NP_5"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_NP_6"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_NP_7"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_NP_8"] = ""--]] 
+L["RAID_BOSS_NP_1"] = "乌格拉克斯"
+L["RAID_BOSS_NP_2"] = "血缚恐魔"
+L["RAID_BOSS_NP_3"] = "席克兰"
+L["RAID_BOSS_NP_4"] = "拉夏南"
+L["RAID_BOSS_NP_5"] = "欧维纳克斯"
+L["RAID_BOSS_NP_6"] = "节点女亲王"
+L["RAID_BOSS_NP_7"] = "流丝之庭"
+L["RAID_BOSS_NP_8"] = "安苏雷克女王"
 L["RAID_BOSS_RS_1"] = "海里昂"
 L["RAID_BOSS_SFO_1"] = "警戒卫士"
 L["RAID_BOSS_SFO_10"] = "莱葛隆"
@@ -376,8 +361,7 @@ L["RAID_DIFFICULTY_SUFFIX_NORMAL10"] = "10PT"
 L["RAID_DIFFICULTY_SUFFIX_NORMAL25"] = "25PT"
 L["RAID_ENCOUNTERS_DEFEATED_TITLE"] = "已击杀团队副本首领"
 L["RAID_ICC"] = "冰冠堡垒"
---[[Translation missing --]]
---[[ L["RAID_NP"] = ""--]] 
+L["RAID_NP"] = "尼鲁巴尔王宫"
 L["RAID_RS"] = "红玉圣所"
 L["RAID_TOTFW"] = "风神王座"
 L["RAIDERIO_AVERAGE_PLAYER_SCORE"] = "能限时%s层的平均分数"

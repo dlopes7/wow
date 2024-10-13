@@ -43,6 +43,10 @@ local ejTable = Details222.EncounterJournalDump
 
 ---@return details_encounterinfo?
 function Details:GetEncounterInfo(id)
+    if (not Details222.EJCache.CacheCreated) then
+        Details222.EJCache.CreateEncounterJournalDump()
+    end
+
     ---@type details_encounterinfo
     local encounterData = Details222.EJCache.CacheEncountersBy_EncounterId[id]
     if (encounterData) then
@@ -63,6 +67,14 @@ end
 ---@param id instanceid|instancename|mapid
 ---@return details_instanceinfo?
 function Details:GetInstanceInfo(id)
+    if (not id) then
+        return
+    end
+
+    if (not Details222.EJCache.CacheCreated) then
+        Details222.EJCache.CreateEncounterJournalDump()
+    end
+
     if (id == 463) then --fall
         id = 1209
     end
@@ -84,6 +96,10 @@ function Details:GetInstanceInfo(id)
     end
 end
 
+function Details:GetInstances()
+
+end
+
 function Details:DumpInstanceInfo()
     dumpt(Details222.EJCache.CacheRaidData_ByInstanceId)
 end
@@ -98,7 +114,21 @@ function Details:GetInstanceEJID(...)
     end
 end
 
+function Details222.EJCache.IsCurrentContent(id)
+    return Details222.EJCache.CurrentContent[id]
+end
+
 function Details222.EJCache.CreateEncounterJournalDump()
+    --if the cache has been already created, then return
+    if (Details222.EJCache.CacheCreated) then
+        return
+    else
+        Details222.EJCache.CacheCreated = true
+    end
+
+    --this table store ids which indicates the bossId, encounterId or mapId is a content from the current expansion
+    Details222.EJCache.CurrentContent = {}
+
     Details222.EJCache.CacheRaidData_ByInstanceId = {}
     Details222.EJCache.CacheRaidData_ByInstanceName = {} --this is localized name
     Details222.EJCache.CacheRaidData_ByMapId = {} --retrivied from GetInstanceInfo()
@@ -185,6 +215,11 @@ function Details222.EJCache.CreateEncounterJournalDump()
                     id_to_journalInstanceID[instanceName] = journalInstanceID
                     id_to_journalInstanceID[instanceID] = journalInstanceID
 
+                    Details222.EJCache.CurrentContent[journalInstanceID] = true
+                    Details222.EJCache.CurrentContent[dungeonUiMapID] = true
+                    Details222.EJCache.CurrentContent[instanceID] = true
+                    Details222.EJCache.CurrentContent[instanceName] = true
+
                     --select the raid instance, this allow to retrieve data about the encounters of the instance
                     EJ_SelectInstance(journalInstanceID)
 
@@ -233,6 +268,10 @@ function Details222.EJCache.CreateEncounterJournalDump()
                                 journalEncounterId = journalEncounterID,
                                 journalInstanceId = journalInstanceID,
                             }
+
+                            Details222.EJCache.CurrentContent[encounterName] = true
+                            Details222.EJCache.CurrentContent[journalEncounterID] = true
+                            Details222.EJCache.CurrentContent[dungeonEncounterID] = true
 
                             local journalEncounterCreatureId, creatureName, creatureDescription, creatureDisplayID, iconImage, uiModelSceneID = EJ_GetCreatureInfo(1, journalEncounterID)
                             if (journalEncounterCreatureId) then

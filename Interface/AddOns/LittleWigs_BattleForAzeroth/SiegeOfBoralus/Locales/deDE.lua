@@ -16,6 +16,8 @@ if L then
 	L.pillager = "Brandschatzer der Bilgeratten"
 	L.tempest = "Orkan der Bilgeratten"
 	L.invader = "Aschenwindeindringling"
+
+	L.gate_open_desc = "Zeigt einen Timer wann der Wellenzähmer von Kul Tiras das Tor hinter Schreckenskapitänin Luebke öffnet."
 end
 
 L = BigWigs:NewBossLocale("Dread Captain Lockwood", "deDE")

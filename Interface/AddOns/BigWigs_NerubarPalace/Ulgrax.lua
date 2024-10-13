@@ -40,6 +40,7 @@ end
 function mod:GetOptions()
 	return {
 		"stages",
+		"berserk",
 
 		-- Gleeful Brutality
 		{434803, "CASTBAR", "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Carnivorous Contest (Soak)
@@ -49,7 +50,7 @@ function mod:GetOptions()
 			439419, -- Stalker Netting
 		{435138, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Digestive Acid
 		435136, -- Venomous Lash
-		434697, -- Brutal Crush
+		{434697, "TANK"}, -- Brutal Crush
 			{434705, "TANK"}, -- Tenderized
 
 		-- Feeding Frenzy
@@ -79,7 +80,9 @@ function mod:OnBossEnable()
 	-- Gleeful Brutality
 	self:Log("SPELL_CAST_START", "BrutalCrush", 434697)
 	self:Log("SPELL_AURA_APPLIED", "TenderizedApplied", 434705)
+	self:Log("SPELL_AURA_APPLIED_DOSE", "TenderizedApplied", 434705)
 	self:Log("SPELL_CAST_SUCCESS", "CarnivorousContest", 434803)
+	self:RegisterEvent("CHAT_MSG_RAID_BOSS_WHISPER") -- Carnivorous Contest target
 	-- self:Log("SPELL_AURA_APPLIED", "CarnivorousContestApplied", 434803) -- using cast target
 	self:Log("SPELL_AURA_REMOVED", "CarnivorousContestRemoved", 434803)
 	self:Log("SPELL_AURA_APPLIED", "CarnivorousContestPullApplied", 434778)
@@ -121,6 +124,7 @@ function mod:OnEngage()
 	self:Bar(435138, 15.0, CL.count:format(self:SpellName(435138), digestiveAcidCount)) -- Digestive Acid
 	self:Bar(434803, 34.0, CL.count:format(CL.soak, carnivorousContestCount)) -- Carnivorous Contest
 	self:Bar("stages", 90.0, CL.stage:format(2), 445123) -- Hulking Crash (Stage 2)
+	self:Berserk(601, true)
 end
 
 --------------------------------------------------------------------------------
@@ -161,36 +165,53 @@ function mod:BrutalCrush(args)
 	self:PlaySound(args.spellId, "alert")
 	brutalCrushCount = brutalCrushCount + 1
 
-	local timer = { 3.0, 15.0, 15.0, 19.0, 15.0 }
+	local timer = { 3.0, 15.0, 15.0, 19.0, 15.0, 0 }
 	self:Bar(args.spellId, timer[brutalCrushCount], CL.count:format(args.spellName, brutalCrushCount))
 end
 
 function mod:TenderizedApplied(args)
 	self:TargetMessage(args.spellId, "purple", args.destName)
-	self:PlaySound(args.spellId, "warning") -- tankswap
+	if self:Me(args.destGUID) then
+		self:PlaySound(args.spellId, "alarm")
+	else
+		local unit = self:UnitTokenFromGUID(args.sourceGUID)
+		if self:Tank() and unit and not self:Tanking(unit) then
+			self:PlaySound(args.spellId, "warning") -- tankswap
+		end
+	end
 end
 
 function mod:CarnivorousContest(args)
 	self:StopBar(CL.count:format(CL.soak, carnivorousContestCount))
 	if UnitInRaid(args.destName) then -- XXX not targetting [DNT] Tug of War Stalker 1
 		self:TargetMessage(args.spellId, "orange", args.destName, CL.count:format(CL.soak, carnivorousContestCount))
-		self:TargetBar(args.spellId, 8, args.destName)
+		self:TargetBar(args.spellId, 8, args.destName, CL.soak)
 	else
 		self:Message(args.spellId, "orange", CL.casting:format(CL.count:format(CL.soak, carnivorousContestCount)))
-		self:CastBar(args.spellId, 8)
+		self:CastBar(args.spellId, 8, CL.soak)
 	end
 	carnivorousContestCount = carnivorousContestCount + 1
 	if carnivorousContestCount < 3 then
 		self:Bar(args.spellId, 36.0, CL.count:format(CL.soak, carnivorousContestCount))
 	end
 
-	if self:Me(args.destGUID) then
-		self:PersonalMessage(args.spellId)
-		self:PlaySound(args.spellId, "warning")
-		self:Yell(args.spellId, CL.soak, nil, "Soak")
-		self:YellCountdown(args.spellId, 8)
-	else
+	-- if self:Me(args.destGUID) then
+	-- 	self:PersonalMessage(args.spellId, nil, CL.soak)
+	-- 	self:PlaySound(args.spellId, "warning")
+	-- 	self:Yell(args.spellId, CL.soak, nil, "Soak")
+	-- 	self:YellCountdown(args.spellId, 8)
+	-- else
 		self:PlaySound(args.spellId, "alert") -- soak
+	-- end
+end
+
+function mod:CHAT_MSG_RAID_BOSS_WHISPER(_, msg)
+	-- |TInterface\\ICONS\\INV_Misc_Web_01.blp:20|t  Ulgrax engages you in a |cFFFF0000|Hspell:434776|h[Carnivorous Contest]|h|r!
+	if msg:find("spell:434776", nil, true) then
+		self:PersonalMessage(434803, nil, CL.soak)
+		self:Yell(434803, CL.soak, nil, "Soak")
+		self:YellCountdown(434803, 8, nil, 6)
+		self:PlaySound(434803, "warning")
 	end
 end
 
@@ -257,7 +278,7 @@ function mod:VenomousLash(args)
 	self:PlaySound(args.spellId, "alert")
 	venomousLashCount = venomousLashCount + 1
 
-	local timer = { 5.0, 25.0, 28.0 }
+	local timer = { 5.0, 25.0, 28.0, 0 }
 	self:Bar(args.spellId, timer[venomousLashCount], CL.count:format(args.spellName, venomousLashCount))
 end
 

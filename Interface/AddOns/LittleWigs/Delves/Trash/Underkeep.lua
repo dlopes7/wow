@@ -34,7 +34,7 @@ function mod:OnRegister()
 	self:SetSpellRename(450714, CL.frontal_cone) -- Jagged Barbs (Frontal Cone)
 end
 
-local autotalk = mod:AddAutoTalkOption(true)
+local autotalk = mod:AddAutoTalkOption(false)
 function mod:GetOptions()
 	return {
 		autotalk,
@@ -65,6 +65,8 @@ function mod:OnBossEnable()
 
 	-- Ascended Webfriar
 	self:Log("SPELL_CAST_START", "GrimweaveOrb", 451913)
+	self:Log("SPELL_AURA_APPLIED", "GrimweaveOrbDamage", 452041)
+	self:Log("SPELL_AURA_REFRESH", "GrimweaveOrbDamage", 452041)
 
 	-- Deepwalker Guardian
 	self:Log("SPELL_CAST_START", "JaggedBarbs", 450714)
@@ -78,6 +80,12 @@ function mod:OnBossEnable()
 
 	-- Web Marauder
 	self:Log("SPELL_CAST_START", "GossamerWebbing", 453149)
+
+	-- also enable the Rares module
+	local raresModule = BigWigs:GetBossModule("Delve Rares", true)
+	if raresModule then
+		raresModule:Enable()
+	end
 end
 
 --------------------------------------------------------------------------------
@@ -87,9 +95,7 @@ end
 -- Autotalk
 
 function mod:GOSSIP_SHOW()
-	local info = self:GetWidgetInfo("delve", 6183)
-	local level = info and tonumber(info.tierText)
-	if (not level or level > 3) and self:GetOption(autotalk) then
+	if self:GetOption(autotalk) then
 		if self:GetGossipID(121502) then -- The Underkeep, start Delve (Weaver's Instructions)
 			-- 121502:|cFF0000FF(Delve)|r <Close the scroll and look for the Weaver's special pheromone to help combat these failed experiments.>
 			self:SelectGossipID(121502)
@@ -104,6 +110,20 @@ function mod:GrimweaveOrb(args)
 	if self:MobId(args.sourceGUID) == 219022 then -- Ascended Webfriar
 		self:Message(args.spellId, "red")
 		self:PlaySound(args.spellId, "alarm")
+	end
+end
+
+do
+	local prev = 0
+	function mod:GrimweaveOrbDamage(args)
+		-- this ability can also be cast by one of the Delve bosses (The Puppetmaster)
+		if self:MobId(args.sourceGUID) == 219022 then -- Ascended Webfriar
+			if self:Me(args.destGUID) and args.time - prev > 1.5 then
+				prev = args.time
+				self:PersonalMessage(451913, "near")
+				self:PlaySound(451913, "underyou")
+			end
+		end
 	end
 end
 

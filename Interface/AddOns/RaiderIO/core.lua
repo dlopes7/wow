@@ -461,7 +461,8 @@ do
                 ["Hulahoops"] = "Raider.IO Cool Kid"
             },
             ["Tichondrius"] = {
-                ["Johnsamdi"] = "Raider.IO Developer"
+                ["Johnsamdi"] = "Raider.IO Developer",
+                ["Vitamiinp"] = "Content Manager of Raider.IO"
             },
             ["Mal'Ganis"] = {
                 ["Qbgosa"] = "Raider.IO Support Dragon"
@@ -3901,8 +3902,8 @@ do
             local milestoneLevelCount = results["keystoneMilestone" .. milestoneLevel] or 0
             if milestoneLevelCount > 0 then
                 local milestoneLabel
-                if i < #keystoneMilestoneLevels - 1 then
-                    milestoneLabel = format(L.TIMED_RUNS_RANGE, milestoneLevel, keystoneMilestoneLevels[i + 1] - 1)
+                if i > 1 then
+                    milestoneLabel = format(L.TIMED_RUNS_RANGE, milestoneLevel, keystoneMilestoneLevels[i - 1] - 1)
                 else
                     milestoneLabel = format(L.TIMED_RUNS_MINIMUM, milestoneLevel)
                 end
@@ -4600,7 +4601,7 @@ do
     ---@param name string @Character name
     ---@param realm string @Realm name
     ---@param overallScore number @Blizzard keystone score directly from the game.
-    ---@param keystoneRuns? MythicPlusRatingMapSummaryRaiderIOExtended[] @Blizzard keystone runs directly from the game.
+    ---@param keystoneRuns? MythicPlusRatingMapSummary[] @Blizzard keystone runs directly from the game.
     function provider:OverrideProfile(name, realm, overallScore, keystoneRuns)
         if type(name) ~= "string" or type(realm) ~= "string" or (type(overallScore) ~= "number" and type(keystoneRuns) ~= "table") then
             return
@@ -4625,21 +4626,20 @@ do
             mythicKeystoneProfile.mplusCurrent.score = overallScore
         end
         if type(keystoneRuns) == "table" and keystoneRuns[1] then
-            local isPlayer = util:IsUnitPlayer(name, realm)
-            local weekDungeons = mythicKeystoneProfile.dungeons
-            local weekDungeonUpgrades = mythicKeystoneProfile.dungeonUpgrades
-            local weekDungeonTimes = mythicKeystoneProfile.dungeonTimes
+            local dungeons = mythicKeystoneProfile.dungeons
+            local dungeonUpgrades = mythicKeystoneProfile.dungeonUpgrades
+            local dungeonTimes = mythicKeystoneProfile.dungeonTimes
             local maxDungeonIndex = 0
             -- local maxDungeonTime = 999
             -- local maxDungeonScore = 0
             local maxDungeonLevel = 0
             local maxDungeonUpgrades = 0
             local maxDungeonRunTimer = 2
-            local needsMaxDungeonUpgrade
+            local dungeonsRequireUpdate ---@type boolean?
             for i = 1, #keystoneRuns do
                 local run = keystoneRuns[i]
-                local dungeonIndex ---@type number|nil
-                local dungeon ---@type Dungeon|nil
+                local dungeonIndex ---@type number?
+                local dungeon ---@type Dungeon?
                 for j = 1, #DUNGEONS do
                     dungeon = DUNGEONS[j]
                     if dungeon.keystone_instance == run.challengeModeID then
@@ -4648,12 +4648,12 @@ do
                     end
                     dungeon = nil
                 end
-                if dungeonIndex and not isPlayer then
+                if dungeonIndex then
                     local runBestRunLevel = run.bestRunLevel
                     local runBestRunDurationMS = run.bestRunDurationMS
                     local runFinishedSuccess = run.finishedSuccess
                     -- local runMapScore = run.mapScore
-                    if dungeonIndex and weekDungeons[dungeonIndex] <= runBestRunLevel then
+                    if dungeonIndex and dungeons[dungeonIndex] <= runBestRunLevel then
                         mythicKeystoneProfile.hasOverrideDungeonRuns = true
                         local _, _, dungeonTimeLimit = C_ChallengeMode.GetMapUIInfo(run.challengeModeID)
                         local goldTimeLimit, silverTimeLimit, bronzeTimeLimit = -1, -1, dungeonTimeLimit
@@ -4672,10 +4672,10 @@ do
                         end
                         local runTimerAsFraction = runSeconds / (dungeonTimeLimit and dungeonTimeLimit > 0 and dungeonTimeLimit or 1) -- convert game timer to a fraction (1 or below is timed, above is depleted)
                         local fractionalTime = runFinishedSuccess and (mythicKeystoneProfile.isEnhanced and runTimerAsFraction or (3 - runNumUpgrades)) or 3 -- the data here depends if we are using client enhanced data or not
-                        needsMaxDungeonUpgrade = true
-                        weekDungeons[dungeonIndex] = runBestRunLevel
-                        weekDungeonUpgrades[dungeonIndex] = runNumUpgrades
-                        weekDungeonTimes[dungeonIndex] = fractionalTime
+                        dungeonsRequireUpdate = true
+                        dungeons[dungeonIndex] = runBestRunLevel
+                        dungeonUpgrades[dungeonIndex] = runNumUpgrades
+                        dungeonTimes[dungeonIndex] = fractionalTime
                         -- if runNumUpgrades > 0 and (runMapScore > maxDungeonScore or (runMapScore == maxDungeonScore and fractionalTime < maxDungeonTime)) then
                         if runNumUpgrades > 0 and (runBestRunLevel > maxDungeonLevel or (runBestRunLevel == maxDungeonLevel and runTimerAsFraction < maxDungeonRunTimer)) then
                             maxDungeonIndex = dungeonIndex ---@type number
@@ -4688,13 +4688,13 @@ do
                     end
                 end
             end
-            if needsMaxDungeonUpgrade then
+            if dungeonsRequireUpdate then
                 mythicKeystoneProfile.maxDungeon = DUNGEONS[maxDungeonIndex]
                 mythicKeystoneProfile.maxDungeonLevel = maxDungeonLevel
                 mythicKeystoneProfile.maxDungeonIndex = maxDungeonIndex
                 mythicKeystoneProfile.maxDungeonUpgrades = maxDungeonUpgrades
+                ApplySortedDungeons(mythicKeystoneProfile)
             end
-            table.sort(mythicKeystoneProfile.sortedDungeons, SortDungeons)
         end
         if mythicKeystoneProfile.hasOverrideScore or mythicKeystoneProfile.hasOverrideDungeonRuns then
             mythicKeystoneProfile.blocked = nil
@@ -4794,46 +4794,10 @@ do
         return cache
     end
 
-    ---@class MythicPlusRatingSummaryRaiderIOExtended : MythicPlusRatingSummary
-    ---@field public runs MythicPlusRatingMapSummaryRaiderIOExtended[]
-
-    ---@class MythicPlusRatingMapSummaryRaiderIOExtended : MythicPlusRatingMapSummary
-    ---@field public fortified? MythicPlusAffixScoreInfo
-    ---@field public tyrannical? MythicPlusAffixScoreInfo
-
-    ---@param bioSummary MythicPlusRatingSummary
-    ---@return MythicPlusRatingSummaryRaiderIOExtended bioSummaryExtended
-    local function ExpandSummaryWithChallengeModeMapData(bioSummary)
-        local mapIDs = C_ChallengeMode.GetMapTable()
-        for _, mapID in ipairs(mapIDs) do
-            local affixScores ---@type MythicPlusAffixScoreInfo[]?
-            local bestOverAllScore ---@type number?
-            local mapRun ---@type MythicPlusRatingMapSummaryRaiderIOExtended?
-            for _, run in ipairs(bioSummary.runs) do
-                if mapID == run.challengeModeID then
-                    affixScores, bestOverAllScore = C_MythicPlus.GetSeasonBestAffixScoreInfoForMap(mapID)
-                    mapRun = run ---@diagnostic disable-line: cast-local-type
-                    break
-                end
-            end
-            if affixScores and mapRun then
-                for _, data in pairs(affixScores) do
-                    if data.name == "Fortified" then
-                        mapRun.fortified = data
-                    elseif data.name == "Tyrannical" then
-                        mapRun.tyrannical = data
-                    end
-                end
-            end
-        end
-        return bioSummary ---@diagnostic disable-line: return-type-mismatch
-    end
-
     local function OverridePlayerData()
         local bioSummary = C_PlayerInfo.GetPlayerMythicPlusRatingSummary("player")
         if bioSummary and bioSummary.currentSeasonScore then
-            local bioSummaryExtended = ExpandSummaryWithChallengeModeMapData(bioSummary)
-            provider:OverrideProfile(ns.PLAYER_NAME, ns.PLAYER_REALM, bioSummaryExtended.currentSeasonScore, bioSummaryExtended.runs)
+            provider:OverrideProfile(ns.PLAYER_NAME, ns.PLAYER_REALM, bioSummary.currentSeasonScore, bioSummary.runs)
         end
     end
 
@@ -8046,6 +8010,19 @@ if IS_RETAIL then
         return floor(ms/1000 + 0.5)
     end
 
+    ---@param ms1 number?
+    ---@param ms2 number?
+    ---@return number deltaRoundedSeconds
+    local function SafelyConvertDeltaMillisecondsToSeconds(ms1, ms2)
+        if not ms1 then
+            ms1 = 0
+        end
+        if not ms2 then
+            ms2 = 0
+        end
+        return ConvertMillisecondsToSeconds(ms1 - ms2)
+    end
+
     ---@alias ReplaySplitStyle
     ---|"NONE"
     ---|"NONE_COLORLESS"
@@ -8280,12 +8257,12 @@ if IS_RETAIL then
                 local delta
                 local comparisonDelta
                 if timing == "BOSS" then
-                    delta = ConvertMillisecondsToSeconds(liveBoss.killed - liveBoss.killedStart)
-                    comparisonDelta = ConvertMillisecondsToSeconds(replayBoss and replayBoss.killed - replayBoss.killedStart or 0)
+                    delta = SafelyConvertDeltaMillisecondsToSeconds(liveBoss.killed, liveBoss.killedStart)
+                    comparisonDelta = SafelyConvertDeltaMillisecondsToSeconds(replayBoss and replayBoss.killed, replayBoss.killedStart)
                 else
                     local prevLiveBoss, prevReplayBoss = self:GetBosses(self.index - 1)
-                    delta = ConvertMillisecondsToSeconds(liveBoss.killed - (prevLiveBoss and prevLiveBoss.killed or 0))
-                    comparisonDelta = ConvertMillisecondsToSeconds(replayBoss.killed - (prevReplayBoss and prevReplayBoss.killed or 0))
+                    delta = SafelyConvertDeltaMillisecondsToSeconds(liveBoss.killed, prevLiveBoss and prevLiveBoss.killed)
+                    comparisonDelta = SafelyConvertDeltaMillisecondsToSeconds(replayBoss.killed, prevReplayBoss and prevReplayBoss.killed)
                 end
                 -- HOTFIX: handles the special case where `ENCOUNTER_START` was never called, but we know about it because the value is `false`, and that means that the boss was defeated (this bug will be resolved in 10.1.7)
                 if timing == "BOSS" and delta <= 0 then
@@ -8294,7 +8271,7 @@ if IS_RETAIL then
                     self.InfoL:SetFormattedText("%s\n%s", liveBoss.killedText, SecondsToTimeTextCompared(delta, comparisonDelta, "PARENTHESIS"))
                 end
             elseif liveBoss and liveBoss.combat then
-                local delta = ConvertMillisecondsToSeconds(timerMS - liveBoss.combatStart)
+                local delta = SafelyConvertDeltaMillisecondsToSeconds(timerMS, liveBoss.combatStart)
                 self.InfoL:SetText(SecondsToTimeText(delta, "NONE_YELLOW"))
             else
                 self.InfoL:SetText("")
@@ -8302,15 +8279,15 @@ if IS_RETAIL then
             if isReplayBossDead then
                 local delta
                 if timing == "BOSS" then
-                    delta = ConvertMillisecondsToSeconds(replayBoss.killed - replayBoss.killedStart)
+                    delta = SafelyConvertDeltaMillisecondsToSeconds(replayBoss.killed, replayBoss.killedStart)
                 else
                     local _, prevReplayBoss = self:GetBosses(self.index - 1)
                     delta = prevReplayBoss and prevReplayBoss.killed or 0
-                    delta = ConvertMillisecondsToSeconds(replayBoss.killed - delta)
+                    delta = SafelyConvertDeltaMillisecondsToSeconds(replayBoss.killed, delta)
                 end
                 self.InfoR:SetFormattedText("%s\n%s", replayBoss.killedText, SecondsToTimeText(delta, "PARENTHESIS", true))
             elseif replayBoss and replayBoss.combat then
-                local delta = ConvertMillisecondsToSeconds(timerMS - replayBoss.combatStart)
+                local delta = SafelyConvertDeltaMillisecondsToSeconds(timerMS, replayBoss.combatStart)
                 self.InfoR:SetText(SecondsToTimeText(delta, "NONE_YELLOW"))
             else
                 self.InfoR:SetText("")

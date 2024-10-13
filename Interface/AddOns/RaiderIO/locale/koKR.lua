@@ -1,4 +1,4 @@
--- Generated from CurseForge on Sat Sep 14 06:41:08 UTC 2024
+-- Generated from CurseForge on Sun Oct 13 07:38:49 UTC 2024
 local ns = select(2, ...) ---@class ns @The addon namespace.
 
 if ns:IsSameLocale("koKR") then
@@ -91,23 +91,19 @@ L["DISABLE_DEBUG_MODE_RELOAD"] = [=[귀하는 디버그 모드를 비활성화�
 L["DPS"] = "|cffFF3636공격전담|r"
 L["DUNGEON_SHORT_NAME_AA"] = "대학"
 L["DUNGEON_SHORT_NAME_AD"] = "아탈"
---[[Translation missing --]]
---[[ L["DUNGEON_SHORT_NAME_ARAK"] = ""--]] 
+L["DUNGEON_SHORT_NAME_ARAK"] = "아라카라"
 L["DUNGEON_SHORT_NAME_AV"] = "하늘빛"
 L["DUNGEON_SHORT_NAME_BH"] = "담쟁이"
 L["DUNGEON_SHORT_NAME_BRH"] = "검떼"
 L["DUNGEON_SHORT_NAME_COS"] = "별궁"
---[[Translation missing --]]
---[[ L["DUNGEON_SHORT_NAME_COT"] = ""--]] 
---[[Translation missing --]]
---[[ L["DUNGEON_SHORT_NAME_DAWN"] = ""--]] 
+L["DUNGEON_SHORT_NAME_COT"] = "실타래"
+L["DUNGEON_SHORT_NAME_DAWN"] = "새인호"
 L["DUNGEON_SHORT_NAME_DHT"] = "어숲"
 L["DUNGEON_SHORT_NAME_DOS"] = "저편"
 L["DUNGEON_SHORT_NAME_EB"] = "상록숲"
 L["DUNGEON_SHORT_NAME_FALL"] = "몰락"
 L["DUNGEON_SHORT_NAME_FH"] = "자유"
---[[Translation missing --]]
---[[ L["DUNGEON_SHORT_NAME_GB"] = ""--]] 
+L["DUNGEON_SHORT_NAME_GB"] = "그림 바톨"
 L["DUNGEON_SHORT_NAME_GD"] = "정비소"
 L["DUNGEON_SHORT_NAME_GMBT"] = "승부수"
 L["DUNGEON_SHORT_NAME_HOA"] = "속죄"
@@ -125,12 +121,10 @@ L["DUNGEON_SHORT_NAME_RISE"] = "현신"
 L["DUNGEON_SHORT_NAME_RLP"] = "루비"
 L["DUNGEON_SHORT_NAME_SBG"] = "어둠달"
 L["DUNGEON_SHORT_NAME_SD"] = "심연"
---[[Translation missing --]]
---[[ L["DUNGEON_SHORT_NAME_SIEGE"] = ""--]] 
+L["DUNGEON_SHORT_NAME_SIEGE"] = "보랄"
 L["DUNGEON_SHORT_NAME_SOA"] = "승천"
 L["DUNGEON_SHORT_NAME_STRT"] = "거리"
---[[Translation missing --]]
---[[ L["DUNGEON_SHORT_NAME_SV"] = ""--]] 
+L["DUNGEON_SHORT_NAME_SV"] = "바위금고"
 L["DUNGEON_SHORT_NAME_TJS"] = "옥룡사"
 L["DUNGEON_SHORT_NAME_TOP"] = "투기장"
 L["DUNGEON_SHORT_NAME_TOTT"] = "파도"
@@ -461,8 +455,7 @@ L["RAID_DIFFICULTY_SUFFIX_NORMAL"] = "일"
 L["RAID_ENCOUNTERS_DEFEATED_TITLE"] = "공격대 보스 처치"
 --[[Translation missing --]]
 --[[ L["RAID_ICC"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_NP"] = ""--]] 
+L["RAID_NP"] = "네룹아르 궁전"
 --[[Translation missing --]]
 --[[ L["RAID_RS"] = ""--]] 
 --[[Translation missing --]]

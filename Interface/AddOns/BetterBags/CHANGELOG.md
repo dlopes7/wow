@@ -1,16 +1,12 @@
 # BetterBags
 
-## [v0.3.16](https://github.com/Cidan/BetterBags/tree/v0.3.16) (2024-09-11)
-[Full Changelog](https://github.com/Cidan/BetterBags/compare/v0.3.15...v0.3.16) [Previous Releases](https://github.com/Cidan/BetterBags/releases)
+## [v0.3.17](https://github.com/Cidan/BetterBags/tree/v0.3.17) (2024-10-03)
+[Full Changelog](https://github.com/Cidan/BetterBags/compare/v0.3.16...v0.3.17) [Previous Releases](https://github.com/Cidan/BetterBags/releases)
 
-- Fixed a small bug with context timeout.  
-- Added labels to forms.  
-    Added small help text for people pointing them to how to add a category.  
-- Plugin Config (#695)  
-    * Plugins can now use the new config screen as well.  
-- Added stub for plugin config to stop errors.  
-- Made the config window a special frame.  
-- Used custom font strings for index buttons.  
-- Adjusted offsets when clicking on a config section.  
-- New Config and More (#691)  
-    * Brand new configuration screen and user experience.  
+- Fixed a bug where third party themes would error out.  
+- Revert "Smooth Drawing (#696)"  
+- Revert "Fastview Bugfix (#697)"  
+- Fastview Bugfix (#697)  
+    * Fixed a few bugs with the bank in fast view mode.  
+- Smooth Drawing (#696)  
+    * Bags now sort and update smoother than ever, with little to no frame skip in all cases.  

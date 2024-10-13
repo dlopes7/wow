@@ -3,6 +3,7 @@ BigWigs:AddSounds("Fungarian Delve Trash", {
 	[372529] = "alarm",
 	[414944] = "alert",
 	[424704] = "alarm",
+	[424750] = {"alarm","info"},
 	[424773] = "alert",
 	[424798] = "alarm",
 	[424891] = "alarm",
@@ -57,7 +58,7 @@ BigWigs:AddSounds("The Underkeep Trash", {
 	[448179] = "alert",
 	[450637] = "info",
 	[450714] = "alarm",
-	[451913] = "alarm",
+	[451913] = {"alarm","underyou"},
 	[453149] = "alert",
 })
 
@@ -69,10 +70,12 @@ BigWigs:AddSounds("Delve Rares", {
 	[418297] = "alert",
 	[445718] = "alert",
 	[445781] = "alarm",
-	[449038] = "alarm",
+	[449038] = "warning",
 	[450492] = "alarm",
 	[450505] = {"alert","info"},
 	[450519] = "alarm",
+	[457448] = "alarm",
+	[457880] = "long",
 	[458090] = "alarm",
 	[458099] = "alert",
 	[458104] = "alert",
@@ -83,4 +86,5 @@ BigWigs:AddSounds("Delve Rares", {
 	[459421] = "alert",
 	[461741] = {"alarm","underyou"},
 	[462686] = "alert",
+	["zekvir_breach"] = "long",
 })

@@ -47,6 +47,8 @@ if L then
 	L.custom_on_autotalk = CL.autotalk
 	L.custom_on_autotalk_desc = "|cFFFF0000Requires Warrior, Dwarf, or 25 skill in Khaz Algar Blacksmithing.|r Automatically select the NPC dialog option that grants your group the 'Imbued Iron Energy' aura."
 	L.custom_on_autotalk_icon = mod:GetMenuIcon("SAY")
+
+	L["425027_icon"] = "ability_earthen_pillar" -- change the icon of Seismic Wave so it doesn't match Ground Pound
 end
 
 --------------------------------------------------------------------------------
@@ -60,6 +62,7 @@ function mod:GetOptions()
 		462500, -- Imbued Iron Energy
 		-- Earth Infused Golem
 		{425027, "NAMEPLATE"}, -- Seismic Wave
+		{425974, "NAMEPLATE"}, -- Ground Pound
 		-- Repurposed Loaderbot
 		{447141, "NAMEPLATE"}, -- Pulverizing Pounce
 		-- Ghastly Voidsoul
@@ -115,6 +118,7 @@ function mod:OnBossEnable()
 
 	-- Earth Infused Golem
 	self:Log("SPELL_CAST_START", "SeismicWave", 425027)
+	self:Log("SPELL_CAST_START", "GroundPound", 425974)
 	self:Death("EarthInfusedGolemDeath", 210109)
 
 	-- Repurposed Loaderbot
@@ -223,9 +227,15 @@ end
 -- Earth Infused Golem
 
 function mod:SeismicWave(args)
-	self:Message(args.spellId, "purple")
-	self:Nameplate(args.spellId, 18.2, args.sourceGUID)
+	self:Message(args.spellId, "purple", nil, L["425027_icon"])
+	self:Nameplate(args.spellId, 18.2, args.sourceGUID, 1016245) -- fileId for L["425027_icon"]
 	self:PlaySound(args.spellId, "alarm")
+end
+
+function mod:GroundPound(args)
+	self:Message(args.spellId, "yellow")
+	self:Nameplate(args.spellId, 21.8, args.sourceGUID)
+	self:PlaySound(args.spellId, "alert")
 end
 
 function mod:EarthInfusedGolemDeath(args)
@@ -356,11 +366,11 @@ function mod:CensoringGear(args)
 end
 
 function mod:CensoringGearInterrupt(args)
-	self:Nameplate(429545, 15.7, args.destGUID)
+	self:Nameplate(429545, 18.0, args.destGUID)
 end
 
 function mod:CensoringGearSuccess(args)
-	self:Nameplate(args.spellId, 15.7, args.sourceGUID)
+	self:Nameplate(args.spellId, 18.0, args.sourceGUID)
 end
 
 function mod:TurnedSpeakerDeath(args)
@@ -496,7 +506,7 @@ do
 			self:Message(args.spellId, "purple")
 			self:PlaySound(args.spellId, "alarm")
 		end
-		self:Nameplate(args.spellId, 23.0, args.sourceGUID)
+		self:Nameplate(args.spellId, 28.4, args.sourceGUID)
 	end
 end
 
@@ -509,7 +519,7 @@ do
 			self:Message(args.spellId, "orange")
 			self:PlaySound(args.spellId, "alarm")
 		end
-		self:Nameplate(args.spellId, 24.3, args.sourceGUID)
+		self:Nameplate(args.spellId, 28.0, args.sourceGUID)
 	end
 end
 

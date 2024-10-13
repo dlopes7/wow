@@ -1,13 +1,13 @@
 local L = BigWigs:NewBossLocale("Ulgrax the Devourer", "ruRU")
 if not L then return end
 if L then
-	--L.carnivorous_contest_pull = "Pull In"
+	L.carnivorous_contest_pull = "Притяжка"
 	L.chunky_viscera_message = "Корми Босса! (Дополнительное действие)"
 end
 
 L = BigWigs:NewBossLocale("The Bloodbound Horror", "ruRU")
 if L then
-	--L.gruesome_disgorge_debuff = "Phase Shift"
+	L.gruesome_disgorge_debuff = "Смена Фазы"
 	L.grasp_from_beyond = "Щупальца"
 	L.grasp_from_beyond_say = "Щупальца"
 	L.bloodcurdle = "Спреды"
@@ -17,7 +17,6 @@ end
 
 L = BigWigs:NewBossLocale("Rasha'nan", "ruRU")
 if L then
-	L.rolling_acid = "Волны"
 	L.spinnerets_strands = "Нити"
 	L.enveloping_webs = "Паутины"
 	L.enveloping_web_say = "Паутина" -- Singular of Webs
@@ -50,14 +49,35 @@ end
 L = BigWigs:NewBossLocale("The Silken Court", "ruRU")
 if L then
 	L.skipped_cast = "Пропущено %s (%d)"
+	L.intermission_trigger = "Вершина мощи!" -- Skeinspinner Takazj 100 energy yell
 
 	L.venomous_rain = "Дождь"
 	L.burrowed_eruption = "Рывок"
 	L.stinging_swarm = "Дебаффы" -- to keep concise
 	L.strands_of_reality = "Фронтал [Н]" -- S for Skeinspinner Takazj
+	L.strands_of_reality_message = "Фронтал [Нитемот Таказдж]"
 	L.impaling_eruption = "Фронтал [А]" -- A for Anub'arash
+	L.impaling_eruption_message = "Фронтал [Ануб'араш]"
 	L.entropic_desolation = "Выбегай"
 	L.cataclysmic_entropy = "Большой взрыв" -- Interrupt before it casts
 	L.spike_eruption = "Шипы"
 	L.unleashed_swarm = "Рой"
+	L.void_degeneration = "Синий Шар"
+	L.burning_rage = "Красный Шар"
+end
+
+L = BigWigs:NewBossLocale("Queen Ansurek", "ruRU")
+if L then
+	L.stacks_onboss = "%dx %s на БОССЕ"
+
+	L.reactive_toxin = "Токсины"
+	L.reactive_toxin_say = "Токсин"
+	L.venom_nova = "Нова"
+	L.web_blades = "Клинки"
+	L.silken_tomb = "Корни" -- Raid being rooted in place
+	L.wrest = "Притяжка"
+	L.royal_condemnation = "Связывание"
+	L.frothing_gluttony = "Кольцо"
+
+	L.stage_two_end_message_storymode = "Беги в портал!"
 end

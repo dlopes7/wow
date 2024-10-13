@@ -197,3 +197,4 @@ WorldMarkerKeyBindings: disabled
 WorldQuestTracker: disabled
 LittleWigs_Dragonflight: enabled
 BigWigs_Dragonflight: enabled
+BigWigs_KhazAlgar: enabled

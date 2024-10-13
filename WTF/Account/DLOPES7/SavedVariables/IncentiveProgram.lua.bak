@@ -111,11 +111,11 @@ IncentiveProgramDB = {
 },
 [2723] = {
 ["queueAsTank"] = true,
-["ignore"] = false,
+["queueAsHealer"] = true,
 ["dungeonType"] = 1,
 ["queueAsDamage"] = true,
 ["dungeonName"] = "Random Heroic (The War Within: Season 1)",
-["queueAsHealer"] = true,
+["ignore"] = false,
 },
 [2596] = {
 ["dungeonName"] = "The Dread Approach",
@@ -259,19 +259,19 @@ IncentiveProgramDB = {
 },
 [2516] = {
 ["queueAsTank"] = true,
-["ignore"] = false,
+["queueAsHealer"] = true,
 ["dungeonType"] = 1,
 ["queueAsDamage"] = true,
 ["dungeonName"] = "Random Dungeon (The War Within)",
-["queueAsHealer"] = true,
+["ignore"] = false,
 },
 [2517] = {
 ["queueAsTank"] = true,
-["ignore"] = false,
+["queueAsHealer"] = true,
 ["dungeonType"] = 1,
 ["queueAsDamage"] = true,
 ["dungeonName"] = "Random Heroic (The War Within)",
-["queueAsHealer"] = true,
+["ignore"] = false,
 },
 [984] = {
 ["dungeonName"] = "Bastion of Shadows",
@@ -282,12 +282,20 @@ IncentiveProgramDB = {
 ["dungeonType"] = 3,
 },
 [2650] = {
-["dungeonName"] = "Secrets of Nerub-ar Palace",
+["queueAsTank"] = true,
+["ignore"] = false,
 ["dungeonType"] = 3,
+["queueAsDamage"] = true,
+["dungeonName"] = "Secrets of Nerub-ar Palace",
+["queueAsHealer"] = true,
 },
 [2651] = {
-["dungeonName"] = "A Queen's Fall",
+["queueAsTank"] = true,
+["queueAsHealer"] = true,
 ["dungeonType"] = 3,
+["queueAsDamage"] = true,
+["dungeonName"] = "A Queen's Fall",
+["ignore"] = false,
 },
 [462] = {
 ["dungeonName"] = "Random Mists of Pandaria Heroic",
@@ -300,6 +308,11 @@ IncentiveProgramDB = {
 [2399] = {
 ["dungeonName"] = "Discarded Works",
 ["dungeonType"] = 3,
+},
+[287] = {
+["dungeonType"] = 1,
+["dungeonName"] = "Coren Direbrew",
+["ignore"] = false,
 },
 [2400] = {
 ["dungeonName"] = "Fury of Giants",
@@ -341,25 +354,29 @@ IncentiveProgramDB = {
 ["dungeonName"] = "Domination's Grasp",
 ["dungeonType"] = 3,
 },
+[2087] = {
+["dungeonName"] = "Random Heroic (Shadowlands)",
+["dungeonType"] = 1,
+},
 [2294] = {
 ["dungeonName"] = "The Grand Design",
+["dungeonType"] = 3,
+},
+[2338] = {
+["dungeonName"] = "Reliquary of Opulence",
 ["dungeonType"] = 3,
 },
 [258] = {
 ["dungeonName"] = "Random Classic Dungeon",
 ["dungeonType"] = 1,
 },
-[2539] = {
-["dungeonName"] = "Random Heroic Timerunning Dungeon (Mists of Pandaria)",
-["dungeonType"] = 1,
-},
-[2649] = {
-["queueAsTank"] = true,
-["ignore"] = false,
+[1613] = {
+["dungeonName"] = "Seat of the Pantheon",
 ["dungeonType"] = 3,
-["queueAsDamage"] = true,
-["dungeonName"] = "The Skittering Battlements",
-["queueAsHealer"] = true,
+},
+[2340] = {
+["dungeonName"] = "An Audience with Arrogance",
+["dungeonType"] = 3,
 },
 [610] = {
 ["dungeonName"] = "Last Stand of the Zandalari",
@@ -369,44 +386,44 @@ IncentiveProgramDB = {
 ["dungeonName"] = "Random Dungeon (Shadowlands)",
 ["dungeonType"] = 1,
 },
-[2344] = {
-["dungeonName"] = "The Reckoning",
+[2342] = {
+["dungeonName"] = "The Dark Bastille",
 ["dungeonType"] = 3,
 },
-[261] = {
-["dungeonName"] = "Random Lich King Dungeon",
-["dungeonType"] = 1,
+[2343] = {
+["dungeonName"] = "Shackles of Fate",
+["dungeonType"] = 3,
 },
-[528] = {
-["dungeonName"] = "The Vault of Mysteries",
+[2341] = {
+["dungeonName"] = "The Jailer's Vanguard",
 ["dungeonType"] = 3,
 },
 [724] = {
 ["dungeonName"] = "The Underhold",
 ["dungeonType"] = 3,
 },
-[2346] = {
-["dungeonName"] = "Ephemeral Plains",
-["dungeonType"] = 3,
-},
 [846] = {
 ["dungeonName"] = "The Black Forge",
+["dungeonType"] = 3,
+},
+[611] = {
+["dungeonName"] = "Forgotten Depths",
 ["dungeonType"] = 3,
 },
 [434] = {
 ["dungeonName"] = "Random Hour of Twilight Heroic",
 ["dungeonType"] = 1,
 },
-[2345] = {
-["dungeonName"] = "Cornerstone of Creation",
+[2347] = {
+["dungeonName"] = "Domination's Grasp",
 ["dungeonType"] = 3,
 },
 [2092] = {
 ["dungeonName"] = "Blood from Stone",
 ["dungeonType"] = 3,
 },
-[2592] = {
-["dungeonName"] = "Halls of Flesh-Shaping",
+[2598] = {
+["dungeonName"] = "Guardians of Mogu'shan",
 ["dungeonType"] = 3,
 },
 [1046] = {
@@ -417,9 +434,9 @@ IncentiveProgramDB = {
 ["dungeonName"] = "Random Burning Crusade Dungeon",
 ["dungeonType"] = 1,
 },
-[2593] = {
-["dungeonName"] = "Forgotten Depths",
-["dungeonType"] = 3,
+[260] = {
+["dungeonName"] = "Random Burning Crusade Heroic",
+["dungeonType"] = 1,
 },
 [1411] = {
 ["dungeonName"] = "Trial of Valor",
@@ -429,24 +446,28 @@ IncentiveProgramDB = {
 ["dungeonName"] = "Halls of Flesh-Shaping",
 ["dungeonType"] = 3,
 },
-[2371] = {
-["dungeonName"] = "Caverns of Infusion",
+[2597] = {
+["dungeonName"] = "The Vault of Mysteries",
 ["dungeonType"] = 3,
 },
-[1287] = {
-["dungeonName"] = "Darkbough",
-["dungeonType"] = 3,
-},
-[1045] = {
-["dungeonName"] = "Random Legion Dungeon",
+[2351] = {
+["dungeonName"] = "Random Heroic (Dragonflight)",
 ["dungeonType"] = 1,
 },
-[1611] = {
-["dungeonName"] = "Forbidden Descent",
+[1612] = {
+["dungeonName"] = "Hope's End",
 ["dungeonType"] = 3,
 },
-[2594] = {
-["dungeonName"] = "Last Stand of the Zandalari",
+[995] = {
+["queueAsTank"] = true,
+["queueAsHealer"] = true,
+["dungeonType"] = 1,
+["queueAsDamage"] = true,
+["dungeonName"] = "Random Timewalking Dungeon (Wrath of the Lich King)",
+["ignore"] = false,
+},
+[2468] = {
+["dungeonName"] = "Molten Incursion",
 ["dungeonType"] = 3,
 },
 [1497] = {
@@ -461,85 +482,90 @@ IncentiveProgramDB = {
 ["dungeonName"] = "Pinnacle of Storms",
 ["dungeonType"] = 3,
 },
-[2468] = {
-["dungeonName"] = "Molten Incursion",
+[2594] = {
+["dungeonName"] = "Last Stand of the Zandalari",
 ["dungeonType"] = 3,
 },
-[2087] = {
-["dungeonName"] = "Random Heroic (Shadowlands)",
-["dungeonType"] = 1,
-},
-[1612] = {
-["dungeonName"] = "Hope's End",
+[1611] = {
+["dungeonName"] = "Forbidden Descent",
 ["dungeonType"] = 3,
 },
-[2351] = {
-["dungeonName"] = "Random Heroic (Dragonflight)",
+[1045] = {
+["dungeonName"] = "Random Legion Dungeon",
 ["dungeonType"] = 1,
 },
-[260] = {
-["dungeonName"] = "Random Burning Crusade Heroic",
-["dungeonType"] = 1,
+[2371] = {
+["dungeonName"] = "Caverns of Infusion",
+["dungeonType"] = 3,
 },
-[2597] = {
-["dungeonName"] = "The Vault of Mysteries",
+[1287] = {
+["dungeonName"] = "Darkbough",
+["dungeonType"] = 3,
+},
+[2593] = {
+["dungeonName"] = "Forgotten Depths",
 ["dungeonType"] = 3,
 },
 [1670] = {
 ["dungeonName"] = "Random Dungeon (Battle for Azeroth)",
 ["dungeonType"] = 1,
 },
-[2598] = {
-["dungeonName"] = "Guardians of Mogu'shan",
+[2592] = {
+["dungeonName"] = "Halls of Flesh-Shaping",
 ["dungeonType"] = 3,
 },
 [1288] = {
 ["dungeonName"] = "Tormented Guardians",
 ["dungeonType"] = 3,
 },
-[2347] = {
-["dungeonName"] = "Domination's Grasp",
+[2345] = {
+["dungeonName"] = "Cornerstone of Creation",
 ["dungeonType"] = 3,
 },
 [1671] = {
 ["dungeonName"] = "Random Heroic (Battle for Azeroth)",
 ["dungeonType"] = 1,
 },
-[611] = {
-["dungeonName"] = "Forgotten Depths",
+[2346] = {
+["dungeonName"] = "Ephemeral Plains",
 ["dungeonType"] = 3,
 },
 [1289] = {
 ["dungeonName"] = "Rift of Aln",
 ["dungeonType"] = 3,
 },
-[2341] = {
-["dungeonName"] = "The Jailer's Vanguard",
+[528] = {
+["dungeonName"] = "The Vault of Mysteries",
 ["dungeonType"] = 3,
 },
-[2343] = {
-["dungeonName"] = "Shackles of Fate",
-["dungeonType"] = 3,
+[261] = {
+["dungeonName"] = "Random Lich King Dungeon",
+["dungeonType"] = 1,
 },
-[2342] = {
-["dungeonName"] = "The Dark Bastille",
+[2344] = {
+["dungeonName"] = "The Reckoning",
 ["dungeonType"] = 3,
 },
 [1290] = {
 ["dungeonName"] = "Arcing Aqueducts",
 ["dungeonType"] = 3,
 },
-[2340] = {
-["dungeonName"] = "An Audience with Arrogance",
+[2649] = {
+["queueAsTank"] = true,
+["queueAsHealer"] = true,
 ["dungeonType"] = 3,
+["queueAsDamage"] = true,
+["dungeonName"] = "The Skittering Battlements",
+["ignore"] = false,
 },
-[1613] = {
-["dungeonName"] = "Seat of the Pantheon",
-["dungeonType"] = 3,
+[2539] = {
+["dungeonName"] = "Random Heroic Timerunning Dungeon (Mists of Pandaria)",
+["dungeonType"] = 1,
 },
-[2338] = {
-["dungeonName"] = "Reliquary of Opulence",
-["dungeonType"] = 3,
+[744] = {
+["dungeonType"] = 1,
+["dungeonName"] = "Random Timewalking Dungeon (Burning Crusade)",
+["ignore"] = false,
 },
 },
 ["settings"] = {
@@ -554,15 +580,15 @@ IncentiveProgramDB = {
 ["hideAlways"] = false,
 ["alertRepeats"] = 3,
 ["toastPing"] = true,
-["minimap"] = {
-},
+["cycleCount"] = 2,
 ["continuouslyCycle"] = false,
-["channel"] = "SFX",
 ["toastSound"] = 18019,
+["channel"] = "SFX",
 ["frameTop"] = 37.59994506835938,
 ["hideInParty"] = true,
 ["alert"] = true,
-["cycleCount"] = 2,
+["minimap"] = {
+},
 },
 ["userSettings"] = {
 ["Player-71-0D42DA71"] = {
@@ -583,6 +609,11 @@ IncentiveProgramDB = {
 ["Player-60-0F515A41"] = {
 ["roleDamage"] = true,
 ["roleHealer"] = false,
+["roleTank"] = false,
+},
+["Player-57-0DAD1D5D"] = {
+["roleDamage"] = true,
+["roleHealer"] = true,
 ["roleTank"] = false,
 },
 ["Player-60-0E6FD603"] = {

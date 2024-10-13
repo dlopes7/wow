@@ -64,7 +64,6 @@ local C_FriendList_GetNumFriends = C_FriendList.GetNumFriends
 local C_Garrison_GetCompleteMissions = C_Garrison.GetCompleteMissions
 local C_Item_GetItemCooldown = C_Item.GetItemCooldown
 local C_Item_GetItemCount = C_Item.GetItemCount
-local C_Item_GetItemIconByID = C_Item.GetItemIconByID
 local C_Timer_NewTicker = C_Timer.NewTicker
 local C_ToyBox_IsToyUsable = C_ToyBox.IsToyUsable
 local C_UI_Reload = C_UI.Reload
@@ -107,6 +106,7 @@ local hearthstones = {
 	208704, -- 深淵居者的大地爐石
 	209035, -- 烈焰爐石
 	212337, -- 爐石之石
+	228940, -- 凶霸絲線爐石
 }
 
 local hearthstoneAndToyIDList = {
@@ -141,6 +141,7 @@ local hearthstoneAndToyIDList = {
 	209035, -- 烈焰爐石
 	210455, -- 德萊尼全像寶石
 	212337, -- 爐石之石
+	228940, -- 凶霸絲線爐石
 	-- Patch Items
 	110560, -- 要塞爐石
 	140192, -- 達拉然爐石
@@ -148,8 +149,13 @@ local hearthstoneAndToyIDList = {
 	180817, -- 移轉暗語
 	-- Engineering Wormholes
 	-- https://www.wowhead.com/items/name:Generator?filter=86:195;5:2;0:0
+	18984, -- 空間撕裂器 - 永望鎮
+	18986, -- 安全傳送器:加基森
+	30542, -- 空間撕裂器 - 52區
+	30544, -- 安全傳送器:托斯利基地
 	48933, -- 蟲洞產生器：北裂境
 	87215, -- 蟲洞產生器：潘達利亞
+	112059, -- 蟲洞離心裝置 (WoD)
 	132517, -- 達拉然內部蟲洞產生器
 	132524, -- 劫福斯蟲洞產生器模組
 	151652, -- 蟲洞產生器：阿古斯
@@ -342,6 +348,7 @@ end
 local VirtualDTEvent = {
 	Friends = nil,
 	Guild = "GUILD_ROSTER_UPDATE",
+	Time = "UPDATE_INSTANCE_INFO",
 }
 
 local VirtualDT = {
@@ -767,18 +774,6 @@ local ButtonTypes = {
 	},
 }
 
-function GB:ShowAdvancedTimeTooltip(panel)
-	DT.RegisteredDataTexts["Time"].onEnter()
-	DT.RegisteredDataTexts["Time"].onLeave()
-	-- DT.tooltip:ClearLines()
-	-- DT.tooltip:SetText(L["Time"])
-	-- DT.tooltip:AddLine("\n", 1, 1, 1)
-	-- DT.tooltip:AddLine(LeftButtonIcon .. " " .. L["Calendar"], 1, 1, 1)
-	-- DT.tooltip:AddLine(RightButtonIcon .. " " .. L["Time Manager"], 1, 1, 1)
-	-- DT.tooltip:AddLine("\n")
-	-- DT.tooltip:AddLine(L["(Modifer Click) Collect Garbage"], unpack(E.media.rgbvaluecolor))
-	-- DT.tooltip:Show()
-end
 function GB:OnEnter()
 	if self.db and self.db.mouseOver then
 		E:UIFrameFadeIn(self.bar, self.db.fadeTime, self.bar:GetAlpha(), 1)
@@ -885,6 +880,7 @@ function GB:ConstructTimeArea()
 		GB:UpdateTime()
 	end)
 
+	DT.RegisteredDataTexts["Time"].eventFunc(VirtualDT["Time"], "ELVUI_FORCE_UPDATE")
 	DT.RegisteredDataTexts["System"].onUpdate(self.bar.middlePanel, 10)
 
 	if self.db.time.alwaysSystemInfo then
@@ -911,16 +907,29 @@ function GB:ConstructTimeArea()
 		if IsModifierKeyDown() then
 			DT.RegisteredDataTexts["System"].eventFunc()
 			DT.RegisteredDataTexts["System"].onEnter()
+
 			self.tooltipTimer = C_Timer_NewTicker(1, function()
 				DT.RegisteredDataTexts["System"].onUpdate(panel, 10)
 				DT.RegisteredDataTexts["System"].eventFunc()
 				DT.RegisteredDataTexts["System"].onEnter()
 			end)
 		else
-			self:ShowAdvancedTimeTooltip(panel)
+			DT.RegisteredDataTexts["Time"].eventFunc(VirtualDT["Time"], VirtualDTEvent["Time"])
+			DT.RegisteredDataTexts["Time"].onEnter()
+			DT.RegisteredDataTexts["Time"].onLeave()
+
 			self.tooltipTimer = C_Timer_NewTicker(1, function()
 				DT.RegisteredDataTexts["System"].onUpdate(panel, 10)
 			end)
+
+			DT.tooltip:AddLine("\n")
+			DT.tooltip:AddDoubleLine(format("%s %s", LeftButtonIcon, L["Left Button"]), L["Calendar"], 1, 1, 1)
+			DT.tooltip:AddDoubleLine(format("%s %s", RightButtonIcon, L["Right Button"]), L["Time Manager"], 1, 1, 1)
+			DT.tooltip:AddDoubleLine(format("%s %s", ScrollButtonIcon, L["Middle Button"]), L["Reload UI"], 1, 1, 1)
+			DT.tooltip:AddDoubleLine(format("Shift + %s", L["Any"]), L["Collect Garbage"], 1, 1, 1)
+			DT.tooltip:AddDoubleLine(format("Ctrl + Shift + %s", L["Any"]), L["Toggle CPU Profiling"], 1, 1, 1)
+
+			DT.tooltip:Show()
 		end
 	end)
 
@@ -956,6 +965,8 @@ function GB:ConstructTimeArea()
 			end
 		elseif mouseButton == "RightButton" then
 			ToggleTimeManager()
+		elseif mouseButton == "MiddleButton" then
+			C_UI_Reload()
 		end
 	end)
 end
@@ -1017,6 +1028,13 @@ function GB:UpdateTimeArea()
 		E:Flash(panel.colon, 1, true)
 	else
 		E:StopFlash(panel.colon)
+	end
+
+	panel.text:ClearAllPoints()
+	if self.db.tooltipsAnchor == "ANCHOR_TOP" then
+		panel.text:SetPoint("BOTTOM", self.bar, "TOP", 0, 5)
+	else
+		panel.text:SetPoint("TOP", self.bar, "BOTTOM", 0, -5)
 	end
 
 	if self.db.time.alwaysSystemInfo then
@@ -1151,7 +1169,7 @@ function GB:UpdateButton(button, buttonType)
 		button:SetAttribute("macrotext1", config.macro.LeftButton or "")
 		button:SetAttribute("macrotext2", config.macro.RightButton or config.macro.LeftButton or "")
 	elseif config.click then
-		function button:Click(mouseButton)
+		button.Click = function(_, mouseButton)
 			local func = mouseButton and config.click[mouseButton] or config.click.LeftButton
 			func(GB.bar.middlePanel)
 		end
@@ -1236,7 +1254,7 @@ function GB:ConstructButtons()
 	end
 
 	self.buttons = {}
-	for i = 1, NUM_PANEL_BUTTONS * 2 do
+	for _ = 1, NUM_PANEL_BUTTONS * 2 do
 		self:ConstructButton()
 	end
 end

@@ -37,7 +37,6 @@ local UpdateOnBarHighlightMarksByFlyout = UpdateOnBarHighlightMarksByFlyout
 local UpdateOnBarHighlightMarksByPetAction = UpdateOnBarHighlightMarksByPetAction
 local UpdateOnBarHighlightMarksBySpell = UpdateOnBarHighlightMarksBySpell
 local UpdatePetActionHighlightMarks = UpdatePetActionHighlightMarks
-local UnitPowerBarID = UnitPowerBarID
 local VehicleExit = VehicleExit
 
 local SPELLS_PER_PAGE = SPELLS_PER_PAGE
@@ -51,6 +50,7 @@ local ClearPetActionHighlightMarks = ClearPetActionHighlightMarks or PetActionBa
 
 local GetProfessionQuality = C_ActionBar.GetProfessionQuality
 local IsInBattle = C_PetBattles and C_PetBattles.IsInBattle
+local C_PlayerInfo_GetGlidingInfo = C_PlayerInfo.GetGlidingInfo
 local FindSpellBookSlotForSpell = C_SpellBook.FindSpellBookSlotForSpell or SpellBook_GetSpellBookSlot
 local ActionBarController_UpdateAllSpellHighlights = ActionBarController_UpdateAllSpellHighlights
 
@@ -61,7 +61,6 @@ local LSM = E.Libs.LSM
 local Masque = E.Masque
 local FlyoutMasqueGroup = Masque and Masque:Group('ElvUI', 'ActionBar Flyouts')
 local VehicleMasqueGroup = Masque and Masque:Group('ElvUI', 'ActionBar Leave Vehicle')
-local VIGOR_BAR_ID = 631 -- this is the oval & diamond variant
 
 local buttonDefaults = {
 	hideElements = {},
@@ -894,7 +893,8 @@ end
 
 do
 	local function CanGlide() -- required when reloading because the event wont fire yet
-		return UnitPowerBarID('player') == VIGOR_BAR_ID
+		local isGliding, canGlide = C_PlayerInfo_GetGlidingInfo()
+		return isGliding or canGlide
 	end
 
 	local canGlide = false -- sometimes the Vigor bar is not activated yet
@@ -1224,29 +1224,31 @@ do
 			_G.VerticalMultiBarsContainer:Size(10) -- dummy values so GetTop etc doesnt fail without replacing
 			AB:SetNoopsi(_G.VerticalMultiBarsContainer)
 
-			-- hide some interface options we dont use
-			_G.InterfaceOptionsActionBarsPanelStackRightBars:SetScale(0.5)
-			_G.InterfaceOptionsActionBarsPanelStackRightBars:SetAlpha(0)
-			_G.InterfaceOptionsActionBarsPanelStackRightBarsText:Hide() -- hides the !
-			_G.InterfaceOptionsActionBarsPanelRightTwoText:SetTextColor(1,1,1) -- no yellow
-			_G.InterfaceOptionsActionBarsPanelRightTwoText.SetTextColor = E.noop -- i said no yellow
-			_G.InterfaceOptionsActionBarsPanelAlwaysShowActionBars:SetScale(0.00001)
-			_G.InterfaceOptionsActionBarsPanelAlwaysShowActionBars:SetAlpha(0)
-			_G.InterfaceOptionsActionBarsPanelPickupActionKeyDropDownButton:SetScale(0.00001)
-			_G.InterfaceOptionsActionBarsPanelPickupActionKeyDropDownButton:SetAlpha(0)
-			_G.InterfaceOptionsActionBarsPanelPickupActionKeyDropDown:SetScale(0.00001)
-			_G.InterfaceOptionsActionBarsPanelPickupActionKeyDropDown:SetAlpha(0)
-			_G.InterfaceOptionsActionBarsPanelLockActionBars:SetScale(0.00001)
-			_G.InterfaceOptionsActionBarsPanelLockActionBars:SetAlpha(0)
+			if E.Cata then
+				-- hide some interface options we dont use
+				_G.InterfaceOptionsActionBarsPanelStackRightBars:SetScale(0.5)
+				_G.InterfaceOptionsActionBarsPanelStackRightBars:SetAlpha(0)
+				_G.InterfaceOptionsActionBarsPanelStackRightBarsText:Hide() -- hides the !
+				_G.InterfaceOptionsActionBarsPanelRightTwoText:SetTextColor(1,1,1) -- no yellow
+				_G.InterfaceOptionsActionBarsPanelRightTwoText.SetTextColor = E.noop -- i said no yellow
+				_G.InterfaceOptionsActionBarsPanelAlwaysShowActionBars:SetScale(0.00001)
+				_G.InterfaceOptionsActionBarsPanelAlwaysShowActionBars:SetAlpha(0)
+				_G.InterfaceOptionsActionBarsPanelPickupActionKeyDropDownButton:SetScale(0.00001)
+				_G.InterfaceOptionsActionBarsPanelPickupActionKeyDropDownButton:SetAlpha(0)
+				_G.InterfaceOptionsActionBarsPanelPickupActionKeyDropDown:SetScale(0.00001)
+				_G.InterfaceOptionsActionBarsPanelPickupActionKeyDropDown:SetAlpha(0)
+				_G.InterfaceOptionsActionBarsPanelLockActionBars:SetScale(0.00001)
+				_G.InterfaceOptionsActionBarsPanelLockActionBars:SetAlpha(0)
 
-			_G.InterfaceOptionsCombatPanelAutoSelfCast:Hide()
-			_G.InterfaceOptionsCombatPanelSelfCastKeyDropDown:Hide()
+				_G.InterfaceOptionsCombatPanelAutoSelfCast:Hide()
+				_G.InterfaceOptionsCombatPanelSelfCastKeyDropDown:Hide()
 
-			if not E.Classic then
-				_G.InterfaceOptionsCombatPanelFocusCastKeyDropDown:Hide()
+				if not E.Classic then
+					_G.InterfaceOptionsCombatPanelFocusCastKeyDropDown:Hide()
+				end
+
+				AB:SecureHook('BlizzardOptionsPanel_OnEvent')
 			end
-
-			AB:SecureHook('BlizzardOptionsPanel_OnEvent')
 		end
 
 		for name in next, untaintButtons do

@@ -16,6 +16,9 @@ DejaCharacterStatsDB = {
 ["dejacharacterstatsShowDecimalsChecked"] = {
 ["SetChecked"] = true,
 },
+["DCS_SetItemTooltipScaleSliderValue"] = {
+["DCS_ItemTooltipScaleSliderValue"] = 1,
+},
 ["dejacharacterstatsDCSZeroChecked"] = {
 ["SetChecked"] = false,
 },
@@ -27,6 +30,13 @@ DejaCharacterStatsDB = {
 },
 ["dejacharacterstatsShowDuraChecked"] = {
 ["ShowDuraSetChecked"] = false,
+},
+["DCS_CenterItemTooltips"] = {
+["centerItemTooltips"] = true,
+["DCS_CenterItemTooltipScale"] = 1,
+},
+["DCS_SettingsShowCharacterChecked"] = {
+["settingsShowCharacterChecked"] = true,
 },
 ["dejacharacterstatsShowItemLevelChecked"] = {
 ["ShowItemLevelSetChecked"] = true,
@@ -255,8 +265,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hideAt"] = 0,
 ["hidden"] = true,
+["hideAt"] = 0,
 },
 {
 ["statKey"] = "HonorCategory",
@@ -480,8 +490,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hidden"] = true,
 ["hideAt"] = 0,
+["hidden"] = true,
 ["roles"] = {
 "TANK",
 },
@@ -648,8 +658,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hidden"] = false,
 ["hideAt"] = 0,
+["hidden"] = false,
 ["roles"] = {
 "TANK",
 },
@@ -869,8 +879,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hidden"] = false,
 ["hideAt"] = 0,
+["hidden"] = false,
 ["roles"] = {
 "TANK",
 },
@@ -1154,8 +1164,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hideAt"] = 0,
 ["hidden"] = true,
+["hideAt"] = 0,
 },
 {
 ["statKey"] = "HonorCategory",
@@ -1382,8 +1392,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hidden"] = true,
 ["hideAt"] = 0,
+["hidden"] = true,
 },
 {
 ["statKey"] = "HonorCategory",
@@ -1611,8 +1621,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hidden"] = true,
 ["hideAt"] = 0,
+["hidden"] = true,
 },
 {
 ["statKey"] = "HonorCategory",
@@ -1836,8 +1846,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hidden"] = true,
 ["hideAt"] = 0,
+["hidden"] = true,
 },
 {
 ["statKey"] = "HonorCategory",
@@ -2062,8 +2072,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hidden"] = true,
 ["hideAt"] = 0,
+["hidden"] = true,
 },
 {
 ["statKey"] = "HonorCategory",
@@ -2288,8 +2298,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hidden"] = true,
 ["hideAt"] = 0,
+["hidden"] = true,
 },
 {
 ["statKey"] = "HonorCategory",
@@ -2511,8 +2521,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hideAt"] = 0,
 ["hidden"] = true,
+["hideAt"] = 0,
 ["roles"] = {
 "TANK",
 },
@@ -2739,8 +2749,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hidden"] = true,
 ["hideAt"] = 0,
+["hidden"] = true,
 ["roles"] = {
 "TANK",
 },
@@ -2967,8 +2977,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hideAt"] = 0,
 ["hidden"] = true,
+["hideAt"] = 0,
 ["roles"] = {
 "TANK",
 },
@@ -3188,8 +3198,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hidden"] = true,
 ["hideAt"] = 0,
+["hidden"] = true,
 ["roles"] = {
 "TANK",
 },
@@ -3416,8 +3426,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hidden"] = true,
 ["hideAt"] = 0,
+["hidden"] = true,
 ["roles"] = {
 "TANK",
 },
@@ -3644,8 +3654,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hidden"] = true,
 ["hideAt"] = 0,
+["hidden"] = true,
 },
 {
 ["statKey"] = "HonorCategory",
@@ -3872,8 +3882,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hideAt"] = 0,
 ["hidden"] = true,
+["hideAt"] = 0,
 },
 {
 ["statKey"] = "HonorCategory",
@@ -4097,8 +4107,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hidden"] = true,
 ["hideAt"] = 0,
+["hidden"] = true,
 ["roles"] = {
 "TANK",
 },
@@ -4328,8 +4338,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hidden"] = true,
 ["hideAt"] = 0,
+["hidden"] = true,
 },
 {
 ["statKey"] = "HonorCategory",
@@ -4548,8 +4558,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hideAt"] = 0,
 ["hidden"] = true,
+["hideAt"] = 0,
 ["roles"] = {
 "TANK",
 },
@@ -4779,8 +4789,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hidden"] = true,
 ["hideAt"] = 0,
+["hidden"] = true,
 },
 {
 ["statKey"] = "HonorCategory",
@@ -5005,8 +5015,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hideAt"] = 0,
 ["hidden"] = true,
+["hideAt"] = 0,
 },
 {
 ["statKey"] = "HonorCategory",
@@ -5233,8 +5243,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hidden"] = true,
 ["hideAt"] = 0,
+["hidden"] = true,
 },
 {
 ["statKey"] = "HonorCategory",
@@ -5396,8 +5406,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hideAt"] = 0,
 ["hidden"] = false,
+["hideAt"] = 0,
 },
 {
 ["statKey"] = "RatingCategory",
@@ -5618,8 +5628,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hidden"] = false,
 ["hideAt"] = 0,
+["hidden"] = false,
 },
 {
 ["statKey"] = "RatingCategory",
@@ -5708,7 +5718,7 @@ DCS_ClassSpecDB = {
 },
 ["uniqueKey"] = "Demongordon:Stormrage:2",
 },
-["Adyfiend:Illidan:5"] = {
+["Nananenem:Illidan:4"] = {
 {
 ["statKey"] = "ItemLevelFrame",
 },
@@ -5746,10 +5756,10 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "AGILITY",
+["hidden"] = true,
 },
 {
 ["statKey"] = "INTELLECT",
-["hidden"] = true,
 },
 {
 ["statKey"] = "STAMINA",
@@ -5762,23 +5772,25 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "ATTACK_DAMAGE",
+["hidden"] = true,
 },
 {
 ["statKey"] = "ATTACK_AP",
+["hidden"] = true,
 },
 {
 ["statKey"] = "DCS_ATTACK_ATTACKSPEED",
+["hidden"] = true,
 },
 {
 ["statKey"] = "WEAPON_DPS",
+["hidden"] = true,
 },
 {
 ["statKey"] = "SPELLPOWER",
-["hidden"] = true,
 },
 {
 ["statKey"] = "MANAREGEN",
-["hidden"] = true,
 },
 {
 ["statKey"] = "ENERGY_REGEN",
@@ -5895,11 +5907,11 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
+["hidden"] = true,
+["hideAt"] = 0,
 ["roles"] = {
 "TANK",
 },
-["hideAt"] = 0,
-["hidden"] = true,
 },
 {
 ["statKey"] = "HonorCategory",
@@ -5932,7 +5944,7 @@ DCS_ClassSpecDB = {
 ["statKey"] = "UserCat5",
 ["hidden"] = true,
 },
-["uniqueKey"] = "Adyfiend:Illidan:5",
+["uniqueKey"] = "Nananenem:Illidan:4",
 },
 ["Davidady:Stormrage:3"] = {
 {
@@ -6062,8 +6074,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hideAt"] = 0,
 ["hidden"] = false,
+["hideAt"] = 0,
 ["roles"] = {
 "TANK",
 },
@@ -6347,8 +6359,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hidden"] = true,
 ["hideAt"] = 0,
+["hidden"] = true,
 },
 {
 ["statKey"] = "HonorCategory",
@@ -6572,8 +6584,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hidden"] = true,
 ["hideAt"] = 0,
+["hidden"] = true,
 },
 {
 ["statKey"] = "ActiBlizzWalkout",
@@ -6788,8 +6800,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hideAt"] = 0,
 ["hidden"] = false,
+["hideAt"] = 0,
 ["roles"] = {
 "TANK",
 },
@@ -7073,8 +7085,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hidden"] = true,
 ["hideAt"] = 0,
+["hidden"] = true,
 },
 {
 ["statKey"] = "HonorCategory",
@@ -7298,8 +7310,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hideAt"] = 0,
 ["hidden"] = true,
+["hideAt"] = 0,
 ["roles"] = {
 "TANK",
 },
@@ -7521,8 +7533,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hideAt"] = 0,
 ["hidden"] = true,
+["hideAt"] = 0,
 ["roles"] = {
 "TANK",
 },
@@ -7749,8 +7761,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hideAt"] = 0,
 ["hidden"] = true,
+["hideAt"] = 0,
 ["roles"] = {
 "TANK",
 },
@@ -7977,8 +7989,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hideAt"] = 0,
 ["hidden"] = true,
+["hideAt"] = 0,
 ["roles"] = {
 "TANK",
 },
@@ -8205,8 +8217,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hideAt"] = 0,
 ["hidden"] = true,
+["hideAt"] = 0,
 ["roles"] = {
 "TANK",
 },
@@ -8430,8 +8442,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hidden"] = true,
 ["hideAt"] = 0,
+["hidden"] = true,
 ["roles"] = {
 "TANK",
 },
@@ -8658,8 +8670,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hideAt"] = 0,
 ["hidden"] = true,
+["hideAt"] = 0,
 ["roles"] = {
 "TANK",
 },
@@ -8886,8 +8898,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hidden"] = true,
 ["hideAt"] = 0,
+["hidden"] = true,
 ["roles"] = {
 "TANK",
 },
@@ -9117,8 +9129,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hideAt"] = 0,
 ["hidden"] = true,
+["hideAt"] = 0,
 },
 {
 ["statKey"] = "HonorCategory",
@@ -9342,8 +9354,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hidden"] = true,
 ["hideAt"] = 0,
+["hidden"] = true,
 ["roles"] = {
 "TANK",
 },
@@ -9513,8 +9525,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hidden"] = false,
 ["hideAt"] = 0,
+["hidden"] = false,
 },
 {
 ["statKey"] = "RatingCategory",
@@ -9792,8 +9804,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hidden"] = true,
 ["hideAt"] = 0,
+["hidden"] = true,
 ["roles"] = {
 "TANK",
 },
@@ -10023,8 +10035,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hideAt"] = 0,
 ["hidden"] = true,
+["hideAt"] = 0,
 },
 {
 ["statKey"] = "HonorCategory",
@@ -10248,8 +10260,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hidden"] = true,
 ["hideAt"] = 0,
+["hidden"] = true,
 ["roles"] = {
 "TANK",
 },
@@ -10479,8 +10491,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hidden"] = true,
 ["hideAt"] = 0,
+["hidden"] = true,
 },
 {
 ["statKey"] = "HonorCategory",
@@ -10701,8 +10713,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hidden"] = true,
 ["hideAt"] = 0,
+["hidden"] = true,
 ["roles"] = {
 "TANK",
 },
@@ -10872,8 +10884,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hidden"] = true,
 ["hideAt"] = 0,
+["hidden"] = true,
 },
 {
 ["statKey"] = "RatingCategory",
@@ -11153,8 +11165,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hideAt"] = 0,
 ["hidden"] = true,
+["hideAt"] = 0,
 ["roles"] = {
 "TANK",
 },
@@ -11323,8 +11335,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hideAt"] = 0,
 ["hidden"] = false,
+["hideAt"] = 0,
 },
 {
 ["statKey"] = "RatingCategory",
@@ -11599,8 +11611,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hidden"] = true,
 ["hideAt"] = 0,
+["hidden"] = true,
 ["roles"] = {
 "TANK",
 },
@@ -11767,8 +11779,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hidden"] = false,
 ["hideAt"] = 0,
+["hidden"] = false,
 ["roles"] = {
 "TANK",
 },
@@ -12050,8 +12062,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hideAt"] = 0,
 ["hidden"] = true,
+["hideAt"] = 0,
 },
 {
 ["statKey"] = "HonorCategory",
@@ -12086,7 +12098,7 @@ DCS_ClassSpecDB = {
 },
 ["uniqueKey"] = "Gordonfreems:Stormrage:2",
 },
-["Nananenem:Illidan:4"] = {
+["Adyfiend:Illidan:5"] = {
 {
 ["statKey"] = "ItemLevelFrame",
 },
@@ -12124,10 +12136,10 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "AGILITY",
-["hidden"] = true,
 },
 {
 ["statKey"] = "INTELLECT",
+["hidden"] = true,
 },
 {
 ["statKey"] = "STAMINA",
@@ -12140,25 +12152,23 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "ATTACK_DAMAGE",
-["hidden"] = true,
 },
 {
 ["statKey"] = "ATTACK_AP",
-["hidden"] = true,
 },
 {
 ["statKey"] = "DCS_ATTACK_ATTACKSPEED",
-["hidden"] = true,
 },
 {
 ["statKey"] = "WEAPON_DPS",
-["hidden"] = true,
 },
 {
 ["statKey"] = "SPELLPOWER",
+["hidden"] = true,
 },
 {
 ["statKey"] = "MANAREGEN",
+["hidden"] = true,
 },
 {
 ["statKey"] = "ENERGY_REGEN",
@@ -12275,11 +12285,11 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hideAt"] = 0,
-["hidden"] = true,
 ["roles"] = {
 "TANK",
 },
+["hidden"] = true,
+["hideAt"] = 0,
 },
 {
 ["statKey"] = "HonorCategory",
@@ -12312,7 +12322,7 @@ DCS_ClassSpecDB = {
 ["statKey"] = "UserCat5",
 ["hidden"] = true,
 },
-["uniqueKey"] = "Nananenem:Illidan:4",
+["uniqueKey"] = "Adyfiend:Illidan:5",
 },
 ["Adyfiend:Illidan:2"] = {
 {
@@ -12443,8 +12453,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hideAt"] = 0,
 ["hidden"] = false,
+["hideAt"] = 0,
 ["roles"] = {
 "TANK",
 },
@@ -12728,8 +12738,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hidden"] = true,
 ["hideAt"] = 0,
+["hidden"] = true,
 },
 {
 ["statKey"] = "HonorCategory",

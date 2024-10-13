@@ -3,6 +3,7 @@ BigWigs:AddColors("Fungarian Delve Trash", {
 	[372529] = "orange",
 	[414944] = "red",
 	[424704] = "yellow",
+	[424750] = {"blue","yellow"},
 	[424773] = "red",
 	[424798] = "orange",
 	[424891] = "orange",
@@ -57,7 +58,7 @@ BigWigs:AddColors("The Underkeep Trash", {
 	[448179] = "red",
 	[450637] = "yellow",
 	[450714] = "orange",
-	[451913] = "red",
+	[451913] = {"blue","red"},
 	[453149] = "yellow",
 })
 
@@ -73,6 +74,8 @@ BigWigs:AddColors("Delve Rares", {
 	[450492] = "yellow",
 	[450505] = {"blue","red"},
 	[450519] = "orange",
+	[457448] = "orange",
+	[457880] = "yellow",
 	[458090] = "yellow",
 	[458099] = "red",
 	[458104] = {"red","yellow"},
@@ -83,4 +86,5 @@ BigWigs:AddColors("Delve Rares", {
 	[459421] = "yellow",
 	[461741] = {"blue","orange"},
 	[462686] = "red",
+	["zekvir_breach"] = "cyan",
 })

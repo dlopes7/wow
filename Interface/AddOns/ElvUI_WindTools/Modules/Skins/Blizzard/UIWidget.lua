@@ -5,6 +5,7 @@ local ES = E.Skins
 local _G = _G
 local hooksecurefunc = hooksecurefunc
 local pairs = pairs
+local strlower = strlower
 
 local function ReskinText(text)
 	if text then
@@ -49,12 +50,60 @@ local function ReskinUIWidgetContainer(container)
 	end)
 end
 
+local function reskinPartitionFrame(partitionFrame)
+	if partitionFrame.__windSkin then
+		return
+	end
+
+	hooksecurefunc(partitionFrame.Tex, "SetAtlas", function(self, atlas)
+		if strlower(atlas) == "widgetstatusbar-bordertick" then
+			self:SetTexture(E.media.blankTex)
+			self:SetTexCoord(0, 1, 0, 1)
+			self:SetVertexColor(1, 1, 1)
+			self:SetAlpha(0.382)
+			self:Height(15)
+			self:Width(1)
+		else
+			self:SetAlpha(1)
+		end
+	end)
+
+	partitionFrame.__windSkin = true
+end
+
+do
+	local hookedWidget = {}
+	function S:ReskinWidgetPartition(widget)
+		local pool = widget.partitionPool
+		if not pool or hookedWidget[widget] then
+			return
+		end
+
+		hookedWidget[widget] = true
+
+		for partitionFrame in pool:EnumerateActive() do
+			reskinPartitionFrame(partitionFrame)
+		end
+
+		hooksecurefunc(pool, "Acquire", function(_pool)
+			for partitionFrame in _pool:EnumerateActive() do
+				reskinPartitionFrame(partitionFrame)
+			end
+		end)
+	end
+end
+
 function S:BlizzardUIWidget()
 	if not self:CheckDB("misc", "uiWidget") then
 		return
 	end
 
-	self:SecureHook(_G.UIWidgetTemplateStatusBarMixin, "Setup", function(widget)
+	-- Partitions
+	self:SecureHook(_G.UIWidgetBaseStatusBarTemplateMixin, "InitPartitions", "ReskinWidgetPartition")
+
+	self:SecureHook(_G.UIWidgetTemplateUnitPowerBarMixin, "InitPartitions", "ReskinWidgetPartition")
+
+	self:SecureHook(_G.UIWidgetTemplateStatusBarMixin, "Setup", function(widget, widgetInfo)
 		if widget:IsForbidden() or widget.widgetSetID and widget.widgetSetID == 283 then
 			return
 		end
@@ -74,6 +123,7 @@ function S:BlizzardUIWidget()
 		if not widget.__windSkin then
 			ReskinBar(widget.Bar)
 		end
+		self:ReskinWidgetPartition(widget)
 	end)
 
 	self:SecureHook(ES, "SkinStatusBarWidget", function(_, widget)

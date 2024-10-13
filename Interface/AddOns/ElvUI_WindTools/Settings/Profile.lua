@@ -393,6 +393,7 @@ P.item = {
 			[183040] = true, -- 恆冬符咒
 			[193757] = true, -- 晶紅幼龍之殼
 			[200563] = true, -- 洪荒儀式龜殼
+			[219381] = true, -- 命運編織者
 		},
 		bar1 = {
 			enable = true,
@@ -440,7 +441,7 @@ P.item = {
 					b = 1,
 				},
 			},
-			include = "QUEST,BANNER,EQUIP,PROF,OPENABLE,DELVE",
+			include = "QUEST,BANNER,EQUIP,PROF,HOLIDAY,OPENABLE,DELVE",
 		},
 		bar2 = {
 			enable = true,
@@ -1076,16 +1077,6 @@ if W.ChineseLocale then
 end
 
 P.quest = {
-	paragonReputation = {
-		enable = false,
-		color = { r = 0, g = 0.5, b = 0.9 },
-		text = "PARAGON",
-		toast = {
-			enable = true,
-			sound = true,
-			fade_time = 5,
-		},
-	},
 	switchButtons = {
 		enable = true,
 		tooltip = true,
@@ -1114,7 +1105,7 @@ P.quest = {
 
 P.tooltips = {
 	elvUITweaks = {
-		forceItemLevel = true,
+		forceItemLevel = false,
 		raceIcon = {
 			enable = true,
 			iconWidth = 16,
@@ -1128,12 +1119,19 @@ P.tooltips = {
 		betterMythicPlusInfo = {
 			enable = true,
 			icon = true,
-			iconWidth = 18,
-			iconHeight = 16,
+			iconWidth = 16,
+			iconHeight = 14,
 		},
 	},
 	yOffsetOfHealthBar = 0,
 	yOffsetOfHealthText = 0,
+	keystone = {
+		enable = true,
+		useAbbreviation = true,
+		icon = true,
+		iconWidth = 16,
+		iconHeight = 14,
+	},
 	groupInfo = {
 		enable = false,
 		title = true,

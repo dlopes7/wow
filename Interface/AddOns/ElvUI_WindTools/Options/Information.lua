@@ -157,7 +157,7 @@ options.help = {
 						"%s: %s | %s",
 						"fang2hou",
 						E.InfoColor .. "houshuu" .. "|r",
-						F.CreateClassColorString("Tabideath @ " .. L["Shadowmoon"] .. "(TW)", "DEATHKNIGHT")
+						F.CreateClassColorString("Tabimonk @ " .. L["Shadowmoon"] .. "(TW)", "MONK")
 					),
 				},
 				["mcc1"] = {
@@ -257,7 +257,11 @@ options.help = {
 				["LvWind"] = {
 					order = 17,
 					type = "description",
-					name = "LvWind",
+					name = format(
+						"%s: %s",
+						"LvWind",
+						F.CreateClassColorString("Stellagosa @ " .. L["Bleeding Hollow"] .. " (CN)", "HUNTER")
+					),
 				},
 			},
 		},
@@ -270,12 +274,12 @@ options.help = {
 				elvui = {
 					order = 1,
 					type = "description",
-					name = "ElvUI: " .. blue(E.version),
+					name = "ElvUI: " .. blue(E.versionString),
 				},
 				windtools = {
 					order = 2,
 					type = "description",
-					name = W.Title .. ": " .. blue(W.Version),
+					name = W.Title .. ": " .. blue(W.DisplayVersion),
 				},
 				build = {
 					order = 3,
@@ -352,7 +356,9 @@ do -- 网站
 		"https://www.wowhead.com/",
 		"https://www.townlong-yak.com/",
 		"https://wow.tools/",
+		"https://wago.tools/",
 		"https://wow.gamepedia.com/",
+		"https://warcraft.wiki.gg/",
 	}
 
 	for i, site in pairs(siteList) do
@@ -456,9 +462,6 @@ do -- 插件代码
 		[L["Misc"]] = {
 			"Warbaby (爱不易)",
 			"oyg123 @ NGA.cn",
-		},
-		[L["Paragon Reputation"]] = {
-			"Fail (Paragon Reputation)",
 		},
 		[L["Skins"]] = {
 			"selias2k (iShadow)",

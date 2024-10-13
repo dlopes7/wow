@@ -1,4 +1,4 @@
--- Generated from CurseForge on Sat Sep 14 06:41:10 UTC 2024
+-- Generated from CurseForge on Sun Oct 13 07:38:51 UTC 2024
 local ns = select(2, ...) ---@class ns @The addon namespace.
 
 if ns:IsSameLocale("ptBR") then
@@ -147,29 +147,20 @@ L["LOCKING_PROFILE_FRAME"] = "Raider.IO: Bloqueando o quadro de perfil M+."
 L["MAINS_BEST_SCORE_BEST_SEASON"] = "Melhor pontuação de M+ do Main (%s)"
 L["MAINS_RAID_PROGRESS"] = "Progresso do Main"
 L["MAINS_SCORE"] = "Pontuação de M+ do Main"
---[[Translation missing --]]
---[[ L["MINIMAP_SHORTCUT_BROKER_ENABLE"] = ""--]] 
---[[Translation missing --]]
---[[ L["MINIMAP_SHORTCUT_BROKER_ENABLE_DESC"] = ""--]] 
+L["MINIMAP_SHORTCUT_BROKER_ENABLE"] = "Habilitar o botão de compartimento de addons"
+L["MINIMAP_SHORTCUT_BROKER_ENABLE_DESC"] = "Ative para exibir o ícone dentro do menu do compartimento de addons. Isso também ativará para qualquer outro addon que suporte o sistema do corretor."
 L["MINIMAP_SHORTCUT_ENABLE"] = "Habilitar botão"
 L["MINIMAP_SHORTCUT_ENABLE_DESC"] = "Ative para exibir o ícone ao redor do minimapa. Isso também o deixará disponível em qualquer outro addon que suporte o sistema de broker."
 L["MINIMAP_SHORTCUT_HEADER"] = "Minimapa"
 L["MINIMAP_SHORTCUT_HELP"] = "|A:newplayertutorial-icon-mouse-leftbutton:16:12|a Procurar |A:newplayertutorial-icon-mouse-rightbutton:16:12|a Configurações"
---[[Translation missing --]]
---[[ L["MINIMAP_SHORTCUT_HELP_LEFT_CLICK"] = ""--]] 
---[[Translation missing --]]
---[[ L["MINIMAP_SHORTCUT_HELP_RIGHT_CLICK"] = ""--]] 
---[[Translation missing --]]
---[[ L["MINIMAP_SHORTCUT_HELP_SEARCH"] = ""--]] 
---[[Translation missing --]]
---[[ L["MINIMAP_SHORTCUT_HELP_SETTINGS"] = ""--]] 
+L["MINIMAP_SHORTCUT_HELP_LEFT_CLICK"] = "Clique esquerdo"
+L["MINIMAP_SHORTCUT_HELP_RIGHT_CLICK"] = "Clique direito"
+L["MINIMAP_SHORTCUT_HELP_SEARCH"] = "Procurar"
+L["MINIMAP_SHORTCUT_HELP_SETTINGS"] = "Configurações"
 L["MINIMAP_SHORTCUT_LOCK"] = "Botão de travar"
---[[Translation missing --]]
---[[ L["MINIMAP_SHORTCUT_MINIMAP_ENABLE"] = ""--]] 
---[[Translation missing --]]
---[[ L["MINIMAP_SHORTCUT_MINIMAP_ENABLE_DESC"] = ""--]] 
---[[Translation missing --]]
---[[ L["MINIMAP_SHORTCUT_MINIMAP_LOCK"] = ""--]] 
+L["MINIMAP_SHORTCUT_MINIMAP_ENABLE"] = "Habilitar botão de minimapa"
+L["MINIMAP_SHORTCUT_MINIMAP_ENABLE_DESC"] = "Ative para exibir o ícone ao redor do minimapa."
+L["MINIMAP_SHORTCUT_MINIMAP_LOCK"] = "Trancar botão de minimapa"
 L["MODULE_AMERICAS"] = "Américas"
 L["MODULE_EUROPE"] = "Europa"
 L["MODULE_KOREA"] = "Coréia"
@@ -242,28 +233,17 @@ L["RAID_BOSS_AVOTI_5"] = "Dathea, Ascendida"
 L["RAID_BOSS_AVOTI_6"] = "Kurog Temível Totem"
 L["RAID_BOSS_AVOTI_7"] = "Guarda-prole Diurna"
 L["RAID_BOSS_AVOTI_8"] = "Raszageth, a Devoradora de Tempestade"
---[[Translation missing --]]
---[[ L["RAID_BOSS_BOT_1"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_BOT_2"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_BOT_3"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_BOT_4"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_BOT_5"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_BWD_1"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_BWD_2"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_BWD_3"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_BWD_4"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_BWD_5"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_BWD_6"] = ""--]] 
+L["RAID_BOSS_BOT_1"] = "Halfus Quebra-serpe"
+L["RAID_BOSS_BOT_2"] = "Valiona & Theralion"
+L["RAID_BOSS_BOT_3"] = "Conselho Ascendente"
+L["RAID_BOSS_BOT_4"] = "Cho'gall"
+L["RAID_BOSS_BOT_5"] = "Sinestra"
+L["RAID_BOSS_BWD_1"] = "Sistema de Defesa Omnitron"
+L["RAID_BOSS_BWD_2"] = "Magorja"
+L["RAID_BOSS_BWD_3"] = "Atramedes"
+L["RAID_BOSS_BWD_4"] = "Khímaron"
+L["RAID_BOSS_BWD_5"] = "Maloriak"
+L["RAID_BOSS_BWD_6"] = "O fim de Nefarian"
 L["RAID_BOSS_CN_1"] = "Guinchasa"
 L["RAID_BOSS_CN_10"] = "Sir Denathrius"
 L["RAID_BOSS_CN_2"] = "Guarda-caça Altimor"
@@ -305,30 +285,18 @@ L["RAID_BOSS_FSOD_6"] = "Artífice da Dor Raznal"
 L["RAID_BOSS_FSOD_7"] = "Guardião dos Primogênitos"
 L["RAID_BOSS_FSOD_8"] = "Escreve-sinas Roh-Kalo"
 L["RAID_BOSS_FSOD_9"] = "Kel'Thuzad"
---[[Translation missing --]]
---[[ L["RAID_BOSS_ICC_1"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_ICC_10"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_ICC_11"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_ICC_12"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_ICC_2"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_ICC_3"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_ICC_4"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_ICC_5"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_ICC_6"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_ICC_7"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_ICC_8"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_ICC_9"] = ""--]] 
+L["RAID_BOSS_ICC_1"] = "Lorde Medulante"
+L["RAID_BOSS_ICC_10"] = "Valithria Andassonho"
+L["RAID_BOSS_ICC_11"] = "Sindragosa"
+L["RAID_BOSS_ICC_12"] = "O Lich Rei"
+L["RAID_BOSS_ICC_2"] = "Lady Sibilamorte"
+L["RAID_BOSS_ICC_3"] = "Batalha da Belonave da Coroa de Gelo"
+L["RAID_BOSS_ICC_4"] = "Carrasco Saurfang"
+L["RAID_BOSS_ICC_5"] = "Tripapútrida"
+L["RAID_BOSS_ICC_6"] = "Rostorroto"
+L["RAID_BOSS_ICC_7"] = "Professor Putricida"
+L["RAID_BOSS_ICC_8"] = "Concílio dos Príncipes de Sangue"
+L["RAID_BOSS_ICC_9"] = "Rainha de Sangue Lana'thel"
 L["RAID_BOSS_NP_1"] = "Ulgrax"
 L["RAID_BOSS_NP_2"] = "O Terror Sanguino"
 L["RAID_BOSS_NP_3"] = "Sikran"
@@ -337,8 +305,7 @@ L["RAID_BOSS_NP_5"] = "Ovi'nax"
 L["RAID_BOSS_NP_6"] = "Princesa do Nexus Ky'veza"
 L["RAID_BOSS_NP_7"] = "A Corte Sedosa"
 L["RAID_BOSS_NP_8"] = "Rainha Ansurek"
---[[Translation missing --]]
---[[ L["RAID_BOSS_RS_1"] = ""--]] 
+L["RAID_BOSS_RS_1"] = "Halion"
 L["RAID_BOSS_SFO_1"] = "Guardião Vigilante"
 L["RAID_BOSS_SFO_10"] = "Rygelon"
 L["RAID_BOSS_SFO_11"] = "O Carcereiro"
@@ -360,10 +327,8 @@ L["RAID_BOSS_SOD_6"] = "Artífice da Dor Raznal"
 L["RAID_BOSS_SOD_7"] = "Guardião dos Primogênitos"
 L["RAID_BOSS_SOD_8"] = "Escreve-sinas Roh-Kalo"
 L["RAID_BOSS_SOD_9"] = "Kel'Thuzad"
---[[Translation missing --]]
---[[ L["RAID_BOSS_TOTFW_1"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_TOTFW_2"] = ""--]] 
+L["RAID_BOSS_TOTFW_1"] = "O Conclave do Vento"
+L["RAID_BOSS_TOTFW_2"] = "Al'Akir"
 L["RAID_BOSS_VOTI_1"] = "Eranog"
 L["RAID_BOSS_VOTI_2"] = "Terros"
 L["RAID_BOSS_VOTI_3"] = "Conselho Primevo"

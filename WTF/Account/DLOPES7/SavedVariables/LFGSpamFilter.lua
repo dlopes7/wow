@@ -6,11 +6,11 @@ LFGSpamFilterAddonConfig = {
 },
 ["ignoredCategories"] = {
 },
-["lastMaintenance"] = 1726166588,
+["lastMaintenance"] = 1728234850,
 ["version"] = 10,
 ["banButton"] = true,
-["buttonTipShown"] = true,
 ["noVoice"] = false,
+["buttonTipShown"] = true,
 ["maxAge"] = 14400,
 ["numberOfBannedPlayers"] = 0,
 }

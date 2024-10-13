@@ -1,6 +1,6 @@
 SharedMedia_Naowh: enabled
 SharedMedia_Causese: enabled
-AngryKeystones: enabled
+AngryKeystones: disabled
 BetterBags: enabled
 BigWigs: enabled
 BigWigs_Core: enabled
@@ -83,3 +83,6 @@ ElvUI_BuffHighlight: disabled
 kExtraBossFrames: disabled
 WeakAurasCompanion: enabled
 Blizzard_CombatText: enabled
+DejaCharacterStats: enabled
+Simulationcraft: enabled
+TrueStatValues: enabled

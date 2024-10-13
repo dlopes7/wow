@@ -93,3 +93,6 @@ LittleWigs_BurningCrusade: enabled
 Plumber: enabled
 Details_Compare2: enabled
 LittleWigs_Classic: enabled
+LittleWigs_WrathOfTheLichKing: enabled
+TrueStatValues: enabled
+LittleWigs_Shadowlands: enabled
