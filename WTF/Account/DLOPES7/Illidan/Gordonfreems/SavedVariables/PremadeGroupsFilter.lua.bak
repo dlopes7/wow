@@ -91,8 +91,12 @@ PremadeGroupsFilterState = {
 },
 ["dungeon7"] = false,
 ["dungeon6"] = false,
+["dps"] = {
+["max"] = "",
+["min"] = "",
+["act"] = false,
+},
 ["dungeon2"] = true,
-["dungeon3"] = false,
 ["members"] = {
 ["max"] = "",
 ["min"] = "",
@@ -110,11 +114,7 @@ PremadeGroupsFilterState = {
 },
 ["dungeon8"] = true,
 ["dungeon5"] = false,
-["dps"] = {
-["max"] = "",
-["min"] = "",
-["act"] = false,
-},
+["dungeon3"] = true,
 ["sorting"] = "",
 },
 ["enabled"] = true,

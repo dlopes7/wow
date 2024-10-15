@@ -22,13 +22,7 @@ BigWigs3DB = {
 },
 },
 },
-["BigWigs_Bosses_Witherbark"] = {
-["profiles"] = {
-["Naowh"] = {
-[164294] = 0,
-[164438] = 0,
-},
-},
+["BigWigs_Plugins_Alt Power"] = {
 },
 ["BigWigs_Plugins_BossBlock"] = {
 },
@@ -44,12 +38,6 @@ BigWigs3DB = {
 },
 },
 },
-["BigWigs_Bosses_The Coaglamation"] = {
-},
-["BigWigs_Bosses_Fangs of the Queen"] = {
-},
-["BigWigs_Plugins_Respawn"] = {
-},
 ["BigWigs_Bosses_Lady Ashvane"] = {
 ["profiles"] = {
 ["Naowh"] = {
@@ -57,9 +45,7 @@ BigWigs3DB = {
 },
 },
 },
-["BigWigs_Bosses_City of Threads Trash"] = {
-},
-["BigWigs_Plugins_AutoReply"] = {
+["BigWigs_Plugins_Statistics"] = {
 },
 ["BigWigs_Bosses_Heartsbane Triad"] = {
 ["profiles"] = {
@@ -73,6 +59,17 @@ BigWigs3DB = {
 },
 },
 },
+["BigWigs_Plugins_AltPower"] = {
+},
+["BigWigs_Bosses_Raszageth the Storm-Eater"] = {
+["profiles"] = {
+["Naowh"] = {
+["custom_off_219878"] = true,
+},
+},
+},
+["BigWigs_Plugins_Wipe"] = {
+},
 ["BigWigs_Bosses_Grong Horde"] = {
 ["profiles"] = {
 ["Naowh"] = {
@@ -83,36 +80,6 @@ BigWigs3DB = {
 [282082] = 0,
 },
 },
-},
-["BigWigs_Plugins_AltPower"] = {
-},
-["BigWigs_Bosses_Raszageth the Storm-Eater"] = {
-["profiles"] = {
-["Naowh"] = {
-["custom_off_219878"] = true,
-},
-},
-},
-["BigWigs_Plugins_Proximity"] = {
-["profiles"] = {
-["Default"] = {
-["posx"] = 467.911122441292,
-["fontSize"] = 16,
-["height"] = 120.0000076293945,
-["posy"] = 103.822061975793,
-["font"] = "Naowh",
-},
-["Naowh"] = {
-["fontSize"] = 16,
-["width"] = 139.9999389648438,
-["font"] = "Naowh",
-["posx"] = 387.5553343566098,
-["height"] = 120.0000076293945,
-["posy"] = 100.266631186043,
-},
-},
-},
-["BigWigs_Plugins_Wipe"] = {
 },
 ["BigWigs_Bosses_Rygelon"] = {
 ["profiles"] = {
@@ -135,19 +102,18 @@ BigWigs3DB = {
 },
 },
 },
-["LibDualSpec-1.0"] = {
-},
-["BigWigs_Bosses_Stormwall Blockade"] = {
+["BigWigs_Bosses_Rezan"] = {
 ["profiles"] = {
 ["Naowh"] = {
-[285350] = 0,
-[284383] = 0,
-[286558] = 0,
-[284405] = 0,
-[284106] = 0,
-[284262] = 0,
-[284362] = 0,
-[287995] = 0,
+[255434] = 3064055,
+},
+},
+},
+["BigWigs_Bosses_Coin-Operated Crowd Pummeler"] = {
+["profiles"] = {
+["Naowh"] = {
+[269493] = 0,
+[271784] = 0,
 },
 },
 },
@@ -160,12 +126,7 @@ BigWigs3DB = {
 },
 },
 },
-["BigWigs_Bosses_Rezan"] = {
-["profiles"] = {
-["Naowh"] = {
-[255434] = 3064055,
-},
-},
+["BigWigs_Plugins_Respawn"] = {
 },
 ["BigWigs_Bosses_The Silken Court"] = {
 ["profiles"] = {
@@ -178,13 +139,13 @@ BigWigs3DB = {
 ["profiles"] = {
 ["Naowh"] = {
 ["outline"] = "OUTLINE",
+["emphOutline"] = "OUTLINE",
 ["emphPosition"] = {
 nil,
 nil,
 -2,
 240,
 },
-["emphOutline"] = "OUTLINE",
 ["normalPosition"] = {
 nil,
 nil,
@@ -210,10 +171,15 @@ nil,
 },
 },
 },
-["BigWigs_Bosses_Archmage Sol"] = {
+["BigWigs_Bosses_Broodkeeper Diurna"] = {
 ["profiles"] = {
 ["Naowh"] = {
-[427899] = 3129591,
+[376073] = 3064054,
+[388716] = 3064054,
+[375829] = 3064054,
+[375871] = 3064054,
+[-25129] = 0,
+[375716] = 0,
 },
 },
 },
@@ -226,17 +192,7 @@ nil,
 },
 ["BigWigs_Plugins_Victory"] = {
 },
-["BigWigs_Bosses_Broodkeeper Diurna"] = {
-["profiles"] = {
-["Naowh"] = {
-[376073] = 3064054,
-[388716] = 3064054,
-[375829] = 3064054,
-[375871] = 3064054,
-[-25129] = 0,
-[375716] = 0,
-},
-},
+["LibDualSpec-1.0"] = {
 },
 ["BigWigs_Bosses_Soulbound Goliath"] = {
 ["profiles"] = {
@@ -256,7 +212,19 @@ nil,
 },
 },
 },
-["BigWigs_Plugins_Alt Power"] = {
+["BigWigs_Bosses_Stormwall Blockade"] = {
+["profiles"] = {
+["Naowh"] = {
+[285350] = 0,
+[284383] = 0,
+[286558] = 0,
+[284405] = 0,
+[284106] = 0,
+[284262] = 0,
+[284362] = 0,
+[287995] = 0,
+},
+},
 },
 ["BigWigs_Bosses_Infested Crawg"] = {
 ["profiles"] = {
@@ -265,47 +233,14 @@ nil,
 },
 },
 },
-["BigWigs_Bosses_Lady Jaina Proudmoore"] = {
+["BigWigs_Plugins_Nameplates"] = {
+},
+["BigWigs_Bosses_Gorak Tul"] = {
 ["profiles"] = {
 ["Naowh"] = {
-[287993] = 0,
-[285459] = 1032439,
-},
-},
-},
-["BigWigs_Bosses_Kurtalos Ravencrest"] = {
-["profiles"] = {
-["Naowh"] = {
-[198635] = 0,
-[199143] = 0,
-[199368] = 0,
-[198820] = 0,
-[201733] = 0,
-[199193] = 0,
-[202019] = 3129591,
-},
-},
-},
-["BigWigs_Bosses_Priestess Alun'za"] = {
-["profiles"] = {
-["Naowh"] = {
-[255579] = 3064055,
-},
-},
-},
-["BigWigs_Bosses_The MOTHERLODE!! Trash"] = {
-["profiles"] = {
-["Naowh"] = {
-[262412] = 0,
-[263628] = 0,
-[263202] = 0,
-},
-},
-},
-["BigWigs_Bosses_Tugar Bloodtotem"] = {
-["profiles"] = {
-["Naowh"] = {
-[242733] = 3129591,
+[266266] = 0,
+[266225] = 0,
+[266181] = 3129591,
 },
 },
 },
@@ -341,22 +276,6 @@ nil,
 [242733] = "|cff0091edLorgok Noooo -Naowh|r",
 },
 },
-["Alarm"] = {
-["BigWigs_Bosses_Broodtwister Ovi'nax"] = {
-[441362] = "|cFFFF0000Defensive|r",
-},
-["BigWigs_Bosses_Shade of Medivh"] = {
-[227628] = "Warning",
-},
-["BigWigs_Bosses_Dathea, Ascended"] = {
-[385812] = "Sonar",
-[375580] = "BigWigs: Alarm",
-},
-["BigWigs_Bosses_Kruul"] = {
-[234631] = "Details Gun1",
-[236572] = "|cff0091edShield -Naowh|r",
-},
-},
 ["Alert"] = {
 ["BigWigs_Bosses_Tugar Bloodtotem"] = {
 [241687] = "|cff0091edStopcast -Naowh|r",
@@ -380,6 +299,43 @@ nil,
 [367079] = "Air Horn",
 },
 },
+["Alarm"] = {
+["BigWigs_Bosses_Broodtwister Ovi'nax"] = {
+[441362] = "|cFFFF0000Defensive|r",
+},
+["BigWigs_Bosses_Shade of Medivh"] = {
+[227628] = "Warning",
+},
+["BigWigs_Bosses_Dathea, Ascended"] = {
+[385812] = "Sonar",
+[375580] = "BigWigs: Alarm",
+},
+["BigWigs_Bosses_Kruul"] = {
+[234631] = "Details Gun1",
+[236572] = "|cff0091edShield -Naowh|r",
+},
+},
+},
+},
+},
+["BigWigs_Bosses_Archmage Sol"] = {
+["profiles"] = {
+["Naowh"] = {
+[427899] = 3129591,
+},
+},
+},
+["BigWigs_Bosses_Tugar Bloodtotem"] = {
+["profiles"] = {
+["Naowh"] = {
+[242733] = 3129591,
+},
+},
+},
+["BigWigs_Bosses_Priestess Alun'za"] = {
+["profiles"] = {
+["Naowh"] = {
+[255579] = 3064055,
 },
 },
 },
@@ -387,6 +343,72 @@ nil,
 ["profiles"] = {
 ["Naowh"] = {
 [198073] = 3129591,
+},
+},
+},
+["BigWigs_Plugins_Bars"] = {
+["profiles"] = {
+["Default"] = {
+["emphasizeGrowup"] = true,
+["spacing"] = 4,
+["barStyle"] = "ElvUI",
+["expPosition"] = {
+nil,
+nil,
+-10,
+95,
+},
+},
+["Naowh"] = {
+["emphasizeGrowup"] = true,
+["visibleBarLimitEmph"] = 3,
+["normalPosition"] = {
+nil,
+nil,
+416,
+233,
+},
+["growup"] = true,
+["texture"] = "Melli",
+["expPosition"] = {
+nil,
+nil,
+371,
+-181,
+},
+["emphasizeTime"] = 15,
+},
+},
+},
+["BigWigs_Bosses_Kurtalos Ravencrest"] = {
+["profiles"] = {
+["Naowh"] = {
+[198635] = 0,
+[199143] = 0,
+[199368] = 0,
+[198820] = 0,
+[201733] = 0,
+[199193] = 0,
+[202019] = 3129591,
+},
+},
+},
+["BigWigs_Bosses_Halondrus the Reclaimer"] = {
+["profiles"] = {
+["Naowh"] = {
+[360115] = 0,
+[368363] = 0,
+[369207] = 0,
+[365297] = 0,
+},
+},
+},
+["BigWigs_Bosses_The MOTHERLODE!! Trash"] = {
+["profiles"] = {
+["Naowh"] = {
+[262412] = 0,
+[263628] = 0,
+[263202] = 0,
 },
 },
 },
@@ -402,41 +424,9 @@ nil,
 },
 },
 },
-["BigWigs_Bosses_Orator Krix'vizk"] = {
-},
-["BigWigs_Bosses_Halondrus the Reclaimer"] = {
-["profiles"] = {
-["Naowh"] = {
-[360115] = 0,
-[368363] = 0,
-[369207] = 0,
-[365297] = 0,
-},
-},
-},
-["BigWigs_Bosses_Skycap'n Kragg"] = {
-["profiles"] = {
-["Naowh"] = {
-[256106] = 966887,
-["stages"] = 0,
-},
-},
-},
-["BigWigs_Plugins_Nameplates"] = {
-},
 ["BigWigs_Plugins_Colors"] = {
 ["profiles"] = {
 ["Naowh"] = {
-["barBackground"] = {
-["BigWigs_Plugins_Colors"] = {
-["default"] = {
-0,
-0,
-0,
-0.1223028302192688,
-},
-},
-},
 ["barColor"] = {
 ["BigWigs_Plugins_Colors"] = {
 ["default"] = {
@@ -455,10 +445,26 @@ nil,
 },
 },
 },
+["barBackground"] = {
+["BigWigs_Plugins_Colors"] = {
+["default"] = {
+0,
+0,
+0,
+0.1223028302192688,
 },
 },
 },
-["BigWigs_Plugins_Raid Icons"] = {
+},
+},
+},
+["BigWigs_Bosses_Witherbark"] = {
+["profiles"] = {
+["Naowh"] = {
+[164294] = 0,
+[164438] = 0,
+},
+},
 },
 ["BigWigs_Plugins_InfoBox"] = {
 ["profiles"] = {
@@ -472,60 +478,46 @@ nil,
 },
 },
 },
-["BigWigs_Plugins_Bars"] = {
-["profiles"] = {
-["Default"] = {
-["barStyle"] = "ElvUI",
-["emphasizeGrowup"] = true,
-["expPosition"] = {
-nil,
-nil,
--10,
-95,
-},
-["spacing"] = 4,
-},
-["Naowh"] = {
-["emphasizeGrowup"] = true,
-["texture"] = "Melli",
-["emphasizeTime"] = 15,
-["growup"] = true,
-["expPosition"] = {
-nil,
-nil,
-371,
--181,
-},
-["visibleBarLimitEmph"] = 3,
-["normalPosition"] = {
-nil,
-nil,
-416,
-233,
-},
-},
-},
-},
-["BigWigs_Bosses_Gorak Tul"] = {
+["BigWigs_Bosses_Lady Jaina Proudmoore"] = {
 ["profiles"] = {
 ["Naowh"] = {
-[266266] = 0,
-[266225] = 0,
-[266181] = 3129591,
+[287993] = 0,
+[285459] = 1032439,
+},
+},
+},
+["BigWigs_Bosses_Skycap'n Kragg"] = {
+["profiles"] = {
+["Naowh"] = {
+[256106] = 966887,
+["stages"] = 0,
 },
 },
 },
 ["BigWigs_Plugins_Super Emphasize"] = {
 },
-["BigWigs_Bosses_Coin-Operated Crowd Pummeler"] = {
+["BigWigs_Plugins_AutoReply"] = {
+},
+["BigWigs_Plugins_Proximity"] = {
 ["profiles"] = {
+["Default"] = {
+["fontSize"] = 16,
+["font"] = "Naowh",
+["posx"] = 467.911122441292,
+["height"] = 120.0000076293945,
+["posy"] = 103.822061975793,
+},
 ["Naowh"] = {
-[269493] = 0,
-[271784] = 0,
+["posx"] = 387.5553343566098,
+["fontSize"] = 16,
+["height"] = 120.0000076293945,
+["posy"] = 100.266631186043,
+["font"] = "Naowh",
+["width"] = 139.9999389648438,
 },
 },
 },
-["BigWigs_Plugins_Statistics"] = {
+["BigWigs_Plugins_Raid Icons"] = {
 },
 ["BigWigs_Bosses_The Necrotic Wake Trash"] = {
 ["profiles"] = {

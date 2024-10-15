@@ -1,7 +1,7 @@
 
 BugGrabberDB = {
 ["lastSanitation"] = 3,
-["session"] = 1637,
+["session"] = 1649,
 ["errors"] = {
 {
 ["message"] = "Lua error in aura '[INFUSION] - TRASH - SPEAR FLURRY CHANNEL': Custom Action\nWeakAuras Version: 5.8.4\nAura Version: 2.6.4\n[string \"return function() NUI.TTS(\"avoid\",5)\"]:1: attempt to call field 'TTS' (a nil value)",
@@ -4994,28 +4994,36 @@ BugGrabberDB = {
 ["counter"] = 54,
 },
 {
-["message"] = "Interface/AddOns/ElvUI/Core/General/Math.lua:311: script ran too long",
-["time"] = "2023/11/13 14:52:24",
-["locals"] = "(*temporary) = <function> defined =[C]:-1\n(*temporary) = \"collect\"\n(*temporary) = 0\n(*temporary) = \"script ran too long\"\nfunc = <function> defined =[C]:-1\nunpack = <function> defined =[C]:-1\ndata = <table> {\n 1 = \"collect\"\n}\n",
-["stack"] = "[string \"@Interface/AddOns/ElvUI/Core/General/Math.lua\"]:311: in function <Interface/AddOns/ElvUI/Core/General/Math.lua:311>",
-["session"] = 1634,
-["counter"] = 200,
+["message"] = "Interface/AddOns/BetterBags/core/events.lua:201: ctx has been cancelled: bags/OpenClose",
+["time"] = "2024/10/15 08:17:53",
+["locals"] = "(*temporary) = \"ctx has been cancelled: bags/OpenClose\"\n",
+["stack"] = "[string \"=[C]\"]: in function `error'\n[string \"@Interface/AddOns/BetterBags/core/events.lua\"]:201: in function `SendMessage'\n[string \"@Interface/AddOns/BetterBags/core/events.lua\"]:224: in function <Interface/AddOns/BetterBags/core/events.lua:223>",
+["session"] = 1644,
+["counter"] = 1,
 },
 {
 ["message"] = "Lua error in aura 'Dungeon Teleport Buttons': init\nWeakAuras Version: 5.17.2\nAura Version: 1.0.19\nStack trace:\n[string \"return function() aura_env.mapIDtoSpellID =...\"]:215: attempt to index local 'cooldownInfo' (a nil value)",
 ["time"] = "2024/10/07 18:10:18",
 ["locals"] = "(for state) = <table> {\n 1 = 501\n 2 = 503\n 3 = 375\n 4 = 507\n 5 = 505\n 6 = 376\n 7 = 353\n 8 = 502\n}\n(for control) = 7\ni = 7\nmapID = 353\nspellID = -1\nframeName = \"Dungeon Teleport Buttons353\"\nbutton = Dungeon Teleport Buttons353 {\n cd = Dungeon Teleport Buttons353cd {\n }\n PixelSnapDisabled = true\n text = FontString {\n }\n tex = Texture {\n }\n}\ncooldownInfo = nil\n(*temporary) = -1\n(*temporary) = Dungeon Teleport Buttons376cd {\n}\n(*temporary) = 0\n(*temporary) = 0\n(*temporary) = \"attempt to index local 'cooldownInfo' (a nil value)\"\n",
 ["stack"] = "[string \"return function() aura_env.mapIDtoSpellID = {\"]:215: in function `updateCooldowns'\n[string \"return function() aura_env.mapIDtoSpellID = {\"]:226: in function <[string \"return function() aura_env.mapIDtoSpellID =...\"]:1>\n[string \"=[C]\"]: in function `xpcall'\n[string \"@Interface/AddOns/WeakAuras/AuraEnvironment.lua\"]:374: in function `ActivateAuraEnvironment'\n[string \"@Interface/AddOns/WeakAuras/GenericTrigger.lua\"]:1116: in function `ScanWithFakeEvent'\n[string \"@Interface/AddOns/WeakAuras/GenericTrigger.lua\"]:1476: in function `LoadDisplays'\n[string \"@Interface/AddOns/WeakAuras/WeakAuras.lua\"]:2024: in function `LoadDisplays'\n[string \"@Interface/AddOns/WeakAuras/WeakAuras.lua\"]:1805: in function <Interface/AddOns/WeakAuras/WeakAuras.lua:1648>\n[string \"@Interface/AddOns/WeakAuras/WeakAuras.lua\"]:2001: in function `Resume'\n[string \"@Interface/AddOns/WeakAuras/WeakAuras.lua\"]:1291: in function <Interface/AddOns/WeakAuras/WeakAuras.lua:1249>",
-["session"] = 1637,
-["counter"] = 34,
+["session"] = 1649,
+["counter"] = 40,
+},
+{
+["message"] = "Interface/AddOns/ElvUI/Core/General/Math.lua:311: script ran too long",
+["time"] = "2023/11/13 14:52:24",
+["locals"] = "(*temporary) = <function> defined =[C]:-1\n(*temporary) = \"collect\"\n(*temporary) = 0\n(*temporary) = \"script ran too long\"\nfunc = <function> defined =[C]:-1\nunpack = <function> defined =[C]:-1\ndata = <table> {\n 1 = \"collect\"\n}\n",
+["stack"] = "[string \"@Interface/AddOns/ElvUI/Core/General/Math.lua\"]:311: in function <Interface/AddOns/ElvUI/Core/General/Math.lua:311>",
+["session"] = 1649,
+["counter"] = 202,
 },
 {
 ["message"] = "Lua error in aura 'Dungeon Teleport Buttons': Trigger 2\nWeakAuras Version: 5.17.2\nAura Version: 1.0.19\nStack trace:\n[string \"return function() aura_env.mapIDtoSpellID =...\"]:215: attempt to index local 'cooldownInfo' (a nil value)",
 ["time"] = "2024/10/07 18:10:19",
 ["locals"] = "(for state) = <table> {\n 1 = 501\n 2 = 503\n 3 = 375\n 4 = 507\n 5 = 505\n 6 = 376\n 7 = 353\n 8 = 502\n}\n(for control) = 7\ni = 7\nmapID = 353\nspellID = -1\nframeName = \"Dungeon Teleport Buttons353\"\nbutton = Dungeon Teleport Buttons353 {\n cd = Dungeon Teleport Buttons353cd {\n }\n PixelSnapDisabled = true\n text = FontString {\n }\n tex = Texture {\n }\n}\ncooldownInfo = nil\n(*temporary) = -1\n(*temporary) = Dungeon Teleport Buttons376cd {\n}\n(*temporary) = 0\n(*temporary) = 0\n(*temporary) = \"attempt to index local 'cooldownInfo' (a nil value)\"\n",
 ["stack"] = "[string \"return function() aura_env.mapIDtoSpellID = {\"]:215: in function `updateCooldowns'\n[string \"return function(event)\"]:3: in function <[string \"return function(event)\"]:1>\n[string \"=[C]\"]: in function `xpcall'\n[string \"@Interface/AddOns/WeakAuras/GenericTrigger.lua\"]:752: in function <Interface/AddOns/WeakAuras/GenericTrigger.lua:657>\n[string \"@Interface/AddOns/WeakAuras/GenericTrigger.lua\"]:933: in function `ScanEventsInternal'\n[string \"@Interface/AddOns/WeakAuras/GenericTrigger.lua\"]:878: in function `ScanEvents'\n[string \"@Interface/AddOns/WeakAuras/GenericTrigger.lua\"]:1163: in function <Interface/AddOns/WeakAuras/GenericTrigger.lua:1148>",
-["session"] = 1637,
-["counter"] = 19066,
+["session"] = 1649,
+["counter"] = 19593,
 },
 },
 }

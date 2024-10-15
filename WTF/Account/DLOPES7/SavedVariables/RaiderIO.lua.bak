@@ -17,23 +17,14 @@ RaiderIO_Config = {
 ["x"] = -223.9988861083984,
 ["point"] = "BOTTOMRIGHT",
 },
-["previouslyEnabledLogging"] = false,
+["previouslyEnabledLogging"] = true,
 ["lockReplay"] = true,
 ["enableReplay"] = false,
 ["displayWeeklyGuildBest"] = false,
 }
-RaiderIO_LastCharacter = "us-Doutora-illidan"
+RaiderIO_LastCharacter = "us-Davi-stormrage"
 RaiderIO_MissingCharacters = {
-["us-Zargala-illidan"] = true,
-["us-Bichillidan-azralon"] = true,
-["us-Frigidbeotch-muradin"] = true,
-["us-Hijynx-sargeras"] = true,
-["us-Doutora-illidan"] = true,
-["us-Redox-illidan"] = true,
-["us-Hottsndotts-illidan"] = true,
-["us-Drexl-muradin"] = true,
-["us-Sgtfenix-scarlet-crusade"] = true,
-["us-Grozbekzarn-daggerspine"] = true,
+["us-Nitec-stormrage"] = true,
 }
 RaiderIO_MissingServers = {
 }

@@ -1,5 +1,5 @@
 --
--- RaiderIO Client Data. Generated on Sun Oct 13 2024 12:29:43 GMT+0000 (Coordinated Universal Time)
+-- RaiderIO Client Data. Generated on Mon Oct 14 2024 12:04:29 GMT+0000 (Coordinated Universal Time)
 --
 local _, ns = ...
 ns.GUILD_BEST_DATA = {
@@ -362,40 +362,6 @@ ns.GUILD_BEST_DATA = {
     },
     ["season_best"] = {
       {
-        ["zone_id"] = 9354,
-        ["level"] = 12,
-        ["upgrades"] = 1,
-        ["fraction"] = 0.9641049793563753,
-        ["clear_time"] = "00:31:49.891",
-        ["party"] = {
-          {
-            ["name"] = "Shieldclass",
-            ["role"] = "tank",
-            ["class_id"] = 1
-          },
-          {
-            ["name"] = "Shamshamios",
-            ["role"] = "healer",
-            ["class_id"] = 7
-          },
-          {
-            ["name"] = "Hiitstick",
-            ["role"] = "dps",
-            ["class_id"] = 7
-          },
-          {
-            ["name"] = "Myeye",
-            ["role"] = "dps",
-            ["class_id"] = 2
-          },
-          {
-            ["name"] = "Woldorogue",
-            ["role"] = "dps",
-            ["class_id"] = 4
-          }
-        }
-      },
-      {
         ["zone_id"] = 15093,
         ["level"] = 12,
         ["upgrades"] = 1,
@@ -464,29 +430,29 @@ ns.GUILD_BEST_DATA = {
         }
       },
       {
-        ["zone_id"] = 14979,
+        ["zone_id"] = 14883,
         ["level"] = 12,
         ["upgrades"] = 1,
-        ["fraction"] = 0.9981846731007488,
-        ["clear_time"] = "00:34:57.185",
+        ["fraction"] = 0.9431822025149937,
+        ["clear_time"] = "00:31:08.443",
         ["party"] = {
           {
-            ["name"] = "Mereld",
+            ["name"] = "Bigbobmobile",
             ["role"] = "tank",
-            ["class_id"] = 11
+            ["class_id"] = 12
           },
           {
-            ["name"] = "Mahoraga",
+            ["name"] = "Sleepyowls",
             ["role"] = "healer",
             ["class_id"] = 7
           },
           {
-            ["name"] = "Piratekitty",
+            ["name"] = "Litric",
             ["role"] = "dps",
-            ["class_id"] = 8
+            ["class_id"] = 2
           },
           {
-            ["name"] = "Sanadk",
+            ["name"] = "Trickcess",
             ["role"] = "dps",
             ["class_id"] = 6
           },
@@ -498,29 +464,63 @@ ns.GUILD_BEST_DATA = {
         }
       },
       {
-        ["zone_id"] = 13334,
+        ["zone_id"] = 12916,
         ["level"] = 12,
         ["upgrades"] = 1,
-        ["fraction"] = 0.9656779376335023,
-        ["clear_time"] = "00:28:59.185",
+        ["fraction"] = 0.9271509549440918,
+        ["clear_time"] = "00:28:45.427",
         ["party"] = {
           {
-            ["name"] = "Snowingg",
+            ["name"] = "End",
             ["role"] = "tank",
-            ["class_id"] = 12
+            ["class_id"] = 11
           },
           {
-            ["name"] = "Zenyitotem",
+            ["name"] = "Rprdo",
             ["role"] = "healer",
             ["class_id"] = 7
           },
           {
-            ["name"] = "Chocos",
+            ["name"] = "Chasesdk",
             ["role"] = "dps",
-            ["class_id"] = 13
+            ["class_id"] = 6
           },
           {
-            ["name"] = "Mumblesz",
+            ["name"] = "Päinkiller",
+            ["role"] = "dps",
+            ["class_id"] = 2
+          },
+          {
+            ["name"] = "Woldorogue",
+            ["role"] = "dps",
+            ["class_id"] = 4
+          }
+        }
+      },
+      {
+        ["zone_id"] = 13334,
+        ["level"] = 13,
+        ["upgrades"] = 0,
+        ["fraction"] = 1.0289389388889167,
+        ["clear_time"] = "00:30:53.118",
+        ["party"] = {
+          {
+            ["name"] = "Bigbobmobile",
+            ["role"] = "tank",
+            ["class_id"] = 12
+          },
+          {
+            ["name"] = "Sleepyowls",
+            ["role"] = "healer",
+            ["class_id"] = 7
+          },
+          {
+            ["name"] = "Litric",
+            ["role"] = "dps",
+            ["class_id"] = 2
+          },
+          {
+            ["name"] = "Trickcess",
             ["role"] = "dps",
             ["class_id"] = 6
           },
@@ -534,40 +534,6 @@ ns.GUILD_BEST_DATA = {
     },
     ["weekly_best"] = {
       {
-        ["zone_id"] = 9354,
-        ["level"] = 12,
-        ["upgrades"] = 1,
-        ["fraction"] = 0.9641049793563753,
-        ["clear_time"] = "00:31:49.891",
-        ["party"] = {
-          {
-            ["name"] = "Shieldclass",
-            ["role"] = "tank",
-            ["class_id"] = 1
-          },
-          {
-            ["name"] = "Shamshamios",
-            ["role"] = "healer",
-            ["class_id"] = 7
-          },
-          {
-            ["name"] = "Hiitstick",
-            ["role"] = "dps",
-            ["class_id"] = 7
-          },
-          {
-            ["name"] = "Myeye",
-            ["role"] = "dps",
-            ["class_id"] = 2
-          },
-          {
-            ["name"] = "Woldorogue",
-            ["role"] = "dps",
-            ["class_id"] = 4
-          }
-        }
-      },
-      {
         ["zone_id"] = 15093,
         ["level"] = 12,
         ["upgrades"] = 1,
@@ -636,29 +602,29 @@ ns.GUILD_BEST_DATA = {
         }
       },
       {
-        ["zone_id"] = 14979,
+        ["zone_id"] = 14883,
         ["level"] = 12,
         ["upgrades"] = 1,
-        ["fraction"] = 0.9981846731007488,
-        ["clear_time"] = "00:34:57.185",
+        ["fraction"] = 0.9431822025149937,
+        ["clear_time"] = "00:31:08.443",
         ["party"] = {
           {
-            ["name"] = "Mereld",
+            ["name"] = "Bigbobmobile",
             ["role"] = "tank",
-            ["class_id"] = 11
+            ["class_id"] = 12
           },
           {
-            ["name"] = "Mahoraga",
+            ["name"] = "Sleepyowls",
             ["role"] = "healer",
             ["class_id"] = 7
           },
           {
-            ["name"] = "Piratekitty",
+            ["name"] = "Litric",
             ["role"] = "dps",
-            ["class_id"] = 8
+            ["class_id"] = 2
           },
           {
-            ["name"] = "Sanadk",
+            ["name"] = "Trickcess",
             ["role"] = "dps",
             ["class_id"] = 6
           },
@@ -670,29 +636,63 @@ ns.GUILD_BEST_DATA = {
         }
       },
       {
-        ["zone_id"] = 13334,
+        ["zone_id"] = 12916,
         ["level"] = 12,
         ["upgrades"] = 1,
-        ["fraction"] = 0.9656779376335023,
-        ["clear_time"] = "00:28:59.185",
+        ["fraction"] = 0.9271509549440918,
+        ["clear_time"] = "00:28:45.427",
         ["party"] = {
           {
-            ["name"] = "Snowingg",
+            ["name"] = "End",
             ["role"] = "tank",
-            ["class_id"] = 12
+            ["class_id"] = 11
           },
           {
-            ["name"] = "Zenyitotem",
+            ["name"] = "Rprdo",
             ["role"] = "healer",
             ["class_id"] = 7
           },
           {
-            ["name"] = "Chocos",
+            ["name"] = "Chasesdk",
             ["role"] = "dps",
-            ["class_id"] = 13
+            ["class_id"] = 6
           },
           {
-            ["name"] = "Mumblesz",
+            ["name"] = "Päinkiller",
+            ["role"] = "dps",
+            ["class_id"] = 2
+          },
+          {
+            ["name"] = "Woldorogue",
+            ["role"] = "dps",
+            ["class_id"] = 4
+          }
+        }
+      },
+      {
+        ["zone_id"] = 13334,
+        ["level"] = 13,
+        ["upgrades"] = 0,
+        ["fraction"] = 1.0289389388889167,
+        ["clear_time"] = "00:30:53.118",
+        ["party"] = {
+          {
+            ["name"] = "Bigbobmobile",
+            ["role"] = "tank",
+            ["class_id"] = 12
+          },
+          {
+            ["name"] = "Sleepyowls",
+            ["role"] = "healer",
+            ["class_id"] = 7
+          },
+          {
+            ["name"] = "Litric",
+            ["role"] = "dps",
+            ["class_id"] = 2
+          },
+          {
+            ["name"] = "Trickcess",
             ["role"] = "dps",
             ["class_id"] = 6
           },
