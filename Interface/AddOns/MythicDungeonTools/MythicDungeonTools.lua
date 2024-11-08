@@ -274,10 +274,6 @@ do
   function MDT.PLAYER_ENTERING_WORLD()
     --initialize Blizzard_ChallengesUI
     C_Timer.After(1, function()
-      C_AddOns.LoadAddOn("Blizzard_ChallengesUI")
-      C_MythicPlus.RequestCurrentAffixes()
-      C_MythicPlus.RequestMapInfo()
-      C_MythicPlus.RequestRewards()
       if db.loadOnStartUp and db.devMode then MDT:Async(function() MDT:ShowInterfaceInternal(true) end, "showInterface") end
     end)
     eventFrame:UnregisterEvent("PLAYER_ENTERING_WORLD")
@@ -336,7 +332,13 @@ function MDT:GetNumDungeons()
   return count
 end
 
-function MDT:GetDungeonName(idx) return MDT.dungeonList[idx] end
+function MDT:GetDungeonName(idx, forceEnglish)
+  -- don't fail hard for legacy dungeons
+  if forceEnglish and MDT.mapInfo[idx].englishName then
+    return MDT.mapInfo[idx].englishName
+  end
+  return MDT.dungeonList[idx]
+end
 
 function MDT:GetDungeonSublevels()
   return MDT.dungeonSubLevels
@@ -2162,10 +2164,10 @@ function MDT:CalculateEnemyHealth(boss, baseHealth, level, ignoreFortified)
     if boss == false then mult = mult * 1.2 end
     if boss == true then mult = mult * 1.25 end
   elseif level >= 12 then
-    -- For levels 12 and above, apply an additional 20% health increase
-    -- Xal'atath's Guile:Xal'atath betrays players, revoking her bargains and increasing the health and damage of enemies by 20%
-    if boss == false then mult = mult * 1.2 * 1.2 end
-    if boss == true then mult = mult * 1.25 * 1.2 end
+    -- For levels 12 and above, apply an additional 10% health increase
+    -- Xal'atath's Guile:Xal'atath betrays players, revoking her bargains and increasing the health and damage of enemies by 10%
+    if boss == false then mult = mult * 1.2 * 1.1 end
+    if boss == true then mult = mult * 1.25 * 1.1 end
   end
 
 
@@ -2200,10 +2202,10 @@ function MDT:ReverseCalcEnemyHealth(health, level, boss, fortified, tyrannical, 
     if boss == false then mult = mult * 1.2 end
     if boss == true then mult = mult * 1.25 end
   elseif level >= 12 then
-    -- For levels 12 and above, apply an additional 20% health increase
+    -- For levels 12 and above, apply an additional 10% health increase
     -- Source: https://www.wowhead.com/blue-tracker/topic/us/affix-system-updates-in-the-war-within-1882601
-    if boss == false then mult = mult * 1.2 * 1.2 end
-    if boss == true then mult = mult * 1.25 * 1.2 end
+    if boss == false then mult = mult * 1.2 * 1.1 end
+    if boss == true then mult = mult * 1.25 * 1.1 end
   end
 
   -- Apply thundering multiplier if present
@@ -4487,7 +4489,7 @@ function MDT:GetCurrentAffixWeek()
   C_MythicPlus.RequestMapInfo()
   C_MythicPlus.RequestRewards()
   local affixIds = C_MythicPlus.GetCurrentAffixes() --table
-  if not affixIds then return end
+  if not affixIds then return 1 end
   if not affixIds[1] then return 1 end
   for week, affixes in ipairs(affixWeeks) do
     if affixes[1] == affixIds[2].id and affixes[2] == affixIds[3].id and affixes[3] == affixIds[1].id then

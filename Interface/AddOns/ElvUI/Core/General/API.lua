@@ -291,17 +291,17 @@ end
 
 do	-- backwards compatibility for C_Spell
 	local GetSpellInfo = GetSpellInfo
-	local C_Spell_GetSpellInfo = C_Spell.GetSpellInfo
+	local C_Spell_GetSpellInfo = not GetSpellInfo and C_Spell.GetSpellInfo
 	function E:GetSpellInfo(spellID)
 		if not spellID then return end
 
-		if GetSpellInfo then
-			return GetSpellInfo(spellID)
-		else
+		if C_Spell_GetSpellInfo then
 			local info = C_Spell_GetSpellInfo(spellID)
 			if info then
 				return info.name, nil, info.iconID, info.castTime, info.minRange, info.maxRange, info.spellID, info.originalIconID
 			end
+		else
+			return GetSpellInfo(spellID)
 		end
 	end
 
@@ -855,8 +855,7 @@ function E:PositionGameMenuButton()
 			if lastIndex == anchorIndex and GameMenuFrame.ElvUI then
 				GameMenuFrame.ElvUI:Point('TOPLEFT', button, 'BOTTOMLEFT', 0, -10)
 			elseif not lastIndex then
-				local point, anchor, point2, x, y = button:GetPoint()
-				button:SetPoint(point, anchor, point2, x, y - 35)
+				button:NudgePoint(nil, -35)
 			end
 		end
 

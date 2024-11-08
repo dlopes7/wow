@@ -1,4 +1,4 @@
--- Generated from CurseForge on Mon Oct 14 08:05:16 UTC 2024
+-- Generated from CurseForge on Thu Nov  7 09:26:50 UTC 2024
 local ns = select(2, ...) ---@class ns @The addon namespace.
 
 if ns:IsSameLocale("zhCN") then
@@ -244,6 +244,22 @@ L["RAID_BOSS_BOT_2"] = "瑟纳利昂和瓦里昂娜"
 L["RAID_BOSS_BOT_3"] = "升腾者议会"
 L["RAID_BOSS_BOT_4"] = "古加尔"
 L["RAID_BOSS_BOT_5"] = "希奈丝特拉"
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_1"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_2"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_3"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_4"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_5"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_6"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_7"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_8"] = ""--]] 
 L["RAID_BOSS_BWD_1"] = "全能金刚防御系统"
 L["RAID_BOSS_BWD_2"] = "熔喉"
 L["RAID_BOSS_BWD_3"] = "艾卓曼德斯"
@@ -270,6 +286,20 @@ L["RAID_BOSS_FCN_6"] = "伊涅瓦·暗脉女勋爵（宿命）"
 L["RAID_BOSS_FCN_7"] = "猩红议会（宿命）"
 L["RAID_BOSS_FCN_8"] = "泥拳（宿命）"
 L["RAID_BOSS_FCN_9"] = "顽石军团干将（宿命）"
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_1"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_2"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_3"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_4"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_5"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_6"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_7"] = ""--]] 
 L["RAID_BOSS_FSFO_1"] = "警戒卫士（宿命）"
 L["RAID_BOSS_FSFO_10"] = "莱葛隆（宿命）"
 L["RAID_BOSS_FSFO_11"] = "典狱长（宿命）"
@@ -344,6 +374,8 @@ L["RAID_BOSS_VOTI_6"] = "库洛洛·恐怖图腾"
 L["RAID_BOSS_VOTI_7"] = "巢穴守护者迪乌尔娜"
 L["RAID_BOSS_VOTI_8"] = "莱萨杰丝，噬雷之龙"
 L["RAID_BOT"] = "暮光堡垒"
+--[[Translation missing --]]
+--[[ L["RAID_BRD"] = ""--]] 
 L["RAID_BWD"] = "黑翼血环"
 L["RAID_DIFFICULTY_NAME_HEROIC"] = "英雄"
 L["RAID_DIFFICULTY_NAME_HEROIC10"] = "10人英雄"
@@ -360,6 +392,8 @@ L["RAID_DIFFICULTY_SUFFIX_NORMAL"] = "普通"
 L["RAID_DIFFICULTY_SUFFIX_NORMAL10"] = "10PT"
 L["RAID_DIFFICULTY_SUFFIX_NORMAL25"] = "25PT"
 L["RAID_ENCOUNTERS_DEFEATED_TITLE"] = "已击杀团队副本首领"
+--[[Translation missing --]]
+--[[ L["RAID_FL"] = ""--]] 
 L["RAID_ICC"] = "冰冠堡垒"
 L["RAID_NP"] = "尼鲁巴尔王宫"
 L["RAID_RS"] = "红玉圣所"

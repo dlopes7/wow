@@ -42,6 +42,8 @@ local COLORS = {
     DarkModeGrey50 = {0.5, 0.5, 0.5},
     DarkModeGold = {1, 0.98, 0.8},
     DarkModeGoldDim = {0.796, 0.784, 0.584},
+
+    WarningRed = {1.000, 0.125, 0.125},
 };
 
 local FONT_OBJECT_COLOR = {
@@ -150,6 +152,14 @@ function ThemeUtil:GetItemSelectColor()
         return unpack(COLORS.DarkModeGold)
     else
         return unpack(COLORS.Ivory)
+    end
+end
+
+function ThemeUtil:GetMenuButtonColor()
+    if self:IsDarkMode() then
+        return unpack(COLORS.DarkModeGrey90)
+    else
+        return unpack(COLORS.DarkBrown)
     end
 end
 

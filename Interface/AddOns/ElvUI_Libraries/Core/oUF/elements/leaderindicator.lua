@@ -58,7 +58,9 @@ local function Update(self, event)
 	end
 	-- end block
 
-	if(isLeader) then
+	if element.combatHide and UnitAffectingCombat(unit) then
+		element:Hide()
+	elseif(isLeader) then
 		if(isInLFGInstance) then
 			element:SetTexture([[Interface\LFGFrame\UI-LFG-ICON-PORTRAITROLES]])
 			element:SetTexCoord(0, 0.296875, 0.015625, 0.3125)
@@ -105,8 +107,11 @@ local function Enable(self)
 		element.__owner = self
 		element.ForceUpdate = ForceUpdate
 
-		self:RegisterEvent('PARTY_LEADER_CHANGED', Path, true)
+		self:RegisterEvent('UNIT_FLAGS', Path)
 		self:RegisterEvent('GROUP_ROSTER_UPDATE', Path, true)
+		self:RegisterEvent('PARTY_LEADER_CHANGED', Path, true)
+		self:RegisterEvent('PLAYER_REGEN_DISABLED', Path, true)
+		self:RegisterEvent('PLAYER_REGEN_ENABLED', Path, true)
 
 		return true
 	end
@@ -117,8 +122,11 @@ local function Disable(self)
 	if(element) then
 		element:Hide()
 
-		self:UnregisterEvent('PARTY_LEADER_CHANGED', Path)
+		self:UnregisterEvent('UNIT_FLAGS', Path)
 		self:UnregisterEvent('GROUP_ROSTER_UPDATE', Path)
+		self:UnregisterEvent('PARTY_LEADER_CHANGED', Path)
+		self:UnregisterEvent('PLAYER_REGEN_DISABLED', Path)
+		self:UnregisterEvent('PLAYER_REGEN_ENABLED', Path)
 	end
 end
 

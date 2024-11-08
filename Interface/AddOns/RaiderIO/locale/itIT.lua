@@ -1,4 +1,4 @@
--- Generated from CurseForge on Mon Oct 14 08:05:09 UTC 2024
+-- Generated from CurseForge on Thu Nov  7 09:26:44 UTC 2024
 local ns = select(2, ...) ---@class ns @The addon namespace.
 
 if ns:IsSameLocale("itIT") then
@@ -278,6 +278,22 @@ L["RAID_BOSS_AVOTI_8"] = "Raszageth la Mangiatempeste"
 --[[Translation missing --]]
 --[[ L["RAID_BOSS_BOT_5"] = ""--]] 
 --[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_1"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_2"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_3"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_4"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_5"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_6"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_7"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_8"] = ""--]] 
+--[[Translation missing --]]
 --[[ L["RAID_BOSS_BWD_1"] = ""--]] 
 --[[Translation missing --]]
 --[[ L["RAID_BOSS_BWD_2"] = ""--]] 
@@ -319,6 +335,20 @@ L["RAID_BOSS_CN_9"] = "Generali della Legione di Pietra "
 --[[ L["RAID_BOSS_FCN_8"] = ""--]] 
 --[[Translation missing --]]
 --[[ L["RAID_BOSS_FCN_9"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_1"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_2"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_3"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_4"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_5"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_6"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_7"] = ""--]] 
 --[[Translation missing --]]
 --[[ L["RAID_BOSS_FSFO_1"] = ""--]] 
 --[[Translation missing --]]
@@ -457,6 +487,8 @@ L["RAID_BOSS_VOTI_8"] = "Raszageth la Mangiatempeste"
 --[[Translation missing --]]
 --[[ L["RAID_BOT"] = ""--]] 
 --[[Translation missing --]]
+--[[ L["RAID_BRD"] = ""--]] 
+--[[Translation missing --]]
 --[[ L["RAID_BWD"] = ""--]] 
 L["RAID_DIFFICULTY_NAME_HEROIC"] = "Eroica"
 L["RAID_DIFFICULTY_NAME_HEROIC10"] = "Eroico 10"
@@ -475,6 +507,8 @@ L["RAID_DIFFICULTY_SUFFIX_NORMAL"] = "NM"
 --[[Translation missing --]]
 --[[ L["RAID_DIFFICULTY_SUFFIX_NORMAL25"] = ""--]] 
 L["RAID_ENCOUNTERS_DEFEATED_TITLE"] = "Boss Incursione Sconfitti"
+--[[Translation missing --]]
+--[[ L["RAID_FL"] = ""--]] 
 L["RAID_ICC"] = "Rocca della Corona di Ghiaccio "
 L["RAID_NP"] = "Palazzo dei Nerub'ar"
 L["RAID_RS"] = "Santuario di Rubino"

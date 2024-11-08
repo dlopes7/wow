@@ -586,6 +586,7 @@ function S:Blizzard_Communities()
 	ApplicantList:CreateBackdrop('Transparent')
 	ApplicantList.backdrop:Point('TOPLEFT', 0, 0)
 	ApplicantList.backdrop:Point('BOTTOMRIGHT', -15, 0)
+	S:HandleTrimScrollBar(ApplicantList.ScrollBar)
 
 	hooksecurefunc(ApplicantList, 'BuildList', function(list)
 		local columnDisplay = list.ColumnDisplay
@@ -605,27 +606,6 @@ function S:Blizzard_Communities()
 				child.IsSkinned = true
 			end
 		end
-
-		--[[local buttons = list.ListScrollFrame.buttons
-		for i = 1, #buttons do
-			local button = buttons[i]
-			if not button.IsSkinned then
-				button:Point('LEFT', ApplicantList.backdrop, 1, 0)
-				button:Point('RIGHT', ApplicantList.backdrop, -1, 0)
-
-				button:SetHighlightTexture(E.media.normTex)
-				button:GetHighlightTexture():SetVertexColor(1, 1, 1, .25)
-
-				button.InviteButton:Size(66, 18)
-				button.CancelInvitationButton:Size(20, 18)
-				S:HandleButton(button.InviteButton)
-				S:HandleButton(button.CancelInvitationButton)
-
-				hooksecurefunc(button, 'UpdateMemberInfo', ColorMemberName)
-
-				button.IsSkinned = true
-			end
-		end]] -- DF
 	end)
 end
 

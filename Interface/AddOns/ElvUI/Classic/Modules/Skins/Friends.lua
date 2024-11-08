@@ -30,7 +30,7 @@ function S:FriendsFrame()
 	_G.FriendsFrameCloseButton:Point('TOPRIGHT', 0, 2)
 
 	S:HandleDropDownBox(_G.FriendsFrameStatusDropdown, 70)
-	S:HandlePointXY(_G.FriendsFrameStatusDropdown, 256, -55)
+	_G.FriendsFrameStatusDropdown:PointXY(256, -55)
 
 	for i = 1, #_G.FRIENDSFRAME_SUBFRAMES do
 		S:HandleTab(_G['FriendsFrameTab'..i])
@@ -75,7 +75,7 @@ function S:FriendsFrame()
 	S:HandleButton(_G.FriendsFrameSendMessageButton)
 	S:HandleButton(_G.FriendsFrameUnsquelchButton)
 
-	S:HandlePointXY(_G.FriendsFrameAddFriendButton, -1, 4)
+	_G.FriendsFrameAddFriendButton:PointXY(-1, 4)
 
 	-- Battle.net
 	local FriendsFrameBattlenetFrame = _G.FriendsFrameBattlenetFrame
@@ -138,9 +138,12 @@ function S:FriendsFrame()
 	_G.FriendsFrameFriendsScrollFrame.PendingInvitesHeaderButton.DownArrow:SetRotation(S.ArrowRotation['down'])
 	_G.FriendsFrameFriendsScrollFrame.PendingInvitesHeaderButton.RightArrow:SetPoint('LEFT', 11, 0)
 	_G.FriendsFrameFriendsScrollFrame.PendingInvitesHeaderButton.DownArrow:SetPoint('TOPLEFT', 8, -10)
-	hooksecurefunc(_G.FriendsFrameFriendsScrollFrame.invitePool, 'Acquire', function()
-		for object in pairs(_G.FriendsFrameFriendsScrollFrame.invitePool.activeObjects) do
-			skinFriendRequest(object)
+
+	hooksecurefunc(_G.FriendsFrameFriendsScrollFrame.invitePool, 'Acquire', function(pool)
+		if pool.activeObjects then
+			for object in pairs(pool.activeObjects) do
+				skinFriendRequest(object)
+			end
 		end
 	end)
 

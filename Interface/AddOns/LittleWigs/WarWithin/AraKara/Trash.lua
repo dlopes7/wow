@@ -6,20 +6,23 @@ local mod, CL = BigWigs:NewBoss("Ara-Kara, City of Echoes Trash", 2660)
 if not mod then return end
 mod.displayName = CL.trash
 mod:RegisterEnableMob(
+	219420, -- Discordant Attendant (gossip NPC)
 	216336, -- Ravenous Crawler
 	216341, -- Jabbing Flyer
 	214840, -- Engorged Crawler
 	216293, -- Trilling Attendant
-	219420, -- Discordant Attendant (gossip NPC)
 	217531, -- Ixin
 	218324, -- Nakt
 	217533, -- Atik
 	216338, -- Hulking Bloodguard
 	228015, -- Hulking Bloodguard (Sentry Stagshell's summon)
 	216340, -- Sentry Stagshell
+	216333, -- Bloodstained Assistant
 	223253, -- Bloodstained Webmage
 	216364, -- Blood Overseer
-	217039 -- Nerubian Hauler
+	216363, -- Reinforced Drone
+	217039, -- Nerubian Hauler
+	216365 -- Winged Carrier
 )
 
 --------------------------------------------------------------------------------
@@ -28,6 +31,8 @@ mod:RegisterEnableMob(
 
 local L = mod:GetLocale()
 if L then
+	L.vile_webbing = 434830
+	L.discordant_attendant = "Discordant Attendant"
 	L.engorged_crawler = "Engorged Crawler"
 	L.trilling_attendant = "Trilling Attendant"
 	L.ixin = "Ixin"
@@ -35,9 +40,12 @@ if L then
 	L.atik = "Atik"
 	L.hulking_bloodguard = "Hulking Bloodguard"
 	L.sentry_stagshell = "Sentry Stagshell"
+	L.bloodstained_assistant = "Bloodstained Assistant"
 	L.bloodstained_webmage = "Bloodstained Webmage"
 	L.blood_overseer = "Blood Overseer"
+	L.reinforced_drone = "Reinforced Drone"
 	L.nerubian_hauler = "Nerubian Hauler"
+	L.winged_carrier = "Winged Carrier"
 
 	L.avanoxx_warmup_trigger = "The Attendants have been silenced... something emerges!"
 	L.custom_on_autotalk = CL.autotalk
@@ -51,7 +59,10 @@ end
 
 function mod:GetOptions()
 	return {
-		-- Autotalk
+		-- Vile Webbing
+		434830, -- Vile Webbing
+		{436614, "DISPEL"}, -- Web Wrap
+		-- Discordant Attendant
 		"custom_on_autotalk",
 		439208, -- Silk Wrap
 		-- Engorged Crawler
@@ -70,15 +81,22 @@ function mod:GetOptions()
 		{465012, "HEALER", "NAMEPLATE"}, -- Slam
 		-- Sentry Stagshell
 		432967, -- Alarm Shrill
+		-- Bloodstained Assistant
+		{433002, "TANK", "NAMEPLATE", "OFF"}, -- Extraction Strike
 		-- Bloodstained Webmage
 		{448248, "NAMEPLATE"}, -- Revolting Volley
 		-- Blood Overseer
 		{433845, "NAMEPLATE"}, -- Erupting Webs
 		{433841, "NAMEPLATE"}, -- Venom Volley
+		-- Reinforced Drone
+		{433785, "TANK", "NAMEPLATE", "OFF"}, -- Grasping Slash
 		-- Nerubian Hauler
 		{434252, "NAMEPLATE"}, -- Massive Slam
+		-- Winged Carrier
+		{433821, "NAMEPLATE", "OFF"}, -- Dashing Strike
 	}, {
-		["custom_on_autotalk"] = CL.general,
+		[434830] = L.vile_webbing,
+		["custom_on_autotalk"] = L.discordant_attendant,
 		[438622] = L.engorged_crawler,
 		[434793] = L.trilling_attendant,
 		[434824] = L.ixin,
@@ -86,9 +104,12 @@ function mod:GetOptions()
 		[438826] = L.atik,
 		[453161] = L.hulking_bloodguard,
 		[432967] = L.sentry_stagshell,
+		[433002] = L.bloodstained_assistant,
 		[448248] = L.bloodstained_webmage,
 		[433845] = L.blood_overseer,
+		[433785] = L.reinforced_drone,
 		[434252] = L.nerubian_hauler,
+		[433821] = L.winged_carrier,
 	}
 end
 
@@ -96,7 +117,12 @@ function mod:OnBossEnable()
 	-- Warmup
 	self:RegisterEvent("CHAT_MSG_RAID_BOSS_EMOTE")
 
-	-- Autotalk
+	-- Vile Webbing
+	self:Log("SPELL_AURA_APPLIED", "VileWebbingApplied", 434830)
+	self:Log("SPELL_AURA_APPLIED_DOSE", "VileWebbingApplied", 434830)
+	self:Log("SPELL_AURA_APPLIED", "WebWrapApplied", 436614)
+
+	-- Discordant Attendant
 	self:RegisterEvent("GOSSIP_SHOW")
 	self:Log("SPELL_AURA_APPLIED", "SilkThreadApplied", 439201)
 
@@ -139,6 +165,12 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "AlarmShrill", 432967)
 	self:Log("SPELL_SUMMON", "AlarmShrillSummon", 432967)
 
+	-- Bloodstained Assistant
+	self:RegisterEngageMob("BloodstainedAssistantEngaged", 216333)
+	self:Log("SPELL_CAST_START", "ExtractionStrike", 433002)
+	self:Log("SPELL_CAST_SUCCESS", "ExtractionStrikeSuccess", 433002)
+	self:Death("BloodstainedAssistantDeath", 216333)
+
 	-- Bloodstained Webmage
 	self:RegisterEngageMob("BloodstainedWebmageEngaged", 223253)
 	self:Log("SPELL_CAST_START", "RevoltingVolley", 448248)
@@ -154,10 +186,21 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "VenomVolleySuccess", 433841)
 	self:Death("BloodOverseerDeath", 216364)
 
+	-- Reinforced Drone
+	self:RegisterEngageMob("ReinforcedDroneEngaged", 216363)
+	self:Log("SPELL_CAST_START", "GraspingSlash", 433785)
+	self:Log("SPELL_CAST_SUCCESS", "GraspingSlashSuccess", 433785)
+	self:Death("ReinforcedDroneDeath", 216363)
+
 	-- Nerubian Hauler
 	self:RegisterEngageMob("NerubianHaulerEngaged", 217039)
 	self:Log("SPELL_CAST_START", "MassiveSlam", 434252)
 	self:Death("NerubianHaulerDeath", 217039)
+
+	-- Winged Carrier
+	self:RegisterEngageMob("WingedCarrierEngaged", 216365)
+	self:Log("SPELL_CAST_SUCCESS", "DashingStrike", 433821)
+	self:Death("WingedCarrierDeath", 216365)
 end
 
 --------------------------------------------------------------------------------
@@ -177,7 +220,26 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(_, msg)
 	end
 end
 
--- Autotalk
+-- Vile Webbing
+
+function mod:VileWebbingApplied(args)
+	if self:Me(args.destGUID) then
+		local amount = args.amount or 1
+		if amount % 2 == 0 then -- alert 2, 4, stuns at 6
+			self:StackMessage(args.spellId, "blue", args.destName, amount, 3)
+			self:PlaySound(args.spellId, "underyou")
+		end
+	end
+end
+
+function mod:WebWrapApplied(args)
+	if self:Me(args.destGUID) or self:Dispeller("magic", nil, args.spellId) then
+		self:TargetMessage(args.spellId, "orange", args.destName)
+		self:PlaySound(args.spellId, "warning", nil, args.destName)
+	end
+end
+
+-- Discordant Attendant
 
 function mod:GOSSIP_SHOW()
 	if self:GetOption("custom_on_autotalk") and self:GetGossipID(121214) then
@@ -353,8 +415,8 @@ do
 	local timer
 
 	function mod:AtikEngaged(guid)
-		self:CDBar(434824, 3.6) -- Web Spray
-		self:Nameplate(434824, 3.6, guid) -- Web Spray
+		self:CDBar(434824, 3.5) -- Web Spray
+		self:Nameplate(434824, 3.5, guid) -- Web Spray
 		self:CDBar(438826, 9.3) -- Poisonous Cloud
 		self:Nameplate(438826, 9.3, guid) -- Poisonous Cloud
 		timer = self:ScheduleTimer("AtikDeath", 30)
@@ -401,7 +463,7 @@ end
 -- Hulking Bloodguard
 
 function mod:HulkingBloodguardEngaged(guid)
-	self:Nameplate(453161, 5.2, guid) -- Impale
+	self:Nameplate(453161, 4.8, guid) -- Impale
 	self:Nameplate(465012, 11.9, guid) -- Slam
 end
 
@@ -438,6 +500,32 @@ end
 function mod:AlarmShrillSummon(args)
 	self:Message(args.spellId, "cyan", CL.spawning:format(args.destName))
 	self:PlaySound(args.spellId, "warning")
+end
+
+-- Bloodstained Assistant
+
+function mod:BloodstainedAssistantEngaged(guid)
+	self:Nameplate(433002, 0, guid) -- Extraction Strike
+end
+
+do
+	local prev = 0
+	function mod:ExtractionStrike(args)
+		if args.time - prev > 1.5 then
+			prev = args.time
+			self:Message(args.spellId, "purple")
+			self:PlaySound(args.spellId, "alert")
+		end
+		self:Nameplate(args.spellId, 0, args.sourceGUID)
+	end
+end
+
+function mod:ExtractionStrikeSuccess(args)
+	self:Nameplate(args.spellId, 7.1, args.sourceGUID)
+end
+
+function mod:BloodstainedAssistantDeath(args)
+	self:ClearNameplate(args.destGUID)
 end
 
 -- Bloodstained Webmage
@@ -516,6 +604,32 @@ function mod:BloodOverseerDeath(args)
 	self:ClearNameplate(args.destGUID)
 end
 
+-- Reinforced Drone
+
+function mod:ReinforcedDroneEngaged(guid)
+	self:Nameplate(433785, 3.4, guid) -- Grasping Slash
+end
+
+do
+	local prev = 0
+	function mod:GraspingSlash(args)
+		self:Nameplate(args.spellId, 0, args.sourceGUID)
+		if args.time - prev > 2 then
+			prev = args.time
+			self:Message(args.spellId, "purple")
+			self:PlaySound(args.spellId, "alert")
+		end
+	end
+end
+
+function mod:GraspingSlashSuccess(args)
+	self:Nameplate(args.spellId, 12.2, args.sourceGUID)
+end
+
+function mod:ReinforcedDroneDeath(args)
+	self:ClearNameplate(args.destGUID)
+end
+
 -- Nerubian Hauler
 
 function mod:NerubianHaulerEngaged(guid)
@@ -529,5 +643,19 @@ function mod:MassiveSlam(args)
 end
 
 function mod:NerubianHaulerDeath(args)
+	self:ClearNameplate(args.destGUID)
+end
+
+-- Winged Carrier
+
+function mod:WingedCarrierEngaged(guid)
+	self:Nameplate(433821, 3.2, guid) -- Dashing Strike
+end
+
+function mod:DashingStrike(args)
+	self:Nameplate(args.spellId, 4.8, args.sourceGUID)
+end
+
+function mod:WingedCarrierDeath(args)
 	self:ClearNameplate(args.destGUID)
 end

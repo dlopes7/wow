@@ -1,4 +1,4 @@
--- Generated from CurseForge on Mon Oct 14 08:05:11 UTC 2024
+-- Generated from CurseForge on Thu Nov  7 09:26:45 UTC 2024
 local ns = select(2, ...) ---@class ns @The addon namespace.
 
 if ns:IsSameLocale("koKR") then
@@ -307,6 +307,22 @@ L["RAID_BOSS_AVOTI_8"] = "폭풍포식자 라자게스"
 --[[Translation missing --]]
 --[[ L["RAID_BOSS_BOT_5"] = ""--]] 
 --[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_1"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_2"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_3"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_4"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_5"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_6"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_7"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_8"] = ""--]] 
+--[[Translation missing --]]
 --[[ L["RAID_BOSS_BWD_1"] = ""--]] 
 --[[Translation missing --]]
 --[[ L["RAID_BOSS_BWD_2"] = ""--]] 
@@ -338,6 +354,20 @@ L["RAID_BOSS_FCN_6"] = "귀부인 이네르바 다크베인"
 L["RAID_BOSS_FCN_7"] = "혈기의 의회"
 L["RAID_BOSS_FCN_8"] = "진흙주먹"
 L["RAID_BOSS_FCN_9"] = "돌 군단 장군"
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_1"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_2"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_3"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_4"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_5"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_6"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_7"] = ""--]] 
 L["RAID_BOSS_FSFO_1"] = "경계하는 수호자"
 L["RAID_BOSS_FSFO_10"] = "라이겔론"
 L["RAID_BOSS_FSFO_11"] = "간수"
@@ -429,6 +459,8 @@ L["RAID_BOSS_VOTI_8"] = "폭풍포식자 라자게스"
 --[[Translation missing --]]
 --[[ L["RAID_BOT"] = ""--]] 
 --[[Translation missing --]]
+--[[ L["RAID_BRD"] = ""--]] 
+--[[Translation missing --]]
 --[[ L["RAID_BWD"] = ""--]] 
 L["RAID_DIFFICULTY_NAME_HEROIC"] = "영웅"
 --[[Translation missing --]]
@@ -453,6 +485,8 @@ L["RAID_DIFFICULTY_SUFFIX_NORMAL"] = "일"
 --[[Translation missing --]]
 --[[ L["RAID_DIFFICULTY_SUFFIX_NORMAL25"] = ""--]] 
 L["RAID_ENCOUNTERS_DEFEATED_TITLE"] = "공격대 보스 처치"
+--[[Translation missing --]]
+--[[ L["RAID_FL"] = ""--]] 
 --[[Translation missing --]]
 --[[ L["RAID_ICC"] = ""--]] 
 L["RAID_NP"] = "네룹아르 궁전"

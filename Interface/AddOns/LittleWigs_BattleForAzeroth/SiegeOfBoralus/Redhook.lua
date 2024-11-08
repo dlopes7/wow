@@ -15,7 +15,7 @@ mod:SetRespawnTime(30)
 local callIrontideCount = 1
 --local ordnanceRemaining = 0
 local ordnanceCollector = {}
-local ordnanceExplosionTime = 0
+--local ordnanceExplosionTime = 0
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -39,6 +39,7 @@ function mod:GetOptions()
 		274002, -- Call Irontide
 		257459, -- On the Hook
 		{257348, "SAY"}, -- Meat Hook
+		272662, -- Iron Hook
 		257326, -- Gore Crash
 		257585, -- Cannon Barrage
 		273721, -- Heavy Ordnance
@@ -57,7 +58,8 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "CallIrontide", 274002)
 	self:Log("SPELL_AURA_APPLIED", "OnTheHookApplied", 257459)
 	self:Log("SPELL_AURA_REMOVED", "OnTheHookRemoved", 257459)
-	self:Log("SPELL_CAST_START", "MeatHook", 257348)
+	self:Log("SPELL_CAST_START", "MeatHook", 257348) -- non-Mythic only
+	self:Log("SPELL_CAST_START", "IronHook", 272662) -- Mythic only
 	self:Log("SPELL_CAST_START", "GoreCrash", 257326)
 	self:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", nil, "boss1") -- Cannon Barrage
 	self:Log("SPELL_DAMAGE", "HeavyOrdnanceDamage", 273720, 280934) -- damage to player, damage to add
@@ -72,10 +74,16 @@ function mod:OnEngage()
 	callIrontideCount = 1
 	--ordnanceRemaining = 0
 	ordnanceCollector = {}
-	ordnanceExplosionTime = 0
+	--ordnanceExplosionTime = 0
 	self:CDBar(257585, 11.1) -- Cannon Barrage
-	--self:CDBar(257348, 21.0) -- Meat Hook
-	--self:CDBar(257326, 24.8) -- Gore Crash
+end
+
+function mod:OnWin()
+	local trashMod = BigWigs:GetBossModule("Siege of Boralus Trash", true)
+	if trashMod then
+		trashMod:Enable()
+		trashMod:LockwoodDefeated(5)
+	end
 end
 
 --------------------------------------------------------------------------------
@@ -122,18 +130,29 @@ do
 	end
 
 	function mod:MeatHook(args)
+		-- this is cast when a Fixate channel finishes without the boss being stunned,
+		-- or sometimes when the boss's stun fades.
 		self:GetUnitTarget(printTarget, 0.1, args.sourceGUID)
-		--self:CDBar(args.spellId, 27.0)
+	end
+end
+
+function mod:IronHook(args)
+	-- this is also cast by trash (Irontide Raider)
+	if self:MobId(args.sourceGUID) == 128650 then -- Chopper Redhook
+		-- this is cast when a Fixate channel finishes without the boss being stunned,
+		-- or sometimes when the boss's stun fades.
+		self:Message(args.spellId, "cyan")
+		self:PlaySound(args.spellId, "info")
 	end
 end
 
 do
 	local prev = 0
 	function mod:GoreCrash(args)
+		-- this ability always follows Meat Hook / Iron Hook
 		if args.time - prev > 2 then
 			prev = args.time
 			self:Message(args.spellId, "orange")
-			--self:CDBar(args.spellId, 22.6)
 			self:PlaySound(args.spellId, "alarm")
 		end
 	end
@@ -143,7 +162,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, _, spellId)
 	if spellId == 257540 then -- Cannon Barrage
 		--ordnanceRemaining = 3 -- was 3, 3, 4, 6, 5, 7, 6, 3...
 		ordnanceCollector = {}
-		ordnanceExplosionTime = GetTime() + 52.5
+		--ordnanceExplosionTime = GetTime() + 52.5
 		self:Message(257585, "orange")
 		self:CDBar(257585, 60.7)
 		--self:Bar(273721, 52.5, CL.count:format(self:SpellName(273721), ordnanceRemaining)) -- Heavy Ordnance

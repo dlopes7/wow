@@ -1,5 +1,5 @@
-local VERSION_TEXT = "v0.4.6";
-local VERSION_DATE = 1725700000;
+local VERSION_TEXT = "v0.5.1";
+local VERSION_DATE = 1730600000;
 
 
 local addonName, addon = ...
@@ -16,8 +16,11 @@ local DefaultValues = {
     Theme = 1,
     FrameSize = 2,
     FontSizeBase = 1,
+    FontText = "default",
+    FontNumber = "default",
     FrameOrientation = 2,                       --1:Left  2:Right(Default)
     HideUI = true,
+        HideOutlineSparkles = true,
         HideUnitNames = false,
     ShowCopyTextButton = false,
     ShowNPCNameOnPage = false,
@@ -38,6 +41,7 @@ local DefaultValues = {
     PrimaryControlKey = 1,                      --1: Space  2:Interact Key
     ScrollDownThenAcceptQuest = false,
     RightClickToCloseUI = true,
+    CycleRewardHotkeyEnabled = false,           --Press Tab to cycle through choosable rewards
     EmulateSwipe = true,
     MobileDeviceMode = false,
 
@@ -46,14 +50,20 @@ local DefaultValues = {
     QuestItemDisplay = false,
         QuestItemDisplayHideSeen = false,
         QuestItemDisplayDynamicFrameStrata = false,
+    AutoCompleteQuest = false,
+        PressKeyToOpenContainer = true,
     AutoSelectGossip = false,
     ForceGossip = false,
-    NameplateDialogEnabled = false,
+    ShowDialogHint = true,
+    DisableDUIInInstance = false,
+
+    NameplateDialogEnabled = false,             --Experimental. Not in the settings
 
     TTSEnabled = false,
         TTSUseHotkey = true,    --Default key R
         TTSAutoPlay = false,
-        TTSSkipRecent = false,  --Skip recently read texts
+            TTSSkipRecent = false,              --Skip recently read texts
+            TTSAutoPlayDelay = false,           --Add a delay before starting auto play in case the NPC is speaking
         TTSAutoStop = true,     --Stop when leaving
         TTSStopOnNew = true,    --Stop when reading new quest
         TTSVoiceMale = 0,       --0: System default
@@ -66,6 +76,15 @@ local DefaultValues = {
             TTSContentQuestTitle = true,
             TTSContentObjective = false,
 
+    --Book Settings
+    BookUIEnabled = true,
+        BookUISize = 1,
+        BookKeepUIOpen = false,
+        BookShowLocation = false,
+        BookUIItemDescription = false,      --Show source item's description on top of the UI
+        BookDarkenScreen = true,
+        BookTTSVoice = 0,
+        BookTTSClickToRead = true,
 
     --Not shown in the Settings. Accessible by other means
     TooltipShowItemComparison = false,          --Tooltip
@@ -73,8 +92,18 @@ local DefaultValues = {
     --WidgetManagerPosition = {x, y};
     --QuestItemDisplayPosition = {x, y};
 
+
     --Deprecated:
     --WarbandCompletedQuest = true,         --Always ON
+};
+
+local InheritExistingValues = {
+    --Newly added systems may copy the the dbValue of similar system: BookUI/DialogueUI frame size, Book/Dialogue voice
+    --If the new dbValue doesn't exisit and the existing dbValue isn't the default value, use the new default value
+    {"BookUISize", "FrameSize"},
+    {"BookTTSVoice", "TTSVoiceNarrator"},
+    {"BookTTSVoice", "TTSVoiceMale"},
+    {"BookTTSVoice", "TTSVoiceFemale"},
 };
 
 local TutorialFlags = {
@@ -114,6 +143,13 @@ local function LoadDatabase()
 
     local type = type;
 
+    for _, v in ipairs(InheritExistingValues) do
+        if DB[v[1]] == nil then
+            if DB[v[2]] ~= nil and DB[v[2]] ~= DefaultValues[v[2]] then
+                DB[v[1]] = DB[v[2]];
+            end
+        end
+    end
 
     for dbKey, defaultValue in pairs(DefaultValues) do
         --Some settings are inter-connected so we load all values first
@@ -131,6 +167,7 @@ local function LoadDatabase()
     end
 
     DefaultValues = nil;
+    InheritExistingValues = nil;
 
     LoadTutorials();
 end

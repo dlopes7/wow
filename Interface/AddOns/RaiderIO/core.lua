@@ -5163,7 +5163,7 @@ do
         overallBest.chests = keystoneProfile.dungeonUpgrades[keystoneProfile.maxDungeonIndex]
         if showLFD then
             local focusDungeon = util:GetLFDStatusForCurrentActivity(state.args and state.args.activityID)
-            if focusDungeon then
+            if focusDungeon and focusDungeon.type == "SEASON" then
                 best.dungeon = focusDungeon
                 best.level = keystoneProfile.dungeons[focusDungeon.index]
                 best.chests = keystoneProfile.dungeonUpgrades[focusDungeon.index]
@@ -8486,7 +8486,15 @@ if IS_RETAIL then
         return bossFramePool
     end
 
-    local DEATH_PENALTY = 5
+    ---@class KeystoneDeathPenaltyInfo
+    ---@field public level number
+    ---@field public penalty number seconds
+
+    ---@type KeystoneDeathPenaltyInfo[]
+    local DEATH_PENALTY_MAP = {
+        { level = 7, penalty = 15 },
+        { level = 0, penalty = 5 },
+    }
 
     ---@class ReplayDataProvider
     local ReplayDataProviderMixin = {}
@@ -8519,7 +8527,7 @@ if IS_RETAIL then
 
         function ReplayDataProviderMixin:OnLoad()
             self.replaySummary = self:CreateSummary()
-            self:SetDeathPenalty(DEATH_PENALTY)
+            self:SetDeathPenaltyMap(DEATH_PENALTY_MAP)
         end
 
         ---@param replay? Replay
@@ -8546,14 +8554,22 @@ if IS_RETAIL then
             return self.replay
         end
 
-        ---@param seconds number
-        function ReplayDataProviderMixin:SetDeathPenalty(seconds)
-            self.deathPenalty = seconds
+        ---@param deathPenaltyMap KeystoneDeathPenaltyInfo[]
+        function ReplayDataProviderMixin:SetDeathPenaltyMap(deathPenaltyMap)
+            self.deathPenaltyMap = deathPenaltyMap
         end
 
-        ---@return number deathPenalty
-        function ReplayDataProviderMixin:GetDeathPenalty()
-            return self.deathPenalty
+        ---@param level number
+        ---@return number deathPenalty seconds
+        function ReplayDataProviderMixin:GetDeathPenalty(level)
+            local deathPenaltyMap = self.deathPenaltyMap
+            for _, deathPenalty in ipairs(deathPenaltyMap) do
+                if level >= deathPenalty.level then
+                    return deathPenalty.penalty
+                end
+            end
+            local deathPenalty = deathPenaltyMap[#deathPenaltyMap]
+            return deathPenalty.penalty
         end
 
         ---@return ReplaySummary replaySummary
@@ -9926,7 +9942,7 @@ if IS_RETAIL then
             end
             local liveDeathsDuringTimer = self:GetCurrentDeaths()
             local liveDataProvider = self:GetLiveDataProvider()
-            local deathPenalty = liveDataProvider:GetDeathPenalty()
+            local deathPenalty = liveDataProvider:GetDeathPenalty(replay and replay.mythic_level or 0)
             local timeLost = liveDeathsDuringTimer * deathPenalty
             return timer - timeLost
         end
@@ -10189,22 +10205,24 @@ if IS_RETAIL then
             if not _replay then
                 return
             end
-            local liveDataProvider = self:GetLiveDataProvider()
-            local liveSummary = liveDataProvider:GetSummary()
-            local deathPenalty = liveDataProvider:GetDeathPenalty()
-            local deathPenaltyMS = deathPenalty * 1000
             local keystoneTimeMS = self:GetKeystoneTimeMS()
             local replaySummary, _, nextReplayEvent = replayDataProvider:GetReplaySummaryAt(keystoneTimeMS)
+            local liveDataProvider = self:GetLiveDataProvider()
+            local liveSummary = liveDataProvider:GetSummary()
+            local liveDeathPenalty = liveDataProvider:GetDeathPenalty(liveSummary.level)
+            local liveDeathPenaltyMS = liveDeathPenalty * 1000
+            local replayDeathPenalty = replayDataProvider:GetDeathPenalty(replaySummary.level)
+            local replayDeathPenaltyMS = replayDeathPenalty * 1000
             local liveDeathsDuringTimer, replayDeathsDuringTimer = self:GetCurrentDeaths()
-            local liveTimer = ConvertMillisecondsToSeconds(keystoneTimeMS + liveDeathsDuringTimer * deathPenaltyMS)
-            local replayTimer = ConvertMillisecondsToSeconds(keystoneTimeMS + replayDeathsDuringTimer * deathPenaltyMS)
+            local liveTimer = ConvertMillisecondsToSeconds(keystoneTimeMS + liveDeathsDuringTimer * liveDeathPenaltyMS)
+            local replayTimer = ConvertMillisecondsToSeconds(keystoneTimeMS + replayDeathsDuringTimer * replayDeathPenaltyMS)
             local totalTimer = ConvertMillisecondsToSeconds(_replay.clear_time_ms)
             if replayTimer > totalTimer then
                 replayTimer = totalTimer
             end
             self:SetUITimer(liveTimer, replayTimer, totalTimer, not nextReplayEvent, isRunning)
             self:SetUITrash(liveSummary.trash, replaySummary.trash, _replay.dungeon.total_enemy_forces, isRunning)
-            self:SetUIDeaths(liveSummary.deaths, replaySummary.deaths, deathPenalty, isRunning)
+            self:SetUIDeaths(liveSummary.deaths, replaySummary.deaths, liveDeathPenalty, replayDeathPenalty, isRunning)
             self:UpdateUIBosses(liveSummary.bosses, replaySummary.bosses, keystoneTimeMS, isRunning)
             self:UpdateUIBossesCombat(liveSummary.inBossCombat, replaySummary.inBossCombat)
             replay:SetCurrentReplaySummary(_replay, liveSummary, replaySummary)
@@ -10219,24 +10237,26 @@ if IS_RETAIL then
             if not _replay then
                 return
             end
-            local liveDataProvider = self:GetLiveDataProvider()
-            local liveSummary = liveDataProvider:GetSummary()
-            local deathPenalty = liveDataProvider:GetDeathPenalty()
-            local deathPenaltyMS = deathPenalty * 1000
-            local keystoneTimeMS = self:GetKeystoneTimeMS()
             local replayTimeMS = self:GetReplayTimeMS()
             local replayCompletedTimer = ConvertMillisecondsToSeconds(replayTimeMS)
             local replaySummary = replayDataProvider:GetReplaySummaryAt(replayTimeMS)
             local liveDeathsDuringTimer, replayDeathsDuringTimer = self:GetCurrentDeaths()
-            local liveTimer = ConvertMillisecondsToSeconds(keystoneTimeMS + liveDeathsDuringTimer * deathPenaltyMS)
-            local replayTimer = ConvertMillisecondsToSeconds(replayTimeMS + replayDeathsDuringTimer * deathPenaltyMS)
+            local liveDataProvider = self:GetLiveDataProvider()
+            local liveSummary = liveDataProvider:GetSummary()
+            local liveDeathPenalty = liveDataProvider:GetDeathPenalty(liveSummary.level)
+            local liveDeathPenaltyMS = liveDeathPenalty * 1000
+            local replayDeathPenalty = replayDataProvider:GetDeathPenalty(replaySummary.level)
+            local replayDeathPenaltyMS = replayDeathPenalty * 1000
+            local keystoneTimeMS = self:GetKeystoneTimeMS()
+            local liveTimer = ConvertMillisecondsToSeconds(keystoneTimeMS + liveDeathsDuringTimer * liveDeathPenaltyMS)
+            local replayTimer = ConvertMillisecondsToSeconds(replayTimeMS + replayDeathsDuringTimer * replayDeathPenaltyMS)
             local totalTimer = ConvertMillisecondsToSeconds(keystoneTimeMS)
             if replayTimer > totalTimer then
                 replayTimer = totalTimer
             end
             self:SetUITimer(liveTimer, replayTimer, totalTimer, false, true, replayCompletedTimer)
             self:SetUITrash(liveSummary.trash, replaySummary.trash, _replay.dungeon.total_enemy_forces, true)
-            self:SetUIDeaths(liveSummary.deaths, replaySummary.deaths, deathPenalty, true)
+            self:SetUIDeaths(liveSummary.deaths, replaySummary.deaths, liveDeathPenalty, replayDeathPenalty, true)
             self:UpdateUIBosses(liveSummary.bosses, replaySummary.bosses, keystoneTimeMS, true, replayTimeMS)
             self:UpdateUIBossesCombat(false, false)
             replay:SetCurrentReplaySummary(_replay, liveSummary, replaySummary)
@@ -10311,12 +10331,13 @@ if IS_RETAIL then
 
         ---@param liveDeaths number
         ---@param replayDeaths number
-        ---@param deathPenalty number
+        ---@param liveDeathPenalty number
+        ---@param replayDeathPenalty number
         ---@param isRunning? boolean
-        function ReplayFrameMixin:SetUIDeaths(liveDeaths, replayDeaths, deathPenalty, isRunning)
+        function ReplayFrameMixin:SetUIDeaths(liveDeaths, replayDeaths, liveDeathPenalty, replayDeathPenalty, isRunning)
             local deltaDeaths = liveDeaths - replayDeaths
-            local livePenalty = liveDeaths * deathPenalty
-            local replayPenalty = replayDeaths * deathPenalty
+            local livePenalty = liveDeaths * liveDeathPenalty
+            local replayPenalty = replayDeaths * replayDeathPenalty
             if self:IsStyle("MDI") then
                 local redColor = "FF5555"
                 local livePenaltyText = format("|cff%s+%s|r", redColor, SecondsToTimeText(livePenalty, "NONE_COLORLESS"))
@@ -10595,6 +10616,7 @@ if IS_RETAIL then
         end
         if replayCount > 1 then
             local replaySelection = config:Get("replaySelection") ---@type ReplayFrameSelection
+            -- TODO: implement logic that both respects the `replaySelection` but also tries to pick the highest level run that is available
             for _, replay in ipairs(relevantReplays) do
                 local index = util:TableContains(replay.sources, replaySelection)
                 if index == #replay.sources then
@@ -10694,15 +10716,16 @@ if IS_RETAIL then
     end
 
     ---@param replays Replay[]
-    local function SortReplaysByWeeklyAffix(replays)
+    local function SortReplaysByLevelAndTime(replays)
         table.sort(replays, function(a, b)
             local x = a.mythic_level
             local y = b.mythic_level
-            if x == y then
-                x = a.clear_time_ms
-                y = b.clear_time_ms
+            if x ~= y then
+                return x > y
             end
-            return x > y
+            x = a.clear_time_ms
+            y = b.clear_time_ms
+            return x < y
         end)
     end
 
@@ -10736,7 +10759,7 @@ if IS_RETAIL then
         TrimHistoryFromSV()
         replays = ns:GetReplays()
         util:TableSort(replays, "date", "keystone_run_id")
-        SortReplaysByWeeklyAffix(replays)
+        SortReplaysByLevelAndTime(replays)
         hiddenContainer = CreateFrame("Frame")
         hiddenContainer:SetClipsChildren(true)
         replayFrame = CreateReplayFrame()

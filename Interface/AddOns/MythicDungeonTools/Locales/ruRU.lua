@@ -1173,10 +1173,8 @@ L["Join Live Session"] = "Присоединиться к 'Прямой тран
 L["Junkyard D.0.G."] = "Сторожевой бот модели ПЕС"
 L["Juvenile Runestag"] = "Молодой рунический олень"
 L["K.U.-J.0."] = "КУ-ДЖ0"
---[[Translation missing --]]
-L["karaLowerShortName"] = "LOWER"
---[[Translation missing --]]
-L["karaUpperShortName"] = "UPPER"
+L["karaLowerShortName"] = "КАРАЖАН"
+L["karaUpperShortName"] = "КАРАЖАН"
 L["Kel'Thuzad"] = "Кел'Тузад"
 L["Keristrasza"] = "Керистраза"
 L["Khajin the Unyielding"] = "Каджин Непреклонная"
@@ -1345,10 +1343,8 @@ L["Mechagon Prowler"] = "Мехагонский хищник"
 L["Mechagon Renormalizer"] = "Мехагонский нормализатор"
 L["Mechagon Tinkerer"] = "Мехагонский боевой механик"
 L["Mechagon Trooper"] = "Мехагонский солдат"
---[[Translation missing --]]
-L["mechagonCityShortName"] = "WORK"
---[[Translation missing --]]
-L["mechagonIslandShortName"] = "YARD"
+L["mechagonCityShortName"] = "МЕХАГОН"
+L["mechagonIslandShortName"] = "МЕХАГОН"
 L["Mechanical"] = "Механизм"
 L["Mechanized Peacekeeper"] = "Механомиротворец"
 L["Melded Berserker"] = "Зараженный берсерк"
@@ -2254,6 +2250,7 @@ L["Time-Lost Smack-o-Tron"] = "Затерянный во времени хлес
 L["Time-Lost Tidehunter"] = "Затерянный во времени волнолов"
 L["Time-Lost Wakethrasher"] = "Затерянный во времени волношлеп"
 L["Time-Lost Waveshaper"] = "Затерянный во времени заклинатель моря"
+L["Timer"] = "Таймер"
 L["Timestream Anomaly"] = "Аномалия временного потока"
 L["Timestream Leech"] = "Пиявка из временного потока"
 L["Tirathon Saltheril"] = "Тиратон Салтерил"

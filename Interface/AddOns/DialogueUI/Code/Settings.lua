@@ -1,6 +1,7 @@
 local _, addon = ...
 local L = addon.L;
 local API = addon.API;
+local SettingsDefinitions = addon.SettingsDefinitions;
 local Clamp = API.Clamp;
 local ThemeUtil = addon.ThemeUtil;
 local TTSUtil = addon.TTSUtil;
@@ -132,7 +133,7 @@ function DUIDialogSettingsMixin:OnGamePadButtonDown(button)
 
     local valid = false;
 
-    if button == "PADFORWARD" or button == "PADBACK" or button == "PAD2" then
+    if button == "PADFORWARD" or button == "PADBACK" or button == "PADMENU" or button == "PAD2" then
         self:Hide();
         valid = true;
     elseif button == "PADLSHOULDER" then
@@ -216,6 +217,10 @@ function DUIDialogSettingsMixin:LoadTheme()
         local isSelected = button.isSelected;
         button.isSelected = true;
         button:SetSelected(isSelected);
+    end
+
+    if self:IsShown() and self.tabID then
+        self:UpdateCurrentTab();
     end
 end
 
@@ -327,7 +332,7 @@ local function ValueTextFormatter_PrimaryControlKey(arrowOptionButton, dbValue)
         arrowOptionButton.HotkeyFrame = f;
     end
 
-    f:SetBaseHeight(20);
+    f:UpdateBaseHeight();   --SetBaseHeight(20)
 
     local key, keyDesc, errorText;
 
@@ -343,14 +348,17 @@ local function ValueTextFormatter_PrimaryControlKey(arrowOptionButton, dbValue)
     end
 
     local fontString = arrowOptionButton.ValueText;
+    local hotkeyWidth = f:GetWidth();
     f:SetKey(key or "ERROR");
     fontString:SetText(keyDesc);
 
-    local widgetWidth = f:GetWidth() + HOTKEYFRAME_VALUETEXT_GAP;
+    local widgetWidth = hotkeyWidth + HOTKEYFRAME_VALUETEXT_GAP;
     fontString:ClearAllPoints();
     fontString:SetPoint("TOP", arrowOptionButton, "TOP", widgetWidth*0.5, ARROWOPTION_VALUETEXT_OFFSET_Y);
     f:ClearAllPoints();
-    f:SetPoint("RIGHT", fontString, "LEFT", -HOTKEYFRAME_VALUETEXT_GAP, 0);
+
+    local textWidth = fontString:GetWrappedWidth();
+    f:SetPoint("RIGHT", fontString, "CENTER", -0.5*textWidth -HOTKEYFRAME_VALUETEXT_GAP, 0);
 end
 
 local function PrimaryControlKey_Interact_Tooltip()
@@ -433,6 +441,11 @@ local function TTSVoice_BuildMenuData(dropdownButton, dbKey)
         menuData.fitWidth = true;
         menuData.autoScaling = true;
 
+        local function selectedIDGetter()
+            return GetDBValue(dbKey)
+        end
+        menuData.selectedIDGetter = selectedIDGetter;
+
         for i, data in ipairs(voices) do
             menuData.buttons[i] = {
                 name = TTSVoice_AbbreviateName(data.name),
@@ -491,6 +504,10 @@ local function OptionHasNoEffectDueToMobile()
     end
 end
 
+local function OutlineSparklesSupported_Validation()
+    return addon.IsToCVersionEqualOrNewerThan(110000)
+end
+
 local Schematic = { --Scheme
     {
         tabName = L["UI"],  --Cate1
@@ -517,6 +534,7 @@ local Schematic = { --Scheme
                     {dbValue = 3, valueText = "16"},
                 },
             },
+            SettingsDefinitions.FontOptionData,     --type = "DropdownButton", dbValue = "Font"
             {type = "ArrowOption", name = L["Frame Orientation"], description = L["Frame Orientation Desc"], dbKey = "FrameOrientation",
                 choices = {
                     {dbValue = 1, valueText = L["Orientation Left"]},
@@ -524,6 +542,7 @@ local Schematic = { --Scheme
                 },
             },
             {type = "Checkbox", name = L["Hide UI"], description = L["Hide UI Desc"], dbKey = "HideUI"},
+            {type = "Checkbox", name = L["Hide Sparkles"], description = L["Hide Sparkles Desc"], preview = "HideOutlineSparkles.jpg", ratio = 2, dbKey = "HideOutlineSparkles", requiredParentValue = {HideUI = true}, validationFunc = OutlineSparklesSupported_Validation},
             {type = "Checkbox", name = L["Hide Unit Names"], description = L["Hide Unit Names Desc"], dbKey = "HideUnitNames", requiredParentValue = {HideUI = true}},
             {type = "Checkbox", name = L["Show Copy Text Button"], description = L["Show Copy Text Button Desc"], preview = "CopyTextButton", ratio = 1, dbKey = "ShowCopyTextButton"},
             {type = "Checkbox", name = L["Show NPC Name On Page"], description = L["Show NPC Name On Page Desc"], dbKey = "ShowNPCNameOnPage"},
@@ -535,6 +554,21 @@ local Schematic = { --Scheme
             {type = "Checkbox", name = L["Use Blizzard Tooltip"], description = L["Use Blizzard Tooltip Desc"], dbKey = "UseBlizzardTooltip"},
             {type = "Subheader", name = L["Roleplaying"], validationFunc = RPAddOn_Validation},
             {type = "Checkbox", name = L["Use RP Name In Dialogues"], description = L["Use RP Name In Dialogues Desc"], tooltip = RPAddOn_ReplaceName_Tooltip, dbKey = "UseRoleplayName", validationFunc = RPAddOn_Validation},
+
+            {type = "Subheader", name = L["Readables"]},    --Book
+            {type = "Checkbox", name = L["BookUI Enable"], description = L["BookUI Enable Desc"], preview = "BookUI", ratio = 1, dbKey = "BookUIEnabled"},
+            {type = "ArrowOption", name = L["Frame Size"], description = L["BookUI Frame Size Desc"], tooltip = OptionHasNoEffectDueToMobile, dbKey = "BookUISize", requiredParentValue = {BookUIEnabled = true},
+                choices = {
+                    {dbValue = 0, valueText = L["Size Extra Small"]},
+                    {dbValue = 1, valueText = L["Size Small"]},
+                    {dbValue = 2, valueText = L["Size Medium"]},
+                    {dbValue = 3, valueText = L["Size Large"]},
+                },
+            },
+            {type = "Checkbox", name = L["BookUI Keep UI Open"], description = L["BookUI Keep UI Open Desc"], dbKey = "BookKeepUIOpen", requireSameParentValue = true},
+            {type = "Checkbox", name = L["BookUI Show Location"], description = L["BookUI Show Location Desc"], dbKey = "BookShowLocation", requireSameParentValue = true},
+            {type = "Checkbox", name = L["BookUI Show Item Description"], description = L["BookUI Show Item Description Desc"], dbKey = "BookUIItemDescription", requireSameParentValue = true},
+            {type = "Checkbox", name = L["BookUI Darken Screen"], description = L["BookUI Darken Screen Desc"], dbKey = "BookDarkenScreen", requireSameParentValue = true},
         },
     },
 
@@ -549,10 +583,10 @@ local Schematic = { --Scheme
                 },
             },
             {type = "Checkbox", name = L["Change FOV"], description = L["Change FOV Desc"], dbKey = "CameraChangeFov", requiredParentValue = {CameraMovement = 1}, preview = "CameraChangeFov", ratio = 2},
-            {type = "Checkbox", name = L["Maintain Camera Position"], description = L["Maintain Camera Position Desc"], dbKey = "CameraMovement1MaintainPosition", {CameraMovement = 1}},
+            {type = "Checkbox", name = L["Maintain Camera Position"], description = L["Maintain Camera Position Desc"], dbKey = "CameraMovement1MaintainPosition", requiredParentValue = {CameraMovement = 1}},
             --{type = "Checkbox", name = L["Maintain Camera Position"], description = L["Maintain Camera Position Desc"], dbKey = "CameraMovement2MaintainPosition", {CameraMovement = 2}},
-            {type = "Checkbox", name = L["Maintain Offset While Mounted"], description = L["Maintain Offset While Mounted Desc"], dbKey = "CameraMovementMountedCamera", {CameraMovement = {1, 2}}},
-            {type = "Checkbox", name = L["Disable Camera Movement Instance"], description = L["Disable Camera Movement Instance Desc"], dbKey = "CameraMovementDisableInstance", parentKey = "CameraMovement", {CameraMovement = {1, 2}}},
+            {type = "Checkbox", name = L["Maintain Offset While Mounted"], description = L["Maintain Offset While Mounted Desc"], dbKey = "CameraMovementMountedCamera", requiredParentValue = {CameraMovement = {1, 2}}},
+            {type = "Checkbox", name = L["Disable Camera Movement Instance"], description = L["Disable Camera Movement Instance Desc"], dbKey = "CameraMovementDisableInstance", requiredParentValue = {CameraMovement = {1, 2}}},
         },
     },
 
@@ -575,6 +609,7 @@ local Schematic = { --Scheme
                 },
             },
             {type = "Checkbox", name = L["Right Click To Close UI"], description = L["Right Click To Close UI Desc"], dbKey = "RightClickToCloseUI", requiredParentValue = {InputDevice = 1}},
+            {type = "Checkbox", name = L["Press Tab To Select Reward"], description = L["Press Tab To Select Reward Desc"], dbKey = "CycleRewardHotkeyEnabled", requiredParentValue = {InputDevice = 1}},
 
             {type = "Subheader", name = L["Quest"]},
             {type = "Checkbox", name = L["Press Button To Scroll Down"], description = L["Press Button To Scroll Down Desc"], dbKey = "ScrollDownThenAcceptQuest"},
@@ -594,14 +629,22 @@ local Schematic = { --Scheme
 
             {type = "Checkbox", name = L["Quest Item Display"], description = L["Quest Item Display Desc"], dbKey = "QuestItemDisplay", preview = "QuestItemDisplay", ratio = 2},
             {type = "Checkbox", name = L["Quest Item Display Hide Seen"], description = L["Quest Item Display Hide Seen Desc"], dbKey = "QuestItemDisplayHideSeen", requiredParentValue = {QuestItemDisplay = true}},
-            {type = "Checkbox", name = L["Quest Item Display Await World Map"], description = L["Quest Item Display Await World Map Desc"], dbKey = "QuestItemDisplayDynamicFrameStrata", parentKey = "QuestItemDisplay", requireSameParentValue = true},
+            {type = "Checkbox", name = L["Quest Item Display Await World Map"], description = L["Quest Item Display Await World Map Desc"], dbKey = "QuestItemDisplayDynamicFrameStrata", requireSameParentValue = true},
             {type = "Custom", name = L["Move Position"], icon = "Settings-Move.png", onClickFunc = QuestItemDisplay_Move_OnClick, requireSameParentValue = true},
             {type = "Custom", name = L["Reset Position"], icon = "Settings-Reset.png", description = L["Quest Item Display Reset Position Desc"], validationFunc = QuestItemDisplayPosition_Validation, onClickFunc = QuestItemDisplay_Reset_OnClick, requireSameParentValue = true},
+
+            {type = "Subheader", name = L["Quest"]},
+            {type = "Checkbox", name = L["Auto Complete Quest"], description = L["Auto Complete Quest Desc"], dbKey = "AutoCompleteQuest", preview = "QuestAutoComplete", ratio = 2},
+            {type = "Checkbox", name = L["Press Key To Open Container"], description = L["Press Key To Open Container Desc"], dbKey = "PressKeyToOpenContainer", requiredParentValue = {AutoCompleteQuest = true}},
 
             {type = "Subheader", name = L["Gossip"]},
             {type = "Checkbox", name = L["Auto Select Gossip"], description = L["Auto Select Gossip Desc"], dbKey = "AutoSelectGossip"},
             {type = "Checkbox", name = L["Force Gossip"], description = L["Force Gossip Desc"], dbKey = "ForceGossip"},
+            {type = "Checkbox", name = L["Show Hint"], description = L["Show Hint Desc"], dbKey = "ShowDialogHint"},
             --{type = "Checkbox", name = L["Nameplate Dialog"], description = L["Nameplate Dialog Desc"], dbKey = "NameplateDialogEnabled", preview = "NameplateDialogEnabled", ratio = 1},
+
+            {type = "Subheader", name = L["Compatibility"]},
+            {type = "Checkbox", name = L["Disable DUI In Instance"], description = L["Disable DUI In Instance Desc"], dbKey = "DisableDUIInInstance"},
         },
     },
 
@@ -609,15 +652,16 @@ local Schematic = { --Scheme
         tabName = L["Accessibility"],  --Cate5
         options = {
             {type = "Checkbox", name = L["TTS"], description = L["TTS Desc"], dbKey = "TTSEnabled", preview = "TTSButton", ratio = 1},
-            {type = "Checkbox", name = L["TTS Use Hotkey"], description = L["TTS Use Hotkey Desc"], tooltip = TTSHotkey_TooltipFunc, dbKey = "TTSUseHotkey", parentKey = "TTSEnabled", requiredParentValue = {TTSEnabled = true}},
+            {type = "Checkbox", name = L["TTS Use Hotkey"], description = L["TTS Use Hotkey Desc"], tooltip = TTSHotkey_TooltipFunc, dbKey = "TTSUseHotkey", requiredParentValue = {TTSEnabled = true}},
             {type = "Checkbox", name = L["TTS Auto Play"], description = L["TTS Auto Play Desc"], dbKey = "TTSAutoPlay", requireSameParentValue = true},
             {type = "Checkbox", name = L["TTS Skip Recent"], description = L["TTS Skip Recent Desc"], dbKey = "TTSSkipRecent", branchLevel = 2, requiredParentValue = {TTSEnabled = true, TTSAutoPlay = true}},
+            {type = "Checkbox", name = L["TTS Auto Play Delay"], description = L["TTS Auto Play Delay Desc"], dbKey = "TTSAutoPlayDelay", branchLevel = 2, requireSameParentValue = true},
             {type = "Checkbox", name = L["TTS Auto Stop"], description = L["TTS Auto Stop Desc"], dbKey = "TTSAutoStop", requiredParentValue = {TTSEnabled = true}},
             {type = "Checkbox", name = L["TTS Stop On New"], description = L["TTS Stop On New Desc"], dbKey = "TTSStopOnNew", requireSameParentValue = true},
-            {type = "DropdownButton", name = L["TTS Voice Male"], description = L["TTS Voice Male Desc"], tooltip = TTSVoice_TooltipFunc, dbKey="TTSVoiceMale", valueTextFormatter = ValueTextFormatter_TTSVoiceName, choices = TTSVoice_GetChoices, requireSameParentValue = true},
-            {type = "DropdownButton", name = L["TTS Voice Female"], description = L["TTS Voice Female Desc"],  tooltip = TTSVoice_TooltipFunc, dbKey="TTSVoiceFemale", valueTextFormatter = ValueTextFormatter_TTSVoiceName, choices = TTSVoice_GetChoices, requireSameParentValue = true},
+            {type = "DropdownButton", name = L["TTS Voice Male"], description = L["TTS Voice Male Desc"], tooltip = TTSVoice_TooltipFunc, dbKey="TTSVoiceMale", valueTextFormatter = ValueTextFormatter_TTSVoiceName, choices = TTSVoice_GetChoices, menuDataBuilder = TTSVoice_BuildMenuData, requireSameParentValue = true},
+            {type = "DropdownButton", name = L["TTS Voice Female"], description = L["TTS Voice Female Desc"],  tooltip = TTSVoice_TooltipFunc, dbKey="TTSVoiceFemale", valueTextFormatter = ValueTextFormatter_TTSVoiceName, choices = TTSVoice_GetChoices, menuDataBuilder = TTSVoice_BuildMenuData, requireSameParentValue = true},
             {type = "Checkbox", name = L["TTS Use Narrator"], description = L["TTS Use Narrator Desc"], dbKey = "TTSUseNarrator", requiredParentValue = {TTSEnabled = true}},
-            {type = "DropdownButton", name = L["TTS Voice Narrator"], description = L["TTS Voice Narrator Desc"],  tooltip = TTSVoice_TooltipFunc, dbKey="TTSVoiceNarrator", valueTextFormatter = ValueTextFormatter_TTSVoiceName, choices = TTSVoice_GetChoices, branchLevel = 2, requiredParentValue = {TTSEnabled = true, TTSUseNarrator = true}},
+            {type = "DropdownButton", name = L["TTS Voice Narrator"], description = L["TTS Voice Narrator Desc"],  tooltip = TTSVoice_TooltipFunc, dbKey="TTSVoiceNarrator", valueTextFormatter = ValueTextFormatter_TTSVoiceName, choices = TTSVoice_GetChoices, menuDataBuilder = TTSVoice_BuildMenuData, branchLevel = 2, requiredParentValue = {TTSEnabled = true, TTSUseNarrator = true}},
             {type = "ArrowOption", name = L["TTS Rate"], dbKey = "TTSRate", description = L["TTS Rate Desc"], requiredParentValue = {TTSEnabled = true},
                 choices = {
                     {dbValue = 1, valueText = "1"},
@@ -630,6 +674,10 @@ local Schematic = { --Scheme
             },
             {type = "ArrowOption", name = L["TTS Volume"], dbKey = "TTSVolume", description = L["TTS Volume Desc"], requireSameParentValue = true,
                 choices = {
+                    {dbValue = 1, valueText = "10%"},
+                    {dbValue = 2, valueText = "20%"},
+                    {dbValue = 3, valueText = "30%"},
+                    {dbValue = 4, valueText = "40%"},
                     {dbValue = 5, valueText = "50%"},
                     {dbValue = 6, valueText = "60%"},
                     {dbValue = 7, valueText = "70%"},
@@ -642,6 +690,10 @@ local Schematic = { --Scheme
             {type = "Checkbox", name = L["TTS Content NPC Name"], dbKey = "TTSContentSpeaker", branchLevel = 2, requireSameParentValue = true},
             {type = "Checkbox", name = L["TTS Content Quest Name"], dbKey = "TTSContentQuestTitle", branchLevel = 2, requireSameParentValue = true},
             {type = "Checkbox", name = L["TTS Content Objective"], dbKey = "TTSContentObjective", branchLevel = 2, requireSameParentValue = true},
+
+            {type = "Subheader", name = L["Readable Objects"], requiredParentValue = {TTSEnabled = true, BookUIEnabled = true}},
+            {type = "DropdownButton", name = L["BookUI TTS Voice"], description = L["BookUI TTS Voice Desc"],  tooltip = TTSVoice_TooltipFunc, dbKey="BookTTSVoice", valueTextFormatter = ValueTextFormatter_TTSVoiceName, choices = TTSVoice_GetChoices, menuDataBuilder = TTSVoice_BuildMenuData, branchLevel = 2, requireSameParentValue = true},
+            {type = "Checkbox", name = L["BookUI TTS Click To Read"], description = L["BookUI TTS Click To Read Desc"], dbKey = "BookTTSClickToRead", branchLevel = 2, requireSameParentValue = true},
         },
     },
 };
@@ -825,7 +877,11 @@ function DUIDialogSettingsMixin:Init()
         f:SetParent(self);
     end
 
-    self.hotkeyFramePool = API.CreateObjectPool(CreateHotkeyFrame, RemoveHotkeyFrame);
+    local function OnAcquireHotkeyFrame(f)
+        f:UpdateBaseHeight();
+    end
+
+    self.hotkeyFramePool = API.CreateObjectPool(CreateHotkeyFrame, RemoveHotkeyFrame, OnAcquireHotkeyFrame);
 
     self.numTabs = #Schematic;
 
@@ -1046,8 +1102,22 @@ function DUIDialogSettingsMixin:SelectTabByID(tabID, forceUpdate)
                 isOptionValid = true;
                 for parentKey, requiredValue in pairs(optionData.requiredParentValue) do
                     local dbValue = GetDBValue(parentKey);
-                    if dbValue ~= requiredValue then
-                        isOptionValid = false;
+                    if type(requiredValue) == "table" then
+                        local isCurrentRequirementMet = false;
+                        for _, value in ipairs(requiredValue) do
+                            if value == dbValue then
+                                isCurrentRequirementMet = true;
+                            end
+                        end
+                        if isCurrentRequirementMet then
+                            isOptionValid = true;
+                        else
+                            isOptionValid = false
+                        end
+                    else
+                        if dbValue ~= requiredValue then
+                            isOptionValid = false;
+                        end
                     end
                     if dbKeyToWidget[parentKey] then
                         dbKeyToWidget[parentKey].isParentOption = true;
@@ -1142,6 +1212,7 @@ function DUIDialogSettingsMixin:UpdateOptionButtonByDBKey(dbKey)
     local optionButton = self:GetOptionButtonByDBKey(dbKey);
     if optionButton and optionButton:IsVisible() and optionButton.optionData and optionButton.widget then
         optionButton.widget:SetData(optionButton.optionData);
+        optionButton:OnEnter();
     end
 end
 
@@ -1450,7 +1521,7 @@ do  --ArrowOption
 
     function DUIDialogSettingsArrowOptionMixin:SetValueTextByID(id)
         if self.valueTextFormatter then
-            self.valueTextFormatter(self, self.choices[id].dbValue);
+            self.valueTextFormatter(self, self.choices[id].dbValue, INPUT_DEVICE_GAME_PAD);
         else
             local valueText = self.choices[id].valueText;
             self.ValueText:SetText(valueText);
@@ -1731,7 +1802,7 @@ do  --DropdownButton
             local menu = addon.GetDropdownMenu(self);
             menu:SetOwner(self, MainFrame);
             menu:Show();
-            menu:SetMenuData(TTSVoice_BuildMenuData(self, self.dbKey));
+            menu:SetMenuData(self.menuDataBuilder(self, self.dbKey));
         end
     end
 
@@ -1759,7 +1830,7 @@ do  --DropdownButton
 
     function DUIDialogSettingsDropdownButtonMixin:SetValueTextByID(id)
         if self.valueTextFormatter then
-            self.valueTextFormatter(self, self.choices[id].dbValue);
+            self.valueTextFormatter(self, self.choices[id].dbValue, INPUT_DEVICE_GAME_PAD);
         else
             self.ValueText:SetText(id);
         end
@@ -1801,6 +1872,7 @@ do  --DropdownButton
     function DUIDialogSettingsDropdownButtonMixin:SetData(optionData)
         self.dbKey = optionData.dbKey;
         self.valueTextFormatter = optionData.valueTextFormatter;
+        self.menuDataBuilder = optionData.menuDataBuilder;
 
         local choices = optionData.choices;
 

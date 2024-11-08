@@ -1,7 +1,7 @@
 --[[-----------------------------------------------------------------------------
 MultiLineEditBox Widget (Modified to add Syntax highlighting from FAIAP)
 -------------------------------------------------------------------------------]]
-local Type, Version = "MultiLineEditBox-ElvUI", 33
+local Type, Version = "MultiLineEditBox-ElvUI", 34
 local AceGUI = LibStub and LibStub("AceGUI-3.0", true)
 if not AceGUI or (AceGUI:GetWidgetVersion(Type) or 0) >= Version then return end
 
@@ -12,17 +12,17 @@ local ACCEPT = ACCEPT
 
 local GetSpellInfo
 do	-- backwards compatibility for GetSpellInfo
-	local C_Spell_GetSpellInfo = C_Spell.GetSpellInfo
+	local C_Spell_GetSpellInfo = not _G.GetSpellInfo and C_Spell.GetSpellInfo
 	GetSpellInfo = function(spellID)
 		if not spellID then return end
 
-		if _G.GetSpellInfo then
-			return _G.GetSpellInfo(spellID)
-		else
+		if C_Spell_GetSpellInfo then
 			local info = C_Spell_GetSpellInfo(spellID)
 			if info then
 				return info.name, nil, info.iconID, info.castTime, info.minRange, info.maxRange, info.spellID, info.originalIconID
 			end
+		else
+			return _G.GetSpellInfo(spellID)
 		end
 	end
 end
@@ -31,12 +31,12 @@ end
 Support functions
 -------------------------------------------------------------------------------]]
 
-if not AceGUIMultiLineEditBoxInsertLink then
+if not AceGUIMultiLineEditBoxInsertLinkElvUI then
 	-- upgradeable hook
-	hooksecurefunc("ChatEdit_InsertLink", function(...) return _G.AceGUIMultiLineEditBoxInsertLink(...) end)
+	hooksecurefunc("ChatEdit_InsertLink", function(...) return _G.AceGUIMultiLineEditBoxInsertLinkElvUI(...) end)
 end
 
-function _G.AceGUIMultiLineEditBoxInsertLink(text)
+function _G.AceGUIMultiLineEditBoxInsertLinkElvUI(text)
 	for i = 1, AceGUI:GetWidgetCount(Type) do
 		local editbox = _G[("MultiLineEditBox%uEdit"):format(i)]
 		if editbox and editbox:IsVisible() and editbox:HasFocus() then
@@ -45,7 +45,6 @@ function _G.AceGUIMultiLineEditBoxInsertLink(text)
 		end
 	end
 end
-
 
 local function Layout(self)
 	self:SetHeight(self.numlines * 14 + (self.disablebutton and 19 or 41) + self.labelHeight)

@@ -23,7 +23,7 @@ local webBladesCount = 1
 local paralyzingVenomCount = 1
 local wrestCount = 1
 
-local firstShadowGate = false
+local firstShadowgate = false
 local gloomTouchCount = 1
 local platformAddsKilled = 0
 local worshippersKilled = 0
@@ -60,10 +60,10 @@ local timersNormal = { -- 11:32
 local timersHeroic = { -- 10:09 (enrage)
 	[1] = {
 		[437592] = { 19.3, 56.0, 56.0, 0 }, -- Reactive Toxin
-		[439814] = { 57.5, 48.0, 16.0, 0 }, -- Silken Tomb
+		[439814] = { 57.4, 64.0, 0 }, -- Silken Tomb
 		[440899] = { 8.5, 40.0, 51.0, 0 }, -- Liquefy
 		[437093] = { 11.4, 40.0, 51.0, 0 }, -- Feast
-		[439299] = { 20.4, 47.0, 47.0, 25.0, 0 }, -- Web Blades
+		[439299] = { 20.5, 47.0, 43.0, 29.0, 0 }, -- Web Blades
 	},
 	[3] = {
 		[444829] = { 119.0, 75.0, 0 }, -- Queen's Summons
@@ -144,19 +144,19 @@ function mod:GetOptions()
 		-- Intermission: The Spider's Web
 		447076, -- Predation
 		447456, -- Paralyzing Venom
-		{447411, "CASTBAR"}, -- Wrest
+		{447411, "CASTBAR", "CASTBAR_COUNTDOWN"}, -- Wrest
 
 		-- Stage Two: Royal Ascension
 		443403, -- Gloom (Damage)
 		{460369, "CASTBAR"}, -- Shadowgate
 		-- Queen Ansurek
-		{449940, "CASTBAR"}, -- Acidic Apocalypse (Fail)
+		449940, -- Acidic Apocalypse (Fail)
 		-- Ascended Voidspeaker
 		447950, -- Shadowblast
 		{448046, "COUNTDOWN"}, -- Gloom Eruption
 		-- Devoted Worshipper
 		{447967, "SAY", "ME_ONLY_EMPHASIZE"}, -- Gloom Touch
-		{448458, "CASTBAR"}, -- Cosmic Apocalypse (Fail)
+		448458, -- Cosmic Apocalypse (Fail)
 		-- Chamber Guardian
 		{448147, "TANK"}, -- Oust
 		-- Chamber Expeller
@@ -198,7 +198,9 @@ function mod:GetOptions()
 		[439299] = L.web_blades, -- Web Blades (Blades)
 		[447456] = CL.waves, -- Paralyzing Venom (Waves)
 		[447411] = L.wrest, -- Wrest (Pull In)
+		[449940] = CL.you_die, -- Acidic Apocalypse (You die)
 		[448046] = CL.knockback, -- Gloom Eruption (Knockback)
+		[448458] = CL.you_die, -- Cosmic Apocalypse (You die)
 		[443888] = CL.portals, -- Abyssal Infusion (Portals)
 		[445422] = L.frothing_gluttony, -- Frothing Gluttony (Ring)
 		[444829] = CL.big_adds, -- Queen's Summons (Big Adds)
@@ -213,6 +215,8 @@ function mod:OnRegister()
 	self:SetSpellRename(439814, L.silken_tomb) -- Silken Tomb (Roots)
 	self:SetSpellRename(447456, CL.waves) -- Paralyzing Venom (Waves)
 	self:SetSpellRename(447411, L.wrest) -- Wrest (Pull In)
+	self:SetSpellRename(449940, CL.you_die) -- Acidic Apocalypse (You die)
+	self:SetSpellRename(448458, CL.you_die) -- Cosmic Apocalypse (You die)
 	self:SetSpellRename(443888, CL.portals) -- Abyssal Infusion (Portals)
 	self:SetSpellRename(445422, L.frothing_gluttony) -- Frothing Gluttony (Ring)
 	self:SetSpellRename(444829, CL.big_adds) -- Queen's Summons (Big Adds)
@@ -228,6 +232,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "ReactiveToxin", 437592)
 	self:Log("SPELL_CAST_SUCCESS", "ReactiveToxinSuccess", 437592) -- LFR
 	self:Log("SPELL_AURA_APPLIED", "ReactiveToxinApplied", 437586)
+	self:Log("SPELL_AURA_REMOVED", "ReactiveToxinRemoved", 437586)
 	self:Log("SPELL_AURA_APPLIED", "ConcentratedToxinApplied", 451278)
 	self:Log("SPELL_AURA_APPLIED", "FrothyToxinApplied", 464638)
 	self:Log("SPELL_AURA_APPLIED_DOSE", "FrothyToxinApplied", 464638)
@@ -285,6 +290,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "AbyssalInfusion", 443888)
 	self:Log("SPELL_CAST_SUCCESS", "AbyssalInfusionSuccess", 443888) -- LFR
 	self:Log("SPELL_AURA_APPLIED", "AbyssalInfusionApplied", 443903)
+	self:Log("SPELL_AURA_REMOVED", "AbyssalInfusionRemoved", 443903)
 	self:Log("SPELL_AURA_APPLIED", "AbyssalReverberationApplied", 455387)
 	self:Log("SPELL_CAST_START", "FrothingGluttony", 445422)
 	self:Log("SPELL_AURA_APPLIED", "FrothVaporAppliedOnBoss", 445880)
@@ -293,6 +299,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "AcolytesEssenceApplied", 445152)
 	self:Log("SPELL_CAST_START", "NullDetonation", 445021)
 	self:Log("SPELL_AURA_APPLIED", "RoyalCondemnationApplied", 438974)
+	self:Log("SPELL_AURA_REMOVED", "RoyalCondemnationRemoved", 438974)
 	self:Log("SPELL_AURA_APPLIED", "RoyalShacklesApplied", 441865)
 	self:Log("SPELL_CAST_START", "Infest", 443325)
 	self:Log("SPELL_AURA_APPLIED", "InfestApplied", 443656)
@@ -363,6 +370,7 @@ end
 function mod:AddMarking(_, unit, guid)
 	if self:MobId(guid) == 226200 and not mobCollector[guid] then -- Chamber Acolyte
 		mobCollector[guid] = true
+		-- use the spawn counter from the mob spawn uid for marking (1/2)
 		local uid = select(7, strsplit("-", guid))
 		local index = bit.rshift(bit.band(tonumber(string.sub(uid, 1, 5), 16), 0xffff8), 3) + 1
 		self:CustomIcon(chamberAcolyteMarker, unit, index)
@@ -438,7 +446,7 @@ do
 				local text = icon and CL.rticon:format(L.reactive_toxin_say, icon) or L.reactive_toxin_say
 				self:PlaySound(437592, "warning") -- position?
 				self:Say(437592, text, nil, icon and CL.rticon:format("Toxin", icon) or "Toxin")
-				self:SayCountdown(437592, 5, icon)
+				self:SayCountdown(437592, self:Mythic() and 5 or 6, icon)
 			end
 			playerList[#playerList+1] = player
 			playerList[player] = icon
@@ -472,6 +480,13 @@ do
 		if #iconList == requiredPlayers then
 			self:MarkToxinPlayers()
 		end
+	end
+
+	function mod:ReactiveToxinRemoved(args)
+		if self:Me(args.destGUID) then
+			self:CancelSayCountdown(437592)
+		end
+		self:CustomIcon(reactiveToxinMarker, args.destName)
 	end
 end
 
@@ -625,12 +640,13 @@ do
 		platformAddsKilled = 0
 		worshippersKilled = 0
 		acolytesKilled = 0
-		firstShadowGate = true
+		firstShadowgate = true
 
 		if self:Mythic() then
 			if self:GetOption(chamberAcolyteMarker) then
 				self:RegisterTargetEvents("AddMarking")
 			end
+			self:RegisterEvent("NAME_PLATE_UNIT_ADDED", "ShadowgateNameplateCheck")
 			self:RegisterEvent("UNIT_SPELLCAST_START")
 			self:RegisterEvent("UNIT_SPELLCAST_STOP")
 		end
@@ -668,15 +684,32 @@ do
 	-- Shadowgate
 	local prev = nil
 	local casterGUID = nil
+
 	-- cast events from nameplates, requires looking at the gate D;
-	function mod:UNIT_SPELLCAST_START(_, unit, castGUID, spellId)
-		if spellId == 460369 and prev ~= castGUID then -- Shadowgate
-			firstShadowGate = false
-			prev = castGUID
-			casterGUID = self:UnitGUID(unit)
-			self:CastBar(460369, 10)
+	function mod:ShadowgateNameplateCheck(event, unit)
+		local guid = self:UnitGUID(unit)
+		if self:MobId(guid) == 228617 and casterGUID ~= guid then -- Shadowgate
+			casterGUID = guid
+			local name, _, _, _, endTime = UnitCastingInfo(unit)
+			if name then
+				local remaining = endTime / 1000 - GetTime()
+				self:CastBar(460369, {remaining, 12})
+			end
+		end
+		if self.targetEventFunc then -- for RegisterTargetEvents
+			self:NAME_PLATE_UNIT_ADDED(event, unit)
 		end
 	end
+
+	function mod:UNIT_SPELLCAST_START(_, unit, castGUID, spellId)
+		if spellId == 460369 and prev ~= castGUID then -- Shadowgate
+			firstShadowgate = false
+			prev = castGUID
+			casterGUID = self:UnitGUID(unit)
+			self:CastBar(460369, 12)
+		end
+	end
+
 	function mod:UNIT_SPELLCAST_STOP(_, unit, _, spellId)
 		if spellId == 460369 then -- Shadowgate
 			casterGUID = self:UnitGUID(unit)
@@ -685,12 +718,12 @@ do
 	end
 
 	function mod:Shadowgate(args)
-		if firstShadowGate then -- get the next cast
-			firstShadowGate = false
-			self:CastBar(args.spellId, 10)
+		if firstShadowgate then -- get the next cast
+			firstShadowgate = false
+			self:CastBar(args.spellId, 12)
 		elseif casterGUID == args.sourceGUID then
 			-- show the cast for the last gate you saw a nameplate for
-			self:CastBar(args.spellId, 10)
+			self:CastBar(args.spellId, 12)
 		end
 	end
 
@@ -800,17 +833,16 @@ do
 			self:StopBar(CL.count:format(L.wrest, i)) -- nuclear cleanup
 		end
 		self:StopCastBar(460369) -- Shadowgate
-		-- firstShadowGate = true -- XXX can still catch desync'd casts here z.z
+		-- firstShadowgate = true -- XXX can still catch desync'd casts here z.z
 	end
 
 	function mod:AcidicApocalypse(args)
-		self:Message(args.spellId, "yellow", CL.casting:format(args.spellName))
-		self:CastBar(args.spellId, self:Easy() and 50 or 35)
+		self:Bar(args.spellId, self:Easy() and 50 or 35, CL.you_die)
 	end
 end
 
 function mod:AcidicApocalypseSuccess(args)
-	self:Message(args.spellId, "red")
+	self:Message(args.spellId, "red", CL.you_die)
 	self:PlaySound(args.spellId, "alarm")
 end
 
@@ -840,7 +872,7 @@ do
 				self:Bar(448046, self:Mythic() and 5.2 or self:Easy() and 7.1 or 5.9, CL.knockback) -- Gloom Eruption
 
 				if wrestCount == 1 then -- first Voidspeaker set
-					firstShadowGate = true
+					firstShadowgate = true
 					self:CDBar(447411, self:Easy() and 13.5 or 11.8, CL.count:format(L.wrest, wrestCount)) -- Wrest
 					self:Bar(451600, 12.5) -- Expulsion Beam
 					self:Bar(448147, 14.2) -- Oust
@@ -882,7 +914,7 @@ do
 	function mod:CosmicApocalypse(args)
 		if args.time - prev > 2 then
 			prev = args.time
-			self:CastBar(args.spellId, self:Mythic() and 80 or self:Easy() and 95 or 85)
+			self:Bar(args.spellId, self:Mythic() and 80 or self:Easy() and 95 or 85, CL.you_die)
 		end
 	end
 end
@@ -892,7 +924,7 @@ do
 	function mod:CosmicApocalypseSuccess(args)
 		if args.time - prev > 2 then
 			prev = args.time
-			self:Message(args.spellId, "red")
+			self:Message(args.spellId, "red", CL.you_die)
 			self:PlaySound(args.spellId, "alarm")
 		end
 	end
@@ -902,7 +934,7 @@ function mod:WorshipperDeath(args)
 	worshippersKilled = worshippersKilled + 1
 	self:Message("stages", "cyan", CL.mob_killed:format(args.destName, worshippersKilled, 2), false)
 	if worshippersKilled == 2 then
-		self:StopCastBar(448458) -- Cosmic Apocalypse
+		self:StopBar(CL.you_die) -- Cosmic Apocalypse
 	end
 end
 
@@ -983,7 +1015,7 @@ end
 
 -- Stage Three: Paranoia's Feast
 function mod:AphoticCommunion(args)
-	self:StopCastBar(449940) -- Acidic Apocalypse
+	self:StopBar(CL.you_die) -- Acidic Apocalypse
 	if self:Mythic() then
 		self:UnregisterTargetEvents()
 		self:UnregisterEvent("UNIT_SPELLCAST_START")
@@ -1106,6 +1138,13 @@ do
 		if #iconList == 2 then
 			self:MarkAbyssalInfusionPlayers()
 		end
+	end
+
+	function mod:AbyssalInfusionRemoved(args)
+		if self:Me(args.destGUID) then
+			self:CancelSayCountdown(443888)
+		end
+		self:CustomIcon(abyssalInfusionMarker, args.destName)
 	end
 end
 
@@ -1232,6 +1271,13 @@ do
 		if #iconList == count then
 			self:MarkRoyalCondemnationPlayers()
 		end
+	end
+
+	function mod:RoyalCondemnationRemoved(args)
+		if self:Me(args.destGUID) then
+			self:CancelSayCountdown(438976)
+		end
+		self:CustomIcon(royalCondemnationMarker, args.destName)
 	end
 end
 

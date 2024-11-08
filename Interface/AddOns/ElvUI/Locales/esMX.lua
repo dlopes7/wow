@@ -334,6 +334,7 @@ L["Stack Items In Bags"] = "Apilar Objetos en Bolsas"
 L["Stack Items In Bank"] = "Apilar Objetos en Banco"
 L["Stack Items To Bags"] = "Apilar Objetos a las Bolsas"
 L["Stack Items To Bank"] = "Apilar Objetos al Banco"
+L["Stack Size"] = "Tamaño de Apilar"
 L["Stance Bar"] = "Barra de Forma"
 L["Steps"] = "Pasos"
 L["Sticky Frames"] = "Marcos Adhesivos"
@@ -366,6 +367,7 @@ L["To setup chat colors, chat channels and chat font size, right-click the chat 
 L["Toggle Bags"] = "Mostrar/Ocultar Bolsas"
 L["Toggle Chat Frame"] = "Mostrar/Ocultar Marco de Chat"
 L["Toggle Configuration"] = "Mostrar/Ocultar Configuración"
+L["Toggle Mover Mode"] = true
 L["Toggle Volume Stream"] = "Mostrar/Ocultar Flujo de Volumen"
 L["Tooltip"] = "Descripción Emergente"
 L["TopCenterWidget"] = true

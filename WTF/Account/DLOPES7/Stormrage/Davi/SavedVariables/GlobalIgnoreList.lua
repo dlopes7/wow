@@ -1,2 +1,0 @@
-
-GlobalIgnoreImported = nil

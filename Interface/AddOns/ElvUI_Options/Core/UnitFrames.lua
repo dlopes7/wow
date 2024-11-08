@@ -885,8 +885,9 @@ end
 local function GetOptionsTable_RaidRoleIcons(updateFunc, groupName, numGroup)
 	local config = ACH:Group(L["Raid Role Indicator"], nil, nil, nil, function(info) return E.db.unitframe.units[groupName].raidRoleIcons[info[#info]] end, function(info, value) E.db.unitframe.units[groupName].raidRoleIcons[info[#info]] = value updateFunc(UF, groupName, numGroup) end)
 	config.args.enable = ACH:Toggle(L["Enable"], nil, 0)
-	config.args.scale = ACH:Range(L["Scale"], nil, 1, { min = 0.5, max = 2, step = 0.01, isPercent = true })
+	config.args.combatHide = ACH:Toggle(L["Hide In Combat"], nil, 1)
 	config.args.position = ACH:Select(L["Position"], nil, 2, C.Values.AllPoints)
+	config.args.scale = ACH:Range(L["Scale"], nil, 3, { min = 0.5, max = 2, step = 0.01, isPercent = true })
 	config.args.xOffset = ACH:Range(L["X-Offset"], nil, 6, offsetLong)
 	config.args.yOffset = ACH:Range(L["Y-Offset"], nil, 7, offsetLong)
 
@@ -990,10 +991,14 @@ local function GetOptionsTable_GeneralGroup(updateFunc, groupName, numUnits)
 		config.args.smartAuraPosition = ACH:Select(L["Smart Aura Position"], L["Will show Buffs in the Debuff position when there are no Debuffs active, or vice versa."], 2, C.Values.SmartAuraPositions)
 	end
 
+	if P.unitframe.units[groupName].debuffHighlight then
+		config.args.debuffHighlightEnable = ACH:Toggle(E.NewSign..L["Aura Highlight"], nil, 6, nil, nil, nil, function() return E.db.unitframe.units[groupName].debuffHighlight.enable end, function(_, value) E.db.unitframe.units[groupName].debuffHighlight.enable = value updateFunc(UF, groupName, numUnits) end)
+	end
+
 	if groupName == 'arena' then
-		config.args.pvpSpecIcon = ACH:Toggle(L["Spec Icon"], L["Display icon on arena frame indicating the units talent specialization or the units faction if inside a battleground."], 6, nil, nil, nil, nil, nil, function() return E.db.unitframe.units[groupName].orientation == 'MIDDLE' end)
+		config.args.pvpSpecIcon = ACH:Toggle(L["Spec Icon"], L["Display icon on arena frame indicating the units talent specialization or the units faction if inside a battleground."], 7, nil, nil, nil, nil, nil, function() return E.db.unitframe.units[groupName].orientation == 'MIDDLE' end)
 	else
-		config.args.threatGroup = ACH:Group(L["Threat"], nil, 50)
+		config.args.threatGroup = ACH:Group(L["Threat"], nil, 60)
 		config.args.threatGroup.args.threatStyle = ACH:Select(L["Display Mode"], nil, 1, threatValues)
 		config.args.threatGroup.args.threatPrimary = ACH:Toggle(L["Primary Unit"], L["Requires the unit to be the primary target to display."], 2)
 		config.args.threatGroup.inline = true
@@ -1011,8 +1016,8 @@ local function GetOptionsTable_GeneralGroup(updateFunc, groupName, numUnits)
 		config.args.positionsGroup.args.growthDirection = ACH:Select(L["Growth Direction"], L["Growth direction from the first unitframe."], 4, C.Values.GrowthDirection)
 		config.args.positionsGroup.args.numGroups = ACH:Range(L["Number of Groups"], nil, 7, { min = 1, max = 8, step = 1 }, nil, nil, function(info, value) E.db.unitframe.units[groupName][info[#info]] = value updateFunc(UF, groupName, numUnits) if UF[groupName].isForced then UF:HeaderConfig(UF[groupName]) UF:HeaderConfig(UF[groupName], true) end end, nil, groupName == 'party')
 		config.args.positionsGroup.args.groupsPerRowCol = ACH:Range(L["Groups Per Row/Column"], nil, 8, { min = 1, max = 8, step = 1 }, nil, nil, function(info, value) E.db.unitframe.units[groupName][info[#info]] = value updateFunc(UF, groupName, numUnits) if UF[groupName].isForced then UF:HeaderConfig(UF[groupName]) UF:HeaderConfig(UF[groupName], true) end end, nil, groupName == 'party')
-		config.args.positionsGroup.args.horizontalSpacing = ACH:Range(L["Horizontal Spacing"], nil, 9, spacingNormal)
-		config.args.positionsGroup.args.verticalSpacing = ACH:Range(L["Vertical Spacing"], nil, 10, spacingNormal)
+		config.args.positionsGroup.args.horizontalSpacing = ACH:Range(L["Horizontal Spacing"], nil, 9, spacingLong)
+		config.args.positionsGroup.args.verticalSpacing = ACH:Range(L["Vertical Spacing"], nil, 10, spacingLong)
 		config.args.positionsGroup.args.groupSpacing = ACH:Range(L["Group Spacing"], L["Additional spacing between each individual group."], 11, spacingNormal, nil, nil, nil, nil, groupName == 'party')
 
 		config.args.visibilityGroup = ACH:Group(L["Visibility"], nil, 100, nil, nil, function(info, value) E.db.unitframe.units[groupName][info[#info]] = value updateFunc(UF, groupName, numUnits) end)
@@ -1144,15 +1149,21 @@ Colors.healthGroup.args.healthselection = ACH:Toggle(L["Selection Health"], L["C
 Colors.healthGroup.args.healthclass = ACH:Toggle(L["Class Health"], L["Color health by classcolor or reaction."], 3, nil, nil, nil, nil, nil, function() return E.Retail and E.db.unitframe.colors.healthselection end)
 Colors.healthGroup.args.forcehealthreaction = ACH:Toggle(L["Force Reaction Color"], L["Forces reaction color instead of class color on units controlled by players."], 4, nil, nil, nil, nil, nil, function() return E.db.unitframe.colors.healthselection or not E.db.unitframe.colors.healthclass end)
 Colors.healthGroup.args.transparentHealth = ACH:Toggle(L["Transparent"], L["Make textures transparent."], 6)
-Colors.healthGroup.args.useDeadBackdrop = ACH:Toggle(L["Use Dead Backdrop"], nil, 7)
-Colors.healthGroup.args.classbackdrop = ACH:Toggle(L["Class Backdrop"], L["Color the health backdrop by class or reaction."], 8, nil, nil, nil, nil, nil, function() return E.db.unitframe.colors.customhealthbackdrop end)
-Colors.healthGroup.args.customhealthbackdrop = ACH:Toggle(L["Custom Backdrop"], L["Use the custom backdrop color instead of a multiple of the main color."], 9)
-Colors.healthGroup.args.healthMultiplier = ACH:Range(L["Health Backdrop Multiplier"], nil, 10, { min = 0, softMax = 0.75, max = 1, step = 0.01 }, nil, nil, nil, function() return E.db.unitframe.colors.customhealthbackdrop end)
-Colors.healthGroup.args.health_backdrop = ACH:Color(L["Health Backdrop"], nil, 20, nil, nil, nil, nil, function() return not E.db.unitframe.colors.customhealthbackdrop end)
 Colors.healthGroup.args.tapped = ACH:Color(L["Tapped"], nil, 21)
 Colors.healthGroup.args.health = ACH:Color(L["Health"], nil, 22)
 Colors.healthGroup.args.disconnected = ACH:Color(L["Disconnected"], nil, 23)
-Colors.healthGroup.args.health_backdrop_dead = ACH:Color(L["Custom Dead Backdrop"], L["Use this backdrop color for units that are dead or ghosts."], 24, nil, 250)
+
+Colors.healthGroup.args.healthBackdrop = ACH:Group(L["Health Backdrop"])
+Colors.healthGroup.args.healthBackdrop.inline = true
+Colors.healthGroup.args.healthBackdrop.args.customhealthbackdrop = ACH:Toggle(L["Custom Backdrop"], L["Use the custom backdrop color instead of a multiple of the main color."], 1)
+Colors.healthGroup.args.healthBackdrop.args.health_backdrop = ACH:Color(L["Health Backdrop"], nil, 2, nil, nil, nil, nil, function() return not E.db.unitframe.colors.customhealthbackdrop end)
+Colors.healthGroup.args.healthBackdrop.args.health_backdrop.customWidth = 150
+Colors.healthGroup.args.healthBackdrop.args.useDeadBackdrop = ACH:Toggle(L["Use Dead Backdrop"], nil, 5)
+Colors.healthGroup.args.healthBackdrop.args.health_backdrop_dead = ACH:Color(L["Custom Dead Backdrop"], L["Use this backdrop color for units that are dead or ghosts."], 6, nil, 250)
+Colors.healthGroup.args.healthBackdrop.args.health_backdrop_dead.customWidth = 150
+Colors.healthGroup.args.healthBackdrop.args.healthbackdropbyvalue = ACH:Toggle(L["Backdrop By Value"], L["Color health by amount remaining."], 10)
+Colors.healthGroup.args.healthBackdrop.args.classbackdrop = ACH:Toggle(L["Class Backdrop"], L["Color the health backdrop by class or reaction."], 11, nil, nil, nil, nil, nil, function() return E.db.unitframe.colors.customhealthbackdrop end)
+Colors.healthGroup.args.healthBackdrop.args.healthMultiplier = ACH:Range(L["Health Backdrop Multiplier"], nil, 12, { min = 0, softMax = 0.75, max = 1, step = 0.01 }, nil, nil, nil, function() return E.db.unitframe.colors.customhealthbackdrop end)
 
 Colors.healthGroup.args.healthBreak = ACH:Group(L["Health Breakpoint"], nil, nil, nil, function(info) if info.type == 'color' then local t, d = E.db.unitframe.colors.healthBreak[info[#info]], P.unitframe.colors.healthBreak[info[#info]] return t.r, t.g, t.b, t.a, d.r, d.g, d.b else return E.db.unitframe.colors.healthBreak[info[#info]] end end, function(info, ...) if info.type == 'color' then local r, g, b, a = ... local t = E.db.unitframe.colors.healthBreak[info[#info]] t.r, t.g, t.b, t.a = r, g, b, a or 1 else local value = ... E.db.unitframe.colors.healthBreak[info[#info]] = value end UF:Update_AllFrames() end)
 Colors.healthGroup.args.healthBreak.inline = true

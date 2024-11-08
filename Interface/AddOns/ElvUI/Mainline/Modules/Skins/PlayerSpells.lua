@@ -4,12 +4,8 @@ local S = E:GetModule('Skins')
 local _G = _G
 local next = next
 local hooksecurefunc = hooksecurefunc
-local GetSpellTexture = C_Spell.GetSpellTexture or GetSpellTexture
 
---[[
-	To Do:  Parchment Remover
-		    Monitor it due to changes from Blizz
-]]
+local GetSpellTexture = C_Spell.GetSpellTexture or GetSpellTexture
 
 local function HandleTalentFrameDialog(dialog)
 	if not dialog then return end
@@ -115,7 +111,7 @@ function S:Blizzard_PlayerSpells()
 	end
 
 	PlayerSpellsFrame.TabSystem:ClearAllPoints()
-	PlayerSpellsFrame.TabSystem:Point('TOPLEFT', PlayerSpellsFrame, 'BOTTOMLEFT', -3, 0)
+	PlayerSpellsFrame.TabSystem:Point('TOPLEFT', PlayerSpellsFrame, 'BOTTOMLEFT', -3, 2)
 
 	local ImportDialog = _G.ClassTalentLoadoutImportDialog
 	if ImportDialog then

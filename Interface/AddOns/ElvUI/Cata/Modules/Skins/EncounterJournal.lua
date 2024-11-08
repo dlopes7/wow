@@ -10,15 +10,6 @@ local rad = rad
 local CreateFrame = CreateFrame
 local hooksecurefunc = hooksecurefunc
 
-local lootQuality = {
-	['loottab-set-itemborder-white'] = nil, -- dont show white
-	['loottab-set-itemborder-green'] = 2,
-	['loottab-set-itemborder-blue'] = 3,
-	['loottab-set-itemborder-purple'] = 4,
-	['loottab-set-itemborder-orange'] = 5,
-	['loottab-set-itemborder-artifact'] = 6,
-}
-
 local function HandleButton(btn, strip, ...)
 	S:HandleButton(btn, strip, ...)
 
@@ -86,18 +77,6 @@ local function SkinOverviewInfoBullets(object)
 	end
 end
 
-local function HandleTabs(tab)
-	local str = tab:GetFontString()
-	tab:StripTextures()
-	tab:SetText(tab.tooltip)
-	str:FontTemplate(nil, nil, 'SHADOW')
-	tab:SetTemplate()
-	tab:SetScript('OnEnter', E.noop)
-	tab:SetScript('OnLeave', E.noop)
-	tab:Size(str:GetStringWidth() * 1.5, 20)
-	tab.SetPoint = E.noop
-end
-
 local function SkinAbilitiesInfo()
 	local index = 1
 	local header = _G['EncounterJournalInfoHeader'..index]
@@ -139,55 +118,6 @@ local function SkinAbilitiesInfo()
 	end
 end
 
-local function ItemSetsItemBorder(border, atlas)
-	local parent = border:GetParent()
-	local backdrop = parent and parent.Icon and parent.Icon.backdrop
-	if backdrop then
-		local color = E.QualityColors[lootQuality[atlas]]
-		if color then
-			backdrop:SetBackdropBorderColor(color.r, color.g, color.b)
-		else
-			backdrop:SetBackdropBorderColor(unpack(E.media.bordercolor))
-		end
-	end
-end
-
-local function ItemSetElements(set)
-	local parchment = E.private.skins.parchmentRemoverEnable
-	if parchment and not set.backdrop then
-		set:CreateBackdrop('Transparent')
-	end
-
-	if parchment and set.Background then
-		set.Background:Hide()
-	end
-
-	if set.ItemButtons then
-		for _, button in next, set.ItemButtons do
-			local icon = button.Icon
-			if icon and not icon.backdrop then
-				S:HandleIcon(icon, true)
-			end
-
-			local border = button.Border
-			if border and not border.IsSkinned then
-				border:SetAlpha(0)
-
-				ItemSetsItemBorder(border, border:GetAtlas()) -- handle first one
-				hooksecurefunc(border, 'SetAtlas', ItemSetsItemBorder)
-
-				border.IsSkinned = true
-			end
-		end
-	end
-end
-
-local function HandleItemSetsElements(scrollBox)
-	if scrollBox then
-		scrollBox:ForEachFrame(ItemSetElements)
-	end
-end
-
 function S:Blizzard_EncounterJournal()
 	if not (E.private.skins.blizzard.enable and E.private.skins.blizzard.encounterjournal) then return end
 
@@ -209,7 +139,10 @@ function S:Blizzard_EncounterJournal()
 	local InstanceSelect = EJ.instanceSelect
 	InstanceSelect.bg:Kill()
 
-	S:HandleDropDownBox(InstanceSelect.tierDropDown)
+	S:HandleDropDownBox(InstanceSelect.ExpansionDropdown)
+	S:HandleDropDownBox(_G.EncounterJournalEncounterFrameInfo.LootContainer.filter, 100)
+	S:HandleDropDownBox(_G.EncounterJournalEncounterFrameInfo.LootContainer.slotFilter, 100)
+	S:HandleDropDownBox(_G.EncounterJournalEncounterFrameInfoDifficulty, 110)
 	S:HandleTrimScrollBar(InstanceSelect.ScrollBar)
 
 	-- Bottom tabs
@@ -289,7 +222,7 @@ function S:Blizzard_EncounterJournal()
 
 		local tab = info[name]
 		tab:CreateBackdrop('Transparent')
-		tab.backdrop:SetInside(2, 2)
+		tab.backdrop:SetInside(nil, 2, 2)
 
 		tab:SetNormalTexture(E.ClearTexture)
 		tab:SetPushedTexture(E.ClearTexture)

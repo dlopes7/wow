@@ -1,4 +1,4 @@
--- Generated from CurseForge on Mon Oct 14 08:05:02 UTC 2024
+-- Generated from CurseForge on Thu Nov  7 09:26:40 UTC 2024
 local ns = select(2, ...) ---@class ns @The addon namespace.
 
 if ns:IsSameLocale("deDE") then
@@ -239,6 +239,14 @@ L["RAID_BOSS_BOT_2"] = "Theralion und Valiona"
 L["RAID_BOSS_BOT_3"] = "Rat der Zwielichtigen Aszendenten"
 L["RAID_BOSS_BOT_4"] = "Cho'gall"
 L["RAID_BOSS_BOT_5"] = "Sinestra"
+L["RAID_BOSS_BRD_1"] = "Lord Roccor"
+L["RAID_BOSS_BRD_2"] = "Bael'Gar"
+L["RAID_BOSS_BRD_3"] = "Lord Incendius"
+L["RAID_BOSS_BRD_4"] = "Golemlord Argelmach"
+L["RAID_BOSS_BRD_5"] = "Die Sieben"
+L["RAID_BOSS_BRD_6"] = "General Zornesschmied"
+L["RAID_BOSS_BRD_7"] = "Botschafter Flammenschlag"
+L["RAID_BOSS_BRD_8"] = "Imperator Dagran Thaurissan"
 L["RAID_BOSS_BWD_1"] = "Omnotron-Verteidigungssystem"
 L["RAID_BOSS_BWD_2"] = "Magmaul"
 L["RAID_BOSS_BWD_3"] = "Atramedes"
@@ -265,6 +273,20 @@ L["RAID_BOSS_FCN_6"] = "Lady Inerva Dunkelader"
 L["RAID_BOSS_FCN_7"] = "Rat des Blutes"
 L["RAID_BOSS_FCN_8"] = "Schlickfaust"
 L["RAID_BOSS_FCN_9"] = "Generäle der Steinlegion"
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_1"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_2"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_3"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_4"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_5"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_6"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_7"] = ""--]] 
 L["RAID_BOSS_FSFO_1"] = "Aufmerksamer Wächter"
 L["RAID_BOSS_FSFO_10"] = "Rygelon"
 L["RAID_BOSS_FSFO_11"] = "Der Kerkermeister"
@@ -339,6 +361,7 @@ L["RAID_BOSS_VOTI_6"] = "Kurog Grimmtotem"
 L["RAID_BOSS_VOTI_7"] = "Bruthüterin Diurna"
 L["RAID_BOSS_VOTI_8"] = "Raszageth die Sturmfresserin"
 L["RAID_BOT"] = "Die Bastion des Zwielichts"
+L["RAID_BRD"] = "Schwarzfelstiefen"
 L["RAID_BWD"] = "Der Pechschwingenabstieg"
 L["RAID_DIFFICULTY_NAME_HEROIC"] = "Heroisch"
 L["RAID_DIFFICULTY_NAME_HEROIC10"] = "Heroisch 10"
@@ -355,6 +378,8 @@ L["RAID_DIFFICULTY_SUFFIX_NORMAL"] = "N"
 L["RAID_DIFFICULTY_SUFFIX_NORMAL10"] = "N10"
 L["RAID_DIFFICULTY_SUFFIX_NORMAL25"] = "N25"
 L["RAID_ENCOUNTERS_DEFEATED_TITLE"] = "Schlachtzugsbegegnungen besiegt"
+--[[Translation missing --]]
+--[[ L["RAID_FL"] = ""--]] 
 L["RAID_ICC"] = "Die Eiskronenzitadelle"
 L["RAID_NP"] = "Palast der Nerub'ar"
 L["RAID_RS"] = "Das Rubinsanktum"

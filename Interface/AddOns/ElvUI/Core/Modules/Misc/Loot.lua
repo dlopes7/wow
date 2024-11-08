@@ -22,9 +22,10 @@ local M = E:GetModule('Misc')
 local LCG = E.Libs.CustomGlow
 
 local _G = _G
-local unpack = unpack
-local tinsert = tinsert
 local hooksecurefunc = hooksecurefunc
+local tinsert = tinsert
+local format = format
+local unpack = unpack
 local next = next
 local max = max
 
@@ -50,6 +51,7 @@ local UnitName = UnitName
 local StaticPopup_Hide = StaticPopup_Hide
 
 local GetCVarBool = C_CVar.GetCVarBool
+local GetItemReagentQualityByItemInfo = C_TradeSkillUI and C_TradeSkillUI.GetItemReagentQualityByItemInfo
 
 local ITEM_QUALITY_COLORS = ITEM_QUALITY_COLORS
 local TEXTURE_ITEM_QUEST_BANG = TEXTURE_ITEM_QUEST_BANG
@@ -166,7 +168,7 @@ local function CreateSlot(id)
 	slot.icon = icon
 
 	local count = iconFrame:CreateFontString(nil, 'OVERLAY')
-	count:SetJustifyH'RIGHT'
+	count:SetJustifyH('RIGHT')
 	count:Point('BOTTOMRIGHT', iconFrame, -2, 2)
 	count:FontTemplate(nil, nil, 'OUTLINE')
 	count:SetText(1)
@@ -193,6 +195,12 @@ local function CreateSlot(id)
 	questTexture:SetTexture(TEXTURE_ITEM_QUEST_BANG)
 	questTexture:SetTexCoord(unpack(E.TexCoords))
 	slot.questTexture = questTexture
+
+	local profQuality = E.Retail and iconFrame:CreateTexture(nil, 'OVERLAY')
+	if profQuality then
+		profQuality:SetPoint('TOPLEFT', -3, 2)
+		slot.ProfessionQualityOverlayFrame = profQuality
+	end
 
 	lootFrame.slots[id] = slot
 	return slot
@@ -256,6 +264,7 @@ function M:LOOT_OPENED(_, autoloot)
 			local slot = lootFrame.slots[i] or CreateSlot(i)
 			local textureID, item, count, _, quality, _, isQuestItem, questId, isActive = GetLootSlotInfo(i)
 			local color = ITEM_QUALITY_COLORS[quality or 0]
+			local itemLink = GetLootSlotLink(i)
 
 			if coinTextureIDs[textureID] then
 				item = item:gsub('\n', ', ')
@@ -276,6 +285,16 @@ function M:LOOT_OPENED(_, autoloot)
 
 			if quality then
 				max_quality = max(max_quality, quality)
+			end
+
+			if slot.ProfessionQualityOverlayFrame then
+				local profQuality = itemLink and GetItemReagentQualityByItemInfo(itemLink)
+				if profQuality then
+					local atlas = format('Professions-Icon-Quality-Tier%d-Inv', profQuality)
+					slot.ProfessionQualityOverlayFrame:SetAtlas(atlas, true)
+				else
+					slot.ProfessionQualityOverlayFrame:SetAtlas(nil)
+				end
 			end
 
 			local questTexture = slot.questTexture

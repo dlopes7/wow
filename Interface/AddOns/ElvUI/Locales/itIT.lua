@@ -334,6 +334,7 @@ L["Stack Items In Bags"] = true
 L["Stack Items In Bank"] = true
 L["Stack Items To Bags"] = true
 L["Stack Items To Bank"] = true
+L["Stack Size"] = true
 L["Stance Bar"] = true
 L["Steps"] = true
 L["Sticky Frames"] = true
@@ -366,6 +367,7 @@ L["To setup chat colors, chat channels and chat font size, right-click the chat 
 L["Toggle Bags"] = true
 L["Toggle Chat Frame"] = true
 L["Toggle Configuration"] = true
+L["Toggle Mover Mode"] = true
 L["Toggle Volume Stream"] = true
 L["Tooltip"] = true
 L["TopCenterWidget"] = true

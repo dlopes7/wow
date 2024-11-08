@@ -2,6 +2,7 @@
 BigWigs:AddSounds("Blightbone", {
 	[320596] = {"alarm","warning"},
 	[320630] = "warning",
+	[320631] = "warning",
 	[320637] = "long",
 	[320655] = "alert",
 })
@@ -22,7 +23,7 @@ BigWigs:AddSounds("Surgeon Stitchflesh", {
 	[320376] = "alert",
 	[322681] = {"info","warning"},
 	[327100] = "underyou",
-	[334476] = "alarm",
+	[334476] = {"alarm","underyou"},
 	[334488] = "alert",
 	[343556] = "warning",
 })
@@ -37,13 +38,14 @@ BigWigs:AddSounds("Nalthor the Rimebinder", {
 
 BigWigs:AddSounds("The Necrotic Wake Trash", {
 	[320464] = "alert",
+	[320696] = "alert",
 	[320822] = "info",
 	[321780] = "alert",
 	[322756] = "alarm",
-	[323190] = "alert",
 	[323347] = "info",
 	[323471] = "info",
 	[324293] = "alarm",
+	[324323] = "alert",
 	[324372] = "alarm",
 	[324387] = "alert",
 	[324394] = "alert",

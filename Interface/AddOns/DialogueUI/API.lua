@@ -120,6 +120,7 @@ end
 do  -- Pixel
     local GetPhysicalScreenSize = GetPhysicalScreenSize;
     local SCREEN_WIDTH, SCREEN_HEIGHT = GetPhysicalScreenSize();
+    local UI_SCALE_RATIO = 1 / UIParent:GetEffectiveScale();
 
     local function GetPixelPertectScale()
         return (768/SCREEN_HEIGHT)
@@ -212,8 +213,18 @@ do  -- Pixel
 
     PixelUtil:SetScript("OnEvent", function(self, event, ...)
         SCREEN_WIDTH, SCREEN_HEIGHT = GetPhysicalScreenSize();
+        UI_SCALE_RATIO = 1 / UIParent:GetEffectiveScale();
         self:MarkScaleDirty();
     end);
+
+
+    local GetCursorPosition = GetCursorPosition;
+
+    local function GetScaledCursorPosition()
+        local x, y = GetCursorPosition();
+        return x*UI_SCALE_RATIO, y*UI_SCALE_RATIO
+    end
+    API.GetScaledCursorPosition = GetScaledCursorPosition;
 end
 
 do  -- Object Pool
@@ -296,6 +307,11 @@ do  -- Object Pool
         return tbl
     end
 
+    function ObjectPoolMixin:EnumerateActive()
+        local activeObjects = self:GetActiveObjects();
+        return ipairs(activeObjects)
+    end
+
     local function RemoveObject(object)
         object:Hide();
         object:ClearAllPoints();
@@ -322,8 +338,12 @@ do  -- String
         local tbl = {};
 
         if text then
+            local n = 0;
             for v in gmatch(text, "[%C]+") do
-                tinsert(tbl, v)
+                if v ~= " " then
+                    n = n + 1;
+                    tbl[n] = v;
+                end
             end
         end
 
@@ -751,6 +771,10 @@ do  -- Quest
     local GetQuestObjectives = C_QuestLog.GetQuestObjectives;
     local GetQuestTimeLeftSeconds = C_TaskQuest and C_TaskQuest.GetQuestTimeLeftSeconds or AlwaysNil;
     local IsQuestFlaggedCompletedOnAccount = C_QuestLog.IsQuestFlaggedCompletedOnAccount or AlwaysFalse;
+    local GetLogIndexForQuestID = C_QuestLog.GetLogIndexForQuestID or GetQuestLogIndexByID or AlwaysNil;
+    local GetNumQuestLeaderBoards = GetNumQuestLeaderBoards;
+    local GetQuestLogLeaderBoard = GetQuestLogLeaderBoard;
+    local GetQuestClassification = C_QuestInfoSystem.GetQuestClassification or AlwaysNil;
 
     API.IsQuestFlaggedCompletedOnAccount = IsQuestFlaggedCompletedOnAccount;
 
@@ -816,6 +840,29 @@ do  -- Quest
     end
     API.GetQuestCurrency = GetQuestCurrency;
 
+    local function GetQuestLogProgress(questID)
+        local questLogIndex = GetLogIndexForQuestID(questID);
+        if questLogIndex then
+            local numObjectives = GetNumQuestLeaderBoards(questLogIndex);
+            if numObjectives > 0 then
+                local str;
+                local text, objectiveType, finished;
+                local n = 0;
+                for i = 1, numObjectives do
+                    text, objectiveType, finished = GetQuestLogLeaderBoard(i, questLogIndex);
+                    if text then
+                        if str then
+                            str = str.."\n".."- "..text;
+                        else
+                            str = "- "..text;
+                        end
+                    end
+                end
+                return str
+            end
+        end
+    end
+    API.GetQuestLogProgress = GetQuestLogProgress;
 
     --Classic
     API.QuestGetAutoAccept = QuestGetAutoAccept;
@@ -1147,7 +1194,6 @@ do  -- Quest
 
 
     --QuestTag
-    
     local GetQuestTagInfo = C_QuestLog.GetQuestTagInfo or AlwaysFalse;
     local QUEST_TAG_NAME = {
         --Also: Enum.QuestTagType
@@ -1206,6 +1252,28 @@ do  -- Quest
     end
     API.GetQuestTimeLeft = GetQuestTimeLeft;
 
+
+    local function GetRecurringQuestTimeLeft(questID, formatedToText)
+        if GetQuestClassification(questID) then
+            local seconds = GetQuestTimeLeft(questID, formatedToText);
+            return true, seconds
+        else
+            return false
+        end
+    end
+    API.GetRecurringQuestTimeLeft = GetRecurringQuestTimeLeft;
+
+    local function ShouldMuteQuestDetail(questID)
+        --Temp Blizzard bug fix for weekly quest appearing repeatedly issue
+        local class = GetQuestClassification(questID);
+        if (class == 4 or class == 5) and IsOnQuest(questID) then
+            return true
+        else
+            return false
+        end
+    end
+    API.ShouldMuteQuestDetail = ShouldMuteQuestDetail;
+
     do
         --Replace player name with RP name:
         --Handled by addon when installed: Total RP 3: RP Name in Quest Text
@@ -1231,6 +1299,32 @@ do  -- Quest
             TextModifier = modifierFunc or TextModifier_None;
         end
         addon.SetDialogueTextModifier = SetDialogueTextModifier;
+    end
+
+
+    --QuestLine
+    if C_QuestLog.GetZoneStoryInfo and C_QuestLine and C_QuestLine.GetQuestLineInfo then
+        local GetBestMapForUnit = C_Map.GetBestMapForUnit;
+        function API.GetQuestLineInfo(questID)
+            local uiMapID = GetBestMapForUnit("player");
+            local isQuestLineQuest, questLineName, questLineID, achievementID;
+            if uiMapID then
+                achievementID = C_QuestLog.GetZoneStoryInfo(uiMapID);
+                if achievementID then
+                    isQuestLineQuest = true;
+                    local questLineInfo = C_QuestLine.GetQuestLineInfo(questID, uiMapID);
+                    if questLineInfo then
+                        questLineName = questLineInfo.questLineName;
+                        questLineID = questLineInfo.questLineID;
+                    end
+                end
+            end
+            return isQuestLineQuest, questLineName, questLineID, uiMapID, achievementID
+        end
+    else
+        function API.GetQuestLineInfo(questID)
+
+        end
     end
 end
 
@@ -1270,6 +1364,15 @@ do  -- Color
         return TextPalette[colorIndex]
     end
     API.GetTextColorByIndex = GetTextColorByIndex;
+
+    local function SetTextColorByIndex(fontString, colorIndex)
+        local color = GetTextColorByIndex(colorIndex);
+        if color then
+            local r, g, b = color:GetRGB();
+            fontString:SetTextColor(r, g, b);
+        end
+    end
+    API.SetTextColorByIndex = SetTextColorByIndex;
 
     local function SetTextColorByGlobal(fontString, colorMixin)
         local r, g, b;
@@ -1364,7 +1467,14 @@ do  -- Currency
     API.GenerateMoneyText = GenerateMoneyText;
 
 
+    local IGNORED_OVERFLOW_ID = {
+        [3068] = true,      --Delver's Journey
+        [3143] = true,      --Delver's Journey
+    };
+
     local function WillCurrencyRewardOverflow(currencyID, rewardQuantity)
+        if IGNORED_OVERFLOW_ID[currencyID] then return false end;
+
         local currencyInfo = GetCurrencyInfo(currencyID);
         local quantity = currencyInfo and (currencyInfo.useTotalEarnedForMaxQty and currencyInfo.totalEarned or currencyInfo.quantity);
         return quantity and currencyInfo.maxQuantity > 0 and rewardQuantity + quantity > currencyInfo.maxQuantity;
@@ -1771,12 +1881,19 @@ do  -- Faction -- Reputation
 
     local function GetFactionStatusText(factionID)
         --Derived from Blizzard ReputationFrame_InitReputationRow in ReputationFrame.lua
+        if not factionID then return end;
+        local p1, description, standingID, barMin, barMax, barValue = GetFactionInfoByID(factionID);
 
-        local name, description, standingID, barMin, barMax, barValue = GetFactionInfoByID(factionID);
+        if type(p1) == "table" then     --Return table after TWW
+            standingID = p1.reaction;
+            barMin = p1.currentReactionThreshold;
+            barMax = p1.nextReactionThreshold;
+            barValue = p1.currentStanding;
+        end
 
         local isParagon = C_Reputation.IsFactionParagon(factionID);
-        local isMajorFaction = factionID and C_Reputation.IsMajorFaction(factionID);
-        local repInfo = factionID and C_GossipInfo.GetFriendshipReputation(factionID);
+        local isMajorFaction = C_Reputation.IsMajorFaction(factionID);
+        local repInfo = C_GossipInfo.GetFriendshipReputation(factionID);
 
         local isCapped;
         local factionStandingtext;  --Revered/Junior/Renown 1

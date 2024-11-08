@@ -909,7 +909,7 @@ function OptionsPrivate.ConstructOptions(prototype, data, startorder, triggernum
               values = WeakAuras[arg.values];
             end
           end
-          local sortOrder = arg.sorted and OptionsPrivate.Private.SortOrderForValues(values) or nil
+          local sortOrder = arg.sorted and (arg.sortOrder or OptionsPrivate.Private.SortOrderForValues(values)) or nil
           options[name..suffix] = {
             type = "select",
             width = WeakAuras.normalWidth,
@@ -981,6 +981,7 @@ function OptionsPrivate.ConstructOptions(prototype, data, startorder, triggernum
                 v = arg.multiConvertKey(trigger, v)
               end
               if v then
+                trigger[realname] = trigger[realname] or {}
                 trigger[realname].multi = trigger[realname].multi or {};
                 if (calledFromSetAll or arg.multiTristate) then
                   trigger[realname].multi[v] = calledFromSetAll;

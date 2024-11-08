@@ -1,4 +1,4 @@
--- Generated from CurseForge on Mon Oct 14 08:05:07 UTC 2024
+-- Generated from CurseForge on Thu Nov  7 09:26:42 UTC 2024
 local ns = select(2, ...) ---@class ns @The addon namespace.
 
 if ns:IsSameLocale("frFR") then
@@ -8,7 +8,7 @@ if ns:IsSameLocale("frFR") then
 
 	L.LOCALE_NAME = "frFR"
 
-L["ALLOW_IN_LFD"] = "Autoriser pour la Recherche de donjon"
+L["ALLOW_IN_LFD"] = "Autoriser pour la Recherche de groupe"
 L["ALLOW_IN_LFD_CLASSIC"] = "Autoriser pour la Recherche de groupe"
 L["ALLOW_IN_LFD_CLASSIC_DESC"] = "Clic droit sur les groupes ou les joueurs dans l'outil de Recherche de groupe pour copier l'URL du profil Raider.IO."
 L["ALLOW_IN_LFD_DESC"] = "Clic droit sur les groupes ou les joueurs dans l'outil de Recherche de groupe pour copier l'URL du profil Raider.IO."
@@ -266,6 +266,22 @@ L["RAID_BOSS_AVOTI_8"] = "Raszageth la Mange-tempêtes"
 --[[Translation missing --]]
 --[[ L["RAID_BOSS_BOT_5"] = ""--]] 
 --[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_1"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_2"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_3"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_4"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_5"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_6"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_7"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_8"] = ""--]] 
+--[[Translation missing --]]
 --[[ L["RAID_BOSS_BWD_1"] = ""--]] 
 --[[Translation missing --]]
 --[[ L["RAID_BOSS_BWD_2"] = ""--]] 
@@ -307,6 +323,20 @@ L["RAID_BOSS_CN_9"] = "Généraux de la Légion de Pierre"
 --[[ L["RAID_BOSS_FCN_8"] = ""--]] 
 --[[Translation missing --]]
 --[[ L["RAID_BOSS_FCN_9"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_1"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_2"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_3"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_4"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_5"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_6"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_7"] = ""--]] 
 --[[Translation missing --]]
 --[[ L["RAID_BOSS_FSFO_1"] = ""--]] 
 --[[Translation missing --]]
@@ -444,6 +474,8 @@ L["RAID_BOSS_VOTI_6"] = "Kurog Totem-Sinistre"
 L["RAID_BOSS_VOTI_7"] = "Garde-couvée Diurna"
 L["RAID_BOSS_VOTI_8"] = "Raszageth la Mange-tempêtes"
 L["RAID_BOT"] = "Le bastion du Crépuscule"
+--[[Translation missing --]]
+--[[ L["RAID_BRD"] = ""--]] 
 L["RAID_BWD"] = "Descente de l’Aile noire"
 L["RAID_DIFFICULTY_NAME_HEROIC"] = "Héroïque"
 L["RAID_DIFFICULTY_NAME_HEROIC10"] = "Héroïque 10"
@@ -460,6 +492,8 @@ L["RAID_DIFFICULTY_SUFFIX_NORMAL"] = "N"
 L["RAID_DIFFICULTY_SUFFIX_NORMAL10"] = "N10"
 L["RAID_DIFFICULTY_SUFFIX_NORMAL25"] = "N25"
 L["RAID_ENCOUNTERS_DEFEATED_TITLE"] = "Rencontres de Raid vaincues"
+--[[Translation missing --]]
+--[[ L["RAID_FL"] = ""--]] 
 L["RAID_ICC"] = "Citadelle de la Couronne de glace"
 L["RAID_NP"] = "Palais des Nérub’ar"
 L["RAID_RS"] = "Le sanctum Rubis"
@@ -530,8 +564,8 @@ L["SHOW_AVERAGE_PLAYER_SCORE_INFO"] = "Afficher le score moyen des joueurs pour 
 L["SHOW_AVERAGE_PLAYER_SCORE_INFO_DESC"] = "Afficher la moyenne des scores Raider.IO des joueurs ayant fini une clé dans les temps. Cela est visible sur l'infobulle de la clé ainsi que des joueurs dans la recherche de groupe."
 L["SHOW_BEST_MAINS_SCORE"] = "Afficher le score Mythique+ de la meilleure saison du personnage principal"
 L["SHOW_BEST_MAINS_SCORE_DESC"] = "Affiche le score Mythique+ de la meilleure saison du personnage principal d'un joueur et la progression du raid dans l'info-bulle. Les joueurs doivent s'être inscrits sur Raider.IO et avoir déclaré un personnage comme personnage principal."
-L["SHOW_BEST_RUN"] = "Afficher la meilleure clé Mythique+ en titre"
-L["SHOW_BEST_RUN_DESC"] = "Affichez la meilleure clé Mythique+ du joueur de la saison en cours sous forme de titre de l'info-bulle."
+L["SHOW_BEST_RUN"] = "Afficher la meilleure clé Mythique+ dans le titre"
+L["SHOW_BEST_RUN_DESC"] = "Affiche la meilleure clé Mythique+ du joueur de la saison en cours sous forme de titre de l'info-bulle."
 L["SHOW_BEST_SEASON"] = "Afficher le meilleur score Mythique+ de la saison dans le titre"
 L["SHOW_BEST_SEASON_DESC"] = "Affiche le meilleur score de la saison Mythique+ du joueur sous forme de titre dans l'info-bulle. Si le score provient d'une saison précédente, la saison sera indiquée dans le titre de l'info-bulle."
 L["SHOW_CHESTS_AS_MEDALS"] = "Afficher les icônes de médaille Mythique+"

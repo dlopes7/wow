@@ -35,8 +35,10 @@ BigWigs:AddColors("Izo, the Grand Splicer", {
 
 BigWigs:AddColors("City of Threads Trash", {
 	[434137] = "yellow",
+	[436205] = "yellow",
 	[441795] = "green",
 	[443430] = "red",
+	[443433] = {"blue","red"},
 	[443437] = {"blue","yellow"},
 	[443500] = "orange",
 	[443507] = "yellow",
@@ -45,8 +47,11 @@ BigWigs:AddColors("City of Threads Trash", {
 	[446717] = "yellow",
 	[447271] = "orange",
 	[448047] = {"blue","cyan"},
+	[448305] = "green",
 	[450784] = "orange",
+	[451222] = "yellow",
 	[451423] = "red",
 	[451543] = "orange",
+	[452151] = {"blue","purple"},
 	[452162] = "red",
 })

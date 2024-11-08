@@ -1,6 +1,6 @@
-## Interface: 110002
+## Interface: 110005
 ## Title: Premade Regions
-## Version: 2.0.13
+## Version: 2.0.14
 ## IconTexture: 237387
 ## Notes: Provides region information in the premade groups and applicants listings as well as to other addons.
 ## Author: gihub.com/0xbs and github.com/Rustyb0y

@@ -49,7 +49,9 @@ local function Update(self, event)
 	end
 
 	local role = UnitGroupRolesAssigned(self.unit)
-	if(role == 'TANK' or role == 'HEALER' or role == 'DAMAGER') then
+	if element.combatHide and UnitAffectingCombat(self.unit) then
+		element:Hide()
+	elseif(role == 'TANK' or role == 'HEALER' or role == 'DAMAGER') then
 		element:SetTexCoord(GetTexCoordsForRoleSmallCircle(role))
 		element:Show()
 	else
@@ -88,6 +90,9 @@ local function Enable(self)
 		element.__owner = self
 		element.ForceUpdate = ForceUpdate
 
+		self:RegisterEvent('PLAYER_REGEN_DISABLED', Path, true)
+		self:RegisterEvent('PLAYER_REGEN_ENABLED', Path, true)
+
 		if(self.unit == 'player') then
 			self:RegisterEvent('PLAYER_ROLES_ASSIGNED', Path, true)
 		else
@@ -107,6 +112,8 @@ local function Disable(self)
 	if(element) then
 		element:Hide()
 
+		self:UnregisterEvent('PLAYER_REGEN_DISABLED', Path)
+		self:UnregisterEvent('PLAYER_REGEN_ENABLED', Path)
 		self:UnregisterEvent('PLAYER_ROLES_ASSIGNED', Path)
 		self:UnregisterEvent('GROUP_ROSTER_UPDATE', Path, true)
 	end

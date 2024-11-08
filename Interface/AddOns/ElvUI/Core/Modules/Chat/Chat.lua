@@ -565,7 +565,9 @@ function CH:CopyButtonOnMouseUp(btn)
 			end
 
 			ToggleFrame(menu)
-		elseif E.Retail then
+		else
+			_G.ChatFrameMenuButton:ClearAllPoints()
+			_G.ChatFrameMenuButton:SetPoint('TOPLEFT', _G.ChatFrame1.copyButton, 'TOPRIGHT')
 			_G.ChatFrameMenuButton:OpenMenu()
 		end
 	else
@@ -851,13 +853,9 @@ function CH:StyleChat(frame)
 
 	local buttonFrame = _G[name..'ButtonFrame']
 	if buttonFrame then
-		if E.Retail and name == 'ChatFrame1' then
-			buttonFrame.Background:Hide()
-			buttonFrame.minimizeButton:Hide()
-			buttonFrame:StripTextures()
-		else
-			buttonFrame:Kill()
-		end
+		buttonFrame:SetScale(0.00001)
+		buttonFrame:ClearAllPoints()
+		buttonFrame:SetPoint('TOP', E.UIParent, 'BOTTOM', 0, -500)
 	end
 
 	local thumbTexture = _G[name..'ThumbTexture']
@@ -918,8 +916,8 @@ function CH:StyleChat(frame)
 end
 
 function CH:AddMessageEdits(frame, msg, isHistory, historyTime)
-	if not strmatch(msg, '^|Helvtime|h') and not strmatch(msg, '^|Hcpl:') then
-		local historyTimestamp --we need to extend the arguments on AddMessage so we can properly handle times without overriding
+	if not strmatch(msg, '^%s*$') and not strmatch(msg, '^|Helvtime|h') and not strmatch(msg, '^|Hcpl:') then
+		local historyTimestamp -- we need to extend the arguments on AddMessage so we can properly handle times without overriding
 		if isHistory == 'ElvUI_ChatHistory' then historyTimestamp = historyTime end
 
 		if CH.db.timeStampFormat and CH.db.timeStampFormat ~= 'NONE' then
@@ -2443,13 +2441,6 @@ function CH:SetupChat()
 
 	if E.Retail then
 		_G.QuickJoinToastButton:Hide()
-
-		_G.ChatFrameMenuButton:SetAlpha(0)
-		_G.ChatFrameMenuButton:EnableMouse(false)
-		_G.ChatFrameMenuButton:ClearAllPoints()
-		_G.ChatFrameMenuButton:SetPoint('TOPLEFT', _G.ChatFrame1.copyButton, 'TOPRIGHT')
-	else
-		_G.ChatFrameMenuButton:Kill()
 	end
 
 	if not CH.HookSecured then
@@ -3652,13 +3643,8 @@ function CH:FCF_Tab_OnClick(button)
 		chat:StopMovingOrSizing()
 
 		_G.CURRENT_CHAT_FRAME_ID = self:GetID()
+		_G.FCF_Tab_SetupMenu(self)
 
-		if E.Cata then
-			local tabName = self:GetName()
-			_G.ToggleDropDownMenu(1, nil, _G[tabName..'DropDown'], tabName, 0, 0)
-		else
-			_G.FCF_Tab_SetupMenu(self)
-		end
 	elseif button == 'MiddleButton' then
 		if (E.Retail or (chat ~= _G.DEFAULT_CHAT_FRAME and not _G.IsCombatLog(chat))) and not _G.IsBuiltinChatWindow(chat) then -- Dynamic between classic/wrath/retail ~Simpy
 			if not chat.isTemporary then

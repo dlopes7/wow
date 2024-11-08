@@ -1,5 +1,3 @@
-## 5.1.6 (2024-10-15)
-  - Ara-Kara: Mapping updates in first boss area
-  - New dungeon selection interface
-  - Renamed Assistant Unnaturaler to Skittering Assistant
-  - Removed the Affix dropdown
+## 5.2.4 (2024-10-30)
+  - Fix route sharing between clients with different client languages
+  - Add 90s to each dungeon timer to account for Challenger's Peril

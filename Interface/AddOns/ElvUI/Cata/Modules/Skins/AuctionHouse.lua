@@ -89,8 +89,7 @@ function S:Blizzard_AuctionUI()
 
 		if i <= 4 then
 			CheckBox:Size(24)
-
-			S:HandlePointXY(CheckBox, nil, (i == 1 and -40) or (i == 3 and -5) or 3)
+			CheckBox:PointXY(nil, (i == 1 and -40) or (i == 3 and -5) or 3)
 		elseif CheckBox.Text then
 			CheckBox.Text:Point('LEFT', CheckBox, 'Right', 2, 0)
 		end
@@ -162,9 +161,8 @@ function S:Blizzard_AuctionUI()
 
 	_G.BrowseCloseButton:Point('BOTTOMRIGHT', 66, 6)
 	_G.BrowseBuyoutButton:Point('RIGHT', _G.BrowseCloseButton, 'LEFT', -4, 0)
-	_G.BrowseBidButton:Point('RIGHT', _G.BrowseBuyoutButton, 'LEFT', -4, 0)
 
-	_G.BrowseBidPrice:Point('BOTTOM', 25, 10)
+	_G.BrowseBidPrice:Point('BOTTOM', -102, 10)
 
 	S:HandleScrollBar(_G.BrowseFilterScrollFrameScrollBar)
 	S:HandleScrollBar(_G.BrowseScrollFrameScrollBar)
@@ -234,8 +232,7 @@ function S:Blizzard_AuctionUI()
 	S:HandleRadioButton(_G.AuctionsMediumAuctionButton)
 	S:HandleRadioButton(_G.AuctionsLongAuctionButton)
 
-	S:HandleDropDownBox(_G.BrowseDropDown, 155)
-	S:HandleDropDownBox(_G.PriceDropDown)
+	S:HandleDropDownBox(_G.BrowseDropdown, 155)
 
 	-- Progress Frame
 	_G.AuctionProgressFrame:StripTextures()

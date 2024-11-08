@@ -6,7 +6,9 @@ local dungeonIndex = 110
 MDT.dungeonList[dungeonIndex] = L["The Stonevault"]
 MDT.mapInfo[dungeonIndex] = {
   teleportId = 445269,
-  shortName = L["stoneVaultShortName"]
+  shortName = L["stoneVaultShortName"],
+  englishName = "The Stonevault",
+  mapID = 501
 }
 
 local zones = { 2214, 2341 }
@@ -119,8 +121,8 @@ MDT.dungeonEnemies[dungeonIndex] = {
         ["sublevel"] = 1,
       },
       [7] = {
-        ["x"] = 395.97497959271,
-        ["y"] = -192.22059154327,
+        ["x"] = 434.85585402472,
+        ["y"] = -191.43246286624,
         ["g"] = -3,
         ["sublevel"] = 1,
       },
@@ -162,12 +164,13 @@ MDT.dungeonEnemies[dungeonIndex] = {
     ["count"] = 10,
     ["health"] = 31826136,
     ["scale"] = 1,
+    ["stealthDetect"] = true,
     ["displayId"] = 117402,
     ["creatureType"] = "Mechanical",
-    ["stealthDetect"] = true,
     ["level"] = 80,
     ["characteristics"] = {
       ["Taunt"] = true,
+      ["Slow"] = true,
     },
     ["spells"] = {
       [425027] = {
@@ -183,8 +186,8 @@ MDT.dungeonEnemies[dungeonIndex] = {
         ["sublevel"] = 1,
       },
       [2] = {
-        ["x"] = 406.14796036113,
-        ["y"] = -181.72812203169,
+        ["x"] = 445.02883479314,
+        ["y"] = -180.93999335466,
         ["g"] = -3,
         ["sublevel"] = 1,
       },
@@ -201,8 +204,8 @@ MDT.dungeonEnemies[dungeonIndex] = {
         ["sublevel"] = 1,
       },
       [5] = {
-        ["x"] = 437.48188308858,
-        ["y"] = -181.96255305416,
+        ["x"] = 395.74669115686,
+        ["y"] = -181.44420259993,
         ["g"] = 4,
         ["sublevel"] = 1,
       },
@@ -249,20 +252,20 @@ MDT.dungeonEnemies[dungeonIndex] = {
         ["sublevel"] = 1,
       },
       [2] = {
-        ["x"] = 405.71261950077,
-        ["y"] = -191.97397860472,
+        ["x"] = 444.59349393278,
+        ["y"] = -191.18584992769,
         ["g"] = -3,
         ["sublevel"] = 1,
       },
       [3] = {
-        ["x"] = 437.19146418848,
-        ["y"] = -191.337801521,
+        ["x"] = 395.45627225676,
+        ["y"] = -190.81945106677,
         ["g"] = 4,
         ["sublevel"] = 1,
       },
       [4] = {
-        ["x"] = 446.72561503579,
-        ["y"] = -191.86125373346,
+        ["x"] = 404.99042310407,
+        ["y"] = -191.34290327923,
         ["g"] = 4,
         ["sublevel"] = 1,
       },
@@ -322,14 +325,14 @@ MDT.dungeonEnemies[dungeonIndex] = {
         ["sublevel"] = 1,
       },
       [5] = {
-        ["x"] = 396.35230338203,
-        ["y"] = -182.03219532435,
+        ["x"] = 435.23317781404,
+        ["y"] = -181.24406664732,
         ["g"] = -3,
         ["sublevel"] = 1,
       },
       [6] = {
-        ["x"] = 446.58036393967,
-        ["y"] = -181.51316144966,
+        ["x"] = 404.84517200795,
+        ["y"] = -180.99481099543,
         ["g"] = 4,
         ["sublevel"] = 1,
       },
@@ -353,12 +356,13 @@ MDT.dungeonEnemies[dungeonIndex] = {
     ["count"] = 10,
     ["health"] = 31826136,
     ["scale"] = 1.3,
+    ["stealthDetect"] = true,
     ["displayId"] = 117973,
     ["creatureType"] = "Humanoid",
-    ["stealthDetect"] = true,
     ["level"] = 80,
     ["characteristics"] = {
       ["Taunt"] = true,
+      ["Slow"] = true,
       ["Mind Soothe"] = true,
     },
     ["spells"] = {
@@ -1091,12 +1095,13 @@ MDT.dungeonEnemies[dungeonIndex] = {
     ["count"] = 10,
     ["health"] = 35804403,
     ["scale"] = 1.4,
+    ["stealthDetect"] = true,
     ["displayId"] = 116911,
     ["creatureType"] = "Mechanical",
-    ["stealthDetect"] = true,
     ["level"] = 80,
     ["characteristics"] = {
       ["Taunt"] = true,
+      ["Slow"] = true,
     },
     ["spells"] = {
       [429114] = {
@@ -1184,9 +1189,9 @@ MDT.dungeonEnemies[dungeonIndex] = {
     ["count"] = 8,
     ["health"] = 31826136,
     ["scale"] = 1,
+    ["stealthDetect"] = true,
     ["displayId"] = 115944,
     ["creatureType"] = "Humanoid",
-    ["stealthDetect"] = true,
     ["level"] = 80,
     ["characteristics"] = {
       ["Taunt"] = true,
@@ -1307,9 +1312,9 @@ MDT.dungeonEnemies[dungeonIndex] = {
     ["count"] = 12,
     ["health"] = 39782670,
     ["scale"] = 1.5,
+    ["stealthDetect"] = true,
     ["displayId"] = 117855,
     ["creatureType"] = "Elemental",
-    ["stealthDetect"] = true,
     ["level"] = 80,
     ["characteristics"] = {
       ["Taunt"] = true,
@@ -1436,6 +1441,7 @@ MDT.dungeonEnemies[dungeonIndex] = {
     ["instanceID"] = 0,
     ["characteristics"] = {
       ["Taunt"] = true,
+      ["Slow"] = true,
     },
     ["spells"] = {
       [424795] = {
@@ -1471,7 +1477,7 @@ MDT.dungeonEnemies[dungeonIndex] = {
     ["name"] = "Skarmorak",
     ["id"] = 210156,
     ["count"] = 0,
-    ["health"] = 139239345,
+    ["health"] = 125533481,
     ["scale"] = 2,
     ["displayId"] = 118714,
     ["creatureType"] = "Elemental",
@@ -1481,6 +1487,7 @@ MDT.dungeonEnemies[dungeonIndex] = {
     ["instanceID"] = 0,
     ["characteristics"] = {
       ["Taunt"] = true,
+      ["Slow"] = true,
     },
     ["spells"] = {
       [422233] = {
@@ -1535,6 +1542,7 @@ MDT.dungeonEnemies[dungeonIndex] = {
     ["instanceID"] = 0,
     ["characteristics"] = {
       ["Taunt"] = true,
+      ["Slow"] = true,
       ["Mind Soothe"] = true,
     },
     ["spells"] = {
@@ -1592,6 +1600,7 @@ MDT.dungeonEnemies[dungeonIndex] = {
     ["instanceID"] = 0,
     ["characteristics"] = {
       ["Taunt"] = true,
+      ["Slow"] = true,
       ["Mind Soothe"] = true,
     },
     ["spells"] = {
@@ -1625,7 +1634,7 @@ MDT.dungeonEnemies[dungeonIndex] = {
     ["name"] = "Void Speaker Eirich",
     ["id"] = 213119,
     ["count"] = 0,
-    ["health"] = 159130680,
+    ["health"] = 143466834,
     ["scale"] = 2,
     ["displayId"] = 119856,
     ["creatureType"] = "Humanoid",
@@ -1794,7 +1803,7 @@ MDT.dungeonEnemies[dungeonIndex] = {
     ["name"] = "Crystal Shard",
     ["id"] = 214443,
     ["count"] = 0,
-    ["health"] = 1591307,
+    ["health"] = 1275261,
     ["scale"] = 1,
     ["displayId"] = 37518,
     ["creatureType"] = "Uncategorized",
@@ -1804,6 +1813,7 @@ MDT.dungeonEnemies[dungeonIndex] = {
     ["instanceID"] = 0,
     ["characteristics"] = {
       ["Taunt"] = true,
+      ["Slow"] = true,
     },
     ["spells"] = {
       [439600] = {

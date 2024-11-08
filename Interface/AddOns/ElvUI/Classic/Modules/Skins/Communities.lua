@@ -4,11 +4,12 @@ local S = E:GetModule('Skins')
 local _G = _G
 local next, pairs, select = next, pairs, select
 
+local CreateFrame = CreateFrame
+local hooksecurefunc = hooksecurefunc
+
 local C_GuildInfo_GetGuildNewsInfo = C_GuildInfo.GetGuildNewsInfo
 local BATTLENET_FONT_COLOR = BATTLENET_FONT_COLOR
 local GREEN_FONT_COLOR = GREEN_FONT_COLOR
-local CreateFrame = CreateFrame
-local hooksecurefunc = hooksecurefunc
 
 local function HandleCommunitiesButtons(button)
 	button.Background:Hide()
@@ -214,6 +215,8 @@ function S:Blizzard_Communities()
 
 	local ClubFinderGuildOptionsList = ClubFinderGuildFinderFrame.OptionsList
 	S:HandleDropDownBox(ClubFinderGuildOptionsList.ClubFilterDropdown)
+	ClubFinderGuildOptionsList.ClubSizeDropdown:ClearAllPoints() -- FIX ME 11.0 Is this DropDown trolling us?
+	ClubFinderGuildOptionsList.ClubSizeDropdown:Point('LEFT', ClubFinderGuildOptionsList.ClubFilterDropdown, 'RIGHT', 3, 0)
 	S:HandleDropDownBox(ClubFinderGuildOptionsList.ClubSizeDropdown)
 
 	ClubFinderGuildOptionsList.SearchBox:Size(118, 20)
@@ -223,18 +226,26 @@ function S:Blizzard_Communities()
 	S:HandleEditBox(ClubFinderGuildOptionsList.SearchBox)
 	S:HandleButton(ClubFinderGuildOptionsList.Search)
 
-	S:HandleCheckBox(ClubFinderGuildOptionsList.TankRoleFrame.Checkbox)
-	S:HandleCheckBox(ClubFinderGuildOptionsList.HealerRoleFrame.Checkbox)
-	S:HandleCheckBox(ClubFinderGuildOptionsList.DpsRoleFrame.Checkbox)
-
 	S:HandleItemButton(ClubFinderGuildFinderFrame.ClubFinderSearchTab)
 	S:HandleItemButton(ClubFinderGuildFinderFrame.ClubFinderPendingTab)
 
 	-- Community and Guild finder Tab
 	local ClubFinderCommunityAndGuildFinderFrame = _G.ClubFinderCommunityAndGuildFinderFrame
+	local ClubFinderCommunityOptionsList = ClubFinderCommunityAndGuildFinderFrame.OptionsList
 	ClubFinderCommunityAndGuildFinderFrame:StripTextures()
 
-	local ClubFinderCommunityOptionsList = ClubFinderCommunityAndGuildFinderFrame.OptionsList
+	for _, checkButton in next, {
+		ClubFinderGuildOptionsList.TankRoleFrame.Checkbox,
+		ClubFinderGuildOptionsList.HealerRoleFrame.Checkbox,
+		ClubFinderGuildOptionsList.DpsRoleFrame.Checkbox,
+		ClubFinderCommunityOptionsList.TankRoleFrame.Checkbox,
+		ClubFinderCommunityOptionsList.HealerRoleFrame.Checkbox,
+		ClubFinderCommunityOptionsList.DpsRoleFrame.Checkbox
+	} do
+		S:HandleCheckBox(checkButton)
+		checkButton:SetFrameLevel(checkButton:GetFrameLevel() + 1)
+	end
+
 	S:HandleDropDownBox(ClubFinderCommunityOptionsList.ClubFilterDropdown, 120)
 	S:HandleDropDownBox(ClubFinderCommunityOptionsList.SortByDropdown, 120)
 
@@ -247,10 +258,6 @@ function S:Blizzard_Communities()
 	ClubFinderCommunityOptionsList.Search:Size(118, 20)
 	ClubFinderCommunityOptionsList.SearchBox:Size(118, 20)
 	S:HandleEditBox(ClubFinderCommunityOptionsList.SearchBox)
-
-	S:HandleCheckBox(ClubFinderCommunityOptionsList.TankRoleFrame.Checkbox)
-	S:HandleCheckBox(ClubFinderCommunityOptionsList.HealerRoleFrame.Checkbox)
-	S:HandleCheckBox(ClubFinderCommunityOptionsList.DpsRoleFrame.Checkbox)
 
 	S:HandleItemButton(ClubFinderCommunityAndGuildFinderFrame.ClubFinderSearchTab)
 	S:HandleItemButton(ClubFinderCommunityAndGuildFinderFrame.ClubFinderPendingTab)
@@ -460,8 +467,8 @@ function S:Blizzard_Communities()
 	RecruitmentDialog:StripTextures()
 	RecruitmentDialog:SetTemplate('Transparent')
 	S:HandleCheckBox(RecruitmentDialog.ShouldListClub.Button)
-	S:HandleDropDownBox(RecruitmentDialog.ClubFocusDropdown, 220)
-	S:HandleDropDownBox(RecruitmentDialog.LookingForDropdown, 220)
+	S:HandleDropDownBox(RecruitmentDialog.ClubFocusDropdown, 200)
+	S:HandleDropDownBox(RecruitmentDialog.LookingForDropdown, 200)
 	S:HandleDropDownBox(RecruitmentDialog.LanguageDropdown, 140)
 	RecruitmentDialog.RecruitmentMessageFrame:StripTextures()
 	S:HandleEditBox(RecruitmentDialog.RecruitmentMessageFrame.RecruitmentMessageInput)
@@ -510,6 +517,8 @@ function S:Blizzard_Communities()
 	S:HandleCheckBox(Settings.MaxLevelOnly.Button)
 	S:HandleCheckBox(Settings.MinIlvlOnly.Button)
 	S:HandleEditBox(Settings.MinIlvlOnly.EditBox)
+	S:HandleDropDownBox(Settings.ClubFocusDropdown, 180)
+	S:HandleDropDownBox(Settings.LookingForDropdown, 180)
 
 	S:HandleEditBox(Settings.NameEdit)
 	S:HandleEditBox(Settings.ShortNameEdit)
@@ -595,27 +604,6 @@ function S:Blizzard_Communities()
 				child.IsSkinned = true
 			end
 		end
-
-		--[[local buttons = list.ListScrollFrame.buttons
-		for i = 1, #buttons do
-			local button = buttons[i]
-			if not button.IsSkinned then
-				button:Point('LEFT', ApplicantList.backdrop, 1, 0)
-				button:Point('RIGHT', ApplicantList.backdrop, -1, 0)
-
-				button:SetHighlightTexture(E.media.normTex)
-				button:GetHighlightTexture():SetVertexColor(1, 1, 1, .25)
-
-				button.InviteButton:Size(66, 18)
-				button.CancelInvitationButton:Size(20, 18)
-				S:HandleButton(button.InviteButton)
-				S:HandleButton(button.CancelInvitationButton)
-
-				hooksecurefunc(button, 'UpdateMemberInfo', ColorMemberName)
-
-				button.IsSkinned = true
-			end
-		end]] -- DF
 	end)
 end
 

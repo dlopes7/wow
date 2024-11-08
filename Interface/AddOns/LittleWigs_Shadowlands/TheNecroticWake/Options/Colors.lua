@@ -2,6 +2,7 @@
 BigWigs:AddColors("Blightbone", {
 	[320596] = {"blue","red"},
 	[320630] = {"blue","cyan"},
+	[320631] = "red",
 	[320637] = "yellow",
 	[320655] = "purple",
 })
@@ -22,7 +23,7 @@ BigWigs:AddColors("Surgeon Stitchflesh", {
 	[320376] = "purple",
 	[322681] = {"blue","green","red"},
 	[327100] = "blue",
-	[334476] = "yellow",
+	[334476] = {"blue","yellow"},
 	[334488] = "purple",
 	[343556] = {"blue","red"},
 })
@@ -37,13 +38,14 @@ BigWigs:AddColors("Nalthor the Rimebinder", {
 
 BigWigs:AddColors("The Necrotic Wake Trash", {
 	[320464] = "purple",
+	[320696] = "purple",
 	[320822] = "yellow",
 	[321780] = "yellow",
 	[322756] = "red",
-	[323190] = "yellow",
 	[323347] = {"blue","yellow"},
 	[323471] = {"blue","yellow"},
 	[324293] = "orange",
+	[324323] = "purple",
 	[324372] = "orange",
 	[324387] = "yellow",
 	[324394] = "purple",

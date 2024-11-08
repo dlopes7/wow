@@ -1,4 +1,4 @@
--- Generated from CurseForge on Mon Oct 14 08:05:18 UTC 2024
+-- Generated from CurseForge on Thu Nov  7 09:26:51 UTC 2024
 local ns = select(2, ...) ---@class ns @The addon namespace.
 
 if ns:IsSameLocale("zhTW") then
@@ -243,6 +243,18 @@ L["RAID_BOSS_BOT_2"] = "瑟拉里恩和瓦莉歐娜"
 L["RAID_BOSS_BOT_3"] = "卓越者議會"
 L["RAID_BOSS_BOT_4"] = "丘加利"
 L["RAID_BOSS_BOT_5"] = "賽絲特拉"
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_1"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_2"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_3"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_4"] = ""--]] 
+L["RAID_BOSS_BRD_5"] = "七賢"
+L["RAID_BOSS_BRD_6"] = "安格弗將軍"
+L["RAID_BOSS_BRD_7"] = "弗萊拉斯大使"
+L["RAID_BOSS_BRD_8"] = "達格蘭·索瑞森大帝"
 L["RAID_BOSS_BWD_1"] = "全能魔像防禦系統"
 L["RAID_BOSS_BWD_2"] = "熔喉"
 L["RAID_BOSS_BWD_3"] = "亞特拉米德"
@@ -269,6 +281,13 @@ L["RAID_BOSS_FCN_6"] = "茵娜瓦‧暗脈女士"
 L["RAID_BOSS_FCN_7"] = "血之議會"
 L["RAID_BOSS_FCN_8"] = "泥拳"
 L["RAID_BOSS_FCN_9"] = "石源魔軍團將軍"
+L["RAID_BOSS_FL_1"] = "貝絲提拉克"
+L["RAID_BOSS_FL_2"] = "萊爾利斯領主"
+L["RAID_BOSS_FL_3"] = "夏諾克斯"
+L["RAID_BOSS_FL_4"] = "艾里絲拉卓"
+L["RAID_BOSS_FL_5"] = "巴勒羅克"
+L["RAID_BOSS_FL_6"] = "管理者鹿盔"
+L["RAID_BOSS_FL_7"] = "拉格納羅斯"
 L["RAID_BOSS_FSFO_1"] = "戒備守護者"
 L["RAID_BOSS_FSFO_10"] = "雷吉隆"
 L["RAID_BOSS_FSFO_11"] = "閻獄之主"
@@ -353,6 +372,7 @@ L["RAID_BOSS_VOTI_6"] = "庫洛格‧恐怖圖騰"
 L["RAID_BOSS_VOTI_7"] = "幼龍守衛者戴恩娜"
 L["RAID_BOSS_VOTI_8"] = "『噬風者』菈薩葛絲"
 L["RAID_BOT"] = "暮光堡壘"
+L["RAID_BRD"] = "黑石深淵"
 L["RAID_BWD"] = "黑翼陷窟"
 L["RAID_DIFFICULTY_NAME_HEROIC"] = "英雄"
 L["RAID_DIFFICULTY_NAME_HEROIC10"] = "英雄10人"
@@ -369,6 +389,7 @@ L["RAID_DIFFICULTY_SUFFIX_NORMAL"] = "N"
 L["RAID_DIFFICULTY_SUFFIX_NORMAL10"] = "N10"
 L["RAID_DIFFICULTY_SUFFIX_NORMAL25"] = "N25"
 L["RAID_ENCOUNTERS_DEFEATED_TITLE"] = "已擊敗的團隊首領"
+L["RAID_FL"] = "火源之界"
 L["RAID_ICC"] = "冰冠城寨"
 L["RAID_NP"] = "奈幽巴宮殿"
 L["RAID_RS"] = "晶紅聖所"

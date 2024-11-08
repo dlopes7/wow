@@ -6,7 +6,9 @@ local dungeonIndex = 111
 MDT.dungeonList[dungeonIndex] = L["The Dawnbreaker"]
 MDT.mapInfo[dungeonIndex] = {
   teleportId = 445414,
-  shortName = L["dawnBreakerShortName"]
+  shortName = L["dawnBreakerShortName"],
+  englishName = "The Dawnbreaker",
+  mapID = 505
 }
 
 local zones = { 2215, 2215, 2359 } -- TODO remove 2215 WHEN DAWNBREAKER IS GONE FROM ROTATION
@@ -229,6 +231,12 @@ MDT.dungeonEnemies[dungeonIndex] = {
         ["g"] = 17,
         ["sublevel"] = 1,
       },
+      [8] = {
+        ["x"] = 246.23270722923,
+        ["y"] = -435.82976769389,
+        ["g"] = 42,
+        ["sublevel"] = 1,
+      },
     },
   },
   [3] = {
@@ -243,6 +251,7 @@ MDT.dungeonEnemies[dungeonIndex] = {
     ["level"] = 80,
     ["characteristics"] = {
       ["Taunt"] = true,
+      ["Slow"] = true,
       ["Mind Soothe"] = true,
     },
     ["spells"] = {
@@ -282,6 +291,7 @@ MDT.dungeonEnemies[dungeonIndex] = {
     ["level"] = 80,
     ["characteristics"] = {
       ["Taunt"] = true,
+      ["Slow"] = true,
       ["Mind Soothe"] = true,
     },
     ["spells"] = {
@@ -318,6 +328,7 @@ MDT.dungeonEnemies[dungeonIndex] = {
     ["level"] = 80,
     ["characteristics"] = {
       ["Taunt"] = true,
+      ["Slow"] = true,
       ["Mind Soothe"] = true,
     },
     ["spells"] = {
@@ -396,12 +407,6 @@ MDT.dungeonEnemies[dungeonIndex] = {
       },
     },
     ["clones"] = {
-      [1] = {
-        ["x"] = 246.5280642612,
-        ["y"] = -434.57841439197,
-        ["g"] = 42,
-        ["sublevel"] = 1,
-      },
       [2] = {
         ["x"] = 367.24319296367,
         ["y"] = -173.67920079313,
@@ -457,14 +462,14 @@ MDT.dungeonEnemies[dungeonIndex] = {
         ["sublevel"] = 1,
       },
       [11] = {
-        ["x"] = 121.99612621208,
-        ["y"] = -196.59029679081,
+        ["x"] = 120.52496916705,
+        ["y"] = -193.96320401032,
         ["g"] = 21,
         ["sublevel"] = 1,
       },
       [12] = {
-        ["x"] = 128.29953303427,
-        ["y"] = -206.17623834812,
+        ["x"] = 125.88263990547,
+        ["y"] = -205.54572357393,
         ["g"] = 21,
         ["sublevel"] = 1,
       },
@@ -577,8 +582,8 @@ MDT.dungeonEnemies[dungeonIndex] = {
         ["sublevel"] = 1,
       },
       [35] = {
-        ["x"] = 210.10376180658,
-        ["y"] = -412.25425297673,
+        ["x"] = 215.88335206173,
+        ["y"] = -420.66090374661,
         ["g"] = 43,
         ["sublevel"] = 1,
       },
@@ -740,6 +745,64 @@ MDT.dungeonEnemies[dungeonIndex] = {
         ["y"] = -196.00934738998,
         ["g"] = 21,
         ["sublevel"] = 1,
+        ["patrol"] = {
+          [1] = {
+            ["x"] = 131.9597313944,
+            ["y"] = -196.00934738998,
+          },
+          [2] = {
+            ["x"] = 137.70702594616,
+            ["y"] = -188.95019322474,
+          },
+          [3] = {
+            ["x"] = 144.06882718161,
+            ["y"] = -182.58835786191,
+          },
+          [4] = {
+            ["x"] = 137.70702594616,
+            ["y"] = -188.95019322474,
+          },
+          [5] = {
+            ["x"] = 131.9597313944,
+            ["y"] = -196.00934738998,
+          },
+          [6] = {
+            ["x"] = 121.28141954429,
+            ["y"] = -198.58880562608,
+          },
+          [7] = {
+            ["x"] = 114.13574978994,
+            ["y"] = -201.42604995491,
+          },
+          [8] = {
+            ["x"] = 103.2702243683,
+            ["y"] = -209.11839337101,
+          },
+          [9] = {
+            ["x"] = 95.599133652681,
+            ["y"] = -215.63356638993,
+          },
+          [10] = {
+            ["x"] = 87.192446375782,
+            ["y"] = -222.04365160885,
+          },
+          [11] = {
+            ["x"] = 95.599133652681,
+            ["y"] = -215.63356638993,
+          },
+          [12] = {
+            ["x"] = 103.2702243683,
+            ["y"] = -209.11839337101,
+          },
+          [13] = {
+            ["x"] = 114.13574978994,
+            ["y"] = -201.42604995491,
+          },
+          [14] = {
+            ["x"] = 121.28141954429,
+            ["y"] = -198.58880562608,
+          },
+        },
       },
       [16] = {
         ["x"] = 147.74241365106,
@@ -838,8 +901,8 @@ MDT.dungeonEnemies[dungeonIndex] = {
         ["sublevel"] = 1,
       },
       [36] = {
-        ["x"] = 217.80276608278,
-        ["y"] = -421.8375028846,
+        ["x"] = 209.39607021599,
+        ["y"] = -412.64269337308,
         ["g"] = 43,
         ["sublevel"] = 1,
       },
@@ -947,6 +1010,7 @@ MDT.dungeonEnemies[dungeonIndex] = {
     ["level"] = 80,
     ["characteristics"] = {
       ["Taunt"] = true,
+      ["Slow"] = true,
     },
     ["spells"] = {
       [431304] = {
@@ -1057,7 +1121,7 @@ MDT.dungeonEnemies[dungeonIndex] = {
     ["name"] = "Sureki Militant",
     ["id"] = 213932,
     ["count"] = 12,
-    ["health"] = 32754194,
+    ["health"] = 35835879,
     ["scale"] = 1.8,
     ["stealthDetect"] = true,
     ["displayId"] = 116834,
@@ -1120,6 +1184,7 @@ MDT.dungeonEnemies[dungeonIndex] = {
     ["level"] = 80,
     ["characteristics"] = {
       ["Taunt"] = true,
+      ["Slow"] = true,
       ["Mind Soothe"] = true,
     },
     ["spells"] = {
@@ -1297,7 +1362,7 @@ MDT.dungeonEnemies[dungeonIndex] = {
     ["name"] = "Ascendant Viscoxria",
     ["id"] = 211261,
     ["count"] = 25,
-    ["health"] = 56690306,
+    ["health"] = 37826761,
     ["scale"] = 2.5,
     ["stealthDetect"] = true,
     ["displayId"] = 115760,
@@ -1305,6 +1370,7 @@ MDT.dungeonEnemies[dungeonIndex] = {
     ["level"] = 80,
     ["characteristics"] = {
       ["Taunt"] = true,
+      ["Slow"] = true,
       ["Mind Soothe"] = true,
     },
     ["spells"] = {
@@ -1337,6 +1403,7 @@ MDT.dungeonEnemies[dungeonIndex] = {
     ["level"] = 80,
     ["characteristics"] = {
       ["Taunt"] = true,
+      ["Slow"] = true,
       ["Mind Soothe"] = true,
     },
     ["spells"] = {
@@ -1373,6 +1440,7 @@ MDT.dungeonEnemies[dungeonIndex] = {
     ["level"] = 80,
     ["characteristics"] = {
       ["Taunt"] = true,
+      ["Slow"] = true,
       ["Mind Soothe"] = true,
     },
     ["spells"] = {
@@ -1407,6 +1475,7 @@ MDT.dungeonEnemies[dungeonIndex] = {
     ["level"] = 80,
     ["characteristics"] = {
       ["Taunt"] = true,
+      ["Slow"] = true,
       ["Mind Soothe"] = true,
     },
     ["spells"] = {
@@ -1445,6 +1514,7 @@ MDT.dungeonEnemies[dungeonIndex] = {
     ["instanceID"] = 0,
     ["characteristics"] = {
       ["Taunt"] = true,
+      ["Slow"] = true,
       ["Mind Soothe"] = true,
     },
     ["spells"] = {
@@ -1487,7 +1557,7 @@ MDT.dungeonEnemies[dungeonIndex] = {
     ["name"] = "Anubikkaj",
     ["id"] = 211089,
     ["count"] = 0,
-    ["health"] = 208859018,
+    ["health"] = 139349505,
     ["scale"] = 1.7,
     ["displayId"] = 114315,
     ["creatureType"] = "Humanoid",
@@ -1497,6 +1567,7 @@ MDT.dungeonEnemies[dungeonIndex] = {
     ["instanceID"] = 0,
     ["characteristics"] = {
       ["Taunt"] = true,
+      ["Slow"] = true,
       ["Mind Soothe"] = true,
     },
     ["spells"] = {
@@ -1547,6 +1618,7 @@ MDT.dungeonEnemies[dungeonIndex] = {
     ["instanceID"] = 0,
     ["characteristics"] = {
       ["Taunt"] = true,
+      ["Slow"] = true,
       ["Mind Soothe"] = true,
     },
     ["spells"] = {

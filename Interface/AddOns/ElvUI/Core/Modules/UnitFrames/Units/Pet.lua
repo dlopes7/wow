@@ -5,6 +5,9 @@ local ElvUF = E.oUF
 local tinsert = tinsert
 
 function UF:Construct_PetFrame(frame)
+	UF:PrepareFrame(frame)
+	UF:ConstructFrame(frame, 'pet')
+
 	frame.Health = UF:Construct_HealthBar(frame, true, true, 'RIGHT')
 	frame.Power = UF:Construct_PowerBar(frame, true, true, 'LEFT')
 	frame.PowerPrediction = UF:Construct_PowerPrediction(frame)
@@ -19,6 +22,7 @@ function UF:Construct_PetFrame(frame)
 	frame.RaidTargetIndicator = UF:Construct_RaidIcon(frame)
 	frame.ThreatIndicator = UF:Construct_Threat(frame)
 	frame.HealthPrediction = UF:Construct_HealComm(frame)
+	frame.AuraHighlight = UF:Construct_AuraHighlight(frame)
 	frame.AuraWatch = UF:Construct_AuraWatch(frame)
 	frame.AuraBars = UF:Construct_AuraBarHeader(frame)
 	frame.InfoPanel = UF:Construct_InfoPanel(frame)
@@ -28,12 +32,9 @@ function UF:Construct_PetFrame(frame)
 	frame.Fader = UF:Construct_Fader()
 	frame.Cutaway = UF:Construct_Cutaway(frame)
 	frame.PrivateAuras = UF:Construct_PrivateAuras(frame)
-	frame.customTexts = {}
 
 	frame:Point('BOTTOM', E.UIParent, 'BOTTOM', -342, 100)
 	E:CreateMover(frame, frame:GetName()..'Mover', L["Pet Frame"], nil, nil, nil, 'ALL,SOLO', nil, 'unitframe,individualUnits,pet,generalGroup')
-
-	frame.unitframeType = 'pet'
 end
 
 function UF:Update_PetFrame(frame, db)
@@ -68,28 +69,7 @@ function UF:Update_PetFrame(frame, db)
 	frame:SetFrameStrata(db.strataAndLevel and db.strataAndLevel.useCustomStrata and db.strataAndLevel.frameStrata or 'LOW')
 	frame:SetFrameLevel(db.strataAndLevel and db.strataAndLevel.useCustomLevel and db.strataAndLevel.frameLevel or 1)
 
-	UF:Configure_InfoPanel(frame)
-	UF:Configure_HealthBar(frame)
-	UF:UpdateNameSettings(frame)
-	UF:Configure_Power(frame)
-	UF:Configure_PowerPrediction(frame)
-	UF:Configure_Portrait(frame)
-	UF:Configure_Threat(frame)
-	UF:EnableDisable_Auras(frame)
-	UF:Configure_AllAuras(frame)
-	UF:Configure_HealComm(frame)
-	UF:Configure_RaidIcon(frame)
-	UF:Configure_AuraBars(frame)
-	UF:Configure_Cutaway(frame)
-	UF:Configure_PrivateAuras(frame)
-	UF:Configure_CustomTexts(frame)
-	UF:Configure_AuraWatch(frame, true)
-	UF:Configure_Castbar(frame)
-	UF:Configure_Fader(frame)
-
-	UF:HandleRegisterClicks(frame)
-
-	frame:UpdateAllElements('ElvUI_UpdateAllElements')
+	UF:ConfigureFrame(frame, 'pet')
 end
 
 tinsert(UF.unitstoload, 'pet')

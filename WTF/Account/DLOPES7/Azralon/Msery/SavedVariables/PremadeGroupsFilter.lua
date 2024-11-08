@@ -1,4 +1,0 @@
-
-PremadeGroupsFilterState = {
-	["version"] = 6,
-}

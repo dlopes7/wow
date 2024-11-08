@@ -334,6 +334,7 @@ L["Stack Items In Bags"] = "Собрать предметы в стопку (с�
 L["Stack Items In Bank"] = "Собрать предметы в стопку (банк)"
 L["Stack Items To Bags"] = "Собрать предметы в стопку (в сумку)"
 L["Stack Items To Bank"] = "Собрать предметы в стопку (в банк)"
+L["Stack Size"] = "Размер стопки"
 L["Stance Bar"] = "Панель стоек"
 L["Steps"] = "Шаги"
 L["Sticky Frames"] = "Клейкие фреймы"
@@ -366,6 +367,7 @@ L["To setup chat colors, chat channels and chat font size, right-click the chat 
 L["Toggle Bags"] = "Показать сумки"
 L["Toggle Chat Frame"] = "Показать/скрыть чат"
 L["Toggle Configuration"] = "Конфигурация"
+L["Toggle Mover Mode"] = true
 L["Toggle Volume Stream"] = "Вкл/откл звуковой поток"
 L["Tooltip"] = "Подсказка"
 L["TopCenterWidget"] = "Центральный виджет"

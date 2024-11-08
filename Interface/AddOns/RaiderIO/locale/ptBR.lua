@@ -1,4 +1,4 @@
--- Generated from CurseForge on Mon Oct 14 08:05:13 UTC 2024
+-- Generated from CurseForge on Thu Nov  7 09:26:47 UTC 2024
 local ns = select(2, ...) ---@class ns @The addon namespace.
 
 if ns:IsSameLocale("ptBR") then
@@ -238,6 +238,22 @@ L["RAID_BOSS_BOT_2"] = "Valiona & Theralion"
 L["RAID_BOSS_BOT_3"] = "Conselho Ascendente"
 L["RAID_BOSS_BOT_4"] = "Cho'gall"
 L["RAID_BOSS_BOT_5"] = "Sinestra"
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_1"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_2"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_3"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_4"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_5"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_6"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_7"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_BRD_8"] = ""--]] 
 L["RAID_BOSS_BWD_1"] = "Sistema de Defesa Omnitron"
 L["RAID_BOSS_BWD_2"] = "Magorja"
 L["RAID_BOSS_BWD_3"] = "Atramedes"
@@ -264,6 +280,20 @@ L["RAID_BOSS_FCN_6"] = "Lady Verva Venumbra"
 L["RAID_BOSS_FCN_7"] = "O Conselho de Sangue"
 L["RAID_BOSS_FCN_8"] = "Punholodo"
 L["RAID_BOSS_FCN_9"] = "Generais da Legião de Pedra"
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_1"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_2"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_3"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_4"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_5"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_6"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_FL_7"] = ""--]] 
 L["RAID_BOSS_FSFO_1"] = "Guardião Vigilante"
 L["RAID_BOSS_FSFO_10"] = "Rygelon"
 L["RAID_BOSS_FSFO_11"] = "O Carcereiro"
@@ -338,6 +368,8 @@ L["RAID_BOSS_VOTI_6"] = "Kurog Temível Totem"
 L["RAID_BOSS_VOTI_7"] = "Guarda-prole Diurna"
 L["RAID_BOSS_VOTI_8"] = "Raszageth, a Devoradora de Tempestade"
 L["RAID_BOT"] = "Bastião do Crepúsculo"
+--[[Translation missing --]]
+--[[ L["RAID_BRD"] = ""--]] 
 L["RAID_BWD"] = "Descenso do Asa Negra"
 L["RAID_DIFFICULTY_NAME_HEROIC"] = "Heroico"
 L["RAID_DIFFICULTY_NAME_HEROIC10"] = "Heroico 10"
@@ -354,6 +386,8 @@ L["RAID_DIFFICULTY_SUFFIX_NORMAL"] = "N"
 L["RAID_DIFFICULTY_SUFFIX_NORMAL10"] = "N10"
 L["RAID_DIFFICULTY_SUFFIX_NORMAL25"] = "N25"
 L["RAID_ENCOUNTERS_DEFEATED_TITLE"] = "Encontros de Raide Derrotados"
+--[[Translation missing --]]
+--[[ L["RAID_FL"] = ""--]] 
 L["RAID_ICC"] = "Cidadela da Coroa de Gelo"
 L["RAID_NP"] = "Palácio Nerub-ar"
 L["RAID_RS"] = "Santuário Rubi"

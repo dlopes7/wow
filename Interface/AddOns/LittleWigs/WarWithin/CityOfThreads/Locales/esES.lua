@@ -8,16 +8,17 @@ if L then
 	L.pale_priest = "Sacerdotisa pálida"
 	L.eye_of_the_queen = "Residente de las cuencas"
 	L.covert_webmancer = "Telamante encubierta"
+	L.web_marauder = "Maleante de telaraña"
 	L.royal_venomshell = "Conchaveneno real"
 	L.unstable_test_subject = "Sujeto de pruebas inestable"
 	L.sureki_unnaturaler = "Antinaturalista sureki"
 	L.elder_shadeweaver = "Tejesombras anciano"
-	--L.hulking_warshell = "Hulking Warshell"
+	L.hulking_warshell = "Concha de guerra descomunal"
 
 	--L.xephitik_defeated_trigger = "Enough!"
 	--L.fangs_of_the_queen_warmup_trigger = "The Transformatory was once the home of our sacred evolution."
 	--L.izo_warmup_trigger = "Enough! You've earned a place in my collection. Let me usher you in."
-	L.custom_on_autotalk_desc = "|cFFFF0000Requiere Pícaro, Sacerdote, o 25 de habilidad en Ingeniería de Khaz Algar.|r Selecciona automáticamente la opción de diálogo del NPC que te otorga el aura 'Poder Robado'.\n\n|T135888:16|tPoder Robado\n{448305}"
+	L.custom_on_autotalk_desc = "|cFFFF0000Requiere Pícaro, Sacerdote, o 25 de habilidad en Ingeniería de Khaz Algar.|r Selecciona automáticamente la opción de diálogo del NPC que te otorga el aura 'Poder Robado'."
 end
 
 L = BigWigs:NewBossLocale("Fangs of the Queen", "esES") or BigWigs:NewBossLocale("Fangs of the Queen", "esMX")
