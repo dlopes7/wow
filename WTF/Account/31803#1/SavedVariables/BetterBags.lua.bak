@@ -1,0 +1,87 @@
+
+BetterBagsDB = {
+["profileKeys"] = {
+["Gordonfreema - Tarren Mill"] = "Default",
+},
+["profiles"] = {
+["Default"] = {
+["categoryOptions"] = {
+["Free Space"] = {
+["shown"] = true,
+},
+["Consumable"] = {
+["shown"] = true,
+},
+["Recent Items"] = {
+["shown"] = true,
+},
+["Quest"] = {
+["shown"] = true,
+},
+["Miscellaneous"] = {
+["shown"] = true,
+},
+},
+["positions"] = {
+[0] = {
+["y"] = 10.2498779296875,
+["x"] = 589.49951171875,
+["point"] = "CENTER",
+["scale"] = 1,
+},
+},
+["ephemeralCategoryFilters"] = {
+["Free Space"] = {
+["enabled"] = {
+true,
+[0] = true,
+},
+["itemList"] = {
+},
+["name"] = "Free Space",
+["dynamic"] = true,
+},
+["Consumable"] = {
+["enabled"] = {
+true,
+[0] = true,
+},
+["itemList"] = {
+},
+["name"] = "Consumable",
+["dynamic"] = true,
+},
+["Recent Items"] = {
+["enabled"] = {
+true,
+[0] = true,
+},
+["itemList"] = {
+},
+["name"] = "Recent Items",
+["dynamic"] = true,
+},
+["Quest"] = {
+["enabled"] = {
+true,
+[0] = true,
+},
+["itemList"] = {
+},
+["name"] = "Quest",
+["dynamic"] = true,
+},
+["Miscellaneous"] = {
+["enabled"] = {
+true,
+[0] = true,
+},
+["itemList"] = {
+},
+["name"] = "Miscellaneous",
+["dynamic"] = true,
+},
+},
+},
+},
+}

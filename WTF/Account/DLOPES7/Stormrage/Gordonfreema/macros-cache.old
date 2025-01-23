@@ -1,0 +1,31 @@
+VER 3 0100000000000007 "asdasd" "134400"
+#showtooltip Word of Glory
+/cast [@player] Word of Glory
+END
+VER 3 0100000000000003 "av" "134400"
+#showtooltip Avenging Wrath
+/use 13
+/cast Avenging Wrath
+END
+VER 3 0100000000000004 "beacon1" "134400"
+#showtooltip Beacon of Light
+/cast [@mouseover, help, nodead] Beacon of Light
+END
+VER 3 0100000000000005 "beacon2" "134400"
+#showtooltip beacon of Faith
+/cast [@mouseover, help, nodead] Beacon of Faith
+END
+VER 3 0100000000000002 "hand" "134400"
+#showtooltip Final Reckoning
+/cast [@player] Final Reckoning
+/cast [@player] Execution Sentence
+END
+VER 3 0100000000000001 "rebuke" "134400"
+#showtooltip Rebuke
+/stopcasting
+/cast [@focus,exists][] Rebuke
+END
+VER 3 0100000000000006 "shock" "134400"
+#showtooltip Holy Shock
+/cast [@mouseover, help, nodead] Holy Shock
+END

@@ -1,0 +1,43 @@
+
+DataStore_GuildIDs = {
+["List"] = {
+},
+["Count"] = 0,
+["Set"] = {
+},
+}
+DataStore_GuildFactions = {
+}
+DataStore_CharacterIDs = {
+["List"] = {
+"Default.Illidan.Gordonfreems",
+"Default.Illidan.Babylucca",
+"Default.Illidan.Adyfiend",
+"Default.Illidan.Nananenem",
+"Default.Illidan.Turdal",
+},
+["Count"] = 5,
+["Set"] = {
+["Default.Illidan.Nananenem"] = 4,
+["Default.Illidan.Adyfiend"] = 3,
+["Default.Illidan.Gordonfreems"] = 1,
+["Default.Illidan.Turdal"] = 5,
+["Default.Illidan.Babylucca"] = 2,
+},
+}
+DataStore_CharacterGUIDs = {
+"Player-57-0DAD1D62",
+"Player-57-0DBDDB0D",
+"Player-57-0DB3CD8D",
+"Player-57-0DBAE1A7",
+"Player-57-0DC3B42C",
+}
+DataStore_CharacterGuilds = {
+}
+DataStore_AltGroups = {
+}
+DataStore_ConnectedRealms = {
+}
+DataStore_RealmNames = {
+["Illidan"] = "Illidan",
+}

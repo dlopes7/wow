@@ -1,0 +1,79 @@
+
+Quartz3DB = {
+	["namespaces"] = {
+		["Swing"] = {
+		},
+		["Buff"] = {
+		},
+		["LibDualSpec-1.0"] = {
+		},
+		["Flight"] = {
+		},
+		["Pet"] = {
+			["profiles"] = {
+				["Default"] = {
+					["y"] = -249.1991577148438,
+					["hideblizz"] = false,
+					["point"] = "CENTER",
+					["x"] = 12.19921875,
+				},
+			},
+		},
+		["Range"] = {
+		},
+		["Mirror"] = {
+		},
+		["EnemyCasts"] = {
+		},
+		["GCD"] = {
+		},
+		["Focus"] = {
+			["profiles"] = {
+				["Default"] = {
+					["y"] = 72.80010986328125,
+					["x"] = 166.6010131835938,
+					["point"] = "CENTER",
+				},
+			},
+		},
+		["Target"] = {
+			["profiles"] = {
+				["Default"] = {
+					["h"] = 20,
+					["w"] = 250,
+					["y"] = -74.399658203125,
+					["point"] = "CENTER",
+					["texture"] = "Minimalist",
+					["x"] = 193.7997436523438,
+					["noInterruptChangeBorder"] = true,
+				},
+			},
+		},
+		["Interrupt"] = {
+		},
+		["Player"] = {
+			["profiles"] = {
+				["Default"] = {
+					["h"] = 15,
+					["w"] = 315,
+					["y"] = -288.900390625,
+					["x"] = 1.79974365234375,
+					["point"] = "CENTER",
+					["texture"] = "Minimalist",
+				},
+			},
+		},
+		["Latency"] = {
+		},
+	},
+	["profileKeys"] = {
+		["Olhos - Stormrage"] = "Default",
+		["Baldes - Stormrage"] = "Default",
+		["Doutora - Stormrage"] = "Default",
+		["Gordonfreems - Stormrage"] = "Default",
+	},
+	["profiles"] = {
+		["Default"] = {
+		},
+	},
+}

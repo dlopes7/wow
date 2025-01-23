@@ -1,0 +1,11 @@
+
+MythicDungeonToolsDB = {
+["profileKeys"] = {
+["Gordonfreema - Tarren Mill"] = "Gordonfreema - Tarren Mill",
+},
+["global"] = {
+["minimap"] = {
+["showInCompartment"] = true,
+},
+},
+}

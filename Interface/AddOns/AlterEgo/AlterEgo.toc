@@ -1,0 +1,30 @@
+## Interface: 110002
+## Title: AlterEgo
+## Notes: Mythic Plus tracker for all of your characters
+## Version: v1.1.17
+## IconTexture: Interface\AddOns\AlterEgo\Media\LogoTransparent.blp
+## SavedVariables: AlterEgoDB
+## X-Website: https://www.curseforge.com/wow/addons/alterego
+## X-Curse-Project-ID: 925037
+## X-Wago-ID: mKOvqW6x
+## X-WoWI-ID: 26718
+
+Libs\TaintLess\TaintLess.xml
+Libs\LibStub\LibStub.lua
+Libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
+Libs\LibDataBroker-1.1\LibDataBroker-1.1.lua
+Libs\LibDBIcon-1.0\lib.xml
+
+Libs\AceAddon-3.0\AceAddon-3.0.xml
+Libs\AceEvent-3.0\AceEvent-3.0.xml
+Libs\AceTimer-3.0\AceTimer-3.0.xml
+Libs\AceBucket-3.0\AceBucket-3.0.xml
+Libs\AceDB-3.0\AceDB-3.0.xml
+Libs\AceConsole-3.0\AceConsole-3.0.xml
+
+Utils.lua
+AlterEgo.lua
+Window.lua
+Table.lua
+Interface.lua
+Database.lua

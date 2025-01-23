@@ -1,0 +1,59 @@
+VER 3 0100000000000004 "Dark" "INV_MISC_QUESTIONMARK"
+#showtooltip Summon Darkglare
+/use 13
+/use 14
+/cast Berserking
+/cast Dark Soul: Misery
+/cast Summon Darkglare
+END
+VER 3 0100000000000007 "guillotine" "134400"
+#showtooltip
+/use [known:Guillotine, @cursor] Guillotine
+END
+VER 3 0100000000000009 "Insta summon" "134400"
+#showtooltip Summon Felguard
+/cast Fel Domination
+/cast Summon Felguard
+END
+VER 3 010000000000000D "Int" "134400"
+#showtooltip
+/cast [target=focus] Spell Lock
+END
+VER 3 0100000000000003 "Mill" "INV_MISC_QUESTIONMARK"
+/use Milling
+/use Nagrand Arrowbloom
+/use Gorgrond Flytrap
+END
+VER 3 010000000000000A "ress" "134400"
+#showtooltip
+/cast [@mouseover] Soulstone
+END
+VER 3 0100000000000006 "Souburn" "134400"
+#showtooltip Soulburn
+/cancelaura Soulburn
+/cast Soulburn
+END
+VER 3 0100000000000008 "Soulkeeper" "134400"
+#showtooltip
+/use [ @cursor] Summon Soulkeeper
+END
+VER 3 010000000000000C "tongue" "134400"
+#showtooltip Curse of Tongues
+/cast Amplify Curse
+/cast Curse of Tongues
+END
+VER 3 010000000000000B "tower" "134400"
+#showtooltip
+/tar Tugar Bloodtotem
+/cast Fear
+END
+VER 3 0100000000000005 "Trinket" "134400"
+#showtooltip
+/use 14
+END
+VER 3 0100000000000001 "VuhDoDCShieldData" "Ability_Repair"
+P[x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x]1LR[x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x]0__
+END
+VER 3 0100000000000002 "VuhDoDCShieldNames" "Ability_Repair"
+N[x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x]Adn[x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x]Bry
+END

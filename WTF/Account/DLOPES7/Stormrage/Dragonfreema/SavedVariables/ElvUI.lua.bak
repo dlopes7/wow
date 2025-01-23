@@ -1,0 +1,28 @@
+
+ElvCharacterDB = {
+	["ConvertKeybindings"] = true,
+	["ChatEditHistory"] = {
+		"/wa", -- [1]
+		"/rc", -- [2]
+		"/cd 10", -- [3]
+		"/p noooo", -- [4]
+		"/p wait for the mage please", -- [5]
+		"/p bress tnak", -- [6]
+		"/p TANK", -- [7]
+		"/p why??", -- [8]
+		"/p 3 hoyl power lets go", -- [9]
+		"/p release and get right side portal, quicker than ress", -- [10]
+		"/p hug right mage let s goo..", -- [11]
+		"/p zz", -- [12]
+		"/p wow", -- [13]
+		"/p every cast killed someone", -- [14]
+		"/p just go inside eh triangle..", -- [15]
+		"/p mage", -- [16]
+		"/p ESTAS ADK O QUE ESTA PASANDO??", -- [17]
+		"/p ragnaros nunca mas", -- [18]
+		"/s |cffffff00|Hworldmap:2025:6184:8314|h[|A:Waypoint-MapPin-ChatIcon:13:13:0:0|a Map Pin Location]|h|r", -- [19]
+		"/key", -- [20]
+	},
+	["ChatHistoryLog"] = {
+	},
+}

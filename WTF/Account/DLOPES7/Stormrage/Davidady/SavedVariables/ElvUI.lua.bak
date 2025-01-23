@@ -1,0 +1,11 @@
+
+ElvCharacterDB = {
+	["ConvertKeybindings"] = true,
+	["ChatEditHistory"] = {
+		"/wave", -- [1]
+		"/dance", -- [2]
+		"/rl", -- [3]
+	},
+	["ChatHistoryLog"] = {
+	},
+}
