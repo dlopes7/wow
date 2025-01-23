@@ -1,10 +1,10 @@
-lightweight tag cdb842d47b6b67586451888e8451153d89d5650b patch-11.0.5-01
+lightweight tag 36ad308c868b9080bb40e5f22505b625c5aecdb3 patch-11.0.7-02
 Author:	Dave Hendler <sollaires@gmail.com>
-Date:	Thu Oct 24 14:37:04 2024 -0700
+Date:	Thu Jan 9 16:20:47 2025 -0800
 
-commit cdb842d47b6b67586451888e8451153d89d5650b
+commit 36ad308c868b9080bb40e5f22505b625c5aecdb3
 Author: Dave Hendler <sollaires@gmail.com>
-Date:   Thu Oct 24 14:37:04 2024 -0700
+Date:   Thu Jan 9 16:20:47 2025 -0800
 
-    Add item upgrade achievements to /simc export, bump WoW version
+    Add 11.1 upgrade currencies and items
 

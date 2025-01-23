@@ -89,16 +89,6 @@ tinsert(menuList, {
 	microOffset = 'MainMenuMicroButton',
 	func = function()
 		if not _G.GameMenuFrame:IsShown() then
-			if E.Cata then
-				if _G.VideoOptionsFrame:IsShown() then
-					_G.VideoOptionsFrameCancel:Click()
-				elseif _G.AudioOptionsFrame:IsShown() then
-					_G.AudioOptionsFrameCancel:Click()
-				elseif _G.InterfaceOptionsFrame:IsShown() then
-					_G.InterfaceOptionsFrameCancel:Click()
-				end
-			end
-
 			CloseMenus()
 			CloseAllWindows()
 			PlaySound(850) --IG_MAINMENU_OPEN
@@ -167,11 +157,6 @@ function M:HandleTrackingButton()
 		tracking:Point(position, Minimap, xOffset, yOffset)
 		M:SetScale(tracking, scale)
 
-		local button = E.Retail and tracking.Button
-		if button and (button:GetScript('OnMouseDown') ~= M.TrackingButton_OnMouseDown) then
-			button:SetScript('OnMouseDown', M.TrackingButton_OnMouseDown)
-		end
-
 		if _G.MiniMapTrackingButtonBorder then
 			_G.MiniMapTrackingButtonBorder:Hide()
 		end
@@ -219,21 +204,6 @@ function M:ADDON_LOADED(_, addon)
 	end
 end
 
-function M:CreateMinimapTrackingDropdown()
-	local dropdown -- 11.0  dropdown:SetupMenu(E.ConfigMode_Initialize)
-	if not E.Retail then
-		dropdown = CreateFrame(E.Retail and 'DropdownButton' or 'Frame', 'ElvUIMiniMapTrackingDropDown', UIParent, E.Retail and 'WowStyle1DropdownTemplate' or 'UIDropDownMenuTemplate')
-		dropdown:SetID(1)
-		dropdown:SetClampedToScreen(true)
-		dropdown:Hide()
-
-		_G.UIDropDownMenu_Initialize(dropdown, _G.MiniMapTrackingDropDown_Initialize, 'MENU')
-		dropdown.noResize = true
-	end
-
-	return dropdown
-end
-
 function M:Minimap_OnShow()
 	M:UpdateIcons()
 end
@@ -259,20 +229,14 @@ end
 function M:Minimap_OnMouseDown(btn)
 	menuFrame:Hide()
 
-	if M.TrackingDropdown then
-		_G.HideDropDownMenu(1, nil, M.TrackingDropdown)
-	end
-
 	local position = M.MapHolder.mover:GetPoint()
 	if btn == 'MiddleButton' or (btn == 'RightButton' and IsShiftKeyDown()) then
 		if not E:AlertCombat() then
 			E:ComplicatedMenu(menuList, menuFrame, 'cursor', position:match('LEFT') and 0 or -160, 0, 'MENU')
 			menuFrame:Show()
 		end
-	elseif btn == 'RightButton' and M.TrackingDropdown then
-		_G.ToggleDropDownMenu(1, nil, M.TrackingDropdown, 'cursor')
-	elseif btn == 'RightButton' and E.Retail then
-		local button = _G.MinimapCluster.Tracking.Button
+	elseif btn == 'RightButton' then
+		local button = (E.Retail and _G.MinimapCluster.Tracking.Button) or _G.MiniMapTrackingButton
 		if button then
 			button:OpenMenu()
 
@@ -293,23 +257,11 @@ end
 function M:MapCanvas_OnMouseDown(btn)
 	menuFrame:Hide()
 
-	if M.TrackingDropdown then
-		_G.HideDropDownMenu(1, nil, M.TrackingDropdown)
-	end
-
 	local position = M.MapHolder.mover:GetPoint()
 	if btn == 'MiddleButton' or (btn == 'RightButton' and IsShiftKeyDown()) then
 		if not E:AlertCombat() then
 			E:ComplicatedMenu(menuList, menuFrame, 'cursor', position:match('LEFT') and 0 or -160, 0, 'MENU')
 		end
-	elseif btn == 'RightButton' and M.TrackingDropdown then
-		_G.ToggleDropDownMenu(1, nil, M.TrackingDropdown, 'cursor')
-	end
-end
-
-function M:TrackingButton_OnMouseDown()
-	if M.TrackingDropdown then
-		_G.ToggleDropDownMenu(1, nil, M.TrackingDropdown, 'cursor')
 	end
 end
 
@@ -659,6 +611,17 @@ function M:ClusterPoint(_, anchor)
 	end
 end
 
+function M:PLAYER_ENTERING_WORLD(_, initLogin, isReload)
+	if initLogin or isReload then
+		local LFGIconBorder = _G.MiniMapLFGFrameBorder or _G.MiniMapLFGBorder or _G.LFGMinimapFrameBorder
+		if LFGIconBorder then
+			LFGIconBorder:Hide()
+		end
+	end
+
+	M:Update_ZoneText()
+end
+
 function M:Initialize()
 	if E.private.general.minimap.enable then
 		Minimap:SetMaskTexture(E.Retail and 130937 or [[interface\chatframe\chatframebackground]])
@@ -759,7 +722,7 @@ function M:Initialize()
 	Minimap.location:Hide() -- Fixes blizzard's font rendering issue, keep after M:SetScale
 	M:SetScale(Minimap.location, 1)
 
-	M:RegisterEvent('PLAYER_ENTERING_WORLD', 'Update_ZoneText')
+	M:RegisterEvent('PLAYER_ENTERING_WORLD')
 	M:RegisterEvent('ZONE_CHANGED_NEW_AREA', 'Update_ZoneText')
 	M:RegisterEvent('ZONE_CHANGED_INDOORS', 'Update_ZoneText')
 	M:RegisterEvent('ZONE_CHANGED', 'Update_ZoneText')
@@ -803,8 +766,6 @@ function M:Initialize()
 
 	if E.Classic then
 		hooksecurefunc('SetLookingForGroupUIAvailable', M.HandleTrackingButton)
-	else --Create the new minimap tracking dropdown frame and initialize it
-		M.TrackingDropdown = M:CreateMinimapTrackingDropdown()
 	end
 
 	if _G.TimeManagerClockButton then
@@ -817,10 +778,6 @@ function M:Initialize()
 
 	if _G.HybridMinimap then
 		M:SetupHybridMinimap()
-	end
-
-	if _G.MiniMapLFGFrame then
-		(E.Cata and _G.MiniMapLFGFrameBorder or _G.MiniMapLFGBorder):Hide()
 	end
 
 	M:RegisterEvent('ADDON_LOADED')

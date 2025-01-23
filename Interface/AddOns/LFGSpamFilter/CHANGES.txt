@@ -1,10 +1,10 @@
-lightweight tag bc8cca0a02463fb1026670ae8a2261bd6e24cddc v1.6.2
+lightweight tag 432b5dd6de21a236da9f27d499f4cee0c36a3e36 v1.6.3
 Author:	romdeau23 <43295566+romdeau23@users.noreply.github.com>
-Date:	Wed Aug 14 11:48:45 2024 +0200
+Date:	Wed Dec 18 14:39:15 2024 +0100
 
-commit bc8cca0a02463fb1026670ae8a2261bd6e24cddc
+commit 432b5dd6de21a236da9f27d499f4cee0c36a3e36
 Author: romdeau23 <43295566+romdeau23@users.noreply.github.com>
-Date:   Wed Aug 14 11:48:45 2024 +0200
+Date:   Wed Dec 18 14:39:15 2024 +0100
 
     Update TOC
 

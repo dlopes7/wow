@@ -8,6 +8,8 @@ mod.displayName = CL.trash
 mod:RegisterEnableMob(
 	129374, -- Scrimshaw Enforcer (Alliance)
 	141283, -- Kul Tiran Halberd (Horde)
+	138002, -- Scrimshaw Gutter (Alliance, RP fights)
+	133990, -- Scrimshaw Gutter (Alliance)
 	129372, -- Blacktar Bomber
 	129370, -- Irontide Waveshaper
 	144071, -- Irontide Waveshaper
@@ -16,6 +18,8 @@ mod:RegisterEnableMob(
 	129371, -- Riptide Shredder
 	138019, -- Kul Tiran Vanguard (Horde)
 	128969, -- Ashvane Commander
+	135258, -- Irontide Curseblade
+	138247, -- Irontide Curseblade (RP fights)
 	135263, -- Ashvane Spotter
 	138255, -- Ashvane Spotter
 	138465, -- Ashvane Cannoneer
@@ -23,6 +27,7 @@ mod:RegisterEnableMob(
 	129366, -- Bilge Rat Buccaneer
 	135241, -- Bilge Rat Pillager
 	129367, -- Bilge Rat Tempest
+	137511, -- Bilge Rat Cutthroat
 	137516 -- Ashvane Invader
 )
 
@@ -34,6 +39,7 @@ local L = mod:GetLocale()
 if L then
 	L.enforcer = "Scrimshaw Enforcer"
 	L.halberd = "Kul Tiran Halberd"
+	L.gutter = "Scrimshaw Gutter"
 	L.bomber = "Blackar Bomber"
 	L.waveshaper = "Irontide Waveshaper"
 	L.wavetender = "Kul Tiran Wavetender"
@@ -41,16 +47,18 @@ if L then
 	L.shredder = "Riptide Shredder"
 	L.vanguard = "Kul Tiran Vanguard"
 	L.commander = "Ashvane Commander"
+	L.curseblade = "Irontide Curseblade"
 	L.spotter = "Ashvane Spotter"
 	L.cannoneer = "Ashvane Cannoneer"
 	L.demolisher = "Bilge Rat Demolisher"
 	L.buccaneer = "Bilge Rat Buccaneer"
 	L.pillager = "Bilge Rat Pillager"
 	L.tempest = "Bilge Rat Tempest"
+	L.cutthroat = "Bilge Rat Cutthroat"
 	L.invader = "Ashvane Invader"
 
 	L.gate_open = CL.gate_open
-	L.gate_open_desc = "Show a bar indicating when the Kul Tiran Wavetender will open the gate after Dread Captain Lockwood."
+	L.gate_open_desc = "Show a bar indicating when the gate to the next area will open after defeating each boss."
 	L.gate_open_icon = "achievement_dungeon_siegeofboralus"
 end
 
@@ -65,6 +73,8 @@ function mod:GetOptions()
 		-- Scrimshaw Enforcer / Kul Tiran Halberd
 		{256627, "NAMEPLATE"}, -- Slobber Knocker
 		{257732, "NAMEPLATE"}, -- Shattering Bellow
+		-- Scrimshaw Gutter
+		{256616, "TANK", "NAMEPLATE"}, -- Tooth Breaker
 		-- Blacktar Bomber
 		{256640, "NAMEPLATE"}, -- Burning Tar
 		-- Irontide Waveshaper / Kul Tiran Wavetender
@@ -74,11 +84,14 @@ function mod:GetOptions()
 		{257170, "NAMEPLATE"}, -- Savage Tempest
 		-- Riptide Shredder
 		{257270, "NAMEPLATE", "OFF"}, -- Iron Ambush
+		{256709, "NAMEPLATE", "TANK", "OFF"}, -- Singing Steel
 		-- Kul Tiran Vanguard
 		{257288, "NAMEPLATE"}, -- Heavy Slash
 		-- Ashvane Commander
 		{454437, "SAY", "NAMEPLATE"}, -- Azerite Charge
 		{275826, "NAMEPLATE"}, -- Bolstering Shout
+		-- Irontide Curseblade
+		{257168, "TANK", "NAMEPLATE", "OFF"}, -- Cursed Slash
 		-- Ashvane Spotter
 		{272421, "SAY", "NAMEPLATE"}, -- Sighted Artillery
 		-- Ashvane Cannoneer
@@ -92,22 +105,27 @@ function mod:GetOptions()
 		{454440, "NAMEPLATE"}, -- Stinky Vomit
 		-- Bilge Rat Tempest
 		{272571, "NAMEPLATE"}, -- Choking Waters
+		-- Bilge Rat Cutthroat
+		{272588, "DISPEL", "NAMEPLATE"}, -- Rotting Wounds
 		-- Ashvane Invader
 		{275835, "TANK", "NAMEPLATE"}, -- Stinging Venom Coating
 	}, {
 		[256627] = L.halberd.." / "..L.enforcer,
+		[256616] = L.gutter,
 		[256640] = L.bomber,
 		[256957] = L.wavetender.." / "..L.waveshaper,
 		[272662] = L.raider,
 		[257270] = L.shredder,
 		[257288] = L.vanguard,
 		[454437] = L.commander,
+		[257168] = L.curseblade,
 		[272421] = L.spotter,
 		[268260] = L.cannoneer,
 		[257169] = L.demolisher,
 		[272546] = L.buccaneer,
 		[454440] = L.pillager,
 		[272571] = L.tempest,
+		[272588] = L.cutthroat,
 		[275835] = L.invader,
 	}
 end
@@ -118,6 +136,12 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "SlobberKnocker", 256627)
 	self:Log("SPELL_CAST_START", "ShatteringBellow", 257732)
 	self:Death("KulTiranHalberdDeath", 141283, 129374) -- Enforcer, Halberd
+
+	-- Scrimshaw Gutter
+	self:RegisterEngageMob("ScrimshawGutterEngaged", 133990) -- 138002 RP fights
+	self:Log("SPELL_CAST_START", "ToothBreaker", 256616)
+	self:Log("SPELL_CAST_SUCCESS", "ToothBreakerSuccess", 256616)
+	self:Death("ScrimshawGutterDeath", 138002, 133990)
 
 	-- Blacktar Bomber
 	self:RegisterEngageMob("BlacktarBomberEngaged", 129372)
@@ -142,6 +166,8 @@ function mod:OnBossEnable()
 	-- Riptide Shredder
 	self:RegisterEngageMob("RiptideShredderEngaged", 129371)
 	self:Log("SPELL_CAST_SUCCESS", "IronAmbush", 257270)
+	self:Log("SPELL_CAST_START", "SingingSteel", 256709)
+	self:Log("SPELL_CAST_SUCCESS", "SingingSteelSuccess", 256709)
 	self:Death("RiptideShredderDeath", 129371)
 
 	-- Kul Tiran Vanguard (Horde-only)
@@ -157,6 +183,11 @@ function mod:OnBossEnable()
 	self:Log("SPELL_INTERRUPT", "BolsteringShoutInterrupt", 275826)
 	self:Log("SPELL_CAST_SUCCESS", "BolsteringShoutSuccess", 275826)
 	self:Death("AshvaneCommanderDeath", 128969)
+
+	-- Irontide Curseblade
+	self:RegisterEngageMob("IrontideCursebladeEngaged", 135258) -- 138247 RP fights
+	self:Log("SPELL_CAST_SUCCESS", "CursedSlash", 257168)
+	self:Death("IrontideCursebladeDeath", 135258, 138247)
 
 	-- Ashvane Spotter
 	self:RegisterEngageMob("AshvaneSpotterEngaged", 135263, 138255)
@@ -195,6 +226,13 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "ChokingWatersSuccess", 272571)
 	self:Death("BilgeRatTempestDeath", 129367)
 
+	-- Bilge Rat Cutthroat
+	self:RegisterEngageMob("BilgeRatCutthroatEngaged", 137511)
+	self:Log("SPELL_CAST_START", "RottingWounds", 272588)
+	self:Log("SPELL_CAST_SUCCESS", "RottingWoundsSuccess", 272588)
+	self:Log("SPELL_AURA_APPLIED", "RottingWoundsApplied", 272588)
+	self:Death("BilgeRatCutthroatDeath", 137511)
+
 	-- Ashvane Invader
 	self:RegisterEngageMob("AshvaneInvaderEngaged", 137516)
 	self:Log("SPELL_CAST_SUCCESS", "StingingVenomCoating", 275835)
@@ -207,15 +245,29 @@ end
 
 -- RP Timers
 
+-- triggered from Chopper Redhook's and Sergeant Bainbridge's :OnWin
+function mod:FirstBossDefeated()
+	self:Bar("gate_open", 4.2, L.gate_open, L.gate_open_icon)
+end
+
 -- triggered from Dread Captain Lockwood's :OnWin
-function mod:LockwoodDefeated(duration)
-	self:Bar("gate_open", duration, L.gate_open, L.gate_open_icon)
+function mod:LockwoodDefeated()
+	self:Bar("gate_open", 4.8, L.gate_open, L.gate_open_icon)
+end
+
+-- triggered from Hadal Darkfathom's :OnWin
+function mod:DarkfathomDefeated()
+	if self:Mythic() or self:Heroic() then -- Alliance version
+		self:Bar("gate_open", 12.3, L.gate_open, L.gate_open_icon)
+	--else -- we might be in the Horde version which has a shorter timer
+		--self:Bar("gate_open", 4.9, L.gate_open, L.gate_open_icon)
+	end
 end
 
 -- Scrimshaw Enforcer / Kul Tiran Halberd
 
 function mod:KulTiranHalberdEngaged(guid)
-	self:Nameplate(256627, 7.1, guid) -- Slobber Knocker
+	self:Nameplate(256627, 5.6, guid) -- Slobber Knocker
 	self:Nameplate(257732, 13.1, guid) -- Shattering Bellow
 end
 
@@ -232,6 +284,32 @@ function mod:ShatteringBellow(args)
 end
 
 function mod:KulTiranHalberdDeath(args)
+	self:ClearNameplate(args.destGUID)
+end
+
+-- Scrimshaw Gutter
+
+function mod:ScrimshawGutterEngaged(guid)
+	self:Nameplate(256616, 2.3, guid) -- Tooth Breaker
+end
+
+do
+	local prev = 0
+	function mod:ToothBreaker(args)
+		self:Nameplate(args.spellId, 0, args.sourceGUID)
+		if args.time - prev > 2 then
+			prev = args.time
+			self:Message(args.spellId, "purple")
+			self:PlaySound(args.spellId, "alert")
+		end
+	end
+end
+
+function mod:ToothBreakerSuccess(args)
+	self:Nameplate(args.spellId, 18.0, args.sourceGUID)
+end
+
+function mod:ScrimshawGutterDeath(args)
 	self:ClearNameplate(args.destGUID)
 end
 
@@ -330,6 +408,7 @@ end
 -- Riptide Shredder
 
 function mod:RiptideShredderEngaged(guid)
+	self:Nameplate(256709, 3.3, guid) -- Singing Steel
 	self:Nameplate(257270, 14.5, guid) -- Iron Ambush
 end
 
@@ -343,6 +422,22 @@ do
 			self:PlaySound(args.spellId, "alarm", nil, args.destName)
 		end
 	end
+end
+
+do
+	local prev = 0
+	function mod:SingingSteel(args)
+		self:Nameplate(args.spellId, 0, args.sourceGUID)
+		if args.time - prev > 2 then
+			prev = args.time
+			self:Message(args.spellId, "purple")
+			self:PlaySound(args.spellId, "alert")
+		end
+	end
+end
+
+function mod:SingingSteelSuccess(args)
+	self:Nameplate(args.spellId, 12.3, args.sourceGUID)
 end
 
 function mod:RiptideShredderDeath(args)
@@ -408,6 +503,28 @@ function mod:BolsteringShoutSuccess(args)
 end
 
 function mod:AshvaneCommanderDeath(args)
+	self:ClearNameplate(args.destGUID)
+end
+
+-- Irontide Curseblade
+
+function mod:IrontideCursebladeEngaged(guid)
+	self:Nameplate(257168, 3.5, guid) -- Cursed Slash
+end
+
+do
+	local prev = 0
+	function mod:CursedSlash(args)
+		self:Nameplate(args.spellId, 15.8, args.sourceGUID)
+		if args.time - prev > 2 then
+			prev = args.time
+			self:Message(args.spellId, "purple")
+			self:PlaySound(args.spellId, "alert")
+		end
+	end
+end
+
+function mod:IrontideCursebladeDeath(args)
 	self:ClearNameplate(args.destGUID)
 end
 
@@ -558,6 +675,41 @@ function mod:ChokingWatersSuccess(args)
 end
 
 function mod:BilgeRatTempestDeath(args)
+	self:ClearNameplate(args.destGUID)
+end
+
+-- Bilge Rat Cutthroat
+
+function mod:BilgeRatCutthroatEngaged(guid)
+	if self:Tank() or self:Dispeller("disease", nil, 272588) then -- Rotting Wounds
+		self:Nameplate(272588, 2.1, guid) -- Rotting Wounds
+	end
+end
+
+function mod:RottingWounds(args)
+	if self:Tank() or self:Dispeller("disease", nil, args.spellId) then
+		self:Nameplate(args.spellId, 0, args.sourceGUID)
+	end
+end
+
+function mod:RottingWoundsSuccess(args)
+	if self:Tank() or self:Dispeller("disease", nil, args.spellId) then
+		self:Nameplate(args.spellId, 15.9, args.sourceGUID)
+	end
+end
+
+do
+	local prev = 0
+	function mod:RottingWoundsApplied(args)
+		if self:Dispeller("disease", nil, args.spellId) and args.time - prev > 2 then
+			prev = args.time
+			self:TargetMessage(args.spellId, "purple", args.destName)
+			self:PlaySound(args.spellId, "alert", nil, args.destName)
+		end
+	end
+end
+
+function mod:BilgeRatCutthroatDeath(args)
 	self:ClearNameplate(args.destGUID)
 end
 

@@ -5,6 +5,7 @@ local T = W.Modules.Tooltips
 
 local _G = _G
 local floor = floor
+local gsub = gsub
 local hooksecurefunc = hooksecurefunc
 local pairs = pairs
 local unpack = unpack
@@ -119,9 +120,6 @@ function S:RareScanner()
 				end
 			end
 
-			child.EditBox:SetTemplate("Transparent")
-			self:CreateShadow(child.EditBox)
-
 			child.EditBox:ClearAllPoints()
 			child.EditBox:SetAllPoints(child)
 
@@ -129,7 +127,33 @@ function S:RareScanner()
 			child:SetSize(w, floor(h * 0.62))
 
 			child:ClearAllPoints()
-			child:SetPoint("TOP", _G.WorldMapFrame.ScrollContainer, "TOP", 0, -5)
+			local ST = W:GetModule("SuperTracker")
+			if ST.db and ST.db.enable and ST.db.waypointParse.enable and ST.WorldMapInput then
+				child.EditBox:SetTemplate()
+				child.EditBox:SetHeight(ST.WorldMapInput:GetHeight())
+				child:SetPoint("LEFT", ST.WorldMapInput, "RIGHT", 12, 0)
+				local placeholder = child.EditBox:CreateFontString(nil, "ARTWORK")
+				placeholder:FontTemplate(nil, nil, "OUTLINE")
+				placeholder:SetText("|cff666666RareScanner|r")
+				placeholder:SetPoint("CENTER", child, "CENTER", 0, 0)
+
+				child.EditBox:HookScript("OnEditFocusGained", function()
+					placeholder:Hide()
+				end)
+
+				child.EditBox:HookScript("OnEditFocusLost", function(eb)
+					local inputText = eb:GetText()
+					if not inputText or gsub(inputText, " ", "") == "" then
+						placeholder:Show()
+						return
+					end
+					placeholder:Hide()
+				end)
+			else
+				child.EditBox:SetTemplate("Transparent")
+				self:CreateShadow(child.EditBox)
+				child:SetPoint("TOP", _G.WorldMapFrame.ScrollContainer, "TOP", 0, -5)
+			end
 			break
 		end
 	end

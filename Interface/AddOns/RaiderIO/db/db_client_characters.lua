@@ -1,5 +1,5 @@
 --
--- RaiderIO Client Data. Generated on Thu Nov 07 2024 19:29:59 GMT+0000 (Coordinated Universal Time)
+-- RaiderIO Client Data. Generated on Thu Jan 23 2025 02:43:55 GMT+0000 (Coordinated Universal Time)
 --
 local _, ns = ...
 ns.CLIENT_CHARACTERS = {
@@ -13,12 +13,105 @@ ns.CLIENT_CHARACTERS = {
     },
     ["mythic_keystone"] = {
       ["all"] = {
-        ["score"] = 0,
-        ["best"] = nil,
-        ["bestFortified"] = nil,
-        ["bestTyrannical"] = nil,
+        ["score"] = 2641.3,
+        ["color"] = "#9c3eed",
+        ["best"] = {
+          ["zone_id"] = 14979,
+          ["level"] = 11,
+          ["upgrades"] = 1,
+          ["fraction"] = 0.927,
+          ["score"] = 337.72695811362763,
+          ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/22041364-11-city-of-threads?utm_source=client"
+        },
+        ["bestFortified"] = {
+          ["zone_id"] = 14979,
+          ["level"] = 11,
+          ["upgrades"] = 1,
+          ["fraction"] = 0.927,
+          ["score"] = 337.72695811362763,
+          ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/22041364-11-city-of-threads?utm_source=client"
+        },
+        ["bestTyrannical"] = {
+          ["zone_id"] = 14971,
+          ["level"] = 10,
+          ["upgrades"] = 2,
+          ["fraction"] = 0.611,
+          ["score"] = 334.58839163936017,
+          ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/20927947-10-the-dawnbreaker?utm_source=client"
+        },
         ["runs"] = {
-
+          {
+            ["zone_id"] = 14882,
+            ["level"] = 0,
+            ["upgrades"] = 0,
+            ["fraction"] = 0,
+            ["score"] = 0,
+            ["url"] = nil
+          },
+          {
+            ["zone_id"] = 14883,
+            ["level"] = 10,
+            ["upgrades"] = 2,
+            ["fraction"] = 0.717,
+            ["score"] = 330.5951222091368,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/22337738-10-the-stonevault?utm_source=client"
+          },
+          {
+            ["zone_id"] = 14938,
+            ["level"] = 0,
+            ["upgrades"] = 0,
+            ["fraction"] = 0,
+            ["score"] = 0,
+            ["url"] = nil
+          },
+          {
+            ["zone_id"] = 14954,
+            ["level"] = 0,
+            ["upgrades"] = 0,
+            ["fraction"] = 0,
+            ["score"] = 0,
+            ["url"] = nil
+          },
+          {
+            ["zone_id"] = 14971,
+            ["level"] = 10,
+            ["upgrades"] = 2,
+            ["fraction"] = 0.611,
+            ["score"] = 334.58839163936017,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/20927947-10-the-dawnbreaker?utm_source=client"
+          },
+          {
+            ["zone_id"] = 14979,
+            ["level"] = 11,
+            ["upgrades"] = 1,
+            ["fraction"] = 0.927,
+            ["score"] = 337.72695811362763,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/22041364-11-city-of-threads?utm_source=client"
+          },
+          {
+            ["zone_id"] = 15093,
+            ["level"] = 8,
+            ["upgrades"] = 2,
+            ["fraction"] = 0.768,
+            ["score"] = 288.6937975641447,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/20405112-8-arakara-city-of-echoes?utm_source=client"
+          },
+          {
+            ["zone_id"] = 15103,
+            ["level"] = 0,
+            ["upgrades"] = 0,
+            ["fraction"] = 0,
+            ["score"] = 0,
+            ["url"] = nil
+          },
+          {
+            ["zone_id"] = 15452,
+            ["level"] = 0,
+            ["upgrades"] = 0,
+            ["fraction"] = 0,
+            ["score"] = 0,
+            ["url"] = nil
+          }
         }
       }
     }
@@ -34,6 +127,7 @@ ns.CLIENT_CHARACTERS = {
     ["mythic_keystone"] = {
       ["all"] = {
         ["score"] = 2185,
+        ["color"] = "#3e81cb",
         ["best"] = {
           ["zone_id"] = 4950,
           ["level"] = 10,
@@ -122,6 +216,14 @@ ns.CLIENT_CHARACTERS = {
             ["fraction"] = 0,
             ["score"] = 0,
             ["url"] = nil
+          },
+          {
+            ["zone_id"] = 15452,
+            ["level"] = 0,
+            ["upgrades"] = 0,
+            ["fraction"] = 0,
+            ["score"] = 0,
+            ["url"] = nil
           }
         }
       }
@@ -138,6 +240,7 @@ ns.CLIENT_CHARACTERS = {
     ["mythic_keystone"] = {
       ["all"] = {
         ["score"] = 0,
+        ["color"] = "#ffffff",
         ["best"] = nil,
         ["bestFortified"] = nil,
         ["bestTyrannical"] = nil,
@@ -158,6 +261,7 @@ ns.CLIENT_CHARACTERS = {
     ["mythic_keystone"] = {
       ["all"] = {
         ["score"] = 0,
+        ["color"] = "#ffffff",
         ["best"] = nil,
         ["bestFortified"] = nil,
         ["bestTyrannical"] = nil,
@@ -178,6 +282,7 @@ ns.CLIENT_CHARACTERS = {
     ["mythic_keystone"] = {
       ["all"] = {
         ["score"] = 0,
+        ["color"] = "#ffffff",
         ["best"] = nil,
         ["bestFortified"] = nil,
         ["bestTyrannical"] = nil,
@@ -198,6 +303,7 @@ ns.CLIENT_CHARACTERS = {
     ["mythic_keystone"] = {
       ["all"] = {
         ["score"] = 0,
+        ["color"] = "#ffffff",
         ["best"] = nil,
         ["bestFortified"] = nil,
         ["bestTyrannical"] = nil,
@@ -218,6 +324,7 @@ ns.CLIENT_CHARACTERS = {
     ["mythic_keystone"] = {
       ["all"] = {
         ["score"] = 0,
+        ["color"] = "#ffffff",
         ["best"] = nil,
         ["bestFortified"] = nil,
         ["bestTyrannical"] = nil,
@@ -238,6 +345,7 @@ ns.CLIENT_CHARACTERS = {
     ["mythic_keystone"] = {
       ["all"] = {
         ["score"] = 0,
+        ["color"] = "#ffffff",
         ["best"] = nil,
         ["bestFortified"] = nil,
         ["bestTyrannical"] = nil,
@@ -252,35 +360,36 @@ ns.CLIENT_CHARACTERS = {
       ["name"] = "Doutora",
       ["realm"] = "Illidan",
       ["faction"] = "alliance",
-      ["race"] = 3,
+      ["race"] = 4,
       ["class"] = 5
     },
     ["mythic_keystone"] = {
       ["all"] = {
-        ["score"] = 2755.7,
+        ["score"] = 3043.4,
+        ["color"] = "#d64ea7",
         ["best"] = {
           ["zone_id"] = 14971,
-          ["level"] = 12,
+          ["level"] = 14,
           ["upgrades"] = 1,
-          ["fraction"] = 0.781,
-          ["score"] = 373.2185780207986,
-          ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/13526133-12-the-dawnbreaker?utm_source=client"
+          ["fraction"] = 0.897,
+          ["score"] = 398.8445688593382,
+          ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/18368514-14-the-dawnbreaker?utm_source=client"
         },
         ["bestFortified"] = {
-          ["zone_id"] = 14971,
-          ["level"] = 12,
+          ["zone_id"] = 14979,
+          ["level"] = 13,
           ["upgrades"] = 1,
-          ["fraction"] = 0.781,
-          ["score"] = 373.2185780207986,
-          ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/13526133-12-the-dawnbreaker?utm_source=client"
+          ["fraction"] = 0.853,
+          ["score"] = 385.52005044274324,
+          ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/16816199-13-city-of-threads?utm_source=client"
         },
         ["bestTyrannical"] = {
-          ["zone_id"] = 9354,
-          ["level"] = 12,
+          ["zone_id"] = 14971,
+          ["level"] = 14,
           ["upgrades"] = 1,
-          ["fraction"] = 0.892,
-          ["score"] = 369.0321482530895,
-          ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/13194938-12-siege-of-boralus?utm_source=client"
+          ["fraction"] = 0.897,
+          ["score"] = 398.8445688593382,
+          ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/18368514-14-the-dawnbreaker?utm_source=client"
         },
         ["runs"] = {
           {
@@ -293,11 +402,11 @@ ns.CLIENT_CHARACTERS = {
           },
           {
             ["zone_id"] = 14883,
-            ["level"] = 10,
-            ["upgrades"] = 2,
-            ["fraction"] = 0.731,
-            ["score"] = 330.1043083555328,
-            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/12153842-10-the-stonevault?utm_source=client"
+            ["level"] = 12,
+            ["upgrades"] = 1,
+            ["fraction"] = 0.837,
+            ["score"] = 371.1211219802617,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/14966956-12-the-stonevault?utm_source=client"
           },
           {
             ["zone_id"] = 14938,
@@ -317,30 +426,38 @@ ns.CLIENT_CHARACTERS = {
           },
           {
             ["zone_id"] = 14971,
-            ["level"] = 12,
+            ["level"] = 14,
             ["upgrades"] = 1,
-            ["fraction"] = 0.781,
-            ["score"] = 373.2185780207986,
-            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/13526133-12-the-dawnbreaker?utm_source=client"
+            ["fraction"] = 0.897,
+            ["score"] = 398.8445688593382,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/18368514-14-the-dawnbreaker?utm_source=client"
           },
           {
             ["zone_id"] = 14979,
-            ["level"] = 10,
-            ["upgrades"] = 2,
-            ["fraction"] = 0.757,
-            ["score"] = 329.1132743556706,
-            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/11946418-10-city-of-threads?utm_source=client"
+            ["level"] = 13,
+            ["upgrades"] = 1,
+            ["fraction"] = 0.853,
+            ["score"] = 385.52005044274324,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/16816199-13-city-of-threads?utm_source=client"
           },
           {
             ["zone_id"] = 15093,
-            ["level"] = 11,
+            ["level"] = 13,
             ["upgrades"] = 1,
-            ["fraction"] = 0.892,
-            ["score"] = 339.0430018736128,
-            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/12614805-11-arakara-city-of-echoes?utm_source=client"
+            ["fraction"] = 0.951,
+            ["score"] = 381.8291720408102,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/16533642-13-arakara-city-of-echoes?utm_source=client"
           },
           {
             ["zone_id"] = 15103,
+            ["level"] = 0,
+            ["upgrades"] = 0,
+            ["fraction"] = 0,
+            ["score"] = 0,
+            ["url"] = nil
+          },
+          {
+            ["zone_id"] = 15452,
             ["level"] = 0,
             ["upgrades"] = 0,
             ["fraction"] = 0,
@@ -361,30 +478,31 @@ ns.CLIENT_CHARACTERS = {
     },
     ["mythic_keystone"] = {
       ["all"] = {
-        ["score"] = 2980,
+        ["score"] = 3092.2,
+        ["color"] = "#da529d",
         ["best"] = {
-          ["zone_id"] = 13334,
-          ["level"] = 13,
+          ["zone_id"] = 15093,
+          ["level"] = 14,
           ["upgrades"] = 1,
-          ["fraction"] = 0.916,
-          ["score"] = 383.1501008197254,
-          ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/13755691-13-mists-of-tirna-scithe?utm_source=client"
+          ["fraction"] = 0.862,
+          ["score"] = 400.1862864549373,
+          ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/18559333-14-arakara-city-of-echoes?utm_source=client"
         },
         ["bestFortified"] = {
+          ["zone_id"] = 15093,
+          ["level"] = 14,
+          ["upgrades"] = 1,
+          ["fraction"] = 0.862,
+          ["score"] = 400.1862864549373,
+          ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/18559333-14-arakara-city-of-echoes?utm_source=client"
+        },
+        ["bestTyrannical"] = {
           ["zone_id"] = 13334,
           ["level"] = 13,
           ["upgrades"] = 1,
-          ["fraction"] = 0.916,
-          ["score"] = 383.1501008197254,
-          ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/13755691-13-mists-of-tirna-scithe?utm_source=client"
-        },
-        ["bestTyrannical"] = {
-          ["zone_id"] = 15093,
-          ["level"] = 12,
-          ["upgrades"] = 1,
-          ["fraction"] = 0.921,
-          ["score"] = 367.96160918117886,
-          ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/12369164-12-arakara-city-of-echoes?utm_source=client"
+          ["fraction"] = 0.849,
+          ["score"] = 385.6478678730131,
+          ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/17601926-13-mists-of-tirna-scithe?utm_source=client"
         },
         ["runs"] = {
           {
@@ -397,11 +515,11 @@ ns.CLIENT_CHARACTERS = {
           },
           {
             ["zone_id"] = 14883,
-            ["level"] = 12,
-            ["upgrades"] = 1,
-            ["fraction"] = 0.951,
-            ["score"] = 366.847007169004,
-            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/12342860-12-the-stonevault?utm_source=client"
+            ["level"] = 13,
+            ["upgrades"] = 0,
+            ["fraction"] = 0.968,
+            ["score"] = 381.19288444851975,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/17694467-13-the-stonevault?utm_source=client"
           },
           {
             ["zone_id"] = 14938,
@@ -423,28 +541,36 @@ ns.CLIENT_CHARACTERS = {
             ["zone_id"] = 14971,
             ["level"] = 13,
             ["upgrades"] = 0,
-            ["fraction"] = 0.993,
-            ["score"] = 380.27203371195986,
-            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/12336295-13-the-dawnbreaker?utm_source=client"
+            ["fraction"] = 0.956,
+            ["score"] = 381.6333170852471,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/19477143-13-the-dawnbreaker?utm_source=client"
           },
           {
             ["zone_id"] = 14979,
-            ["level"] = 12,
-            ["upgrades"] = 0,
-            ["fraction"] = 0.97,
-            ["score"] = 366.130135157524,
-            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/13168819-12-city-of-threads?utm_source=client"
+            ["level"] = 13,
+            ["upgrades"] = 1,
+            ["fraction"] = 0.941,
+            ["score"] = 382.21879950652647,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/18555422-13-city-of-threads?utm_source=client"
           },
           {
             ["zone_id"] = 15093,
-            ["level"] = 12,
+            ["level"] = 14,
             ["upgrades"] = 1,
-            ["fraction"] = 0.921,
-            ["score"] = 367.96160918117886,
-            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/12369164-12-arakara-city-of-echoes?utm_source=client"
+            ["fraction"] = 0.862,
+            ["score"] = 400.1862864549373,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-1/18559333-14-arakara-city-of-echoes?utm_source=client"
           },
           {
             ["zone_id"] = 15103,
+            ["level"] = 0,
+            ["upgrades"] = 0,
+            ["fraction"] = 0,
+            ["score"] = 0,
+            ["url"] = nil
+          },
+          {
+            ["zone_id"] = 15452,
             ["level"] = 0,
             ["upgrades"] = 0,
             ["fraction"] = 0,
@@ -466,6 +592,7 @@ ns.CLIENT_CHARACTERS = {
     ["mythic_keystone"] = {
       ["all"] = {
         ["score"] = 0,
+        ["color"] = "#ffffff",
         ["best"] = nil,
         ["bestFortified"] = nil,
         ["bestTyrannical"] = nil,
@@ -486,6 +613,7 @@ ns.CLIENT_CHARACTERS = {
     ["mythic_keystone"] = {
       ["all"] = {
         ["score"] = 0,
+        ["color"] = "#ffffff",
         ["best"] = nil,
         ["bestFortified"] = nil,
         ["bestTyrannical"] = nil,

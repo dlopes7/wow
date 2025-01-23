@@ -9,11 +9,11 @@ local tostring = tostring;
 local find = string.find;
 
 local LOCALE = GetLocale and GetLocale() or "enUS";
-local IS_TWW = addon.IsToCVersionEqualOrNewerThan(110000);
 
 
 local function AlwaysNil(arg)
 end
+API.Nop = AlwaysNil;
 
 local function AlwaysFalse(arg)
     --used to replace non-existent API in Classic
@@ -21,8 +21,23 @@ local function AlwaysFalse(arg)
 end
 API.AlwaysFalse = AlwaysFalse;
 
+local function AlwaysTrue(arg)
+    return true
+end
+API.AlwaysTrue = AlwaysTrue;
+
 local function AlwaysZero(arg)
     return 0
+end
+
+local function CopyEnum(name)
+    local tbl = {};
+    if Enum and Enum[name] then
+        for k, v in pairs(Enum[name]) do
+            tbl[k] = v;
+        end
+    end
+    return tbl
 end
 
 do  -- Math
@@ -227,10 +242,11 @@ do  -- Pixel
     API.GetScaledCursorPosition = GetScaledCursorPosition;
 end
 
-do  -- Object Pool
+do  -- Object Pool (Pool needs to Release all objects before reusing) / DynamicPoolMixin (can reuse any inactive object without Releasing All objects)
     local ObjectPoolMixin = {};
     local ipairs = ipairs;
     local tinsert = table.insert;
+    local tremove = table.remove;
 
     function ObjectPoolMixin:Release()
         for i, object in ipairs(self.objects) do
@@ -326,6 +342,90 @@ do  -- Object Pool
         return pool
     end
     API.CreateObjectPool = CreateObjectPool;
+
+
+
+
+    local DynamicPoolMixin = {};
+
+    function DynamicPoolMixin:ReleaseAll()
+        local removeFunc = self.Remove or RemoveObject;
+        for obj, active in pairs(self.activeObjects) do
+            if active then
+                removeFunc(obj);
+            end
+        end
+        self.activeObjects = {};
+        self.bins = {};
+        for i, obj in ipairs(self.allObjects) do
+            self.bins[i] = obj;
+        end
+    end
+
+    function DynamicPoolMixin:RecycleObject(obj)
+        if self.activeObjects[obj] then
+            self.activeObjects[obj] = nil;
+            if self.Remove then
+                self.Remove(obj);
+            else
+                RemoveObject(obj);
+            end
+        end
+        tinsert(self.bins, obj);
+    end
+
+    function DynamicPoolMixin:Acquire()
+        local obj = tremove(self.bins);
+        if not obj then
+            obj = self.Create();
+            obj.Release = self.ReleaseObject;
+            tinsert(self.allObjects, obj);
+        end
+        if self.OnAcquired then
+            self.OnAcquired(obj);
+        end
+        self.activeObjects[obj] = true;
+        return obj
+    end
+
+    function DynamicPoolMixin:CallActive(method, arg1, arg2, arg3, arg4)
+        for obj, active in pairs(self.activeObjects) do
+            obj[method](obj, arg1, arg2, arg3, arg4);
+        end
+    end
+
+    function DynamicPoolMixin:EnumerateActive()
+        return pairs(self.activeObjects);
+    end
+
+    function DynamicPoolMixin:DebugGetCount()
+        local numTotal = #self.allObjects;
+        local numInactive = #self.bins;
+        local numActive = 0;
+        for obj, active in pairs(self.activeObjects) do
+            numActive = numActive + 1;
+        end
+        print(numTotal, numActive, numInactive);
+    end
+
+    local function CreateDynamicObjectPool(createFunc, removeFunc, onAcquiredFunc)
+        local pool = API.CreateFromMixins(DynamicPoolMixin);
+
+        pool.allObjects = {};
+        pool.bins = {};
+        pool.activeObjects = {};
+
+        pool.Create = createFunc;
+        pool.Remove = removeFunc or RemoveObject;
+        pool.OnAcquired = onAcquiredFunc;
+
+        pool.ReleaseObject = function(obj)
+            pool:RecycleObject(obj);
+        end
+
+        return pool
+    end
+    API.CreateDynamicObjectPool = CreateDynamicObjectPool;
 end
 
 do  -- String
@@ -414,6 +514,8 @@ end
 do  -- NPC Interaction
     local SetUnitCursorTexture = SetUnitCursorTexture;
     local UnitExists = UnitExists;
+    local UnitName = UnitName;
+    local UnitGUID = UnitGUID;
 
     local f = CreateFrame("Frame");
     f.texture = f:CreateTexture();
@@ -673,7 +775,8 @@ do  -- NPC Interaction
     local match = string.match;
 
     local function GetCreatureIDFromGUID(guid)
-        local id = match(guid, "Creature%-0%-%d*%-%d*%-%d*%-(%d*)");
+        --Including Creature, Vehicle, GameObject
+        local id = guid and match(guid, "^%a+%-0%-%d*%-%d*%-%d*%-(%d*)");
         if id then
             return tonumber(id)
         end
@@ -681,14 +784,36 @@ do  -- NPC Interaction
     API.GetCreatureIDFromGUID = GetCreatureIDFromGUID;
 
     local function GetCurrentNPCInfo()
-        if UnitExists("npc") then
-            local name = UnitName("npc");
-            local creatureID = GetCreatureIDFromGUID(UnitGUID("npc"));
+        local name = UnitName("npc");
+        local creatureID = GetCreatureIDFromGUID(UnitGUID("npc"));
+        if creatureID then
+            name = name or "";
             return name, creatureID
         end
     end
     API.GetCurrentNPCInfo = GetCurrentNPCInfo;
 
+    local SkippedNPC = {
+        [94398] = true,     --Fleet Command Table
+        [94399] = true,     --Fleet Command Table
+        [138704] = true,    --Mission Command Table
+        [138706] = true,    --Mission Command Table
+        [147244] = true,    --Mission Command Table
+        [215758] = true,    --Mission Command Table
+    };
+    local function IsInteractingWithGameObject()
+        local guid = UnitGUID("npc");
+        if guid then
+            local unitType, id = match(guid, "^(%a+)%-0%-%d*%-%d*%-%d*%-(%d*)");
+            if unitType == "GameObject" or unitType == "Vehicle" then
+                return true
+            elseif unitType == "Creature" and id then
+                id = tonumber(id) or 0;
+                return SkippedNPC[id]
+            end
+        end
+    end
+    API.IsInteractingWithGameObject = IsInteractingWithGameObject;
 
     local SCOUTING_MAP = ADVENTURE_MAP_TITLE or "Scouting Map";
     local UnitClass = UnitClass;
@@ -741,27 +866,31 @@ do  -- Easing
         t = t / d
         return (e - b) * pow(t, 2) + b
     end
+
+    function EasingFunctions.none(t, b, e, d)
+        return e
+    end
+
+    function EasingFunctions.noChange(t, b, e, d)
+        return b
+    end
 end
 
 do  -- Quest
-    local FREQUENCY_DAILY = 1;      --Enum.QuestFrequency.Daily
-    local FREQUENCY_WEELY = 2;      --Enum.QuestFrequency.Weekly
-    local FREQUENCY_SCHEDULER = 3;  --Enum.ResetByScheduler --Includes Meta Quest: Time-gated quests that give good rewards (TWW)
     local ICON_PATH = "Interface/AddOns/DialogueUI/Art/Icons/";
+    local Enum_QuestClassification = CopyEnum("QuestClassification");
 
     local QuestGetAutoAccept = QuestGetAutoAccept or AlwaysFalse;
     local C_QuestLog = C_QuestLog;
     local IsOnQuest = C_QuestLog.IsOnQuest;
+    local GetQuestReward = GetQuestReward;
     local ReadyForTurnIn = C_QuestLog.ReadyForTurnIn or IsQuestComplete or AlwaysFalse;
     local QuestIsFromAreaTrigger = QuestIsFromAreaTrigger or AlwaysFalse;
     local GetSuggestedGroupSize = GetSuggestedGroupSize or AlwaysZero;
     local IsQuestTrivial = C_QuestLog.IsQuestTrivial or AlwaysFalse;
-    local IsLegendaryQuest = C_QuestLog.IsLegendaryQuest or AlwaysFalse;
-    local IsImportantQuest = C_QuestLog.IsImportantQuest or AlwaysFalse;
     local IsCampaignQuest = (C_CampaignInfo and C_CampaignInfo.IsCampaignQuest) or AlwaysFalse;
     local IsQuestTask = C_QuestLog.IsQuestTask or AlwaysFalse;
     local IsWorldQuest = C_QuestLog.IsWorldQuest or AlwaysFalse;
-    local IsMetaQuest = C_QuestLog.IsMetaQuest or AlwaysFalse;
     local GetRewardSkillPoints = GetRewardSkillPoints or AlwaysFalse;
     local GetRewardArtifactXP = GetRewardArtifactXP or AlwaysZero;
     local QuestCanHaveWarModeBonus = C_QuestLog.QuestCanHaveWarModeBonus or AlwaysFalse;
@@ -775,6 +904,7 @@ do  -- Quest
     local GetNumQuestLeaderBoards = GetNumQuestLeaderBoards;
     local GetQuestLogLeaderBoard = GetQuestLogLeaderBoard;
     local GetQuestClassification = C_QuestInfoSystem.GetQuestClassification or AlwaysNil;
+    local IsAccountQuest = C_QuestLog.IsAccountQuest or AlwaysFalse;
 
     API.IsQuestFlaggedCompletedOnAccount = IsQuestFlaggedCompletedOnAccount;
 
@@ -874,6 +1004,7 @@ do  -- Quest
     API.QuestHasQuestSessionBonus = QuestHasQuestSessionBonus;
     API.GetQuestItemInfoLootType = GetQuestItemInfoLootType;
     API.GetTitleForQuestID = GetTitleForQuestID;
+    API.IsAccountQuest = IsAccountQuest;
 
     if GetAvailableQuestInfo then
         API.GetAvailableQuestInfo = GetAvailableQuestInfo;
@@ -891,8 +1022,27 @@ do  -- Quest
         end
     end
 
+    local function CompleteCurrentQuest(rewardChoiceID, isAutoComplete)
+        rewardChoiceID = rewardChoiceID or 0;
+        GetQuestReward(rewardChoiceID);
+        CallbackRegistry:Trigger("TriggerQuestFinished", isAutoComplete);   --In some cases game doesn't fire QUEST_FINISHED after completing a quest?
+    end
+    API.CompleteCurrentQuest = CompleteCurrentQuest;
 
-    local function CompleteQuestInfo(questInfo)
+    local QuestMixin = {};
+    do
+        function QuestMixin:Refresh()
+            self.classification = GetQuestClassification(self.questID) or -1;
+            self.isTrivial = IsQuestTrivial(self.questID);
+        end
+    end
+
+    local function BuildQuestInfo(questInfo)
+        questInfo.Refresh = QuestMixin.Refresh;
+
+        local class = GetQuestClassification(questInfo.questID) or -1;
+        questInfo.classification = class;
+
         if questInfo.isOnQuest == nil then
             questInfo.isOnQuest = IsOnQuest(questInfo.questID);
         end
@@ -906,15 +1056,15 @@ do  -- Quest
         end
 
         if questInfo.isLegendary == nil then
-            questInfo.isLegendary = IsLegendaryQuest(questInfo.questID);
+            questInfo.isLegendary = class == Enum_QuestClassification.Legendary;
         end
 
         if questInfo.isImportant == nil then
-            questInfo.isImportant = IsImportantQuest(questInfo.questID);
+            questInfo.isImportant = class == Enum_QuestClassification.Important;
         end
 
         if questInfo.isTrivial == nil then
-            questInfo.isTrivial  = IsQuestTrivial(questInfo.questID);
+            questInfo.isTrivial  = IsQuestTrivial(questInfo.questID);   --May not get the correct value during the first call
         end
 
         if questInfo.frequency == nil then
@@ -922,13 +1072,25 @@ do  -- Quest
             questInfo.frequency = 0;
         end
 
-        if questInfo.isMeta == nil then
-            questInfo.isMeta = IsMetaQuest(questInfo.questID);
+        if not questInfo.isMeta then
+            questInfo.isMeta = class == Enum_QuestClassification.Meta;
+        end
+
+        if questInfo.frequency == 2 then
+            questInfo.isWeekly = true;
+        end
+
+        if questInfo.frequency == 1 then
+            questInfo.isDaily = true;
+        end
+
+        if questInfo.isAccountQuest == nil then
+            questInfo.isAccountQuest = IsAccountQuest(questInfo.questID);
         end
 
         return questInfo
     end
-    API.CompleteQuestInfo = CompleteQuestInfo;
+    API.BuildQuestInfo = BuildQuestInfo;
 
     local function GetQuestIcon(questInfo)
         --QuestMapLogTitleButton_OnEnter
@@ -936,8 +1098,6 @@ do  -- Quest
         if not questInfo then
             return ICON_PATH.."IncompleteQuest.png";
         end
-
-        CompleteQuestInfo(questInfo);
 
         local file;
 
@@ -947,6 +1107,8 @@ do  -- Quest
                     file = "CompleteCampaignQuest.png";
                 elseif questInfo.isLegendary then
                     file = "CompleteLegendaryQuest.png";
+                elseif questInfo.isImportant then
+                    file = "CompleteImportantQuest.png";
                 else
                     file = "CompleteQuest.png";
                 end
@@ -955,6 +1117,8 @@ do  -- Quest
                     file = "IncompleteCampaignQuest.png";
                 elseif questInfo.isLegendary then
                     file = "IncompleteLegendaryQuest.png";
+                elseif questInfo.isImportant then
+                    file = "IncompleteImportantQuest.png";
                 elseif questInfo.isMeta then
                     file = "IncompleteMetaQuest.png";
                 else
@@ -963,10 +1127,12 @@ do  -- Quest
             end
 
         else
-            if questInfo.frequency == FREQUENCY_DAILY then
+            if questInfo.frequency == 1 then    --Enum.QuestFrequency.Daily
                 file = "DailyQuest.png";
-            elseif questInfo.frequency == FREQUENCY_WEELY then
+            elseif questInfo.frequency == 2 then    --Enum.QuestFrequency.Weekly
                 file = "WeeklyQuest.png";
+            elseif questInfo.frequency == 3 and not questInfo.isMeta then   ----Enum.QuestFrequency.ResetByScheduler
+                file = "RepeatableScheduler.png";    --TWW
             elseif  questInfo.repeatable then
                 file = "RepeatableQuest.png";
             else
@@ -974,10 +1140,10 @@ do  -- Quest
                     file = "AvailableCampaignQuest.png";
                 elseif questInfo.isLegendary then
                     file = "AvailableLegendaryQuest.png";
+                elseif questInfo.isImportant then
+                    file = "AvailableImportantQuest.png";
                 elseif questInfo.isMeta then
                     file = "AvailableMetaQuest.png";
-                elseif questInfo.frequency == FREQUENCY_SCHEDULER then
-                    file = "RepeatableScheduler.png";    --TWW
                 else
                     file = "AvailableQuest.png";
                 end
@@ -1056,10 +1222,12 @@ do  -- Quest
         ["QuestBG-Storm"] = "TWW-Storm.png",
         ["QuestBG-Web"] = "TWW-Web.png",
         ["QuestBG-1027"] = "TWW-Azeroth.png",
+        ["QuestBG-Rocket"] = "TWW-Rocket.png",
     };
 
     local function GetQuestBackgroundDecor(questID)
         local theme = GetQuestDetailsTheme(questID);
+        --print(theme.background)
         --theme = {background = "QuestBG-Web"};    --debug
         if theme and theme.background and BackgroundDecors[theme.background] then
             return DECOR_PATH..BackgroundDecors[theme.background]
@@ -1070,7 +1238,6 @@ do  -- Quest
 
     local MAX_QUESTS;
     local GetNumQuestLogEntries = C_QuestLog.GetNumQuestLogEntries;
-    local IsAccountQuest = C_QuestLog.IsAccountQuest;
     local GetQuestIDForLogIndex = C_QuestLog.GetQuestIDForLogIndex;
     local GetQuestInfo = C_QuestLog.GetInfo;
 
@@ -1107,7 +1274,7 @@ do  -- Quest
         return MAX_QUESTS - numQuests, MAX_QUESTS
     end
 
-    local GetItemInfoInstant = C_Item.GetItemInfoInstant or GetItemInfoInstant;
+    local GetItemInfoInstant = C_Item.GetItemInfoInstant;
     local select = select;
 
     local function IsQuestLoreItem(item)
@@ -1115,7 +1282,7 @@ do  -- Quest
         if not item then return end;
         local classID, subclassID = select(6, GetItemInfoInstant(item));
         --print(item, classID, subclassID)
-        return (classID == 12) or (classID == 0 and subclassID == 8) or (classID == 15 and subclassID == 4)
+        return (classID == 12) or (classID == 0 and subclassID == 8) or (classID == 15 and (subclassID == 0 or subclassID == 4))
     end
     API.IsQuestLoreItem = IsQuestLoreItem;
 
@@ -1307,11 +1474,11 @@ do  -- Quest
         local GetBestMapForUnit = C_Map.GetBestMapForUnit;
         function API.GetQuestLineInfo(questID)
             local uiMapID = GetBestMapForUnit("player");
-            local isQuestLineQuest, questLineName, questLineID, achievementID;
+            local hasQuestLineOnMap, questLineName, questLineID, achievementID;
             if uiMapID then
                 achievementID = C_QuestLog.GetZoneStoryInfo(uiMapID);
                 if achievementID then
-                    isQuestLineQuest = true;
+                    hasQuestLineOnMap = true;
                     local questLineInfo = C_QuestLine.GetQuestLineInfo(questID, uiMapID);
                     if questLineInfo then
                         questLineName = questLineInfo.questLineName;
@@ -1319,7 +1486,7 @@ do  -- Quest
                     end
                 end
             end
-            return isQuestLineQuest, questLineName, questLineID, uiMapID, achievementID
+            return hasQuestLineOnMap, questLineName, questLineID, uiMapID, achievementID
         end
     else
         function API.GetQuestLineInfo(questID)
@@ -1984,18 +2151,29 @@ end
 do  -- Chat Message
     local ADDON_ICON = "|TInterface\\AddOns\\DialogueUI\\Art\\Icons\\Logo:0:0|t";
     local function PrintMessage(header, msg)
+        if not msg then
+            msg = "";
+        end
         if StripHyperlinks then
             msg = StripHyperlinks(msg);
         end
         print(ADDON_ICON.."|cffffd100"..header.."  |cffffffff"..msg.."|r");
     end
     API.PrintMessage = PrintMessage;
+
+    function API.PrintQuestCompletionText(msg)
+        if msg == "" then return end;
+        if StripHyperlinks then
+            msg = StripHyperlinks(msg);
+        end
+        print(ADDON_ICON.." |cffffd100"..msg.."|r");
+    end
 end
 
 do  -- Tooltip
     local GetInventoryItemLink = GetInventoryItemLink;
     local GetInventoryItemID = GetInventoryItemID;
-    local GetItemInfoInstant = C_Item.GetItemInfoInstant or GetItemInfoInstant;
+    local GetItemInfoInstant = C_Item.GetItemInfoInstant;
     local GetQuestItemLink = GetQuestItemLink;
 
     local EQUIPLOC_SLOTID = {
@@ -2196,10 +2374,16 @@ do  -- Tooltip
     end
     API.GetRewardItemLevelDelta = GetRewardItemLevelDelta;
 
+    local function IsItemAnUpgrade(newLink)
+        local delta, isReady = GetMaxEquippedItemLevelDelta(newLink)
+        return (delta and delta > 0), isReady
+    end
+    API.IsItemAnUpgrade = IsItemAnUpgrade;
+    API.IsItemAnUpgrade_External = IsItemAnUpgrade;     --Override our API if Pawn is installed (see SupportedAddOns/Pawn.lua)
 
     local function IsRewardItemUpgrade(questInfoType, index)
-        local delta, isReady = GetRewardItemLevelDelta(questInfoType, index);
-        return (delta and delta > 0), isReady
+        local newLink = GetQuestItemLink(questInfoType, index);
+        return API.IsItemAnUpgrade_External(newLink)
     end
     API.IsRewardItemUpgrade = IsRewardItemUpgrade;
 
@@ -2601,9 +2785,11 @@ do  -- Items
     local IsCosmeticItem = C_Item.IsCosmeticItem or IsCosmeticItem or AlwaysFalse;
     local GetTransmogItemInfo = (C_TransmogCollection and C_TransmogCollection.GetItemInfo) or AlwaysFalse;
     local GetItemLevel = C_Item.GetDetailedItemLevelInfo or GetDetailedItemLevelInfo or AlwaysZero;
-    local GetItemInfo = C_Item.GetItemInfo or GetItemInfo;
+    local GetItemInfoInstant = C_Item.GetItemInfoInstant;
+    local GetItemInfo = C_Item.GetItemInfo;
     local IsDressableItem = C_Item.IsDressableItemByID or IsDressableItem or AlwaysFalse;
     local GetQuestItemLink = GetQuestItemLink;
+    local GetToyInfo = C_ToyBox and C_ToyBox.GetToyInfo or AlwaysNil;
 
     API.IsEquippableItem = IsEquippableItem;
     API.IsCosmeticItem = IsCosmeticItem;
@@ -2642,6 +2828,36 @@ do  -- Items
         end
     end
     API.GetQuestChoiceSellPrice = GetQuestChoiceSellPrice;
+
+    local function GetItemClassification(item)
+        if IsCosmeticItem(item) then
+            return "cosmetic"
+        end
+
+        local itemID, _, _, _, _, classID, subClassID = GetItemInfoInstant(item);
+
+        if API.IsContainerItem(itemID) then
+            return "container"
+        end
+
+        if classID == 2 or classID == 4 then
+            return "equipment"
+        elseif classID == 17 then
+            return "pet"
+        elseif classID == 15 then
+            if subClassID == 2 then
+                return "pet"
+            elseif subClassID == 5 then
+                return "mount"
+            end
+        end
+
+        local toyItemID = GetToyInfo(itemID);
+        if toyItemID then
+            return "toy"
+        end
+    end
+    API.GetItemClassification = GetItemClassification;
 end
 
 do  -- Keybindings
@@ -2703,7 +2919,7 @@ do  -- Inventory Bags Container
         if count and count > 0 then 
             for bagID = 0, NUM_BAG_SLOTS do
                 for slotID = 1, GetContainerNumSlots(bagID) do
-                    if(GetContainerItemID(bagID, slotID) == itemID) then
+                    if (GetContainerItemID(bagID, slotID) == itemID) then
                         return bagID, slotID
                     end
                 end
@@ -2713,7 +2929,7 @@ do  -- Inventory Bags Container
     API.GetItemBagPosition = GetItemBagPosition;
 
     local function GetBagQuestItemInfo(itemID)
-        --used in 
+        --used in Widget_QuestItemDisplay
         local bagID, slotID = GetItemBagPosition(itemID);
         if bagID and slotID then
             local containerInfo = GetContainerItemInfo(bagID, slotID);
@@ -2726,12 +2942,39 @@ do  -- Inventory Bags Container
                     itemInfo.questID = questInfo.questID;
                     itemInfo.isOnQuest = questInfo.isActive;
                 end
-                
                 return itemInfo
             end
         end
     end
     API.GetBagQuestItemInfo = GetBagQuestItemInfo;
+
+    local function GetItemLinkInBag(itemID)
+        if not itemID then return end;
+
+        local count = GetItemCount(itemID);
+        if count and count > 0 then
+            for bagID = 0, NUM_BAG_SLOTS do
+                for slotID = 1, GetContainerNumSlots(bagID) do
+                    if (GetContainerItemID(bagID, slotID) == itemID) then
+                        local containerInfo = GetContainerItemInfo(bagID, slotID);
+                        if containerInfo then
+                            return containerInfo.hyperlink
+                        end
+                    end
+                end
+            end
+
+            local GetInventoryItemID = GetInventoryItemID;
+            for slotID = 1, 19 do
+                if GetInventoryItemID("player", slotID) == itemID then
+                    return GetInventoryItemLink("player", slotID)
+                end
+            end
+
+            return string.format("|Hitem:%d|h", itemID)
+        end
+    end
+    API.GetItemLinkInBag = GetItemLinkInBag;
 end
 
 do  -- Spell
@@ -2747,7 +2990,7 @@ do  -- Spell
     end
     API.GetGlyphIDForSpell = GetGlyphIDForSpell;
 
-    if IS_TWW then
+    if addon.IsToCVersionEqualOrNewerThan(110000) then
         local GetSpellInfo_Table = C_Spell.GetSpellInfo;    --{"name", "rank", "iconID", "castTime", "minRange", "maxRange", "spellID", "originalIconID"}
 
         local function GetSpellName(spellID)
@@ -2969,12 +3212,18 @@ do  -- System
     API.RemoveQuestObjectiveTrackerQuestPopUp = RemoveQuestObjectiveTrackerQuestPopUp;
 end
 
+do  -- Zone -- Location -- Area
+    local function GetZoneName(areaID)
+        return C_Map.GetAreaInfo(areaID)
+    end
+    API.GetZoneName = GetZoneName;
+end
+
 do  -- Dev Tool
     local DEV_MODE = false;
 
     if not DEV_MODE then return end;
 
-    local IsAccountQuest = C_QuestLog.IsAccountQuest;
     local GetQuestIDForLogIndex = C_QuestLog.GetQuestIDForLogIndex;
     local GetQuestInfo = C_QuestLog.GetInfo;
 
@@ -2994,7 +3243,7 @@ do  -- Dev Tool
             if questID ~= 0 then
                 print(i, questID)
             end
-            if questID ~= 0 and not IsAccountQuest(questID) then
+            if questID ~= 0 and not API.IsAccountQuest(questID) then
                 local info = GetQuestInfo(i);
                 if info and (not (info.isHidden or info.isHeader)) and info.frequency == 1 then
                     numAllQuests = numAllQuests - 1;
@@ -3022,7 +3271,7 @@ do  -- Dev Tool
         for _, key in ipairs(QuestInfoFields) do
             TooltipAddInfo(tooltip, info, key)
         end
-        tooltip:AddDoubleLine("Account", tostring(IsAccountQuest(questID)));
+        tooltip:AddDoubleLine("Account", tostring(API.IsAccountQuest(questID)));
         tooltip:AddDoubleLine("isCalling", tostring(C_QuestLog.IsQuestCalling(questID)));
         tooltip:AddDoubleLine("QuestType", C_QuestLog.GetQuestType(questID));
         tooltip:AddDoubleLine("isRepeatable", tostring(C_QuestLog.IsRepeatableQuest(questID)));

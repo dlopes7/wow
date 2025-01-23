@@ -1,5 +1,5 @@
-## Interface: 110002
-## Version: R110002r11
+## Interface: 110007
+## Version: R110007r2
 ## Title: |cff00c0ffDejaCharacterStats|r
 ## Author: Dejablue, Kakjens, loudsoul
 ## Notes: Dejablue's improved character stats panel view.
@@ -36,4 +36,3 @@ DCSExpand.lua
 DCSDecimals.lua
 DCSDuraRepair.lua
 DCSAbout.lua
-# DCSProfiles.lua

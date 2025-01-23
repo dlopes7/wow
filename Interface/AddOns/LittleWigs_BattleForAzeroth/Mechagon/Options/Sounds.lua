@@ -33,26 +33,30 @@ BigWigs:AddSounds("HK-8 Aerial Oppression Unit", {
 })
 
 BigWigs:AddSounds("Tussle Tonks", {
-	[282801] = "long",
-	[283422] = "alert",
+	[282801] = {"info","long"},
+	[283422] = "alarm",
 	[285020] = "alert",
 	[285152] = "alert",
 	[285344] = "info",
 	[285388] = "alarm",
+	[1215065] = "alarm",
+	[1215102] = "info",
+	[1216431] = "long",
+	[1216443] = "long",
 })
 
 BigWigs:AddSounds("K.U.-J.0.", {
 	[291930] = "info",
 	[291946] = "alarm",
 	[291973] = "alert",
-	[294929] = "alert",
+	[294929] = {"alert","warning"},
 })
 
 BigWigs:AddSounds("Machinist's Garden", {
 	[285440] = "alarm",
 	[285454] = {"alert","info"},
+	[294853] = "long",
 	[294855] = "alert",
-	["activate_plant"] = "long",
 })
 
 BigWigs:AddSounds("King Mechagon", {
@@ -84,7 +88,7 @@ BigWigs:AddSounds("Operation: Mechagon Trash", {
 	[294324] = "alarm",
 	[294349] = "alert",
 	[294884] = "alarm",
-	[295169] = "alert",
+	[295169] = "long",
 	[297128] = "alarm",
 	[297133] = "info",
 	[299438] = "info",
@@ -113,4 +117,8 @@ BigWigs:AddSounds("Operation: Mechagon Trash", {
 	[301667] = "alarm",
 	[301681] = "alarm",
 	[303941] = "info",
+	[1215409] = "alarm",
+	[1215411] = "alert",
+	[1215412] = "info",
+	[1217819] = "alert",
 })

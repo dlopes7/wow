@@ -24,9 +24,27 @@ function S:OmniCD_Party_Icon()
 	end
 
 	local O = _G.OmniCD[1]
-	hooksecurefunc(O.Party, "SetBorder", function(_, icon)
-		self:CreateShadow(icon)
+
+	if not O.Party or not O.Party.AcquireIcon then
+		return
+	end
+
+	hooksecurefunc(O.Party, "AcquireIcon", function(_, barFrame, iconIndex, unitBar)
+		local icon = barFrame.icons[iconIndex]
+		if icon and not icon.__wind then
+			self:CreateShadow(icon)
+			icon.__wind = true
+		end
 	end)
+end
+
+local function updateBorderVisibility(self)
+	local parent = self:GetParent()
+	if not parent or not parent.__wind then
+		return
+	end
+
+	parent.__wind:SetShown(self:IsShown())
 end
 
 function S:OmniCD_Party_ExtraBars()
@@ -35,14 +53,26 @@ function S:OmniCD_Party_ExtraBars()
 	end
 
 	local O = _G.OmniCD[1]
-	hooksecurefunc(O.Party, "GetStatusBar", function(P, icon)
+
+	if not O.Party or not O.Party.AcquireStatusBar then
+		return
+	end
+
+	hooksecurefunc(O.Party, "AcquireStatusBar", function(P, icon)
 		if icon.statusBar then
 			if not icon.statusBar.__wind then
 				icon.statusBar.__wind = CreateFrame("Frame", nil, icon.statusBar)
 				icon.statusBar.__wind:SetFrameLevel(icon.statusBar:GetFrameLevel() - 1)
+
+				-- bind the visibility to the original borders
+				if icon.statusBar.borderTop then
+					hooksecurefunc(icon.statusBar.borderTop, "SetShown", updateBorderVisibility)
+					hooksecurefunc(icon.statusBar.borderTop, "Hide", updateBorderVisibility)
+					hooksecurefunc(icon.statusBar.borderTop, "Show", updateBorderVisibility)
+				end
 			end
 
-			local x, y = icon:GetSize()
+			local x = icon:GetSize()
 
 			icon.statusBar.__wind:ClearAllPoints()
 			icon.statusBar.__wind:SetPoint("TOPLEFT", icon.statusBar, "TOPLEFT", -x - 1, 0)

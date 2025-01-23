@@ -10,6 +10,7 @@ if L then
 	L.taener_duelmal = "泰纳·杜尔玛"
 	L.arathi_knight = "阿拉希骑士"
 	L.arathi_footman = "阿拉希步兵"
+	L.fervent_sharpshooter = "热诚的神射手"
 	L.devout_priest = "虔诚的牧师"
 	L.fanatical_conjuror = "狂热的咒术师"
 	L.lightspawn = "光耀之子"
@@ -19,4 +20,9 @@ if L then
 
 	L.baron_braunpyke_warmup_trigger = "他们已为使命捐躯。男爵，去证明你的实力吧。"
 	L.custom_on_autotalk_desc = "|cFFFF0000需要牧师或圣骑士。|r 自动选择与NPC的对话，赋予你“神圣烈焰的祝福”光环。"
+end
+
+L = BigWigs:NewBossLocale("Baron Braunpyke", "zhCN")
+if L then
+	--L.charges = "%d charges"
 end

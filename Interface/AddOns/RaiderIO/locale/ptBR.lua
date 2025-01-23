@@ -1,4 +1,4 @@
--- Generated from CurseForge on Thu Nov  7 09:26:47 UTC 2024
+-- Generated from CurseForge on Wed Jan 22 20:42:11 UTC 2025
 local ns = select(2, ...) ---@class ns @The addon namespace.
 
 if ns:IsSameLocale("ptBR") then
@@ -327,6 +327,22 @@ L["RAID_BOSS_ICC_6"] = "Rostorroto"
 L["RAID_BOSS_ICC_7"] = "Professor Putricida"
 L["RAID_BOSS_ICC_8"] = "Concílio dos Príncipes de Sangue"
 L["RAID_BOSS_ICC_9"] = "Rainha de Sangue Lana'thel"
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_LOU_1"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_LOU_2"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_LOU_3"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_LOU_4"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_LOU_5"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_LOU_6"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_LOU_7"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_LOU_8"] = ""--]] 
 L["RAID_BOSS_NP_1"] = "Ulgrax"
 L["RAID_BOSS_NP_2"] = "O Terror Sanguino"
 L["RAID_BOSS_NP_3"] = "Sikran"
@@ -389,6 +405,8 @@ L["RAID_ENCOUNTERS_DEFEATED_TITLE"] = "Encontros de Raide Derrotados"
 --[[Translation missing --]]
 --[[ L["RAID_FL"] = ""--]] 
 L["RAID_ICC"] = "Cidadela da Coroa de Gelo"
+--[[Translation missing --]]
+--[[ L["RAID_LOU"] = ""--]] 
 L["RAID_NP"] = "Palácio Nerub-ar"
 L["RAID_RS"] = "Santuário Rubi"
 L["RAID_TOTFW"] = "Trono dos Quatro Ventos"
@@ -402,6 +420,8 @@ L["RAIDERIO_MP_SCORE"] = "Raider.IO Pontuação de M+"
 L["RAIDERIO_MYTHIC_OPTIONS"] = "Opções do Addon do Raider.IO "
 L["RAIDING_DATA_HEADER"] = "Raider.IO Progresso de Raid"
 L["RAIDING_DB_MODULES"] = "Módulos de banco de dados de raide"
+--[[Translation missing --]]
+--[[ L["RECENT_RUNS_WITH_YOU"] = ""--]] 
 L["RECRUITMENT_DB_MODULES"] = "Módulos de banco de dados de recrutamento"
 L["RELOAD_LATER"] = "Recarregarei depois."
 L["RELOAD_NOW"] = "Recarregar agora."

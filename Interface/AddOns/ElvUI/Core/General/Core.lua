@@ -1451,6 +1451,18 @@ function E:DBConvertTWW()
 
 		E.db.tooltip.itemCount = db
 	end
+
+	local healthBreak = E.db.unitframe.colors.healthBreak
+	local onlyLow = healthBreak.onlyLow
+	if onlyLow ~= nil then
+		healthBreak.onlyLow = nil
+
+		if onlyLow then
+			healthBreak.threshold.bad = true
+			healthBreak.threshold.neutral = false
+			healthBreak.threshold.good = false
+		end
+	end
 end
 
 function E:DBConvertDev()

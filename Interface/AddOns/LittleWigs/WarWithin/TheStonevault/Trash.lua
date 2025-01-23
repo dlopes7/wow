@@ -47,8 +47,6 @@ if L then
 	L.custom_on_autotalk = CL.autotalk
 	L.custom_on_autotalk_desc = "|cFFFF0000Requires Warrior, Dwarf, or 25 skill in Khaz Algar Blacksmithing.|r Automatically select the NPC dialog option that grants your group the 'Imbued Iron Energy' aura."
 	L.custom_on_autotalk_icon = mod:GetMenuIcon("SAY")
-
-	L["425027_icon"] = "ability_earthen_pillar" -- change the icon of Seismic Wave so it doesn't match Ground Pound
 end
 
 --------------------------------------------------------------------------------
@@ -85,6 +83,7 @@ function mod:GetOptions()
 		{449154, "HEALER", "NAMEPLATE"}, -- Molten Mortar
 		-- Cursedforge Honor Guard
 		{448640, "NAMEPLATE"}, -- Shield Stampede
+		{428894, "TANK", "NAMEPLATE", "OFF"}, -- Stonebreaker Strike
 		-- Cursedforge Stoneshaper
 		{429427, "NAMEPLATE"}, -- Earth Burst Totem
 		-- Rock Smasher
@@ -181,6 +180,8 @@ function mod:OnBossEnable()
 	-- Cursedforge Honor Guard
 	self:RegisterEngageMob("CursedforgeHonorGuardEngaged", 214264)
 	self:Log("SPELL_CAST_START", "ShieldStampede", 448640)
+	self:Log("SPELL_CAST_START", "StonebreakerStrike", 428894)
+	self:Log("SPELL_CAST_SUCCESS", "StonebreakerStrikeSuccess", 428894)
 	self:Death("CursedforgeHonorGuardDeath", 214264)
 
 	-- Cursedforge Stoneshaper
@@ -240,13 +241,13 @@ end
 -- Earth Infused Golem
 
 function mod:EarthInfusedGolemEngaged(guid)
-	self:Nameplate(425027, 5.5, guid, 1016245) -- Seismic Wave, fileId for L["425027_icon"]
+	self:Nameplate(425027, 5.5, guid) -- Seismic Wave
 	self:Nameplate(425974, 13.4, guid) -- Ground Pound
 end
 
 function mod:SeismicWave(args)
-	self:Message(args.spellId, "purple", nil, L["425027_icon"])
-	self:Nameplate(args.spellId, 18.2, args.sourceGUID, 1016245) -- fileId for L["425027_icon"]
+	self:Message(args.spellId, "purple")
+	self:Nameplate(args.spellId, 18.2, args.sourceGUID)
 	self:PlaySound(args.spellId, "alarm")
 end
 
@@ -339,7 +340,7 @@ end
 -- Void Bound Despoiler
 
 function mod:VoidBoundDespoilerEngaged(guid)
-	self:Nameplate(459210, 5.4, guid) -- Shadow Claw
+	self:Nameplate(459210, 3.2, guid) -- Shadow Claw
 	self:Nameplate(426771, 6.6, guid) -- Void Outburst
 end
 
@@ -351,7 +352,7 @@ end
 
 function mod:ShadowClaw(args)
 	self:Message(args.spellId, "purple")
-	self:Nameplate(args.spellId, 13.3, args.sourceGUID)
+	self:Nameplate(args.spellId, 22.7, args.sourceGUID)
 	self:PlaySound(args.spellId, "alert")
 end
 
@@ -515,6 +516,7 @@ end
 
 function mod:CursedforgeHonorGuardEngaged(guid)
 	self:Nameplate(448640, 6.8, guid) -- Shield Stampede
+	self:Nameplate(428894, 14.4, guid) -- Stonebreaker Strike
 end
 
 do
@@ -528,6 +530,22 @@ do
 		end
 		self:Nameplate(args.spellId, 18.2, args.sourceGUID)
 	end
+end
+
+do
+	local prev = 0
+	function mod:StonebreakerStrike(args)
+		self:Nameplate(args.spellId, 0, args.sourceGUID)
+		if args.time - prev > 2 then
+			prev = args.time
+			self:Message(args.spellId, "purple")
+			self:PlaySound(args.spellId, "alert")
+		end
+	end
+end
+
+function mod:StonebreakerStrikeSuccess(args)
+	self:Nameplate(args.spellId, 15.2, args.sourceGUID)
 end
 
 function mod:CursedforgeHonorGuardDeath(args)

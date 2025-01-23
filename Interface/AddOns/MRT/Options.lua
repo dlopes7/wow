@@ -74,17 +74,20 @@ Options:SetScript("OnShow",function(self)
 	end
 end)
 
-function Options:SetPage(page)
-	if Options.CurrentFrame then
+function Options:SetPage(page,dontreload)
+	local isSamePage = Options.CurrentFrame == page
+	if Options.CurrentFrame and (not dontreload or not isSamePage) then
 		Options.CurrentFrame:Hide()
 	end
 	Options.CurrentFrame = page
 
-	if Options.CurrentFrame.AdditionalOnShow then
+	if Options.CurrentFrame.AdditionalOnShow and (not dontreload or not isSamePage) then
 		Options.CurrentFrame:AdditionalOnShow()
 	end
 
-	Options.CurrentFrame:Show()
+	if (not dontreload or not isSamePage) then
+		Options.CurrentFrame:Show()
+	end
 
 	if Options.CurrentFrame.isWide and Options.nowWide ~= Options.CurrentFrame.isWide then
 		local frameWidth = type(Options.CurrentFrame.isWide)=='number' and Options.CurrentFrame.isWide or 850
@@ -118,6 +121,7 @@ function MRT.Options:Add(moduleName,frameName)
 	local self = CreateFrame("Frame",OptionsFrameName..moduleName,Options)
 	self:SetSize(Options.Width-Options.ListWidth,Options.Height-16)
 	self:SetPoint("TOPLEFT",Options.ListWidth,-16)
+	self.moduleName = moduleName
 	
 	local pos = #Options.Frames + 1
 	Options.modulesList.L[pos] = frameName or moduleName
@@ -134,11 +138,28 @@ end
 
 function MRT.Options:AddIcon(moduleName,icon)
 	Options.modulesList.IconsRight = Options.modulesList.IconsRight or {}
-	for i=1,#Options.modulesList.L do
-		if Options.modulesList.L[i] == moduleName then
+	for i=1,#Options.Frames do
+		if Options.Frames[i].moduleName == moduleName then
 			Options.modulesList.IconsRight[i] = icon
 			break
 		end
+	end
+	if Options:IsShown() then
+		Options.modulesList:Update()
+	end
+end
+function MRT.Options:RemoveIcon(moduleName)
+	if not Options.modulesList.IconsRight then
+		return
+	end
+	for i=1,#Options.Frames do
+		if Options.Frames[i].moduleName == moduleName then
+			Options.modulesList.IconsRight[i] = nil
+			break
+		end
+	end
+	if Options:IsShown() then
+		Options.modulesList:Update()
 	end
 end
 
@@ -448,6 +469,8 @@ MRT.F.menuTable = {
 { text = L.minimapmenu, isTitle = true, notCheckable = true, notClickable = true },
 { text = L.minimapmenuset, func = MRT.Options.Open, notCheckable = true, keepShownOnClick = true, },
 { text = " ", isTitle = true, notCheckable = true, notClickable = true },
+{ text = " ", isTitle = true, notCheckable = true, notClickable = true },
+{ text = "Profiling", func = function() CloseDropDownMenus() ELib.ScrollDropDown.Close() MRT.F:ProfilingWindow() end, notCheckable = true },
 { text = " ", isTitle = true, notCheckable = true, notClickable = true },
 { text = L.minimapmenuclose, func = function() CloseDropDownMenus() ELib.ScrollDropDown.Close() end, notCheckable = true },
 }
@@ -926,7 +949,7 @@ function OptionsFrame:AddWeb()
 	
 		local X,Y = -0,-0
 		local function l(x1,y1,x2,y2)
-			line = sf.c:CreateLine(nil,"ARTWORK",nil,2)
+			local line = sf.c:CreateLine(nil,"ARTWORK",nil,2)
 			line:SetColorTexture(1,1,1,.4)
 			line:SetStartPoint("TOPRIGHT",x1+X,y1+Y)
 			line:SetEndPoint("TOPRIGHT",x2+X,y2+Y)

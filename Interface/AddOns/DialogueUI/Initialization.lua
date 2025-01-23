@@ -1,5 +1,5 @@
-local VERSION_TEXT = "v0.5.1";
-local VERSION_DATE = 1730600000;
+local VERSION_TEXT = "v0.6.1";
+local VERSION_DATE = 1737090000;
 
 
 local addonName, addon = ...
@@ -20,6 +20,7 @@ local DefaultValues = {
     FontNumber = "default",
     FrameOrientation = 2,                       --1:Left  2:Right(Default)
     HideUI = true,
+        ShowChatWindow = true,
         HideOutlineSparkles = true,
         HideUnitNames = false,
     ShowCopyTextButton = false,
@@ -36,12 +37,16 @@ local DefaultValues = {
     CameraMovement2MaintainPosition = true,
     CameraMovementMountedCamera = true,
     CameraMovementDisableInstance = false,
+    CameraZoomMultiplier = 1,                   --The smaller the further
 
     InputDevice = 1,                            --1:K&M  2:XBOX  3.PS  4.Mobile
+    UseCustomBindings = false,
     PrimaryControlKey = 1,                      --1: Space  2:Interact Key
     ScrollDownThenAcceptQuest = false,
     RightClickToCloseUI = true,
     CycleRewardHotkeyEnabled = false,           --Press Tab to cycle through choosable rewards
+    DisableHotkeyForTeleport = false,           --Disable gossip hotkey when select teleportation
+    GamePadClickFirstObject = false,            --If true, when starting a new interaction, pressing PAD1 will click the first object
     EmulateSwipe = true,
     MobileDeviceMode = false,
 
@@ -50,14 +55,18 @@ local DefaultValues = {
     QuestItemDisplay = false,
         QuestItemDisplayHideSeen = false,
         QuestItemDisplayDynamicFrameStrata = false,
+    QuickSlotQuestReward = false,
     AutoCompleteQuest = false,
-        PressKeyToOpenContainer = true,
+        QuickSlotUseHotkey = true,
     AutoSelectGossip = false,
     ForceGossip = false,
+        ForceGossipSkipGameObject = false,
     ShowDialogHint = true,
     DisableDUIInInstance = false,
 
     NameplateDialogEnabled = false,             --Experimental. Not in the settings
+
+    DisableUIMotion = false,
 
     TTSEnabled = false,
         TTSUseHotkey = true,    --Default key R
@@ -110,6 +119,7 @@ local TutorialFlags = {
     --Saved in the DB, prefix: Tutorial_
     --e.g. Tutorial_OpenSettings = true
     "OpenSettings",
+    "WarbandCompletedQuest",
 };
 
 local function GetDBValue(dbKey)
@@ -170,6 +180,8 @@ local function LoadDatabase()
     InheritExistingValues = nil;
 
     LoadTutorials();
+
+    addon.CallbackRegistry:Trigger("ADDON_LOADED", DB);
 end
 
 local function SetTutorialRead(tutorialFlag)

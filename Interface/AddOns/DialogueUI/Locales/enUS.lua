@@ -50,7 +50,7 @@ L["Different Item Types Alert"] = "The item types are different!";
 L["Click To Read"] = "Left Click to Read";
 L["Item Level"] = STAT_AVERAGE_ITEM_LEVEL or "Item Level";
 L["Gossip Quest Option Prepend"] = "(Quest)";   --Some gossip options start with blue (Quest), we prioritize them when sorting. See GOSSIP_QUEST_OPTION_PREPEND
-L["TTS Button Tooltip"] = "Left Click: Play/Stop Reading.\nRight Click: Toggle Auto Play";
+L["TTS Button Tooltip"] = "Left Click: Play/Stop Reading.\nRight Click: Toggle Auto Play.";
 L["Item Is An Upgrade"] = "This item is an upgrade for you";
 L["Identical Stats"] = "The two items have the same stats";   --Two items provide the same stats
 L["Quest Completed On Account"] = (ACCOUNT_COMPLETED_QUEST_NOTICE or "Your Warband previously completed this quest.");
@@ -59,6 +59,8 @@ L["Campaign Quest"] = TRACKER_HEADER_CAMPAIGN_QUESTS or "Campaign";
 L["Click To Open BtWQuests"] = "Click to view this quest in BtWQuests window.";
 L["Story Progress"] = STORY_PROGRESS or "Story Progress";
 L["Quest Complete Alert"] = QUEST_WATCH_POPUP_QUEST_COMPLETE or "Quest Complete!";
+L["Item Equipped"] = "Equipped";
+L["Collection Collected"] = COLLECTED or "Collected";
 
 --String Format
 L["Format Reputation Reward Tooltip"] = QUEST_REPUTATION_REWARD_TOOLTIP or "Awards %d reputation with the %s";
@@ -127,6 +129,9 @@ L["Orientation Left"] = HUD_EDIT_MODE_SETTING_BAGS_DIRECTION_LEFT or "Left";
 L["Orientation Right"] = HUD_EDIT_MODE_SETTING_BAGS_DIRECTION_RIGHT or "Right";
 L["Hide UI"] = "Hide UI";
 L["Hide UI Desc"] = "Fade out the game UI when you interact with an NPC.";
+L["Show Chat Window"] = "NPC Chat Window";
+L["Show Chat Window Left Desc"] = "Show an NPC chat window on the bottom left of your screen.";
+L["Show Chat Window Right Desc"] = "Show an NPC chat window on the bottom right of your screen.";
 L["Hide Unit Names"] = "Hide Unit Names";
 L["Hide Unit Names Desc"] = "Hide players and other NPC names when you interact with an NPC.";
 L["Hide Sparkles"] = "Hide Outline Sparkles";
@@ -161,6 +166,8 @@ L["Disable Camera Movement Instance"] = "Disable In Instance";
 L["Disable Camera Movement Instance Desc"] = "Disable camera movement while in dungeon or raid.";
 L["Maintain Offset While Mounted"] = "Maintain Offset While Mounted";
 L["Maintain Offset While Mounted Desc"] = "Attempt to maintain your character's position on the screen while mounted.\n\nEnabling this option may overcompensate the horizontal offset for large-sized mounts.";
+L["Camera Zoom Multiplier"] = "Zoom Multiplier";
+L["Camera Zoom Multiplier Desc"] = "The smaller the value, the closer the camera moves to the target.\n\nThe distance is also affected by the target's size.";
 
 L["Input Device"] = "Input Device";
 L["Input Device Desc"] = "Affects hotkey icons and UI layout.";
@@ -171,6 +178,8 @@ L["Input Device PlayStation"] = "PlayStation";
 L["Input Device PlayStation Tooltip"] = "Confirm Button: [KEY:PS:PAD1]\nCancel Button: [KEY:PS:PAD2]";
 L["Input Device Switch"] = "Switch";
 L["Input Device Switch Tooltip"] = "Confirm Button: [KEY:SWITCH:PAD1]\nCancel Button: [KEY:SWITCH:PAD2]";
+L["Use Custom Bindings"] = "Use Custom Bindings";
+L["Use Custom Bindings Desc"] = "Enable this option to use your own bindings.";
 L["Primary Control Key"] = "Confirm Button";
 L["Primary Control Key Desc"] = "Press this key to select the first available option like Accept Quest."
 L["Press Button To Scroll Down"] = "Press Button To Scroll Down";
@@ -179,12 +188,16 @@ L["Right Click To Close UI"] = "Right Click To Close UI";
 L["Right Click To Close UI Desc"] = "Right click on the dialogue UI to close it.";
 L["Press Tab To Select Reward"] = "Press Tab To Select Reward";
 L["Press Tab To Select Reward Desc"] = "Press [KEY:PC:TAB] to cycle through choosable rewards when you turn in the quest.";
+L["Disable Hokey For Teleport"] = "Disable Hokey For Teleport";
+L["Disable Hokey For Teleport Desc"] = "Disable the hotkeys when you are choosing a teleport destination.";
 L["Experimental Features"] = "Experimental";
 L["Emulate Swipe"] = "Emulate Swipe Gesture";
 L["Emulate Swipe Desc"] = "Scroll the dialogue UI up/down by clicking and dragging on the window.";
 L["Mobile Device Mode"] = "Mobile Device Mode";
 L["Mobile Device Mode Desc"] = "Experimental Feature:\n\nIncreases UI and font size to make texts readable on small-screen devices.";
 L["Mobile Device Mode Override Option"] = "This option currently has no effect because you have enabled \"Mobile Device Mode\" in Control.";
+L["GamePad Click First Object"] = "Click First Option";
+L["GamePad Click First Object Desc"] = "When starting a new interaction with an NPC, press the Confirm Button to click the first dialogue option.";
 
 L["Key Space"] = "Space";
 L["Key Interact"] = "Interact";
@@ -206,15 +219,22 @@ L["Quest Item Display Hide Seen Desc"] = "Ignore items that have been discovered
 L["Quest Item Display Await World Map"] = " Await World Map";
 L["Quest Item Display Await World Map Desc"] = "When you open the World Map, temporarily hide the Quest Item Display and pause the auto close timer.";
 L["Quest Item Display Reset Position Desc"] = "Reset the window's position.";
+L["Valuable Reward Popup"] = "Valuable Reward Popup";
+L["Valuable Reward Popup Desc"] = "When you receive a valuable item like an upgrade, a chest, or an uncollected cosmetic item, show a button that allows you to use it directly.";
 L["Auto Complete Quest"] = "Auto Complete Quest";
 L["Auto Complete Quest Desc"] = "Auto complete the following quest then display the dialogue and rewards in a separate window. If the rewards contain a chest, you can click to open it.\n\n- Candy Bucket (Hallow's End)\n- Khaz Algar Weekly";
-L["Press Key To Open Container"] = "Press Space To Open Container";
-L["Press Key To Open Container Desc"] = "Press [KEY:PC:SPACE] to open the rewarded container when you are out of combat.";
+L["Press Key To Use Item"] = "Press Button To Use";
+L["Press Key To Use Item Desc PC"] = "Press [KEY:PC:SPACE] to use the item when you are out of combat.";
+L["Press Key To Use Item Desc Xbox"] = "Press [KEY:XBOX:PAD3] to use the item when you are out of combat.";
+L["Press Key To Use Item Desc PlayStation"] = "Press [KEY:PS:PAD3] to use the item when you are out of combat.";
+L["Press Key To Use Item Desc Switch"] = "Press [KEY:SWITCH:PAD3] to use the item when you are out of combat.";
 L["Auto Select"] = "Auto Select";
 L["Auto Select Gossip"] = "Auto Select Option";
 L["Auto Select Gossip Desc"] = "Automatically select the best dialogue option when interacting with certain NPC.";
 L["Force Gossip"] = "Force Gossip";
 L["Force Gossip Desc"] = "By default, the game sometimes automatically selects the first option without showing the dialog. By enabling Force Gossip, the dialogue will become visible.";
+L["Skip GameObject"] = "Skip GameObject";   --Sub-option of Force Gossip
+L["Skip GameObject Desc"] = "Dot not reveal the hidden dialogue of GameObject like Crafting Tables.";
 L["Show Hint"] = "Show Hint";
 L["Show Hint Desc"] = "Add a button that selects the correct answer if possible.\n\nCurrently only supports the quiz during Timewalking.";
 L["Nameplate Dialog"] = "Display Dialogue On Nameplate";
@@ -222,6 +242,9 @@ L["Nameplate Dialog Desc"] = "Display the dialogue on the NPC nameplate if they 
 L["Compatibility"] = "Compatibility";
 L["Disable DUI In Instance"] = "Use WoW's Default UI In Instance";
 L["Disable DUI In Instance Desc"] = "Disable Dialogue UI and use WoW's default one when you are in dungeon or raid.\n\nEnable this option if you cannot interact with an NPC that allows you to start or skip boss encounters.";
+
+L["Disable UI Motions"] = "Reduce UI Movements";
+L["Disable UI Motions Desc"] = "Reduce UI movements such as Unfolding UI or Nudging Button Text.";
 
 L["TTS"] = TEXT_TO_SPEECH or "Text To Speech";
 L["TTS Desc"] = "Read dialogue text out loud by clicking the button on the top left of the UI.";
@@ -277,11 +300,39 @@ L["BookUI TTS Voice Desc"] = "Use this voice for readable objects:";
 L["BookUI TTS Click To Read"] = "Click Paragraph To Read";
 L["BookUI TTS Click To Read Desc"] = "Click on a paragraph to read it.\n\nClick on a paragraph currently being read to stop reading.";
 
+--Keybinding Action
+L["Bound To"] = "Bound to: ";
+L["Hotkey Colon"] = "Hotkey: ";
+L["Not Bound"] = NOT_BOUND or "Not Bound";
+L["Action Confirm"] = "Confirm";
+L["Action Settings"] = "Toggle Settings";
+L["Action Option1"] = "Option 1";
+L["Action Option2"] = "Option 2";
+L["Action Option3"] = "Option 3";
+L["Action Option4"] = "Option 4";
+L["Action Option5"] = "Option 5";
+L["Action Option6"] = "Option 6";
+L["Action Option7"] = "Option 7";
+L["Action Option8"] = "Option 8";
+L["Action Option9"] = "Option 9";
+
 --Tutorial
 L["Tutorial Settings Hotkey"] = "Press [KEY:PC:F1] to toggle Settings";     --Shown when interacting with an NPC with this addon for the first time
 L["Tutorial Settings Hotkey Console"] = "Press [KEY:PC:F1] or [KEY:CONSOLE:MENU] to toggle Settings";   --Use this if gamepad enabled
-L["Instuction Open Settings"] = "To open Settings, press [KEY:PC:F1] while you are interacting with an NPC.";    --Used in Game Menu - AddOns
-L["Instuction Open Settings Console"] = "To open Settings, press [KEY:PC:F1] or [KEY:CONSOLE:MENU] while you are interacting with an NPC.";
+L["Instruction Open Settings"] = "You can open settings by pressing [KEY:PC:F1] when the dialogue window is active.";    --Used in Game Menu - AddOns
+L["Instruction Open Settings Console"] = "You can open settings by pressing [KEY:PC:F1] or [KEY:CONSOLE:MENU] when the dialogue window is active.";
+L["Instruction Open Settings Keybind Format"] = "You can open settings by pressing [%s] when the dialogue window is active.";
+L["Instruction Open Settings No Keybind"] = "You did not set a keybind to open settings.";
+L["HelpTip Warband Completed Quest"] = "This icon indicates the quest has been completed by your Warband.";
+L["Got It"] = HELP_TIP_BUTTON_GOT_IT or "Got It";
+L["Open Settings"] = "Open Settings";
+
+--AddOn Compatibility for Language Translator
+L["Translator"] = "Translator";
+L["Translator Source"] = "Source: ";
+L["Translator No Quest Data Format"] = "No entry found for [Quest: %s]";
+L["Translator Click To Hide Translation"] = "Click to hide the translation";
+L["Translator Click To Show Translation"] = "Click to show the translation";
 
 --DO NOT TRANSLATE
 L["Abbrev Breakpoint 1000"] = FIRST_NUMBER_CAP_NO_SPACE or "K";     --1,000 = 1K

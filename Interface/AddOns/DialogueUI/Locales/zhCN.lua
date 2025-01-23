@@ -58,6 +58,9 @@ L["New Quest Available"] = "发现新任务";
 L["Campaign Quest"] =  "战役";
 L["Click To Open BtWQuests"] = "点击以在BtWQuests窗口中查看此任务。";
 L["Story Progress"] = "故事进度";
+L["Quest Complete Alert"] = "任务完成！";
+L["Item Equipped"] = "已装备";
+L["Collection Collected"] = "已收集";
 
 --String Format
 L["Format Reputation Reward Tooltip"] = "在%2$s中的声望提高%1$d点";
@@ -126,6 +129,9 @@ L["Orientation Left"] = "左侧";
 L["Orientation Right"] = "右侧";
 L["Hide UI"] = "隐藏界面";
 L["Hide UI Desc"] = "与NPC交互时隐藏其他界面。";
+L["Show Chat Window"] = "NPC聊天窗口";
+L["Show Chat Window Left Desc"] = "在屏幕左下角显示NPC聊天窗口。";
+L["Show Chat Window Right Desc"] = "在屏幕右下角显示NPC聊天窗口。";
 L["Hide Unit Names"] = "隐藏单位姓名";
 L["Hide Unit Names Desc"] = "与NPC交互时隐藏其他玩家和NPC的名字。";
 L["Hide Sparkles"] = "隐藏人物描边与闪光";
@@ -160,6 +166,8 @@ L["Disable Camera Movement Instance"] = "副本中关闭";
 L["Disable Camera Movement Instance Desc"] = "在副本中关闭镜头运动。";
 L["Maintain Offset While Mounted"] = "在骑乘时保持水平位移";
 L["Maintain Offset While Mounted Desc"] = "在你上坐骑后尝试保持你的角色在屏幕上的位置不变。\n\n勾选此选项可能会导致在你使用体形比较大的坐骑时镜头出现过度补偿。";
+L["Camera Zoom Multiplier"] = "缩放倍数";
+L["Camera Zoom Multiplier Desc"] = "数值越小摄像机与目标距离越近。\n\n目标模型大小也会影响摄像机的距离。";
 
 L["Input Device"] = "输入设备";
 L["Input Device Desc"] = "此选项影响快捷键图标和界面布局。";
@@ -170,6 +178,8 @@ L["Input Device PlayStation"] = "PlayStation";
 L["Input Device PlayStation Tooltip"] = "确认键： [KEY:PS:PAD1]\n取消键： [KEY:PS:PAD2]";
 L["Input Device Switch"] = "Switch";
 L["Input Device Switch Tooltip"] = "确认键： [KEY:SWITCH:PAD1]\n取消键： [KEY:SWITCH:PAD2]";
+L["Use Custom Bindings"] = "使用自定义按键";
+L["Use Custom Bindings Desc"] = "勾选此选项以启用自定义按键。";
 L["Primary Control Key"] = "确认键";
 L["Primary Control Key Desc"] = "按下此按钮将自动选择第一个最佳选项，例如接受任务。"
 L["Press Button To Scroll Down"] = "按确认键来向下滚屏";
@@ -178,12 +188,16 @@ L["Right Click To Close UI"] = "右键关闭界面";
 L["Right Click To Close UI Desc"] = "在对话界面上按右键即可关闭窗口。";
 L["Press Tab To Select Reward"] = "按Tab键选择任务奖励";
 L["Press Tab To Select Reward Desc"] = "在你交任务时，按[KEY:PC:TAB]在可选奖励之间循环。";
+L["Disable Hokey For Teleport"] = "使用传送服务时禁用快捷键";
+L["Disable Hokey For Teleport Desc"] = "在与提供传送服务的NPC交互时禁用快捷键。";
 L["Experimental Features"] = "实验性";
 L["Emulate Swipe"] = "模拟滑动手势";
 L["Emulate Swipe Desc"] = "在对话界面上点击并拖拽来滚动页面。";
 L["Mobile Device Mode"] = "移动设备模式";
 L["Mobile Device Mode Desc"] = "实验性功能：\n\n增大界面和字号来让文本在小屏幕设备上也可清晰分辨。";
 L["Mobile Device Mode Override Option"] = "此选项暂时不起作用，因为你已在控制选项里开启“移动设备”模式";
+L["GamePad Click First Object"] = "点击第一个选项";
+L["GamePad Click First Object Desc"] = "当你与一个新的NPC交互时，按确认键来直接点击第一个对话选项。";
 
 L["Key Space"] = "空格";
 L["Key Interact"] = "交互键";
@@ -205,15 +219,22 @@ L["Quest Item Display Hide Seen Desc"] = "忽略你账号上角色见过的物�
 L["Quest Item Display Await World Map"] = " 等待世界地图";
 L["Quest Item Display Await World Map Desc"] = "当你打开世界地图时，将正在显示的任务物品说明隐藏并暂停自动关闭倒计时。";
 L["Quest Item Display Reset Position Desc"] = "重置窗口位置。";
+L["Valuable Reward Popup"] = "有价值物品弹窗";
+L["Valuable Reward Popup Desc"] = "当你获得一件有价值的物品时（例如更好的装备，可以打开的宝箱或是未收集的藏品），显示一个按钮让你可以直接使用它。";
 L["Auto Complete Quest"] = "自动完成任务";
 L["Auto Complete Quest Desc"] = "自动完成以下任务，然后将任务文本和奖励显示在一个独立的窗口中。如果任务奖励中有宝箱，你可以鼠标点击来打开它。\n\n- 糖罐 (万圣节)\n- 地心之战周常任务";
-L["Press Key To Open Container"] = "按空格打开宝箱";
-L["Press Key To Open Container Desc"] = "非战斗时按 [KEY:PC:SPACE] 打开宝箱。";
+L["Press Key To Use Item"] = "按键使用物品";
+L["Press Key To Use Item Desc PC"] = "非战斗时按 [KEY:PC:SPACE] 使用物品。";
+L["Press Key To Use Item Desc Xbox"] = "非战斗时按 [KEY:XBOX:PAD3] 使用物品。";
+L["Press Key To Use Item Desc PlayStation"] = "非战斗时按 [KEY:PS:PAD3] 使用物品。";
+L["Press Key To Use Item Desc Switch"] = "非战斗时按 [KEY:SWITCH:PAD3] 使用物品。";
 L["Auto Select"] = "自动选择";
 L["Auto Select Gossip"] = "自动选择对话选项";
 L["Auto Select Gossip Desc"] = "当你与特定NPC交互时自动选择最合适的选项。";
 L["Force Gossip"] = "强制显示对话";
 L["Force Gossip Desc"] = "在游戏默认状态下，系统有时会自动选择第一个选项且不显示对话界面。勾选强制显示对话将显示这些被隐藏的内容。";
+L["Skip GameObject"] = "忽略游戏物体";   --Sub-option of Force Gossip
+L["Skip GameObject Desc"] = "不显示来自游戏物体（例如专业工作台）的隐藏对话。";
 L["Show Hint"] = "显示正确答案";
 L["Show Hint Desc"] = "增加一个选项来自动选择正确的对话答案。\n\n目前仅支持时空漫游期间的问答日常。";
 L["Nameplate Dialog"] = "在姓名版上显示对话";
@@ -221,6 +242,9 @@ L["Nameplate Dialog Desc"] = "将不提供任何选项的对话显示在目标�
 L["Compatibility"] = "兼容性";
 L["Disable DUI In Instance"] = "在副本内使用游戏原始对话界面";
 L["Disable DUI In Instance Desc"] = "当你进入地下城或团本时使用游戏原始对话界面。\n\n推荐勾选此选项如果你无法与开始或跳过Boss战的NPC交互。";
+
+L["Disable UI Motions"] = "减少界面动画";
+L["Disable UI Motions Desc"] = "减少界面动画例如主界面展开和按钮文字右移。";
 
 L["TTS"] = TEXT_TO_SPEECH or "文字转语音";
 L["TTS Desc"] = "点击位于任务界面左上角的按钮来朗读文本。\n\n语音，音量大小和速度将跟随魔兽自带的文字转语音设置。";
@@ -276,11 +300,31 @@ L["BookUI TTS Voice Desc"] = "使用此声音朗读书籍：";
 L["BookUI TTS Click To Read"] = "点击以朗读段落";
 L["BookUI TTS Click To Read Desc"] = "左键点击某个段落来朗读它。\n\n左键点击正在被朗读的段落即可停止。";
 
+--Keybinding Action
+L["Bound To"] = "绑定到：";
+L["Hotkey Colon"] = "快捷键：";
+L["Not Bound"] = "未绑定";
+L["Action Confirm"] = "确认键";
+L["Action Settings"] = "打开/关闭设置界面";
+L["Action Option1"] = "对话选项 1";
+L["Action Option2"] = "对话选项 2";
+L["Action Option3"] = "对话选项 3";
+L["Action Option4"] = "对话选项 4";
+L["Action Option5"] = "对话选项 5";
+L["Action Option6"] = "对话选项 6";
+L["Action Option7"] = "对话选项 7";
+L["Action Option8"] = "对话选项 8";
+L["Action Option9"] = "对话选项 9";
+
 --Tutorial
 L["Tutorial Settings Hotkey"] = "按下 [KEY:PC:F1] 来打开或关闭设置";
 L["Tutorial Settings Hotkey Console"] = "按下 [KEY:PC:F1] 或 [KEY:CONSOLE:MENU] 来打开或关闭设置";   --Use this if gamepad enabled
-L["Instuction Open Settings"] = "在与NPC交互时按下 [KEY:PC:F1] 来打开设置";    --Used in Game Menu - AddOns
-L["Instuction Open Settings Console"] = "在与NPC交互时按下 [KEY:PC:F1] 或 [KEY:CONSOLE:MENU] 来打开设置";
+L["Instruction Open Settings"] = "在对话界面可见时按 [KEY:PC:F1] 来打开设置";    --Used in Game Menu - AddOns
+L["Instruction Open Settings Console"] = "在对话界面可见时按 [KEY:PC:F1] 或 [KEY:CONSOLE:MENU] 来打开设置";
+L["Instruction Open Settings Keybind Format"] = "在对话界面可见时按 [%s] 来打开设置";
+L["Instruction Open Settings No Keybind"] = "你未设定打开设置界面的快捷键";
+L["HelpTip Warband Completed Quest"] = "这个图标表示你战团里的角色完成过此任务。";
+L["Got It"] = "我悟了";     --HELP_TIP_BUTTON_GOT_IT
 
 --DO NOT TRANSLATE
 L["Abbrev Breakpoint 1000"] = "千";     --1,000 = 1K

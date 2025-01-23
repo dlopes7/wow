@@ -1,5 +1,5 @@
 --
--- Copyright (c) 2024 by Ludicrous Speed, LLC
+-- Copyright (c) 2025 by Ludicrous Speed, LLC
 -- All rights reserved.
 --
 local _, ns = ...

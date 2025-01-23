@@ -394,6 +394,7 @@ do
     ---@field public previousScoreTiersSimple table<number, ScoreTierSimple> @DEPRECATED
     ---@field public CUSTOM_TITLES table<number, RecruitmentTitle>
     ---@field public CLIENT_CHARACTERS table<string, CharacterCollection>
+    ---@field public CLIENT_RECENT_CHARACTERS table<string, RecentCharacterCollection>
     ---@field public CLIENT_COLORS table<number, ScoreColor>
     ---@field public CLIENT_CONFIG ClientConfig
     ---@field public GUILD_BEST_DATA table<string, GuildCollection>
@@ -907,8 +908,15 @@ do
     ---@field public runs CharacterMythicKeystoneRun[]
 
     ---@return table<string, CharacterCollection>
-    function ns:GetClientData()
+    function ns:GetClientCharactersData()
         return ns.CLIENT_CHARACTERS
+    end
+
+    ---@alias RecentCharacterCollection unknown[]
+
+    ---@return table<string, RecentCharacterCollection>
+    function ns:GetClientRecentCharactersData()
+        return ns.CLIENT_RECENT_CHARACTERS
     end
 
     ---@class ScoreColor
@@ -2292,6 +2300,19 @@ do
         return fallback
     end
 
+    ---@param data LfgEntryData|LfgSearchResultData
+    ---@return number? activityID
+    function util:GetLFDActivityID(data)
+        -- TODO `pre-11.0.7`
+        if type(data.activityID) == "number" then
+            return data.activityID
+        end
+        -- TODO `11.0.7`
+        if type(data.activityIDs) == "table" then
+            return data.activityIDs[1]
+        end
+    end
+
     ---@class LFDStatusResult
     ---@field dungeon Dungeon
     ---@field resultID number
@@ -2311,25 +2332,31 @@ do
         }
         local index = 0
         local activityInfo = C_LFGList.GetActiveEntryInfo()
-        if activityInfo and activityInfo.activityID then
-            temp.dungeon = util:GetDungeonByLFDActivityID(activityInfo.activityID) or util:GetRaidByLFDActivityID(activityInfo.activityID)
-            temp.hosting = true
+        if activityInfo then
+            local activityID = util:GetLFDActivityID(activityInfo)
+            if activityID then
+                temp.dungeon = util:GetDungeonByLFDActivityID(activityID) or util:GetRaidByLFDActivityID(activityID)
+                temp.hosting = true
+            end
         end
         local applications = C_LFGList.GetApplications() ---@type number[]
         for _, resultID in ipairs(applications) do
             local searchResultInfo = C_LFGList.GetSearchResultInfo(resultID)
-            if searchResultInfo and searchResultInfo.activityID and not searchResultInfo.isDelisted then
-                local dungeon = util:GetDungeonByLFDActivityID(searchResultInfo.activityID) or util:GetRaidByLFDActivityID(searchResultInfo.activityID)
-                if dungeon then
-                    local _, appStatus, pendingStatus = C_LFGList.GetApplicationInfo(resultID)
-                    if not pendingStatus and (appStatus == "applied" or appStatus == "invited") then
-                        temp.dungeon = dungeon
-                        temp.queued = true
-                        index = index + 1
-                        temp[index] = {
-                            dungeon = dungeon,
-                            resultID = resultID
-                        }
+            if searchResultInfo and not searchResultInfo.isDelisted then
+                local activityID = util:GetLFDActivityID(searchResultInfo)
+                if activityID then
+                    local dungeon = util:GetDungeonByLFDActivityID(activityID) or util:GetRaidByLFDActivityID(activityID)
+                    if dungeon then
+                        local _, appStatus, pendingStatus = C_LFGList.GetApplicationInfo(resultID)
+                        if not pendingStatus and (appStatus == "applied" or appStatus == "invited") then
+                            temp.dungeon = dungeon
+                            temp.queued = true
+                            index = index + 1
+                            temp[index] = {
+                                dungeon = dungeon,
+                                resultID = resultID
+                            }
+                        end
                     end
                 end
             end
@@ -2348,7 +2375,7 @@ do
         return util:GetDungeonByInstanceMapID(instanceMapID) or util:GetRaidByInstanceMapID(instanceMapID)
     end
 
-    ---@param activityID number
+    ---@param activityID? number
     ---@param includeExpansionDungeons? boolean
     function util:GetLFDStatusForCurrentActivity(activityID, includeExpansionDungeons)
         ---@type Dungeon|DungeonRaid|nil
@@ -2521,6 +2548,36 @@ do
         return SCORE_STATS[level]
     end
 
+    ---@param dungeon Dungeon
+    ---@return number goldTimeLimit, number silverTimeLimit, number bronzeTimeLimit
+    function util:GetKeystoneTimeLimits(dungeon)
+        local timers = dungeon.timers
+        local goldTimeLimit = timers[1]
+        local silverTimeLimit = timers[2]
+        local bronzeTimeLimit = timers[3]
+        return goldTimeLimit, silverTimeLimit, bronzeTimeLimit
+    end
+
+    ---@param goldTimeLimit number
+    ---@param silverTimeLimit number
+    ---@param bronzeTimeLimit number
+    ---@param level? number
+    ---@return number goldTimeLimit, number silverTimeLimit, number bronzeTimeLimit
+    function util:ApplyKeystoneTimeLimitsForLevel(goldTimeLimit, silverTimeLimit, bronzeTimeLimit, level)
+        if level and level >= 7 then
+            if goldTimeLimit > 0 then
+                goldTimeLimit = goldTimeLimit + 90
+            end
+            if silverTimeLimit > 0 then
+                silverTimeLimit = silverTimeLimit + 90
+            end
+            if bronzeTimeLimit > 0 then
+                bronzeTimeLimit = bronzeTimeLimit + 90
+            end
+        end
+        return goldTimeLimit, silverTimeLimit, bronzeTimeLimit
+    end
+
     ---@type FontString
     local TOOLTIP_TEXT_FONTSTRING do
         TOOLTIP_TEXT_FONTSTRING = UIParent:CreateFontString(nil, nil, "GameTooltipText")
@@ -2570,21 +2627,24 @@ do
         return format("https://%s/characters/%s/%s/%s/%s?utm_source=addon", ns.RAIDERIO_DOMAIN, ns.PLAYER_REGION, realmSlug, name, urlSuffix), name, realm, realmSlug
     end
 
-    ---@class InternalStaticPopupDialog : Frame
+    ---@class InternalStaticPopupFrame : Frame
+    ---@field public OnAcceptCallback? function
+
+    ---@class InternalStaticPopupDialog
     ---@field public id string
     ---@field public which? string
     ---@field public text string|fun(): string
     ---@field public button1? string
     ---@field public button2? string
-    ---@field public EditBoxOnEscapePressed? fun(self: InternalStaticPopupDialog)
+    ---@field public EditBoxOnEscapePressed? fun(self: InternalStaticPopupFrame)
     ---@field public editBoxWidth? number
     ---@field public hasEditBox? boolean
     ---@field public hasWideEditBox? boolean
     ---@field public hideOnEscape? boolean
-    ---@field public OnAccept? fun(self: InternalStaticPopupDialog)
-    ---@field public OnCancel? fun(self: InternalStaticPopupDialog)
-    ---@field public OnShow? fun(self: InternalStaticPopupDialog)
-    ---@field public OnHide? fun(self: InternalStaticPopupDialog)
+    ---@field public OnAccept? fun(self: InternalStaticPopupFrame)
+    ---@field public OnCancel? fun(self: InternalStaticPopupFrame)
+    ---@field public OnShow? fun(self: InternalStaticPopupFrame)
+    ---@field public OnHide? fun(self: InternalStaticPopupFrame)
     ---@field public preferredIndex? number
     ---@field public timeout? number
     ---@field public whileDead? boolean
@@ -3088,9 +3148,12 @@ do
             data.group = GetGroupData(unitPrefix, startIndex, endIndex)
         end
         local entry = C_LFGList.GetActiveEntryInfo()
-        if entry and entry.activityID then
-            data.activity = entry.activityID
-            data.queue = GetApplicantsData()
+        if entry then
+            local activityID = util:GetLFDActivityID(entry)
+            if activityID then
+                data.activity = activityID
+                data.queue = GetApplicantsData()
+            end
         end
         return TableToJSON(data)
     end
@@ -3666,7 +3729,7 @@ do
         0,  1,  2,  3,  4,  5,  6,  7,
         8,  9, 10, 11, 12, 13, 14, 15,
        16, 17, 18, 19, 20, 21, 22, 23,
-       24, 25, 30, 35, 40, 45, 50
+       24, 25, 25, 30, 35, 40, 45, 50
     }
 
     ---@param value number
@@ -3823,7 +3886,7 @@ do
     ---@field public label string
     ---@field public text string
 
-    local CLIENT_CHARACTERS = ns:GetClientData()
+    local CLIENT_CHARACTERS = ns:GetClientCharactersData()
     local DUNGEONS = ns:GetDungeonData()
 
     ---@param a SortedDungeon
@@ -4081,9 +4144,11 @@ do
 
     ---@alias DataProviderRaidProgressFields "progress"|"mainProgress"|"previousProgress"
 
-    ---@class SortedRaidProgress
-    ---@field public obsolete? boolean If this evaluates truthy we hide it unless tooltip is expanded on purpose.
-    ---@field public tier number Weighted number based on current or previous raid, difficulty and boss kill count.
+    ---@class RaidWithTierWeight
+    ---@field public tier number Weighted number based on: current or previous raid, difficulty and boss kill count. This is compared like `tier1 < tier2` to find the most progressed raid with highest difficulty and boss kills.
+
+    ---@class SortedRaidProgress : RaidWithTierWeight
+    ---@field public obsolete? boolean If this evaluates truthy it means this progress is replaced by a better progress. For example a full Normal clear is obsolete if there is a full Heroic clear available.
     ---@field public isProgress? boolean
     ---@field public isProgressPrev? boolean
     ---@field public isMainProgress? boolean
@@ -4095,7 +4160,7 @@ do
     ---@field public progress RaidProgressGroup[]
     ---@field public isMainProgress boolean
 
-    ---@class RaidProgressGroup
+    ---@class RaidProgressGroup : RaidWithTierWeight
     ---@field public difficulty number
     ---@field public progress RaidProgressBossInfo[]
     ---@field public kills? number
@@ -4161,10 +4226,11 @@ do
                     }
                     local diffToIndexMap = {} ---@type number[]
                     local diffNextIndex = 1
+                    ---@param tier number
                     ---@param difficulty number
                     ---@param index number
                     ---@param count number
-                    local function appendBossInfo(difficulty, index, count)
+                    local function appendBossInfo(tier, difficulty, index, count)
                         ---@type RaidProgressBossInfo
                         local bossInfo = {
                             difficulty = difficulty,
@@ -4182,6 +4248,7 @@ do
                         if not diffGroup then
                             ---@type RaidProgressGroup
                             diffGroup = {
+                                tier = tier,
                                 difficulty = difficulty,
                                 progress = {},
                             }
@@ -4199,12 +4266,12 @@ do
                             if progProgress.killsPerBoss then
                                 for k = 1, #progProgress.killsPerBoss do
                                     local killsPerBoss = progProgress.killsPerBoss[k]
-                                    appendBossInfo(progProgress.difficulty, k, killsPerBoss)
+                                    appendBossInfo(prog.tier, progProgress.difficulty, k, killsPerBoss)
                                 end
                             else
                                 for k = 1, progProgress.raid.bossCount do
                                     local killsPerBoss = progProgress.progressCount >= k and 1 or 0
-                                    appendBossInfo(progProgress.difficulty, k, killsPerBoss)
+                                    appendBossInfo(prog.tier, progProgress.difficulty, k, killsPerBoss)
                                 end
                             end
                         end
@@ -4660,6 +4727,7 @@ do
                         if dungeon and dungeon.timers then
                             goldTimeLimit, silverTimeLimit, bronzeTimeLimit = dungeon.timers[1], dungeon.timers[2], dungeonTimeLimit or dungeon.timers[3] -- TODO: always prefer the game data time limit for bronze or the addons time limit?
                         end
+                        goldTimeLimit, silverTimeLimit, bronzeTimeLimit = util:ApplyKeystoneTimeLimitsForLevel(goldTimeLimit, silverTimeLimit, bronzeTimeLimit, runBestRunLevel)
                         local runSeconds = runBestRunDurationMS / 1000
                         local runNumUpgrades = 0
                         if runFinishedSuccess then
@@ -5197,6 +5265,62 @@ do
         end
     end
 
+    local CLIENT_RECENT_CHARACTERS = ns:GetClientRecentCharactersData()
+
+    ---@param tooltip GameTooltip
+    ---@param profile DataProviderCharacterProfile
+    ---@param state TooltipState
+    local function AppendRecentRunsWithCharacter(tooltip, profile, state)
+        if not CLIENT_RECENT_CHARACTERS or not config:Get("enableClientEnhancements") then
+            return
+        end
+        local lookupKey = format("%s-%s", profile.name, profile.realm)
+        local data = CLIENT_RECENT_CHARACTERS[lookupKey]
+        if not data then
+            return
+        end
+        local FIELD_INDEX_DATE = 1
+        local FIELD_INDEX_NUM_RUNS = 2
+        local FIELD_INDEX_FIRST_MAP = 3
+        local NUM_FIELDS = 4
+        local MAP_FIELD_INSTANCE_MAP_ID = 1
+        local MAP_FIELD_KEY_LEVEL = 2
+        local MAP_FIELD_IS_SUCCESS = 3
+        local MAP_FIELD_CLEAR_TIME_MS = 4
+        local MAP_NUM_FIELDS = MAP_FIELD_CLEAR_TIME_MS
+        local MAX_RUNS_TO_SHOW = 3
+        local numRuns = data[FIELD_INDEX_NUM_RUNS]
+        tooltip:AddDoubleLine(L.RECENT_RUNS_WITH_YOU, numRuns, 1, 1, 1, 1, 1, 1)
+        local runsText = {} ---@type string[]
+        for runIndex = 0, min(MAX_RUNS_TO_SHOW - 1, numRuns) do
+            local baseIndex = FIELD_INDEX_FIRST_MAP + (runIndex * MAP_NUM_FIELDS) - 1
+            local instanceMapID = data[baseIndex + MAP_FIELD_INSTANCE_MAP_ID] ---@type number?
+            if not instanceMapID then
+                break
+            end
+            local dungeon = util:GetDungeonByInstanceMapID(instanceMapID)
+            if dungeon then
+                local keyLevel = data[baseIndex + MAP_FIELD_KEY_LEVEL] ---@type number
+                local isSuccess = data[baseIndex + MAP_FIELD_IS_SUCCESS] ~= 0 and true or false ---@type boolean
+                local clearTimeMS = data[baseIndex + MAP_FIELD_CLEAR_TIME_MS] ---@type number
+                local goldTimeLimit, silverTimeLimit, bronzeTimeLimit = util:GetKeystoneTimeLimits(dungeon)
+                goldTimeLimit, silverTimeLimit, bronzeTimeLimit = util:ApplyKeystoneTimeLimitsForLevel(goldTimeLimit, silverTimeLimit, bronzeTimeLimit, keyLevel)
+                local runSeconds = clearTimeMS / 1000
+                local runNumUpgrades = 0
+                if runSeconds <= goldTimeLimit then
+                    runNumUpgrades = 3
+                elseif runSeconds <= silverTimeLimit then
+                    runNumUpgrades = 2
+                elseif runSeconds <= bronzeTimeLimit then
+                    runNumUpgrades = 1
+                end
+                runsText[#runsText + 1] = format("%s%s %s", util:GetNumChests(runNumUpgrades), keyLevel, dungeon.shortName)
+            end
+        end
+        local text = table.concat(runsText, " |cff888888/|r ")
+        tooltip:AddLine(text, 1, 1, 1)
+    end
+
     ---@class PartyMember
     ---@field public unit string
     ---@field public level number
@@ -5397,6 +5521,28 @@ do
         end)
     end
 
+    ---@param raidGroup RaidProgressExtended
+    ---@param raidGroups RaidProgressExtended[]
+    local function IsRaidGroupBestMainProgress(raidGroup, raidGroups)
+        local groupProgress = raidGroup.progress
+        if not groupProgress.isMainProgress then
+            return
+        end
+        local currentProg = groupProgress.progress
+        local currentBest = currentProg[#currentProg]
+        for i = 1, #raidGroups do
+            local otherRaidGroup = raidGroups[i]
+            if otherRaidGroup ~= raidGroup then
+                local otherProg = otherRaidGroup.progress.progress
+                local otherBest = otherProg[#otherProg]
+                if currentBest.tier < otherBest.tier then
+                    return true
+                end
+            end
+        end
+        return false
+    end
+
     ---@param tooltip GameTooltip
     ---@param raidProfile DataProviderRaidProfile
     ---@param state TooltipState
@@ -5427,7 +5573,7 @@ do
         end
         for i = 1, #raidGroups do
             local raidGroup = raidGroups[i]
-            if raidGroup.show or hasShown == false then
+            if raidGroup.show or hasShown == false or IsRaidGroupBestMainProgress(raidGroup, raidGroups) then
                 local groupProgress = raidGroup.progress
                 local tempIndex = 0
                 local temp = {}
@@ -5546,7 +5692,6 @@ do
                                 if isWarbandPreviousScoreRelevant then
                                     tooltip:AddDoubleLine(GetSeasonLabel(L.WARBAND_BEST_SCORE_BEST_SEASON, keystoneProfile.mplusWarbandPrevious.season), GetScoreText(keystoneProfile.mplusWarbandPrevious, true), 1, 1, 1, util:GetScoreColor(keystoneProfile.mplusWarbandPrevious.score, true))
                                 end
-
                                 if keystoneProfile.mplusWarbandCurrent.score > 0 or hasMod or hasModSticky then
                                     tooltip:AddDoubleLine(L.WARBAND_SCORE, GetScoreText(keystoneProfile.mplusWarbandCurrent), 1, 1, 1, util:GetScoreColor(keystoneProfile.mplusWarbandCurrent.score))
                                 end
@@ -5581,6 +5726,9 @@ do
                         end
                         local sortedMilestone = keystoneProfile.sortedMilestones[i]
                         tooltip:AddDoubleLine(sortedMilestone.label, sortedMilestone.text, 1, 1, 1, 1, 1, 1)
+                    end
+                    do
+                        AppendRecentRunsWithCharacter(tooltip, profile, state)
                     end
                     if isExtendedProfile and (hasMod or hasModSticky) and keystoneProfile.sortedDungeons[1] then
                         local hasBestDungeons = false
@@ -6977,12 +7125,13 @@ if not IS_CLASSIC_ERA then
             return
         end
         local leaderFaction = util:FactionGroupToFactionId(entry.leaderFactionGroup)
-        local activityInfo = C_LFGList.GetActivityInfoTable(entry.activityID, nil, entry.isWarMode)
+        local activityID = util:GetLFDActivityID(entry)
+        local activityInfo = activityID and C_LFGList.GetActivityInfoTable(activityID, nil, entry.isWarMode)
         if activityInfo and activityInfo.isMythicPlusActivity and entry.leaderOverallDungeonScore then
             local leaderName, leaderRealm = util:GetNameRealm(entry.leaderName)
             provider:OverrideProfile(leaderName, leaderRealm, entry.leaderOverallDungeonScore)
         end
-        currentResult.activityID = entry.activityID
+        currentResult.activityID = activityID
         currentResult.leaderName = entry.leaderName
         currentResult.leaderFaction = leaderFaction
         currentResult.keystoneLevel = util:GetKeystoneLevelFromText(entry.name) or util:GetKeystoneLevelFromText(entry.comment) or 0
@@ -7045,7 +7194,7 @@ if not IS_CLASSIC_ERA then
     function OnEnter(self)
         local entry = C_LFGList.GetActiveEntryInfo()
         if entry then
-            currentResult.activityID = entry.activityID
+            currentResult.activityID = util:GetLFDActivityID(entry)
         end
         if not currentResult.activityID or not config:Get("enableLFGTooltips") then
             return
@@ -7878,7 +8027,7 @@ if IS_RETAIL then
         [5] = "watched_replay",
     }
 
-    ---@class ConfigReplayColor : ColorMixin
+    ---@class ConfigReplayColor : ColorType
     ---@field public r number
     ---@field public g number
     ---@field public b number
@@ -9316,13 +9465,13 @@ if IS_RETAIL then
             barMin = 0,
             barMax = 100,
             barValue = 0,
-            -- text = "text",
-            -- tooltip = "tooltip",
+            text = "",
+            tooltip = "",
             barValueTextType = Enum.StatusBarValueTextType.Percentage,
-            -- overrideBarText = "0/500 (500)",
+            overrideBarText = "", -- 0/500 (500)
             overrideBarTextShownType = Enum.StatusBarOverrideBarTextShownType.OnlyOnMouseover,
             colorTint = Enum.StatusBarColorTintValue.Blue,
-            -- partitionValues = {},
+            partitionValues = {},
             tooltipLoc = Enum.UIWidgetTooltipLocation.BottomLeft,
             fillMotionType = Enum.UIWidgetMotionType.Smooth,
             barTextEnabledState = Enum.WidgetEnabledState.White,
@@ -9331,18 +9480,23 @@ if IS_RETAIL then
             widgetSizeSetting = 120,
             frameTextureKit = "widgetstatusbar", -- "ui-frame-bar" | "widgetstatusbar" | "cosmic-bar"
             textureKit = "white", -- "blue" | "green" | "red" | "white" | "yellow"
-            -- hasTimer = false,
+            hasTimer = false,
             orderIndex = 0,
-            -- widgetTag = "",
-            -- inAnimType = Enum.WidgetAnimationType.Fade,
-            -- outAnimType = Enum.WidgetAnimationType.Fade,
+            widgetTag = "",
+            inAnimType = Enum.WidgetAnimationType.Fade,
+            outAnimType = Enum.WidgetAnimationType.Fade,
             widgetScale = Enum.UIWidgetScale.OneHundred,
             layoutDirection = Enum.UIWidgetLayoutDirection.Horizontal,
-            -- modelSceneLayer = Enum.UIWidgetModelSceneLayer.None,
-            -- scriptedAnimationEffectID = 0,
+            modelSceneLayer = Enum.UIWidgetModelSceneLayer.None,
+            scriptedAnimationEffectID = 0,
             textEnabledState = Enum.WidgetEnabledState.White,
             textFontType = Enum.UIWidgetFontType.Shadow,
             textSizeType = Enum.UIWidgetTextSizeType.Standard14Pt,
+            -- TODO `11.0.7`
+            fillMaxOpacity = Enum.WidgetOpacityType.OneHundred,
+            fillMinOpacity = Enum.WidgetOpacityType.OneHundred,
+            glowAnimType = Enum.WidgetGlowAnimType.None,
+            showGlowState = Enum.WidgetShowGlowState.HideGlow,
         }
 
         ---@param barValue number
@@ -9857,6 +10011,8 @@ if IS_RETAIL then
             local mapID = self:GetKeystone()
             local liveDataProvider = self:GetLiveDataProvider()
             local liveSummary = liveDataProvider:GetSummary()
+            local liveDeathPenalty = liveDataProvider:GetDeathPenalty(liveSummary.level)
+            local liveDeathPenaltyMS = liveDeathPenalty * 1000
             ---@type ReplayCompletedSummary
             local summary = {
                 replaySeason = replay.season,
@@ -9865,7 +10021,7 @@ if IS_RETAIL then
                 zoneId = mapID,
                 keyLevel = liveSummary.level,
                 completedAt = time(),
-                clearTimeMS = liveSummary.timer,
+                clearTimeMS = liveSummary.timer + liveDeathPenaltyMS,
             }
             table.insert(_G.RaiderIO_CompletedReplays, summary)
             local delta = ConvertMillisecondsToSeconds(summary.clearTimeMS)
@@ -13986,7 +14142,8 @@ do
                 r = value.r,
                 g = value.g,
                 b = value.b,
-                opacity = value.a,
+                a = value.a,
+                opacity = value.a, -- TODO `pre-11.0.7`
                 hasOpacity = true,
                 swatchFunc = function() update() end,
                 opacityFunc = function() update() end,

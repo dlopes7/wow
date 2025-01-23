@@ -9,6 +9,7 @@ mod:RegisterEnableMob(
 	224219, -- Twilight Earthcaller
 	224152, -- Twilight Brute
 	224609, -- Twilight Destroyer
+	224221, -- Twilight Overseer
 	40167, -- Twilight Beguiler
 	40166, -- Molten Giant
 	224271, -- Twilight Warlock
@@ -26,6 +27,7 @@ if L then
 	L.twilight_earthcaller = "Twilight Earthcaller"
 	L.twilight_brute = "Twilight Brute"
 	L.twilight_destroyer = "Twilight Destroyer"
+	L.twilight_overseer = "Twilight Overseer"
 	L.twilight_beguiler = "Twilight Beguiler"
 	L.molten_giant = "Molten Giant"
 	L.twilight_warlock = "Twilight Warlock"
@@ -44,10 +46,13 @@ function mod:GetOptions()
 		{451871, "NAMEPLATE"}, -- Mass Tremor
 		-- Twilight Brute
 		{456696, "NAMEPLATE"}, -- Obsidian Stomp
+		{451364, "TANK", "NAMEPLATE", "OFF"}, -- Brutal Strike
 		-- Twilight Destroyer
 		{451612, "SAY", "NAMEPLATE"}, -- Twilight Flame
 		451614, -- Twilight Ember
 		{451939, "NAMEPLATE"}, -- Umbral Wind
+		-- Twilight Overseer
+		{451378, "TANK", "NAMEPLATE"}, -- Rive
 		-- Twilight Beguiler
 		{76711, "NAMEPLATE"}, -- Sear Mind
 		-- Molten Giant
@@ -69,6 +74,7 @@ function mod:GetOptions()
 		[451871] = L.twilight_earthcaller,
 		[456696] = L.twilight_brute,
 		[451612] = L.twilight_destroyer,
+		[451378] = L.twilight_overseer,
 		[76711] = L.twilight_beguiler,
 		[451965] = L.molten_giant,
 		[451224] = L.twilight_warlock,
@@ -92,6 +98,8 @@ function mod:OnBossEnable()
 		-- Twilight Brute
 		self:RegisterEngageMob("TwilightBruteEngaged", 224152)
 		self:Log("SPELL_CAST_SUCCESS", "ObsidianStomp", 456696)
+		self:Log("SPELL_CAST_START", "BrutalStrike", 451364)
+		self:Log("SPELL_CAST_SUCCESS", "BrutalStrikeSuccess", 451364)
 		self:Death("TwilightBruteDeath", 224152)
 
 		-- Twilight Destroyer
@@ -102,6 +110,11 @@ function mod:OnBossEnable()
 		self:Log("SPELL_PERIODIC_MISSED", "TwilightEmberDamage", 451614)
 		self:Log("SPELL_CAST_START", "UmbralWind", 451939)
 		self:Death("TwilightDestroyerDeath", 224609)
+
+		-- Twilight Overseer
+		self:RegisterEngageMob("TwilightOverseerEngaged", 224221)
+		self:Log("SPELL_CAST_START", "Rive", 451378)
+		self:Death("TwilightOverseerDeath", 224221)
 	end
 
 	-- Twilight Beguiler
@@ -204,6 +217,7 @@ function mod:TwilightBruteEngaged(guid)
 		-- don't start timers when attacking from Battered Red Drake
 		return
 	end
+	self:Nameplate(451364, 3.4, guid) -- Brutal Strike
 	self:Nameplate(456696, 10.3, guid) -- Obsidian Stomp
 end
 
@@ -214,7 +228,7 @@ do
 		local unit = self:UnitTokenFromGUID(args.sourceGUID)
 		if unit and UnitCanAttack("player", unit) then
 			local t = args.time
-			if t - prev > 2 then
+			if t - prev > 1.5 then
 				prev = t
 				self:Message(args.spellId, "orange")
 				self:PlaySound(args.spellId, "alarm")
@@ -222,6 +236,22 @@ do
 			self:Nameplate(args.spellId, 17.0, args.sourceGUID)
 		end
 	end
+end
+
+do
+	local prev = 0
+	function mod:BrutalStrike(args)
+		self:Nameplate(args.spellId, 0, args.sourceGUID)
+		if args.time - prev > 2 then
+			prev = args.time
+			self:Message(args.spellId, "purple")
+			self:PlaySound(args.spellId, "alert")
+		end
+	end
+end
+
+function mod:BrutalStrikeSuccess(args)
+	self:Nameplate(args.spellId, 15.0, args.sourceGUID)
 end
 
 function mod:TwilightBruteDeath(args)
@@ -272,6 +302,26 @@ function mod:TwilightDestroyerDeath(args)
 	self:ClearNameplate(args.destGUID)
 end
 
+-- Twilight Overseer
+
+function mod:TwilightOverseerEngaged(guid)
+	if UnitInVehicle("player") then
+		-- don't start timers when attacking from Battered Red Drake
+		return
+	end
+	self:Nameplate(451378, 4.3, guid) -- Rive
+end
+
+function mod:Rive(args)
+	self:Message(args.spellId, "purple")
+	self:Nameplate(args.spellId, 17.0, args.sourceGUID)
+	self:PlaySound(args.spellId, "alert")
+end
+
+function mod:TwilightOverseerDeath(args)
+	self:ClearNameplate(args.destGUID)
+end
+
 -- Twilight Beguiler
 
 function mod:TwilightBeguilerEngaged(guid)
@@ -313,7 +363,7 @@ end
 
 function mod:LavaFist(args)
 	self:Message(args.spellId, "purple")
-	self:Nameplate(args.spellId, 15.0, args.sourceGUID)
+	self:Nameplate(args.spellId, 23.0, args.sourceGUID)
 	self:PlaySound(args.spellId, "alert")
 end
 

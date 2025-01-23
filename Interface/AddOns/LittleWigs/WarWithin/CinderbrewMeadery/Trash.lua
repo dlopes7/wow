@@ -1,3 +1,4 @@
+local isElevenDotOne = select(4, GetBuildInfo()) >= 110100 -- XXX remove when 11.1 is live
 --------------------------------------------------------------------------------
 -- Module Declaration
 --
@@ -63,13 +64,11 @@ function mod:GetOptions()
 		-- Venture Co. Pyromaniac
 		{437721, "NAMEPLATE"}, -- Boiling Flames
 		{437956, "NAMEPLATE"}, -- Erupting Inferno
-		-- Hired Muscle
-		434761, -- Mighty Stomp
 		-- Tasting Room Attendant
-		{434706, "NAMEPLATE"}, -- Cindrewbrew Toss
+		{434706, "NAMEPLATE"}, -- Cinderbrew Toss
 		-- Chef Chewie
-		434998, -- High Steaks
-		463206, -- Tenderize
+		{463206, "NAMEPLATE"}, -- Tenderize
+		{434998, "NAMEPLATE"}, -- High Steaks
 		-- Flavor Scientist
 		{441627, "NAMEPLATE"}, -- Rejuvenating Honey
 		{441434, "NAMEPLATE"}, -- Failed Batch
@@ -90,9 +89,8 @@ function mod:GetOptions()
 		{439467, "NAMEPLATE"}, -- Downward Trend
 	}, {
 		[437721] = L.venture_co_pyromaniac,
-		[434761] = L.hired_muscle,
 		[434706] = L.tasting_room_attendant,
-		[434998] = L.chef_chewie,
+		[463206] = L.chef_chewie,
 		[441627] = L.flavor_scientist,
 		[448619] = L.careless_hopgoblin,
 		[441179] = L.brew_drop,
@@ -111,33 +109,36 @@ function mod:OnBossEnable()
 	self:RegisterEvent("GOSSIP_SHOW")
 
 	-- Venture Co. Pyromaniac
-	self:Log("SPELL_CAST_START", "BoilingFlames", 437721)
-	self:Log("SPELL_INTERRUPT", "BoilingFlamesInterrupt", 437721)
-	self:Log("SPELL_CAST_SUCCESS", "BoilingFlamesSuccess", 437721)
+	self:RegisterEngageMob("VentureCoPyromaniacEngaged", 218671)
+	if not isElevenDotOne then -- XXX remove in 11.1
+		self:Log("SPELL_CAST_START", "BoilingFlamesStart", 437721)
+		self:Log("SPELL_INTERRUPT", "BoilingFlamesInterrupt", 437721)
+	end
+	self:Log("SPELL_CAST_SUCCESS", "BoilingFlames", 437721)
 	self:Log("SPELL_CAST_SUCCESS", "EruptingInferno", 437956)
 	self:Log("SPELL_AURA_APPLIED", "EruptingInfernoApplied", 437956)
 	self:Death("VentureCoPyromaniacDeath", 218671)
 
-	-- Hired Muscle
-	self:Log("SPELL_CAST_START", "MightyStomp", 434761) -- TODO removed?
-	--self:Death("HiredMuscleDeath", 210269)
-
 	-- Tasting Room Attendant
-	self:Log("SPELL_CAST_SUCCESS", "CindrewbrewToss", 434706)
+	self:RegisterEngageMob("TastingRoomAttendantEngaged", 214920)
+	self:Log("SPELL_CAST_SUCCESS", "CinderbrewToss", 434706)
 	self:Death("TastingRoomAttendantDeath", 214920)
 
 	-- Chef Chewie
-	self:Log("SPELL_CAST_START", "HighSteaks", 434998)
+	self:RegisterEngageMob("ChefChewieEngaged", 214697)
 	self:Log("SPELL_CAST_START", "Tenderize", 463206)
+	self:Log("SPELL_CAST_START", "HighSteaks", 434998)
 	self:Death("ChefChewieDeath", 214697)
 
 	-- Flavor Scientist
+	self:RegisterEngageMob("FlavorScientistEngaged", 214673, 222964)
 	self:Log("SPELL_CAST_START", "RejuvenatingHoney", 441627)
 	self:Log("SPELL_CAST_SUCCESS", "FailedBatch", 441434)
 	self:Log("SPELL_SUMMON", "FailedBatchSummon", 441501)
 	self:Death("FlavorScientistDeath", 214673, 222964)
 
 	-- Careless Hopgoblin
+	self:RegisterEngageMob("CarelessHopgoblinEngaged", 223423)
 	self:Log("SPELL_CAST_START", "RecklessDelivery", 448619)
 	self:Death("CarelessHopgoblinDeath", 223423)
 
@@ -146,24 +147,30 @@ function mod:OnBossEnable()
 	self:Log("SPELL_PERIODIC_MISSED", "OozingHoneyDamage", 441179)
 
 	-- Bee Wrangler
+	self:RegisterEngageMob("BeeWranglerEngaged", 210264)
 	self:Log("SPELL_CAST_START", "BeeZooka", 441119)
 	self:Log("SPELL_CAST_SUCCESS", "BeeZookaSuccess", 441119)
 	self:Death("BeeWranglerDeath", 210264)
 
 	-- Venture Co. Honey Harvester
+	self:RegisterEngageMob("VentureCoHoneyHarvesterEngaged", 220946)
 	self:Log("SPELL_CAST_START", "Beeswax", 442589)
 	self:Log("SPELL_CAST_START", "SwarmingSurprise", 442995)
 	self:Death("VentureCoHoneyHarvesterDeath", 220946)
 
 	-- Royal Jelly Purveyor
+	self:RegisterEngageMob("RoyalJellyPurveyorEngaged", 220141)
 	self:Log("SPELL_CAST_START", "HoneyVolley", 440687)
 	self:Log("SPELL_INTERRUPT", "HoneyVolleyInterrupt", 440687)
 	self:Log("SPELL_CAST_SUCCESS", "HoneyVolleySuccess", 440687)
-	self:Log("SPELL_CAST_START", "RainOfHoney", 440876)
-	self:Log("SPELL_CAST_SUCCESS", "RainOfHoneySuccess", 440876)
+	if not isElevenDotOne then -- XXX remove in 11.1
+		self:Log("SPELL_CAST_START", "RainOfHoneyStart", 440876)
+	end
+	self:Log("SPELL_CAST_SUCCESS", "RainOfHoney", 440876)
 	self:Death("RoyalJellyPurveyorDeath", 220141)
 
 	-- Yes Man
+	self:RegisterEngageMob("YesManEngaged", 219588)
 	self:Log("SPELL_CAST_START", "DownwardTrend", 439467)
 	self:Death("YesManDeath", 219588)
 end
@@ -195,18 +202,29 @@ end
 
 -- Venture Co. Pyromaniac
 
-function mod:BoilingFlames(args)
-	self:Message(args.spellId, "red", CL.casting:format(args.spellName))
-	self:PlaySound(args.spellId, "alert")
-	self:Nameplate(args.spellId, 0, args.sourceGUID)
+function mod:VentureCoPyromaniacEngaged(guid)
+	self:Nameplate(437956, 3.8, guid) -- Erupting Inferno
+	self:Nameplate(437721, 11.9, guid) -- Boiling Flames
 end
 
-function mod:BoilingFlamesInterrupt(args)
+function mod:BoilingFlamesStart(args) -- XXX remove in 11.1
+	self:Message(args.spellId, "red", CL.casting:format(args.spellName))
+	self:Nameplate(args.spellId, 0, args.sourceGUID)
+	self:PlaySound(args.spellId, "alert")
+end
+
+function mod:BoilingFlamesInterrupt(args) -- XXX remove in 11.1
 	self:Nameplate(437721, 20.1, args.destGUID)
 end
 
-function mod:BoilingFlamesSuccess(args)
-	self:Nameplate(args.spellId, 20.1, args.sourceGUID)
+function mod:BoilingFlames(args)
+	if isElevenDotOne then
+		self:Message(args.spellId, "red", CL.casting:format(args.spellName))
+		self:Nameplate(args.spellId, 20.6, args.sourceGUID)
+		self:PlaySound(args.spellId, "alert")
+	else -- XXX remove in 11.1
+		self:Nameplate(args.spellId, 20.1, args.sourceGUID)
+	end
 end
 
 function mod:EruptingInferno(args)
@@ -222,24 +240,16 @@ function mod:VentureCoPyromaniacDeath(args)
 	self:ClearNameplate(args.destGUID)
 end
 
--- Hired Muscle
-
-function mod:MightyStomp(args)
-	self:Message(args.spellId, "yellow")
-	self:PlaySound(args.spellId, "alarm")
-	--self:Nameplate(args.spellId, 100, args.sourceGUID)
-end
-
---function mod:HiredMuscleDeath(args)
-	--self:ClearNameplate(args.destGUID)
---end
-
 -- Tasting Room Attendant
 
-function mod:CindrewbrewToss(args)
+function mod:TastingRoomAttendantEngaged(guid)
+	self:Nameplate(434706, 13.2, guid) -- Cinderbrew Toss
+end
+
+function mod:CinderbrewToss(args)
 	self:Message(args.spellId, "orange")
-	self:PlaySound(args.spellId, "alarm")
 	self:Nameplate(args.spellId, 12.1, args.sourceGUID)
+	self:PlaySound(args.spellId, "alarm")
 end
 
 function mod:TastingRoomAttendantDeath(args)
@@ -251,13 +261,11 @@ end
 do
 	local timer
 
-	function mod:HighSteaks(args)
-		if timer then
-			self:CancelTimer(timer)
-		end
-		self:Message(args.spellId, "red")
-		self:PlaySound(args.spellId, "long")
-		self:CDBar(args.spellId, 21.8)
+	function mod:ChefChewieEngaged(guid)
+		self:CDBar(463206, 8.0) -- Tenderize
+		self:Nameplate(463206, 8.0, guid) -- Tenderize
+		self:CDBar(434998, 11.9) -- High Steaks
+		self:Nameplate(434998, 11.9, guid) -- High Steaks
 		timer = self:ScheduleTimer("ChefChewieDeath", 30)
 	end
 
@@ -266,39 +274,59 @@ do
 			self:CancelTimer(timer)
 		end
 		self:Message(args.spellId, "yellow")
-		self:PlaySound(args.spellId, "alert")
 		self:CDBar(args.spellId, 18.2)
+		self:Nameplate(args.spellId, 18.2, args.sourceGUID)
+		self:PlaySound(args.spellId, "alert")
 		timer = self:ScheduleTimer("ChefChewieDeath", 30)
 	end
 
-	function mod:ChefChewieDeath()
+	function mod:HighSteaks(args)
+		if timer then
+			self:CancelTimer(timer)
+		end
+		self:Message(args.spellId, "red")
+		self:CDBar(args.spellId, 21.8)
+		self:Nameplate(args.spellId, 21.8, args.sourceGUID)
+		self:PlaySound(args.spellId, "long")
+		timer = self:ScheduleTimer("ChefChewieDeath", 30)
+	end
+
+	function mod:ChefChewieDeath(args)
 		if timer then
 			self:CancelTimer(timer)
 			timer = nil
 		end
-		self:StopBar(434998) -- High Steaks
 		self:StopBar(463206) -- Tenderize
+		self:StopBar(434998) -- High Steaks
+		if args then
+			self:ClearNameplate(args.destGUID)
+		end
 	end
 end
 
 -- Flavor Scientist
 
+function mod:FlavorScientistEngaged(guid)
+	self:Nameplate(441434, 4.6, guid) -- Failed Batch
+	self:Nameplate(441627, 10.7, guid) -- Rejuvenating Honey
+end
+
 do
 	local prev = 0
 	function mod:RejuvenatingHoney(args)
+		self:Nameplate(args.spellId, 15.8, args.sourceGUID) -- CD triggers on cast start
 		if args.time - prev > 1.5 then
 			prev = args.time
 			self:Message(args.spellId, "red", CL.casting:format(args.spellName))
 			self:PlaySound(args.spellId, "alert")
 		end
-		self:Nameplate(args.spellId, 15.8, args.sourceGUID) -- CD triggers on cast start
 	end
 end
 
 function mod:FailedBatch(args)
 	self:Message(args.spellId, "cyan", CL.spawning:format(args.spellName))
-	self:PlaySound(args.spellId, "info")
 	self:Nameplate(args.spellId, 23.1, args.sourceGUID)
+	self:PlaySound(args.spellId, "info")
 end
 
 do
@@ -327,18 +355,22 @@ end
 
 -- Careless Hopgoblin
 
+function mod:CarelessHopgoblinEngaged(guid)
+	self:Nameplate(448619, 6.3, guid) -- Reckless Delivery
+end
+
 do
 	local function printTarget(self, name, guid)
 		self:TargetMessage(448619, "orange", name)
-		self:PlaySound(448619, "alarm", nil, name)
 		if self:Me(guid) then
 			self:Say(448619, nil, nil, "Reckless Delivery")
 		end
+		self:PlaySound(448619, "alarm", nil, name)
 	end
 
 	function mod:RecklessDelivery(args)
 		self:GetUnitTarget(printTarget, 0.2, args.sourceGUID)
-		self:Nameplate(args.spellId, 25.5, args.sourceGUID)
+		self:Nameplate(args.spellId, 23.0, args.sourceGUID)
 	end
 end
 
@@ -351,22 +383,28 @@ end
 do
 	local prev = 0
 	function mod:OozingHoneyDamage(args)
-		if self:Me(args.destGUID) and args.time - prev > 2 then
-			prev = args.time
-			self:PersonalMessage(args.spellId, "underyou")
-			self:PlaySound(args.spellId, "underyou")
+		if self:MobId(args.sourceGUID) == 223562 then -- Brew Drop, trash version
+			if self:Me(args.destGUID) and args.time - prev > 2 then
+				prev = args.time
+				self:PersonalMessage(args.spellId, "underyou")
+				self:PlaySound(args.spellId, "underyou")
+			end
 		end
 	end
 end
 
 -- Bee Wrangler
 
+function mod:BeeWranglerEngaged(guid)
+	self:Nameplate(441119, 4.7, guid) -- Bee-Zooka
+end
+
 do
 	local prev = 0
 	local function printTarget(self, name, guid)
 		self:TargetMessage(441119, "orange", name)
 		local t = GetTime()
-		if t - prev > 2 then
+		if t - prev > 2.5 then
 			prev = t
 			if self:Me(guid) then
 				self:Say(441119, nil, nil, "Bee-Zooka")
@@ -380,6 +418,7 @@ do
 			return
 		end
 		self:GetUnitTarget(printTarget, 0.4, args.sourceGUID)
+		self:Nameplate(args.spellId, 0, args.sourceGUID)
 	end
 end
 
@@ -393,16 +432,25 @@ end
 
 -- Venture Co. Honey Harvester
 
+function mod:VentureCoHoneyHarvesterEngaged(guid)
+	self:Nameplate(442589, 4.6, guid) -- Beeswax
+	self:Nameplate(442995, 5.6, guid) -- Swarming Surprise
+end
+
 function mod:Beeswax(args)
 	self:Message(args.spellId, "orange")
+	if isElevenDotOne then
+		self:Nameplate(args.spellId, 21.8, args.sourceGUID)
+	else -- XXX remove in 11.1
+		self:Nameplate(args.spellId, 18.2, args.sourceGUID)
+	end
 	self:PlaySound(args.spellId, "alarm")
-	self:Nameplate(args.spellId, 18.2, args.sourceGUID)
 end
 
 function mod:SwarmingSurprise(args)
 	self:Message(args.spellId, "yellow")
-	self:PlaySound(args.spellId, "alert")
 	self:Nameplate(args.spellId, 23.1, args.sourceGUID)
+	self:PlaySound(args.spellId, "alert")
 end
 
 function mod:VentureCoHoneyHarvesterDeath(args)
@@ -411,36 +459,50 @@ end
 
 -- Royal Jelly Purveyor
 
+function mod:RoyalJellyPurveyorEngaged(guid)
+	self:Nameplate(440687, 3.0, guid) -- Honey Volley
+	self:Nameplate(440876, 7.8, guid) -- Rain of Honey
+end
+
 do
 	local prev = 0
 	function mod:HoneyVolley(args)
 		if self:Friendly(args.sourceFlags) then -- these NPCs can be mind-controlled by Priests
 			return
 		end
+		self:Nameplate(args.spellId, 0, args.sourceGUID)
 		local t = args.time
 		if t - prev > 2 then
 			prev = t
 			self:Message(args.spellId, "red", CL.casting:format(args.spellName))
 			self:PlaySound(args.spellId, "alert")
 		end
-		self:Nameplate(args.spellId, 0, args.sourceGUID)
 	end
 end
 
 function mod:HoneyVolleyInterrupt(args)
-	self:Nameplate(440687, 9.3, args.destGUID)
+	if isElevenDotOne then
+		self:Nameplate(440687, 18.9, args.destGUID)
+	else -- XXX remove in 11.1
+		self:Nameplate(440687, 9.3, args.destGUID)
+	end
 end
 
 function mod:HoneyVolleySuccess(args)
-	self:Nameplate(args.spellId, 9.3, args.sourceGUID)
+	if isElevenDotOne then
+		self:Nameplate(args.spellId, 18.9, args.sourceGUID)
+	else -- XXX remove in 11.1
+		self:Nameplate(args.spellId, 9.3, args.sourceGUID)
+	end
 end
 
 do
 	local prev = 0
-	function mod:RainOfHoney(args)
+	function mod:RainOfHoneyStart(args) -- XXX remove when 11.1 is live
 		if self:Friendly(args.sourceFlags) then -- these NPCs can be mind-controlled by Priests
 			return
 		end
+		self:Nameplate(args.spellId, 0, args.sourceGUID)
 		local t = args.time
 		if t - prev > 2 then
 			prev = t
@@ -450,8 +512,23 @@ do
 	end
 end
 
-function mod:RainOfHoneySuccess(args)
-	self:Nameplate(args.spellId, 16.2, args.sourceGUID)
+do
+	local prev = 0
+	function mod:RainOfHoney(args)
+		if isElevenDotOne then
+			if self:Friendly(args.sourceFlags) then -- these NPCs can be mind-controlled by Priests
+				return
+			end
+			self:Nameplate(args.spellId, 17.0, args.sourceGUID)
+			if args.time - prev > 2 then
+				prev = args.time
+				self:Message(args.spellId, "yellow")
+				self:PlaySound(args.spellId, "alarm")
+			end
+		else -- XXX remove in 11.1
+			self:Nameplate(args.spellId, 16.2, args.sourceGUID)
+		end
+	end
 end
 
 function mod:RoyalJellyPurveyorDeath(args)
@@ -460,16 +537,20 @@ end
 
 -- Yes Man
 
+function mod:YesManEngaged(guid)
+	self:Nameplate(439467, 7.2, guid) -- Downward Trend
+end
+
 do
 	local prev = 0
 	function mod:DownwardTrend(args)
+		self:Nameplate(args.spellId, 13.0, args.sourceGUID)
 		local t = args.time
 		if t - prev > 2 then
 			prev = t
 			self:Message(args.spellId, "orange")
 			self:PlaySound(args.spellId, "alarm")
 		end
-		self:Nameplate(args.spellId, 14.6, args.sourceGUID)
 	end
 end
 

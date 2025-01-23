@@ -9,6 +9,27 @@ local RAID_CLASS_COLORS, COMBATLOG_OBJECT_TYPE_MASK, COMBATLOG_OBJECT_CONTROL_MA
 local UnitGroupRolesAssigned = UnitGroupRolesAssigned or ExRT.NULLfunc
 local GetRaidRosterInfo = GetRaidRosterInfo
 local GetItemInfo, GetItemInfoInstant  = C_Item and C_Item.GetItemInfo or GetItemInfo,  C_Item and C_Item.GetItemInfoInstant or GetItemInfoInstant
+local GetSpecialization = GetSpecialization
+
+if not GetSpecialization and ExRT.isClassic then
+	GetSpecialization = function()
+		local n,m = 1,1
+		for spec=1,3 do
+			local selectedNum = 0
+			for talPos=1,22 do
+				local name, iconTexture, tier, column, rank, maxRank, isExceptional, available = GetTalentInfo(spec, talPos)
+				if name and maxRank > 0 and rank > 0 then
+					selectedNum = selectedNum + 1
+				end
+			end
+			if selectedNum > m then
+				n = spec
+				m = selectedNum
+			end
+		end
+		return n
+	end
+end
 
 do
 	local antiSpamArr = {}
@@ -623,18 +644,56 @@ function ExRT.F.table_rewrite(t1,t2)
 	end
 end
 
+function ExRT.F.table_random(t)
+	local keys_num = 0
+	for k,v in pairs(t) do
+		keys_num = keys_num + 1
+	end
+	if keys_num == 0 then return end
+	local key_need = math.random(1,keys_num)
+	keys_num = 0
+	for k,v in pairs(t) do
+		keys_num = keys_num + 1
+		if keys_num == key_need then
+			return v
+		end
+	end
+end
+
+local sort_f = function(a,b) return a[1]<b[1] end
+function ExRT.F.table_to_string(t)
+	if type(t)~="table" then return end
+	local keys = {}
+	local res = {}
+	for q,w in pairs(t) do
+		if type(q)~="function" and type(q)~="table" and not (w=="") then
+			keys[#keys+1]={tostring(q),w}
+		end
+	end
+	sort(keys,sort_f)
+	for i=1,#keys do
+		local v = keys[i][2]
+		res[#res+1] = keys[i][1] .. "=" .. (type(v)=="table" and ExRT.F.table_to_string(v) or type(v)=="function" and "<f>" or tostring(v))
+	end
+	local str = "{"..table.concat(res,",").."}"
+	return str
+end
+
 function ExRT.F.tohex(num,size)
 	return format("%0"..(size or "1").."X",num)
 end
 
 function ExRT.F.UnitInGuild(unit)
-	unit = ExRT.F.delUnitNameServer(unit)
+	local sunit = ExRT.F.delUnitNameServer(unit)
 	local gplayers = GetNumGuildMembers() or 0
 	for i=1,gplayers do
 		local name = GetGuildRosterInfo(i)
-		if name and ExRT.F.delUnitNameServer(name) == unit then
+		if name and ExRT.F.delUnitNameServer(name) == sunit then
 			return true
 		end
+	end
+	if UnitIsInMyGuild(unit) or UnitIsInMyGuild(sunit) then
+		return true
 	end
 	return false
 end
@@ -738,8 +797,11 @@ function ExRT.F.CreateAddonMsg(...)
 	return result
 end
 
-function ExRT.F.GetPlayerRole()
+function ExRT.F.GetPlayerRole(checkNotInGroup)
 	local role = UnitGroupRolesAssigned('player')
+	if (not role or role == "NONE") and checkNotInGroup and GetSpecializationInfo then
+		role = select(5,GetSpecializationInfo(GetSpecialization() or 0))
+	end
 	if role == "HEALER" then
 		local _,class = UnitClass('player')
 		return role, (class == "PALADIN" or class == "MONK") and "MHEALER" or "RHEALER"
@@ -786,6 +848,59 @@ function ExRT.F.GetUnitRole(unit)
 			return role, "MDD"
 		else
 			return role, "RDD"
+		end
+	end
+end
+if ExRT.isClassic and not ExRT.isWoD then
+	function ExRT.F.GetPlayerRole()
+		local role = UnitGroupRolesAssigned('player')
+		if role == "HEALER" then
+			local _,class = UnitClass('player')
+			return role, (class == "PALADIN" or class == "MONK") and "MHEALER" or "RHEALER"
+		elseif role ~= "DAMAGER" then
+			--TANK, NONE
+			return role
+		else
+			local _,class = UnitClass('player')
+			local isMelee = (class == "WARRIOR" or class == "PALADIN" or class == "ROGUE" or class == "DEATHKNIGHT" or class == "MONK" or class == "DEMONHUNTER")
+			if class == "DRUID" then
+				isMelee = GetSpecialization() ~= 1
+			elseif class == "SHAMAN" then
+				isMelee = GetSpecialization() == 2
+			elseif class == "HUNTER" then
+				isMelee = false
+			end
+			if isMelee then
+				return role, "MDD"
+			else
+				return role, "RDD"
+			end
+		end
+	end
+	
+	function ExRT.F.GetUnitRole(unit)
+		local role = UnitGroupRolesAssigned(unit)
+		if role == "HEALER" then
+			local _,class = UnitClass(unit)
+			return role, (class == "PALADIN" or class == "MONK") and "MHEALER" or "RHEALER"
+		elseif role ~= "DAMAGER" then
+			--TANK, NONE
+			return role
+		else
+			local _,class = UnitClass(unit)
+			local isMelee = (class == "WARRIOR" or class == "PALADIN" or class == "ROGUE" or class == "DEATHKNIGHT" or class == "MONK" or class == "DEMONHUNTER")
+			if class == "DRUID" then
+				isMelee = not (UnitPowerType(unit) == 8)	--astral power
+			elseif class == "SHAMAN" then
+				isMelee = UnitPowerMax(unit) >= 150
+			elseif class == "HUNTER" then
+				isMelee = false
+			end
+			if isMelee then
+				return role, "MDD"
+			else
+				return role, "RDD"
+			end
 		end
 	end
 end
@@ -1315,6 +1430,73 @@ do
 	end
 end
 
+do
+	local alertWindow = nil
+	local alertFunc = nil
+	local alertArg1 = nil
+	local ce = 0
+	local function CreateEdit()
+		ce = ce + 1
+		local e = alertWindow.EditBox[ce]
+		if not e then
+			e = ELib:Edit(alertWindow):Size(400,16):Point("TOPLEFT",90,-20-(ce-1)*20)
+			alertWindow.EditBox[ce] = e
+
+			e:SetScript("OnEnterPressed",function (self)
+				self:GetParent().OK:Click("LeftButton")
+			end)
+		end
+		e:Show()
+
+		return alertWindow.EditBox[ce]
+	end
+	local function CreateWindow()
+		alertWindow = ExRT.lib:Popup():Size(500,65)
+		alertWindow:SetFrameStrata("FULLSCREEN_DIALOG")
+
+		alertWindow.EditBox = {}
+
+		alertWindow.OK = ExRT.lib:Button(alertWindow,ACCEPT):Size(130,20):Point("BOTTOM",0,3):OnClick(function (self)
+			alertWindow:Hide()
+			local r = {}
+			for i=1,#alertWindow.EditBox do
+				local e = alertWindow.EditBox[i]
+				local input = e:GetText()
+				r[i] = input
+			end
+			alertFunc(r)
+		end)
+	end
+	function ExRT.F.ShowInput2(text,func,...)
+		if not alertWindow then
+			CreateWindow()
+		end
+		ce = 0
+		alertWindow.title:SetText(text)
+		for i=1,select("#",...) do
+			local opt = select(i,...)
+			
+			local e = CreateEdit()
+			e:LeftText(type(opt) == "table" and opt.text or opt)
+			e:SetScript("OnTextChanged",type(opt) == "table" and opt.funcOnEdit or nil)
+			e:Tooltip(type(opt) == "table" and opt.tip or nil)
+			e:SetText(type(opt) == "table" and opt.defText or "")
+			if type(opt) == "table" and opt.onlyNum then
+				e:SetNumeric(true)
+			else
+				e:SetNumeric(false)
+			end
+		end
+		alertFunc = func
+
+		alertWindow:ClearAllPoints()
+		alertWindow:SetPoint("CENTER",UIParent,0,0)
+		alertWindow:SetHeight(45+20*ce)
+		alertWindow:Show()
+		alertWindow.EditBox[1]:SetFocus()
+	end
+end
+
 ---------------> Chat links hook <---------------
 do
 	local chatLinkFormat = "|HMRT:%s:0|h|cffffff00[MRT: %s]|r|h"
@@ -1465,6 +1647,82 @@ do
 		exportWindow:Show()
 	end
 end
+---------------> Profiling Window <---------------
+do
+	local profilingWindow
+	function ExRT.F:ProfilingWindow()
+		if not profilingWindow then
+			profilingWindow = ExRT.lib:Popup("Profiling"):Size(700,300)
+			local self = profilingWindow
+
+			profilingWindow.decorationLine = ELib:DecorationLine(self,true,"BACKGROUND",-5):Point("TOPLEFT",self,0,-15):Point("BOTTOMRIGHT",self,"TOPRIGHT",0,-35)
+		
+			profilingWindow.list = ELib:ScrollTableList(self,300,80,80,80,80,0):Size(700,300-35-25):Point("TOP",0,-35):FontSize(11):HideBorders()
+		
+			profilingWindow.headertext1 = ELib:Text(self,"  Event"):Point("LEFT",self.list,2,0):Point("TOP",self.decorationLine,0,0):Size(300,20):Left():Middle():Color():Shadow()
+			profilingWindow.headertext2 = ELib:Text(self,"Total, ms"):Point("LEFT",self.headertext1,"RIGHT",0,0):Point("TOP",self.decorationLine,0,0):Size(80,20):Left():Middle():Color():Shadow()
+			profilingWindow.headertext3 = ELib:Text(self,"Count"):Point("LEFT",self.headertext2,"RIGHT",0,0):Point("TOP",self.decorationLine,0,0):Size(80,20):Left():Middle():Color():Shadow()
+			profilingWindow.headertext4 = ELib:Text(self,"Peak"):Point("LEFT",self.headertext3,"RIGHT",0,0):Point("TOP",self.decorationLine,0,0):Size(80,20):Left():Middle():Color():Shadow()
+			profilingWindow.headertext5 = ELib:Text(self,"Per 1, ms"):Point("LEFT",self.headertext4,"RIGHT",0,0):Point("TOP",self.decorationLine,0,0):Size(80,20):Left():Middle():Color():Shadow()
+			profilingWindow.headertext6 = ELib:Text(self,"Per sec, ms"):Point("LEFT",self.headertext5,"RIGHT",0,0):Point("TOP",self.decorationLine,0,0):Size(80,20):Left():Middle():Color():Shadow()
+
+			local t = 0
+			profilingWindow:SetScript("OnUpdate",function(self,elapsed)
+				t = t + elapsed
+				if t < 0.5 then
+					return
+				end
+				t = t % 0.5
+
+				profilingWindow.nextBoss:SetEnabled(not ExRT.F:IsProfilingBoss())
+
+				if not ExRT.Profiling.Start then
+					return
+				end
+
+				local r,total = {},{"Total",0,"","","",0}
+				local now = (ExRT.Profiling.End or debugprofilestop()) - ExRT.Profiling.Start
+				for event in pairs(ExRT.Profiling.T) do
+					local t = ExRT.Profiling.T[event]
+					local c = ExRT.Profiling.C[event]
+					local m = ExRT.Profiling.M[event]
+			
+					r[#r+1] = {event,format("%.1f",t),c,format("%.1f",m),format("%.1f",t/c),format("%.1f",t/now*1000),sort=t}
+
+					total[2] = total[2] + t
+				end
+				sort(r,function(a,b) return a.sort>b.sort end)
+				total[6] = format("%.1f",total[2] / now*1000)
+				total[2] = format("%.1f",total[2])
+				tinsert(r,1,total)
+
+				if ExRT.F:IsProfilingBoss() and not ExRT.Profiling.BossStarted then
+					wipe(r)
+				end
+		
+				profilingWindow.list.L = r
+				profilingWindow.list:Update()
+
+				profilingWindow.startBut:SetText(ExRT.Profiling.Enabled and "Stop profiling" or "Start profiling")
+			end)
+
+			profilingWindow.startBut = ELib:Button(profilingWindow,"Start profiling"):Size(200,20):Point("BOTTOMLEFT",2,2):OnClick(function()
+				ExRT.F:StartStopProfiling()
+				t = 0.5
+			end)
+			profilingWindow.exportBut = ELib:Button(profilingWindow,"Export to string"):Size(200,20):Point("LEFT",profilingWindow.startBut,"RIGHT",2,0):OnClick(function()
+				ExRT.F:GetProfiling()
+			end)
+			profilingWindow.nextBoss = ELib:Button(profilingWindow,"Next boss encounter"):Size(200,20):Point("LEFT",profilingWindow.exportBut,"RIGHT",2,0):OnClick(function()
+				ExRT.F:StartProfilingBoss()
+			end)
+		end
+
+		profilingWindow:NewPoint("TOPLEFT",UIParent,5,-5)
+		profilingWindow:Show()
+	end
+end
+
 
 ---------------> Import/Export data <---------------
 do
@@ -2537,7 +2795,7 @@ do
 	end
 end
 
-function ExRT.F.GetEncountersList(onlyRaid,onlyActual,reverse)
+function ExRT.F.GetEncountersList(onlyRaid,onlyActual,reverse,onlyDung)
 	local new = {}
 
 	local isActual,isRaid
@@ -2545,6 +2803,7 @@ function ExRT.F.GetEncountersList(onlyRaid,onlyActual,reverse)
 		if v[1] == 232 then
 			isRaid = true
 			isActual = false
+			if onlyDung then break end
 		elseif v[1] == ACTUAL_DUNG then
 			isActual = true
 		elseif v[1] == ACTUAL_RAID then

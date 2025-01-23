@@ -28,6 +28,7 @@ local gloomTouchCount = 1
 local platformAddsKilled = 0
 local worshippersKilled = 0
 local acolytesKilled = 0
+local lastAcolyteMarked = nil
 
 local abyssalInfusionCount = 1
 local frothingGluttonyCount = 1
@@ -76,18 +77,18 @@ local timersHeroic = { -- 10:09 (enrage)
 
 local timersMythic = { -- 10:10 (enrage)
 	[1] = {
-		[437592] = { 21.1, 56.0, 53.0, 0 }, -- Reactive Toxin
-		[439814] = { 12.3, 40.0, 54.0, 26.0, 0 }, -- Silken Tomb
+		[437592] = { 21.1, 56.0, 56.0, 0 }, -- Reactive Toxin
+		[439814] = { 12.3, 40.0, 57.0, 0 }, -- Silken Tomb
 		[440899] = { 6.4, 40.0, 54.0, 0 }, -- Liquefy
 		[437093] = { 8.4, 40.0, 54.0, 0 }, -- Feast
-		[439299] = { 20.3, 40.0, 13.0, 25.0, 16.0, 26.0, 0 }, -- Web Blades
+		[439299] = { 20.3, 40.0, 13.0, 25.0, 19.0, 23.0, 0 }, -- Web Blades
 	},
 	[3] = {
 		[444829] = { 43.3, 64.0, 83.0, 0 }, -- Queen's Summons
-		[438976] = { 111.4, 51.9, 34.0, 0 }, -- Royal Condemnation
-		[443325] = { 30.0, 66.0, 82.0, 0 }, -- Infest
-		[443336] = { 32.0, 66.0, 82.0, 0 }, -- Gorge
-		[439299] = { 48.3, 11.0, 26.0, 21.0, 17.0, 16.0, 47.0, 19.0, 14.0, 22.0, 0 }, -- Web Blades
+		[438976] = { 111.4, 86.0, 0 }, -- Royal Condemnation
+		[443325] = { 30.0, 66.0, 80.0, 0 }, -- Infest
+		[443336] = { 32.0, 66.0, 80.0, 0 }, -- Gorge
+		[439299] = { 48.3, 37.0, 21.0, 17.0, 42.0, 21.0, 19.0, 36.0, 0 }, -- Web Blades
 		[445422] = { 45.0, 80.0, 88.0, 35.5 }, -- Frothing Gluttony
 	},
 }
@@ -367,13 +368,47 @@ function mod:INSTANCE_ENCOUNTER_ENGAGE_UNIT()
 	end
 end
 
-function mod:AddMarking(_, unit, guid)
-	if self:MobId(guid) == 226200 and not mobCollector[guid] then -- Chamber Acolyte
-		mobCollector[guid] = true
-		-- use the spawn counter from the mob spawn uid for marking (1/2)
-		local uid = select(7, strsplit("-", guid))
-		local index = bit.rshift(bit.band(tonumber(string.sub(uid, 1, 5), 16), 0xffff8), 3) + 1
-		self:CustomIcon(chamberAcolyteMarker, unit, index)
+do
+	local function getSpawnIndex(guid)
+		local spawnUID = select(7, strsplit("-", guid))
+		local spawnIndex = bit.rshift(bit.band(tonumber(string.sub(spawnUID, 1, 5), 16), 0xffff8), 3) + 1
+		return spawnIndex
+	end
+	local function getSpawnTime(guid)
+		local spawnUID = select(7, strsplit("-", guid))
+		local spawnEpochOffset = bit.band(tonumber(string.sub(spawnUID, 5), 16), 0x7fffff)
+		local serverTime = GetServerTime() -- luacheck: ignore
+		local spawnTime = serverTime - (serverTime % 2 ^ 23) + spawnEpochOffset
+		if spawnTime > serverTime then
+			spawnTime = spawnTime - ((2 ^ 23) - 1)
+		end
+		return spawnTime
+	end
+
+	function mod:AddMarking(_, unit, guid)
+		if self:MobId(guid) == 226200 and not mobCollector[guid] then -- Chamber Acolyte
+			mobCollector[guid] = true
+			if self:GetIcon(unit) and not lastAcolyteMarked then
+				-- try to minimize icon shuffle with multiple people marking
+				return
+			end
+
+			-- use the spawn time and counter from the mob spawn uid for marking star/circle (1/2)
+			local index = getSpawnIndex(guid)
+			if index == 1 and lastAcolyteMarked then -- staggered spawn
+				local spawnA, spawnB = getSpawnTime(lastAcolyteMarked), getSpawnTime(guid)
+				if spawnA < spawnB then
+					-- this is the second spawn
+					index = 2
+				else
+					-- this is the first spawn, remark other add
+					local otherUnit = self:UnitTokenFromGUID(lastAcolyteMarked)
+					self:CustomIcon(chamberAcolyteMarker, otherUnit, 2)
+				end
+			end
+			self:CustomIcon(chamberAcolyteMarker, unit, index)
+			lastAcolyteMarked = guid
+		end
 	end
 end
 
@@ -476,7 +511,7 @@ do
 			scheduled = self:ScheduleTimer("MarkToxinPlayers", 0.5)
 		end
 		iconList = addPlayerToIconList(iconList, args.destName)
-		local requiredPlayers = self:Mythic() and reactiveToxinCount or self:Easy() and 1 or 2
+		local requiredPlayers = self:Mythic() and math.min(reactiveToxinCount, 3) or self:Easy() and 1 or 2
 		if #iconList == requiredPlayers then
 			self:MarkToxinPlayers()
 		end
@@ -640,6 +675,7 @@ do
 		platformAddsKilled = 0
 		worshippersKilled = 0
 		acolytesKilled = 0
+		lastAcolyteMarked = nil
 		firstShadowgate = true
 
 		if self:Mythic() then
