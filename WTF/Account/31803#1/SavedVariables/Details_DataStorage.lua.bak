@@ -1,0 +1,50 @@
+
+DetailsDataStorage = {
+["normal"] = {
+},
+["mythic"] = {
+},
+["mythic_plus"] = {
+},
+["totalkills"] = {
+[2898] = {
+["raidfinder"] = {
+["time_incombat"] = 128.3300000000745,
+["time_fasterkill"] = 128.3300000000745,
+["wipes"] = 0,
+["kills"] = 1,
+["dps_best"] = 68308.05736400616,
+["dps_best_raid_when"] = 1738113415,
+["time_fasterkill_when"] = 1738113415,
+["dps_best_when"] = 1738113415,
+["dps_best_raid"] = 10066177.56564521,
+},
+},
+[2918] = {
+["raidfinder"] = {
+["time_incombat"] = 203.2150000000838,
+["time_fasterkill"] = 203.2150000000838,
+["wipes"] = 0,
+["kills"] = 1,
+["dps_best"] = 44618.40908333174,
+["dps_best_raid_when"] = 1738114425,
+["time_fasterkill_when"] = 1738114425,
+["dps_best_when"] = 1738114425,
+["dps_best_raid"] = 8492544.50704568,
+},
+},
+},
+["VERSION"] = 7,
+["raidfinder"] = {
+[2898] = {
+},
+[2918] = {
+},
+},
+["Data"] = {
+},
+["saved_encounters"] = {
+},
+["heroic"] = {
+},
+}

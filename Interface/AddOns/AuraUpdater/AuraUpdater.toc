@@ -1,0 +1,35 @@
+## Interface: 110100
+## Version: 23
+## Title: Aura Updater
+## Author: Naemesis
+## IconTexture: Interface\AddOns\AuraUpdater\Media\Textures\logo_secondary.blp
+## SavedVariables: LiquidUpdaterSaved
+## Dependencies: WeakAuras
+## OptionalDeps: ViragDevTool, Plater, RCLootCouncil, MRT, CustomNames, Liquid, Grid2, ElvUI, Cell, LiquidUpdater, VuhDo
+## Category: Liquid
+
+embeds.xml
+AUFont.xml
+
+GlobalSettings.lua
+BigWigsDisabler.lua
+AnchorSettings.lua
+Nicknames.lua
+WeakAuras.lua
+WeakAurasImporter.lua
+Utility.lua
+
+Interface/Widgets/Window.lua
+Interface/Widgets/Button.lua
+Interface/Widgets/EditBox.lua
+Interface/Widgets/CheckButton.lua
+Interface/Widgets/PopupWindow.lua
+
+Interface/Interface.lua
+Interface/AuraImportElement.lua
+Interface/AuraUpdater.lua
+Interface/AuraChecker.lua
+Interface/OtherChecker.lua
+Interface/Settings.lua
+
+AuraUpdater.lua

@@ -1,0 +1,55 @@
+
+RaiderIO_Config = {
+["previouslyEnabledLogging"] = false,
+["minimapIcon"] = {
+["minimapPos"] = 180,
+["showInCompartment"] = true,
+["lock"] = false,
+["hide"] = false,
+},
+["profilePoint"] = {
+["y"] = 0,
+["x"] = -16,
+["point"] = "TOPLEFT",
+},
+}
+RaiderIO_LastCharacter = "eu-Gordonfreema-tarren-mill"
+RaiderIO_MissingCharacters = {
+["eu-Tundrax-tarren-mill"] = true,
+["eu-Sosigroll-tarren-mill"] = true,
+["eu-Lelxd-tarren-mill"] = true,
+["eu-Stallvon-ravencrest"] = true,
+["eu-Gordonfreema-Tarren Mill"] = true,
+["eu-Zahari-tarren-mill"] = true,
+["eu-Nfsdeath-tarren-mill"] = true,
+["eu-Eyebiim-tarren-mill"] = true,
+["eu-Cherotia-silvermoon"] = true,
+["eu-Damnzor-tarren-mill"] = true,
+["eu-Rubicon-shadowsong"] = true,
+["eu-Rabidpriest-shadowsong"] = true,
+["eu-Tyrandris-ravenholdt"] = true,
+["eu-Veiðun-shadowsong"] = true,
+["eu-Ntherkel-tarren-mill"] = true,
+["eu-Crackmonkeey-ravencrest"] = true,
+["eu-Failnova-tarren-mill"] = true,
+["eu-Blazestrider-tarren-mill"] = true,
+["eu-Mellde-agamaggan"] = true,
+["eu-Gordonfreema-tarren-mill"] = true,
+["eu-Xdanerys-dun-modr"] = true,
+["eu-Onigirazu-tarren-mill"] = true,
+["eu-Runchu-tarren-mill"] = true,
+["eu-Eleax-tarren-mill"] = true,
+["eu-Vanexá-tarren-mill"] = true,
+["eu-Leyck-dentarg"] = true,
+["eu-Degringolada-tarren-mill"] = true,
+["eu-Ogri-tarren-mill"] = true,
+["eu-Jaarrk-tarren-mill"] = true,
+["eu-Ëldri-tarren-mill"] = true,
+}
+RaiderIO_MissingServers = {
+}
+RaiderIO_CachedRuns = nil
+RaiderIO_RWF = {
+}
+RaiderIO_CompletedReplays = {
+}

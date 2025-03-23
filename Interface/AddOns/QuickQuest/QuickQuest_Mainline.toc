@@ -1,0 +1,29 @@
+## Interface: 110100
+## Author: p3lim
+## Version: 110100.80-Release
+## Title: QuickQuest
+## Notes: Quest automation wizardry
+## IconTexture: Interface\Icons\spell_nature_timestop
+## SavedVariables: QuickQuestDB2, QuickQuestDB3, QuickQuestBlocklistDB
+
+## X-Curse-Project-ID: 36494
+## X-WoWI-ID: 20838
+## X-Wago-ID: Qb6meD6P
+
+libs\Dashi\embed.xml
+
+locale\deDE.lua
+locale\esES.lua
+locale\esMX.lua
+locale\frFR.lua
+locale\itIT.lua
+locale\koKR.lua
+locale\ptBR.lua
+locale\ruRU.lua
+locale\zhCN.lua
+locale\zhTW.lua
+
+utils.lua
+quests.lua
+gossip.lua
+settings.lua

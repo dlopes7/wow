@@ -1,0 +1,143 @@
+
+NarcissusDB = {
+["DragonridingTourWorldMapPin"] = true,
+["SearchSuggestDirection"] = 1,
+["LetterboxRatio"] = 2,
+["NamePlateLanguage"] = "enUS",
+["ItemNameWidth"] = 180,
+["UseEscapeButton"] = true,
+["QuestCardTheme"] = 1,
+["LoopAnimation"] = false,
+["AutoFilterGem"] = false,
+["SearchRelativesHotkey"] = "TAB",
+["AutoFilterMail"] = false,
+["SoloQueueLFRDetails"] = true,
+["DressingRoomAutoRemoveNonSetItem"] = false,
+["IsSortedByCategory"] = true,
+["AutoFilterAuction"] = false,
+["CameraTransition"] = true,
+["PaperDollWidget"] = true,
+["ShowModulePanelOnMouseOver"] = true,
+["CameraSafeMode"] = true,
+["WeatherEffect"] = true,
+["OutfitSortMethod"] = "name",
+["SearchRelatives"] = false,
+["DressingRoomIncludeItemID"] = false,
+["ClassSetTheme_DF_1"] = 1,
+["PaperDollWidget_Remix"] = true,
+["FadeButton"] = false,
+["ShowMinimapButton"] = true,
+["ItemTooltipStyle"] = 1,
+["MinimapButton"] = {
+["Position"] = 2.617993877991494,
+},
+["DetailedIlvlInfo"] = true,
+["OnlyShowOwnedUpgradeItem"] = true,
+["VignetteStrength"] = 0.5,
+["TruncateText"] = false,
+["ShrinkArea"] = 0,
+["LetterboxEffect"] = false,
+["ShowItemID"] = false,
+["Favorites"] = {
+["FavoriteSpellVisualKitIDs"] = {
+},
+["FavoriteAnimationIDs"] = {
+},
+},
+["BaseLineOffset"] = 0,
+["TalentTreeBiggerUI"] = false,
+["DressingRoomShowIconSelect"] = false,
+["UseAddonCompartment"] = true,
+["DressingRoom"] = true,
+["UseBustShot"] = true,
+["PaperDollWidget_ClassSet"] = true,
+["TranslateName"] = false,
+["TalentTreeUseClassBackground"] = false,
+["installTime"] = 1738165284,
+["GlobalScale"] = 0.8,
+["AutoPlayAnimation"] = false,
+["AFKScreen"] = false,
+["EnableDoubleTap"] = false,
+["AKFScreenDelay"] = false,
+["FontHeightItemName"] = 10,
+["Version"] = 10000,
+["HideTextsWithUI"] = false,
+["IndependentMinimapButton"] = false,
+["TalentTreeForEquipmentManager"] = true,
+["Tutorials"] = {
+["ExitConfirmation"] = true,
+["Movement"] = true,
+["SpellVisualBrowser"] = true,
+["NPCBrowserEntance"] = true,
+["WeaponBrowser"] = true,
+["NPCBrowser"] = true,
+},
+["PerksProgramDB"] = {
+["MonthNames"] = {
+},
+["VendorItems"] = {
+},
+["CurrentMonthData"] = {
+},
+},
+["NamePlateNameOffset"] = 0,
+["AnchorToMinimap"] = true,
+["UseEntranceVisual"] = true,
+["GemManager"] = true,
+["ModelPanelScale"] = 1,
+["AutoDisplayQuestItem"] = false,
+["CameraOrbit"] = true,
+["TooltipTheme"] = "Bright",
+["TalentTreeForInspection"] = true,
+["MissingEnchantAlert"] = false,
+["TalentTreeForPaperDoll"] = false,
+["TalentTreeAnchor"] = 1,
+["NameTranslationPosition"] = 1,
+["SpeedyScreenshotAlert"] = true,
+["TradingPostChangePost"] = true,
+["TooltipLanguages"] = {
+},
+["SearchSuggestEnable"] = false,
+["ConduitTooltip"] = false,
+["DressingRoomUseTargetModel"] = true,
+}
+NarciAchievementOptions = {
+["UseAsDefault"] = false,
+["IncompleteFirst"] = true,
+["Scale"] = 1,
+["ReplaceToast"] = true,
+["Theme"] = 1,
+["ShowRedMark"] = false,
+}
+NarciStatisticsDB = {
+["InstalledDate"] = 1738165293,
+["QuestItems"] = {
+},
+}
+NarciTurntableOptions = {
+["FontSize"] = 16,
+["BackgroundImageType"] = 1,
+["BackgroundType"] = 1,
+["ImageWidth"] = 1024,
+["ShowSplash"] = false,
+["NoTextImageWidth"] = 600,
+["Period"] = 6,
+["ImageHeight"] = 768,
+["ShowItemName"] = true,
+["NoTextImageHeight"] = 800,
+}
+NarciCharacterProfiles = {
+["0B18737E"] = {
+["race"] = 3,
+["name"] = "Gordonfreema",
+["birth"] = 1738165293,
+["serverID"] = "1084",
+["lastVisit"] = 1738336270,
+["outfits"] = {
+},
+["class"] = 7,
+},
+}
+NarciPhotoModeDB = {
+}
+NarciDevToolOutput = nil
