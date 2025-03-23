@@ -22,8 +22,13 @@ RaiderIO_Config = {
 ["lockReplay"] = true,
 ["displayWeeklyGuildBest"] = false,
 }
-RaiderIO_LastCharacter = "us-Gordonfreems-illidan"
+RaiderIO_LastCharacter = "us-Pedrado-stormrage"
 RaiderIO_MissingCharacters = {
+["us-Sunwalkers-stormrage"] = true,
+["us-Gullyg-thunderlord"] = true,
+["us-Botein-stormrage"] = true,
+["us-Giggleswørth-stormrage"] = true,
+["us-Pedrado-stormrage"] = true,
 }
 RaiderIO_MissingServers = {
 }

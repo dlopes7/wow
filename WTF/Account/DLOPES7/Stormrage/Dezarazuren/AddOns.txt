@@ -9,7 +9,7 @@ BetterBags_Bound: disabled
 BigWigs: disabled
 BigWigs_Core: enabled
 BigWigs_Dragonflight: disabled
-BigWigs_KhazAlgar: disabled
+BigWigs_KhazAlgar: enabled
 BigWigs_NerubarPalace: enabled
 BigWigs_Options: enabled
 BigWigs_Plugins: enabled
@@ -40,9 +40,9 @@ LittleWigs_BattleForAzeroth: enabled
 LittleWigs_BurningCrusade: disabled
 LittleWigs_Cataclysm: enabled
 LittleWigs_Classic: disabled
-LittleWigs_Dragonflight: disabled
+LittleWigs_Dragonflight: enabled
 LittleWigs_Legion: disabled
-LittleWigs_MistsOfPandaria: disabled
+LittleWigs_MistsOfPandaria: enabled
 LittleWigs_Shadowlands: enabled
 LittleWigs_WarlordsOfDraenor: disabled
 LittleWigs_WrathOfTheLichKing: disabled
@@ -96,3 +96,6 @@ ElvUI_BuffHighlight: disabled
 kExtraBossFrames: disabled
 OPie_Classic: disabled
 Blizzard_CombatText: enabled
+ConsolePort_Config: enabled
+ConsolePort_Cursor: enabled
+BigWigs_LiberationOfUndermine: enabled

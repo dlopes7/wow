@@ -306,6 +306,10 @@ local function LoadSkin()
 	ItemBuyFrame.BidFrame.BidButton:ClearAllPoints()
 	ItemBuyFrame.BidFrame.BidButton:Point('LEFT', ItemBuyFrame.BidFrame.BidAmount, 'RIGHT', 2, -2)
 
+	-- Did blizz do a whoopsi with this names?
+	S:HandleEditBox(_G.BidAmountGold)
+	S:HandleEditBox(_G.BidAmountSilver)
+
 	--[[ Item Sell Frame | TAB 2 ]]--
 	local SellFrame = Frame.ItemSellFrame
 	HandleSellFrame(SellFrame)
@@ -370,8 +374,6 @@ local function LoadSkin()
 	HandleSellList(BidsList, true, true)
 	BidsList.ResultsText:SetParent(BidsList.ScrollFrame)
 	S:HandleButton(BidsList.RefreshFrame.RefreshButton)
-	S:HandleEditBox(_G.AuctionHouseFrameAuctionsFrameGold)
-	S:HandleEditBox(_G.AuctionHouseFrameAuctionsFrameSilver)
 	S:HandleButton(AuctionsFrame.BidFrame.BidButton)
 
 	--[[ ProgressBars ]]--

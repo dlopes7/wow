@@ -1,5 +1,7 @@
 local _, Cell = ...
+---@type CellFuncs
 local F = Cell.funcs
+---@class CellUnitButtonFuncs
 local I = Cell.iFuncs
 
 -------------------------------------------------
@@ -13,7 +15,7 @@ function I.GetDefaultCustomIndicatorTable(name, indicatorName, type, auraType)
             ["indicatorName"] = indicatorName,
             ["type"] = type,
             ["enabled"] = true,
-            ["position"] = {"TOPRIGHT", "TOPRIGHT", 0, 3},
+            ["position"] = {"TOPRIGHT", "button", "TOPRIGHT", 0, 3},
             ["frameLevel"] = 5,
             ["size"] = {13, 13},
             ["font"] = {
@@ -25,6 +27,7 @@ function I.GetDefaultCustomIndicatorTable(name, indicatorName, type, auraType)
             ["showAnimation"] = true,
             ["auraType"] = auraType,
             ["auras"] = {},
+            ["glowOptions"] = {"None", {0.95, 0.95, 0.32, 1}}
         }
     elseif type == "text" then
         t = {
@@ -32,7 +35,7 @@ function I.GetDefaultCustomIndicatorTable(name, indicatorName, type, auraType)
             ["indicatorName"] = indicatorName,
             ["type"] = type,
             ["enabled"] = true,
-            ["position"] = {"TOPRIGHT", "TOPRIGHT", 0, 3},
+            ["position"] = {"TOPRIGHT", "button", "TOPRIGHT", 0, 3},
             ["frameLevel"] = 5,
             ["font"] = {"Cell " .. _G.DEFAULT, 12, "Outline", false},
             ["colors"] = {{0, 1, 0, 1}, {false, 0.5, {1, 1, 0, 1}}, {false, 3, {1, 0, 0, 1}}},
@@ -54,7 +57,7 @@ function I.GetDefaultCustomIndicatorTable(name, indicatorName, type, auraType)
             ["indicatorName"] = indicatorName,
             ["type"] = type,
             ["enabled"] = true,
-            ["position"] = {"BOTTOMRIGHT", "TOPRIGHT", 0, -1},
+            ["position"] = {"BOTTOMRIGHT", "button", "TOPRIGHT", 0, -1},
             ["frameLevel"] = 5,
             ["size"] = {18, 4},
             ["colors"] = {{0, 1, 0, 1}, {false, 0.5, {1, 1, 0, 1}}, {false, 3, {1, 0, 0, 1}}, {0, 0, 0, 1}, {0.07, 0.07, 0.07, 0.9}},
@@ -65,8 +68,10 @@ function I.GetDefaultCustomIndicatorTable(name, indicatorName, type, auraType)
             },
             ["showStack"] = false,
             ["showDuration"] = false,
+            ["maxValue"] = {false, 10, true},
             ["auraType"] = auraType,
             ["auras"] = {},
+            ["glowOptions"] = {"None", {0.95, 0.95, 0.32, 1}}
         }
     elseif type == "bars" then
         t = {
@@ -74,7 +79,7 @@ function I.GetDefaultCustomIndicatorTable(name, indicatorName, type, auraType)
             ["indicatorName"] = indicatorName,
             ["type"] = type,
             ["enabled"] = true,
-            ["position"] = {"TOPRIGHT", "TOPRIGHT", 0, 0},
+            ["position"] = {"TOPRIGHT", "button", "TOPRIGHT", 0, 0},
             ["frameLevel"] = 5,
             ["size"] = {18, 4},
             ["num"] = 3,
@@ -87,9 +92,10 @@ function I.GetDefaultCustomIndicatorTable(name, indicatorName, type, auraType)
             },
             ["showStack"] = false,
             ["showDuration"] = false,
-            ["maxValue"] = {0, true},
+            ["maxValue"] = {false, 10, true},
             ["auraType"] = auraType,
             ["auras"] = {},
+            ["glowOptions"] = {"None", {0.95, 0.95, 0.32, 1}}
         }
     elseif type == "rect" then
         t = {
@@ -97,7 +103,7 @@ function I.GetDefaultCustomIndicatorTable(name, indicatorName, type, auraType)
             ["indicatorName"] = indicatorName,
             ["type"] = type,
             ["enabled"] = true,
-            ["position"] = {"TOPRIGHT", "TOPRIGHT", 0, 2},
+            ["position"] = {"TOPRIGHT", "button", "TOPRIGHT", 0, 2},
             ["frameLevel"] = 5,
             ["size"] = {11, 4},
             ["colors"] = {{0, 1, 0, 1}, {false, 0.5, {1, 1, 0, 1}}, {false, 3, {1, 0, 0, 1}}, {0, 0, 0, 1}},
@@ -109,6 +115,7 @@ function I.GetDefaultCustomIndicatorTable(name, indicatorName, type, auraType)
             ["showDuration"] = false,
             ["auraType"] = auraType,
             ["auras"] = {},
+            ["glowOptions"] = {"None", {0.95, 0.95, 0.32, 1}}
         }
     elseif type == "icons" then
         t = {
@@ -116,7 +123,7 @@ function I.GetDefaultCustomIndicatorTable(name, indicatorName, type, auraType)
             ["indicatorName"] = indicatorName,
             ["type"] = type,
             ["enabled"] = true,
-            ["position"] = {"TOPRIGHT", "TOPRIGHT", 0, 3},
+            ["position"] = {"TOPRIGHT", "button", "TOPRIGHT", 0, 3},
             ["frameLevel"] = 5,
             ["size"] = {13, 13},
             ["num"] = 5,
@@ -132,6 +139,7 @@ function I.GetDefaultCustomIndicatorTable(name, indicatorName, type, auraType)
             ["showAnimation"] = true,
             ["auraType"] = auraType,
             ["auras"] = {},
+            ["glowOptions"] = {"None", {0.95, 0.95, 0.32, 1}}
         }
     elseif type == "color" then
         t = {
@@ -151,7 +159,7 @@ function I.GetDefaultCustomIndicatorTable(name, indicatorName, type, auraType)
             ["indicatorName"] = indicatorName,
             ["type"] = type,
             ["enabled"] = true,
-            ["position"] = {"TOP", "TOP", 0, 0},
+            ["position"] = {"TOP", "button", "TOP", 0, 0},
             ["size"] = {16, 16},
             ["frameLevel"] = 10,
             ["texture"] = {"Interface\\AddOns\\Cell\\Media\\Shapes\\circle_blurred.tga", 0, {1, 1, 1, 1}},
@@ -190,7 +198,7 @@ function I.GetDefaultCustomIndicatorTable(name, indicatorName, type, auraType)
             ["indicatorName"] = indicatorName,
             ["type"] = type,
             ["enabled"] = true,
-            ["position"] = {"TOPRIGHT", "TOPRIGHT", 0, 3},
+            ["position"] = {"TOPRIGHT", "button", "TOPRIGHT", 0, 3},
             ["frameLevel"] = 5,
             ["size"] = {10, 10},
             ["colors"] = {"duration", {0, 1, 0, 1}, {false, 0.5, {1, 1, 0, 1}}, {false, 3, {1, 0, 0, 1}}, {0, 0, 0, 1}},
@@ -202,6 +210,7 @@ function I.GetDefaultCustomIndicatorTable(name, indicatorName, type, auraType)
             ["showDuration"] = false,
             ["auraType"] = auraType,
             ["auras"] = {},
+            ["glowOptions"] = {"None", {0.95, 0.95, 0.32, 1}}
         }
     elseif type == "blocks" then
         t = {
@@ -209,7 +218,7 @@ function I.GetDefaultCustomIndicatorTable(name, indicatorName, type, auraType)
             ["indicatorName"] = indicatorName,
             ["type"] = type,
             ["enabled"] = true,
-            ["position"] = {"TOPRIGHT", "TOPRIGHT", 0, 3},
+            ["position"] = {"TOPRIGHT", "button", "TOPRIGHT", 0, 3},
             ["frameLevel"] = 5,
             ["size"] = {10, 10},
             ["num"] = 5,
@@ -224,6 +233,7 @@ function I.GetDefaultCustomIndicatorTable(name, indicatorName, type, auraType)
             ["showDuration"] = false,
             ["auraType"] = auraType,
             ["auras"] = {},
+            ["glowOptions"] = {"None", {0.95, 0.95, 0.32, 1}}
         }
     elseif type == "border" then
         t = {
@@ -273,7 +283,7 @@ end
 
 function I.ResetDebuffTypeColor()
     -- copy
-    CellDB["debuffTypeColor"] = F:Copy(DebuffTypeColor)
+    CellDB["debuffTypeColor"] = F.Copy(DebuffTypeColor)
     -- add Bleed
     CellDB["debuffTypeColor"]["Bleed"] = {r = 1, g = 0.2, b = 0.6}
     -- add cleu

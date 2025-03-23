@@ -13,6 +13,20 @@ if L then
 	--L.particularly_bad_guy = "Particularly Bad Guy"
 end
 
+L = BigWigs:NewBossLocale("Goblin Delve Trash", "zhTW")
+if L then
+	--L.goblin_trash = "Goblin Trash"
+
+	--L.bopper_bot = "Bopper Bot"
+	--L.aerial_support_bot = "Aerial Support Bot"
+	--L.masked_freelancer = "Masked Freelancer"
+	--L.underpaid_brute = "Underpaid Brute"
+	--L.drill_sergeant = "Drill Sergeant"
+	--L.punchy_thug = "Punchy Thug"
+	--L.flinging_flicker = "Flinging Flicker"
+	--L.bomb_bot = "Bomb Bot"
+end
+
 L = BigWigs:NewBossLocale("Kobold Delve Trash", "zhTW")
 if L then
 	--L.kobold_trash = "Kobold Trash"
@@ -32,6 +46,7 @@ if L then
 	--L.wandering_gutter = "Wandering Gutter"
 	--L.crazed_predator = "Crazed Predator"
 	--L.deepwater_makura = "Deepwater Makura"
+	--L.kobyss_trickster = "Kobyss Trickster"
 end
 
 L = BigWigs:NewBossLocale("Nerubian Delve Trash", "zhTW")
@@ -58,6 +73,17 @@ if L then
 	--L.shadow_elemental = "Shadow Elemental"
 end
 
+L = BigWigs:NewBossLocale("Old God Delve Trash", "zhTW")
+if L then
+	--L.old_god_trash = "Old God Trash"
+
+	--L.dark_walker = "Dark Walker"
+	--L.hideous_amalgamation = "Hideous Amalgamation"
+	--L.coagulated_mass = "Coagulated Mass"
+	--L.silent_slitherer = "Silent Slitherer"
+	--L.amalgamized_mass = "Amalgamized Mass"
+end
+
 L = BigWigs:NewBossLocale("The Underkeep Trash", "zhTW")
 if L then
 	--L.ascended_webfriar = "Ascended Webfriar"
@@ -66,23 +92,20 @@ if L then
 	--L.web_marauder = "Web Marauder"
 end
 
-L = BigWigs:NewBossLocale("Delve Rares", "zhTW")
+L = BigWigs:NewBossLocale("Underpin Rares", "zhTW")
 if L then
-	--L.rares = "Rares"
+	--L.rares = "Underpin Rares"
 
-	--L.stolen_loader = "Stolen Loader"
-	--L.invasive_sporecap = "Invasive Sporecap"
-	--L.reno_jackson = "Reno Jackson"
-	--L.sir_finley_mrgglton = "Sir Finley Mrgglton"
 	--L.treasure_wraith = "Treasure Wraith"
-	--L.venombite = "Venombite"
-	--L.kasdru = "Kas'dru"
-	--L.tala = "Tala"
-	--L.velo = "Velo"
-	--L.anubvir = "Anub'vir"
-	--L.zekvir = "Zekvir"
-	--L.zekvirs_influence = "Zekvir's Influence"
-	--L.zekvir_random = "Zekvir (Random Spawn)"
-	--L.zekvir_breach = "Zekvir incoming"
-	--L.zekvir_breach_desc = "Show an alert when Zekvir is spawning in the Delve."
+	--L.treasure_crab = "Treasure Crab"
+	--L.hovering_menace = "Hovering Menace"
+	--L.malfunctioning_pummeler = "Malfunctioning Pummeler"
+	--L.underpins_adoring_fan = "Underpin's Adoring Fan"
+	--L.underpins_well_connected_friend = "Underpin's Well-Connected Friend"
+	--L.underpins_explosive_ally = "Underpin's Explosive Ally"
+	--L.underpins_bodyguards_intern = "Underpin's Bodyguard's Intern"
+	--L.aggressively_lost_hobgoblin = "Aggressively Lost Hobgoblin"
+	--L.the_underpin = "The Underpin (Random Spawn)"
+
+	--L.underpin_retreat_trigger = "People always messin' around on my perfectly legal, deeded land!"
 end

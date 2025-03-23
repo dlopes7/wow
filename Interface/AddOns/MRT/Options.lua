@@ -889,6 +889,10 @@ function OptionsFrame:AddChest(chestType)
 			if self.tmr > data.s then
 				self.tmr = 0
 				self.frame = self.frame + 1
+
+				if not Options:IsShown() then
+					self:Hide()
+				end
 		
 				if self.frame > self.frame_max then
 					self.frame = 0
@@ -1168,7 +1172,7 @@ OptionsFrame.dateChecks:SetScript("OnShow",function(self)
 			isSnowDay = true
 		end
 	end
-	if (today.wday == 6 and today.day % 2 == 0) then
+	if (today.wday == 6 and today.day % 2 == 0) and not MRT.isClassic then
 		isFrierenFriday = true
 	end	
 	

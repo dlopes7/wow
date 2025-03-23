@@ -11,10 +11,12 @@ if L then
 	--L.arathi_knight = "Arathi Knight"
 	--L.arathi_footman = "Arathi Footman"
 	--L.fervent_sharpshooter = "Fervent Sharpshooter"
+	--L.war_lynx = "War Lynx"
 	--L.devout_priest = "Devout Priest"
 	--L.fanatical_conjuror = "Fanatical Conjuror"
 	--L.lightspawn = "Lightspawn"
 	--L.ardent_paladin = "Ardent Paladin"
+	--L.zealous_templar = "Zealous Templar"
 	--L.risen_mage = "Risen Mage"
 	--L.sir_braunpyke = "Sir Braunpyke"
 

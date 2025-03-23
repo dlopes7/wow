@@ -11,11 +11,17 @@ if L then
 	L.torchsnarl = "炬龇"
 	L.skittering_darkness = "掠行之暗"
 	L.shuffling_horror = "残步恐魔"
+	L.corridor_creeper = "通道爬行者"
 	L.creaky_mine_cart = "吱嘎作响的采矿车"
 
 	L.minecart = "迷你矿车游戏"
 	L.hits = "命中"
 	L.minecart_over = "获胜者：%s （命中 %d）"
+end
+
+L = BigWigs:NewBossLocale("Ol' Waxbeard", "zhCN")
+if L then
+	L.dynamite_mine_cart = "炸药采矿车"
 end
 
 L = BigWigs:NewBossLocale("The Darkness", "zhCN")

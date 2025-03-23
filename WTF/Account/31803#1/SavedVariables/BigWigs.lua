@@ -1,57 +1,71 @@
 
 BigWigs3DB = {
 ["namespaces"] = {
-["BigWigs_Plugins_Victory"] = {
-},
 ["BigWigs_Plugins_BossBlock"] = {
-},
-["BigWigs_Plugins_Sounds"] = {
 },
 ["BigWigs_Plugins_AutoReply"] = {
 },
-["BigWigs_Plugins_Nameplates"] = {
-},
-["BigWigs_Bosses_Voidstone Monstrosity"] = {
-},
-["BigWigs_Plugins_Countdown"] = {
-},
 ["BigWigs_Plugins_AltPower"] = {
 },
-["BigWigs_Plugins_Proximity"] = {
-},
-["BigWigs_Plugins_Colors"] = {
+["BigWigs_Bosses_The Dawnbreaker Trash"] = {
 },
 ["BigWigs_Plugins_Raid Icons"] = {
 },
+["BigWigs_Bosses_Rasha'nan Dawnbreaker"] = {
+},
+["BigWigs_Plugins_Messages"] = {
+},
+["BigWigs_Plugins_Victory"] = {
+},
+["BigWigs_Bosses_Shadowcrown"] = {
+},
+["BigWigs_Plugins_Sounds"] = {
+},
+["BigWigs_Bosses_Anub'ikkaj"] = {
+},
 ["BigWigs_Plugins_InfoBox"] = {
+["profiles"] = {
+["Default"] = {
+["position"] = {
+nil,
+nil,
+-312.7497253417969,
+54.49985504150391,
+},
+},
+},
+},
+["BigWigs_Plugins_Countdown"] = {
+},
+["BigWigs_Plugins_Wipe"] = {
+},
+["BigWigs_Plugins_Colors"] = {
+},
+["BigWigs_Plugins_Statistics"] = {
+},
+["BigWigs_Plugins_Nameplates"] = {
 },
 ["BigWigs_Plugins_Bars"] = {
 ["profiles"] = {
 ["Default"] = {
 ["expPosition"] = {
-[3] = 298,
-[4] = -41,
+nil,
+nil,
+298,
+-41,
 },
 ["normalPosition"] = {
-[3] = 429,
-[4] = -211,
+nil,
+nil,
+429,
+-211,
 },
 },
 },
 },
-["BigWigs_Bosses_The Rookery Trash"] = {
-},
-["BigWigs_Plugins_Wipe"] = {
-},
-["BigWigs_Bosses_Kyrioss"] = {
-},
-["BigWigs_Bosses_Stormguard Gorren"] = {
+["BigWigs_Plugins_Proximity"] = {
 },
 ["LibDualSpec-1.0"] = {
-},
-["BigWigs_Plugins_Statistics"] = {
-},
-["BigWigs_Plugins_Messages"] = {
 },
 ["BigWigs_Plugins_Pull"] = {
 },
@@ -68,5 +82,43 @@ BigWigsIconDB = {
 ["minimapPos"] = 261.1528735184489,
 }
 BigWigsStatsDB = {
+[2657] = {
+[2599] = {
+["LFR"] = {
+["kills"] = 1,
+["fkDuration"] = 128.2980000001844,
+["best"] = 128.2980000001844,
+["bestDate"] = "2025/01/28",
+["fkDate"] = "2025/01/28",
+},
+},
+[2601] = {
+["LFR"] = {
+["kills"] = 1,
+["fkDate"] = "2025/01/28",
+["bestDate"] = "2025/01/28",
+["best"] = 215.7879999999423,
+["fkDuration"] = 215.7879999999423,
+},
+},
+[2609] = {
+["LFR"] = {
+["kills"] = 1,
+["fkDuration"] = 203.1929999999702,
+["best"] = 203.1929999999702,
+["bestDate"] = "2025/01/28",
+["fkDate"] = "2025/01/28",
+},
+},
+[2612] = {
+["LFR"] = {
+["kills"] = 1,
+["fkDate"] = "2025/01/28",
+["bestDate"] = "2025/01/28",
+["best"] = 202.7079999998678,
+["fkDuration"] = 202.7079999998678,
+},
+},
+},
 }
-BigWigsTempNameplates = nil
+BigWigsTempNameplates = true

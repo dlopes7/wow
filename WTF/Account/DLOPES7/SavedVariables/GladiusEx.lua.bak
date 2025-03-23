@@ -83,7 +83,7 @@ GladiusExDB = {
 },
 ["party_Auras"] = {
 },
-["Announcements"] = {
+["party_Interrupts"] = {
 },
 ["party_Tags"] = {
 },
@@ -91,7 +91,7 @@ GladiusExDB = {
 },
 ["Alerts"] = {
 },
-["party_Interrupts"] = {
+["Announcements"] = {
 },
 ["PetBar"] = {
 },
@@ -101,6 +101,8 @@ GladiusExDB = {
 },
 },
 ["profileKeys"] = {
+["Pedrado - Stormrage"] = "Default",
+["Dragonfreema - Stormrage"] = "Default",
 ["Gordonfreema - Stormrage"] = "Default",
 ["Gords - Stormrage"] = "Default",
 ["Doutora - Illidan"] = "Default",

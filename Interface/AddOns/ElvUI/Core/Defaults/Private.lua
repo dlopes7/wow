@@ -31,6 +31,7 @@ V.general = {
 	blizzardFontSize = false,
 	noFontScale = false,
 	totemTracker = true,
+	classColors = false,
 	queueStatus = true,
 	minimap = {
 		enable = true,
@@ -181,6 +182,7 @@ V.skins = {
 		majorFactions = true,
 		genericTrait = true,
 		editor = true,
+		campsites = true,
 	}
 }
 

@@ -310,12 +310,12 @@ local function SkinMountFrame()
 	S:HandleItemButton(_G.MountJournalSummonRandomFavoriteButton)
 	S:HandleButton(_G.MountJournal.FilterDropdown, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, true, 'right')
 
-	local Flyout = _G.MountJournal.DynamicFlightFlyout
-	Flyout.Background:Hide()
+	HandleDynamicFlightButton(_G.MountJournal.ToggleDynamicFlightFlyoutButton, 3)
 
-	HandleDynamicFlightButton(Flyout.DynamicFlightModeButton, 4)
-	HandleDynamicFlightButton(Flyout.OpenDynamicFlightSkillTreeButton, 4)
-	HandleDynamicFlightButton(_G.MountJournal.ToggleDynamicFlightFlyoutButton, 1)
+	local Flyout = _G.MountJournal.ToggleDynamicFlightFlyoutButton.popup
+	if Flyout then
+		Flyout.Background:Hide()
+	end
 
 	_G.MountJournal.FilterDropdown:ClearAllPoints()
 	_G.MountJournal.FilterDropdown:Point('LEFT', _G.MountJournalSearchBox, 'RIGHT', 5, 0)
@@ -584,7 +584,7 @@ local function SkinTransmogFrames()
 					if region:IsObjectType('Texture') then -- check for hover glow
 						local texture, regionName = region:GetTexture(), region:GetDebugName() -- find transmogrify.blp (sets:1569530 or items:1116940)
 						if texture == 1569530 or (texture == 1116940 and not strfind(regionName, 'SlotInvalidTexture') and not strfind(regionName, 'DisabledOverlay')) then
-							region:SetColorTexture(1, 1, 1, 0.3)
+							region:SetColorTexture(1, 1, 1, .25)
 							region:SetBlendMode('ADD')
 							region:SetAllPoints(Model)
 						end
@@ -684,7 +684,26 @@ local function SkinTransmogFrames()
 		end
 	end
 
-	S:HandleButton(WardrobeTransmogFrame.SpecDropdown)
+	local SpecButton = WardrobeTransmogFrame.SpecDropdown
+	if SpecButton then
+		S:HandleButton(SpecButton)
+
+		SpecButton:SetPoint('RIGHT', WardrobeTransmogFrame.ApplyButton, 'LEFT', -3, 0)
+
+		if SpecButton.Arrow then
+			SpecButton.Arrow:SetAlpha(0)
+		end
+
+		if not SpecButton.customArrow then
+			local tex = SpecButton:CreateTexture(nil, 'ARTWORK')
+			tex:SetAllPoints()
+			tex:SetTexture(E.Media.Textures.ArrowUp)
+			tex:SetRotation(S.ArrowRotation.down)
+
+			SpecButton.customArrow = tex
+		end
+	end
+
 	S:HandleButton(WardrobeTransmogFrame.ApplyButton)
 	S:HandleButton(WardrobeTransmogFrame.ModelScene.ClearAllPendingButton)
 	S:HandleCheckBox(WardrobeTransmogFrame.ToggleSecondaryAppearanceCheckbox)
@@ -739,10 +758,57 @@ local function SkinCollectionsFrames()
 	SkinHeirloomFrame()
 end
 
+local function UpdateWarbandSceneData(frame)
+	if frame and frame.warbandSceneInfo and not frame.artBackdrop then
+		frame.artBackdrop = CreateFrame('Frame', nil, frame)
+		frame.artBackdrop:SetFrameLevel(frame:GetFrameLevel() - 1)
+		frame.artBackdrop:SetOutside(frame.Icon, -5, -5)
+		frame.artBackdrop:SetTemplate()
+
+		frame.Border:SetAlpha(0)
+		S:HandleIcon(frame.Icon)
+
+		if frame.SetHighlightTexture then
+			local highlight = frame:CreateTexture()
+			highlight:SetColorTexture(1, 1, 1, .25)
+			highlight:SetAllPoints(frame.Icon)
+
+			frame:SetHighlightTexture(highlight)
+		end
+	end
+end
+
+local function SkinCampsitesFrame()
+	local Frame = _G.WarbandSceneJournal
+
+	local IconsFrame = Frame.IconsFrame
+	if IconsFrame then
+		IconsFrame:StripTextures()
+		IconsFrame.NineSlice:SetTemplate('Transparent')
+
+		local Controls = IconsFrame.Icons and IconsFrame.Icons.Controls
+		if Controls then
+			local CheckBox = Controls and Controls.ShowOwned and Controls.ShowOwned.Checkbox
+			if CheckBox then
+				CheckBox:Size(28)
+				S:HandleCheckBox(CheckBox)
+			end
+
+			if Controls.PagingControls then
+				S:HandleNextPrevButton(Controls.PagingControls.PrevPageButton, nil, nil, true)
+				S:HandleNextPrevButton(Controls.PagingControls.NextPageButton, nil, nil, true)
+			end
+		end
+	end
+
+	hooksecurefunc(_G.WarbandSceneEntryMixin, 'UpdateWarbandSceneData', UpdateWarbandSceneData)
+end
+
 function S:Blizzard_Collections()
 	if not E.private.skins.blizzard.enable then return end
 	if E.private.skins.blizzard.collections then SkinCollectionsFrames() end
 	if E.private.skins.blizzard.transmogrify then SkinTransmogFrames() end
+	if E.private.skins.blizzard.campsites then SkinCampsitesFrame() end
 end
 
 S:AddCallbackForAddon('Blizzard_Collections')

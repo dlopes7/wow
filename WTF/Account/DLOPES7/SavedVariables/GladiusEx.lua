@@ -81,9 +81,9 @@ GladiusExDB = {
 },
 ["party_Clicks"] = {
 },
-["party_Interrupts"] = {
-},
 ["Announcements"] = {
+},
+["party_Interrupts"] = {
 },
 ["Alerts"] = {
 },
@@ -101,6 +101,8 @@ GladiusExDB = {
 },
 },
 ["profileKeys"] = {
+["Pedrado - Stormrage"] = "Default",
+["Dragonfreema - Stormrage"] = "Default",
 ["Gordonfreems - Illidan"] = "Default",
 ["Gords - Stormrage"] = "Default",
 ["Doutora - Illidan"] = "Default",

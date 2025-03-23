@@ -1,4 +1,4 @@
--- Generated from CurseForge on Wed Jan 22 20:42:10 UTC 2025
+-- Generated from CurseForge on Sat Mar 22 20:08:51 UTC 2025
 local ns = select(2, ...) ---@class ns @The addon namespace.
 
 if ns:IsSameLocale("koKR") then
@@ -92,17 +92,26 @@ L["DPS"] = "|cffFF3636공격전담|r"
 L["DUNGEON_SHORT_NAME_AA"] = "대학"
 L["DUNGEON_SHORT_NAME_AD"] = "아탈"
 L["DUNGEON_SHORT_NAME_ARAK"] = "아라카라"
+--[[Translation missing --]]
+--[[ L["DUNGEON_SHORT_NAME_ARC"] = ""--]] 
 L["DUNGEON_SHORT_NAME_AV"] = "하늘빛"
 L["DUNGEON_SHORT_NAME_BH"] = "담쟁이"
+L["DUNGEON_SHORT_NAME_BREW"] = "양조장"
 L["DUNGEON_SHORT_NAME_BRH"] = "검떼"
+--[[Translation missing --]]
+--[[ L["DUNGEON_SHORT_NAME_COEN"] = ""--]] 
 L["DUNGEON_SHORT_NAME_COS"] = "별궁"
 L["DUNGEON_SHORT_NAME_COT"] = "실타래"
 L["DUNGEON_SHORT_NAME_DAWN"] = "새인호"
+L["DUNGEON_SHORT_NAME_DFC"] = "어둠불꽃"
 L["DUNGEON_SHORT_NAME_DHT"] = "어숲"
 L["DUNGEON_SHORT_NAME_DOS"] = "저편"
 L["DUNGEON_SHORT_NAME_EB"] = "상록숲"
+--[[Translation missing --]]
+--[[ L["DUNGEON_SHORT_NAME_EOA"] = ""--]] 
 L["DUNGEON_SHORT_NAME_FALL"] = "몰락"
 L["DUNGEON_SHORT_NAME_FH"] = "자유"
+L["DUNGEON_SHORT_NAME_FLOOD"] = "수문"
 L["DUNGEON_SHORT_NAME_GB"] = "그림 바톨"
 L["DUNGEON_SHORT_NAME_GD"] = "정비소"
 L["DUNGEON_SHORT_NAME_GMBT"] = "승부수"
@@ -110,23 +119,38 @@ L["DUNGEON_SHORT_NAME_HOA"] = "속죄"
 L["DUNGEON_SHORT_NAME_HOI"] = "주입"
 L["DUNGEON_SHORT_NAME_HOV"] = "용전"
 L["DUNGEON_SHORT_NAME_ID"] = "선착장"
+--[[Translation missing --]]
+--[[ L["DUNGEON_SHORT_NAME_KR"] = ""--]] 
 L["DUNGEON_SHORT_NAME_LOWR"] = "하층"
 L["DUNGEON_SHORT_NAME_MISTS"] = "티르"
+L["DUNGEON_SHORT_NAME_ML"] = "왕노"
+--[[Translation missing --]]
+--[[ L["DUNGEON_SHORT_NAME_MOS"] = ""--]] 
 L["DUNGEON_SHORT_NAME_NELT"] = "넬루"
 L["DUNGEON_SHORT_NAME_NL"] = "넬둥"
 L["DUNGEON_SHORT_NAME_NO"] = "노쿠드"
 L["DUNGEON_SHORT_NAME_NW"] = "죽상"
 L["DUNGEON_SHORT_NAME_PF"] = "역병"
+L["DUNGEON_SHORT_NAME_PSF"] = "수도원"
 L["DUNGEON_SHORT_NAME_RISE"] = "현신"
 L["DUNGEON_SHORT_NAME_RLP"] = "루비"
+L["DUNGEON_SHORT_NAME_ROOK"] = "부화장"
 L["DUNGEON_SHORT_NAME_SBG"] = "어둠달"
 L["DUNGEON_SHORT_NAME_SD"] = "심연"
+--[[Translation missing --]]
+--[[ L["DUNGEON_SHORT_NAME_SEAT"] = ""--]] 
 L["DUNGEON_SHORT_NAME_SIEGE"] = "보랄"
 L["DUNGEON_SHORT_NAME_SOA"] = "승천"
+--[[Translation missing --]]
+--[[ L["DUNGEON_SHORT_NAME_SOTS"] = ""--]] 
 L["DUNGEON_SHORT_NAME_STRT"] = "거리"
 L["DUNGEON_SHORT_NAME_SV"] = "바위금고"
+--[[Translation missing --]]
+--[[ L["DUNGEON_SHORT_NAME_TD"] = ""--]] 
 L["DUNGEON_SHORT_NAME_TJS"] = "옥룡사"
 L["DUNGEON_SHORT_NAME_TOP"] = "투기장"
+--[[Translation missing --]]
+--[[ L["DUNGEON_SHORT_NAME_TOS"] = ""--]] 
 L["DUNGEON_SHORT_NAME_TOTT"] = "파도"
 L["DUNGEON_SHORT_NAME_ULD"] = "울다만"
 L["DUNGEON_SHORT_NAME_UNDR"] = "썩은굴"
@@ -344,6 +368,22 @@ L["RAID_BOSS_CN_6"] = "귀부인 이네르바 다크베인"
 L["RAID_BOSS_CN_7"] = "혈기의 의회"
 L["RAID_BOSS_CN_8"] = "진흙주먹"
 L["RAID_BOSS_CN_9"] = "돌 군단 장군"
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_DS_1"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_DS_2"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_DS_3"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_DS_4"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_DS_5"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_DS_6"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_DS_7"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_BOSS_DS_8"] = ""--]] 
 L["RAID_BOSS_FCN_1"] = "절규날개"
 L["RAID_BOSS_FCN_10"] = "대영주 데나트리우스"
 L["RAID_BOSS_FCN_2"] = "사냥꾼 알티모르"
@@ -413,22 +453,14 @@ L["RAID_BOSS_FSOD_9"] = "켈투자드"
 --[[ L["RAID_BOSS_ICC_8"] = ""--]] 
 --[[Translation missing --]]
 --[[ L["RAID_BOSS_ICC_9"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_LOU_1"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_LOU_2"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_LOU_3"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_LOU_4"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_LOU_5"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_LOU_6"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_LOU_7"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_LOU_8"] = ""--]] 
+L["RAID_BOSS_LOU_1"] = "벡시와 연마공"
+L["RAID_BOSS_LOU_2"] = "살육의 도가니"
+L["RAID_BOSS_LOU_3"] = "리크 리버브"
+L["RAID_BOSS_LOU_4"] = "스틱스 벙크정커"
+L["RAID_BOSS_LOU_5"] = "스프로켓몽거 로켄스톡"
+L["RAID_BOSS_LOU_6"] = "외팔이 좀도둑"
+L["RAID_BOSS_LOU_7"] = "보안 책임자 머그지"
+L["RAID_BOSS_LOU_8"] = "크롬왕 갤리윅스"
 L["RAID_BOSS_NP_1"] = "포식자 울그락스"
 L["RAID_BOSS_NP_2"] = "피결속 공포"
 L["RAID_BOSS_NP_3"] = "수레키 대장 시크란"
@@ -479,16 +511,12 @@ L["RAID_BOSS_VOTI_8"] = "폭풍포식자 라자게스"
 --[[Translation missing --]]
 --[[ L["RAID_BWD"] = ""--]] 
 L["RAID_DIFFICULTY_NAME_HEROIC"] = "영웅"
---[[Translation missing --]]
---[[ L["RAID_DIFFICULTY_NAME_HEROIC10"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_DIFFICULTY_NAME_HEROIC25"] = ""--]] 
+L["RAID_DIFFICULTY_NAME_HEROIC10"] = "10인 영웅"
+L["RAID_DIFFICULTY_NAME_HEROIC25"] = "25인 영웅"
 L["RAID_DIFFICULTY_NAME_MYTHIC"] = "신화"
 L["RAID_DIFFICULTY_NAME_NORMAL"] = "일반"
---[[Translation missing --]]
---[[ L["RAID_DIFFICULTY_NAME_NORMAL10"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_DIFFICULTY_NAME_NORMAL25"] = ""--]] 
+L["RAID_DIFFICULTY_NAME_NORMAL10"] = "10인 일반"
+L["RAID_DIFFICULTY_NAME_NORMAL25"] = "25인 일반"
 L["RAID_DIFFICULTY_SUFFIX_HEROIC"] = "영"
 --[[Translation missing --]]
 --[[ L["RAID_DIFFICULTY_SUFFIX_HEROIC10"] = ""--]] 
@@ -500,13 +528,14 @@ L["RAID_DIFFICULTY_SUFFIX_NORMAL"] = "일"
 --[[ L["RAID_DIFFICULTY_SUFFIX_NORMAL10"] = ""--]] 
 --[[Translation missing --]]
 --[[ L["RAID_DIFFICULTY_SUFFIX_NORMAL25"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["RAID_DS"] = ""--]] 
 L["RAID_ENCOUNTERS_DEFEATED_TITLE"] = "공격대 보스 처치"
 --[[Translation missing --]]
 --[[ L["RAID_FL"] = ""--]] 
 --[[Translation missing --]]
 --[[ L["RAID_ICC"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_LOU"] = ""--]] 
+L["RAID_LOU"] = "언더마인 해방전선"
 L["RAID_NP"] = "네룹아르 궁전"
 --[[Translation missing --]]
 --[[ L["RAID_RS"] = ""--]] 

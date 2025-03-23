@@ -124,12 +124,7 @@ do
 		end
 	end
 
-	function S:HandleNavBarButtons()
-		local func = NavBarCheck[self:GetParent():GetName()]
-		if func and not func() then return end
-
-		local total = #self.navList
-		local button = self.navList[total]
+	function S:SkinNavBarButton(button, index)
 		if button and not button.IsSkinned then
 			S:HandleButton(button, true)
 			button:GetFontString():SetTextColor(1, 1, 1)
@@ -147,12 +142,26 @@ do
 			end
 
 			-- setting the xoffset will cause a taint, use the hook below instead to lock the xoffset to 1
-			if total > 1 then
+			if index > 1 then
 				NavButtonXOffset(button, button:GetPoint())
 				hooksecurefunc(button, 'SetPoint', NavButtonXOffset)
 			end
 
 			button.IsSkinned = true
+		end
+	end
+
+	function S:HandleNavBarButtons(data)
+		local func = NavBarCheck[self:GetParent():GetName()]
+		if func and not func() then return end
+
+		if not data then -- init call
+			for index, nav in next, self.navList do
+				S:SkinNavBarButton(nav, index)
+			end
+		else
+			local lastIndex = #self.navList
+			S:SkinNavBarButton(self.navList[lastIndex], lastIndex)
 		end
 	end
 end
@@ -241,15 +250,17 @@ function S:HandlePortraitFrame(frame, createBackdrop, noStrip)
 	local name = frame and frame.GetName and frame:GetName()
 
 	local insetFrame = name and _G[name..'Inset'] or frame.Inset
-	local portraitFrame = name and _G[name..'Portrait'] or frame.Portrait or frame.portrait
+	local portraitFrame = name and _G[name..'Portrait'] or frame.Portrait
 	local portraitFrameOverlay = name and _G[name..'PortraitOverlay'] or frame.PortraitOverlay
 	local artFrameOverlay = name and _G[name..'ArtOverlayFrame'] or frame.ArtOverlayFrame
+	local portraitFrameAlt = frame.portrait  -- blizzard uses the same global name on two frames
 
 	if not noStrip then
 		frame:StripTextures()
 
 		if portraitFrame then portraitFrame:SetAlpha(0) end
 		if portraitFrameOverlay then portraitFrameOverlay:SetAlpha(0) end
+		if portraitFrameAlt then portraitFrameAlt:SetAlpha(0) end
 		if artFrameOverlay then artFrameOverlay:SetAlpha(0) end
 
 		if insetFrame then
@@ -744,6 +755,7 @@ do
 	function S:HandleModelSceneControlButtons(frame)
 		if not frame.IsSkinned then
 			frame.IsSkinned = true
+
 			hooksecurefunc(frame, 'UpdateLayout', UpdateLayout)
 		end
 	end
@@ -756,6 +768,68 @@ do
 
 		tex:SetTexture(E.Media.Textures.ArrowUp)
 		tex:SetRotation(rad(arrowDegree[direction]))
+	end
+end
+
+do
+	local overlays = {}
+
+	local function OverlayHide(button)
+		local overlay = overlays[button]
+		if not overlay then return end
+
+		overlay:Hide()
+	end
+
+	local function OverlayShow(button)
+		local overlay = overlays[button]
+		if not overlay then return end
+
+		overlay:ClearAllPoints()
+		overlay:SetPoint(button:GetPoint())
+		overlay:Show()
+	end
+
+	local function OverlayOnEnter(button)
+		local overlay = overlays[button]
+		if not overlay then return end
+
+		overlay.text:SetTextColor(1, 1, 1)
+		S:SetBackdropBorderColor(overlay, 'OnEnter')
+	end
+
+	local function OverlayOnLeave(button)
+		local overlay = overlays[button]
+		if not overlay then return end
+
+		overlay.text:SetTextColor(1, 0.81, 0)
+		S:SetBackdropBorderColor(overlay, 'OnLeave')
+	end
+
+	function S:OverlayButton(button, name, width, height, text, textLayer, level, strata)
+		if overlays[button] then return end -- already exists
+
+		local overlay = CreateFrame('Frame', 'ElvUI_OverlayButton_'..name, E.UIParent)
+		overlay:Size(width or 120, height or 22) -- dont use GetSize it can taint the owner
+		overlay:SetTemplate(nil, true)
+		overlay:SetPoint(button:GetPoint())
+		overlay:SetFrameLevel(level or 10)
+		overlay:SetFrameStrata(strata or 'MEDIUM')
+		overlay:Hide()
+
+		local txt = overlay:CreateFontString(nil, textLayer or 'OVERLAY')
+		txt:SetPoint('CENTER')
+		txt:FontTemplate()
+		txt:SetText(text)
+		txt:SetTextColor(1, 0.81, 0)
+		overlay.text = txt
+
+		button:HookScript('OnEnter', OverlayOnEnter)
+		button:HookScript('OnLeave', OverlayOnLeave)
+		button:HookScript('OnHide', OverlayHide)
+		button:HookScript('OnShow', OverlayShow)
+
+		overlays[button] = overlay
 	end
 end
 

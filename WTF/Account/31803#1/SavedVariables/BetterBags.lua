@@ -6,22 +6,28 @@ BetterBagsDB = {
 ["profiles"] = {
 ["Default"] = {
 ["categoryOptions"] = {
-["Tradeskill"] = {
+["Waist"] = {
 ["shown"] = true,
 },
-["Head"] = {
+["Finger"] = {
 ["shown"] = true,
 },
 ["Neck"] = {
 ["shown"] = true,
 },
-["Miscellaneous"] = {
+["One-Hand"] = {
 ["shown"] = true,
 },
-["Chest"] = {
+["Back"] = {
 ["shown"] = true,
 },
-["Consumable"] = {
+["Recipe"] = {
+["shown"] = true,
+},
+["Reagent"] = {
+["shown"] = true,
+},
+["Hands"] = {
 ["shown"] = true,
 },
 ["Wrist"] = {
@@ -30,16 +36,55 @@ BetterBagsDB = {
 ["Junk"] = {
 ["shown"] = true,
 },
-["Two-Hand"] = {
+["Off Hand"] = {
 ["shown"] = true,
 },
-["Recent Items"] = {
+["WuE"] = {
+["shown"] = true,
+},
+["Tradeskill"] = {
 ["shown"] = true,
 },
 ["Quest"] = {
 ["shown"] = true,
 },
+["Head"] = {
+["shown"] = true,
+},
+["Two-Hand"] = {
+["shown"] = true,
+},
+["Trinket"] = {
+["shown"] = true,
+},
 ["Free Space"] = {
+["shown"] = true,
+},
+["Feet"] = {
+["shown"] = true,
+},
+["Chest"] = {
+["shown"] = true,
+},
+["Consumable"] = {
+["shown"] = true,
+},
+["Gem"] = {
+["shown"] = true,
+},
+["Legs"] = {
+["shown"] = true,
+},
+["Miscellaneous"] = {
+["shown"] = true,
+},
+["Recent Items"] = {
+["shown"] = true,
+},
+["Shoulder"] = {
+["shown"] = true,
+},
+["BoE"] = {
 ["shown"] = true,
 },
 },
@@ -52,24 +97,24 @@ BetterBagsDB = {
 },
 },
 ["ephemeralCategoryFilters"] = {
-["Tradeskill"] = {
+["Waist"] = {
 ["enabled"] = {
 true,
 [0] = true,
 },
 ["itemList"] = {
 },
-["name"] = "Tradeskill",
+["name"] = "Waist",
 ["dynamic"] = true,
 },
-["Head"] = {
+["Finger"] = {
 ["enabled"] = {
 true,
 [0] = true,
 },
 ["itemList"] = {
 },
-["name"] = "Head",
+["name"] = "Finger",
 ["dynamic"] = true,
 },
 ["Neck"] = {
@@ -82,64 +127,54 @@ true,
 ["name"] = "Neck",
 ["dynamic"] = true,
 },
-["Free Space"] = {
+["One-Hand"] = {
 ["enabled"] = {
 true,
 [0] = true,
 },
 ["itemList"] = {
 },
-["name"] = "Free Space",
+["name"] = "One-Hand",
 ["dynamic"] = true,
 },
-["Miscellaneous"] = {
+["Back"] = {
 ["enabled"] = {
 true,
 [0] = true,
 },
 ["itemList"] = {
 },
-["name"] = "Miscellaneous",
+["name"] = "Back",
 ["dynamic"] = true,
 },
-["Chest"] = {
+["Recipe"] = {
 ["enabled"] = {
 true,
 [0] = true,
 },
 ["itemList"] = {
 },
-["name"] = "Chest",
+["name"] = "Recipe",
 ["dynamic"] = true,
 },
-["Consumable"] = {
+["Reagent"] = {
 ["enabled"] = {
 true,
 [0] = true,
 },
 ["itemList"] = {
 },
-["name"] = "Consumable",
+["name"] = "Reagent",
 ["dynamic"] = true,
 },
-["Two-Hand"] = {
+["Hands"] = {
 ["enabled"] = {
 true,
 [0] = true,
 },
 ["itemList"] = {
 },
-["name"] = "Two-Hand",
-["dynamic"] = true,
-},
-["Junk"] = {
-["enabled"] = {
-true,
-[0] = true,
-},
-["itemList"] = {
-},
-["name"] = "Junk",
+["name"] = "Hands",
 ["dynamic"] = true,
 },
 ["Wrist"] = {
@@ -152,6 +187,16 @@ true,
 ["name"] = "Wrist",
 ["dynamic"] = true,
 },
+["Junk"] = {
+["enabled"] = {
+true,
+[0] = true,
+},
+["itemList"] = {
+},
+["name"] = "Junk",
+["dynamic"] = true,
+},
 ["Recent Items"] = {
 ["enabled"] = {
 true,
@@ -162,6 +207,135 @@ true,
 ["name"] = "Recent Items",
 ["dynamic"] = true,
 },
+["WuE"] = {
+["enabled"] = {
+true,
+[0] = true,
+},
+["itemList"] = {
+},
+["name"] = "WuE",
+},
+["Tradeskill"] = {
+["enabled"] = {
+true,
+[0] = true,
+},
+["itemList"] = {
+},
+["name"] = "Tradeskill",
+["dynamic"] = true,
+},
+["Legs"] = {
+["enabled"] = {
+true,
+[0] = true,
+},
+["itemList"] = {
+},
+["name"] = "Legs",
+["dynamic"] = true,
+},
+["Head"] = {
+["enabled"] = {
+true,
+[0] = true,
+},
+["itemList"] = {
+},
+["name"] = "Head",
+["dynamic"] = true,
+},
+["Two-Hand"] = {
+["enabled"] = {
+true,
+[0] = true,
+},
+["itemList"] = {
+},
+["name"] = "Two-Hand",
+["dynamic"] = true,
+},
+["Trinket"] = {
+["enabled"] = {
+true,
+[0] = true,
+},
+["itemList"] = {
+},
+["name"] = "Trinket",
+["dynamic"] = true,
+},
+["Feet"] = {
+["enabled"] = {
+true,
+[0] = true,
+},
+["itemList"] = {
+},
+["name"] = "Feet",
+["dynamic"] = true,
+},
+["Miscellaneous"] = {
+["enabled"] = {
+true,
+[0] = true,
+},
+["itemList"] = {
+},
+["name"] = "Miscellaneous",
+["dynamic"] = true,
+},
+["Free Space"] = {
+["enabled"] = {
+true,
+[0] = true,
+},
+["itemList"] = {
+},
+["name"] = "Free Space",
+["dynamic"] = true,
+},
+["Consumable"] = {
+["enabled"] = {
+true,
+[0] = true,
+},
+["itemList"] = {
+},
+["name"] = "Consumable",
+["dynamic"] = true,
+},
+["Gem"] = {
+["enabled"] = {
+true,
+[0] = true,
+},
+["itemList"] = {
+},
+["name"] = "Gem",
+["dynamic"] = true,
+},
+["Off Hand"] = {
+["enabled"] = {
+true,
+[0] = true,
+},
+["itemList"] = {
+},
+["name"] = "Off Hand",
+["dynamic"] = true,
+},
+["Chest"] = {
+["enabled"] = {
+true,
+[0] = true,
+},
+["itemList"] = {
+},
+["name"] = "Chest",
+["dynamic"] = true,
+},
 ["Quest"] = {
 ["enabled"] = {
 true,
@@ -170,6 +344,16 @@ true,
 ["itemList"] = {
 },
 ["name"] = "Quest",
+["dynamic"] = true,
+},
+["Shoulder"] = {
+["enabled"] = {
+true,
+[0] = true,
+},
+["itemList"] = {
+},
+["name"] = "Shoulder",
 ["dynamic"] = true,
 },
 ["BoE"] = {

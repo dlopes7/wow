@@ -102,11 +102,10 @@ function NP:Construct_Power(nameplate)
 	local Power = CreateFrame('StatusBar', nameplate.frameName..'Power', nameplate)
 	Power:SetFrameStrata(nameplate:GetFrameStrata())
 	Power:SetFrameLevel(5)
-	Power:CreateBackdrop('Transparent', nil, nil, nil, nil, true, true)
+	Power:CreateBackdrop('Transparent', nil, nil, nil, nil, true)
 
 	NP.StatusBars[Power] = true
 
-	Power.frequentUpdates = true
 	Power.colorTapping = false
 	Power.colorClass = false
 
@@ -129,7 +128,7 @@ function NP:Update_Power(nameplate)
 		nameplate.Power:SetStatusBarTexture(LSM:Fetch('statusbar', NP.db.statusbar))
 		nameplate.Power:Point('CENTER', nameplate, 'CENTER', db.power.xOffset, db.power.yOffset)
 
-		E:SetSmoothing(nameplate.Power, NP.db.smoothbars)
+		E:SetSmoothing(nameplate.Power, db.power.smoothbars)
 	elseif nameplate:IsElementEnabled('Power') then
 		nameplate:DisableElement('Power')
 	end

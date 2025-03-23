@@ -10,6 +10,5 @@ if L then
 	L.coalescing_void_diffuser = "Diffuseur de Vide amalgamé"
 	L.inflicted_civilian = "Civil affligé(e)"
 	L.void_ascendant = "Ascendant(e) du Vide"
-	--L.consuming_voidstone = "Consuming Voidstone"
-	L.void_fragment = "Fragment du Vide"
+	L.consuming_voidstone = "Pierre du Vide consumante"
 end

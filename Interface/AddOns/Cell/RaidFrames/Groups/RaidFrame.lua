@@ -1,4 +1,5 @@
 local _, Cell = ...
+---@class CellFuncs
 local F = Cell.funcs
 local B = Cell.bFuncs
 local P = Cell.pixelPerfectFuncs
@@ -10,7 +11,7 @@ raidFrame:SetAllPoints(Cell.frames.mainFrame)
 local npcFrameAnchor = CreateFrame("Frame", "CellNPCFrameAnchor", raidFrame, "SecureFrameTemplate,BackDropTemplate")
 raidFrame:SetFrameRef("npcAnchor", npcFrameAnchor)
 -- npcFrameAnchor:Hide()
--- Cell:StylizeFrame(npcFrameAnchor)
+-- Cell.StylizeFrame(npcFrameAnchor)
 
 raidFrame:SetAttribute("_onattributechanged", [[
     if not (name == "combinegroups" or name == "visibility") then
@@ -145,6 +146,8 @@ local function CreateGroupHeader(group)
     --     self:SetHeight(header:GetAttribute("buttonHeight") or 46)
     -- ]])
 
+    -- header:SetAttribute("_initialAttributeNames", "refreshUnitChange")
+
     header:SetAttribute("template", "CellUnitButtonTemplate")
     header:SetAttribute("columnAnchorPoint", "LEFT")
     header:SetAttribute("point", "TOP")
@@ -200,13 +203,14 @@ end
 -------------------------------------------------
 -- update
 -------------------------------------------------
-local function GetPoints(layout)
-    local orientation = layout["main"]["orientation"]
-    local anchor = layout["main"]["anchor"]
-    local spacingX = layout["main"]["spacingX"]
-    local spacingY = layout["main"]["spacingY"]
+function F.GetRaidFramePoints(layout)
+    local orientation = layout["orientation"]
+    local anchor = layout["anchor"]
+    local spacingX = layout["spacingX"]
+    local spacingY = layout["spacingY"]
+    local width, height = unpack(layout["size"])
 
-    local point, anchorPoint, groupAnchorPoint, unitSpacing, groupSpacing, verticalSpacing, horizontalSpacing, headerPoint, headerColumnAnchorPoint
+    local point, anchorPoint, groupAnchorPoint, unitSpacing, groupSpacing, unitSpacingX, unitSpacingY, verticalSpacing, horizontalSpacing, headerPoint, headerColumnAnchorPoint
 
     if orientation == "vertical" then
         if anchor == "BOTTOMLEFT" then
@@ -215,28 +219,28 @@ local function GetPoints(layout)
             unitSpacing = spacingY
             groupSpacing = spacingX
             unitSpacingX, unitSpacingY = spacingX, spacingY
-            verticalSpacing = spacingY+layout["main"]["groupSpacing"]
+            verticalSpacing = P.Scale(spacingY) + P.Scale(layout["groupSpacing"]) + P.Scale(height) * 5 + P.Scale(spacingY) * 4
         elseif anchor == "BOTTOMRIGHT" then
             point, anchorPoint, groupAnchorPoint = "BOTTOMRIGHT", "TOPRIGHT", "BOTTOMLEFT"
             headerPoint, headerColumnAnchorPoint = "BOTTOM", "RIGHT"
             unitSpacing = spacingY
             groupSpacing = -spacingX
             unitSpacingX, unitSpacingY = spacingX, spacingY
-            verticalSpacing = spacingY+layout["main"]["groupSpacing"]
+            verticalSpacing = P.Scale(spacingY) + P.Scale(layout["groupSpacing"]) + P.Scale(height) * 5 + P.Scale(spacingY) * 4
         elseif anchor == "TOPLEFT" then
             point, anchorPoint, groupAnchorPoint = "TOPLEFT", "BOTTOMLEFT", "TOPRIGHT"
             headerPoint, headerColumnAnchorPoint = "TOP", "LEFT"
             unitSpacing = -spacingY
             groupSpacing = spacingX
             unitSpacingX, unitSpacingY = spacingX, -spacingY
-            verticalSpacing = -spacingY-layout["main"]["groupSpacing"]
+            verticalSpacing = P.Scale(-layout["groupSpacing"]) + P.Scale(-height) * 5 + P.Scale(-spacingY) * 5
         elseif anchor == "TOPRIGHT" then
             point, anchorPoint, groupAnchorPoint = "TOPRIGHT", "BOTTOMRIGHT", "TOPLEFT"
             headerPoint, headerColumnAnchorPoint = "TOP", "RIGHT"
             unitSpacing = -spacingY
             groupSpacing = -spacingX
             unitSpacingX, unitSpacingY = spacingX, -spacingY
-            verticalSpacing = -spacingY-layout["main"]["groupSpacing"]
+            verticalSpacing = P.Scale(-spacingY) + P.Scale(-layout["groupSpacing"]) + P.Scale(-height) * 5 + P.Scale(-spacingY) * 4
         end
     else
         if anchor == "BOTTOMLEFT" then
@@ -245,46 +249,44 @@ local function GetPoints(layout)
             unitSpacing = spacingX
             groupSpacing = spacingY
             unitSpacingX, unitSpacingY = spacingX, spacingY
-            horizontalSpacing = spacingX+layout["main"]["groupSpacing"]
+            horizontalSpacing = P.Scale(spacingX) + P.Scale(layout["groupSpacing"]) + P.Scale(width) * 5 + P.Scale(spacingX) * 4
         elseif anchor == "BOTTOMRIGHT" then
             point, anchorPoint, groupAnchorPoint = "BOTTOMRIGHT", "BOTTOMLEFT", "TOPRIGHT"
             headerPoint, headerColumnAnchorPoint = "RIGHT", "BOTTOM"
             unitSpacing = -spacingX
             groupSpacing = spacingY
             unitSpacingX, unitSpacingY = -spacingX, spacingY
-            horizontalSpacing = -spacingX-layout["main"]["groupSpacing"]
+            horizontalSpacing = P.Scale(-spacingX) + P.Scale(-layout["groupSpacing"]) + P.Scale(-width) * 5 + P.Scale(-spacingX) * 4
         elseif anchor == "TOPLEFT" then
             point, anchorPoint, groupAnchorPoint = "TOPLEFT", "TOPRIGHT", "BOTTOMLEFT"
             headerPoint, headerColumnAnchorPoint = "LEFT", "TOP"
             unitSpacing = spacingX
             groupSpacing = -spacingY
             unitSpacingX, unitSpacingY = spacingX, spacingY
-            horizontalSpacing = spacingX+layout["main"]["groupSpacing"]
+            horizontalSpacing = P.Scale(spacingX) + P.Scale(layout["groupSpacing"]) + P.Scale(width) * 5 + P.Scale(spacingX) * 4
         elseif anchor == "TOPRIGHT" then
             point, anchorPoint, groupAnchorPoint = "TOPRIGHT", "TOPLEFT", "BOTTOMRIGHT"
             headerPoint, headerColumnAnchorPoint = "RIGHT", "TOP"
             unitSpacing = -spacingX
             groupSpacing = -spacingY
             unitSpacingX, unitSpacingY = -spacingX, spacingY
-            horizontalSpacing = -spacingX-layout["main"]["groupSpacing"]
+            horizontalSpacing = P.Scale(-spacingX) + P.Scale(-layout["groupSpacing"]) + P.Scale(-width) * 5 + P.Scale(-spacingX) * 4
         end
     end
 
-    return point, anchorPoint, groupAnchorPoint, unitSpacing, groupSpacing, unitSpacingX, unitSpacingY, verticalSpacing, horizontalSpacing, headerPoint, headerColumnAnchorPoint
+    return point, anchorPoint, groupAnchorPoint, P.Scale(unitSpacing), P.Scale(groupSpacing), P.Scale(unitSpacingX), P.Scale(unitSpacingY), verticalSpacing, horizontalSpacing, headerPoint, headerColumnAnchorPoint
 end
 
 local function UpdateHeadersShowRaidAttribute()
-    local shouldShowRaid = CellDB["general"]["showRaid"]
-
     if Cell.vars.currentLayoutTable["main"]["combineGroups"] then
-        combinedHeader:SetAttribute("showRaid", shouldShowRaid)
+        combinedHeader:SetAttribute("showRaid", true)
         for _, header in ipairs(separatedHeaders) do
             header:SetAttribute("showRaid", nil)
         end
     else
         combinedHeader:SetAttribute("showRaid", nil)
         for _, header in ipairs(separatedHeaders) do
-            header:SetAttribute("showRaid", shouldShowRaid)
+            header:SetAttribute("showRaid", true)
         end
     end
 end
@@ -295,24 +297,24 @@ local function UpdateHeader(header, layout, which)
 
         for _, b in ipairs(header) do
             if not which or which == "header" or which == "main-size" or which == "groupFilter" then
-                P:Size(b, width, height)
+                P.Size(b, width, height)
                 b:ClearAllPoints()
             end
             -- NOTE: SetOrientation BEFORE SetPowerSize
             if not which or which == "header" or which == "barOrientation" then
-                B:SetOrientation(b, layout["barOrientation"][1], layout["barOrientation"][2])
+                B.SetOrientation(b, layout["barOrientation"][1], layout["barOrientation"][2])
             end
             if not which or which == "header" or which == "main-power" or which == "groupFilter" or which == "barOrientation" or which == "powerFilter" then
-                B:SetPowerSize(b, layout["main"]["powerSize"])
+                B.SetPowerSize(b, layout["main"]["powerSize"])
             end
         end
 
         if not which or which == "header" or which == "main-size" or which == "groupFilter" then
             -- 确保按钮在“一定程度上”对齐
-            header:SetAttribute("minWidth", P:Scale(width))
-            header:SetAttribute("minHeight", P:Scale(height))
+            header:SetAttribute("minWidth", P.Scale(width))
+            header:SetAttribute("minHeight", P.Scale(height))
 
-            P:Size(npcFrameAnchor, width, height) -- REVIEW: check same as main
+            P.Size(npcFrameAnchor, width, height) -- REVIEW: check same as main
         end
     end
 
@@ -327,18 +329,39 @@ local function UpdateHeader(header, layout, which)
     end
 end
 
+-- local function RemoveInitialAttribute(header)
+--     header:SetAttribute("_initialAttribute-refreshUnitChange", nil)
+-- end
+
+-- local function SetInitialAttribute(header, relativeTo)
+--     header:SetAttribute("_initialAttribute-refreshUnitChange", [[
+
+--     ]])
+-- end
+
 local init, previousLayout
 local function RaidFrame_UpdateLayout(layout, which)
     if Cell.vars.groupType ~= "raid" and init then return end
+
+    -- visibility
+    if layout == "hide" then
+        UnregisterAttributeDriver(raidFrame, "state-visibility")
+        raidFrame:Hide()
+        if init then
+            return
+        else
+            layout = "default"
+        end
+    else
+        RegisterAttributeDriver(raidFrame, "state-visibility", "show")
+    end
+
+    -- update
     init = true
-
-    -- if previousLayout == layout and not which then return end
-    -- previousLayout = layout
-
     layout = CellDB["layouts"][layout]
 
     -- arena pets
-    if Cell.vars.inBattleground == 5 and layout["pet"]["partyEnabled"] then
+    if Cell.vars.inBattleground == 5 and layout["pet"]["partyEnabled"] and not layout["pet"]["partyDetached"] then
         for i, arenaPet in ipairs(arenaPetButtons) do
             RegisterAttributeDriver(arenaPet, "state-visibility", "[@raidpet"..i..", exists] show;hide")
         end
@@ -349,9 +372,12 @@ local function RaidFrame_UpdateLayout(layout, which)
         end
     end
 
-    local point, anchorPoint, groupAnchorPoint, unitSpacing, groupSpacing, unitSpacingX, unitSpacingY, verticalSpacing, horizontalSpacing, headerPoint, headerColumnAnchorPoint = GetPoints(layout)
+    local point, anchorPoint, groupAnchorPoint, unitSpacing, groupSpacing, unitSpacingX, unitSpacingY, verticalSpacing, horizontalSpacing, headerPoint, headerColumnAnchorPoint = F.GetRaidFramePoints(layout["main"])
 
-    if not which or which == "main-arrangement" or which == "rows_columns" or which == "groupSpacing" or which == "groupFilter" then
+    if not which or which == "main-arrangement" or which == "pet-arrangement" or which == "rows_columns" or which == "groupSpacing" or which == "groupFilter" then
+        local petSpacingX = layout["pet"]["sameArrangementAsMain"] and unitSpacingX or P.Scale(layout["pet"]["spacingX"])
+        local petSpacingY = layout["pet"]["sameArrangementAsMain"] and unitSpacingY or P.Scale(layout["pet"]["spacingY"])
+
         -- arena pets
         for k in ipairs(arenaPetButtons) do
             arenaPetButtons[k]:ClearAllPoints()
@@ -359,9 +385,9 @@ local function RaidFrame_UpdateLayout(layout, which)
                 arenaPetButtons[k]:SetPoint(point, npcFrameAnchor)
             else
                 if layout["main"]["orientation"] == "vertical" then
-                    arenaPetButtons[k]:SetPoint(point, arenaPetButtons[k-1], anchorPoint, 0, unitSpacing)
+                    arenaPetButtons[k]:SetPoint(point, arenaPetButtons[k-1], anchorPoint, 0, petSpacingY)
                 else
-                    arenaPetButtons[k]:SetPoint(point, arenaPetButtons[k-1], anchorPoint, unitSpacing, 0)
+                    arenaPetButtons[k]:SetPoint(point, arenaPetButtons[k-1], anchorPoint, petSpacingX, 0)
                 end
             end
         end
@@ -429,7 +455,7 @@ local function RaidFrame_UpdateLayout(layout, which)
         end
 
         if not which or which == "header" or which == "groupFilter" then
-            combinedHeader:SetAttribute("groupFilter", F:TableToString(shownGroups, ","))
+            combinedHeader:SetAttribute("groupFilter", F.TableToString(shownGroups, ","))
         end
 
     else
@@ -454,11 +480,11 @@ local function RaidFrame_UpdateLayout(layout, which)
                         header:SetPoint(point)
                     else
                         local headersPerRow = layout["main"]["maxColumns"]
-                        local headerCol = i % layout["main"]["maxColumns"]
+                        local headerCol = i % headersPerRow
                         headerCol = headerCol == 0 and headersPerRow or headerCol
 
                         if headerCol == 1 then -- first column on each row
-                            header:SetPoint(point, separatedHeaders[shownGroups[i-headersPerRow]], anchorPoint, 0, verticalSpacing)
+                            header:SetPoint(point, separatedHeaders[shownGroups[i-headersPerRow]], 0, verticalSpacing)
                         else
                             header:SetPoint(point, separatedHeaders[shownGroups[i-1]], groupAnchorPoint, groupSpacing, 0)
                         end
@@ -479,11 +505,11 @@ local function RaidFrame_UpdateLayout(layout, which)
                         header:SetPoint(point)
                     else
                         local headersPerCol = layout["main"]["maxColumns"]
-                        local headerRow = i % layout["main"]["maxColumns"]
+                        local headerRow = i % headersPerCol
                         headerRow = headerRow == 0 and headersPerCol or headerRow
 
                         if headerRow == 1 then -- first row on each column
-                            header:SetPoint(point, separatedHeaders[shownGroups[i-headersPerCol]], anchorPoint, horizontalSpacing, 0)
+                            header:SetPoint(point, separatedHeaders[shownGroups[i-headersPerCol]], point, horizontalSpacing, 0)
                         else
                             header:SetPoint(point, separatedHeaders[shownGroups[i-1]], groupAnchorPoint, 0, groupSpacing)
                         end
@@ -532,30 +558,30 @@ local function RaidFrame_UpdateLayout(layout, which)
 
         for i, arenaPet in ipairs(arenaPetButtons) do
             -- NOTE: SetOrientation BEFORE SetPowerSize
-            B:SetOrientation(arenaPet, layout["barOrientation"][1], layout["barOrientation"][2])
+            B.SetOrientation(arenaPet, layout["barOrientation"][1], layout["barOrientation"][2])
 
             if layout["pet"]["sameSizeAsMain"] then
-                P:Size(arenaPet, width, height)
-                B:SetPowerSize(arenaPet, layout["main"]["powerSize"])
+                P.Size(arenaPet, width, height)
+                B.SetPowerSize(arenaPet, layout["main"]["powerSize"])
             else
-                P:Size(arenaPet, layout["pet"]["size"][1], layout["pet"]["size"][2])
-                B:SetPowerSize(arenaPet, layout["pet"]["powerSize"])
+                P.Size(arenaPet, layout["pet"]["size"][1], layout["pet"]["size"][2])
+                B.SetPowerSize(arenaPet, layout["pet"]["powerSize"])
             end
         end
     end
 end
-Cell:RegisterCallback("UpdateLayout", "RaidFrame_UpdateLayout", RaidFrame_UpdateLayout)
+Cell.RegisterCallback("UpdateLayout", "RaidFrame_UpdateLayout", RaidFrame_UpdateLayout)
 
-local function RaidFrame_UpdateVisibility(which)
-    if not which or which == "raid" then
-        UpdateHeadersShowRaidAttribute()
+-- local function RaidFrame_UpdateVisibility(which)
+--     if not which or which == "raid" then
+--         UpdateHeadersShowRaidAttribute()
 
-        if CellDB["general"]["showRaid"] then
-            RegisterAttributeDriver(raidFrame, "state-visibility", "show")
-        else
-            UnregisterAttributeDriver(raidFrame, "state-visibility")
-            raidFrame:Hide()
-        end
-    end
-end
-Cell:RegisterCallback("UpdateVisibility", "RaidFrame_UpdateVisibility", RaidFrame_UpdateVisibility)
+--         if CellDB["general"]["showRaid"] then
+--             RegisterAttributeDriver(raidFrame, "state-visibility", "show")
+--         else
+--             UnregisterAttributeDriver(raidFrame, "state-visibility")
+--             raidFrame:Hide()
+--         end
+--     end
+-- end
+-- Cell.RegisterCallback("UpdateVisibility", "RaidFrame_UpdateVisibility", RaidFrame_UpdateVisibility)

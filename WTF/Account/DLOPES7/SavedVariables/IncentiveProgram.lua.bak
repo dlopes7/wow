@@ -411,10 +411,26 @@ IncentiveProgramDB = {
 ["dungeonName"] = "Random Mists of Pandaria Heroic",
 ["ignore"] = false,
 },
+[2780] = {
+["queueAsTank"] = true,
+["ignore"] = false,
+["dungeonType"] = 3,
+["queueAsDamage"] = true,
+["dungeonName"] = "Shock and Awesome",
+["queueAsHealer"] = true,
+},
 [986] = {
 ["dungeonType"] = 3,
 ["dungeonName"] = "The Black Gate",
 ["ignore"] = false,
+},
+[2781] = {
+["queueAsTank"] = true,
+["ignore"] = false,
+["dungeonType"] = 3,
+["queueAsDamage"] = true,
+["dungeonName"] = "Maniacal Machinist",
+["queueAsHealer"] = true,
 },
 [2399] = {
 ["dungeonType"] = 3,
@@ -430,6 +446,10 @@ IncentiveProgramDB = {
 ["dungeonType"] = 3,
 ["dungeonName"] = "Fury of Giants",
 ["ignore"] = false,
+},
+[2783] = {
+["dungeonName"] = "The Chrome King",
+["dungeonType"] = 3,
 },
 [2401] = {
 ["dungeonType"] = 3,
@@ -456,6 +476,10 @@ IncentiveProgramDB = {
 ["dungeonName"] = "Random Mists of Pandaria Dungeon",
 ["ignore"] = false,
 },
+[288] = {
+["dungeonName"] = "The Crown Chemical Co.",
+["dungeonType"] = 1,
+},
 [2537] = {
 ["dungeonType"] = 1,
 ["dungeonName"] = "Random Mists of Pandaria Heroic",
@@ -471,9 +495,22 @@ IncentiveProgramDB = {
 ["dungeonName"] = "The Siege of Wyrmrest Temple",
 ["ignore"] = false,
 },
+[2086] = {
+["dungeonType"] = 1,
+["dungeonName"] = "Random Dungeon (Shadowlands)",
+["ignore"] = false,
+},
 [2291] = {
 ["dungeonType"] = 3,
 ["dungeonName"] = "Cornerstone of Creation",
+["ignore"] = false,
+},
+[2782] = {
+["queueAsTank"] = true,
+["queueAsHealer"] = true,
+["dungeonType"] = 3,
+["queueAsDamage"] = true,
+["dungeonName"] = "Two Heads Are Better",
 ["ignore"] = false,
 },
 [2292] = {
@@ -529,10 +566,13 @@ IncentiveProgramDB = {
 ["dungeonName"] = "Last Stand of the Zandalari",
 ["ignore"] = false,
 },
-[2086] = {
-["dungeonType"] = 1,
-["dungeonName"] = "Random Dungeon (Shadowlands)",
+[2807] = {
+["queueAsTank"] = true,
 ["ignore"] = false,
+["dungeonType"] = 1,
+["queueAsDamage"] = true,
+["dungeonName"] = "Random Heroic (The War Within: Season 2)",
+["queueAsHealer"] = true,
 },
 [2342] = {
 ["dungeonType"] = 3,
@@ -579,14 +619,14 @@ IncentiveProgramDB = {
 ["dungeonName"] = "Blood from Stone",
 ["ignore"] = false,
 },
-[2598] = {
-["dungeonType"] = 3,
-["dungeonName"] = "Guardians of Mogu'shan",
-["ignore"] = false,
-},
 [260] = {
 ["dungeonType"] = 1,
 ["dungeonName"] = "Random Burning Crusade Heroic",
+["ignore"] = false,
+},
+[2598] = {
+["dungeonType"] = 3,
+["dungeonName"] = "Guardians of Mogu'shan",
 ["ignore"] = false,
 },
 [259] = {
@@ -792,14 +832,24 @@ IncentiveProgramDB = {
 ["roleHealer"] = false,
 ["roleTank"] = true,
 },
+["Player-60-0F2EA3CF"] = {
+["roleDamage"] = true,
+["roleHealer"] = true,
+["roleTank"] = true,
+},
+["Player-60-0F8786B8"] = {
+["roleDamage"] = true,
+["roleHealer"] = false,
+["roleTank"] = false,
+},
+["Player-60-0E6FD603"] = {
+["roleDamage"] = true,
+["roleHealer"] = true,
+["roleTank"] = true,
+},
 ["Player-57-0DAD1D62"] = {
 ["roleDamage"] = true,
 ["roleHealer"] = true,
-["roleTank"] = false,
-},
-["Player-60-0F515A41"] = {
-["roleDamage"] = true,
-["roleHealer"] = false,
 ["roleTank"] = false,
 },
 ["Player-57-0DAD1D5D"] = {
@@ -807,17 +857,12 @@ IncentiveProgramDB = {
 ["roleHealer"] = true,
 ["roleTank"] = false,
 },
-["Player-60-0F2EA3CF"] = {
+["Player-60-0EDC5FC4"] = {
 ["roleDamage"] = true,
 ["roleHealer"] = true,
-["roleTank"] = true,
+["roleTank"] = false,
 },
-["Player-60-0E6FD603"] = {
-["roleDamage"] = true,
-["roleHealer"] = true,
-["roleTank"] = true,
-},
-["Player-60-0F8786B8"] = {
+["Player-60-0F515A41"] = {
 ["roleDamage"] = true,
 ["roleHealer"] = false,
 ["roleTank"] = false,

@@ -1,6 +1,7 @@
 
 TSV_DB = {
 ["profileKeys"] = {
+["Pedrado - Stormrage"] = "Pedrado - Stormrage",
 ["Msery - Azralon"] = "Msery - Azralon",
 ["Gordonfreema - Stormrage"] = "Gordonfreema - Stormrage",
 ["Davidady - Stormrage"] = "Davidady - Stormrage",

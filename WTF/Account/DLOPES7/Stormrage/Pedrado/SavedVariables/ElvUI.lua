@@ -2,7 +2,6 @@
 ElvCharacterDB = {
 ["ConvertKeybindings"] = true,
 ["ChatEditHistory"] = {
-"/wa",
 "/p thanks",
 "/cw Arglaive-Stormrage thankss",
 "/p thank yer",
@@ -17,6 +16,11 @@ ElvCharacterDB = {
 "tomei um deserter",
 "bora",
 "vo no shjaman",
+"aff",
+"to upando com o nenem no colo",
+"/wa",
+"/WA",
+"/MACRO",
 },
 ["ChatHistoryLog"] = {
 },

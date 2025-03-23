@@ -670,9 +670,10 @@ local function RunTriggerFunc(allStates, data, id, triggernum, event, arg1, arg2
       else
         ok, returnValue = xpcall(data.triggerFunc, errorHandler, allStates, event, arg1, arg2, ...);
       end
-      if (ok and returnValue) then
+      if (ok and (returnValue or (returnValue ~= false and allStates.__changed))) then
         updateTriggerState = true;
       end
+      allStates.__changed = nil
       for key, state in pairs(allStates) do
         if (type(state) ~= "table") then
           errorHandler(string.format(L["All States table contains a non table at key: '%s'."], key))
@@ -892,13 +893,6 @@ function Private.ScanEvents(event, arg1, arg2, ...)
       return;
     end
     Private.ScanEventsInternal(event_list, event, CombatLogGetCurrentEventInfo());
-
-  elseif (event == "COMBAT_LOG_EVENT_UNFILTERED_CUSTOM") then
-    -- This reverts the COMBAT_LOG_EVENT_UNFILTERED_CUSTOM workaround so that custom triggers that check the event argument will work as expected
-    if(event == "COMBAT_LOG_EVENT_UNFILTERED_CUSTOM") then
-      event = "COMBAT_LOG_EVENT_UNFILTERED";
-    end
-    Private.ScanEventsInternal(event_list, event, CombatLogGetCurrentEventInfo());
   else
     Private.ScanEventsInternal(event_list, event, arg1, arg2, ...);
   end
@@ -906,6 +900,9 @@ function Private.ScanEvents(event, arg1, arg2, ...)
 end
 
 function WeakAuras.ScanEvents(event, arg1, arg2, ...)
+  if type(event) ~= "string" then
+    return
+  end
   scannerFrame:Queue(Private.ScanEvents, event, arg1, arg2, ...)
 end
 
@@ -1090,7 +1087,8 @@ local function AddFakeInformation(data, triggernum, state, eventData)
     state.progressType = "timed"
   end
   if state.progressType == "timed" then
-    if state.expirationTime and state.expirationTime ~= math.huge and state.expirationTime > GetTime() then
+    local expirationTime = state.expirationTime
+    if expirationTime and type(expirationTime) == "number" and expirationTime ~= math.huge and expirationTime > GetTime() then
       return
     end
     state.progressType = "timed"
@@ -1162,9 +1160,6 @@ function GenericTrigger.ScanWithFakeEvent(id, fake)
         end
       elseif (type(event.force_events) == "boolean" and event.force_events) then
         for i, eventName in pairs(event.events) do
-          if eventName == "COMBAT_LOG_EVENT_UNFILTERED_CUSTOM" then
-            eventName = "COMBAT_LOG_EVENT_UNFILTERED"
-          end
           updateTriggerState = RunTriggerFunc(allStates, events[id][triggernum], id, triggernum, eventName) or updateTriggerState;
         end
         for unit, unitData in pairs(event.unit_events) do
@@ -1193,9 +1188,6 @@ function HandleEvent(frame, event, arg1, arg2, ...)
   if not(WeakAuras.IsPaused()) then
     if(event == "COMBAT_LOG_EVENT_UNFILTERED") then
       Private.ScanEvents(event);
-      -- This triggers the scanning of "hacked" COMBAT_LOG_EVENT_UNFILTERED events that were renamed in order to circumvent
-      -- the "proper" COMBAT_LOG_EVENT_UNFILTERED checks
-      Private.ScanEvents("COMBAT_LOG_EVENT_UNFILTERED_CUSTOM");
     else
       Private.ScanEvents(event, arg1, arg2, ...);
     end
@@ -1222,10 +1214,22 @@ function HandleEvent(frame, event, arg1, arg2, ...)
   Private.StopProfileSystem("generictrigger " .. event);
 end
 
+-- WORKAROUND https://github.com/Stanzilla/WoWUIBugs/issues/708
+-- The game fires events for areanaX when it actually should be sending for boss(X+5)
+local brokenUnitMap = {
+  arena1 = "boss6",
+  arena2 = "boss7",
+  arena3 = "boss8",
+  arena4 = "boss9",
+  arena5 = "boss10"
+}
+
 function HandleUnitEvent(frame, event, unit, ...)
   Private.StartProfileSystem("generictrigger " .. event .. " " .. unit);
   if not(WeakAuras.IsPaused()) then
-    if (UnitIsUnit(unit, frame.unit)) then
+    if UnitIsUnit(unit, frame.unit)
+       or (brokenUnitMap[unit] == frame.unit and not UnitExists(unit))
+    then
       Private.ScanUnitEvents(event, frame.unit, ...);
     end
   end
@@ -1445,18 +1449,10 @@ function GenericTrigger.LoadDisplays(toLoad, loadEvent, ...)
       for triggernum, data in pairs(events[id]) do
         if data.events then
           for index, event in pairs(data.events) do
-            if (event == "COMBAT_LOG_EVENT_UNFILTERED_CUSTOM") then
-              if not genericTriggerRegisteredEvents["COMBAT_LOG_EVENT_UNFILTERED"] then
-                eventsToRegister["COMBAT_LOG_EVENT_UNFILTERED"] = true;
-              end
-            elseif (event == "FRAME_UPDATE") then
+            if (event == "FRAME_UPDATE") then
               register_for_frame_updates = true;
-            else
-              if (genericTriggerRegisteredEvents[event]) then
-                -- Already registered event
-              else
-                eventsToRegister[event] = true;
-              end
+            elseif not genericTriggerRegisteredEvents[event] then
+              eventsToRegister[event] = true;
             end
           end
         end
@@ -1834,12 +1830,7 @@ function GenericTrigger.Add(data, region)
               if isCLEU then
                 if hasParam then
                   tinsert(trigger_events, "COMBAT_LOG_EVENT_UNFILTERED")
-                else
-                  -- This is a dirty, lazy, dirty hack. "Proper" COMBAT_LOG_EVENT_UNFILTERED events are indexed by their sub-event types (e.g. SPELL_PERIODIC_DAMAGE),
-                  -- but custom COMBAT_LOG_EVENT_UNFILTERED events are not guaranteed to have sub-event types. Thus, if the user specifies that they want to use
-                  -- COMBAT_LOG_EVENT_UNFILTERED, this hack renames the event to COMBAT_LOG_EVENT_UNFILTERED_CUSTOM to circumvent the COMBAT_LOG_EVENT_UNFILTERED checks
-                  -- that are already in place. Replacing all those checks would be a pain in the ass.
-                  tinsert(trigger_events, "COMBAT_LOG_EVENT_UNFILTERED_CUSTOM")
+                  -- We don't register CLEU events without parameters anymore
                 end
               elseif isUnitEvent then
                 -- not added to trigger_events
@@ -1900,7 +1891,7 @@ function GenericTrigger.Add(data, region)
 
   if warnAboutCLEUEvents then
     Private.AuraWarnings.UpdateWarning(data.uid, "spammy_event_warning", "error",
-                L["|cFFFF0000Support for unfiltered COMBAT_LOG_EVENT_UNFILTERED is deprecated|r\nCOMBAT_LOG_EVENT_UNFILTERED without a filter is advised against as it’s very performance costly.\nFind more information:\nhttps://github.com/WeakAuras/WeakAuras2/wiki/Deprecated-CLEU"], true)
+                L["|cFFFF0000Support for unfiltered COMBAT_LOG_EVENT_UNFILTERED is deprecated|r\nCOMBAT_LOG_EVENT_UNFILTERED without a filter are disabled as it’s very performance costly.\nFind more information:\nhttps://github.com/WeakAuras/WeakAuras2/wiki/Custom-Triggers#events"])
   else
     Private.AuraWarnings.UpdateWarning(data.uid, "spammy_event_warning")
   end
@@ -3624,6 +3615,7 @@ function WeakAuras.WatchUnitChange(unit)
     watchUnitChange.trackedUnits = {}
     watchUnitChange.unitIdToGUID = {}
     watchUnitChange.GUIDToUnitIds = {}
+    watchUnitChange.unitExists = {}
     watchUnitChange.unitRoles = {}
     watchUnitChange.unitRaidRole = {}
     watchUnitChange.inRaid = IsInRaid()
@@ -3651,9 +3643,11 @@ function WeakAuras.WatchUnitChange(unit)
     watchUnitChange:RegisterEvent("RAID_TARGET_UPDATE")
 
     local function unitUpdate(unitA, eventsToSend)
+      local oldUnitExists = watchUnitChange.unitExists[unitA]
       local oldGUID = watchUnitChange.unitIdToGUID[unitA]
       local newGUID = WeakAuras.UnitExistsFixed(unitA) and UnitGUID(unitA)
-      if oldGUID ~= newGUID then
+      local unitExists = UnitExists(unitA) -- UnitExistsFixed check both UnitExists and UnitGUID, but in edge cases we are interested in UnitExists
+      if oldGUID ~= newGUID or oldUnitExists ~= unitExists then
         eventsToSend["UNIT_CHANGED_" .. unitA] = unitA
         if watchUnitChange.GUIDToUnitIds[oldGUID] then
           for unitB in pairs(watchUnitChange.GUIDToUnitIds[oldGUID]) do
@@ -3684,6 +3678,7 @@ function WeakAuras.WatchUnitChange(unit)
         watchUnitChange.GUIDToUnitIds[newGUID][unitA] = true
       end
       watchUnitChange.unitIdToGUID[unitA] = newGUID
+      watchUnitChange.unitExists[unitA] = unitExists
     end
 
     local function markerUpdate(unit, eventsToSend)
@@ -3723,11 +3718,18 @@ function WeakAuras.WatchUnitChange(unit)
     local roleUpdate
     if WeakAuras.IsClassicEra() then
       function roleUpdate(unit, eventsToSend)
+        -- For classic check both raid role and group role
         local oldRaidRole = watchUnitChange.unitRaidRole[unit]
         local newRaidRole = WeakAuras.UnitRaidRole(unit)
         if oldRaidRole ~= newRaidRole then
           eventsToSend["UNIT_ROLE_CHANGED_" .. unit] = unit
           watchUnitChange.unitRaidRole[unit] = newRaidRole
+        end
+        local oldRole = watchUnitChange.unitRoles[unit]
+        local newRole = UnitGroupRolesAssigned(unit)
+        if oldRole ~= newRole then
+          eventsToSend["UNIT_ROLE_CHANGED_" .. unit] = unit
+          watchUnitChange.unitRoles[unit] = newRole
         end
       end
     end
@@ -3765,7 +3767,7 @@ function WeakAuras.WatchUnitChange(unit)
         handleUnit(unit, eventsToSend, unitUpdate, markerClear, reactionClear)
       end,
       INSTANCE_ENCOUNTER_ENGAGE_UNIT = function(_, eventsToSend)
-        for i = 1, 5 do
+        for i = 1, 10 do
           handleUnit("boss" .. i, eventsToSend, unitUpdate, markerInit, reactionInit)
           handleUnit("boss" .. i .. "target", eventsToSend, unitUpdate, markerInit, reactionInit)
         end
@@ -3846,7 +3848,9 @@ function WeakAuras.WatchUnitChange(unit)
   end
   local guid = UnitGUID(unit)
   watchUnitChange.trackedUnits[unit] = true
-  watchUnitChange.unitIdToGUID[unit] = guid
+  watchUnitChange.unitIdToGUID[unit] = WeakAuras.UnitExistsFixed(unit) and UnitGUID(unit)
+  watchUnitChange.unitExists[unit] = UnitExists(unit)
+
   if guid then
     watchUnitChange.GUIDToUnitIds[guid] = watchUnitChange.GUIDToUnitIds[guid] or {}
     watchUnitChange.GUIDToUnitIds[guid][unit] = true
@@ -4485,7 +4489,7 @@ function GenericTrigger.GetOverlayInfo(data, triggernum)
           count = variables.additionalProgress;
         end
       else
-        local allStates = {};
+        local allStates = setmetatable({}, Private.allstatesMetatable)
         Private.ActivateAuraEnvironment(data.id);
         RunTriggerFunc(allStates, events[data.id][triggernum], data.id, triggernum, "OPTIONS");
         Private.ActivateAuraEnvironment(nil);
@@ -4728,7 +4732,24 @@ local commonConditions = {
   name = {
     display = L["Name"],
     type = "string"
-  }
+  },
+  itemInRange = {
+    display = WeakAuras.newFeatureString .. L["Item in Range"],
+    hidden = true,
+    type = "bool",
+    test = function(state, needle)
+      if not state or not state.itemId or not state.show or not UnitExists('target') then
+        return false
+      end
+      if InCombatLockdown() and not UnitCanAttack('player', 'target') then
+        return false
+      end
+      return C_Item.IsItemInRange(state.itemId, 'target') == (needle == 1)
+    end,
+    events = Private.AddTargetConditionEvents({
+      "WA_SPELL_RANGECHECK",
+    })
+  },
 }
 
 ---@type fun(variables: table)
@@ -4809,6 +4830,10 @@ function GenericTrigger.GetTriggerConditions(data, triggernum)
 
     if prototype.nameFunc then
       result.name = commonConditions.name;
+    end
+
+    if prototype.hasItemID then
+      result.itemInRange = commonConditions.itemInRange
     end
 
     for _, v in pairs(prototype.args) do

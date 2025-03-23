@@ -7,7 +7,7 @@ local hooksecurefunc = hooksecurefunc
 
 local GetAddOnInfo = C_AddOns.GetAddOnInfo
 
-local function HandleButton(entry, addonIndex)
+local function HandleButton(entry, treeNode)
 	if not entry.IsSkinned then
 		S:HandleCheckBox(entry.Enabled)
 		S:HandleButton(entry.LoadAddonButton)
@@ -21,24 +21,27 @@ local function HandleButton(entry, addonIndex)
 		entry.IsSkinned = true
 	end
 
-	local checkstate = E:GetAddOnEnableState(addonIndex)
-	if checkstate == 2 then
-		entry.Status:SetTextColor(0.7, 0.7, 0.7)
-	else
-		entry.Status:SetTextColor(0.4, 0.4, 0.4)
-	end
+	local data = treeNode:GetData()
+	if data then
+		local checkstate = E:GetAddOnEnableState(data.addonIndex)
+		if checkstate == 2 then
+			entry.Status:SetTextColor(0.7, 0.7, 0.7)
+		else
+			entry.Status:SetTextColor(0.4, 0.4, 0.4)
+		end
 
-	local _, _, _, _, reason = GetAddOnInfo(addonIndex)
-	local checktex = entry.Enabled:GetCheckedTexture()
-	if reason == 'DEP_DISABLED' then
-		checktex:SetVertexColor(0.6, 0.6, 0.6)
-		checktex:SetDesaturated(true)
-	elseif checkstate == 1 then
-		checktex:SetVertexColor(1, 0.8, 0.1)
-		checktex:SetDesaturated(false)
-	elseif checkstate == 2 then
-		checktex:SetVertexColor(unpack(E.media.rgbvaluecolor))
-		checktex:SetDesaturated(false)
+		local _, _, _, _, reason = GetAddOnInfo(data.addonIndex)
+		local checktex = entry.Enabled:GetCheckedTexture()
+		if reason == 'DEP_DISABLED' then
+			checktex:SetVertexColor(0.6, 0.6, 0.6)
+			checktex:SetDesaturated(true)
+		elseif checkstate == 1 then
+			checktex:SetVertexColor(1, 0.8, 0.1)
+			checktex:SetDesaturated(false)
+		elseif checkstate == 2 then
+			checktex:SetVertexColor(unpack(E.media.rgbvaluecolor))
+			checktex:SetDesaturated(false)
+		end
 	end
 end
 
@@ -51,12 +54,13 @@ function S:AddonList()
 	S:HandleButton(AddonList.DisableAllButton, nil, nil, nil, true, nil, nil, nil, true)
 	S:HandleButton(AddonList.OkayButton, nil, nil, nil, true, nil, nil, nil, true)
 	S:HandleButton(AddonList.CancelButton, nil, nil, nil, true, nil, nil, nil, true)
-	S:HandleDropDownBox(_G.AddonList.Dropdown, 165)
-	S:HandleTrimScrollBar(_G.AddonList.ScrollBar)
-	S:HandleCheckBox(_G.AddonListForceLoad)
-	_G.AddonListForceLoad:Size(26)
+	S:HandleDropDownBox(AddonList.Dropdown, 165)
+	S:HandleTrimScrollBar(AddonList.ScrollBar)
+	S:HandleCheckBox(AddonList.ForceLoad)
+	AddonList.ForceLoad:Size(26)
+	S:HandleEditBox(AddonList.SearchBox)
 
-	hooksecurefunc('AddonList_InitButton', HandleButton)
+	hooksecurefunc('AddonList_InitAddon', HandleButton)
 end
 
 S:AddCallback('AddonList')

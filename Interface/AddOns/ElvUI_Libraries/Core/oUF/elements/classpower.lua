@@ -195,11 +195,11 @@ local function Visibility(self, event, unit)
 			-- use 'player' instead of unit because 'SPELLS_CHANGED' is a unitless event
 			if(not RequirePower or RequirePower == UnitPowerType('player')) then
 				if(not RequireSpell or IsPlayerSpell(RequireSpell)) then
-					self:UnregisterEvent('SPELLS_CHANGED', Visibility)
+					oUF:UnregisterEvent(self, 'SPELLS_CHANGED', Visibility)
 					shouldEnable = true
 					unit = 'player'
 				else
-					self:RegisterEvent('SPELLS_CHANGED', Visibility, true)
+					oUF:RegisterEvent(self, 'SPELLS_CHANGED', Visibility, true)
 				end
 			end
 		end
@@ -258,13 +258,13 @@ end
 
 do
 	function ClassPowerEnable(self)
+		self:RegisterEvent('UNIT_POWER_FREQUENT', Path)
 		self:RegisterEvent('UNIT_MAXPOWER', Path)
-		self:RegisterEvent('UNIT_POWER_UPDATE', Path)
 
 		if oUF.isRetail then -- according to Blizz any class may receive this event due to specific spell auras
-			self:RegisterEvent('UNIT_POWER_POINT_CHARGE', Path)
+			oUF:RegisterEvent(self, 'UNIT_POWER_POINT_CHARGE', Path)
 		else
-			self:RegisterEvent('PLAYER_TARGET_CHANGED', VisibilityPath, true)
+			oUF:RegisterEvent(self, 'PLAYER_TARGET_CHANGED', VisibilityPath, true)
 		end
 
 		self.ClassPower.__isEnabled = true
@@ -277,13 +277,13 @@ do
 	end
 
 	function ClassPowerDisable(self)
-		self:UnregisterEvent('UNIT_POWER_UPDATE', Path)
+		self:UnregisterEvent('UNIT_POWER_FREQUENT', Path)
 		self:UnregisterEvent('UNIT_MAXPOWER', Path)
 
 		if oUF.isRetail then
-			self:UnregisterEvent('UNIT_POWER_POINT_CHARGE', Path)
+			oUF:UnregisterEvent(self, 'UNIT_POWER_POINT_CHARGE', Path)
 		else
-			self:UnregisterEvent('PLAYER_TARGET_CHANGED', VisibilityPath)
+			oUF:UnregisterEvent(self, 'PLAYER_TARGET_CHANGED', VisibilityPath)
 		end
 
 		local element = self.ClassPower
@@ -330,12 +330,12 @@ local function Enable(self, unit)
 		element.__max = #element
 		element.ForceUpdate = ForceUpdate
 
-		if(oUF.isRetail or oUF.isCata) and (RequireSpec or RequireSpell) then
-			self:RegisterEvent('PLAYER_TALENT_UPDATE', VisibilityPath, true)
-		end
-
 		if(RequirePower) then
 			self:RegisterEvent('UNIT_DISPLAYPOWER', VisibilityPath)
+		end
+
+		if(oUF.isRetail or oUF.isCata) and (RequireSpec or RequireSpell) then
+			oUF:RegisterEvent(self, 'PLAYER_TALENT_UPDATE', VisibilityPath, true)
 		end
 
 		element.ClassPowerEnable = ClassPowerEnable
@@ -360,12 +360,13 @@ local function Disable(self)
 	if(self.ClassPower) then
 		ClassPowerDisable(self)
 
-		if oUF.isRetail or oUF.isCata then
-			self:UnregisterEvent('PLAYER_TALENT_UPDATE', VisibilityPath)
-		end
+		oUF:UnregisterEvent(self, 'SPELLS_CHANGED', Visibility)
 
 		self:UnregisterEvent('UNIT_DISPLAYPOWER', VisibilityPath)
-		self:UnregisterEvent('SPELLS_CHANGED', Visibility)
+
+		if oUF.isRetail or oUF.isCata then
+			oUF:UnregisterEvent(self, 'PLAYER_TALENT_UPDATE', VisibilityPath)
+		end
 	end
 end
 

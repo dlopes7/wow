@@ -72,11 +72,8 @@ local function Update(self, event, unit)
 	if self.isForced or (not element or not element.count or element.count <= 0) then
 		self:SetAlpha(1)
 		return
-	end
-
-	-- Instance Difficulty is enabled and we haven't checked yet
-	if element.InstanceDifficulty and not element.InstancedCached then
-		updateInstanceDifficulty(element)
+	elseif element.Range and event ~= 'OnRangeUpdate' then
+		return
 	end
 
 	-- stuff for Skyriding
@@ -89,7 +86,7 @@ local function Update(self, event, unit)
 	end
 
 	-- try to get the unit from the parent
-	if not unit then
+	if not unit or type(unit) ~= 'string' then
 		unit = self.unit
 	end
 
@@ -104,6 +101,11 @@ local function Update(self, event, unit)
 		end
 
 		return
+	end
+
+	-- Instance Difficulty is enabled and we haven't checked yet
+	if element.InstanceDifficulty and not element.InstancedCached then
+		updateInstanceDifficulty(element)
 	end
 
 	-- normal fader
@@ -137,8 +139,8 @@ local function Update(self, event, unit)
 	end
 end
 
-local function ForceUpdate(element)
-	return Update(element.__owner, "ForceUpdate", element.__owner.unit)
+local function ForceUpdate(element, event)
+	return Update(element.__owner, event or 'ForceUpdate', element.__owner.unit)
 end
 
 local function onRangeUpdate(frame, elapsed)
@@ -147,7 +149,7 @@ local function onRangeUpdate(frame, elapsed)
 	if (frame.timer >= .20) then
 		for _, object in next, onRangeObjects do
 			if object:IsVisible() then
-				object.Fader:ForceUpdate()
+				object.Fader:ForceUpdate('OnRangeUpdate')
 			end
 		end
 
@@ -158,20 +160,20 @@ end
 local function onInstanceDifficulty(self)
 	local element = self.Fader
 	updateInstanceDifficulty(element)
-	element:ForceUpdate()
+	element:ForceUpdate('OnInstanceDifficulty')
 end
 
 local function HoverScript(self)
 	local Fader = self.__faderelement or self.Fader
 	if Fader and Fader.HoverHooked == 1 then
-		Fader:ForceUpdate()
+		Fader:ForceUpdate('HoverScript')
 	end
 end
 
 local function TargetScript(self)
 	if self.Fader and self.Fader.TargetHooked == 1 then
 		if self:IsShown() then
-			self.Fader:ForceUpdate()
+			self.Fader:ForceUpdate('TargetScript')
 		else
 			self:SetAlpha(0)
 		end
@@ -257,13 +259,12 @@ local options = {
 		enable = function(self)
 			if oUF.isClassic then
 				self:RegisterEvent('UNIT_HEALTH_FREQUENT', Update)
-			else
-				self:RegisterEvent('UNIT_HEALTH', Update)
 			end
 
+			self:RegisterEvent('UNIT_HEALTH', Update)
 			self:RegisterEvent('UNIT_MAXHEALTH', Update)
 		end,
-		events = oUF.isClassic and {'UNIT_HEALTH_FREQUENT','UNIT_MAXHEALTH'} or {'UNIT_HEALTH','UNIT_MAXHEALTH'}
+		events = oUF.isClassic and {'UNIT_HEALTH_FREQUENT','UNIT_HEALTH','UNIT_MAXHEALTH'} or {'UNIT_HEALTH','UNIT_MAXHEALTH'}
 	},
 	Power = {
 		enable = function(self)

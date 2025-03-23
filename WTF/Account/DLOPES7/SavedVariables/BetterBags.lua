@@ -2,18 +2,19 @@
 BetterBagsDB = {
 ["profileKeys"] = {
 ["Pedrado - Stormrage"] = "Default",
-["Turdal - Illidan"] = "Default",
 ["Alvein - Anvilmar"] = "Default",
-["Gords - Stormrage"] = "Default",
-["Fajitas - Azralon"] = "Default",
-["Adyfiend - Illidan"] = "Default",
-["Gordonfreems - Illidan"] = "Default",
+["Casasbahia - Illidan"] = "Default",
 ["Gordonfreema - Stormrage"] = "Default",
 ["Babylucca - Illidan"] = "Default",
-["Davi - Stormrage"] = "Default",
-["Nananenem - Illidan"] = "Default",
-["Casasbahia - Illidan"] = "Default",
 ["Klarth - Stormrage"] = "Default",
+["Turdal - Illidan"] = "Default",
+["Gords - Stormrage"] = "Default",
+["Fajitas - Azralon"] = "Default",
+["Davi - Stormrage"] = "Default",
+["Dragonfreema - Stormrage"] = "Default",
+["Nananenem - Illidan"] = "Default",
+["Gordonfreems - Illidan"] = "Default",
+["Adyfiend - Illidan"] = "Default",
 ["Coroio - Illidan"] = "Default",
 ["Blazingly - Illidan"] = "Default",
 ["Doutora - Illidan"] = "Default",
@@ -40,9 +41,9 @@ nil,
 ["scale"] = 1,
 },
 [0] = {
-["y"] = -123.401123046875,
-["x"] = -333.595703125,
-["point"] = "TOPRIGHT",
+["y"] = 142.8984680175781,
+["x"] = -479.39501953125,
+["point"] = "RIGHT",
 ["scale"] = 1,
 },
 },
@@ -287,6 +288,16 @@ true,
 ["name"] = "One-Hand",
 ["dynamic"] = true,
 },
+["Jewelcrafting"] = {
+["enabled"] = {
+true,
+[0] = true,
+},
+["itemList"] = {
+},
+["name"] = "Jewelcrafting",
+["dynamic"] = true,
+},
 ["Cooking"] = {
 ["enabled"] = {
 true,
@@ -347,15 +358,6 @@ true,
 ["name"] = "Recent Items",
 ["dynamic"] = true,
 },
-["WuE"] = {
-["enabled"] = {
-true,
-[0] = true,
-},
-["itemList"] = {
-},
-["name"] = "WuE",
-},
 ["Inscription"] = {
 ["enabled"] = {
 true,
@@ -364,6 +366,16 @@ true,
 ["itemList"] = {
 },
 ["name"] = "Inscription",
+["dynamic"] = true,
+},
+["Container"] = {
+["enabled"] = {
+true,
+[0] = true,
+},
+["itemList"] = {
+},
+["name"] = "Container",
 ["dynamic"] = true,
 },
 ["Junk"] = {
@@ -496,15 +508,14 @@ true,
 ["name"] = "Wrist",
 ["dynamic"] = true,
 },
-["Jewelcrafting"] = {
+["WuE"] = {
 ["enabled"] = {
 true,
 [0] = true,
 },
 ["itemList"] = {
 },
-["name"] = "Jewelcrafting",
-["dynamic"] = true,
+["name"] = "WuE",
 },
 ["Shoulder"] = {
 ["enabled"] = {
@@ -700,14 +711,14 @@ true,
 },
 ["name"] = "Consumable",
 },
-["Gem"] = {
+["Item Enhancement"] = {
 ["enabled"] = {
 true,
 [0] = true,
 },
 ["itemList"] = {
 },
-["name"] = "Gem",
+["name"] = "Item Enhancement",
 },
 ["Recent Items"] = {
 ["enabled"] = {
@@ -727,14 +738,14 @@ true,
 },
 ["name"] = "Engineering",
 },
-["Item Enhancement"] = {
+["Gem"] = {
 ["enabled"] = {
 true,
 [0] = true,
 },
 ["itemList"] = {
 },
-["name"] = "Item Enhancement",
+["name"] = "Gem",
 },
 ["Recipe"] = {
 ["enabled"] = {
@@ -832,6 +843,9 @@ true,
 ["One-Hand"] = {
 ["shown"] = true,
 },
+["Herbalism"] = {
+["shown"] = true,
+},
 ["Cooking"] = {
 ["shown"] = true,
 },
@@ -850,10 +864,10 @@ true,
 ["Recent Items"] = {
 ["shown"] = true,
 },
-["WuE"] = {
+["Inscription"] = {
 ["shown"] = true,
 },
-["Inscription"] = {
+["Container"] = {
 ["shown"] = true,
 },
 ["Junk"] = {
@@ -895,7 +909,7 @@ true,
 ["Wrist"] = {
 ["shown"] = true,
 },
-["Herbalism"] = {
+["WuE"] = {
 ["shown"] = true,
 },
 ["Shoulder"] = {

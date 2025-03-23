@@ -11,10 +11,12 @@ if L then
 	L.arathi_knight = "Caballero arathi"
 	L.arathi_footman = "Lacayo arathi"
 	L.fervent_sharpshooter = "Tiradora certera fervorosa"
+	L.war_lynx = "Lince de guerra"
 	L.devout_priest = "Sacerdote devoto"
 	L.fanatical_conjuror = "Conjuradora fanática"
 	L.lightspawn = "Engendro de luz"
 	L.ardent_paladin = "Paladín ardoroso"
+	L.zealous_templar = "Templaria ferviente"
 	L.risen_mage = "Mago resucitado"
 	L.sir_braunpyke = "Sir Braunpyke"
 

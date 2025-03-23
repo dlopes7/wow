@@ -11,11 +11,17 @@ if L then
 	L.torchsnarl = "Пламескал"
 	L.skittering_darkness = "Снующая тьма"
 	L.shuffling_horror = "Слоняющийся ужас"
+	L.corridor_creeper = "Коридорный ужас"
 	L.creaky_mine_cart = "Скрипучая вагонетка"
 
 	--L.minecart = "Mine Cart Minigame"
 	--L.hits = "Hits"
 	--L.minecart_over = "Winner: %s (%d hits)"
+end
+
+L = BigWigs:NewBossLocale("Ol' Waxbeard", "ruRU")
+if L then
+	--L.dynamite_mine_cart = "Dynamite Mine Cart"
 end
 
 L = BigWigs:NewBossLocale("The Darkness", "ruRU")

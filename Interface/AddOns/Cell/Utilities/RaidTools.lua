@@ -8,14 +8,14 @@ local LCG = LibStub("LibCustomGlow-1.0")
 -- raid tools
 -------------------------------------------------
 local rtPane
-local resCB, reportCB, buffCB, buffDropdown, sizeEditBox, readyPullCB, styleDropdown, pullDropdown, secEditBox, marksBarCB, marksDropdown, marksShowSoloCB, fadeOutToolsCB
+local resCB, resDetachCB, reportCB, buffCB, buffDropdown, sizeEditBox, readyPullCB, styleDropdown, pullDropdown, secEditBox, marksBarCB, marksDropdown, marksShowSoloCB, fadeOutToolsCB
 
 local function CreateRTPane()
-    rtPane = Cell:CreateTitledPane(Cell.frames.utilitiesTab, L["Raid Tools"].." |cFF777777"..L["only in group"], 422, 167)
+    rtPane = Cell.CreateTitledPane(Cell.frames.utilitiesTab, L["Raid Tools"].." |cFF777777"..L["only in group"], 422, 167)
     rtPane:SetPoint("TOPLEFT", 5, -5)
     rtPane:SetPoint("BOTTOMRIGHT", -5, 5)
 
-    local unlockBtn = Cell:CreateButton(rtPane, L["Unlock"], "accent", {77, 17})
+    local unlockBtn = Cell.CreateButton(rtPane, L["Unlock"], "accent", {77, 17})
     unlockBtn:SetPoint("TOPRIGHT", rtPane)
     unlockBtn.locked = true
     unlockBtn:SetScript("OnClick", function(self)
@@ -30,23 +30,30 @@ local function CreateRTPane()
             Cell.vars.showMover = false
             LCG.PixelGlow_Stop(unlockBtn)
         end
-        Cell:Fire("ShowMover", Cell.vars.showMover)
+        Cell.Fire("ShowMover", Cell.vars.showMover)
     end)
 
     -- battle res
-    resCB = Cell:CreateCheckButton(rtPane, L["Battle Res Timer"], function(checked, self)
-        CellDB["tools"]["showBattleRes"] = checked
-        Cell:Fire("UpdateTools", "battleRes")
+    resCB = Cell.CreateCheckButton(rtPane, L["Battle Res Timer"], function(checked, self)
+        CellDB["tools"]["battleResTimer"][1] = checked
+        resDetachCB:SetEnabled(checked)
+        Cell.Fire("UpdateTools", "battleResTimer")
     end, L["Battle Res Timer"], L["Only show during encounter or in mythic+"])
     resCB:SetPoint("TOPLEFT", rtPane, "TOPLEFT", 5, -27)
     resCB:SetEnabled(Cell.isRetail)
 
-    -- death report
-    reportCB = Cell:CreateCheckButton(rtPane, L["Death Report"], function(checked, self)
-        CellDB["tools"]["deathReport"][1] = checked
-        Cell:Fire("UpdateTools", "deathReport")
+    resDetachCB = Cell.CreateCheckButton(rtPane, L["Detached"], function(checked, self)
+        CellDB["tools"]["battleResTimer"][2] = checked
+        Cell.Fire("UpdateTools", "battleResTimer")
     end)
-    reportCB:SetPoint("TOPLEFT", resCB, "BOTTOMLEFT", 0, -15)
+    resDetachCB:SetPoint("TOPLEFT", resCB, "BOTTOMRIGHT", 5, -5)
+
+    -- death report
+    reportCB = Cell.CreateCheckButton(rtPane, L["Death Report"], function(checked, self)
+        CellDB["tools"]["deathReport"][1] = checked
+        Cell.Fire("UpdateTools", "deathReport")
+    end)
+    reportCB:SetPoint("TOPLEFT", resCB, "BOTTOMLEFT", 0, -35)
     reportCB:HookScript("OnEnter", function()
         CellTooltip:SetOwner(reportCB, "ANCHOR_TOPLEFT", 0, 2)
         CellTooltip:AddLine(L["Death Report"].." |cffff2727"..L["HIGH CPU USAGE"])
@@ -61,11 +68,11 @@ local function CreateRTPane()
     end)
 
     -- buff tracker
-    buffCB = Cell:CreateCheckButton(rtPane, L["Buff Tracker"], function(checked, self)
+    buffCB = Cell.CreateCheckButton(rtPane, L["Buff Tracker"], function(checked, self)
         CellDB["tools"]["buffTracker"][1] = checked
         buffDropdown:SetEnabled(checked)
         sizeEditBox:SetEnabled(checked)
-        Cell:Fire("UpdateTools", "buffTracker")
+        Cell.Fire("UpdateTools", "buffTracker")
     end, L["Buff Tracker"].." |cffff7727"..L["MODERATE CPU USAGE"], L["Check if your group members need some raid buffs"],
     Cell.isRetail and L["|cffffb5c5Left-Click:|r cast the spell"] or "|cffffb5c5(Shift)|r "..L["|cffffb5c5Left-Click:|r cast the spell"],
     L["|cffffb5c5Right-Click:|r report unaffected"])
@@ -73,7 +80,7 @@ local function CreateRTPane()
     -- "|cffffffff" .. L["Current"]..": |cFFFFB5C5"..CellDB["tools"]["buffTracker"][3])
     buffCB:SetPoint("TOPLEFT", reportCB, "BOTTOMLEFT", 0, -15)
 
-    buffDropdown = Cell:CreateDropdown(rtPane, 120)
+    buffDropdown = Cell.CreateDropdown(rtPane, 120)
     buffDropdown:SetPoint("TOPLEFT", buffCB, "BOTTOMRIGHT", 5, -5)
     buffDropdown:SetItems({
         {
@@ -81,7 +88,7 @@ local function CreateRTPane()
             ["value"] = "left-to-right",
             ["onClick"] = function()
                 CellDB["tools"]["buffTracker"][2] = "left-to-right"
-                Cell:Fire("UpdateTools", "buffTracker")
+                Cell.Fire("UpdateTools", "buffTracker")
             end,
         },
         {
@@ -89,7 +96,7 @@ local function CreateRTPane()
             ["value"] = "right-to-left",
             ["onClick"] = function()
                 CellDB["tools"]["buffTracker"][2] = "right-to-left"
-                Cell:Fire("UpdateTools", "buffTracker")
+                Cell.Fire("UpdateTools", "buffTracker")
             end,
         },
         {
@@ -97,7 +104,7 @@ local function CreateRTPane()
             ["value"] = "top-to-bottom",
             ["onClick"] = function()
                 CellDB["tools"]["buffTracker"][2] = "top-to-bottom"
-                Cell:Fire("UpdateTools", "buffTracker")
+                Cell.Fire("UpdateTools", "buffTracker")
             end,
         },
         {
@@ -105,24 +112,24 @@ local function CreateRTPane()
             ["value"] = "bottom-to-top",
             ["onClick"] = function()
                 CellDB["tools"]["buffTracker"][2] = "bottom-to-top"
-                Cell:Fire("UpdateTools", "buffTracker")
+                Cell.Fire("UpdateTools", "buffTracker")
             end,
         },
     })
 
-    sizeEditBox = Cell:CreateEditBox(rtPane, 38, 20, false, false, true)
+    sizeEditBox = Cell.CreateEditBox(rtPane, 38, 20, false, false, true)
     sizeEditBox:SetPoint("TOPLEFT", buffDropdown, "TOPRIGHT", 5, 0)
     sizeEditBox:SetMaxLetters(3)
 
-    sizeEditBox.confirmBtn = Cell:CreateButton(rtPane, "OK", "accent", {27, 20})
-    sizeEditBox.confirmBtn:SetPoint("TOPLEFT", sizeEditBox, "TOPRIGHT", P:Scale(-1), 0)
+    sizeEditBox.confirmBtn = Cell.CreateButton(rtPane, "OK", "accent", {27, 20})
+    sizeEditBox.confirmBtn:SetPoint("TOPLEFT", sizeEditBox, "TOPRIGHT", P.Scale(-1), 0)
     sizeEditBox.confirmBtn:Hide()
     sizeEditBox.confirmBtn:SetScript("OnHide", function()
         sizeEditBox.confirmBtn:Hide()
     end)
     sizeEditBox.confirmBtn:SetScript("OnClick", function()
         CellDB["tools"]["buffTracker"][3] = tonumber(sizeEditBox:GetText())
-        Cell:Fire("UpdateTools", "buffTracker")
+        Cell.Fire("UpdateTools", "buffTracker")
         sizeEditBox.confirmBtn:Hide()
         sizeEditBox:ClearFocus()
     end)
@@ -139,17 +146,17 @@ local function CreateRTPane()
     end)
 
     -- ready & pull
-    readyPullCB = Cell:CreateCheckButton(rtPane, L["ReadyCheck and PullTimer buttons"], function(checked, self)
+    readyPullCB = Cell.CreateCheckButton(rtPane, L["ReadyCheck and PullTimer buttons"], function(checked, self)
         CellDB["tools"]["readyAndPull"][1] = checked
         styleDropdown:SetEnabled(checked)
         pullDropdown:SetEnabled(checked)
         secEditBox:SetEnabled(checked)
-        Cell:Fire("UpdateTools", "buttons")
+        Cell.Fire("UpdateTools", "buttons")
     end, L["ReadyCheck and PullTimer buttons"], L["Only show when you have permission to do this"], L["readyCheckTips"], L["pullTimerTips"])
     readyPullCB:SetPoint("TOPLEFT", buffCB, "BOTTOMLEFT", 0, -43)
-    Cell:RegisterForCloseDropdown(readyPullCB)
+    Cell.RegisterForCloseDropdown(readyPullCB)
 
-    styleDropdown = Cell:CreateDropdown(rtPane, 120)
+    styleDropdown = Cell.CreateDropdown(rtPane, 120)
     styleDropdown:SetPoint("TOPLEFT", readyPullCB, "BOTTOMRIGHT", 5, -5)
     styleDropdown:SetItems({
         {
@@ -157,7 +164,7 @@ local function CreateRTPane()
             ["value"] = "text_button",
             ["onClick"] = function()
                 CellDB["tools"]["readyAndPull"][2] = "text_button"
-                Cell:Fire("UpdateTools", "readyAndPull")
+                Cell.Fire("UpdateTools", "readyAndPull")
             end,
         },
         {
@@ -165,7 +172,7 @@ local function CreateRTPane()
             ["value"] = "icon_button_h",
             ["onClick"] = function()
                 CellDB["tools"]["readyAndPull"][2] = "icon_button_h"
-                Cell:Fire("UpdateTools", "readyAndPull")
+                Cell.Fire("UpdateTools", "readyAndPull")
             end,
         },
         {
@@ -173,12 +180,12 @@ local function CreateRTPane()
             ["value"] = "icon_button_v",
             ["onClick"] = function()
                 CellDB["tools"]["readyAndPull"][2] = "icon_button_v"
-                Cell:Fire("UpdateTools", "readyAndPull")
+                Cell.Fire("UpdateTools", "readyAndPull")
             end,
         },
     })
 
-    pullDropdown = Cell:CreateDropdown(rtPane, 109)
+    pullDropdown = Cell.CreateDropdown(rtPane, 109)
     pullDropdown:SetPoint("TOPLEFT", styleDropdown, "TOPRIGHT", 5, 0)
     pullDropdown:SetItems({
         {
@@ -186,7 +193,7 @@ local function CreateRTPane()
             ["value"] = "default",
             ["onClick"] = function()
                 CellDB["tools"]["readyAndPull"][3][1] = "default"
-                Cell:Fire("UpdateTools", "readyAndPull")
+                Cell.Fire("UpdateTools", "readyAndPull")
             end,
         },
         {
@@ -194,7 +201,7 @@ local function CreateRTPane()
             ["value"] = "mrt",
             ["onClick"] = function()
                 CellDB["tools"]["readyAndPull"][3][1] = "mrt"
-                Cell:Fire("UpdateTools", "readyAndPull")
+                Cell.Fire("UpdateTools", "readyAndPull")
             end,
         },
         {
@@ -202,7 +209,7 @@ local function CreateRTPane()
             ["value"] = "dbm",
             ["onClick"] = function()
                 CellDB["tools"]["readyAndPull"][3][1] = "dbm"
-                Cell:Fire("UpdateTools", "readyAndPull")
+                Cell.Fire("UpdateTools", "readyAndPull")
             end,
         },
         {
@@ -210,24 +217,24 @@ local function CreateRTPane()
             ["value"] = "bw",
             ["onClick"] = function()
                 CellDB["tools"]["readyAndPull"][3][1] = "bw"
-                Cell:Fire("UpdateTools", "readyAndPull")
+                Cell.Fire("UpdateTools", "readyAndPull")
             end,
         },
     })
 
-    secEditBox = Cell:CreateEditBox(rtPane, 38, 20, false, false, true)
+    secEditBox = Cell.CreateEditBox(rtPane, 38, 20, false, false, true)
     secEditBox:SetPoint("TOPLEFT", pullDropdown, "TOPRIGHT", 5, 0)
     secEditBox:SetMaxLetters(3)
 
-    secEditBox.confirmBtn = Cell:CreateButton(rtPane, "OK", "accent", {27, 20})
-    secEditBox.confirmBtn:SetPoint("TOPLEFT", secEditBox, "TOPRIGHT", P:Scale(-1), 0)
+    secEditBox.confirmBtn = Cell.CreateButton(rtPane, "OK", "accent", {27, 20})
+    secEditBox.confirmBtn:SetPoint("TOPLEFT", secEditBox, "TOPRIGHT", P.Scale(-1), 0)
     secEditBox.confirmBtn:Hide()
     secEditBox.confirmBtn:SetScript("OnHide", function()
         secEditBox.confirmBtn:Hide()
     end)
     secEditBox.confirmBtn:SetScript("OnClick", function()
         CellDB["tools"]["readyAndPull"][3][2] = tonumber(secEditBox:GetText())
-        Cell:Fire("UpdateTools", "readyAndPull")
+        Cell.Fire("UpdateTools", "readyAndPull")
         secEditBox.confirmBtn:Hide()
     end)
 
@@ -243,16 +250,16 @@ local function CreateRTPane()
     end)
 
     -- marks bar
-    marksBarCB = Cell:CreateCheckButton(rtPane, L["Marks Bar"], function(checked, self)
+    marksBarCB = Cell.CreateCheckButton(rtPane, L["Marks Bar"], function(checked, self)
         CellDB["tools"]["marks"][1] = checked
         marksDropdown:SetEnabled(checked)
         marksShowSoloCB:SetEnabled(checked)
-        Cell:Fire("UpdateTools", "marks")
+        Cell.Fire("UpdateTools", "marks")
     end, L["Marks Bar"], L["Only show when you have permission to do this"], L["marksTips"])
     marksBarCB:SetPoint("TOPLEFT", readyPullCB, "BOTTOMLEFT", 0, -43)
-    Cell:RegisterForCloseDropdown(marksBarCB)
+    Cell.RegisterForCloseDropdown(marksBarCB)
 
-    marksDropdown = Cell:CreateDropdown(rtPane, 217)
+    marksDropdown = Cell.CreateDropdown(rtPane, 217)
     marksDropdown:SetPoint("TOPLEFT", marksBarCB, "BOTTOMRIGHT", 5, -5)
     marksDropdown:SetItems({
         {
@@ -260,7 +267,7 @@ local function CreateRTPane()
             ["value"] = "target_h",
             ["onClick"] = function()
                 CellDB["tools"]["marks"][3] = "target_h"
-                Cell:Fire("UpdateTools", "marks")
+                Cell.Fire("UpdateTools", "marks")
             end,
         },
         {
@@ -268,7 +275,7 @@ local function CreateRTPane()
             ["value"] = "target_v",
             ["onClick"] = function()
                 CellDB["tools"]["marks"][3] = "target_v"
-                Cell:Fire("UpdateTools", "marks")
+                Cell.Fire("UpdateTools", "marks")
             end,
         },
         {
@@ -277,7 +284,7 @@ local function CreateRTPane()
             ["disabled"] = Cell.isVanilla or Cell.isWrath,
             ["onClick"] = function()
                 CellDB["tools"]["marks"][3] = "world_h"
-                Cell:Fire("UpdateTools", "marks")
+                Cell.Fire("UpdateTools", "marks")
             end,
         },
         {
@@ -286,7 +293,7 @@ local function CreateRTPane()
             ["disabled"] = Cell.isVanilla or Cell.isWrath,
             ["onClick"] = function()
                 CellDB["tools"]["marks"][3] = "world_v"
-                Cell:Fire("UpdateTools", "marks")
+                Cell.Fire("UpdateTools", "marks")
             end,
         },
         {
@@ -295,7 +302,7 @@ local function CreateRTPane()
             ["disabled"] = Cell.isVanilla or Cell.isWrath,
             ["onClick"] = function()
                 CellDB["tools"]["marks"][3] = "both_h"
-                Cell:Fire("UpdateTools", "marks")
+                Cell.Fire("UpdateTools", "marks")
             end,
         },
         {
@@ -304,21 +311,21 @@ local function CreateRTPane()
             ["disabled"] = Cell.isVanilla or Cell.isWrath,
             ["onClick"] = function()
                 CellDB["tools"]["marks"][3] = "both_v"
-                Cell:Fire("UpdateTools", "marks")
+                Cell.Fire("UpdateTools", "marks")
             end,
         }
     })
 
-    marksShowSoloCB = Cell:CreateCheckButton(rtPane, L["Show Solo"], function(checked, self)
+    marksShowSoloCB = Cell.CreateCheckButton(rtPane, L["Show Solo"], function(checked, self)
         CellDB["tools"]["marks"][2] = checked
-        Cell:Fire("UpdateTools", "marks")
+        Cell.Fire("UpdateTools", "marks")
     end)
     marksShowSoloCB:SetPoint("TOPLEFT", marksDropdown, "BOTTOMLEFT", 0, -8)
 
     -- fadeOut
-    fadeOutToolsCB = Cell:CreateCheckButton(rtPane, L["Fade Out These Buttons"], function(checked, self)
+    fadeOutToolsCB = Cell.CreateCheckButton(rtPane, L["Fade Out These Buttons"], function(checked, self)
         CellDB["tools"]["fadeOut"] = checked
-        Cell:Fire("UpdateTools", "fadeOut")
+        Cell.Fire("UpdateTools", "fadeOut")
     end)
     fadeOutToolsCB:SetPoint("TOPLEFT", marksBarCB, "BOTTOMLEFT", 0, -70)
 
@@ -328,7 +335,7 @@ local function CreateRTPane()
     region:SetPoint("RIGHT", -5, 0)
 
     fadeOutToolsCB:HookScript("OnEnter", function()
-        LCG.PixelGlow_Start(region, Cell:GetAccentColorTable(1), 27, 0.1, 17, 1)
+        LCG.PixelGlow_Start(region, Cell.GetAccentColorTable(1), 27, 0.1, 17, 1)
     end)
     fadeOutToolsCB:HookScript("OnLeave", function()
         LCG.PixelGlow_Stop(region)
@@ -343,7 +350,7 @@ local function ShowUtilitySettings(which)
     if which == "raidTools" then
         if not init then
             CreateRTPane()
-            F:ApplyCombatProtectionToFrame(rtPane, -4, 4, 4, -4)
+            F.ApplyCombatProtectionToFrame(rtPane, -4, 4, 4, -4)
         end
 
         rtPane:Show()
@@ -352,19 +359,21 @@ local function ShowUtilitySettings(which)
         init = true
 
         -- raid tools
-        resCB:SetChecked(CellDB["tools"]["showBattleRes"])
+        resCB:SetChecked(CellDB["tools"]["battleResTimer"][1])
+        resDetachCB:SetChecked(CellDB["tools"]["battleResTimer"][2])
+        resDetachCB:SetEnabled(CellDB["tools"]["battleResTimer"][1])
         reportCB:SetChecked(CellDB["tools"]["deathReport"][1])
 
         buffCB:SetChecked(CellDB["tools"]["buffTracker"][1])
         buffDropdown:SetSelectedValue(CellDB["tools"]["buffTracker"][2])
         sizeEditBox:SetText(CellDB["tools"]["buffTracker"][3])
-        Cell:SetEnabled(CellDB["tools"]["buffTracker"][1], buffDropdown, sizeEditBox)
+        Cell.SetEnabled(CellDB["tools"]["buffTracker"][1], buffDropdown, sizeEditBox)
 
         readyPullCB:SetChecked(CellDB["tools"]["readyAndPull"][1])
         styleDropdown:SetSelectedValue(CellDB["tools"]["readyAndPull"][2])
         pullDropdown:SetSelectedValue(CellDB["tools"]["readyAndPull"][3][1])
         secEditBox:SetText(CellDB["tools"]["readyAndPull"][3][2])
-        Cell:SetEnabled(CellDB["tools"]["readyAndPull"][1], styleDropdown, pullDropdown, secEditBox)
+        Cell.SetEnabled(CellDB["tools"]["readyAndPull"][1], styleDropdown, pullDropdown, secEditBox)
 
         marksDropdown:SetEnabled(CellDB["tools"]["marks"][1])
         marksBarCB:SetChecked(CellDB["tools"]["marks"][1])
@@ -377,4 +386,4 @@ local function ShowUtilitySettings(which)
         rtPane:Hide()
     end
 end
-Cell:RegisterCallback("ShowUtilitySettings", "RaidTools_ShowUtilitySettings", ShowUtilitySettings)
+Cell.RegisterCallback("ShowUtilitySettings", "RaidTools_ShowUtilitySettings", ShowUtilitySettings)

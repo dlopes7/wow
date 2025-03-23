@@ -12,6 +12,31 @@ OmniCDDB = {
 ["version"] = 4,
 ["profiles"] = {
 ["Default"] = {
+["Party"] = {
+["party"] = {
+["extraBars"] = {
+["raidBar1"] = {
+["manualPos"] = {
+["raidBar1"] = {
+["y"] = 357.9199138748663,
+["x"] = 584.8001041161988,
+},
+},
+},
+},
+["position"] = {
+["offsetX"] = 0,
+["anchor"] = "BOTTOMLEFT",
+["attachMore"] = "BOTTOMLEFT",
+["columns"] = 4,
+["attach"] = "BOTTOMLEFT",
+["layout"] = "vertical",
+["preset"] = "manual",
+["offsetY"] = 37,
+["anchorMore"] = "BOTTOMLEFT",
+},
+},
+},
 },
 },
 }

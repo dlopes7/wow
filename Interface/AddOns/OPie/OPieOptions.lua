@@ -216,7 +216,7 @@ do -- config.bind
 		local parent = self:GetParent()
 		GameTooltip:SetOwner(self, self.tooltipOwnerPoint or "ANCHOR_BOTTOMRIGHT")
 		GameTooltip:AddLine(header)
-		GameTooltip:AddLine(L"Left click to set assign binding", hc.r, hc.g, hc.b)
+		GameTooltip:AddLine(L"Left click to assign binding", hc.r, hc.g, hc.b)
 		if parent.OnBindingAltClick then
 			GameTooltip:AddLine(L"Alt click to set conditional binding", hc.r, hc.g, hc.b)
 		end
@@ -395,7 +395,7 @@ local OPC_Options = {
 	{ "section", caption=L"Interaction" },
 		{"radio", "InteractionMode", {L"Quick", L"Relaxed", L"Mouse-less"}},
 		{"twof", tag="OnPrimaryPress", caption=L"On ring binding press:", menuOption="RingAtMouse"},
-		{"twof", tag="OnPrimaryRelease", caption=L"On ring binding release:", menuOption="QuickActionOnRelease", depOn="InteractionMode", depValue=2},
+		{"twof", tag="OnPrimaryRelease", caption=L"On ring binding release:", menuOption="QuickActionOnRelease", depOn="InteractionMode", depValueSet={nil, 2, 3}},
 		{"twof", tag="OnLeft", caption=L"On left click:", menuOption="NoClose", depOn="InteractionMode", depValue=2, otherwise=DISABLED_TEXT},
 		{"twof", tag="OnRight", caption=L"On right click:"},
 		{"twof", "QuickAction", caption=L"Quick action repeat trigger:", depOn="InteractionMode", depValueSet=REQ_POINTER, otherwise=DISABLED_TEXT},
@@ -413,8 +413,8 @@ local OPC_Options = {
 		{"bool", "ShowKeys", caption=L"Per-slice bindings", depOn="SliceBinding", depValue=true, otherwise=false},
 		{"bool", "ShowCooldowns", caption=L"Show cooldown numbers", depIndicatorFeature="CooldownNumbers"},
 		{"bool", "ShowRecharge", caption=L"Show recharge numbers", depIndicatorFeature="CooldownNumbers"},
+		{"twof", "UseGameTooltip", caption=L"Show tooltips:"},
 		{"bool", "ShowShortLabels", caption=L"Show slice labels", depIndicatorFeature="ShortLabels"},
-		{"bool", "UseGameTooltip", caption=L"Show tooltips"},
 	{ "section", caption=L"Animation"},
 		{"bool", "XTAnimation", caption=L"Animate transitions"},
 		{"bool", "MISpinOnHide", caption=L"Outward spiral on hide", depOn="XTAnimation", depValue=true, otherwise=false},
@@ -433,7 +433,7 @@ local OPC_OptionDomain = CreateFrame("Frame", "OPC_OptionDomain", frame, "UIDrop
 	OPC_OptionDomain:SetPoint("LEFT", OPC_Profile, "RIGHT", 44, 0)
 	UIDropDownMenu_SetWidth(OPC_OptionDomain, 250)
 
-local OPC_AlterOption, OPC_AlterOptionW, OPC_BlockInput
+local OPC_AlterOption, OPC_AlterOptionW, OPC_AlterOptionQ, OPC_BlockInput
 local OPC_UpdateControlReqs, OPC_UpdateViewport, OPC_IsViewDirty, OR_CurrentOptionsDomain
 
 local widgetControl, optionControl = {}, {} do -- Widget construction
@@ -796,24 +796,39 @@ do -- customized widgets
 	local function currentDomainHasQA()
 		return PC:GetOption("CenterAction", OR_CurrentOptionsDomain) or PC:GetOption("MotionAction", OR_CurrentOptionsDomain)
 	end
+	local function onPrimaryReleaseOption(_, pref)
+		local c = optionControl.OnPrimaryRelease
+		if pref == "close" or pref == "no-close" then
+			OPC_AlterOption(c, "CloseOnRelease", pref == "close")
+		elseif pref == "qa-close" or pref == "no-qa-close" then
+			OPC_AlterOption(c, "QuickActionOnRelease", pref == "qa-close")
+		end
+	end
 	function optionControl.OnPrimaryRelease:refresh()
+		local im = PC:GetOption("InteractionMode", OR_CurrentOptionsDomain)
 		self.text:SetText(not self.widget:IsEnabled() and self.otherwise
-		                  or PC:GetOption("QuickActionOnRelease", OR_CurrentOptionsDomain) and currentDomainHasQA() and L"Close after quick action"
+		                  or im == 3 and PC:GetOption("CloseOnRelease", OR_CurrentOptionsDomain) and L"Close ring"
+		                  or im == 2 and PC:GetOption("QuickActionOnRelease", OR_CurrentOptionsDomain) and currentDomainHasQA() and L"Close ring after quick action"
 		                  or L"Do nothing")
 	end
 	function optionControl.OnPrimaryRelease.menuInitializer()
-		local c = optionControl.OnPrimaryRelease
-		local info = {func=onMenuOptionSetClick, arg2=c.widget, minWidth=240, tooltipWhileDisabled=true, tooltipOnButton=true}
+		local info = {func=onPrimaryReleaseOption, minWidth=240, tooltipWhileDisabled=true, tooltipOnButton=true}
 		local qaOnRelease = PC:GetOption("QuickActionOnRelease", OR_CurrentOptionsDomain)
-		local hasQA = currentDomainHasQA()
-		info.text, info.arg1, info.checked = L"Close after quick action", true, hasQA and qaOnRelease
-		if not hasQA then
-			local opt = "|cffffffff" .. (L"Quick action repeat trigger:"):gsub("%s*:%s*$", "") .. "|r"
-			info.disabled, info.tooltipTitle, info.tooltipText = true, info.text, (L"Select a %s interaction to enable this option."):format(opt)
+		local closeOnRelease = PC:GetOption("CloseOnRelease", OR_CurrentOptionsDomain)
+		local im, hasQA = PC:GetOption("InteractionMode", OR_CurrentOptionsDomain), currentDomainHasQA()
+		if im == 3 then
+			info.text, info.arg1, info.checked = L"Close ring", "close", closeOnRelease
+			UIDropDownMenu_AddButton(info)
+		else
+			info.text, info.arg1, info.checked = L"Close ring after quick action", "qa-close", hasQA and qaOnRelease
+			if not hasQA then
+				local opt = "|cffffffff" .. (L"Quick action repeat trigger:"):gsub("%s*:%s*$", "") .. "|r"
+				info.disabled, info.tooltipTitle, info.tooltipText = true, info.text, (L"Select a %s interaction to enable this option."):format(opt)
+			end
+			UIDropDownMenu_AddButton(info)
+			info.disabled, info.tooltipTitle, info.tooltipText = nil
 		end
-		UIDropDownMenu_AddButton(info)
-		info.text, info.arg1, info.checked = L"Do nothing", false, not qaOnRelease
-		info.disabled, info.tooltipTitle, info.tooltipText = nil
+		info.text, info.arg1, info.checked = L"Do nothing", im == 3 and "no-close" or "no-qa-close", not (im == 3 and closeOnRelease or im ~= 3 and qaOnRelease)
 		UIDropDownMenu_AddButton(info)
 	end
 	function optionControl.QuickAction.menuInitializer()
@@ -862,21 +877,31 @@ do -- customized widgets
 		end
 		OPC_AlterOption(widgetControl[owner], "NoCloseOnSlice", pref == "UseNoClose")
 	end
+	local function onRunOnDownClick(_, pref, owner)
+		OPC_AlterOption(widgetControl[owner], "RunBindingsOnDown", pref == "OnDown")
+	end
 	function optionControl.SliceBinding.menuInitializer()
 		local c = optionControl.SliceBinding
 		local info = {func=onSliceBindingOptionClick, arg2=c.widget, minWidth=240}
 		local noClose = PC:GetOption("NoCloseOnSlice", OR_CurrentOptionsDomain)
+		local runOnDown = PC:GetOption("RunBindingsOnDown", OR_CurrentOptionsDomain)
 		if c.forced then
 			info.text, info.arg1, info.checked, info.isNotRadio = L"Leave open after use", "ToggleNoClose", noClose, true
 			UIDropDownMenu_AddButton(info)
-			return
+		else
+			local doBind = PC:GetOption("SliceBinding", OR_CurrentOptionsDomain)
+			info.text, info.arg1, info.checked = L"Use slice and close ring", "UseClose", doBind and not noClose
+			UIDropDownMenu_AddButton(info)
+			info.text, info.arg1, info.checked = L"Use slice", "UseNoClose", doBind and noClose
+			UIDropDownMenu_AddButton(info)
+			info.text, info.arg1, info.checked = L"Do nothing", "None", not doBind
+			UIDropDownMenu_AddButton(info)
 		end
-		local doBind = c.forced or PC:GetOption("SliceBinding", OR_CurrentOptionsDomain)
-		info.text, info.arg1, info.checked = L"Use slice and close ring", "UseClose", doBind and not noClose
+		UIDropDownMenu_AddSeparator()
+		info.func, info.isNotRadio = onRunOnDownClick, nil
+		info.text, info.arg1, info.checked = L"Trigger on binding press", "OnDown", runOnDown
 		UIDropDownMenu_AddButton(info)
-		info.text, info.arg1, info.checked = L"Use slice", "UseNoClose", doBind and noClose
-		UIDropDownMenu_AddButton(info)
-		info.text, info.arg1, info.checked = L"Do nothing", "None", not doBind
+		info.text, info.arg1, info.checked = L"Trigger on binding release", "OnUp", not runOnDown
 		UIDropDownMenu_AddButton(info)
 	end
 	function optionControl.SliceBinding:refresh()
@@ -890,6 +915,31 @@ do -- customized widgets
 	end
 	function optionControl.InRingBindingNav:OnClick(_w)
 		T.ShowSliceBindingPanel(OR_CurrentOptionsDomain)
+	end
+	local function onTooltipAnchorSelect(_, pref, owner)
+		OPC_AlterOptionQ("UseGameTooltip", pref ~= "none")
+		OPC_AlterOption(widgetControl[owner], "TooltipAnchor", pref == "side" and pref or nil)
+	end
+	function optionControl.UseGameTooltip.menuInitializer()
+		local c = optionControl.UseGameTooltip
+		local info = {func=onTooltipAnchorSelect, arg2=c.widget, minWidth=240}
+		local useAny = PC:GetOption("UseGameTooltip", OR_CurrentOptionsDomain)
+		local anchor = useAny and PC:GetOption("TooltipAnchor", OR_CurrentOptionsDomain) or "none"
+		info.text, info.arg1, info.checked = L"Ring-side", "side", anchor == "side"
+		UIDropDownMenu_AddButton(info)
+		info.text, info.arg1, info.checked = L"At HUD Tooltip position", "hud", useAny and anchor ~= "side"
+		UIDropDownMenu_AddButton(info)
+		info.text, info.arg1, info.checked = L"Do not show", "none", anchor == "none"
+		UIDropDownMenu_AddButton(info)
+	end
+	function optionControl.UseGameTooltip:refresh()
+		local useAny = PC:GetOption("UseGameTooltip", OR_CurrentOptionsDomain)
+		local anchor = useAny and PC:GetOption("TooltipAnchor", OR_CurrentOptionsDomain)
+		self.text:SetText(
+			useAny == false and L"Do not show" or
+			anchor == "side" and L"Ring-side" or
+			L"At HUD Tooltip position"
+		)
 	end
 	function EV:CVAR_UPDATE(cvar)
 		if cvar == "GamePadEnable" and frame:IsVisible() then
@@ -937,6 +987,10 @@ function OPC_UpdateControlReqs(v)
 		v.widget:SetChecked(checked or nil)
 		v.widget.tooltipText, v.widget.tooltipTitle = disabled and disabledHint, disabled and disabledHint and v.caption or nil
 	end
+end
+function OPC_AlterOptionQ(option, newval)
+	config.undo:saveActiveProfile()
+	PC:SetOption(option, newval, OR_CurrentOptionsDomain)
 end
 function OPC_AlterOptionW(widget, newval, ...)
 	if OPC_BlockInput then return end

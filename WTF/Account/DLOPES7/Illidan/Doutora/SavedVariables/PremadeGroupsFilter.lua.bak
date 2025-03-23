@@ -35,7 +35,7 @@ PremadeGroupsFilterState = {
 ["heals"] = {
 ["max"] = "0",
 ["min"] = "0",
-["act"] = false,
+["act"] = true,
 },
 ["dungeon6"] = false,
 ["dps"] = {

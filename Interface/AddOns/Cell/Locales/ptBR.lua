@@ -46,6 +46,8 @@ L["Any Spells"] = "Qualquer feitiço"
 L["Anyone"] = "Qualquer um"
 L["AoE Healing"] = "Cura AoE"
 L["Appearance"] = "Aparência"
+--[[Translation missing --]]
+--[[ L["Apply Recommended Scale"] = ""--]]
 L["Arena"] = "Arena"
 L["assist"] = "Assist"
 L["Assist"] = "Assist"
@@ -135,6 +137,8 @@ L["Color Duration Text"] = "Cor do texto de duração"
 --[[Translation missing --]]
 --[[ L["Color Thresholds"] = ""--]]
 L["Columns"] = "Colunas"
+--[[Translation missing --]]
+--[[ L["Combat Icon"] = ""--]]
 L["Combine Groups"] = "Combinar grupos"
 L["Common"] = "Comum"
 L["Condition"] = "Condição"
@@ -185,6 +189,10 @@ L["Delete debuff?"] = "Deletar debuff?"
 L["Delete indicator"] = "Deletar indicador"
 L["Delete layout"] = "Deletar layout"
 L["Delete spell?"] = "Deletar feitiço?"
+--[[Translation missing --]]
+--[[ L["Delimiter"] = "Delimiter"--]]
+--[[Translation missing --]]
+--[[ L["Detached"] = ""--]]
 L["Disabled"] = "Desabilitado"
 L["Disabled in battlegrounds and arenas"] = "Desabilitado em battlegrounds e arenas"
 L["Discard"] = "Descartar"
@@ -195,7 +203,7 @@ L["Dispel Request"] = "Solicitação de Dispel"
 L["Dispellable By Me"] = "Dispelável por mim"
 L["dispellableByMe"] = "Mostrar apenas debuffs dispeláveis por mim"
 L["Dispels"] = "Dispels"
-L["Display a gradient texture when the unit receives a heal from your certain AoE healing spells."] = "Exibe uma textura em degradê quando a unidade recebe uma cura de certos feitiços de cura AoE."
+L["Display a gradient texture when the unit receives a heal from your certain healing spells."] = "Exibe uma textura em degradê quando a unidade recebe uma cura de certos feitiços de cura AoE."
 L["Display elapsed time since debuff applied"] = "Mostrar o tempo decorrido desde que o debuff foi aplicado"
 L["Display One Decimal Place When"] = "Exibir uma casa decimal quando"
 L["Displayed Per Line"] = "Exibido Por Linha"
@@ -205,6 +213,8 @@ L["Due to restrictions of the private aura system, this indicator can only use B
 L["durationFont"] = "Fonte de duração"
 L["Edit"] = "Editar"
 L["Edit spell"] = "Editar feitiço"
+--[[Translation missing --]]
+--[[ L["Effective"] = "Effective"--]]
 L["En"] = "En"
 L["Enable"] = "Enable"
 --[[Translation missing --]]
@@ -266,7 +276,11 @@ L["Group Spacing"] = "Espaçamento de Grupo"
 L["H"] = "Talentos de Herói"
 L["Half"] = "Metade"
 L["Heal Absorb"] = "Absorção de Cura"
+--[[Translation missing --]]
+--[[ L["Heal Absorbs"] = ""--]]
 L["Heal Prediction"] = "Previsão de Cura"
+--[[Translation missing --]]
+--[[ L["Health"] = ""--]]
 L["Health Bar"] = "Barra de Vida"
 L["Health Bar Alpha"] = "Alpha da Barra de Vida"
 L["Health Bar Color"] = "Cor da Barra de Vida"
@@ -408,6 +422,8 @@ L["Only one threshold is displayed at a time"] = "Apenas um limite é exibido po
 L["Only show during encounter or in mythic+"] = "Mostrar apenas durante um encontro ou em mítica+"
 L["Only show when you have permission to do this"] = "Mostrar apenas quando você tiver permissão para fazer isso"
 L["Only visible to me"] = "Visível apenas para mim"
+--[[Translation missing --]]
+--[[ L["onlyEnableNotInCombat"] = "Only when I'm not in combat"--]]
 L["onlyShowOvershields"] = "Mostrar apenas overshields"
 L["onlyShowTopGlow"] = "Mostrar brilho apenas no primeiro debuff"
 L["Options"] = "Opções"
@@ -431,6 +447,7 @@ L["PENDING"] = "PENDENTE"
 L["Percentage"] = "Porcentagem"
 L["Pet"] = "Pet"
 L["PET"] = "Pet"
+L["Pets"] = "Pets de Raid"
 L["Pixel"] = "Pixel"
 L["Pixel Perfect"] = "Pixel Perfect"
 L["Play animation when the unit uses a specific spell/item. The list is global shared, not layout-specific."] = "Reproduzir a animação quando a unidade usa um feitiço/item específico. A lista é compartilhada globalmente, não específica para o layout."
@@ -447,6 +464,8 @@ L["Press Key to Bind"] = "Pressione a tecla para vincular"
 L["Preview"] = "Pré-visualizar"
 L["Primary Talents"] = "Talentos Primários"
 L["Private Auras"] = "Auras Privadas"
+--[[Translation missing --]]
+--[[ L["Profile imported successfully."] = ""--]]
 L["Profiles"] = "Perfis"
 L["Pull"] = "Pull"
 L["Pull in %d sec"] = "Pull em %d segundos"
@@ -460,7 +479,6 @@ L["Raid Debuffs"] = "Debuffs de Raid"
 L["Raid Debuffs updated: %s."] = "Debuffs de Raid atualizados: %s."
 L["Raid Icon (player)"] = "Ícone de Raid (player)"
 L["Raid Icon (target)"] = "ícone de Raid (target)"
-L["Raid Pets"] = "Pets de Raid"
 L["Raid Tools"] = "Ferramentas de Raid"
 L["RAID_DEBUFFS_TIPS"] = "Dicas: [Arraste & Solte] para mudar a ordem de debuffs. [Double-Click] no nome de uma instância para abrir o Guia de Aventura. [Shift+Left Click] numa instância/nome de chefe pra compartilhar debuffs. A prioridade dos Debuffs Gerais é maior que dos Debuffs de Chefe."
 L["raidRosterTips"] = "[Right-Click] para promover/rebaixar (assist). [Alt+Right-Click] desconvidar."
@@ -471,6 +489,10 @@ L["readyCheckTips"] = "n|rReady Check\nLeft-Click: |cffffffffiniciar um ready ch
 L["Rect"] = "Retângulo"
 L["refresh unit buttons"] = "atualizar botões de unidade"
 L["Refreshing unit buttons (%s)..."] = "Atualizando botões de unidade (%s)..."
+--[[Translation missing --]]
+--[[ L["Relative Point"] = ""--]]
+--[[Translation missing --]]
+--[[ L["Relative To"] = ""--]]
 L["Remaining Time"] = "Tempo Restante"
 L["Remember to backup your profile"] = "Lembre-se de fazer backup do seu perfil"
 L["Remove"] = "Remover"
@@ -540,6 +562,8 @@ L["Shield Bar"] = "Barra de Escudo"
 L["Shield Texture"] = "Textura de Escudo"
 L["shieldByMe"] = "Mostrar apenas PW:S lançados por mim"
 L["shields"] = "Escudos"
+--[[Translation missing --]]
+--[[ L["Shields"] = "Shields"--]]
 L["Shift+Enter: add a new line"] = "Shift+Enter: adicione uma nova linha"
 L["Shine"] = "Brilhar"
 L["Show All"] = "Mostrar tudo"
@@ -551,9 +575,13 @@ L["Show friendly NPCs in a separate frame"] = "Mostre NPCs amigáveis ​​em u
 L["Show NPC Frame"] = "Mostrar o Frame de NPC"
 L["Show Party"] = "Mostrar grupo"
 L["Show Party/Arena Pets"] = "Mostrar Pets de Grupo/Arena"
+--[[Translation missing --]]
+--[[ L["Show pets in a separate frame"] = ""--]]
 L["Show Raid"] = "Exibir Raide"
 L["Show Raid Pets"] = "Mostrar pets de Raid"
 L["Show Solo"] = "Mostrar quando sozinho"
+--[[Translation missing --]]
+--[[ L["Show Solo Pet"] = ""--]]
 L["Show units you care about more in a separate frame"] = "Mostre as unidades mais importantes para você em um quadro separado"
 L["Show while in a party"] = "Mostrar durante um grupo"
 L["Show while in a raid"] = "Exibir quando estiver em uma raide."

@@ -88,10 +88,6 @@ local function UpdateWhoList()
 	end
 end
 
-local function RaidInfoFrame_OnShow()
-	_G.RaidInfoFrame:Point('TOPLEFT', _G.RaidFrame, 'TOPRIGHT', 0, 0)
-end
-
 function S:FriendsFrame()
 	if not (E.private.skins.blizzard.enable and E.private.skins.blizzard.friends) then return end
 
@@ -112,7 +108,10 @@ function S:FriendsFrame()
 	_G.FriendsFrameTab2:Point('TOPLEFT', _G.FriendsFrameTab1, 'TOPRIGHT', -19, 0)
 	_G.FriendsFrameTab3:Point('TOPLEFT', _G.FriendsFrameTab2, 'TOPRIGHT', -19, 0)
 	_G.FriendsFrameTab4:Point('TOPLEFT', _G.FriendsFrameTab3, 'TOPRIGHT', -19, 0)
-	_G.FriendsFrameTab5:Point('TOPLEFT', _G.FriendsFrameTab4, 'TOPRIGHT', -19, 0)
+
+	if _G.FriendsFrameTab5 then
+		_G.FriendsFrameTab5:Point('TOPLEFT', _G.FriendsFrameTab4, 'TOPRIGHT', -19, 0)
+	end
 
 	-- Friends List Frame
 	for i = 1, _G.FRIEND_HEADER_TAB_IGNORE do
@@ -272,24 +271,6 @@ function S:FriendsFrame()
 	end
 
 	hooksecurefunc('WhoList_Update', UpdateWhoList)
-
-	-- Raid Tab
-	S:HandleButton(_G.RaidFrameRaidInfoButton)
-	S:HandleButton(_G.RaidFrameConvertToRaidButton)
-	S:HandleCheckBox(_G.RaidFrameAllAssistCheckButton)
-
-	-- Raid Info Frame
-	_G.RaidInfoFrame:StripTextures(true)
-	_G.RaidInfoFrame:CreateBackdrop('Transparent')
-	_G.RaidInfoFrame:HookScript('OnShow', RaidInfoFrame_OnShow)
-
-	_G.RaidInfoScrollFrame:StripTextures()
-	S:HandleScrollBar(_G.RaidInfoScrollFrameScrollBar)
-	S:HandleCloseButton(_G.RaidInfoCloseButton, _G.RaidInfoFrame)
-
-	_G.RaidInfoInstanceLabel:SetTemplate()
-	_G.RaidInfoIDLabel:SetTemplate()
-	S:HandleButton(_G.RaidInfoCancelButton)
 end
 
 S:AddCallback('FriendsFrame')

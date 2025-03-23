@@ -1,3 +1,18 @@
+VER 3 000000000000001A "1" "134400"
+/rw 1st set -  Elechero > Estelaris > Gordonfreems
+END
+VER 3 000000000000001B "2" "134400"
+/rw 2nd set -  Yisucràíst > Mhystogun > Firststriker
+END
+VER 3 0000000000000019 "car" "134400"
+/cast [nomounted, noflyable] G-99 Breakneck
+END
+VER 3 000000000000001C "knock" "134400"
+/rw BAIT DRILLS TO SIDES
+END
+VER 3 0000000000000018 "ping" "134400"
+/ping
+END
 VER 3 0000000000000016 "saphiren" "134400"
 /invite saphiren-azralon
 /invite sapphiren-azralon
@@ -7,6 +22,7 @@ VER 3 0000000000000016 "saphiren" "134400"
 /invite saphiren-stormrage
 /invite sapphiren-stormrage
 /invite saphirenn-stormrage
+/inv Saphirenn-stormrage
 END
 VER 3 0000000000000017 "Trinke" "134400"
 #showtooltip

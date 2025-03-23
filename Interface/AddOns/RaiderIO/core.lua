@@ -1542,6 +1542,7 @@ do
         inverseProfileModifier = false,
         positionProfileAuto = true,
         lockProfile = false,
+        enableLFGExportButton = true, -- NEW in 11.1
         showRoleIcons = true,
         profilePoint = { point = nil, x = 0, y = 0 },
         debugMode = false,
@@ -2012,7 +2013,8 @@ do
 
     local REGION = ns:GetRegionData()
 
-    ---@return boolean|string|nil, number|nil @arg1 can be nil (no data), false (server is unknown), string (the ltd). arg2 can be nil (no data), or region ID.
+    ---@return (false|string)? ltd The LTD string, otherwise `nil` for no data, or `false` for unknown server.
+    ---@return number? regionId The RegionID number, otherwise `nil` for no data.
     function util:GetRegion()
         local guid = UnitGUID("player")
         if not guid then
@@ -2021,7 +2023,7 @@ do
         local serverId = tonumber(strmatch(guid, "^Player%-(%d+)") or 0) or 0
         local regionId = REGION[serverId]
         if not regionId then
-            regionId = GetCurrentRegion() ---@type number
+            regionId = GetCurrentRegion()
             if util:IsOnRetailRealm() then
                 ns.Print(format(L.UNKNOWN_SERVER_FOUND, addonName, guid or "N/A", GetNormalizedRealmName() or "N/A"))
             end
@@ -2039,7 +2041,9 @@ do
         return ltd, regionId
     end
 
-    ---@return boolean|string|nil, number|nil @arg1 can be nil (no data), false (server is unknown), string (the ltd). arg2 can be nil (no data), or region ID.
+    ---@param serverId? number
+    ---@return (false|string)? ltd The LTD string, otherwise `nil` for no data, or `false` for unknown server.
+    ---@return number? regionId The RegionID number, otherwise `nil` for no data.
     function util:GetRegionForServerId(serverId)
         if not serverId then
             return
@@ -2217,55 +2221,55 @@ do
     end
 
     ---@param bnetIDAccount number @BNet Account ID
-    ---@param getAllChars? boolean @true = table, false = character as varargs
-    ---@return table|string|nil, string?, number? @Returns either a table with all characters, or the specific character varargs with name, faction and level.
-    function util:GetNameRealmForBNetFriend(bnetIDAccount, getAllChars)
+    ---@return string? fullName `Name-Realm`
+    ---@return number faction `1`|`2`|`3`
+    ---@return number level `80`
+    function util:GetNameRealmForBNetFriend(bnetIDAccount)
         local index = BNGetFriendIndex(bnetIDAccount)
         if not index then
-            return
+            return ---@diagnostic disable-line: missing-return-value
         end
-        local collection = {}
+        local collection = {} ---@type [string, number, number][]
         local collectionIndex = 0
         for i = 1, C_BattleNet.GetFriendNumGameAccounts(index), 1 do
             local accountInfo = C_BattleNet.GetFriendGameAccountInfo(index, i)
-            if accountInfo and accountInfo.clientProgram == BNET_CLIENT_WOW and (not accountInfo.wowProjectID or accountInfo.wowProjectID == WOW_PROJECT_MAINLINE) then
+            if accountInfo and accountInfo.characterName and accountInfo.clientProgram == BNET_CLIENT_WOW and (not accountInfo.wowProjectID or accountInfo.wowProjectID == WOW_PROJECT_MAINLINE) then
                 if accountInfo.realmName then
-                    accountInfo.characterName = accountInfo.characterName .. "-" .. accountInfo.realmName:gsub("%s+", "")
+                    accountInfo.characterName = format("%s-%s", accountInfo.characterName, accountInfo.realmName:gsub("%s+", ""))
                 end
                 collectionIndex = collectionIndex + 1
                 collection[collectionIndex] = { accountInfo.characterName, ns.FACTION_TO_ID[accountInfo.factionName], tonumber(accountInfo.characterLevel) }
             end
         end
-        if not getAllChars then
-            for i = 1, collectionIndex do
-                local profile = collection[collectionIndex]
-                local name, faction, level = profile[1], profile[2], profile[3]
-                if util:IsMaxLevel(level) then
-                    return name, faction, level
-                end
+        for i = 1, collectionIndex do
+            local profile = collection[i]
+            local fullName, faction, level = profile[1], profile[2], profile[3]
+            if util:IsMaxLevel(level) then
+                return fullName, faction, level
             end
-            return
         end
-        return collection
+        return ---@diagnostic disable-line: missing-return-value
     end
 
     ---@param playerLink string @The player link can be any valid clickable chat link for messaging
     ---@return string?, string?, number? @Returns the name and realm, or nil for both if invalid
     function util:GetNameRealmFromPlayerLink(playerLink)
         local linkString, linkText = LinkUtil.SplitLink(playerLink)
-        local linkType, linkData = ExtractLinkData(linkString)
+        local linkType, linkData = ExtractLinkData(linkString) ---@type string, string
         if linkType == "player" then
-            local name, realm, unit = util:GetNameRealm(linkData) ---@diagnostic disable-line: param-type-mismatch
+            local name, realm, unit = util:GetNameRealm(linkData)
             return name, realm
         elseif linkType == "BNplayer" then
-            local _, bnetIDAccount = strsplit(":", linkData) ---@diagnostic disable-line: param-type-mismatch
+            local _, bnetIDAccount = strsplit(":", linkData) ---@type _, (string|number)?
             if bnetIDAccount then
                 bnetIDAccount = tonumber(bnetIDAccount)
             end
             if bnetIDAccount then
                 local fullName, _, level = util:GetNameRealmForBNetFriend(bnetIDAccount)
-                local name, realm = util:GetNameRealm(fullName) ---@diagnostic disable-line: param-type-mismatch
-                return name, realm, level
+                if fullName then
+                    local name, realm = util:GetNameRealm(fullName)
+                    return name, realm, level
+                end
             end
         end
     end
@@ -2304,8 +2308,9 @@ do
     ---@return number? activityID
     function util:GetLFDActivityID(data)
         -- TODO `pre-11.0.7`
-        if type(data.activityID) == "number" then
-            return data.activityID
+        local activityID = data.activityID---@diagnostic disable-line: undefined-field
+        if type(activityID) == "number" then
+            return activityID
         end
         -- TODO `11.0.7`
         if type(data.activityIDs) == "table" then
@@ -2946,11 +2951,12 @@ do
 end
 
 -- json.lua
--- dependencies: module, callback, util
+-- dependencies: module, config, callback, util
 do
 
     ---@class JSONModule : Module
     local json = ns:NewModule("JSON") ---@type JSONModule
+    local config = ns:GetModule("Config") ---@type ConfigModule
     local callback = ns:GetModule("Callback") ---@type CallbackModule
     local util = ns:GetModule("Util") ---@type UtilModule
 
@@ -3042,6 +3048,7 @@ do
         EditBoxOnEscapePressed = function(self) self:GetParent():Hide() end ---@diagnostic disable-line: undefined-field
     }
 
+    ---@type RaiderIOExportButton
     local exportButton
 
     local RoleNameToBit = {
@@ -3165,8 +3172,19 @@ do
         return not not (hasGroupMembers or entry or numApplicants > 0)
     end
 
+    local function CanShowButton()
+        if not config:Get("enableLFGExportButton") then
+            return false
+        end
+        return CanShowCopyDialog()
+    end
+
+    local function UpdateButtonVisibility()
+        exportButton:SetShown(CanShowButton())
+    end
+
     local function UpdateCopyDialog()
-        local canShow = CanShowCopyDialog()
+        local canShow = CanShowButton()
         exportButton:SetShown(canShow)
         if not canShow then
             json:CloseCopyDialog()
@@ -3217,12 +3235,14 @@ do
     end
 
     function json:CanLoad()
-        return not exportButton and LFGListFrame
+        return not exportButton and LFGListFrame and config:IsEnabled()
     end
 
     function json:OnLoad()
         self:Enable()
         exportButton = CreateExportButton()
+        UpdateButtonVisibility()
+        callback:RegisterEvent(UpdateButtonVisibility, "RAIDERIO_SETTINGS_SAVED")
         callback:RegisterEvent(UpdateCopyDialog, "GROUP_ROSTER_UPDATE", "LFG_LIST_ACTIVE_ENTRY_UPDATE", "LFG_LIST_APPLICANT_LIST_UPDATED", "LFG_LIST_APPLICANT_UPDATED", "PLAYER_ENTERING_WORLD", "PLAYER_ROLES_ASSIGNED", "PLAYER_SPECIALIZATION_CHANGED")
     end
 
@@ -4785,8 +4805,8 @@ do
         return cache
     end
 
-    ---@param name string
-    ---@param realm string
+    ---@param name? string
+    ---@param realm? string
     ---@param region? string @Optional, will use players own region if ommited. Include to avoid ambiguity during debug mode.
     ---@return DataProviderCharacterProfile? @Return value is nil if not found
     function provider:GetProfile(name, realm, region)
@@ -6023,7 +6043,7 @@ do
             return
         end
         local button = self.button
-        local fullName, faction, level
+        local fullName, faction, level ---@type string?, number, number
         if button.buttonType == FRIENDS_BUTTON_TYPE_BNET then
             local bnetIDAccountInfo = C_BattleNet.GetFriendAccountInfo(button.id)
             if bnetIDAccountInfo then
@@ -7237,11 +7257,18 @@ if not IS_CLASSIC_ERA then
         ScrollBoxUtil:OnViewFramesChanged(LFGListFrame.ApplicationViewer.ScrollBox, function(buttons) HookUtil:MapOn(buttons, hookMap) end)
         ScrollBoxUtil:OnViewScrollChanged(LFGListFrame.ApplicationViewer.ScrollBox, OnScroll)
         -- remove the shroud and allow hovering over people even when not the group leader
-        do
-            local f = LFGListFrame.ApplicationViewer.UnempoweredCover
-            f:EnableMouse(false)
-            f:EnableMouseWheel(false)
-            f:SetToplevel(false)
+        local frame = LFGListFrame.ApplicationViewer.UnempoweredCover ---@type Frame?
+        if frame then
+            frame:EnableMouse(false)
+            frame:EnableMouseWheel(false)
+            frame:SetToplevel(false)
+        end
+        -- this issue has been lingering for a while, so it might be worth to add this workaround to avoid taint breaking issues
+        -- it only affects the dropdown option "Report Advertisement" that would without this fix block due to taint
+        -- we can't avoid this because it automatically happens when we modify the dropdown menu (even when using the intended method)
+        -- https://github.com/Stanzilla/WoWUIBugs/issues/237
+        if LFGList_ReportAdvertisement and LFGList_ReportListing then
+            LFGList_ReportAdvertisement = LFGList_ReportListing
         end
     end
 
@@ -7472,7 +7499,7 @@ if IS_RETAIL then
         local info = {}
         local temp = {strsplit(":", raw)}
         for i = 12, #temp, 2 do -- start at offset 12 (where we expect the first kv-pair to occur in the keystone link)
-            local k = temp[i]
+            local k = temp[i] ---@type (string|number)?
             if k and k ~= "" then
                 k = tonumber(k)
                 if k and k >= 17 and k <= 23 then -- we expect the field ID's to be 17 to 23 that we wish to extract
@@ -8641,8 +8668,8 @@ if IS_RETAIL then
 
     ---@type KeystoneDeathPenaltyInfo[]
     local DEATH_PENALTY_MAP = {
-        { level = 7, penalty = 15 },
-        { level = 0, penalty = 5 },
+        { level = 12, penalty = 15 },
+        { level = 4, penalty = 5 },
     }
 
     ---@class ReplayDataProvider
@@ -8717,8 +8744,7 @@ if IS_RETAIL then
                     return deathPenalty.penalty
                 end
             end
-            local deathPenalty = deathPenaltyMap[#deathPenaltyMap]
-            return deathPenalty.penalty
+            return 0 -- default to no death penalty
         end
 
         ---@return ReplaySummary replaySummary
@@ -11616,12 +11642,35 @@ do
         MENU_LFG_FRAME_MEMBER_APPLY = 1,
     }
 
+    ---@class DropDownListPolyfill
+    ---@field public which string
+    ---@field public unit? string
+    ---@field public name? string
+    ---@field public server? string
+    ---@field public bnetIDAccount? number
+    ---@field public menuList? MenuListInfoPolyfill[]
+    ---@field public quickJoinMember? QuickJoinMemberInfoPolyfill
+    ---@field public quickJoinButton? QuickJoinMemberButtonPolyfill
+    ---@field public clubMemberInfo? ClubMemberInfo
+
+    ---@class MenuListInfoPolyfill
+    ---@field public text string
+    ---@field public arg1? string
+
+    ---@class QuickJoinMemberInfoPolyfill
+    ---@field public playerLink? string
+
+    ---@class QuickJoinMemberButtonPolyfill
+    ---@field public Members QuickJoinMemberInfoPolyfill[]
+
     -- if the dropdown is a valid type of dropdown then we mark it as acceptable to check for a unit on it
+    ---@param bdropdown DropDownListPolyfill
     local function IsValidDropDown(bdropdown)
         return (bdropdown == LFGListFrameDropDown and config:Get("enableLFGDropdown")) or (type(bdropdown.which) == "string" and validTypes[bdropdown.which])
     end
 
     -- get name and realm from dropdown or nil if it's not applicable
+    ---@param bdropdown DropDownListPolyfill
     local function GetNameRealmForDropDown(bdropdown)
         local unit = bdropdown.unit
         local bnetIDAccount = bdropdown.bnetIDAccount
@@ -11630,9 +11679,9 @@ do
         local quickJoinButton = bdropdown.quickJoinButton
         local clubMemberInfo = bdropdown.clubMemberInfo
         local tempName, tempRealm = bdropdown.name, bdropdown.server
-        local name, realm, level, faction
+        local name, realm, level, faction ---@type string?, string?, number?, number?
         -- unit
-        if not name and UnitExists(unit) then
+        if not name and unit and UnitExists(unit) then
             if UnitIsPlayer(unit) then
                 name, realm = util:GetNameRealm(unit)
                 level = UnitLevel(unit)
@@ -11665,8 +11714,8 @@ do
         end
         -- quick join
         if not name and (quickJoinMember or quickJoinButton) then
-            local memberInfo = quickJoinMember or quickJoinButton.Members[1]
-            if memberInfo.playerLink then
+            local memberInfo = quickJoinMember or (quickJoinButton and quickJoinButton.Members[1])
+            if memberInfo and memberInfo.playerLink then
                 name, realm, level = util:GetNameRealmFromPlayerLink(memberInfo.playerLink)
                 faction = ns.PLAYER_FACTION
             end
@@ -11692,11 +11741,12 @@ do
     end
 
     -- tracks the currently active dropdown name and realm for lookup
-    local selectedName, selectedRealm, selectedLevel, selectedUnit, selectedFaction
+    local selectedName, selectedRealm, selectedLevel, selectedUnit, selectedFaction ---@type string?, string?, number?, string?, number?
 
     ---@type CustomDropDownOption[]
     local unitOptions
 
+    ---@param bdropdown DropDownListPolyfill
     ---@param options CustomDropDownOption[]
     local function OnToggle(bdropdown, event, options, level, data)
         if event == "OnShow" then
@@ -14386,6 +14436,10 @@ do
             configOptions:CreateOptionToggle(L.ENABLE_LOCK_PROFILE_FRAME, L.ENABLE_LOCK_PROFILE_FRAME_DESC, "lockProfile")
 
             configOptions:CreatePadding()
+            configOptions:CreateHeadline(L.MISC_SETTINGS)
+            configOptions:CreateOptionToggle(L.ENABLE_LFG_EXPORT_BUTTON, L.ENABLE_LFG_EXPORT_BUTTON_DESC, "enableLFGExportButton")
+
+            configOptions:CreatePadding()
             configOptions:CreateHeadline(L.RAIDERIO_CLIENT_CUSTOMIZATION)
             configOptions:CreateOptionToggle(L.ENABLE_RAIDERIO_CLIENT_ENHANCEMENTS, L.ENABLE_RAIDERIO_CLIENT_ENHANCEMENTS_DESC, "enableClientEnhancements", { needReload = true })
             if IS_RETAIL then
@@ -14824,7 +14878,7 @@ do
         if not guid then
             return
         end
-        local guidType, serverId = strsplit("-", guid)
+        local guidType, serverId = strsplit("-", guid) ---@type string, string|number
         if guidType ~= "Player" then
             return
         end

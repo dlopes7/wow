@@ -1,10 +1,14 @@
-[Full Changelog](https://github.com/enderneko/Cell/compare/r242-release...16402c234159ae4dd8b357e9c30e941dea8d7cea)
+[Full Changelog](https://github.com/enderneko/Cell/compare/r249-release...70557d8982ca1a6778bce12bf60de73715fe0cfd)
 
-- Fix wrath power filter
-- Fix indicator revision process
-- Add stack options for custom text indicators
-- Update health text format
-- Update bleed list
-- Update buff tracker events
-- Update range check
-- Revert some GROUP_ROSTER_UPDATE changes
+- Fix "Healers" indicator
+- Fix healthText issue
+- Fix raid debuff glow
+- Fix size of Dispels
+- Fix nil error #354 #355
+- Fix spotlight placeholders
+- Change TankActiveMitigation to spellID
+- Attempt to fix the aura list height
+- Update Liberation of Undermine debuffs
+- Update some targeted spells
+- Update button backdrops
+- Update locales

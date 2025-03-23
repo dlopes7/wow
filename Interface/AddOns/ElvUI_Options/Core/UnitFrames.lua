@@ -5,15 +5,12 @@ local ACD = E.Libs.AceConfigDialog
 local ACH = E.Libs.ACH
 
 local _G = _G
-local wipe, next, pairs, ipairs = wipe, next, pairs, ipairs
-local format, strmatch, strsplit = format, strmatch, strsplit
-local tinsert, tonumber, gsub, ceil = tinsert, tonumber, gsub, ceil
+local wipe, next, pairs, ipairs, gsub = wipe, next, pairs, ipairs, gsub
+local format, strmatch, strsplit, ceil = format, strmatch, strsplit, ceil
+local tinsert, tonumber, tostring = tinsert, tonumber, tostring
 
-local GetClassInfo = GetClassInfo
+local GetSpellTexture = C_Spell.GetSpellTexture or GetSpellTexture
 local CopyTable = CopyTable
-
-local NUM_CLASSES = #CLASS_SORT_ORDER
-local MAX_BOSS_FRAMES = 8
 
 local petTypes = {
 	pet = true,
@@ -66,14 +63,6 @@ local blendModeValues = {
 
 local CUSTOMTEXT_CONFIGS, filters = {}, {}
 local carryFilterFrom, carryFilterTo
-
-local classTable = {}
-for i = 1, _G.MAX_CLASSES do
-	local classDisplayName, classTag = GetClassInfo(i)
-	if classTag then
-		classTable[classTag] = classDisplayName
-	end
-end
 
 local roles = { TANK = L["Tank"] , HEALER = L["Healer"], DAMAGER = L["DPS"] }
 local offsetShort = { softMin = -100, min = -1000, softMax = 100, max = 1000, step = 1 }
@@ -151,6 +140,7 @@ local function GetOptionsTable_AuraBars(updateFunc, groupName)
 	config.args.generalGroup.args.enemyAuraType = ACH:Select(L["Enemy Aura Type"], L["Set the type of auras to show when a unit is a foe."], 14, { HARMFUL = L["Debuffs"], HELPFUL = L["Buffs"] }, nil, nil, nil, nil, nil, groupName == 'player')
 	config.args.generalGroup.args.yOffset = ACH:Range(L["Y-Offset"], nil, 15, { min = 0, max = 100, step = 1 }, nil, nil, nil, nil, function() return E.db.unitframe.units[groupName].aurabar.attachTo == 'DETACHED' end)
 	config.args.generalGroup.args.spacing = ACH:Range(L["Spacing"], nil, 16, spacingNormal)
+	config.args.generalGroup.args.smoothbars = ACH:Toggle(L["Smooth Bars"], L["Bars will transition smoothly."], 17)
 
 	config.args.filtersGroup = ACH:Group(L["Filters"], nil, 30)
 	config.args.filtersGroup.args.minDuration = ACH:Range(L["Minimum Duration"], L["Don't display auras that are shorter than this duration (in seconds). Set to zero to disable."], 1, { min = 0, max = 10800, step = 1 })
@@ -374,7 +364,8 @@ local function GetOptionsTable_Castbar(updateFunc, groupName, numUnits)
 
 	config.args.reverse = ACH:Toggle(L["Reverse"], nil, 14)
 	config.args.spark = ACH:Toggle(L["Spark"], L["Display a spark texture at the end of the castbar statusbar to help show the differance between castbar and backdrop."], 15)
-	config.args.spellRename = ACH:Toggle(E.NewSign..L["BigWigs Spell Rename"], L["Allows BigWigs to rename specific encounter spells on your castbar to something better to understand.\nExample: 'Impaling Eruption' becomes 'Frontal' and 'Twilight Massacre' becomes 'Dash'."], 16)
+	config.args.spellRename = ACH:Toggle(L["BigWigs Spell Rename"], L["Allows BigWigs to rename specific encounter spells on your castbar to something better to understand.\nExample: 'Impaling Eruption' becomes 'Frontal' and 'Twilight Massacre' becomes 'Dash'."], 16)
+	config.args.smoothbars = ACH:Toggle(L["Smooth Bars"], L["Bars will transition smoothly."], 17)
 
 	config.args.generalGroup = ACH:Group(L["General"], nil, 10)
 	config.args.generalGroup.args.width = ACH:Range(L["Width"], nil, 8, { min = 50, max = ceil(E.screenWidth), step = 1 })
@@ -446,7 +437,7 @@ local function GetOptionsTable_Castbar(updateFunc, groupName, numUnits)
 		config.args.displayTarget = ACH:Toggle(L["Display Target"], L["Display the target of current cast."], 17)
 	end
 
-	if groupName == 'party' or groupName == 'arena' then
+	if groupName == 'party' or groupName == 'arena' or groupName == 'boss' then
 		config.args.generalGroup.args.positionsGroup = ACH:Group(L["Position"], nil, 19, nil, function(info) return E.db.unitframe.units[groupName].castbar.positionsGroup[info[#info]] end, function(info, value) E.db.unitframe.units[groupName].castbar.positionsGroup[info[#info]] = value updateFunc(UF, groupName, numUnits) end)
 		config.args.generalGroup.args.positionsGroup.args.anchorPoint = ACH:Select(L["Position"], nil, 3, C.Values.AllPoints)
 		config.args.generalGroup.args.positionsGroup.args.xOffset = ACH:Range(L["X-Offset"], nil, 4, { min = -500, max = 500, step = 1 })
@@ -600,33 +591,100 @@ local function GetOptionsTable_CustomText(updateFunc, groupName, numUnits)
 	return config
 end
 
+local function GetRangeSpell(spell)
+	local spellID = tonumber(spell)
+	if spellID then
+		local spellName = E:GetSpellInfo(spellID)
+		if spellName then
+			spell = format('|cFFffff00%s|r |cFFffffff(%d)|r', spellName, spellID)
+		end
+	end
+
+	local spellTexture = GetSpellTexture(spellID or spell)
+	local spellDescription = spellTexture and E:TextureString(spellTexture, ':32:32:0:0:32:32:4:28:4:28')
+
+	return spell, spellDescription
+end
+
+local function UpdateRangeList(list, db, value, add)
+	local setting = list.args.spells
+	if not value then -- initialized
+		setting.args = {}
+
+		if db then
+			for opt in next, db do
+				local spell, desc = GetRangeSpell(opt)
+				if spell then
+					local name = tostring(opt)
+					local option = ACH:Toggle(spell or name, spell and desc or nil)
+					option.textWidth = true
+
+					setting.args[name] = option
+				end
+			end
+		end
+	elseif add then
+		local spell, desc = GetRangeSpell(value)
+		if spell then
+			local name = tostring(value)
+			local option = ACH:Toggle(spell or name, spell and desc or nil)
+			option.textWidth = true
+
+			setting.args[name] = option
+		end
+
+		UF:UpdateRangeSpells()
+	else
+		setting.args[value] = nil
+
+		UF:UpdateRangeSpells()
+	end
+
+	setting.hidden = not next(setting.args)
+end
+
+local function ResetRangeList(list)
+	E.global.unitframe.rangeCheck.ENEMY[E.myclass] = CopyTable(G.unitframe.rangeCheck.ENEMY[E.myclass])
+	E.global.unitframe.rangeCheck.FRIENDLY[E.myclass] = CopyTable(G.unitframe.rangeCheck.FRIENDLY[E.myclass])
+	E.global.unitframe.rangeCheck.RESURRECT[E.myclass] = CopyTable(G.unitframe.rangeCheck.RESURRECT[E.myclass])
+	E.global.unitframe.rangeCheck.PET[E.myclass] = CopyTable(G.unitframe.rangeCheck.PET[E.myclass])
+
+	UpdateRangeList(list.rangeEnemy, E.global.unitframe.rangeCheck.ENEMY[E.myclass], nil, true)
+	UpdateRangeList(list.rangeFriendly, E.global.unitframe.rangeCheck.FRIENDLY[E.myclass], nil, true)
+	UpdateRangeList(list.rangeResurrect, E.global.unitframe.rangeCheck.RESURRECT[E.myclass], nil, true)
+	UpdateRangeList(list.rangePet, E.global.unitframe.rangeCheck.PET[E.myclass], nil, true)
+
+	UF:UpdateRangeSpells()
+end
+
 local function GetOptionsTable_Fader(updateFunc, groupName, numUnits)
 	local disabled = function() return not E.db.unitframe.units[groupName].fader.enable end
-	local disabledOrRanged = function() return not E.db.unitframe.units[groupName].fader.enable or E.db.unitframe.units[groupName].fader.range end
+	local ranged = function() return E.db.unitframe.units[groupName].fader.range end
 
-	local config = ACH:Group(L["Fader"], nil, nil, nil, function(info) return E.db.unitframe.units[groupName].fader[info[#info]] end, function(info, value) E.db.unitframe.units[groupName].fader[info[#info]] = value updateFunc(UF, groupName, numUnits) end)
+	local config = ACH:Group(L["Fader"], nil, nil, 'tab', function(info) return E.db.unitframe.units[groupName].fader[info[#info]] end, function(info, value) E.db.unitframe.units[groupName].fader[info[#info]] = value updateFunc(UF, groupName, numUnits) end)
 	config.args.enable = ACH:Toggle(L["Enable"], nil, 1)
 	config.args.range = ACH:Toggle(L["Range"], nil, 2, nil, nil, nil, nil, nil, disabled, groupName == 'player')
-	config.args.unittarget = ACH:Toggle(L["Unit Target"], nil, 3, nil, nil, nil, nil, nil, disabledOrRanged, groupName == 'player')
+	config.args.unittarget = ACH:Toggle(L["Unit Target"], nil, 3, nil, nil, nil, nil, nil, disabled, ranged or groupName == 'player')
 
-	config.args.spacer1 = ACH:Spacer(10, 'full')
-	config.args.hover = ACH:Toggle(L["Hover"], nil, 11, nil, nil, nil, nil, nil, disabledOrRanged)
-	config.args.combat = ACH:Toggle(L["Combat"], nil, 12, nil, nil, nil, nil, nil, disabledOrRanged)
-	config.args.playertarget = ACH:Toggle(groupName == 'player' and L["Target"] or L["Player Target"], nil, 13, nil, nil, nil, nil, nil, disabledOrRanged)
-	config.args.focus = ACH:Toggle(L["Focus"], nil, 14, nil, nil, nil, nil, nil, disabledOrRanged)
-	config.args.health = ACH:Toggle(L["Health"], nil, 15, nil, nil, nil, nil, nil, disabledOrRanged)
-	config.args.power = ACH:Toggle(L["Power"], nil, 16, nil, nil, nil, nil, nil, disabledOrRanged)
-	config.args.vehicle = ACH:Toggle(L["Vehicle"], nil, 17, nil, nil, nil, nil, nil, disabledOrRanged)
-	config.args.casting = ACH:Toggle(L["Casting"], nil, 18, nil, nil, nil, nil, nil, disabledOrRanged)
-	config.args.dynamicflight = ACH:Toggle(L["Dynamic Flight"], nil, 19, nil, nil, nil, nil, nil, disabledOrRanged)
+	config.args.rangeShortcut = ACH:Execute(L["Range"], nil, 5, function() ACD:SelectGroup('ElvUI', 'unitframe', 'rangeGroup') end, nil, nil, nil, nil, nil, nil, function() return not E.db.unitframe.units[groupName].fader.range end)
 
-	config.args.spacer2 = ACH:Spacer(30, 'full')
-	config.args.delay = ACH:Range(L["Fade Out Delay"], nil, 31, { min = 0, max = 3, step = 0.01 }, nil, nil, nil, disabledOrRanged)
+	config.args.hover = ACH:Toggle(L["Hover"], nil, 11, nil, nil, nil, nil, nil, disabled, ranged)
+	config.args.combat = ACH:Toggle(L["Combat"], nil, 12, nil, nil, nil, nil, nil, disabled, ranged)
+	config.args.playertarget = ACH:Toggle(groupName == 'player' and L["Target"] or L["Player Target"], nil, 13, nil, nil, nil, nil, nil, disabled, ranged)
+	config.args.focus = ACH:Toggle(L["Focus"], nil, 14, nil, nil, nil, nil, nil, disabled, ranged)
+	config.args.health = ACH:Toggle(L["Health"], nil, 15, nil, nil, nil, nil, nil, disabled, ranged)
+	config.args.power = ACH:Toggle(L["Power"], nil, 16, nil, nil, nil, nil, nil, disabled, ranged)
+	config.args.vehicle = ACH:Toggle(L["Vehicle"], nil, 17, nil, nil, nil, nil, nil, disabled, ranged)
+	config.args.casting = ACH:Toggle(L["Casting"], nil, 18, nil, nil, nil, nil, nil, disabled, ranged)
+	config.args.dynamicflight = ACH:Toggle(L["Dynamic Flight"], nil, 19, nil, nil, nil, nil, nil, disabled, ranged)
+
+	config.args.spacer1 = ACH:Spacer(30, 'full')
+	config.args.delay = ACH:Range(L["Fade Out Delay"], nil, 31, { min = 0, max = 3, step = 0.01 }, nil, nil, nil, disabled, ranged)
 	config.args.smooth = ACH:Range(L["Smooth"], nil, 32, { min = 0, max = 1, step = 0.01 }, nil, nil, nil, disabled)
 	config.args.minAlpha = ACH:Range(L["Min Alpha"], nil, 33, { min = 0, max = 1, step = 0.01 }, nil, nil, nil, disabled)
 	config.args.maxAlpha = ACH:Range(L["Max Alpha"], nil, 34, { min = 0, max = 1, step = 0.01 }, nil, nil, nil, disabled)
 
-	config.args.instanceDifficulties = ACH:Group(L["Instance Difficulties"], nil, 40, nil, function(info) return E.db.unitframe.units[groupName].fader.instanceDifficulties[info[#info]] end, function(info, value) E.db.unitframe.units[groupName].fader.instanceDifficulties[info[#info]] = value updateFunc(UF, groupName, numUnits) end)
+	config.args.instanceDifficulties = ACH:Group(L["Instance Difficulties"], nil, 40, nil, function(info) return E.db.unitframe.units[groupName].fader.instanceDifficulties[info[#info]] end, function(info, value) E.db.unitframe.units[groupName].fader.instanceDifficulties[info[#info]] = value updateFunc(UF, groupName, numUnits) end, nil, ranged)
 	config.args.instanceDifficulties.args.none = ACH:Toggle(L["None"], nil, 1, nil, nil, nil, nil, nil, disabled)
 	config.args.instanceDifficulties.args.dungeonNormal = ACH:Toggle(L["Dungeon (normal)"], nil, 2, nil, nil, nil, nil, nil, disabled)
 	config.args.instanceDifficulties.args.dungeonHeroic = ACH:Toggle(L["Dungeon (heroic)"], nil, 3, nil, nil, nil, nil, nil, disabled)
@@ -667,6 +725,7 @@ end
 local function GetOptionsTable_Health(isGroupFrame, updateFunc, groupName, numUnits)
 	local config = ACH:Group(L["Health"], nil, nil, nil, function(info) return E.db.unitframe.units[groupName].health[info[#info]] end, function(info, value) E.db.unitframe.units[groupName].health[info[#info]] = value updateFunc(UF, groupName, numUnits) end)
 	config.args.reverseFill = ACH:Toggle(L["Reverse Fill"], nil, 1)
+	config.args.smoothbars = ACH:Toggle(L["Smooth Bars"], L["Bars will transition smoothly."], 2)
 	config.args.attachTextTo = ACH:Select(L["Attach Text To"], L["The object you want to attach to."], 4, attachToValues)
 	config.args.colorOverride = ACH:Select(L["Class Color Override"], L["Override the default class color setting."], 5, colorOverrideValues, nil, nil, function(info) return E.db.unitframe.units[groupName][info[#info]] end, function(info, value) E.db.unitframe.units[groupName][info[#info]] = value updateFunc(UF, groupName, numUnits) end)
 	config.args.configureButton = ACH:Execute(L["Coloring"], L["This opens the UnitFrames Color settings. These settings affect all unitframes."], 6, function() ACD:SelectGroup('ElvUI', 'unitframe', 'allColorsGroup') end)
@@ -759,6 +818,7 @@ local function GetOptionsTable_Power(hasDetatchOption, updateFunc, groupName, nu
 	config.args.generalGroup.args.offset = ACH:Range(L["Offset"], L["Offset of the powerbar to the healthbar, set to 0 to disable."], 8, { min = 0, max = 20, step = 1 }, nil, nil, nil, nil, function() return E.db.unitframe.units[groupName].power.width ~= 'offset' end)
 	config.args.generalGroup.args.powerPrediction = ACH:Toggle(L["Power Prediction"], nil, 9)
 	config.args.generalGroup.args.reverseFill = ACH:Toggle(L["Reverse Fill"], nil, 10)
+	config.args.generalGroup.args.smoothbars = ACH:Toggle(L["Smooth Bars"], L["Bars will transition smoothly."], 11)
 
 	config.args.configureButton = ACH:Execute(L["Coloring"], L["This opens the UnitFrames Color settings. These settings affect all unitframes."], 20, function() ACD:SelectGroup('ElvUI', 'unitframe', 'allColorsGroup') end)
 
@@ -867,7 +927,7 @@ local function GetOptionsTable_RaidIcon(updateFunc, groupName, numUnits, subGrou
 end
 
 local function GetOptionsTable_RoleIcons(updateFunc, groupName, numGroup)
-	local config = ACH:Group(L["Role Icon"], nil, nil, nil, function(info) return E.db.unitframe.units[groupName].roleIcon[info[#info]] end, function(info, value) E.db.unitframe.units[groupName].roleIcon[info[#info]] = value updateFunc(UF, groupName, numGroup) end, nil, E.Classic)
+	local config = ACH:Group(L["Role Icon"], nil, nil, nil, function(info) return E.db.unitframe.units[groupName].roleIcon[info[#info]] end, function(info, value) E.db.unitframe.units[groupName].roleIcon[info[#info]] = value updateFunc(UF, groupName, numGroup) end, nil, not E.allowRoles)
 	config.args.enable = ACH:Toggle(L["Enable"], nil, 0)
 	config.args.options = ACH:MultiSelect(' ', nil, 1, { tank = L["Show For Tanks"], healer = L["Show For Healers"], damager = L["Show For DPS"], combatHide = L["Hide In Combat"] }, nil, nil, function(_, key) return E.db.unitframe.units[groupName].roleIcon[key] end, function(_, key, value) E.db.unitframe.units[groupName].roleIcon[key] = value updateFunc(UF, groupName, numGroup) end)
 	config.args.position = ACH:Select(L["Position"], nil, 2, C.Values.AllPoints)
@@ -933,7 +993,7 @@ local function GetOptionsTable_ClassBar(updateFunc, groupName, numUnits)
 
 	config.args.generalGroup = ACH:Group(L["General"], nil, 10)
 	config.args.generalGroup.args.height = ACH:Range(L["Height"], nil, 1, { min = 2, max = 30, step = 1 })
-	config.args.generalGroup.args.fill = ACH:Select(L["Style"], nil, 3, { fill = L["Filled"], spaced = L["Spaced"] })
+	config.args.generalGroup.args.fill = ACH:Select(L["Style"], nil, 2, { fill = L["Filled"], spaced = L["Spaced"] })
 
 	if groupName == 'party' or strmatch(groupName, '^raid(%d)') then
 		config.args.generalGroup.args.altPowerColor = ACH:Color(L["COLOR"], nil, 3, nil, nil, function(info) local t, d = E.db.unitframe.units[groupName].classbar[info[#info]], P.unitframe.units[groupName].classbar[info[#info]] return t.r, t.g, t.b, t.a, d.r, d.g, d.b end, function(info, r, g, b) local t = E.db.unitframe.units[groupName].classbar[info[#info]] t.r, t.g, t.b = r, g, b UF:Update_AllFrames() end)
@@ -941,6 +1001,7 @@ local function GetOptionsTable_ClassBar(updateFunc, groupName, numUnits)
 	elseif groupName == 'player' then
 		config.args.generalGroup.args.height.max = function() return E.db.unitframe.units.player.classbar.detachFromFrame and 300 or 30 end
 		config.args.generalGroup.args.autoHide = ACH:Toggle(L["Auto-Hide"], nil, 5)
+		config.args.generalGroup.args.smoothbars = ACH:Toggle(L["Smooth Bars"], L["Bars will transition smoothly."], 6)
 		config.args.generalGroup.args.sortDirection = ACH:Select(L["Sort Direction"], L["Defines the sort order of the selected sort method."], 7, { asc = L["Ascending"], desc = L["Descending"], NONE = L["None"] }, nil, nil, nil, nil, nil, function() return (E.myclass ~= 'DEATHKNIGHT') end)
 
 		config.args.generalGroup.args.altManaGroup = ACH:Group(L["Display Mana"], nil, 20, nil, function(info) return E.db.unitframe.altManaPowers[E.myclass][info[#info]] end, function(info, value) E.db.unitframe.altManaPowers[E.myclass][info[#info]] = value updateFunc(UF, groupName, numUnits) end, nil, function() if E.Retail then return not E.db.unitframe.altManaPowers[E.myclass] else return E.myclass ~= 'DRUID' end end)
@@ -989,7 +1050,7 @@ local function GetOptionsTable_GeneralGroup(updateFunc, groupName, numUnits)
 	end
 
 	if P.unitframe.units[groupName].debuffHighlight then
-		config.args.debuffHighlightEnable = ACH:Toggle(E.NewSign..L["Aura Highlight"], nil, 6, nil, nil, nil, function() return E.db.unitframe.units[groupName].debuffHighlight.enable end, function(_, value) E.db.unitframe.units[groupName].debuffHighlight.enable = value updateFunc(UF, groupName, numUnits) end)
+		config.args.debuffHighlightEnable = ACH:Toggle(L["Aura Highlight"], nil, 6, nil, nil, nil, function() return E.db.unitframe.units[groupName].debuffHighlight.enable end, function(_, value) E.db.unitframe.units[groupName].debuffHighlight.enable = value updateFunc(UF, groupName, numUnits) end)
 	end
 
 	if groupName == 'arena' then
@@ -1039,8 +1100,8 @@ local function GetOptionsTable_GeneralGroup(updateFunc, groupName, numUnits)
 		config.args.sortingGroup.args.classSetup = ACH:Group(L["Class Order"], nil, 500, nil, nil, nil, nil, function() return E.db.unitframe.units[groupName].groupBy ~= 'CLASS' end)
 		config.args.sortingGroup.args.classSetup.inline = true
 
-		for i = 1, NUM_CLASSES do
-			config.args.sortingGroup.args.classSetup.args['CLASS'..i] = ACH:Select(' ', nil, i, classTable)
+		for i = 1, C.Values.NUM_CLASSES do
+			config.args.sortingGroup.args.classSetup.args['CLASS'..i] = ACH:Select(' ', nil, i, C.ClassTable)
 		end
 	else
 		config.args.positionsGroup.inline = true -- inline for others
@@ -1110,8 +1171,7 @@ UnitFrame.borderOptions = ACH:Execute(L["Border Options"], nil, 4, function() AC
 UnitFrame.generalOptionsGroup = ACH:Group(L["General"], nil, 5, 'tree')
 UnitFrame.generalOptionsGroup.args.targetOnMouseDown = ACH:Toggle(L["Target On Mouse-Down"], L["Target units on mouse down rather than mouse up.\n|cffff3333Note:|r If Clique is enabled, this option only effects ElvUI frames if they are not blacklisted in Clique."], 2)
 UnitFrame.generalOptionsGroup.args.targetSound = ACH:Toggle(L["Targeting Sound"], L["Enable a sound if you select a unit."], 3)
-UnitFrame.generalOptionsGroup.args.smoothbars = ACH:Toggle(L["Smooth Bars"], L["Bars will transition smoothly."], 4, nil, nil, nil, nil, function(info, value) E.db.unitframe[info[#info]] = value UF:Update_AllFrames() end)
-UnitFrame.generalOptionsGroup.args.maxAllowedGroups = ACH:Toggle(L["Max Allowed Groups"], L["Groups will be maxed as Mythic to 4, Other Raids to 6, and PVP / World to 8."], 5, nil, nil, nil, nil, function(info, value) E.db.unitframe[info[#info]] = value UF:ZONE_CHANGED_NEW_AREA() end)
+UnitFrame.generalOptionsGroup.args.maxAllowedGroups = ACH:Toggle(L["Max Allowed Groups"], L["Groups will be maxed as Mythic to 4, Other Raids to 6, and PVP / World to 8."], 4, nil, nil, nil, nil, function(info, value) E.db.unitframe[info[#info]] = value UF:ZONE_CHANGED_NEW_AREA() end, nil, not E.Retail)
 
 UnitFrame.generalOptionsGroup.args.fontGroup = ACH:Group(L["Fonts"], nil, 10, nil, nil, function(info, value) E.db.unitframe[info[#info]] = value UF:Update_FontStrings() end)
 UnitFrame.generalOptionsGroup.args.fontGroup.inline = true
@@ -1136,7 +1196,7 @@ UnitFrame.generalOptionsGroup.args.disabledBlizzardFrames.inline = true
 UnitFrame.generalOptionsGroup.args.disabledBlizzardFrames.args.individual = ACH:MultiSelect(L["Individual Units"], nil, 1, { castbar = L["Cast Bar"], player = L["Player"], target = L["Target"], focus = not E.Classic and L["Focus"] or nil })
 UnitFrame.generalOptionsGroup.args.disabledBlizzardFrames.args.group = ACH:MultiSelect(L["Group Units"], nil, 2, { party = L["Party"], raid = L["Raid"], boss = (E.Retail or E.Cata) and L["Boss"] or nil, arena = not E.Classic and L["Arena"] or nil })
 
-UnitFrame.allColorsGroup = ACH:Group(L["Colors"], nil, 10, 'tree', function(info) return E.db.unitframe.colors[info[#info]] end, function(info, value) E.db.unitframe.colors[info[#info]] = value UF:Update_AllFrames() end, function() return not E.UnitFrames.Initialized end)
+UnitFrame.allColorsGroup = ACH:Group(L["Colors"], nil, 40, 'tree', function(info) return E.db.unitframe.colors[info[#info]] end, function(info, value) E.db.unitframe.colors[info[#info]] = value UF:Update_AllFrames() end, function() return not E.UnitFrames.Initialized end)
 local Colors = UnitFrame.allColorsGroup.args
 
 Colors.healthGroup = ACH:Group(L["Health"], nil, nil, nil, function(info) if info.type == 'color' then local t, d = E.db.unitframe.colors[info[#info]], P.unitframe.colors[info[#info]] return t.r, t.g, t.b, t.a, d.r, d.g, d.b else return E.db.unitframe.colors[info[#info]] end end, function(info, ...) if info.type == 'color' then local r, g, b, a = ... local t = E.db.unitframe.colors[info[#info]] t.r, t.g, t.b, t.a = r, g, b, a or 1 else local value = ... E.db.unitframe.colors[info[#info]] = value end UF:Update_AllFrames() end)
@@ -1161,8 +1221,8 @@ Colors.healthGroup.args.healthBackdrop.args.health_backdrop_dead = ACH:Color(L["
 
 Colors.healthBreak = ACH:Group(L["Health Breakpoint"], nil, nil, nil, function(info) if info.type == 'color' then local t, d = E.db.unitframe.colors.healthBreak[info[#info]], P.unitframe.colors.healthBreak[info[#info]] return t.r, t.g, t.b, t.a, d.r, d.g, d.b else return E.db.unitframe.colors.healthBreak[info[#info]] end end, function(info, ...) if info.type == 'color' then local r, g, b, a = ... local t = E.db.unitframe.colors.healthBreak[info[#info]] t.r, t.g, t.b, t.a = r, g, b, a or 1 else local value = ... E.db.unitframe.colors.healthBreak[info[#info]] = value end UF:Update_AllFrames() end)
 Colors.healthBreak.args.enabled = ACH:Toggle(L["Enable"], nil, 1)
-Colors.healthBreak.args.onlyFriendly = ACH:Toggle(E.NewSign..L["Only Friendly"], nil, 2)
-Colors.healthBreak.args.colorBackdrop = ACH:Toggle(E.NewSign..L["Color Backdrop"], nil, 3)
+Colors.healthBreak.args.onlyFriendly = ACH:Toggle(L["Only Friendly"], nil, 2)
+Colors.healthBreak.args.colorBackdrop = ACH:Toggle(L["Color Backdrop"], nil, 3)
 Colors.healthBreak.args.bad = ACH:Color(L["Bad"], nil, 4)
 Colors.healthBreak.args.good = ACH:Color(L["Good"], nil, 5)
 Colors.healthBreak.args.neutral = ACH:Color(L["Neutral"], nil, 6)
@@ -1355,7 +1415,7 @@ do
 	end
 end
 
-UnitFrame.frameGlowGroup = ACH:Group(L["Frame Glow"], nil, 25, 'tree', nil, nil, function() return not E.UnitFrames.Initialized end)
+UnitFrame.frameGlowGroup = ACH:Group(L["Frame Glow"], nil, 30, 'tree', nil, nil, function() return not E.UnitFrames.Initialized end)
 UnitFrame.frameGlowGroup.args.mainGlow = ACH:Group(L["Mouseover Glow"], nil, 1, nil, function(info) local t = E.db.unitframe.colors.frameGlow.mainGlow[info[#info]] if info.type == 'color' then local d = P.unitframe.colors.frameGlow.mainGlow[info[#info]] return t.r, t.g, t.b, t.a, d.r, d.g, d.b, d.a else return t end end, function(info, ...) if info.type == 'color' then local t = E.db.unitframe.colors.frameGlow.mainGlow[info[#info]] t.r, t.g, t.b, t.a = ... else E.db.unitframe.colors.frameGlow.mainGlow[info[#info]] = ... end UF:FrameGlow_UpdateFrames() end, function() return not E.db.unitframe.colors.frameGlow.mainGlow.enable end)
 UnitFrame.frameGlowGroup.args.mainGlow.inline = true
 UnitFrame.frameGlowGroup.args.mainGlow.args.enable = ACH:Toggle(L["Enable"], nil, 1, nil, nil, nil, nil, nil, false)
@@ -1385,7 +1445,47 @@ UnitFrame.frameGlowGroup.args.mouseoverGlow.args.spacer = ACH:Spacer(3)
 UnitFrame.frameGlowGroup.args.mouseoverGlow.args.class = ACH:Toggle(L["Use Class Color"], L["Alpha channel is taken from the color option."], 4)
 UnitFrame.frameGlowGroup.args.mouseoverGlow.args.color = ACH:Color(L["COLOR"], nil, 5, true)
 
-UnitFrame.individualUnits = ACH:Group(L["Individual Units"], nil, 15, 'tab', nil, nil, function() return not E.UnitFrames.Initialized end)
+UnitFrame.rangeGroup = ACH:Group(L["Range"], nil, 50)
+UnitFrame.rangeGroup.args.rangeReset = ACH:Execute(L["Reset Spells"], nil, 4, function() ResetRangeList(UnitFrame.rangeGroup.args) end, nil, true)
+
+UnitFrame.rangeGroup.args.rangeEnemy = ACH:Group(L["Enemy Spells"], nil, 10)
+UnitFrame.rangeGroup.args.rangeEnemy.args.addSpell = ACH:Input(L["Add Spell ID or Name"], nil, 2, nil, nil, nil, function(_, value) local list = E.global.unitframe.rangeCheck.ENEMY[E.myclass] list[value] = true UpdateRangeList(UnitFrame.rangeGroup.args.rangeEnemy, list, value, true) end)
+UnitFrame.rangeGroup.args.rangeEnemy.args.removeSpell = ACH:Select(L["Remove Spell ID or Name"], L["If the aura is listed with a number then you need to use that to remove it from the list."], 3, function() local values, list = {}, E.global.unitframe.rangeCheck.ENEMY[E.myclass] for spell in next, list do values[spell] = spell end return values end, nil, nil, nil, function(_, value) local list = E.global.unitframe.rangeCheck.ENEMY[E.myclass] list[value] = nil UpdateRangeList(UnitFrame.rangeGroup.args.rangeEnemy, list, value) end)
+UnitFrame.rangeGroup.args.rangeEnemy.args.addSpell.preferSpellID = true
+
+UnitFrame.rangeGroup.args.rangeEnemy.args.spells = ACH:Group('', nil, 11, nil, function(info) local list = E.global.unitframe.rangeCheck.ENEMY[E.myclass] local value = info[#info] return list[value] end, function(info, value) local list = E.global.unitframe.rangeCheck.ENEMY[E.myclass] list[info[#info]] = value UF:UpdateRangeSpells() end, nil, true)
+UnitFrame.rangeGroup.args.rangeEnemy.args.spells.inline = true
+
+UnitFrame.rangeGroup.args.rangeFriendly = ACH:Group(L["Friendly Spells"], nil, 20)
+UnitFrame.rangeGroup.args.rangeFriendly.args.addSpell = ACH:Input(L["Add Spell ID or Name"], nil, 2, nil, nil, nil, function(_, value) local list = E.global.unitframe.rangeCheck.FRIENDLY[E.myclass] list[value] = true UpdateRangeList(UnitFrame.rangeGroup.args.rangeFriendly, list, value, true) end)
+UnitFrame.rangeGroup.args.rangeFriendly.args.removeSpell = ACH:Select(L["Remove Spell ID or Name"], L["If the aura is listed with a number then you need to use that to remove it from the list."], 3, function() local values, list = {}, E.global.unitframe.rangeCheck.FRIENDLY[E.myclass] for spell in next, list do values[spell] = spell end return values end, nil, nil, nil, function(_, value) local list = E.global.unitframe.rangeCheck.FRIENDLY[E.myclass] list[value] = nil UpdateRangeList(UnitFrame.rangeGroup.args.rangeFriendly, list, value) end)
+UnitFrame.rangeGroup.args.rangeFriendly.args.addSpell.preferSpellID = true
+
+UnitFrame.rangeGroup.args.rangeFriendly.args.spells = ACH:Group('', nil, 11, nil, function(info) local list = E.global.unitframe.rangeCheck.FRIENDLY[E.myclass] local value = info[#info] return list[value] end, function(info, value) local list = E.global.unitframe.rangeCheck.FRIENDLY[E.myclass] list[info[#info]] = value UF:UpdateRangeSpells() end, nil, true)
+UnitFrame.rangeGroup.args.rangeFriendly.args.spells.inline = true
+
+UnitFrame.rangeGroup.args.rangeResurrect = ACH:Group(L["Resurrect Spells"], nil, 30)
+UnitFrame.rangeGroup.args.rangeResurrect.args.addSpell = ACH:Input(L["Add Spell ID or Name"], nil, 2, nil, nil, nil, function(_, value) local list = E.global.unitframe.rangeCheck.RESURRECT[E.myclass] list[value] = true UpdateRangeList(UnitFrame.rangeGroup.args.rangeResurrect, list, value, true) end)
+UnitFrame.rangeGroup.args.rangeResurrect.args.removeSpell = ACH:Select(L["Remove Spell ID or Name"], L["If the aura is listed with a number then you need to use that to remove it from the list."], 3, function() local values, list = {}, E.global.unitframe.rangeCheck.RESURRECT[E.myclass] for spell in next, list do values[spell] = spell end return values end, nil, nil, nil, function(_, value) local list = E.global.unitframe.rangeCheck.RESURRECT[E.myclass] list[value] = nil UpdateRangeList(UnitFrame.rangeGroup.args.rangeResurrect, list, value) end)
+UnitFrame.rangeGroup.args.rangeResurrect.args.addSpell.preferSpellID = true
+
+UnitFrame.rangeGroup.args.rangeResurrect.args.spells = ACH:Group('', nil, 11, nil, function(info) local list = E.global.unitframe.rangeCheck.RESURRECT[E.myclass] local value = info[#info] return list[value] end, function(info, value) local list = E.global.unitframe.rangeCheck.RESURRECT[E.myclass] list[info[#info]] = value UF:UpdateRangeSpells() end, nil, true)
+UnitFrame.rangeGroup.args.rangeResurrect.args.spells.inline = true
+
+UnitFrame.rangeGroup.args.rangePet = ACH:Group(L["Pet Spells"], nil, 40)
+UnitFrame.rangeGroup.args.rangePet.args.addSpell = ACH:Input(L["Add Spell ID or Name"], nil, 2, nil, nil, nil, function(_, value) local list = E.global.unitframe.rangeCheck.PET[E.myclass] list[value] = true UpdateRangeList(UnitFrame.rangeGroup.args.rangePet, list, value, true) end)
+UnitFrame.rangeGroup.args.rangePet.args.removeSpell = ACH:Select(L["Remove Spell ID or Name"], L["If the aura is listed with a number then you need to use that to remove it from the list."], 3, function() local values, list = {}, E.global.unitframe.rangeCheck.PET[E.myclass] for spell in next, list do values[spell] = spell end return values end, nil, nil, nil, function(_, value) local list = E.global.unitframe.rangeCheck.PET[E.myclass] list[value] = nil UpdateRangeList(UnitFrame.rangeGroup.args.rangePet, list, value) end)
+UnitFrame.rangeGroup.args.rangePet.args.addSpell.preferSpellID = true
+
+UnitFrame.rangeGroup.args.rangePet.args.spells = ACH:Group('', nil, 11, nil, function(info) local list = E.global.unitframe.rangeCheck.PET[E.myclass] local value = info[#info] return list[value] end, function(info, value) local list = E.global.unitframe.rangeCheck.PET[E.myclass] list[info[#info]] = value UF:UpdateRangeSpells() end, nil, true)
+UnitFrame.rangeGroup.args.rangePet.args.spells.inline = true
+
+UpdateRangeList(UnitFrame.rangeGroup.args.rangeEnemy, E.global.unitframe.rangeCheck.ENEMY[E.myclass], nil, true)
+UpdateRangeList(UnitFrame.rangeGroup.args.rangeFriendly, E.global.unitframe.rangeCheck.FRIENDLY[E.myclass], nil, true)
+UpdateRangeList(UnitFrame.rangeGroup.args.rangeResurrect, E.global.unitframe.rangeCheck.RESURRECT[E.myclass], nil, true)
+UpdateRangeList(UnitFrame.rangeGroup.args.rangePet, E.global.unitframe.rangeCheck.PET[E.myclass], nil, true)
+
+UnitFrame.individualUnits = ACH:Group(L["Individual Units"], nil, 10, 'tab', nil, nil, function() return not E.UnitFrames.Initialized end)
 local IndividualUnits = UnitFrame.individualUnits.args
 
 local SingleCopyFrom = {}
@@ -1588,17 +1688,17 @@ PetTarget.copyFrom = ACH:Select(L["Copy From"], L["Select a unit to copy setting
 PetTarget.generalGroup = GetOptionsTable_GeneralGroup(UF.CreateAndUpdateUF, 'pettarget')
 
 -- Group
-UnitFrame.groupUnits = ACH:Group(L["Group Units"], nil, 16, 'tab', nil, nil, function() return not E.UnitFrames.Initialized end)
+UnitFrame.groupUnits = ACH:Group(L["Group Units"], nil, 20, 'tab', nil, nil, function() return not E.UnitFrames.Initialized end)
 local GroupUnits = UnitFrame.groupUnits.args
 
-GroupUnits.boss = ACH:Group(L["Boss"], nil, nil, nil, function(info) return E.db.unitframe.units.boss[info[#info]] end, function(info, value) E.db.unitframe.units.boss[info[#info]] = value UF:CreateAndUpdateUFGroup('boss', MAX_BOSS_FRAMES) end, nil, not (E.Retail or E.Cata))
-GroupUnits.boss.args = GetUnitSettings('boss', UF.CreateAndUpdateUFGroup, MAX_BOSS_FRAMES)
+GroupUnits.boss = ACH:Group(L["Boss"], nil, nil, nil, function(info) return E.db.unitframe.units.boss[info[#info]] end, function(info, value) E.db.unitframe.units.boss[info[#info]] = value UF:CreateAndUpdateUFGroup('boss', C.Values.MAX_BOSS_FRAMES) end, nil, not (E.Retail or E.Cata))
+GroupUnits.boss.args = GetUnitSettings('boss', UF.CreateAndUpdateUFGroup, C.Values.MAX_BOSS_FRAMES)
 local Boss = GroupUnits.boss.args
 
-Boss.displayFrames = ACH:Execute(L["Display Frames"], L["Force the frames to show, they will act as if they are the player frame."], 2, function() UF:ToggleForceShowGroupFrames('boss', MAX_BOSS_FRAMES) end)
+Boss.displayFrames = ACH:Execute(L["Display Frames"], L["Force the frames to show, they will act as if they are the player frame."], 2, function() UF:ToggleForceShowGroupFrames('boss', C.Values.MAX_BOSS_FRAMES) end)
 Boss.resetSettings = ACH:Execute(L["Restore Defaults"], nil, 3, function() E:StaticPopup_Show('RESET_UF_UNIT', L["Boss Frames"], nil, {unit='boss', mover='Boss Frames'}) end)
 Boss.copyFrom = ACH:Select(L["Copy From"], L["Select a unit to copy settings from."], 4, { arena = L["Arena"] }, true, nil, nil, function(_, value) UF:MergeUnitSettings(value, 'boss') E:RefreshGUI() end)
-Boss.generalGroup = GetOptionsTable_GeneralGroup(UF.CreateAndUpdateUFGroup, 'boss', MAX_BOSS_FRAMES)
+Boss.generalGroup = GetOptionsTable_GeneralGroup(UF.CreateAndUpdateUFGroup, 'boss', C.Values.MAX_BOSS_FRAMES)
 
 GroupUnits.arena = ACH:Group(L["Arena"], nil, nil, nil, function(info) return E.db.unitframe.units.arena[info[#info]] end, function(info, value) E.db.unitframe.units.arena[info[#info]] = value UF:CreateAndUpdateUFGroup('arena', 5) end, nil, E.Classic)
 GroupUnits.arena.args = GetUnitSettings('arena', UF.CreateAndUpdateUFGroup, 5)

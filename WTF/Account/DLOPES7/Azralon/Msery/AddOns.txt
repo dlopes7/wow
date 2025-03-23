@@ -95,3 +95,7 @@ ElvUI_BuffHighlight: disabled
 OPie_Classic: disabled
 BigWigs_NerubarPalace: enabled
 BigWigs_KhazAlgar: enabled
+ConsolePort_Config: enabled
+ConsolePort_Cursor: enabled
+BigWigs_LiberationOfUndermine: enabled
+LittleWigs_Dragonflight: enabled

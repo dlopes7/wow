@@ -43,7 +43,7 @@ local oUF = ns.oUF
 local UnitGUID = UnitGUID
 local UnitIsConnected = UnitIsConnected
 local UnitIsVisible = UnitIsVisible
-local UnitClassBase = UnitClassBase
+local UnitClass = UnitClass
 -- end block
 
 local function Update(self, event)
@@ -90,9 +90,12 @@ local function Update(self, event)
 				element:SetUnit(unit)
 			end
 		elseif element.useClassBase then
-			local classBase = UnitClassBase(unit)
-			if classBase then
-				element:SetAtlas('classicon-' .. classBase)
+			-- BUG: UnitClassBase can't be trusted
+			--      https://github.com/Stanzilla/WoWUIBugs/issues/621
+
+			local _, className = UnitClass(unit)
+			if className then
+				element:SetAtlas('classicon-' .. className)
 			end
 		end
 	end
@@ -130,19 +133,17 @@ local function Enable(self, unit)
 		element.__owner = self
 		element.ForceUpdate = ForceUpdate
 
-		self:RegisterEvent('UNIT_MODEL_CHANGED', Path)
-		self:RegisterEvent('UNIT_PORTRAIT_UPDATE', Path)
-		self:RegisterEvent('PORTRAITS_UPDATED', Path, true)
-		self:RegisterEvent('UNIT_CONNECTION', Path)
+		oUF:RegisterEvent(self, 'UNIT_MODEL_CHANGED', Path)
+		oUF:RegisterEvent(self, 'UNIT_PORTRAIT_UPDATE', Path)
+		oUF:RegisterEvent(self, 'PORTRAITS_UPDATED', Path, true)
+		oUF:RegisterEvent(self, 'UNIT_CONNECTION', Path)
 
 		-- The quest log uses PARTY_MEMBER_{ENABLE,DISABLE} to handle updating of
 		-- party members overlapping quests. This will probably be enough to handle
 		-- model updating.
-		--
-		-- DISABLE isn't used as it fires when we most likely don't have the
-		-- information we want.
-		if(unit == 'party') then
-			self:RegisterEvent('PARTY_MEMBER_ENABLE', Path)
+		if unit == 'party' or unit == 'target' then
+			oUF:RegisterEvent(self, 'PARTY_MEMBER_ENABLE', Path)
+			oUF:RegisterEvent(self, 'PARTY_MEMBER_DISABLE', Path)
 		end
 
 		element:Show()
@@ -156,11 +157,12 @@ local function Disable(self)
 	if(element) then
 		element:Hide()
 
-		self:UnregisterEvent('UNIT_MODEL_CHANGED', Path)
-		self:UnregisterEvent('UNIT_PORTRAIT_UPDATE', Path)
-		self:UnregisterEvent('PORTRAITS_UPDATED', Path)
-		self:UnregisterEvent('PARTY_MEMBER_ENABLE', Path)
-		self:UnregisterEvent('UNIT_CONNECTION', Path)
+		oUF:UnregisterEvent(self, 'UNIT_MODEL_CHANGED', Path)
+		oUF:UnregisterEvent(self, 'UNIT_PORTRAIT_UPDATE', Path)
+		oUF:UnregisterEvent(self, 'PORTRAITS_UPDATED', Path)
+		oUF:UnregisterEvent(self, 'PARTY_MEMBER_ENABLE', Path)
+		oUF:UnregisterEvent(self, 'PARTY_MEMBER_DISABLE', Path)
+		oUF:UnregisterEvent(self, 'UNIT_CONNECTION', Path)
 	end
 end
 

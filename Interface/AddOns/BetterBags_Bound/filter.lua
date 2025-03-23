@@ -74,7 +74,7 @@ local _SCANNER = "AVY_ScannerTooltip"
 --- Get the category of an item.
 ---@param bagIndex number
 ---@param slotIndex number
----@param itemInfo ExpandedItemInfo
+---@param itemInfo ExpandedItemInfo|nil
 ---@return string|nil
 function addon:GetItemCategory(bagIndex, slotIndex, itemInfo)
 	local category = nil

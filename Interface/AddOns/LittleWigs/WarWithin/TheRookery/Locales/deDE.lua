@@ -10,6 +10,5 @@ if L then
 	L.coalescing_void_diffuser = "Verdichtender Leerenzerstreuer"
 	L.inflicted_civilian = "Betroffener Bürger"
 	L.void_ascendant = "Leerenaszendentin"
-	--L.consuming_voidstone = "Consuming Voidstone"
-	L.void_fragment = "Leerenfragment"
+	L.consuming_voidstone = "Verschlingender Leerenstein"
 end

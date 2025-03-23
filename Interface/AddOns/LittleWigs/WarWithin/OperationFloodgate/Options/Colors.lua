@@ -11,7 +11,7 @@ BigWigs:AddColors("Big M.O.M.M.A.", {
 })
 
 BigWigs:AddColors("Demolition Duo", {
-	[459779] = {"blue","red"},
+	[459779] = {"blue","green","red"},
 	[459799] = "purple",
 	[460867] = "yellow",
 	[470090] = "cyan",
@@ -35,14 +35,16 @@ BigWigs:AddColors("Geezle Gigazap", {
 })
 
 BigWigs:AddColors("Operation: Floodgate Trash", {
-	[462771] = "red",
+	[462771] = {"blue","red"},
 	[463058] = "red",
+	[465120] = "yellow",
 	[465408] = "cyan",
 	[465666] = "purple",
 	[465682] = "orange",
 	[465754] = "yellow",
-	[465813] = {"blue","yellow"},
+	[465813] = {"blue","orange","yellow"},
 	[465827] = "yellow",
+	[468631] = "red",
 	[468726] = "cyan",
 	[469721] = "yellow",
 	[469799] = {"blue","orange"},

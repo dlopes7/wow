@@ -2,20 +2,42 @@
 -- http://wow.gamepedia.com/UI_Scale
 -- http://www.wowinterface.com/forums/showthread.php?t=31813
 --------------------------------------------
-local addonName, addon = ...
+local _, addon = ...
 addon.pixelPerfectFuncs = {}
+
+local function Round(num, numDecimalPlaces)
+    if numDecimalPlaces and numDecimalPlaces >= 0 then
+        local mult = 10 ^ numDecimalPlaces
+        num = num * mult
+        if num >= 0 then
+            return floor(num + 0.5) / mult
+        else
+            return ceil(num - 0.5) / mult
+        end
+    end
+
+    if num >= 0 then
+        return floor(num + 0.5)
+    else
+        return ceil(num - 0.5)
+    end
+end
+
+local Clamp = Clamp
+
+---@class PixelPerfectFuncs
 local P = addon.pixelPerfectFuncs
 
-function P:GetResolution()
+function P.GetResolution()
     -- return string.match(({GetScreenResolutions()})[GetCurrentResolution()], "(%d+)x(%d+)")
     return GetPhysicalScreenSize()
 end
 
--- The UI P:Scale goes from 1 to 0.64.
+-- The UI P.Scale goes from 1 to 0.64.
 -- At 768y we see pixel-per-pixel accurate representation of our texture,
 -- and again at 1200y if at 0.64 scale.
-function P:GetPixelPerfectScale()
-    local hRes, vRes = P:GetResolution()
+function P.GetPixelPerfectScale()
+    local hRes, vRes = P.GetResolution()
     if vRes then
         return 768 / vRes
     else -- windowed mode before 8.0, or maybe something goes wrong?
@@ -23,37 +45,50 @@ function P:GetPixelPerfectScale()
     end
 end
 
+function P.GetRecommendedScale()
+    local pScale = P.GetPixelPerfectScale()
+    local mult
+    if pScale >= 0.71 then -- 1080
+        mult = 1
+    elseif pScale >= 0.53 then -- 1440
+        mult = 1.2
+    else -- 2160
+        mult = 1.7
+    end
+    return Clamp(Round(pScale / UIParent:GetScale() * mult, 2), 0.5, 2)
+end
+
 -- scale perfect!
-function P:PixelPerfectScale(frame)
-    frame:SetScale(P:GetPixelPerfectScale())
+function P.PixelPerfectScale(frame)
+    frame:SetScale(P.GetPixelPerfectScale())
 end
 
 -- position perfect!
-function P:PixelPerfectPoint(frame)
+function P.PixelPerfectPoint(frame)
     local left = frame:GetLeft()
     local top = frame:GetTop()
 
     frame:ClearAllPoints()
-    frame:SetPoint("TOPLEFT", UIParent, "BOTTOMLEFT", math.floor(left + 0.5), math.floor(top + 0.5))
+    frame:SetPoint("TOPLEFT", CellParent, "BOTTOMLEFT", math.floor(left + 0.5), math.floor(top + 0.5))
 end
 
 --------------------------------------------
 -- PixelUtil
 --------------------------------------------
 -- local effectiveScale = 1
--- function P:SetRelativeScale(scale)
+-- function P.SetRelativeScale(scale)
 --     effectiveScale = scale
 -- end
 
--- function P:GetEffectiveScale()
+-- function P.GetEffectiveScale()
 --     return effectiveScale
 -- end
 
--- function P:SetEffectiveScale(frame)
+-- function P.SetEffectiveScale(frame)
 --     frame:SetScale(effectiveScale)
 -- end
 
--- function P:Scale(uiUnitSize)
+-- function P.Scale(uiUnitSize)
 --     if uiUnitSize == 0 then
 --         return 0
 --     end
@@ -81,52 +116,63 @@ end
 --     return scale - scale % 0.1 ^ 2
 -- end
 
+local scale = 1
 local mult = 1
-function P:SetRelativeScale(scale)
-    mult = 1 / scale
+---@deprecated
+function P.SetRelativeScale(s)
+    mult = 1 / s
+    scale = s
 end
 
-function P:GetEffectiveScale()
-    return P:GetPixelPerfectScale() / mult
+---@deprecated
+function P.GetEffectiveScale()
+    return P.GetPixelPerfectScale() / mult
 end
 
-function P:SetEffectiveScale(frame)
-    frame:SetScale(P:GetEffectiveScale())
+---@deprecated
+function P.SetEffectiveScale(frame)
+    frame:SetScale(P.GetEffectiveScale())
 end
 
 --[[
 local trunc = function(s) return s >= 0 and s-s%01 or s-s%-1 end
 local round = function(s) return s >= 0 and s-s%-1 or s-s%01 end
-function P:Scale(n)
+function P.Scale(n)
     return (mult == 1 or n == 0) and n or ((mult < 1 and trunc(n/mult) or round(n/mult)) * mult)
 end
 ]]
-function P:Scale(n)
-    if mult == 1 or n == 0 then
-        return n
-    else
-        local x = mult > 1 and mult or -mult
-        return n - n % (n < 0 and x or -x)
-    end
+-- function P.Scale(n)
+--     if mult == 1 or n == 0 then
+--         return n
+--     else
+--         local x = mult > 1 and mult or -mult
+--         return n - n % (n < 0 and x or -x)
+--     end
+-- end
+
+local GetNearestPixelSize = PixelUtil.GetNearestPixelSize
+
+function P.Scale(desiredPixels)
+    return GetNearestPixelSize(desiredPixels, CellParent:GetEffectiveScale())
 end
 
-function P:Size(frame, width, height)
+function P.Size(frame, width, height)
     frame.width = width
     frame.height = height
-    frame:SetSize(P:Scale(width), P:Scale(height))
+    frame:SetSize(P.Scale(width), P.Scale(height))
 end
 
-function P:Width(frame, width)
+function P.Width(frame, width)
     frame.width = width
-    frame:SetWidth(P:Scale(width))
+    frame:SetWidth(P.Scale(width))
 end
 
-function P:Height(frame, height)
+function P.Height(frame, height)
     frame.height = height
-    frame:SetHeight(P:Scale(height))
+    frame:SetHeight(P.Scale(height))
 end
 
-function P:SetGridSize(region, gridWidth, gridHeight, gridSpacingH, gridSpacingV, columns, rows)
+function P.SetGridSize(region, gridWidth, gridHeight, gridSpacingH, gridSpacingV, columns, rows)
     region._size_grid = true
     region._gridWidth = gridWidth
     region._gridHeight = gridHeight
@@ -138,17 +184,17 @@ function P:SetGridSize(region, gridWidth, gridHeight, gridSpacingH, gridSpacingV
     if columns == 0 then
         region:SetWidth(0.001)
     else
-        region:SetWidth(P:Scale(gridWidth) * columns + P:Scale(gridSpacingH) * (columns - 1))
+        region:SetWidth(P.Scale(gridWidth) * columns + P.Scale(gridSpacingH) * (columns - 1))
     end
 
     if rows == 0 then
         region:SetHeight(0.001)
     else
-        region:SetHeight(P:Scale(gridHeight) * rows + P:Scale(gridSpacingV) * (rows - 1))
+        region:SetHeight(P.Scale(gridHeight) * rows + P.Scale(gridSpacingV) * (rows - 1))
     end
 end
 
-function P:Point(frame, ...)
+function P.Point(frame, ...)
     if not frame.points then frame.points = {} end
     local point, anchorTo, anchorPoint, x, y
 
@@ -165,10 +211,10 @@ function P:Point(frame, ...)
 
     tinsert(frame.points, {point, anchorTo or frame:GetParent(), anchorPoint or point, x or 0, y or 0})
     local n = #frame.points
-    frame:SetPoint(frame.points[n][1], frame.points[n][2], frame.points[n][3], P:Scale(frame.points[n][4]), P:Scale(frame.points[n][5]))
+    frame:SetPoint(frame.points[n][1], frame.points[n][2], frame.points[n][3], P.Scale(frame.points[n][4]), P.Scale(frame.points[n][5]))
 end
 
-function P:ClearPoints(frame)
+function P.ClearPoints(frame)
     frame:ClearAllPoints()
     if frame.points then wipe(frame.points) end
 end
@@ -176,33 +222,33 @@ end
 --------------------------------------------
 -- scale changed
 --------------------------------------------
-function P:Resize(frame)
+function P.Resize(frame)
     if frame._size_grid then
-        P:SetGridSize(frame, frame._gridWidth, frame._gridHeight, frame._gridSpacingH, frame._gridSpacingV, frame._columns, frame._rows)
+        P.SetGridSize(frame, frame._gridWidth, frame._gridHeight, frame._gridSpacingH, frame._gridSpacingV, frame._columns, frame._rows)
     else
         if frame.width then
-            frame:SetWidth(P:Scale(frame.width))
+            frame:SetWidth(P.Scale(frame.width))
         end
         if frame.height then
-            frame:SetHeight(P:Scale(frame.height))
+            frame:SetHeight(P.Scale(frame.height))
         end
     end
 end
 
-function P:Reborder(frame, ignoreSnippetVar)
+function P.Reborder(frame, ignoreSnippetVar)
     if not frame.backdropInfo then return end
 
     local _r, _g, _b, _a = frame:GetBackdropColor()
     local r, g, b, a = frame:GetBackdropBorderColor()
 
     if ignoreSnippetVar then
-        frame.backdropInfo.edgeSize = P:Scale(1)
+        frame.backdropInfo.edgeSize = P.Scale(1)
     else
         if CELL_BORDER_SIZE == 0 then
             frame.backdropInfo.edgeFile = nil
             frame.backdropInfo.edgeSize = nil
         else
-            frame.backdropInfo.edgeSize = P:Scale(CELL_BORDER_SIZE or 1)
+            frame.backdropInfo.edgeSize = P.Scale(CELL_BORDER_SIZE or 1)
         end
     end
     frame:ApplyBackdrop()
@@ -211,20 +257,20 @@ function P:Reborder(frame, ignoreSnippetVar)
     if r then frame:SetBackdropBorderColor(r, g, b, a) end
 end
 
-function P:Repoint(frame)
+function P.Repoint(frame)
     if not frame.points or #frame.points == 0 then return end
     frame:ClearAllPoints()
     for _, t in pairs(frame.points) do
-        frame:SetPoint(t[1], t[2], t[3], P:Scale(t[4]), P:Scale(t[5]))
+        frame:SetPoint(t[1], t[2], t[3], P.Scale(t[4]), P.Scale(t[5]))
     end
 end
 
 -- local frames = {}
--- function P:SetPixelPerfect(frame)
+-- function P.SetPixelPerfect(frame)
 --     tinsert(frames, frame)
 -- end
 
--- function P:UpdatePixelPerfectFrames()
+-- function P.UpdatePixelPerfectFrames()
 --     for _, f in pairs(frames) do
 --         f:UpdatePixelPerfect()
 --     end
@@ -233,19 +279,58 @@ end
 --------------------------------------------
 -- save & load position
 --------------------------------------------
-function P:SavePosition(frame, positionTable)
+function P.SavePosition(frame, positionTable)
     wipe(positionTable)
-    local left = math.floor(frame:GetLeft() + 0.5)
-    local top = math.floor(frame:GetTop() + 0.5)
-    positionTable[1], positionTable[2] = left, top
+    positionTable[1], positionTable[2], positionTable[3] = P.CalcPoint(frame)
+    -- local left = math.floor(frame:GetLeft() + 0.5)
+    -- local top = math.floor(frame:GetTop() + 0.5)
+    -- positionTable[1], positionTable[2] = left, top
 end
 
-function P:LoadPosition(frame, positionTable)
-    if type(positionTable) ~= "table" or #positionTable ~= 2 then return end
+function P.LoadPosition(frame, positionTable)
+    if type(positionTable) ~= "table" then return end
 
-    P:ClearPoints(frame)
-    P:Point(frame, "TOPLEFT", UIParent, "BOTTOMLEFT", positionTable[1], positionTable[2])
-    return true
+    if #positionTable == 2 then
+        P.ClearPoints(frame)
+        P.Point(frame, "TOPLEFT", UIParent, "BOTTOMLEFT", positionTable[1], positionTable[2])
+        return true
+    elseif #positionTable == 3 then
+        P.ClearPoints(frame)
+        frame:SetPoint(positionTable[1], CellParent, positionTable[2], positionTable[3])
+        return true
+    end
+end
+
+function P.CalcPoint(frame)
+    local point, x, y
+    local centerX, centerY = CellParent:GetCenter()
+    local width = CellParent:GetRight()
+    x, y = frame:GetCenter()
+
+    if y >= centerY then
+        point = "TOP"
+            y = -(CellParent:GetTop() - frame:GetTop())
+    else
+        point = "BOTTOM"
+            y = frame:GetBottom()
+    end
+
+    if x >= (width * 2 / 3) then
+        point = point.."RIGHT"
+            x = frame:GetRight() - width
+    elseif x <= (width / 3) then
+        point = point.."LEFT"
+            x = frame:GetLeft()
+    else
+        x = x - centerX
+    end
+
+    -- x = tonumber(string.format("%.2f", x))
+    -- y = tonumber(string.format("%.2f", y))
+    x = Round(x, 1)
+    y = Round(y, 1)
+
+    return point, x, y
 end
 
 ---------------------------------------------------------------------

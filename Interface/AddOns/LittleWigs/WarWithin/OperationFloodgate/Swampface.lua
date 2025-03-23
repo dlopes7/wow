@@ -1,4 +1,3 @@
-if not BigWigsLoader.isTestBuild then return end
 --------------------------------------------------------------------------------
 -- Module Declaration
 --
@@ -8,6 +7,15 @@ if not mod then return end
 mod:RegisterEnableMob(226396) -- Swampface
 mod:SetEncounterID(3053)
 mod:SetRespawnTime(30)
+
+--------------------------------------------------------------------------------
+-- Localization
+--
+
+local L = mod:GetLocale()
+if L then
+	L.warmup_icon = "inv_achievement_dungeon_waterworks"
+end
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -22,6 +30,7 @@ local sludgeClawsCount = 1
 
 function mod:GetOptions()
 	return {
+		"warmup",
 		473070, -- Awaken the Swamp
 		473114, -- Mudslide
 		{469478, "TANK_HEALER"}, -- Sludge Claws
@@ -33,13 +42,12 @@ function mod:GetOptions()
 end
 
 function mod:OnBossEnable()
-	-- TODO warmup?
 	self:Log("SPELL_CAST_START", "AwakenTheSwamp", 473070)
 	self:Log("SPELL_CAST_START", "Mudslide", 473114)
 	self:Log("SPELL_CAST_START", "SludgeClaws", 469478)
 
 	-- Mythic
-	self:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", nil, "boss1") -- Razorchoke Vines
+	self:Log("SPELL_CAST_SUCCESS", "RazorchokeVines", 470039)
 	self:Log("SPELL_AURA_APPLIED", "RazorchokeVinesPreApplied", 470038)
 	self:Log("SPELL_AURA_APPLIED", "RazorchokeVinesApplied", 472819)
 end
@@ -47,10 +55,11 @@ end
 function mod:OnEngage()
 	awakenTheSwampCount = 1
 	sludgeClawsCount = 1
+	self:StopBar(CL.active)
 	if self:Mythic() then
 		self:CDBar(470039, 1.0) -- Razorchoke Vines
 	end
-	self:CDBar(469478, 3.0, CL.count:format(self:SpellName(469478), sludgeClawsCount)) -- Sludge Claws
+	self:CDBar(469478, 2.0, CL.count:format(self:SpellName(469478), sludgeClawsCount)) -- Sludge Claws
 	self:CDBar(473114, 9.0) -- Mudslide
 	self:CDBar(473070, 19.0, CL.count:format(self:SpellName(473070), awakenTheSwampCount)) -- Awaken the Swamp
 end
@@ -58,6 +67,12 @@ end
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
+
+function mod:Warmup() -- called from trash module
+	-- 20.14 [CLEU] SPELL_CAST_SUCCESS#Player-5764#Creature-0-5770-2773-5861-234373#Bomb Pile#1214337#Plant Bombs
+	-- 37.72 [NAME_PLATE_UNIT_ADDED] Swampface#Creature-0-5770-2773-5861-226396
+	self:Bar("warmup", 17.6, CL.active, L.warmup_icon)
+end
 
 function mod:AwakenTheSwamp(args)
 	self:StopBar(CL.count:format(args.spellName, awakenTheSwampCount))
@@ -86,12 +101,10 @@ end
 do
 	local firstPlayerName, firstPlayerMe = nil, false
 
-	function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, _, spellId)
-		if spellId == 470039 then -- Razorchoke Vines
-			firstPlayerName = nil
-			firstPlayerMe = false
-			self:CDBar(spellId, 30.0)
-		end
+	function mod:RazorchokeVines(args)
+		firstPlayerName = nil
+		firstPlayerMe = false
+		self:CDBar(args.spellId, 30.0)
 	end
 
 	function mod:RazorchokeVinesPreApplied(args)

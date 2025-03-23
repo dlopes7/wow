@@ -8,9 +8,8 @@ local LCS = E.Libs.LCS
 
 local _G = _G
 local wipe, pairs, strmatch, strsplit, tostring = wipe, pairs, strmatch, strsplit, tostring
-local next, sort, tonumber, format = next, sort, tonumber, format
+local next, sort, tinsert, tonumber, format = next, sort, tinsert, tonumber, format
 
-local GetClassInfo = GetClassInfo
 local GetDifficultyInfo = GetDifficultyInfo
 local GetInstanceInfo = GetInstanceInfo
 local GetRealZoneText = GetRealZoneText
@@ -23,7 +22,7 @@ local GetSpecializationInfoForClassID = (not E.Retail and LCS.GetSpecializationI
 
 local MAX_PLAYER_LEVEL = E.Retail and GetMaxLevelForPlayerExpansion() or GetMaxPlayerLevel()
 
-local filters = {}
+local filters, sortedFilters = {},{}
 local exportList = {}
 local raidTargetIcon = [[|TInterface\TargetingFrame\UI-RaidTargetingIcon_%s:0|t %s]]
 local sortedClasses = E:CopyTable({}, CLASS_SORT_ORDER)
@@ -194,11 +193,20 @@ function C:StyleFilterSetConfig(filter)
 	E.Libs.AceConfigDialog:SelectGroup('ElvUI', 'nameplates', 'stylefilters', filter and 'triggers' or 'import')
 end
 
+local function sortFilters(a, b)
+	local list = E.global.nameplates.filters
+	if not list then return end
+
+	local A, B = list[a].triggers, list[b].triggers
+	if A and B then return A.priority < B.priority end
+end
+
 local function validateCreateFilter(_, value) return not (strmatch(value, '^[%s%p]-$') or E.global.nameplates.filters[value]) end
 local function validateString(_, value) return value and not strmatch(value, '^[%s%p]-$') end
 
 StyleFilters.addFilter = ACH:Input(L["Create Filter"], nil, 1, nil, nil, nil, function(_, value) E.global.nameplates.filters[value] = NP:StyleFilterCopyDefaults() C:StyleFilterSetConfig(value) end, nil, nil, validateCreateFilter)
-StyleFilters.selectFilter = ACH:Select(L["Select Filter"], nil, 2, GetFilters, nil, nil, function() return C.StyleFilterSelected end, function(_, value) C:StyleFilterSetConfig(value) end, nil, nil, true)
+StyleFilters.selectFilter = ACH:Select(L["Select Filter"], nil, 2, GetFilters, nil, nil, function() return C.StyleFilterSelected end, function(_, value) C:StyleFilterSetConfig(value) end)
+StyleFilters.selectFilter.sorting = function() wipe(sortedFilters) for filter in next, E.global.nameplates.filters do tinsert(sortedFilters, filter) end sort(sortedFilters, sortFilters) return sortedFilters end
 StyleFilters.removeFilter = ACH:Select(L["Delete Filter"], L["Delete a created filter, you cannot delete pre-existing filters, only custom ones."], 3, function() wipe(filters) for filterName in next, E.global.nameplates.filters do if not G.nameplates.filters[filterName] then filters[filterName] = filterName end end return filters end, true, nil, nil, function(_, value) for profile in pairs(E.data.profiles) do if E.data.profiles[profile].nameplates and E.data.profiles[profile].nameplates.filters then E.data.profiles[profile].nameplates.filters[value] = nil end end E.global.nameplates.filters[value] = nil exportList[value] = nil NP:ConfigureAll() C:StyleFilterSetConfig() end)
 
 StyleFilters.triggers = ACH:Group(L["Triggers"], nil, 5, nil, nil, nil, function() return not C.StyleFilterSelected end)
@@ -244,6 +252,7 @@ StyleFilters.triggers.args.casting.args.removeSpell = ACH:Select(L["Remove Spell
 StyleFilters.triggers.args.casting.args.notSpell = ACH:Toggle(L["Not Spell"], L["If enabled then the filter will only activate if the unit is not casting or channeling one of the selected spells."], 4)
 StyleFilters.triggers.args.casting.args.description1 = ACH:Description(L["You do not need to use Is Casting Anything or Is Channeling Anything for these spells to trigger."], 10)
 StyleFilters.triggers.args.casting.args.description2 = ACH:Description(L["If this list is empty, and if Interruptible is checked, then the filter will activate on any type of cast that can be interrupted."], 11)
+StyleFilters.triggers.args.casting.args.addSpell.preferSpellID = true
 
 StyleFilters.triggers.args.casting.args.spells = ACH:Group('', nil, 50, nil, function(info) local triggers = GetFilter(true) return triggers.casting.spells and triggers.casting.spells[info[#info]] end, function(info, value) local triggers = GetFilter(true) if not triggers.casting.spells then triggers.casting.spells = {} end triggers.casting.spells[info[#info]] = value NP:ConfigureAll() end, nil, true)
 StyleFilters.triggers.args.casting.args.spells.inline = true
@@ -256,6 +265,7 @@ StyleFilters.triggers.args.known.args.types.args.playerSpell = ACH:Toggle(L["Pla
 
 StyleFilters.triggers.args.known.args.addSpell = ACH:Input(L["Add Spell ID or Name"], nil, 2, nil, nil, nil, function(_, value) local triggers = GetFilter(true) triggers.known.spells[value] = true UpdateFilterList('known', nil, value, true) NP:ConfigureAll() end, nil, nil, validateString)
 StyleFilters.triggers.args.known.args.removeSpell = ACH:Select(L["Remove Spell ID or Name"], L["If the aura is listed with a number then you need to use that to remove it from the list."], 3, function() local triggers, values = GetFilter(true), {} for spell in next, triggers.known.spells do values[spell] = spell end return values end, nil, nil, nil, function(_, value) local triggers = GetFilter(true) triggers.known.spells[value] = nil UpdateFilterList('known', nil, value) NP:ConfigureAll() end)
+StyleFilters.triggers.args.known.args.addSpell.preferSpellID = true
 
 StyleFilters.triggers.args.known.args.spells = ACH:Group('', nil, 50, nil, function(info) local triggers = GetFilter(true) return triggers.known.spells and triggers.known.spells[info[#info]] end, function(info, value) local triggers = GetFilter(true) if not triggers.known.spells then triggers.known.spells = {} end triggers.known.spells[info[#info]] = value NP:ConfigureAll() end, nil, true)
 StyleFilters.triggers.args.known.args.spells.inline = true
@@ -337,25 +347,24 @@ StyleFilters.triggers.args.faction.args.types.args.Neutral = ACH:Toggle(L["Neutr
 
 StyleFilters.triggers.args.class = ACH:Group(L["CLASS"], nil, 12, nil, nil, nil, DisabledFilter)
 
-for index = 1, _G.MAX_CLASSES do
-	local className, classTag, classID = GetClassInfo(index)
-	if classTag then
-		local coloredName = E:ClassColor(classTag)
-		coloredName = (coloredName and coloredName.colorStr) or 'ff666666'
-		StyleFilters.triggers.args.class.args[classTag] = ACH:Toggle(format('|c%s%s|r', coloredName, className), nil, tIndexOf(sortedClasses, classTag), nil, nil, nil, function() local triggers = GetFilter(true) local tagTrigger = triggers.class[classTag] return tagTrigger and tagTrigger.enabled end, function(_, value) local triggers = GetFilter(true) local tagTrigger = triggers.class[classTag] if not tagTrigger then triggers.class[classTag] = {} end if value then triggers.class[classTag].enabled = value else triggers.class[classTag] = nil end NP:ConfigureAll() end)
+for classID, info in next, E.ClassInfoByID do
+	local className, classFile = info.className, info.classFile
 
-		local group = ACH:Group(className, nil, tIndexOf(sortedClasses, classTag) + 13, nil, nil, nil, nil, function() local triggers = GetFilter(true) local tagTrigger = triggers.class[classTag] return not tagTrigger or not tagTrigger.enabled end)
-		group.inline = true
+	local coloredName = E:ClassColor(classFile)
+	coloredName = (coloredName and coloredName.colorStr) or 'ff666666'
+	StyleFilters.triggers.args.class.args[classFile] = ACH:Toggle(format('|c%s%s|r', coloredName, className), nil, tIndexOf(sortedClasses, classFile), nil, nil, nil, function() local triggers = GetFilter(true) local tagTrigger = triggers.class[classFile] return tagTrigger and tagTrigger.enabled end, function(_, value) local triggers = GetFilter(true) local tagTrigger = triggers.class[classFile] if not tagTrigger then triggers.class[classFile] = {} end if value then triggers.class[classFile].enabled = value else triggers.class[classFile] = nil end NP:ConfigureAll() end)
 
-		for k = 1, GetNumSpecializationsForClassID(classID) do
-			local specID, name = GetSpecializationInfoForClassID(classID, k)
+	local group = ACH:Group(className, nil, tIndexOf(sortedClasses, classFile) + 13, nil, nil, nil, nil, function() local triggers = GetFilter(true) local tagTrigger = triggers.class[classFile] return not tagTrigger or not tagTrigger.enabled end)
+	group.inline = true
 
-			local tagID = format('%s%s', classTag, specID)
-			group.args[tagID] = ACH:Toggle(format('|c%s%s|r', coloredName, name), nil, k, nil, nil, nil, function() local triggers = GetFilter(true) local tagTrigger = triggers.class[classTag] return tagTrigger and tagTrigger.specs and tagTrigger.specs[specID] end, function(_, value) local triggers = GetFilter(true) local tagTrigger = triggers.class[classTag] if not tagTrigger.specs then triggers.class[classTag].specs = {} end triggers.class[classTag].specs[specID] = value or nil if not next(triggers.class[classTag].specs) then triggers.class[classTag].specs = nil end NP:ConfigureAll() end)
-		end
+	for k = 1, GetNumSpecializationsForClassID(classID) do
+		local specID, name = GetSpecializationInfoForClassID(classID, k)
 
-		StyleFilters.triggers.args.class.args[format('%s%s', classTag, 'spec')] = group
+		local tagID = format('%s%s', classFile, specID)
+		group.args[tagID] = ACH:Toggle(format('|c%s%s|r', coloredName, name), nil, k, nil, nil, nil, function() local triggers = GetFilter(true) local tagTrigger = triggers.class[classFile] return tagTrigger and tagTrigger.specs and tagTrigger.specs[specID] end, function(_, value) local triggers = GetFilter(true) local tagTrigger = triggers.class[classFile] if not tagTrigger.specs then triggers.class[classFile].specs = {} end triggers.class[classFile].specs[specID] = value or nil if not next(triggers.class[classFile].specs) then triggers.class[classFile].specs = nil end NP:ConfigureAll() end)
 	end
+
+	StyleFilters.triggers.args.class.args[format('%s%s', classFile, 'spec')] = group
 end
 
 local EquippedValues = {
@@ -473,6 +482,7 @@ do
 		option.changeList.args.addSpell = ACH:Input(L["Add Spell ID or Name"], nil, 1, nil, nil, nil, function(_, value) if stackThreshold then value = value .. '\n' .. stackThreshold end local triggers = GetFilter(true) triggers[auraType].names[value] = true stackThreshold = nil UpdateFilterList(auraType, nil, value, true) NP:ConfigureAll() end, nil, nil, validateString)
 		option.changeList.args.removeSpell = ACH:Select(L["Remove Spell ID or Name"], L["If the aura is listed with a number then you need to use that to remove it from the list."], 2, function() local triggers, values = GetFilter(true), {} for name in pairs(triggers[auraType].names) do values[name] = format('%s (%d)', strsplit('\n', name)) end return values end, nil, nil, nil, function(_, value) local triggers = GetFilter(true) triggers[auraType].names[value] = nil UpdateFilterList(auraType, nil, value) end)
 		option.changeList.args.stackThreshold = ACH:Range(L["Stack Threshold"], L["Allows you to tie a stack count to an aura when you add it to the list, which allows the trigger to act when an aura reaches X number of stacks."], 3, { min = 1, max = 250, softMax = 100, step = 1 }, nil, function() return stackThreshold or 1 end, function(_, value) stackThreshold = (value > 1 and value) or nil end)
+		option.changeList.args.addSpell.preferSpellID = true
 
 		option.names = ACH:Group('', nil, 50, nil, function(info) local triggers = GetFilter(true) return triggers[auraType].names and triggers[auraType].names[info[#info]] end, function(info, value) local triggers = GetFilter(true) triggers[auraType].names[info[#info]] = value NP:ConfigureAll() end, nil, true)
 		option.names.inline = true
@@ -488,6 +498,8 @@ StyleFilters.triggers.args.cooldowns = ACH:Group(L["Cooldowns"], nil, 23, nil, n
 StyleFilters.triggers.args.cooldowns.args.addCooldown = ACH:Input(L["Add Spell ID or Name"], nil, 1, nil, nil, nil, function(_, value) local triggers = GetFilter(true) triggers.cooldowns.names[value] = 'ONCD' UpdateFilterList('cooldowns', nil, value, true) NP:ConfigureAll() end, nil, nil, validateString)
 StyleFilters.triggers.args.cooldowns.args.removeCooldown = ACH:Select(L["Remove Spell ID or Name"], L["If the aura is listed with a number then you need to use that to remove it from the list."], 2, function() local values = {} local triggers = GetFilter(true) for item in next, triggers.cooldowns.names do values[item] = item end return values end, nil, nil, nil, function(_, value) local triggers = GetFilter(true) triggers.cooldowns.names[value] = nil UpdateFilterList('cooldowns', nil, value) NP:ConfigureAll() end)
 StyleFilters.triggers.args.cooldowns.args.mustHaveAll = ACH:Toggle(L["Require All"], L["If enabled then it will require all cooldowns to activate the filter. Otherwise it will only require any one of the cooldowns to activate it."], 3, nil, nil, nil, function() local triggers = GetFilter(true) return triggers.cooldowns and triggers.cooldowns.mustHaveAll end, function(_, value) local triggers = GetFilter(true) triggers.cooldowns.mustHaveAll = value NP:ConfigureAll() end, DisabledFilter)
+StyleFilters.triggers.args.cooldowns.args.addCooldown.preferSpellID = true
+
 StyleFilters.triggers.args.cooldowns.args.names = ACH:Group('', nil, 50, nil, function(info) local triggers = GetFilter(true) return triggers.cooldowns.names and triggers.cooldowns.names[info[#info]] end, function(info, value) local triggers = GetFilter(true) triggers.cooldowns.names[info[#info]] = value NP:ConfigureAll() end)
 StyleFilters.triggers.args.cooldowns.args.names.inline = true
 

@@ -29,6 +29,10 @@ VER 3 010000000000000F "poison" "134400"
 /p I got afflicted
 /cast Poison Cleansing Totem
 END
+VER 3 0100000000000010 "Projection" "134400"
+#showtooltip Totemic Projection
+/cast [@cursor] Totemic Projection
+END
 VER 3 010000000000000D "T" "134400"
 /cast Feral Spirit
 /cast Ancestral Guidance

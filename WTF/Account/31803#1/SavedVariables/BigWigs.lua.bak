@@ -1,45 +1,99 @@
 
 BigWigs3DB = {
 ["namespaces"] = {
-["BigWigs_Plugins_Victory"] = {
-},
 ["BigWigs_Plugins_BossBlock"] = {
-},
-["BigWigs_Plugins_Sounds"] = {
 },
 ["BigWigs_Plugins_AutoReply"] = {
 },
-["BigWigs_Plugins_Countdown"] = {
+["BigWigs_Bosses_Hydrospawn"] = {
 },
 ["BigWigs_Plugins_AltPower"] = {
 },
-["BigWigs_Plugins_Colors"] = {
-},
 ["BigWigs_Plugins_Raid Icons"] = {
-},
-["BigWigs_Plugins_InfoBox"] = {
-},
-["BigWigs_Plugins_Bars"] = {
-},
-["BigWigs_Bosses_Web General Ab'enar"] = {
-},
-["BigWigs_Bosses_Delve Rares"] = {
-},
-["BigWigs_Plugins_Wipe"] = {
-},
-["BigWigs_Bosses_Nerubian Delve Trash"] = {
-},
-["LibDualSpec-1.0"] = {
-},
-["BigWigs_Plugins_Statistics"] = {
 },
 ["BigWigs_Plugins_Messages"] = {
 },
+["BigWigs_Bosses_Gilnid"] = {
+},
+["BigWigs_Plugins_Victory"] = {
+},
+["BigWigs_Bosses_Tendris Warpwood"] = {
+},
+["BigWigs_Bosses_Theka the Martyr"] = {
+},
+["BigWigs_Bosses_Edwin VanCleef"] = {
+},
+["BigWigs_Plugins_Sounds"] = {
+},
+["BigWigs_Bosses_Dire Maul Trash"] = {
+},
+["BigWigs_Bosses_Mr. Smite"] = {
+},
+["BigWigs_Bosses_Prince Tortheldrin"] = {
+},
+["BigWigs_Bosses_Captain Greenskin"] = {
+},
+["BigWigs_Bosses_Sneed"] = {
+},
+["BigWigs_Plugins_Countdown"] = {
+},
+["BigWigs_Plugins_Wipe"] = {
+},
+["BigWigs_Bosses_Rhahk'Zor"] = {
+},
+["BigWigs_Plugins_Colors"] = {
+},
+["LibDualSpec-1.0"] = {
+},
 ["BigWigs_Plugins_Nameplates"] = {
+},
+["BigWigs_Plugins_Bars"] = {
+["profiles"] = {
+["Default"] = {
+["expPosition"] = {
+nil,
+nil,
+298,
+-41,
+},
+["normalPosition"] = {
+nil,
+nil,
+429,
+-211,
+},
+},
+},
+},
+["BigWigs_Bosses_Chief Ukorz Sandscalp"] = {
+},
+["BigWigs_Bosses_Alzzin the Wildshaper"] = {
+},
+["BigWigs_Bosses_Balnazzar"] = {
+},
+["BigWigs_Bosses_Witch Doctor Zum'rah"] = {
+},
+["BigWigs_Bosses_Zevrim Thornhoof"] = {
+},
+["BigWigs_Bosses_Nekrum & Sezz'ziz"] = {
+},
+["BigWigs_Plugins_Proximity"] = {
+},
+["BigWigs_Plugins_Statistics"] = {
 },
 ["BigWigs_Plugins_Pull"] = {
 },
-["BigWigs_Plugins_Proximity"] = {
+["BigWigs_Plugins_InfoBox"] = {
+["profiles"] = {
+["Default"] = {
+["position"] = {
+nil,
+nil,
+-312.7497253417969,
+54.49985504150391,
+},
+},
+},
 },
 },
 ["profileKeys"] = {
@@ -51,7 +105,46 @@ BigWigs3DB = {
 },
 }
 BigWigsIconDB = {
+["minimapPos"] = 261.1528735184489,
 }
 BigWigsStatsDB = {
+[2657] = {
+[2599] = {
+["LFR"] = {
+["kills"] = 1,
+["fkDate"] = "2025/01/28",
+["bestDate"] = "2025/01/28",
+["best"] = 128.2980000001844,
+["fkDuration"] = 128.2980000001844,
+},
+},
+[2601] = {
+["LFR"] = {
+["kills"] = 1,
+["fkDuration"] = 215.7879999999423,
+["best"] = 215.7879999999423,
+["bestDate"] = "2025/01/28",
+["fkDate"] = "2025/01/28",
+},
+},
+[2609] = {
+["LFR"] = {
+["kills"] = 1,
+["fkDate"] = "2025/01/28",
+["bestDate"] = "2025/01/28",
+["best"] = 203.1929999999702,
+["fkDuration"] = 203.1929999999702,
+},
+},
+[2612] = {
+["LFR"] = {
+["kills"] = 1,
+["fkDuration"] = 202.7079999998678,
+["best"] = 202.7079999998678,
+["bestDate"] = "2025/01/28",
+["fkDate"] = "2025/01/28",
+},
+},
+},
 }
-BigWigsTempNameplates = nil
+BigWigsTempNameplates = true

@@ -12,12 +12,13 @@ BigWigs:AddColors("I'pa", {
 	[439031] = "purple",
 	[439202] = {"blue","orange"},
 	[439365] = "yellow",
-	[440147] = "red",
+	[440147] = "cyan",
 	[441179] = "blue",
 })
 
 BigWigs:AddColors("Benk Buzzbee", {
 	[438025] = "yellow",
+	[438971] = "orange",
 	[439524] = "red",
 	[440134] = {"blue","purple"},
 })
@@ -31,18 +32,23 @@ BigWigs:AddColors("Goldie Baronbottom", {
 
 BigWigs:AddColors("Cinderbrew Meadery Trash", {
 	[434706] = "orange",
+	[434756] = {"blue","red"},
 	[434998] = "red",
 	[437721] = "red",
-	[437956] = {"blue","orange"},
+	[437956] = {"blue","yellow"},
 	[439467] = "orange",
 	[440687] = "red",
 	[440876] = "yellow",
 	[441119] = {"blue","orange"},
 	[441179] = "blue",
+	[441214] = "yellow",
+	[441242] = "red",
+	[441351] = "red",
 	[441434] = "cyan",
 	[441627] = "red",
 	[442589] = "orange",
 	[442995] = "yellow",
 	[448619] = {"blue","orange"},
 	[463206] = "yellow",
+	[463218] = "yellow",
 })

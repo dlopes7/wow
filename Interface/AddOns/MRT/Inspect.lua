@@ -211,6 +211,7 @@ local exec_env = setmetatable({}, { __index = function(t, k)
 end})
 
 local rereg_auto = nil
+local rereg_auto2 = nil
 
 local lastCheckNext = {}
 local inspectLastTime = 0
@@ -220,7 +221,7 @@ local function InspectNext()
 	end
 	local nowTime = GetTime()
 	for name,timeAdded in pairs(module.db.inspectQuery) do
-		if name and UnitName(name) and (not ExRT.isClassic or (not InCombatLockdown() and CheckInteractDistance(name,1))) and CanInspect(name) and (not lastCheckNext[name] or nowTime - lastCheckNext[name] > 30) and (ExRT.isClassic or (select(4,UnitPosition'player') == select(4,UnitPosition(name)))) then
+		if name and UnitName(name) and (not ExRT.isClassic or (not InCombatLockdown() and CheckInteractDistance(name,1))) and CanInspect(name) and (not lastCheckNext[name] or nowTime - lastCheckNext[name] > 30) then
 			lastCheckNext[name] = nowTime
 			if ExRT.isLK then
 				MuteSoundFile(SOUNDKIT.IG_CHARACTER_INFO_OPEN)
@@ -258,6 +259,20 @@ local function InspectNext()
 					ClearAchievementComparisonUnit()
 					SetAchievementComparisonUnit(name)
 				end
+			end
+
+			if InspectPVPFrame and not INSPECTED_UNIT then
+				InspectPVPFrame:UnregisterEvent("INSPECT_HONOR_UPDATE")
+				module.db.blizzinterfaceunloaded2 = true
+				if rereg_auto2 then
+					rereg_auto2:Cancel()
+				end
+				rereg_auto2 = C_Timer.NewTimer(10,function() 
+					if module.db.blizzinterfaceunloaded2 then
+						InspectPVPFrame:RegisterEvent("INSPECT_HONOR_UPDATE")
+					end
+					rereg_auto2 = nil
+				end)
 			end
 
 			module.db.inspectQuery[name] = nil
@@ -1201,6 +1216,10 @@ do
 		if module.db.blizzinterfaceunloaded and AchievementFrameComparison then
 			AchievementFrameComparison:RegisterEvent("INSPECT_ACHIEVEMENT_READY")
 			module.db.blizzinterfaceunloaded = nil
+		end
+		if module.db.blizzinterfaceunloaded2 and InspectPVPFrame then
+			InspectPVPFrame:UnregisterEvent("INSPECT_HONOR_UPDATE")
+			module.db.blizzinterfaceunloaded2 = nil
 		end
 		if RaidInCombat() then
 			return

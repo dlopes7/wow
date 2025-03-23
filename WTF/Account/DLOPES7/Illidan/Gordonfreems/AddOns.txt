@@ -213,3 +213,13 @@ WorldQuestTracker: disabled
 LittleWigs_Dragonflight: enabled
 DialogueUI: disabled
 BigWigs_KhazAlgar: enabled
+ConsolePort_Config: disabled
+ConsolePort_Cursor: disabled
+ConsolePort: disabled
+ConsolePort_Bar: disabled
+ConsolePort_Keyboard: disabled
+ConsolePort_Menu: disabled
+ConsolePort_World: disabled
+ShadowedUF_Options: disabled
+ShadowedUnitFrames: disabled
+BigWigs_LiberationOfUndermine: enabled

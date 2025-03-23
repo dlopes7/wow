@@ -1,8 +1,6 @@
 local L = BigWigsAPI:NewLocale("BigWigs", "ruRU")
 if not L then return end
 
---L.tempNPMsg = "Our season 1 nameplate timers are active."
-
 -- Core.lua
 L.berserk = "Берсерк"
 L.berserk_desc = "Предупреждать и отсчитывать время до берсерка."
@@ -85,7 +83,7 @@ L.spell_under_you = "BigWigs: Заклинание под тобой"
 
 -- Options.lua
 L.options = "Настройки"
-L.optionsKey = "ID заклинания: %s" -- The ID that messages/bars/options use
+L.optionsKey = "ID: %s" -- The ID that messages/bars/options use
 L.raidBosses = "Рейдовые боссы"
 L.dungeonBosses = "Боссы подземелий"
 L.introduction = "Добро пожаловать в BigWigs, где бродят боссы. Пожалуйста, пристегните ремни безопасности, запаситесь печеньками и наслаждайтесь поездкой. Он не cъест ваших детей, но поможет подготовиться к встречи с новыми боссами, словно для обеда из 7-ми блюд вашего рейда."

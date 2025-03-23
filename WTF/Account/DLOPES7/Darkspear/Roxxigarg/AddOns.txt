@@ -28,7 +28,7 @@ LittleWigs_BurningCrusade: disabled
 LittleWigs_Cataclysm: enabled
 LittleWigs_Classic: disabled
 LittleWigs_Legion: disabled
-LittleWigs_MistsOfPandaria: disabled
+LittleWigs_MistsOfPandaria: enabled
 LittleWigs_WarlordsOfDraenor: disabled
 LittleWigs_WrathOfTheLichKing: disabled
 MRT: disabled
@@ -87,3 +87,7 @@ OPie_Classic: disabled
 ElvUI_Options: enabled
 BigWigs_NerubarPalace: enabled
 BigWigs_KhazAlgar: enabled
+ConsolePort_Config: enabled
+ConsolePort_Cursor: enabled
+BigWigs_LiberationOfUndermine: enabled
+LittleWigs_Dragonflight: enabled

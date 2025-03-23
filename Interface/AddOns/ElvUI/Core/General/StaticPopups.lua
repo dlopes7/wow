@@ -22,7 +22,6 @@ local AutoCompleteEditBox_OnTextChanged = AutoCompleteEditBox_OnTextChanged
 local ChatEdit_FocusActiveWindow = ChatEdit_FocusActiveWindow
 
 local DisableAddOn = C_AddOns.DisableAddOn
-local EnableAddOn = C_AddOns.EnableAddOn
 local IsAddOnLoaded = C_AddOns.IsAddOnLoaded
 
 local STATICPOPUP_TEXTURE_ALERT = STATICPOPUP_TEXTURE_ALERT
@@ -330,13 +329,6 @@ E.PopupDialogs.RESET_PRIVATE_PROFILE_PROMPT = {
 	button2 = NO,
 	hideOnEscape = 1,
 	OnAccept = function() E:ResetPrivateProfile() end,
-}
-
-E.PopupDialogs.WARNING_BLIZZARD_ADDONS = {
-	text = L["It appears one of your AddOns have disabled the AddOn Blizzard_CompactRaidFrames. This can cause errors and other issues. The AddOn will now be re-enabled."],
-	button1 = OKAY,
-	hideOnEscape = false,
-	OnAccept = function() EnableAddOn('Blizzard_CompactRaidFrames'); ReloadUI() end,
 }
 
 E.PopupDialogs.APPLY_FONT_WARNING = {

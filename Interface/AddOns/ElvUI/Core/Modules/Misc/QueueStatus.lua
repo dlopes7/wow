@@ -149,13 +149,13 @@ function M:GetQueueStatusButton()
 end
 
 function M:LoadQueueStatus()
-	if (E.Retail and not E.private.actionbar.enable) and not E.private.general.queueStatus then return end
+	if (E.Retail and not E.private.actionbar.enable) or (not E.Retail and not E.private.general.minimap.enable) then return end
 
 	M.QueueStatus = CreateFrame('Frame', 'ElvUIQueueStatus', E.UIParent)
 	M.QueueStatus:Point('BOTTOMRIGHT', _G.ElvUI_MinimapHolder or _G.Minimap, 'BOTTOMRIGHT', -5, 25)
 	M.QueueStatus:SetFrameLevel(10) -- over minimap mover
 	M.QueueStatus:Size(32)
-	E:CreateMover(M.QueueStatus, 'QueueStatusMover', L["Queue Status"], nil, nil, nil, nil, nil, 'general,blizzUIImprovements,queueStatus')
+	E:CreateMover(M.QueueStatus, 'QueueStatusMover', L["Queue Status"], nil, nil, nil, nil, nil, 'general,blizzardImprovements,queueStatus')
 
 	local statusFrame = _G.QueueStatusFrame
 	if statusFrame then

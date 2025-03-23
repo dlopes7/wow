@@ -11,11 +11,17 @@ if L then
 	L.torchsnarl = "횃불이빨"
 	L.skittering_darkness = "딸깍거리는 어둠"
 	L.shuffling_horror = "부산한 공포"
+	L.corridor_creeper = "회랑 지하사냥개"
 	L.creaky_mine_cart = "삐걱거리는 광산 수레"
 
 	L.minecart = "광산 수레 미니게임"
 	L.hits = "맞춤"
 	L.minecart_over = "우승자: %s (%d 맞춤)"
+end
+
+L = BigWigs:NewBossLocale("Ol' Waxbeard", "koKR")
+if L then
+	L.dynamite_mine_cart = "다이너마이트 광산 수레"
 end
 
 L = BigWigs:NewBossLocale("The Darkness", "koKR")

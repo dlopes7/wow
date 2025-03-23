@@ -197,7 +197,7 @@ function UF:Configure_ClassBar(frame)
 		bars.LunarBar:SetStatusBarColor(lr, lg, lb)
 		bars.LunarBar:Size(CLASSBAR_WIDTH - SPACING, frame.CLASSBAR_HEIGHT - SPACING)
 		bars.LunarBar:SetOrientation(isVertical and 'VERTICAL' or 'HORIZONTAL')
-		E:SetSmoothing(bars.LunarBar, UF.db.smoothbars)
+		E:SetSmoothing(bars.LunarBar, db.classbar and db.classbar.smoothbars)
 
 		local sr, sg, sb = unpack(ElvUF.colors.ClassBars.DRUID[2])
 		bars.SolarBar:SetMinMaxValues(-1, 1)
@@ -206,7 +206,7 @@ function UF:Configure_ClassBar(frame)
 		bars.SolarBar:SetOrientation(isVertical and 'VERTICAL' or 'HORIZONTAL')
 		bars.SolarBar:ClearAllPoints()
 		bars.SolarBar:Point(isVertical and 'BOTTOM' or 'LEFT', lunarTex, isVertical and 'TOP' or 'RIGHT')
-		E:SetSmoothing(bars.SolarBar, UF.db.smoothbars)
+		E:SetSmoothing(bars.SolarBar, db.classbar and db.classbar.smoothbars)
 
 		bars.Arrow:ClearAllPoints()
 		bars.Arrow:Point('CENTER', lunarTex, isVertical and 'TOP' or 'RIGHT', 0, isVertical and -4 or 0)
@@ -261,17 +261,18 @@ function UF:Configure_ClassBar(frame)
 		bars:SetParent(frame)
 	end
 
-	if frame.USE_CLASSBAR then
-		for _, powerType in pairs(ClassPowerTypes) do
-			if frame[powerType] then
+	for _, powerType in pairs(ClassPowerTypes) do
+		if frame[powerType] then
+			if frame.USE_CLASSBAR then
 				if powerType == 'AdditionalPower' then
-					local altMana, displayMana = E.db.unitframe.altManaPowers[E.myclass], frame.AdditionalPower.displayPairs[E.myclass]
+					local displayMana = frame.AdditionalPower.displayPairs[E.myclass]
 					wipe(displayMana)
 
+					local altMana = E.db.unitframe.altManaPowers[E.myclass]
 					if altMana then
 						for name, value in pairs(altMana) do
-							local altType = AltManaTypes[name]
-							if altType and value then
+							local altType = value and AltManaTypes[name]
+							if altType then
 								displayMana[altType] = value
 							end
 						end
@@ -287,11 +288,7 @@ function UF:Configure_ClassBar(frame)
 				elseif not frame:IsElementEnabled(powerType) then
 					frame:EnableElement(powerType)
 				end
-			end
-		end
-	else
-		for _, powerType in pairs(ClassPowerTypes) do
-			if frame[powerType] and frame:IsElementEnabled(powerType) then
+			elseif frame:IsElementEnabled(powerType) then
 				frame:DisableElement(powerType)
 			end
 		end
@@ -520,7 +517,6 @@ end
 function UF:Construct_AdditionalPowerBar(frame)
 	local additionalPower = CreateFrame('StatusBar', '$parent_AdditionalPowerBar', frame)
 	additionalPower.colorPower = true
-	additionalPower.frequentUpdates = true
 	additionalPower.PostUpdate = UF.PostUpdateAdditionalPower
 	additionalPower.PostUpdateColor = UF.PostColorAdditionalPower
 	additionalPower.PostVisibility = UF.PostVisibilityAdditionalPower

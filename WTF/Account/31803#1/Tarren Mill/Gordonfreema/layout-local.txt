@@ -1,6 +1,13 @@
 Version: 1
+Frame: PremadeGroupsFilterDialog
+FrameLevel: 2
+Anchor: TOP
+X: -258
+Y: -123
+W: 300
+H: 427
 Frame: ColorPickerFrame
-FrameLevel: 1
+FrameLevel: 23
 Anchor: CENTER
 X: 0
 Y: 0

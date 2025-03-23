@@ -19,8 +19,10 @@ local UnitGUID = UnitGUID
 local UnitIsEnemy = UnitIsEnemy
 local UnitIsFriend = UnitIsFriend
 local GetInstanceInfo = GetInstanceInfo
-local RegisterStateDriver = RegisterStateDriver
+local GetInventorySlotInfo = GetInventorySlotInfo
+local GetInventoryItemLink = GetInventoryItemLink
 local UnregisterStateDriver = UnregisterStateDriver
+local RegisterStateDriver = RegisterStateDriver
 
 local UnitFrame_OnEnter = UnitFrame_OnEnter
 local UnitFrame_OnLeave = UnitFrame_OnLeave
@@ -1006,7 +1008,7 @@ end
 function UF:ZONE_CHANGED_NEW_AREA(event)
 	local previous = UF.maxAllowedGroups
 
-	if UF.db.maxAllowedGroups then
+	if E.Retail and UF.db.maxAllowedGroups then
 		local _, instanceType, difficultyID = GetInstanceInfo()
 		UF.maxAllowedGroups = (difficultyID == 16 and 4) or (instanceType == 'raid' and 6) or 8
 	else
@@ -1022,8 +1024,29 @@ function UF:ZONE_CHANGED_NEW_AREA(event)
 	end
 end
 
+do
+	local ChestSlotID = GetInventorySlotInfo('CHESTSLOT')
+	local LegSlotID = GetInventorySlotInfo('LEGSSLOT')
+
+	local chestSlotItem, legSlotItem -- local cache of the items
+	function UF:UNIT_INVENTORY_CHANGED(_, unit) -- limited to Mages only currently
+		if unit ~= 'player' then return end
+
+		local ChestItem = GetInventoryItemLink('player', ChestSlotID) -- Mage: Regeneration
+		local LegItem = GetInventoryItemLink('player', LegSlotID) -- Mage: Mass Regeneration
+
+		if chestSlotItem ~= ChestItem or legSlotItem ~= LegItem then
+			chestSlotItem = ChestItem
+			legSlotItem = LegItem
+
+			UF:UpdateRangeSpells()
+		end
+	end
+end
+
 function UF:PLAYER_ENTERING_WORLD(_, initLogin, isReload)
 	UF:RegisterRaidDebuffIndicator()
+	UF:UpdateRangeSpells()
 
 	local _, instanceType = GetInstanceInfo()
 	if instanceType == 'raid' then
@@ -1245,7 +1268,7 @@ do
 	local auraHighlight = { assist = true, boss = true, focus = true, party = true, pet = true, player = true, raid = true, raidpet = true, tank = true, target = true }
 	local castBar = { arena = true, boss = true, focus = true, party = true, pet = true, player = true, target = true }
 	local classBar = { party = true, player = true, raid = true }
-	local iconCombat = { focus = true, party = true, player = true, target = true }
+	local iconCombat = { party = true, raid = true, player = true, target = true, focus = true }
 	local iconPhase = { party = true, raid = true, target = true }
 	local iconPVP = { player = true, target = true }
 	local iconRaid = { party = true, player = true, raid = true, target = true }
@@ -1334,8 +1357,11 @@ do
 		if iconRoles[which] then
 			UF:Configure_ReadyCheckIcon(frame)
 
-			if not E.Classic then
+			if E.allowRoles then
 				UF:Configure_RoleIcon(frame)
+			end
+
+			if not E.Classic then
 				UF:Configure_SummonIcon(frame)
 				UF:Configure_AltPowerBar(frame)
 			end
@@ -1629,9 +1655,7 @@ do
 				_G.CompactRaidFrameManager:SetParent(E.HiddenFrame)
 			end
 
-			if not CompactRaidFrameManager_SetSetting then
-				E:StaticPopup_Show('WARNING_BLIZZARD_ADDONS')
-			else
+			if CompactRaidFrameManager_SetSetting then
 				CompactRaidFrameManager_SetSetting('IsShown', '0')
 			end
 		end
@@ -2111,10 +2135,22 @@ function UF:Initialize()
 	ElvUF:Factory(UF.Setup)
 
 	UF:UpdateColors()
+
 	UF:RegisterEvent('PLAYER_ENTERING_WORLD')
 	UF:RegisterEvent('PLAYER_TARGET_CHANGED')
 	UF:RegisterEvent('PLAYER_FOCUS_CHANGED')
 	UF:RegisterEvent('SOUNDKIT_FINISHED')
+
+	UF:RegisterEvent('SPELLS_CHANGED', 'UpdateRangeSpells')
+	UF:RegisterEvent('LEARNED_SPELL_IN_TAB', 'UpdateRangeSpells')
+	UF:RegisterEvent('CHARACTER_POINTS_CHANGED', 'UpdateRangeSpells')
+
+	if E.Retail or E.Cata then
+		UF:RegisterEvent('PLAYER_TALENT_UPDATE', 'UpdateRangeSpells')
+	elseif E.ClassicSOD and E.myclass == 'MAGE' then
+		UF:RegisterEvent('UNIT_INVENTORY_CHANGED')
+	end
+
 	UF:DisableBlizzard()
 
 	hooksecurefunc('CompactRaidGroup_InitializeForGroup', UF.DisableBlizzard_InitializeForGroup)
@@ -2126,10 +2162,11 @@ function UF:Initialize()
 	end
 
 	local ORD = E.oUF_RaidDebuffs or _G.oUF_RaidDebuffs
-	if not ORD then return end
-	ORD.ShowDispellableDebuff = true
-	ORD.FilterDispellableDebuff = true
-	ORD.MatchBySpellName = false
+	if ORD then
+		ORD.ShowDispellableDebuff = true
+		ORD.FilterDispellableDebuff = true
+		ORD.MatchBySpellName = false
+	end
 end
 
 E:RegisterInitialModule(UF:GetName())

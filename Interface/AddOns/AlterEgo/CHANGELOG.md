@@ -1,5 +1,81 @@
 # Changelog
 
+## v1.2.4 - 2025-03-09
+
+### Added
+
+- Items in the Equipment window will now be greyed out if they are from a previous season (requires relogging on characters to update)
+
+### Fixed
+
+- The One-Armed Bandit now correctly appears as killed in the Raid Progress section
+
+## v1.2.3 - 2025-02-26
+
+### Added
+
+- Added addon category for the new AddOn List. Credit: Warcraft Wiki
+
+### Updated
+
+- Updated the TOC number to support patch 11.1
+
+## v1.2.2 - 2025-02-23
+
+### Added
+
+- Added Season 2 data, including Raids, Dungeons, Affixes, and Currencies
+- Added a new window background color setting that allows you to make the window transparent
+
+### Updated
+
+- Optimized performance by removing outdated and unused code
+- Updated code for detecting the weekly affix rotation
+- Adjusted dungeon timers for season 2 - No longer adds 90 seconds at level 7+
+- Rearranged some settings and updated tooltip instructions
+- Upgraded all dropdown menus (Settings, Sorting, etc.) to the new TWW layout
+
+### Fixed
+
+- Resolved an issue where raid difficulty levels in the Vault tooltip were incorrect
+
+## v1.2.1 - 2025-02-14
+
+### Added
+
+- Added a new keybind option for opening the Great Vault
+
+### Fixed
+
+- The keybind for opening the AlterEgo window now functions properly again
+
+## v1.2.0 - 2025-02-12
+
+### Added
+
+- Introduced a new character sorting option: Custom Order – Arrange your characters as you like
+- All windows can now be moved halfway off-screen
+- Focusing a window now brings it to the front of other windows
+- Added a new button to open the Great Vault
+- Right-clicking the minimap button now opens the Great Vault
+- Character tooltips now display gold amounts
+
+### Updated
+
+- Completely rewrote UI rendering code for significantly improved performance
+- Enhanced scrolling logic for smoother and more responsive navigation
+- Reduced addon load times and improved game data processing speed
+- Extra windows now open away from the center of the screen by default
+- Updated addon .toc for patch 11.0.7
+
+### Fixed
+
+- Window positions are now properly saved between reloads and sessions
+- Resolved rendering issues when highlighting certain rows with the mouse
+- Shift-clicking a keystone to share its link in chat now works again
+- Fixed character and realm names from wrapping onto a new line when too long
+- Resolved a bug causing raid difficulties to disappear in the Show Raid Progress option
+
 ## v1.1.17 - 2024-12-21
 
 ### Added

@@ -5,9 +5,9 @@ BigWigs3DB = {
 ["profiles"] = {
 ["Naowh"] = {
 [288449] = 0,
-[284719] = 0,
-[287333] = 1032439,
 [284831] = 0,
+[287333] = 1032439,
+[284719] = 0,
 [286742] = 967415,
 [284781] = 0,
 },
@@ -15,16 +15,9 @@ BigWigs3DB = {
 },
 ["BigWigs_Plugins_EchoRename"] = {
 },
-["BigWigs_Bosses_Broodtwister Ovi'nax"] = {
-["profiles"] = {
-["Naowh"] = {
-[441362] = 3134199,
-},
-},
-},
 ["BigWigs_Plugins_Alt Power"] = {
 },
-["LibDualSpec-1.0"] = {
+["BigWigs_Plugins_BossBlock"] = {
 },
 ["BigWigs_Bosses_Lords of Dread"] = {
 ["profiles"] = {
@@ -37,15 +30,6 @@ BigWigs3DB = {
 [360012] = 3064054,
 },
 },
-},
-["BigWigs_Bosses_Lady Ashvane"] = {
-["profiles"] = {
-["Naowh"] = {
-[296725] = 1033463,
-},
-},
-},
-["BigWigs_Plugins_Statistics"] = {
 },
 ["BigWigs_Bosses_Heartsbane Triad"] = {
 ["profiles"] = {
@@ -68,7 +52,86 @@ BigWigs3DB = {
 },
 },
 },
-["BigWigs_Plugins_Raid Icons"] = {
+["BigWigs_Plugins_Wipe"] = {
+},
+["BigWigs_Bosses_Stormwall Blockade"] = {
+["profiles"] = {
+["Naowh"] = {
+[287995] = 0,
+[284362] = 0,
+[284262] = 0,
+[285350] = 0,
+[284106] = 0,
+[286558] = 0,
+[284383] = 0,
+[284405] = 0,
+},
+},
+},
+["BigWigs_Bosses_Zul"] = {
+["profiles"] = {
+["Naowh"] = {
+["crusher"] = 0,
+[276299] = 0,
+[273288] = 0,
+[274271] = 0,
+[273451] = 0,
+["bloodhexer"] = 0,
+[273350] = 0,
+[273361] = 0,
+[-18530] = 0,
+[273365] = 0,
+},
+},
+},
+["BigWigs_Plugins_Victory"] = {
+},
+["BigWigs_Bosses_Smashspite"] = {
+["profiles"] = {
+["Naowh"] = {
+[198073] = 3129591,
+},
+},
+},
+["BigWigs_Bosses_The One-Armed Bandit"] = {
+["profiles"] = {
+["Naowh"] = {
+[469993] = 3130103,
+},
+},
+},
+["BigWigs_Bosses_Skycap'n Kragg"] = {
+["profiles"] = {
+["Naowh"] = {
+[256106] = 966887,
+["stages"] = 0,
+},
+},
+},
+["BigWigs_Plugins_Nameplates"] = {
+},
+["BigWigs_Plugins_Super Emphasize"] = {
+},
+["BigWigs_Bosses_The Necrotic Wake Trash"] = {
+["profiles"] = {
+["Naowh"] = {
+[322756] = 966903,
+[338357] = 966903,
+},
+},
+},
+["BigWigs_Plugins_Respawn"] = {
+},
+["BigWigs_Bosses_G'huun"] = {
+["profiles"] = {
+["Naowh"] = {
+[270373] = 1032439,
+[263307] = 0,
+[272506] = 0,
+},
+},
+},
+["BigWigs_Plugins_Pull"] = {
 },
 ["BigWigs_Bosses_Grong Horde"] = {
 ["profiles"] = {
@@ -78,6 +141,20 @@ BigWigs3DB = {
 [285660] = 0,
 [282082] = 0,
 [285659] = 0,
+},
+},
+},
+["BigWigs_Bosses_Terros"] = {
+["profiles"] = {
+["Naowh"] = {
+[383073] = 3130103,
+},
+},
+},
+["BigWigs_Bosses_Broodtwister Ovi'nax"] = {
+["profiles"] = {
+["Naowh"] = {
+[441362] = 3134199,
 },
 },
 },
@@ -95,27 +172,27 @@ BigWigs3DB = {
 },
 },
 },
-["BigWigs_Plugins_Wipe"] = {
-},
-["BigWigs_Bosses_Stormwall Blockade"] = {
+["BigWigs_Bosses_Lady Ashvane"] = {
 ["profiles"] = {
 ["Naowh"] = {
-[284362] = 0,
-[287995] = 0,
-[284262] = 0,
-[284405] = 0,
-[284106] = 0,
-[286558] = 0,
-[284383] = 0,
-[285350] = 0,
+[296725] = 1033463,
+},
+},
+},
+["BigWigs_Plugins_Statistics"] = {
+},
+["BigWigs_Bosses_Rezan"] = {
+["profiles"] = {
+["Naowh"] = {
+[255434] = 3064055,
 },
 },
 },
 ["BigWigs_Bosses_Coin-Operated Crowd Pummeler"] = {
 ["profiles"] = {
 ["Naowh"] = {
-[269493] = 0,
 [271784] = 0,
+[269493] = 0,
 },
 },
 },
@@ -127,8 +204,6 @@ BigWigs3DB = {
 [362028] = 3129591,
 },
 },
-},
-["BigWigs_Plugins_Respawn"] = {
 },
 ["BigWigs_Bosses_The Silken Court"] = {
 ["profiles"] = {
@@ -157,22 +232,6 @@ nil,
 },
 },
 },
-["BigWigs_Bosses_Zul"] = {
-["profiles"] = {
-["Naowh"] = {
-["crusher"] = 0,
-[276299] = 0,
-[273288] = 0,
-[274271] = 0,
-[273451] = 0,
-["bloodhexer"] = 0,
-[273350] = 0,
-[273361] = 0,
-[-18530] = 0,
-[273365] = 0,
-},
-},
-},
 ["BigWigs_Bosses_Archmage Sol"] = {
 ["profiles"] = {
 ["Naowh"] = {
@@ -184,16 +243,6 @@ nil,
 ["profiles"] = {
 ["Naowh"] = {
 [333227] = 966903,
-},
-},
-},
-["BigWigs_Plugins_Victory"] = {
-},
-["BigWigs_Bosses_Witherbark"] = {
-["profiles"] = {
-["Naowh"] = {
-[164294] = 0,
-[164438] = 0,
 },
 },
 },
@@ -215,7 +264,15 @@ nil,
 },
 },
 },
-["BigWigs_Plugins_BossBlock"] = {
+["BigWigs_Bosses_Halondrus the Reclaimer"] = {
+["profiles"] = {
+["Naowh"] = {
+[360115] = 0,
+[368363] = 0,
+[369207] = 0,
+[365297] = 0,
+},
+},
 },
 ["BigWigs_Bosses_Infested Crawg"] = {
 ["profiles"] = {
@@ -224,26 +281,46 @@ nil,
 },
 },
 },
-["BigWigs_Plugins_Proximity"] = {
+["BigWigs_Plugins_Bars"] = {
 ["profiles"] = {
 ["Default"] = {
-["posx"] = 467.911122441292,
-["fontSize"] = 16,
-["height"] = 120.0000076293945,
-["posy"] = 103.822061975793,
-["font"] = "Naowh",
+["barStyle"] = "ElvUI",
+["emphasizeGrowup"] = true,
+["expPosition"] = {
+nil,
+nil,
+-10,
+95,
+},
+["spacing"] = 4,
 },
 ["Naowh"] = {
-["posx"] = 387.5553343566098,
-["fontSize"] = 16,
-["height"] = 120.0000076293945,
-["posy"] = 100.266631186043,
-["font"] = "Naowh",
-["width"] = 139.9999389648438,
+["emphasizeGrowup"] = true,
+["visibleBarLimitEmph"] = 3,
+["normalPosition"] = {
+nil,
+nil,
+416,
+233,
+},
+["growup"] = true,
+["emphasizeTime"] = 15,
+["expPosition"] = {
+nil,
+nil,
+371,
+-181,
+},
+["texture"] = "Melli",
 },
 },
 },
-["BigWigs_Plugins_AutoReply"] = {
+["BigWigs_Bosses_Priestess Alun'za"] = {
+["profiles"] = {
+["Naowh"] = {
+[255579] = 3064055,
+},
+},
 },
 ["BigWigs_Plugins_Sounds"] = {
 ["profiles"] = {
@@ -319,13 +396,6 @@ nil,
 },
 },
 },
-["BigWigs_Bosses_Terros"] = {
-["profiles"] = {
-["Naowh"] = {
-[383073] = 3130103,
-},
-},
-},
 ["BigWigs_Bosses_Tugar Bloodtotem"] = {
 ["profiles"] = {
 ["Naowh"] = {
@@ -333,55 +403,45 @@ nil,
 },
 },
 },
-["BigWigs_Bosses_Priestess Alun'za"] = {
+["BigWigs_Bosses_Gorak Tul"] = {
 ["profiles"] = {
 ["Naowh"] = {
-[255579] = 3064055,
+[266266] = 0,
+[266225] = 0,
+[266181] = 3129591,
 },
 },
 },
-["BigWigs_Bosses_Smashspite"] = {
+["BigWigs_Bosses_Broodkeeper Diurna"] = {
 ["profiles"] = {
 ["Naowh"] = {
-[198073] = 3129591,
+[376073] = 3064054,
+[375716] = 0,
+[-25129] = 0,
+[375829] = 3064054,
+[388716] = 3064054,
+[375871] = 3064054,
 },
 },
 },
-["BigWigs_Plugins_Bars"] = {
+["BigWigs_Plugins_Proximity"] = {
 ["profiles"] = {
 ["Default"] = {
-["barStyle"] = "ElvUI",
-["emphasizeGrowup"] = true,
-["expPosition"] = {
-nil,
-nil,
--10,
-95,
-},
-["spacing"] = 4,
+["posx"] = 467.911122441292,
+["fontSize"] = 16,
+["height"] = 120.0000076293945,
+["posy"] = 103.822061975793,
+["font"] = "Naowh",
 },
 ["Naowh"] = {
-["emphasizeGrowup"] = true,
-["visibleBarLimitEmph"] = 3,
-["normalPosition"] = {
-nil,
-nil,
-416,
-233,
-},
-["growup"] = true,
-["emphasizeTime"] = 15,
-["expPosition"] = {
-nil,
-nil,
-371,
--181,
-},
-["texture"] = "Melli",
+["posx"] = 387.5553343566098,
+["fontSize"] = 16,
+["height"] = 120.0000076293945,
+["posy"] = 100.266631186043,
+["font"] = "Naowh",
+["width"] = 139.9999389648438,
 },
 },
-},
-["BigWigs_Plugins_Nameplates"] = {
 },
 ["BigWigs_Plugins_Countdown"] = {
 ["profiles"] = {
@@ -399,20 +459,8 @@ nil,
 ["profiles"] = {
 ["Naowh"] = {
 [262412] = 0,
-[263628] = 0,
 [263202] = 0,
-},
-},
-},
-["BigWigs_Plugins_InfoBox"] = {
-["profiles"] = {
-["Naowh"] = {
-["position"] = {
-"LEFT",
-"LEFT",
-608.60009765625,
-79.1998519897461,
-},
+[263628] = 0,
 },
 },
 },
@@ -450,29 +498,6 @@ nil,
 },
 },
 },
-["BigWigs_Bosses_Halondrus the Reclaimer"] = {
-["profiles"] = {
-["Naowh"] = {
-[360115] = 0,
-[368363] = 0,
-[369207] = 0,
-[365297] = 0,
-},
-},
-},
-["BigWigs_Bosses_Kurtalos Ravencrest"] = {
-["profiles"] = {
-["Naowh"] = {
-[198635] = 0,
-[198820] = 0,
-[199193] = 0,
-[202019] = 3129591,
-[201733] = 0,
-[199368] = 0,
-[199143] = 0,
-},
-},
-},
 ["BigWigs_Bosses_Lady Jaina Proudmoore"] = {
 ["profiles"] = {
 ["Naowh"] = {
@@ -481,49 +506,40 @@ nil,
 },
 },
 },
-["BigWigs_Bosses_Skycap'n Kragg"] = {
+["BigWigs_Plugins_InfoBox"] = {
 ["profiles"] = {
 ["Naowh"] = {
-[256106] = 966887,
-["stages"] = 0,
+["position"] = {
+"LEFT",
+"LEFT",
+431.8001708984375,
+87.19988250732422,
 },
 },
 },
-["BigWigs_Plugins_Super Emphasize"] = {
 },
-["BigWigs_Bosses_Gorak Tul"] = {
+["BigWigs_Plugins_AutoReply"] = {
+},
+["BigWigs_Bosses_Kurtalos Ravencrest"] = {
 ["profiles"] = {
 ["Naowh"] = {
-[266266] = 0,
-[266225] = 0,
-[266181] = 3129591,
+[198635] = 0,
+[202019] = 3129591,
+[199193] = 0,
+[198820] = 0,
+[199143] = 0,
+[199368] = 0,
+[201733] = 0,
 },
 },
 },
-["BigWigs_Bosses_Rezan"] = {
+["LibDualSpec-1.0"] = {
+},
+["BigWigs_Bosses_Witherbark"] = {
 ["profiles"] = {
 ["Naowh"] = {
-[255434] = 3064055,
-},
-},
-},
-["BigWigs_Bosses_Broodkeeper Diurna"] = {
-["profiles"] = {
-["Naowh"] = {
-[376073] = 3064054,
-[375716] = 0,
-[-25129] = 0,
-[375829] = 3064054,
-[388716] = 3064054,
-[375871] = 3064054,
-},
-},
-},
-["BigWigs_Bosses_The Necrotic Wake Trash"] = {
-["profiles"] = {
-["Naowh"] = {
-[322756] = 966903,
-[338357] = 966903,
+[164294] = 0,
+[164438] = 0,
 },
 },
 },
@@ -544,16 +560,7 @@ nil,
 },
 },
 },
-["BigWigs_Bosses_G'huun"] = {
-["profiles"] = {
-["Naowh"] = {
-[270373] = 1032439,
-[263307] = 0,
-[272506] = 0,
-},
-},
-},
-["BigWigs_Plugins_Pull"] = {
+["BigWigs_Plugins_Raid Icons"] = {
 },
 ["BigWigs_Bosses_Jadefire Masters Horde"] = {
 ["profiles"] = {
@@ -565,62 +572,6 @@ nil,
 [286988] = 0,
 },
 },
-},
-},
-["global"] = {
-["watchedMovies"] = {
-[-2002] = true,
-[952] = true,
-[956] = true,
-[294] = true,
-[295] = true,
-[964] = true,
-[-1345] = true,
-[-2170] = true,
-[-909] = true,
-[-917] = true,
-[-2234] = true,
-[549] = true,
-[992] = true,
-[-437] = true,
-[-1153] = true,
-[876] = true,
-[-1358] = true,
-[-1004] = true,
-[-2000] = true,
-[-2004] = true,
-[-573] = true,
-[957] = true,
-[656] = true,
-[-2292] = true,
-[-593] = {
-true,
-true,
-},
-[-323] = true,
-[927] = true,
-[958] = true,
-[-575] = true,
-[-1352] = {
-[2] = true,
-},
-[875] = true,
-[-2238] = {
-true,
-true,
-},
-[-609] = true,
-[-607] = true,
-[-1151] = true,
-[682] = true,
-[991] = true,
-[686] = true,
-[1003] = true,
-[688] = true,
-[-1597] = true,
-[886] = true,
-[-2233] = true,
-[-2296] = true,
 },
 },
 ["profileKeys"] = {
@@ -730,7 +681,7 @@ true,
 ["Naowhpal - EU Mythic Dungeons"] = "Naowh",
 ["Naowh - Twisting Nether"] = "Naowh",
 ["Naowhw - Mythic Dungeon Heroes - EU"] = "Default",
-["Naowhxd - Valley of Heroes - EU"] = "Default",
+["Naowhdudu - Valley of Heroes - EU"] = "Default",
 ["Floorpov - Tarren Mill"] = "Naowh",
 ["Naowhdeez - Tarren Mill"] = "Naowh",
 ["Naowhtwo - Tarren Mill"] = "Naowh",
@@ -741,7 +692,7 @@ true,
 ["Naowhfae - EU Mythic Dungeons"] = "Naowh",
 ["Naowhlul - EU Mythic Dungeons"] = "Naowh",
 ["Naowhgrip - Mythic Dungeon Heroes - EU"] = "Default",
-["Naowhd - Valley of Heroes - EU"] = "Default",
+["Gordonfreems - Illidan"] = "Naowh",
 ["Naowhha - Tarren Mill"] = "Naowh",
 ["Naowhtwo - Valley of Heroes - EU"] = "Default",
 ["Naowh - Valley of Heroes - EU"] = "Default",
@@ -752,12 +703,12 @@ true,
 ["Naowhpog - EU Mythic Dungeons"] = "Naowh",
 ["Auntli - Stormrage"] = "Naowh",
 ["Naowhwicked - EU Mythic Dungeons"] = "Naowh",
-["Gordonfreems - Illidan"] = "Naowh",
+["Naowhd - Valley of Heroes - EU"] = "Default",
 ["Naowhxoxo - Twisting Nether"] = "Default",
 ["Naowhpp - Mythic Dungeon Heroes - EU"] = "Default",
 ["Liilililiili - Tarren Mill"] = "Naowh",
 ["Naowhdudu - Tarren Mill"] = "Naowh",
-["Naowhdudu - Valley of Heroes - EU"] = "Default",
+["Naowhxd - Valley of Heroes - EU"] = "Default",
 ["Naowhpal - Tarren Mill"] = "Naowh",
 ["Naowhdruid - Mythic Dungeon Heroes - EU"] = "Default",
 ["Naowhlight - Mythic Dungeon Heroes - EU"] = "Default",
@@ -766,6 +717,64 @@ true,
 ["Nhao - Shattered Hand"] = "Default",
 ["Nananenem - Illidan"] = "Naowh",
 ["Naowh - Ravencrest"] = "Default",
+},
+["global"] = {
+["watchedMovies"] = {
+[-2002] = true,
+[952] = true,
+[956] = true,
+[294] = true,
+[295] = true,
+[964] = true,
+[-1345] = true,
+[-2170] = true,
+[-909] = true,
+[-917] = true,
+[-2234] = true,
+[549] = true,
+[992] = true,
+[-437] = true,
+[-1153] = true,
+[876] = true,
+[-1358] = true,
+[-1004] = true,
+[-2000] = true,
+[-2004] = true,
+[-2409] = true,
+[-573] = true,
+[957] = true,
+[-2406] = true,
+[656] = true,
+[-2292] = true,
+[-593] = {
+true,
+true,
+},
+[-323] = true,
+[927] = true,
+[958] = true,
+[-1352] = {
+[2] = true,
+},
+[875] = true,
+[-575] = true,
+[-2238] = {
+true,
+true,
+},
+[991] = true,
+[-1151] = true,
+[-607] = true,
+[682] = true,
+[-609] = true,
+[686] = true,
+[688] = true,
+[1003] = true,
+[-1597] = true,
+[886] = true,
+[-2233] = true,
+[-2296] = true,
+},
 },
 ["profiles"] = {
 ["Gordonfreems - Illidan"] = {
@@ -780,7 +789,7 @@ true,
 },
 ["Turdal - Illidan"] = {
 },
-["Dragonfreema - Stormrage"] = {
+["Doutora - Stormrage"] = {
 },
 ["Gords - Stormrage"] = {
 },
@@ -792,11 +801,11 @@ true,
 },
 ["Gordonfreems - Stormrage"] = {
 },
-["Default"] = {
-},
-["Doutora - Stormrage"] = {
-},
 ["Nananenem - Illidan"] = {
+},
+["Dragonfreema - Stormrage"] = {
+},
+["Default"] = {
 },
 ["Adnade - Area 52"] = {
 },
@@ -833,6 +842,19 @@ BigWigsStatsDB = {
 ["kills"] = 1,
 },
 },
+[2425] = {
+["LFR"] = {
+["best"] = 397.0520000000033,
+["kills"] = 1,
+},
+},
+[2426] = {
+["normal"] = {
+["kills"] = 1,
+["wipes"] = 1,
+["best"] = 341.0210000000002,
+},
+},
 [2418] = {
 ["normal"] = {
 ["best"] = 231.002,
@@ -845,17 +867,160 @@ BigWigsStatsDB = {
 ["kills"] = 1,
 },
 },
-[2426] = {
+},
+[2769] = {
+[2644] = {
+["heroic"] = {
+["kills"] = 2,
+["fkDuration"] = 411.0070000000123,
+["wipes"] = 26,
+["fkWipes"] = 14,
+["best"] = 365.2870000000112,
+["bestDate"] = "2025/03/19",
+["fkDate"] = "2025/03/13",
+},
 ["normal"] = {
 ["kills"] = 1,
+["fkDuration"] = 289.9329999999609,
 ["wipes"] = 1,
-["best"] = 341.0210000000002,
+["fkWipes"] = 1,
+["best"] = 289.9329999999609,
+["bestDate"] = "2025/03/10",
+["fkDate"] = "2025/03/10",
 },
 },
-[2425] = {
-["LFR"] = {
-["best"] = 397.0520000000033,
+[2645] = {
+["normal"] = {
+["kills"] = 2,
+["fkDate"] = "2025/03/10",
+["bestDate"] = "2025/03/21",
+["fkWipes"] = 1,
+["best"] = 283.9089999999851,
+["wipes"] = 1,
+["fkDuration"] = 326.8679999999004,
+},
+["heroic"] = {
+["kills"] = 2,
+["fkDate"] = "2025/03/17",
+["bestDate"] = "2025/03/17",
+["fkWipes"] = 62,
+["best"] = 355.747000000003,
+["wipes"] = 67,
+["fkDuration"] = 355.747000000003,
+},
+},
+[2639] = {
+["heroic"] = {
+["kills"] = 3,
+["fkDuration"] = 363.5060000000522,
+["best"] = 274.7250000000058,
+["bestDate"] = "2025/03/18",
+["fkDate"] = "2025/03/06",
+},
+["normal"] = {
 ["kills"] = 1,
+["fkDuration"] = 223.0889999999199,
+["best"] = 223.0889999999199,
+["bestDate"] = "2025/03/10",
+["fkDate"] = "2025/03/10",
+},
+},
+[2640] = {
+["heroic"] = {
+["kills"] = 3,
+["fkDate"] = "2025/03/07",
+["bestDate"] = "2025/03/11",
+["fkWipes"] = 3,
+["best"] = 308.4889999999432,
+["wipes"] = 5,
+["fkDuration"] = 499.2050000000745,
+},
+["normal"] = {
+["kills"] = 1,
+["fkDuration"] = 204.5699999999488,
+["wipes"] = 2,
+["fkWipes"] = 2,
+["best"] = 204.5699999999488,
+["bestDate"] = "2025/03/10",
+["fkDate"] = "2025/03/10",
+},
+},
+[2641] = {
+["normal"] = {
+["kills"] = 2,
+["fkDate"] = "2025/03/04",
+["bestDate"] = "2025/03/10",
+["fkWipes"] = 1,
+["best"] = 267.1030000000028,
+["wipes"] = 1,
+["fkDuration"] = 367.1809999999823,
+},
+["heroic"] = {
+["kills"] = 3,
+["fkDate"] = "2025/03/07",
+["bestDate"] = "2025/03/18",
+["fkWipes"] = 4,
+["best"] = 338.7660000000033,
+["wipes"] = 5,
+["fkDuration"] = 400.0160000000615,
+},
+},
+[2642] = {
+["normal"] = {
+["kills"] = 2,
+["fkDuration"] = 289.9959999999264,
+["wipes"] = 2,
+["fkWipes"] = 2,
+["best"] = 248.8379999999888,
+["bestDate"] = "2025/03/21",
+["fkDate"] = "2025/03/10",
+},
+["heroic"] = {
+["kills"] = 2,
+["fkDate"] = "2025/03/11",
+["bestDate"] = "2025/03/11",
+["fkWipes"] = 16,
+["best"] = 454.85699999996,
+["wipes"] = 18,
+["fkDuration"] = 454.85699999996,
+},
+},
+[2646] = {
+["normal"] = {
+["kills"] = 1,
+["fkDuration"] = 466.8850000000093,
+["wipes"] = 2,
+["fkWipes"] = 2,
+["best"] = 466.8850000000093,
+["bestDate"] = "2025/03/09",
+["fkDate"] = "2025/03/09",
+},
+["heroic"] = {
+["kills"] = 1,
+["fkDate"] = "2025/03/21",
+["bestDate"] = "2025/03/21",
+["fkWipes"] = 54,
+["best"] = 564.00900000002,
+["wipes"] = 54,
+["fkDuration"] = 564.00900000002,
+},
+},
+[2653] = {
+["heroic"] = {
+["kills"] = 3,
+["fkDuration"] = 366.0840000000317,
+["wipes"] = 30,
+["fkWipes"] = 8,
+["best"] = 366.0840000000317,
+["bestDate"] = "2025/03/07",
+["fkDate"] = "2025/03/07",
+},
+["normal"] = {
+["kills"] = 1,
+["fkDuration"] = 211.0400000000373,
+["best"] = 211.0400000000373,
+["bestDate"] = "2025/03/10",
+["fkDate"] = "2025/03/10",
 },
 },
 },
@@ -1497,32 +1662,6 @@ BigWigsStatsDB = {
 ["fkDuration"] = 216.1579999999958,
 },
 },
-[2601] = {
-["heroic"] = {
-["kills"] = 8,
-["fkDuration"] = 353.2679999999818,
-["wipes"] = 9,
-["fkWipes"] = 5,
-["best"] = 218.5,
-["bestDate"] = "2024/12/16",
-["fkDate"] = "2024/09/23",
-},
-["normal"] = {
-["kills"] = 4,
-["fkDuration"] = 261.2249999999985,
-["wipes"] = 1,
-["best"] = 145.1190000000643,
-["bestDate"] = "2024/10/01",
-["fkDate"] = "2024/09/11",
-},
-["LFR"] = {
-["kills"] = 1,
-["fkDuration"] = 203.6479999999865,
-["best"] = 203.6479999999865,
-["bestDate"] = "2024/12/12",
-["fkDate"] = "2024/12/12",
-},
-},
 [2608] = {
 ["heroic"] = {
 ["kills"] = 12,
@@ -1546,6 +1685,32 @@ BigWigsStatsDB = {
 ["kills"] = 1,
 ["fkDuration"] = 297.4330000000045,
 ["best"] = 297.4330000000045,
+["bestDate"] = "2024/12/12",
+["fkDate"] = "2024/12/12",
+},
+},
+[2601] = {
+["heroic"] = {
+["kills"] = 8,
+["fkDuration"] = 353.2679999999818,
+["wipes"] = 9,
+["fkWipes"] = 5,
+["best"] = 218.5,
+["bestDate"] = "2024/12/16",
+["fkDate"] = "2024/09/23",
+},
+["normal"] = {
+["kills"] = 4,
+["fkDuration"] = 261.2249999999985,
+["wipes"] = 1,
+["best"] = 145.1190000000643,
+["bestDate"] = "2024/10/01",
+["fkDate"] = "2024/09/11",
+},
+["LFR"] = {
+["kills"] = 1,
+["fkDuration"] = 203.6479999999865,
+["best"] = 203.6479999999865,
 ["bestDate"] = "2024/12/12",
 ["fkDate"] = "2024/12/12",
 },
@@ -1733,4 +1898,3 @@ BigWigsStatsDB = {
 },
 },
 }
-BigWigsTempNameplates = true

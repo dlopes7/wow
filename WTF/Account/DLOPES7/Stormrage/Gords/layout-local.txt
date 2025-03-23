@@ -69,10 +69,3 @@ X: 0
 Y: -70
 W: 970
 H: 832
-Frame: PlayerSpellsFrame
-FrameLevel: 1
-Anchor: TOP
-X: 200
-Y: -41
-W: 809
-H: 883

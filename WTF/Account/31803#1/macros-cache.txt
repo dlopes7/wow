@@ -1,5 +1,5 @@
 VER 3 0000000000000018 "ping" "134400"
-/ping
+/cast 462854
 END
 VER 3 0000000000000016 "saphiren" "134400"
 /invite saphiren-azralon

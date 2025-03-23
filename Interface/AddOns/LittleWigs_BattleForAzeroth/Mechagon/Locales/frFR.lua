@@ -23,7 +23,6 @@ if L then
 	L.rocket_tonk = "Chariotte fusée"
 	L.waste_processing_unit = "Unité de traitement des déchets"
 	--L.metal_gunk = "Metal Gunk"
-	L.living_waste = "Déchets vivants"
 	--L.junkyard_d0g = "Junkyard D.0.G."
 	L.mechagon_tinkerer = "Bricoleuse mécagonienne"
 	L.anti_personnel_squirrel = "Ecureuil antipersonnel"
@@ -38,10 +37,15 @@ if L then
 	-- L.warmup_trigger = "Now this is a statistical anomaly! Our visitors are still alive!"
 end
 
+L = BigWigs:NewBossLocale("K.U.-J.0.", "frFR")
+if L then
+	L.safe = "En sécurité"
+end
+
 L = BigWigs:NewBossLocale("King Mechagon", "frFR")
 if L then
 	--L.hardmode_desc = "Warning for when the Annihilo-tron 5000 starts displaying the button order."
 
-	--L.button = "Button"
-	--L.button_desc = "Show a warning when someone clicks a button."
+	L.button = "Bouton"
+	L.button_desc = "Affiche un avertissement lorsque quelqu'un appuie sur un bouton."
 end

@@ -1,5 +1,5 @@
-## Interface: 110007
-## Version: R110007r2
+## Interface: 110100
+## Version: R110100r1
 ## Title: |cff00c0ffDejaCharacterStats|r
 ## Author: Dejablue, Kakjens, loudsoul
 ## Notes: Dejablue's improved character stats panel view.

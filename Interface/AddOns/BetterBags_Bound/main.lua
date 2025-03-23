@@ -25,7 +25,8 @@ local Events = BetterBags:GetModule('Events')
 local L = BetterBags:GetModule('Localization')
 
 ---@class Context: AceModule
----@field New fun(self: AceModule, key: string): table
+---@field New fun(self: AceModule, key: string): Context
+---@field Copy fun(self: AceModule): Context
 local context = BetterBags:GetModule('Context')
 
 ---@class Config: AceModule

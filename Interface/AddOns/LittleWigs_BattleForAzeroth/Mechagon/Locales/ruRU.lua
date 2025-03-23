@@ -23,7 +23,6 @@ if L then
 	L.rocket_tonk = "Ракетный танк"
 	L.waste_processing_unit = "Переработчик отходов"
 	--L.metal_gunk = "Metal Gunk"
-	L.living_waste = "Живые отходы"
 	--L.junkyard_d0g = "Junkyard D.0.G."
 	L.mechagon_tinkerer = "Мехагонский боевой механик"
 	L.anti_personnel_squirrel = "Противопехотная белка"
@@ -36,6 +35,11 @@ end
 L = BigWigs:NewBossLocale("Tussle Tonks", "ruRU")
 if L then
 	L.warmup_trigger = "Что это? Ошибка в расчетах? Наши гости еще живы!"
+end
+
+L = BigWigs:NewBossLocale("K.U.-J.0.", "ruRU")
+if L then
+	--L.safe = "Safe"
 end
 
 L = BigWigs:NewBossLocale("King Mechagon", "ruRU")

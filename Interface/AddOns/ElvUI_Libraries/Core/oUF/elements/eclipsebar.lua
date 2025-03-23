@@ -119,8 +119,9 @@ local function Enable(self, unit)
 		element.ForceUpdate = ForceUpdate
 
 		self:RegisterEvent('ECLIPSE_DIRECTION_CHANGE', EclipseDirectionPath, true)
-		self:RegisterEvent('PLAYER_TALENT_UPDATE', VisibilityPath, true)
-		self:RegisterEvent('UPDATE_SHAPESHIFT_FORM', VisibilityPath, true)
+
+		oUF:RegisterEvent(self, 'PLAYER_TALENT_UPDATE', VisibilityPath, true)
+		oUF:RegisterEvent(self, 'UPDATE_SHAPESHIFT_FORM', VisibilityPath, true)
 
 		if(element.LunarBar and element.LunarBar:IsObjectType('StatusBar') and not element.LunarBar:GetStatusBarTexture()) then
 			element.LunarBar:SetStatusBarTexture([[Interface\TargetingFrame\UI-StatusBar]])
@@ -139,8 +140,9 @@ local function Disable(self)
 		ElementDisable(self)
 
 		self:UnregisterEvent('ECLIPSE_DIRECTION_CHANGE', EclipseDirectionPath)
-		self:UnregisterEvent('PLAYER_TALENT_UPDATE', VisibilityPath)
-		self:UnregisterEvent('UPDATE_SHAPESHIFT_FORM', VisibilityPath)
+
+		oUF:UnregisterEvent(self, 'PLAYER_TALENT_UPDATE', VisibilityPath)
+		oUF:UnregisterEvent(self, 'UPDATE_SHAPESHIFT_FORM', VisibilityPath)
 	end
 end
 

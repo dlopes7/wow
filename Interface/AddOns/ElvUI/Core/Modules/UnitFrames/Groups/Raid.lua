@@ -30,14 +30,18 @@ function UF:Construct_RaidFrames()
 	self.ReadyCheckIndicator = UF:Construct_ReadyCheckIcon(self)
 	self.ResurrectIndicator = UF:Construct_ResurrectionIcon(self)
 	self.SummonIndicator = UF:Construct_SummonIcon(self)
+	self.CombatIndicator = UF:Construct_CombatIndicator(self)
 	self.HealthPrediction = UF:Construct_HealComm(self)
 	self.Fader = UF:Construct_Fader()
 	self.Cutaway = UF:Construct_Cutaway(self)
 	self.PrivateAuras = UF:Construct_PrivateAuras(self)
 
+	if E.allowRoles then
+		self.GroupRoleIndicator = UF:Construct_RoleIcon(self)
+	end
+
 	if not E.Classic then
 		self.PvPClassificationIndicator = UF:Construct_PvPClassificationIndicator(self) -- Cart / Flag / Orb / Assassin Bounty
-		self.GroupRoleIndicator = UF:Construct_RoleIcon(self)
 		self.AlternativePower = UF:Construct_AltPowerBar(self)
 		self.ClassBar = 'AlternativePower'
 	end

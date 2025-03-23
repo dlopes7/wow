@@ -44,7 +44,7 @@ local EJ_GetEncounterInfo = isCata and function(key)
 end or isRetail and EJ_GetEncounterInfo or function(key)
 	return BigWigsAPI:GetLocale("BigWigs: Encounters")[key]
 end
-local SendChatMessage, GetInstanceInfo, Timer, SetRaidTarget = loader.SendChatMessage, loader.GetInstanceInfo, loader.CTimerAfter, loader.SetRaidTarget
+local SendChatMessage, GetInstanceInfo, SimpleTimer, SetRaidTarget = loader.SendChatMessage, loader.GetInstanceInfo, loader.CTimerAfter, loader.SetRaidTarget
 local UnitGUID, UnitHealth, UnitHealthMax = loader.UnitGUID, loader.UnitHealth, loader.UnitHealthMax
 local RegisterAddonMessagePrefix = loader.RegisterAddonMessagePrefix
 local format, find, gsub, band, tremove, twipe = string.format, string.find, string.gsub, bit.band, table.remove, table.wipe
@@ -59,7 +59,7 @@ local bossUtilityFrame = CreateFrame("Frame")
 local petUtilityFrame = CreateFrame("Frame")
 local activeNameplateUtilityFrame, inactiveNameplateUtilityFrame = CreateFrame("Frame"), CreateFrame("Frame")
 local engagedGUIDs, activeNameplates, nameplateWatcher = {}, {}, nil
-local enabledModules, unitTargetScans = {}, {}
+local enabledModules, unitTargetScans, scheduledEvents = {}, {}, {}
 local allowedEvents = {}
 local difficulty, maxPlayers
 local UpdateDispelStatus, UpdateInterruptStatus = nil, nil
@@ -128,7 +128,7 @@ local updateData = function(module)
 		local spent = 0
 		local talentTree = 0
 		for tree = 1, 3 do
-			local pointsSpent = select(isClassicEra and 5 or 3, GetTalentTabInfo(tree))
+			local _, _, _, _, pointsSpent = GetTalentTabInfo(tree)
 			if pointsSpent > spent then
 				spent = pointsSpent
 				talentTree = tree
@@ -306,8 +306,25 @@ end
 -- @number encounterId The encounter id
 -- @within Enable triggers
 function boss:SetEncounterID(encounterId)
-	if type(encounterId) == "number" then
+	local encounterIdType = type(encounterId)
+	if encounterIdType == "number" then
 		self.engageId = encounterId
+	elseif encounterIdType == "table" then
+		self.extraEncounterIDs = {}
+		for i = 1, #encounterId do
+			local actualId = encounterId[i]
+			local actualIdType = type(actualId)
+			if actualIdType ~= "number" then
+				core:Error(("Module %q tried to set an invalid encounter ID at position #%d. Expected number, got %s."):format(self.moduleName, i, actualIdType))
+			elseif i > 1 then
+				self.extraEncounterIDs[actualId] = true
+				self.extraEncounterIDs[#self.extraEncounterIDs+1] = actualId
+			else
+				self.engageId = actualId
+			end
+		end
+	else
+		core:Error(("Module %q tried to set an invalid encounter ID. Expected number or table, got %s."):format(self.moduleName, encounterIdType))
 	end
 end
 
@@ -315,10 +332,19 @@ end
 -- @return number
 -- @within Enable triggers
 function boss:GetEncounterID()
-	local encounterId = self.engageId
-	if type(encounterId) == "number" then
-		return encounterId
+	if self.extraEncounterIDs then
+		return self.engageId, unpack(self.extraEncounterIDs)
+	else
+		return self.engageId
 	end
+end
+
+--- Check if a specific encounter ID is registered this module.
+-- @number encounterId A singular specific encounter ID
+-- @return boolean
+-- @within Enable triggers
+function boss:IsEncounterID(encounterId)
+	return encounterId == self.engageId or (self.extraEncounterIDs and self.extraEncounterIDs[encounterId])
 end
 
 --- Set the journal id used for this module. (As used by the dungeon journal)
@@ -388,13 +414,19 @@ function boss:GetAllowWin()
 	return self.allowWin and true or false
 end
 
-function boss:SetPrivateAuraSounds(opts)
-	for i = 1, #opts do
-		if type(opts[i]) ~= "table" then
-			opts[i] = { opts[i] }
+--- Register private auras.
+-- @param spellIDTable the options table
+function boss:SetPrivateAuraSounds(spellIDTable)
+	for i = 1, #spellIDTable do
+		local spellId = spellIDTable[i]
+		local idType = type(spellId)
+		if idType == "number" then
+			spellIDTable[i] = { spellId }
+		elseif idType ~= "table" then
+			core:Error(("Module %s tried to add an invalid private aura spell id at position #%d. Expected number or table, got %s."):format(self.moduleName, i, idType))
 		end
 	end
-	self.privateAuraSoundOptions = opts
+	self.privateAuraSoundOptions = spellIDTable
 end
 
 --- Check if a module option is enabled.
@@ -496,6 +528,7 @@ function boss:Enable(isWipe)
 
 		updateData(self)
 		self.sayCountdowns = {}
+		scheduledEvents[self] = {}
 
 		-- Update enabled modules list
 		for i = #enabledModules, 1, -1 do
@@ -536,6 +569,10 @@ function boss:Disable(isWipe)
 		-- Update enabled modules list
 		self:DeleteFromTable(enabledModules, self)
 
+		-- Cancel and clean up scheduled events
+		self:CancelAllTimers()
+		scheduledEvents[self] = nil
+
 		-- No enabled modules? Unregister the combat log!
 		if #enabledModules == 0 then
 			bossUtilityFrame:UnregisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
@@ -543,9 +580,11 @@ function boss:Disable(isWipe)
 			activeNameplateUtilityFrame:UnregisterEvent("NAME_PLATE_UNIT_ADDED")
 			inactiveNameplateUtilityFrame:UnregisterEvent("NAME_PLATE_UNIT_REMOVED")
 			nameplateWatcher:Stop()
+			enabledModules = {}
 			engagedGUIDs = {}
 			activeNameplates = {}
 			unitTargetScans = {}
+			scheduledEvents = {}
 		else
 			for i = #unitTargetScans, 1, -1 do
 				if self == unitTargetScans[i][1] then
@@ -594,8 +633,6 @@ function boss:Disable(isWipe)
 		self.isWiping = nil
 		self.isEngaged = nil
 		self.bossTargetChecks = nil
-
-		self:CancelAllTimers()
 
 		if not isWiping then
 			self:SendMessage("BigWigs_OnBossDisable", self)
@@ -1336,7 +1373,7 @@ do
 		end
 
 		if #unitTargetScans ~= 0 then
-			Timer(0.05, unitScanner)
+			SimpleTimer(0.05, unitScanner)
 		end
 	end
 
@@ -1348,7 +1385,7 @@ do
 	-- @string guid GUID of the mob to get the target of
 	function boss:GetUnitTarget(func, tankCheckExpiry, guid)
 		if #unitTargetScans == 0 then
-			Timer(0.05, unitScanner)
+			SimpleTimer(0.05, unitScanner)
 		end
 
 		unitTargetScans[#unitTargetScans+1] = {self, func, solo and 0.1 or tankCheckExpiry, guid, 0} -- Tiny allowance when solo
@@ -1399,37 +1436,20 @@ do
 				self.privateAuraSounds = {}
 				local soundModule = plugins.Sounds
 				if soundModule then
-					for _, option in next, self.privateAuraSoundOptions do
-						local spellId = option[1]
-						local default = soundModule:GetDefaultSound("privateaura")
-
-						local key = ("pa_%d"):format(spellId)
+					local default = soundModule:GetDefaultSound("privateaura")
+					for _, opt in next, self.privateAuraSoundOptions do
+						local key = ("pa_%d"):format(opt[1])
 						local sound = soundModule:GetSoundFile(nil, nil, self.db.profile[key] or default)
 						if sound then
-							local privateAuraSoundId = C_UnitAuras.AddPrivateAuraAppliedSound({
-								spellID = spellId,
-								unitToken = "player",
-								soundFileName = sound,
-								outputChannel = "master",
-							})
-							if type(privateAuraSoundId) == "number" then
-								self.privateAuraSounds[#self.privateAuraSounds + 1] = privateAuraSoundId
-							else
-								self:Error("Failed to register Private Aura %q with return: %s", spellId, tostring(privateAuraSoundId))
-							end
-							if option.extra then
-								for _, id in next, option.extra do
-									local extrasSoundId = C_UnitAuras.AddPrivateAuraAppliedSound({
-										spellID = id,
-										unitToken = "player",
-										soundFileName = sound,
-										outputChannel = "master",
-									})
-									if type(extrasSoundId) == "number" then
-										self.privateAuraSounds[#self.privateAuraSounds + 1] = extrasSoundId
-									else
-										self:Error("Failed to register Private Aura %q with return: %s", id, tostring(extrasSoundId))
-									end
+							for i = 1, #opt do
+								local privateAuraSoundId = C_UnitAuras.AddPrivateAuraAppliedSound({
+									spellID = opt[i],
+									unitToken = "player",
+									soundFileName = sound,
+									outputChannel = "master",
+								})
+								if privateAuraSoundId then
+									self.privateAuraSounds[#self.privateAuraSounds + 1] = privateAuraSoundId
 								end
 							end
 						end
@@ -1457,7 +1477,7 @@ do
 			twipe(icons) -- Wipe icon cache
 			twipe(spells)
 			if self.OnWin then self:OnWin() end
-			Timer(1, function() self:Disable() end) -- Delay a little to prevent re-enabling
+			SimpleTimer(1, function() self:Disable() end) -- Delay a little to prevent re-enabling
 			self:SendMessage("BigWigs_OnBossWin", self)
 			self:SendMessage("BigWigs_VictorySound", self)
 		end
@@ -1506,7 +1526,7 @@ do
 			if UnitGUID(unit) == guid then
 				self.bossTargetChecks[unit] = func
 				self:RegisterUnitEvent("UNIT_TARGET", "NextTarget", unit)
-				Timer(timeToWait or 0.3, function()
+				SimpleTimer(timeToWait or 0.3, function()
 					if self.bossTargetChecks[unit] then
 						self:UnregisterUnitEvent("UNIT_TARGET", unit)
 					end
@@ -1524,19 +1544,8 @@ do
 			self[self.targetEventFunc](self, event, "mouseover", guid)
 		end
 	end
-	function boss:UNIT_TARGET(event, unit)
-		local unitTarget = unit.."target"
-		local guid = UnitGUID(unitTarget)
-		if guid and not myGroupGUIDs[guid] then
-			self[self.targetEventFunc](self, event, unitTarget, guid)
-		end
-
-		if self.targetEventFunc then -- Event is still registered, continue
-			guid = UnitGUID(unit)
-			if guid and not myGroupGUIDs[guid] then
-				self[self.targetEventFunc](self, event, unit, guid)
-			end
-		end
+	function boss:BigWigs_UNIT_TARGET(_, _, unitTarget, guid)
+		self[self.targetEventFunc](self, "UNIT_TARGET", unitTarget, guid)
 	end
 	function boss:NAME_PLATE_UNIT_ADDED(event, unit)
 		local guid = UnitGUID(unit)
@@ -1552,7 +1561,7 @@ do
 		if self[func] then
 			self.targetEventFunc = func
 			self:RegisterEvent("UPDATE_MOUSEOVER_UNIT")
-			self:RegisterEvent("UNIT_TARGET")
+			self:RegisterMessage("BigWigs_UNIT_TARGET")
 			self:RegisterEvent("NAME_PLATE_UNIT_ADDED")
 		end
 	end
@@ -1560,13 +1569,13 @@ do
 	function boss:UnregisterTargetEvents()
 		self.targetEventFunc = nil
 		self:UnregisterEvent("UPDATE_MOUSEOVER_UNIT")
-		self:UnregisterEvent("UNIT_TARGET")
+		self:UnregisterMessage("BigWigs_UNIT_TARGET")
 		self:UnregisterEvent("NAME_PLATE_UNIT_ADDED")
 	end
 end
 
 function boss:EncounterEnd(_, id, name, diff, size, status)
-	if self:GetEncounterID() == id and self:IsEnabled() then
+	if self:IsEncounterID(id) and self:IsEnabled() then
 		if status == 1 then
 			if self:GetJournalID() or self:GetAllowWin() then
 				self:Win() -- Official boss module
@@ -1575,7 +1584,7 @@ function boss:EncounterEnd(_, id, name, diff, size, status)
 			end
 		elseif status == 0 then
 			self:SendMessage("BigWigs_StopBars", self)
-			Timer(5, function() self:Wipe() end) -- Delayed due to issues with some multi-boss encounters showing/hiding the boss frames (IEEU) rapidly whilst wiping.
+			SimpleTimer(5, function() self:Wipe() end) -- Delayed due to issues with some multi-boss encounters showing/hiding the boss frames (IEEU) rapidly whilst wiping.
 		end
 		self:SendMessage("BigWigs_EncounterEnd", self, id, name, diff, size, status) -- Do NOT use this for wipe detection, use BigWigs_OnBossWipe.
 	end
@@ -1585,6 +1594,71 @@ end
 -- Misc utility functions
 -- @section utility
 --
+
+do
+	local hexColors = {}
+	for k, v in next, (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS) do
+		hexColors[k] = format("|cff%02x%02x%02x", v.r * 255, v.g * 255, v.b * 255)
+	end
+	local coloredNames = setmetatable({}, {__index =
+		function(self, key)
+			if key then
+				local shortKey = gsub(key, "%-.+", "*") -- Replace server names with *
+				local _, class = UnitClass(key)
+				if class then
+					local newKey = hexColors[class] .. shortKey .. "|r"
+					self[key] = newKey
+					return newKey
+				else
+					return shortKey
+				end
+			end
+		end
+	})
+	coloredNames[L.garrick] = hexColors.PALADIN .. L.garrick_short .. "|r" -- AI paladin tank
+	coloredNames[L.meredy] = hexColors.MAGE .. L.meredy_short .. "|r" -- AI mage dps
+	coloredNames[L.shuja] = hexColors.SHAMAN .. L.shuja_short .. "|r" -- AI shaman dps
+	coloredNames[L.crenna] = hexColors.DRUID .. L.crenna_short .. "|r" -- AI druid healer
+	coloredNames[L.austin] = hexColors.HUNTER .. L.austin_short .. "|r" -- AI hunter dps
+	coloredNames[L.breka] = hexColors.WARRIOR .. L.breka_short .. "|r" -- AI warrior tank
+	coloredNames[L.henry] = hexColors.PRIEST .. L.henry_short .. "|r" -- AI priest healer
+	myNameWithColor = coloredNames[myName]
+
+	--- Get a table that colors player names based on class. [DEPRECATED]
+	-- @return an empty table
+	function boss:NewTargetList()
+		return {}
+	end
+
+	--- Color a player name based on class.
+	-- @param player The player name, or a table containing a list of names
+	-- @bool[opt] overwrite Ignore whatever the "class color message" feature is set to
+	-- @bool[opt] disableBarColors Not for current use
+	-- @return colored player name, or table containing colored names
+	function boss:ColorName(player, overwrite, disableBarColors) -- XXX add a proper option for bar colors
+		if not disableBarColors and classColorMessages or overwrite then
+			if type(player) == "table" then
+				local tmp = {}
+				for i = 1, #player do
+					tmp[i] = coloredNames[player[i]]
+				end
+				return tmp
+			else
+				return coloredNames[player]
+			end
+		else
+			if type(player) == "table" then
+				local tmp = {}
+				for i = 1, #player do
+					tmp[i] = gsub(player[i], "%-.+", "*") -- Replace server names with *
+				end
+				return tmp
+			else
+				return gsub(player, "%-.+", "*") -- Replace server names with *
+			end
+		end
+	end
+end
 
 --- Delete a specific item from a table.
 -- @param[type=table] table The table to remove the item from
@@ -2265,7 +2339,7 @@ do
 		end
 	end
 	--- Check if you can dispel.
-	-- @string dispelType dispel type (magic, disease, poison, curse, movement)
+	-- @string dispelType dispel type (magic, enrage, disease, poison, curse, movement)
 	-- @bool[opt] isOffensive true if dispelling a buff from an enemy (magic), nil if dispelling a friendly
 	-- @param[opt] key module option key to check
 	-- @return boolean
@@ -2600,6 +2674,13 @@ function boss:MessageOld(key, color, sound, text, icon)
 	end
 end
 
+--- Display a colored message.
+-- @param key the option key
+-- @string color the message color category
+-- @param[opt] text the message text (string) or fetch a spell name from a spellID (number) (if nil, key is assumed to be a spellID and is used instead)
+-- @param[opt] icon the message icon as a texture name (string) or as a spell ID to fetch its texture (number) or use false (bool) to disable the icon
+-- @bool[opt] disableEmphasize if true then this message can never emphasize regardless of user settings
+-- @number[opt] customDisplayTime overwrite the user display time (the time the message stays on screen) with a defined one
 function boss:Message(key, color, text, icon, disableEmphasize, customDisplayTime)
 	if checkFlag(self, key, C.MESSAGE) then
 		local isEmphasized = not disableEmphasize and band(self.db.profile[key], C.EMPHASIZE) == C.EMPHASIZE
@@ -2621,360 +2702,294 @@ function boss:PersonalMessage(key, localeString, text, icon)
 	end
 end
 
-do
-	local hexColors = {}
-	for k, v in next, (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS) do
-		hexColors[k] = format("|cff%02x%02x%02x", v.r * 255, v.g * 255, v.b * 255)
+--- Display a buff/debuff stack warning message. [DEPRECATED]
+-- @param key the option key
+-- @string player the player to display
+-- @number stack the stack count
+-- @string color the message color category
+-- @string[opt] sound the message sound
+-- @param[opt] text the message text (if nil, key is used)
+-- @param[opt] icon the message icon (spell id or texture name)
+function boss:StackMessageOld(key, player, stack, color, sound, text, icon)
+	if icon == nil then icon = type(text) == "number" and text or key end
+	self:StackMessage(key, color, player, stack, 0, text, icon)
+	if sound then
+		self:PlaySound(key, sound)
 	end
-	local coloredNames = setmetatable({}, {__index =
-		function(self, key)
-			if key then
-				local shortKey = gsub(key, "%-.+", "*") -- Replace server names with *
-				local _, class = UnitClass(key)
-				if class then
-					local newKey = hexColors[class] .. shortKey .. "|r"
-					self[key] = newKey
-					return newKey
-				else
-					return shortKey
-				end
-			end
-		end
-	})
-	coloredNames[L.garrick] = hexColors.PALADIN .. L.garrick_short .. "|r" -- AI paladin tank
-	coloredNames[L.meredy] = hexColors.MAGE .. L.meredy_short .. "|r" -- AI mage dps
-	coloredNames[L.shuja] = hexColors.SHAMAN .. L.shuja_short .. "|r" -- AI shaman dps
-	coloredNames[L.crenna] = hexColors.DRUID .. L.crenna_short .. "|r" -- AI druid healer
-	coloredNames[L.austin] = hexColors.HUNTER .. L.austin_short .. "|r" -- AI hunter dps
-	myNameWithColor = coloredNames[myName]
+end
 
-	--- Get a table that colors player names based on class. [DEPRECATED]
-	-- @return an empty table
-	function boss:NewTargetList()
-		return {}
-	end
-
-	--- Color a player name based on class.
-	-- @param player The player name, or a table containing a list of names
-	-- @bool[opt] overwrite Ignore whatever the "class color message" feature is set to
-	-- @return colored player name, or table containing colored names
-	function boss:ColorName(player, overwrite)
-		if classColorMessages or overwrite then
-			if type(player) == "table" then
-				local tmp = {}
-				for i = 1, #player do
-					tmp[i] = coloredNames[player[i]]
-				end
-				return tmp
-			else
-				return coloredNames[player]
-			end
-		else
-			if type(player) == "table" then
-				local tmp = {}
-				for i = 1, #player do
-					tmp[i] = gsub(player[i], "%-.+", "*") -- Replace server names with *
-				end
-				return tmp
-			else
-				return gsub(player, "%-.+", "*") -- Replace server names with *
-			end
+--- Display a buff/debuff stack warning message.
+-- @param key the option key
+-- @string color the message color category
+-- @string player the player to display
+-- @number stack the stack count
+-- @number noEmphUntil prevent the emphasize function taking effect until this amount of stacks has been reached
+-- @param[opt] text the message text (if nil, key is used)
+-- @param[opt] icon the message icon (spell id or texture name)
+function boss:StackMessage(key, color, player, stack, noEmphUntil, text, icon)
+	if checkFlag(self, key, C.MESSAGE) then
+		local textType = type(text)
+		local amount = stack or 1
+		if player == myName then
+			local isEmphasized = (band(self.db.profile[key], C.EMPHASIZE) == C.EMPHASIZE or band(self.db.profile[key], C.ME_ONLY_EMPHASIZE) == C.ME_ONLY_EMPHASIZE) and amount >= noEmphUntil
+			self:SendMessage("BigWigs_Message", self, key, format(L.stackyou, amount, textType == "string" and text or spells[text or key]), "blue", icon ~= false and icons[icon or key], isEmphasized)
+		elseif not checkFlag(self, key, C.ME_ONLY) then
+			local isEmphasized = band(self.db.profile[key], C.EMPHASIZE) == C.EMPHASIZE and amount >= noEmphUntil
+			self:SendMessage("BigWigs_Message", self, key, format(L.stack, amount, textType == "string" and text or spells[text or key], self:ColorName(player)), color, icon ~= false and icons[icon or key], isEmphasized)
 		end
 	end
+end
 
-	--- Display a buff/debuff stack warning message. [DEPRECATED]
-	-- @param key the option key
-	-- @string player the player to display
-	-- @number stack the stack count
-	-- @string color the message color category
-	-- @string[opt] sound the message sound
-	-- @param[opt] text the message text (if nil, key is used)
-	-- @param[opt] icon the message icon (spell id or texture name)
-	function boss:StackMessageOld(key, player, stack, color, sound, text, icon)
-		if icon == nil then icon = type(text) == "number" and text or key end
-		self:StackMessage(key, color, player, stack, 0, text, icon)
+--- Display a target message. [DEPRECATED]
+-- @param key the option key
+-- @string player the player to display
+-- @string color the message color category
+-- @string[opt] sound the message sound
+-- @param[opt] text the message text (if nil, key is used)
+-- @param[opt] icon the message icon (spell id or texture name)
+-- @bool[opt] alwaysPlaySound if true, play the sound even if player is not you
+function boss:TargetMessageOld(key, player, color, sound, text, icon, alwaysPlaySound)
+	if icon == nil then icon = type(text) == "number" and text or key end
+	if type(player) == "table" then
+		self:TargetsMessage(key, color, player, #player, text, icon)
 		if sound then
-			self:PlaySound(key, sound)
-		end
-	end
-
-	--- Display a buff/debuff stack warning message.
-	-- @param key the option key
-	-- @string color the message color category
-	-- @string player the player to display
-	-- @number stack the stack count
-	-- @number noEmphUntil prevent the emphasize function taking effect until this amount of stacks has been reached
-	-- @param[opt] text the message text (if nil, key is used)
-	-- @param[opt] icon the message icon (spell id or texture name)
-	function boss:StackMessage(key, color, player, stack, noEmphUntil, text, icon)
-		if checkFlag(self, key, C.MESSAGE) then
-			local textType = type(text)
-			local amount = stack or 1
-			if player == myName then
-				local isEmphasized = (band(self.db.profile[key], C.EMPHASIZE) == C.EMPHASIZE or band(self.db.profile[key], C.ME_ONLY_EMPHASIZE) == C.ME_ONLY_EMPHASIZE) and amount >= noEmphUntil
-				self:SendMessage("BigWigs_Message", self, key, format(L.stackyou, amount, textType == "string" and text or spells[text or key]), "blue", icon ~= false and icons[icon or key], isEmphasized)
-			elseif not checkFlag(self, key, C.ME_ONLY) then
-				local isEmphasized = band(self.db.profile[key], C.EMPHASIZE) == C.EMPHASIZE and amount >= noEmphUntil
-				self:SendMessage("BigWigs_Message", self, key, format(L.stack, amount, textType == "string" and text or spells[text or key], self:ColorName(player)), color, icon ~= false and icons[icon or key], isEmphasized)
-			end
-		end
-	end
-
-	--- Display a target message. [DEPRECATED]
-	-- @param key the option key
-	-- @string player the player to display
-	-- @string color the message color category
-	-- @string[opt] sound the message sound
-	-- @param[opt] text the message text (if nil, key is used)
-	-- @param[opt] icon the message icon (spell id or texture name)
-	-- @bool[opt] alwaysPlaySound if true, play the sound even if player is not you
-	function boss:TargetMessageOld(key, player, color, sound, text, icon, alwaysPlaySound)
-		if icon == nil then icon = type(text) == "number" and text or key end
-		if type(player) == "table" then
-			self:TargetsMessage(key, color, player, #player, text, icon)
-			if sound then
-				if alwaysPlaySound then
-					self:PlaySound(key, sound)
-				else
-					for i = 1, #player do
-						local playerInTable = player[i]
-						if playerInTable == myNameWithColor or playerInTable == myName then
-							self:PlaySound(key, sound)
-							break
-						end
+			if alwaysPlaySound then
+				self:PlaySound(key, sound)
+			else
+				for i = 1, #player do
+					local playerInTable = player[i]
+					if playerInTable == myNameWithColor or playerInTable == myName then
+						self:PlaySound(key, sound)
+						break
 					end
 				end
 			end
-			twipe(player)
-		else
-			self:TargetMessage(key, color, player, text, icon)
-			if sound and (alwaysPlaySound or player == myName) then
-				self:PlaySound(key, sound, nil, player)
+		end
+		twipe(player)
+	else
+		self:TargetMessage(key, color, player, text, icon)
+		if sound and (alwaysPlaySound or player == myName) then
+			self:PlaySound(key, sound, nil, player)
+		end
+	end
+end
+
+do
+	local function printTargets(self, key, playerTable, color, text, icon, markers)
+		local playersInTable = #playerTable
+		if playersInTable ~= 0 then -- Might fire twice (1st from timer, 2nd from reaching max playerCount)
+			local textType = type(text)
+			local msg = textType == "string" and text or spells[text or key]
+			local texture = icon ~= false and icons[icon or textType == "number" and text or key]
+			if playersInTable == 1 and (playerTable[1] == myNameWithColor or playerTable[1] == myName) then
+				local meEmphasized = band(self.db.profile[key], C.ME_ONLY_EMPHASIZE) == C.ME_ONLY_EMPHASIZE
+				if not meEmphasized then -- We already did a ME_ONLY_EMPHASIZE print in :TargetsMessage
+					local emphasized = band(self.db.profile[key], C.EMPHASIZE) == C.EMPHASIZE
+					if markers then
+						self:SendMessage("BigWigs_Message", self, key, format(L.you_icon, msg, markers[1]), "blue", texture, emphasized)
+					else
+						self:SendMessage("BigWigs_Message", self, key, format(L.you, msg), "blue", texture, emphasized)
+					end
+				end
+			else
+				if markers then
+					for i = 1, playersInTable do
+						playerTable[i] = self:GetIconTexture(markers[i]) .. playerTable[i]
+					end
+				end
+				local list = self:TableToString(playerTable, playersInTable)
+				-- Don't Emphasize if it's on other people when both EMPHASIZE and ME_ONLY_EMPHASIZE are enabled.
+				local isEmphasized = band(self.db.profile[key], C.EMPHASIZE) == C.EMPHASIZE and band(self.db.profile[key], C.ME_ONLY_EMPHASIZE) ~= C.ME_ONLY_EMPHASIZE
+				self:SendMessage("BigWigs_Message", self, key, format(L.other, msg, list), color, texture, isEmphasized)
+			end
+			twipe(playerTable)
+			if markers then
+				twipe(markers)
 			end
 		end
 	end
 
-	do
-		local function printTargets(self, key, playerTable, color, text, icon, markers)
-			local playersInTable = #playerTable
-			if playersInTable ~= 0 then -- Might fire twice (1st from timer, 2nd from reaching max playerCount)
+	--- Display a target message of multiple players using a table. [DEPRECATED]
+	-- @param key the option key
+	-- @string color the message color category
+	-- @param playerTable a table containing the list of players
+	-- @number playerCount the max amount of players you expect to be included, message will instantly print when this max is reached
+	-- @param[opt] text the message text (if nil, key is used)
+	-- @param[opt] icon the message icon (spell id or texture name, key is used if nil)
+	-- @number[opt] customTime how long to wait to reach the max players in the table. If the max is not reached, it will print after this value (0.3s is used if nil)
+	-- @param[opt] markers a table containing the markers that should be attached next to the player names e.g. {1, 2, 3}
+	function boss:TargetsMessageOld(key, color, playerTable, playerCount, text, icon, customTime, markers)
+		local playersInTable = #playerTable
+		if band(self.db.profile[key], C.ME_ONLY) == C.ME_ONLY then -- We allow ME_ONLY even if MESSAGE off
+			if (playerTable[playersInTable] == myNameWithColor or playerTable[playersInTable] == myName) and checkFlag(self, key, C.ME_ONLY) then -- Use checkFlag for the role check
+				local isEmphasized = band(self.db.profile[key], C.EMPHASIZE) == C.EMPHASIZE or band(self.db.profile[key], C.ME_ONLY_EMPHASIZE) == C.ME_ONLY_EMPHASIZE
 				local textType = type(text)
 				local msg = textType == "string" and text or spells[text or key]
 				local texture = icon ~= false and icons[icon or textType == "number" and text or key]
-
-				if playersInTable == 1 and (playerTable[1] == myNameWithColor or playerTable[1] == myName) then
-					local meEmphasized = band(self.db.profile[key], C.ME_ONLY_EMPHASIZE) == C.ME_ONLY_EMPHASIZE
-					if not meEmphasized then -- We already did a ME_ONLY_EMPHASIZE print in :TargetsMessage
-						local emphasized = band(self.db.profile[key], C.EMPHASIZE) == C.EMPHASIZE
-						if markers then
-							self:SendMessage("BigWigs_Message", self, key, format(L.you_icon, msg, markers[1]), "blue", texture, emphasized)
-						else
-							self:SendMessage("BigWigs_Message", self, key, format(L.you, msg), "blue", texture, emphasized)
-						end
-					end
-				else
-					if markers then
-						for i = 1, playersInTable do
-							playerTable[i] = self:GetIconTexture(markers[i]) .. playerTable[i]
-						end
-					end
-					local list = self:TableToString(playerTable, playersInTable)
-					-- Don't Emphasize if it's on other people when both EMPHASIZE and ME_ONLY_EMPHASIZE are enabled.
-					local isEmphasized = band(self.db.profile[key], C.EMPHASIZE) == C.EMPHASIZE and band(self.db.profile[key], C.ME_ONLY_EMPHASIZE) ~= C.ME_ONLY_EMPHASIZE
-					self:SendMessage("BigWigs_Message", self, key, format(L.other, msg, list), color, texture, isEmphasized)
-				end
-				twipe(playerTable)
 				if markers then
-					twipe(markers)
+					self:SendMessage("BigWigs_Message", self, key, format(L.you_icon, msg, markers[playersInTable]), "blue", texture, isEmphasized)
+				else
+					self:SendMessage("BigWigs_Message", self, key, format(L.you, msg), "blue", texture, isEmphasized)
 				end
 			end
-		end
-
-		--- Display a target message of multiple players using a table. [DEPRECATED]
-		-- @param key the option key
-		-- @string color the message color category
-		-- @param playerTable a table containing the list of players
-		-- @number playerCount the max amount of players you expect to be included, message will instantly print when this max is reached
-		-- @param[opt] text the message text (if nil, key is used)
-		-- @param[opt] icon the message icon (spell id or texture name, key is used if nil)
-		-- @number[opt] customTime how long to wait to reach the max players in the table. If the max is not reached, it will print after this value (0.3s is used if nil)
-		-- @param[opt] markers a table containing the markers that should be attached next to the player names e.g. {1, 2, 3}
-		function boss:TargetsMessageOld(key, color, playerTable, playerCount, text, icon, customTime, markers)
-			local playersInTable = #playerTable
-			if band(self.db.profile[key], C.ME_ONLY) == C.ME_ONLY then -- We allow ME_ONLY even if MESSAGE off
-				if (playerTable[playersInTable] == myNameWithColor or playerTable[playersInTable] == myName) and checkFlag(self, key, C.ME_ONLY) then -- Use checkFlag for the role check
-					local isEmphasized = band(self.db.profile[key], C.EMPHASIZE) == C.EMPHASIZE or band(self.db.profile[key], C.ME_ONLY_EMPHASIZE) == C.ME_ONLY_EMPHASIZE
-					local textType = type(text)
-					local msg = textType == "string" and text or spells[text or key]
-					local texture = icon ~= false and icons[icon or textType == "number" and text or key]
-					if markers then
-						self:SendMessage("BigWigs_Message", self, key, format(L.you_icon, msg, markers[playersInTable]), "blue", texture, isEmphasized)
-					else
-						self:SendMessage("BigWigs_Message", self, key, format(L.you, msg), "blue", texture, isEmphasized)
-					end
-				end
-				if playersInTable == playerCount then
+			if playersInTable == playerCount then
+				twipe(playerTable)
+				if markers then twipe(markers) end
+			elseif playersInTable == 1 then
+				SimpleTimer(customTime or 0.3, function()
 					twipe(playerTable)
 					if markers then twipe(markers) end
-				elseif playersInTable == 1 then
-					Timer(customTime or 0.3, function()
-						twipe(playerTable)
-						if markers then twipe(markers) end
-					end)
+				end)
+			end
+		elseif checkFlag(self, key, C.MESSAGE) then
+			if (playerTable[playersInTable] == myNameWithColor or playerTable[playersInTable] == myName) and band(self.db.profile[key], C.ME_ONLY_EMPHASIZE) == C.ME_ONLY_EMPHASIZE then
+				local textType = type(text)
+				local msg = textType == "string" and text or spells[text or key]
+				local texture = icon ~= false and icons[icon or textType == "number" and text or key]
+				if markers then
+					self:SendMessage("BigWigs_Message", self, key, format(L.you_icon, msg, markers[playersInTable]), "blue", texture, true)
+				else
+					self:SendMessage("BigWigs_Message", self, key, format(L.you, msg), "blue", texture, true)
 				end
-			elseif checkFlag(self, key, C.MESSAGE) then
-				if (playerTable[playersInTable] == myNameWithColor or playerTable[playersInTable] == myName) and band(self.db.profile[key], C.ME_ONLY_EMPHASIZE) == C.ME_ONLY_EMPHASIZE then
-					local textType = type(text)
-					local msg = textType == "string" and text or spells[text or key]
-					local texture = icon ~= false and icons[icon or textType == "number" and text or key]
-					if markers then
-						self:SendMessage("BigWigs_Message", self, key, format(L.you_icon, msg, markers[playersInTable]), "blue", texture, true)
-					else
-						self:SendMessage("BigWigs_Message", self, key, format(L.you, msg), "blue", texture, true)
-					end
-				end
-				if playersInTable == playerCount then
+			end
+			if playersInTable == playerCount then
+				printTargets(self, key, playerTable, color, text, icon, markers)
+			elseif playersInTable == 1 then
+				SimpleTimer(customTime or 0.3, function()
 					printTargets(self, key, playerTable, color, text, icon, markers)
-				elseif playersInTable == 1 then
-					Timer(customTime or 0.3, function()
-						printTargets(self, key, playerTable, color, text, icon, markers)
-					end)
-				end
-			else
-				if playersInTable == playerCount then
+				end)
+			end
+		else
+			if playersInTable == playerCount then
+				twipe(playerTable)
+				if markers then twipe(markers) end
+			elseif playersInTable == 1 then
+				SimpleTimer(customTime or 0.3, function()
 					twipe(playerTable)
 					if markers then twipe(markers) end
-				elseif playersInTable == 1 then
-					Timer(customTime or 0.3, function()
-						twipe(playerTable)
-						if markers then twipe(markers) end
-					end)
-				end
+				end)
 			end
 		end
 	end
+end
 
-	do
-		local function printTargets(self, key, playerTable, color, text, icon)
-			local playersInTable = #playerTable
-			if playersInTable > 0 and (not playerTable.prevPlayersInTable or playerTable.prevPlayersInTable < playersInTable) then
+do
+	local function printTargets(self, key, playerTable, color, text, icon)
+		local playersInTable = #playerTable
+		if playersInTable > 0 and (not playerTable.prevPlayersInTable or playerTable.prevPlayersInTable < playersInTable) then
+			local textType = type(text)
+			local msg = textType == "string" and text or spells[text or key]
+			local texture = icon ~= false and icons[icon or key]
+			local previousAmount = playerTable.prevPlayersInTable or 0
+			if playersInTable-previousAmount == 1 and playerTable[playersInTable] == myName then
+				local meEmphasized = band(self.db.profile[key], C.ME_ONLY_EMPHASIZE) == C.ME_ONLY_EMPHASIZE
+				if not meEmphasized then -- We already did a ME_ONLY_EMPHASIZE print in :TargetsMessage
+					local emphasized = band(self.db.profile[key], C.EMPHASIZE) == C.EMPHASIZE
+					local marker = playerTable[myName]
+					if marker then
+						self:SendMessage("BigWigs_Message", self, key, format(L.you_icon, msg, marker), "blue", texture, emphasized)
+					else
+						self:SendMessage("BigWigs_Message", self, key, format(L.you, msg), "blue", texture, emphasized)
+					end
+				end
+			else
+				local startFromEntry = previousAmount+1
+				local tbl = {}
+				for i = startFromEntry, playersInTable do
+					local name = playerTable[i]
+					local hasMarker = playerTable[name]
+					if hasMarker then
+						local markerFromTable = self:GetIconTexture(hasMarker)
+						if markerFromTable then
+							tbl[#tbl+1] = markerFromTable .. self:ColorName(name)
+						else
+							tbl[#tbl+1] = self:ColorName(name)
+							core:Error(format("Option %q is trying to set invalid marker %q on a player table.", key, tostring(hasMarker)))
+						end
+					else
+						tbl[#tbl+1] = self:ColorName(name)
+					end
+				end
+				local list = self:TableToString(tbl, #tbl)
+				-- Don't Emphasize if it's on other people when both EMPHASIZE and ME_ONLY_EMPHASIZE are enabled.
+				local isEmphasized = band(self.db.profile[key], C.EMPHASIZE) == C.EMPHASIZE and band(self.db.profile[key], C.ME_ONLY_EMPHASIZE) ~= C.ME_ONLY_EMPHASIZE
+				self:SendMessage("BigWigs_Message", self, key, format(L.other, msg, list), color, texture, isEmphasized)
+			end
+			playerTable.prevPlayersInTable = playersInTable
+		end
+	end
+
+	--- Display a target message of multiple players using a table.
+	-- @param key the option key
+	-- @string color the message color category
+	-- @param playerTable a table containing the list of players
+	-- @number playerCount the max amount of players you expect to be included, message will instantly print when this max is reached
+	-- @param[opt] text the message text (if nil, key is used)
+	-- @param[opt] icon the message icon (spell id or texture name, key is used if nil)
+	-- @number[opt] customTime how long to wait to reach the max players in the table. If the max is not reached, it will print after this value (0.3s is used if nil)
+	function boss:TargetsMessage(key, color, playerTable, playerCount, text, icon, customTime)
+		local playersInTable = #playerTable
+		if band(self.db.profile[key], C.ME_ONLY) == C.ME_ONLY then -- We allow ME_ONLY even if MESSAGE off
+			if playerTable[playersInTable] == myName and checkFlag(self, key, C.ME_ONLY) then -- Use checkFlag for the role check
+				local isEmphasized = band(self.db.profile[key], C.EMPHASIZE) == C.EMPHASIZE or band(self.db.profile[key], C.ME_ONLY_EMPHASIZE) == C.ME_ONLY_EMPHASIZE
 				local textType = type(text)
 				local msg = textType == "string" and text or spells[text or key]
 				local texture = icon ~= false and icons[icon or key]
-
-				local previousAmount = playerTable.prevPlayersInTable or 0
-				if playersInTable-previousAmount == 1 and playerTable[playersInTable] == myName then
-					local meEmphasized = band(self.db.profile[key], C.ME_ONLY_EMPHASIZE) == C.ME_ONLY_EMPHASIZE
-					if not meEmphasized then -- We already did a ME_ONLY_EMPHASIZE print in :TargetsMessage
-						local emphasized = band(self.db.profile[key], C.EMPHASIZE) == C.EMPHASIZE
-						local marker = playerTable[myName]
-						if marker then
-							self:SendMessage("BigWigs_Message", self, key, format(L.you_icon, msg, marker), "blue", texture, emphasized)
-						else
-							self:SendMessage("BigWigs_Message", self, key, format(L.you, msg), "blue", texture, emphasized)
-						end
-					end
+				local marker = playerTable[myName]
+				if marker then
+					self:SendMessage("BigWigs_Message", self, key, format(L.you_icon, msg, marker), "blue", texture, isEmphasized)
 				else
-					local startFromEntry = previousAmount+1
-					local tbl = {}
-					for i = startFromEntry, playersInTable do
-						local name = playerTable[i]
-						local hasMarker = playerTable[name]
-						if hasMarker then
-							local markerFromTable = self:GetIconTexture(hasMarker)
-							if markerFromTable then
-								tbl[#tbl+1] = markerFromTable .. self:ColorName(name)
-							else
-								tbl[#tbl+1] = self:ColorName(name)
-								core:Error(format("Option %q is trying to set invalid marker %q on a player table.", key, tostring(hasMarker)))
-							end
-
-						else
-							tbl[#tbl+1] = self:ColorName(name)
-						end
-					end
-					local list = self:TableToString(tbl, #tbl)
-					-- Don't Emphasize if it's on other people when both EMPHASIZE and ME_ONLY_EMPHASIZE are enabled.
-					local isEmphasized = band(self.db.profile[key], C.EMPHASIZE) == C.EMPHASIZE and band(self.db.profile[key], C.ME_ONLY_EMPHASIZE) ~= C.ME_ONLY_EMPHASIZE
-					self:SendMessage("BigWigs_Message", self, key, format(L.other, msg, list), color, texture, isEmphasized)
+					self:SendMessage("BigWigs_Message", self, key, format(L.you, msg), "blue", texture, isEmphasized)
 				end
-				playerTable.prevPlayersInTable = playersInTable
 			end
-		end
-
-		--- Display a target message of multiple players using a table.
-		-- @param key the option key
-		-- @string color the message color category
-		-- @param playerTable a table containing the list of players
-		-- @number playerCount the max amount of players you expect to be included, message will instantly print when this max is reached
-		-- @param[opt] text the message text (if nil, key is used)
-		-- @param[opt] icon the message icon (spell id or texture name, key is used if nil)
-		-- @number[opt] customTime how long to wait to reach the max players in the table. If the max is not reached, it will print after this value (0.3s is used if nil)
-		function boss:TargetsMessage(key, color, playerTable, playerCount, text, icon, customTime)
-			local playersInTable = #playerTable
-			if band(self.db.profile[key], C.ME_ONLY) == C.ME_ONLY then -- We allow ME_ONLY even if MESSAGE off
-				if playerTable[playersInTable] == myName and checkFlag(self, key, C.ME_ONLY) then -- Use checkFlag for the role check
-					local isEmphasized = band(self.db.profile[key], C.EMPHASIZE) == C.EMPHASIZE or band(self.db.profile[key], C.ME_ONLY_EMPHASIZE) == C.ME_ONLY_EMPHASIZE
-					local textType = type(text)
-					local msg = textType == "string" and text or spells[text or key]
-					local texture = icon ~= false and icons[icon or key]
-					local marker = playerTable[myName]
-					if marker then
-						self:SendMessage("BigWigs_Message", self, key, format(L.you_icon, msg, marker), "blue", texture, isEmphasized)
-					else
-						self:SendMessage("BigWigs_Message", self, key, format(L.you, msg), "blue", texture, isEmphasized)
-					end
+		elseif checkFlag(self, key, C.MESSAGE) then
+			if playerTable[playersInTable] == myName and band(self.db.profile[key], C.ME_ONLY_EMPHASIZE) == C.ME_ONLY_EMPHASIZE then
+				local textType = type(text)
+				local msg = textType == "string" and text or spells[text or key]
+				local texture = icon ~= false and icons[icon or key]
+				local marker = playerTable[myName]
+				if marker then
+					self:SendMessage("BigWigs_Message", self, key, format(L.you_icon, msg, marker), "blue", texture, true)
+				else
+					self:SendMessage("BigWigs_Message", self, key, format(L.you, msg), "blue", texture, true)
 				end
-			elseif checkFlag(self, key, C.MESSAGE) then
-				if playerTable[playersInTable] == myName and band(self.db.profile[key], C.ME_ONLY_EMPHASIZE) == C.ME_ONLY_EMPHASIZE then
-					local textType = type(text)
-					local msg = textType == "string" and text or spells[text or key]
-					local texture = icon ~= false and icons[icon or key]
-					local marker = playerTable[myName]
-					if marker then
-						self:SendMessage("BigWigs_Message", self, key, format(L.you_icon, msg, marker), "blue", texture, true)
-					else
-						self:SendMessage("BigWigs_Message", self, key, format(L.you, msg), "blue", texture, true)
-					end
-				end
-				local playersAddedSinceLastPrint = playersInTable - (playerTable.prevPlayersInTable or 0)
-				if playersAddedSinceLastPrint == playerCount then
+			end
+			local playersAddedSinceLastPrint = playersInTable - (playerTable.prevPlayersInTable or 0)
+			if playersAddedSinceLastPrint == playerCount then
+				printTargets(self, key, playerTable, color, text, icon)
+			elseif playersAddedSinceLastPrint == 1 then
+				SimpleTimer(customTime or 0.3, function()
 					printTargets(self, key, playerTable, color, text, icon)
-				elseif playersAddedSinceLastPrint == 1 then
-					Timer(customTime or 0.3, function()
-						printTargets(self, key, playerTable, color, text, icon)
-					end)
-				end
+				end)
 			end
 		end
 	end
+end
 
-	--- Display a target message of a single player.
-	-- @param key the option key
-	-- @string color the message color category
-	-- @string player the player name
-	-- @param[opt] text the message text (if nil, key is used)
-	-- @param[opt] icon the message icon (spell id or texture name, key is used if nil)
-	function boss:TargetMessage(key, color, player, text, icon)
-		local textType = type(text)
-		local msg = textType == "string" and text or spells[text or key]
-		local texture = icon ~= false and icons[icon or key]
-
-		if not player then
-			if checkFlag(self, key, C.MESSAGE) then
-				local isEmphasized = band(self.db.profile[key], C.EMPHASIZE) == C.EMPHASIZE
-				self:SendMessage("BigWigs_Message", self, key, format(L.other, msg, "???"), color, texture, isEmphasized)
-			end
-		elseif player == myName then
-			if checkFlag(self, key, C.MESSAGE) or checkFlag(self, key, C.ME_ONLY) then
-				local isEmphasized = band(self.db.profile[key], C.EMPHASIZE) == C.EMPHASIZE or band(self.db.profile[key], C.ME_ONLY_EMPHASIZE) == C.ME_ONLY_EMPHASIZE
-				self:SendMessage("BigWigs_Message", self, key, format(L.you, msg), "blue", texture, isEmphasized)
-			end
-		elseif checkFlag(self, key, C.MESSAGE) and not checkFlag(self, key, C.ME_ONLY) then
-			-- Don't Emphasize if it's on other people when both EMPHASIZE and ME_ONLY_EMPHASIZE are enabled.
-			local isEmphasized = band(self.db.profile[key], C.EMPHASIZE) == C.EMPHASIZE and band(self.db.profile[key], C.ME_ONLY_EMPHASIZE) ~= C.ME_ONLY_EMPHASIZE
-			self:SendMessage("BigWigs_Message", self, key, format(L.other, msg, self:ColorName(player)), color, texture, isEmphasized)
+--- Display a target message of a single player.
+-- @param key the option key
+-- @string color the message color category
+-- @string player the player name
+-- @param[opt] text the message text (if nil, key is used)
+-- @param[opt] icon the message icon (spell id or texture name, key is used if nil)
+function boss:TargetMessage(key, color, player, text, icon)
+	local textType = type(text)
+	local msg = textType == "string" and text or spells[text or key]
+	local texture = icon ~= false and icons[icon or key]
+	if not player then
+		if checkFlag(self, key, C.MESSAGE) then
+			local isEmphasized = band(self.db.profile[key], C.EMPHASIZE) == C.EMPHASIZE
+			self:SendMessage("BigWigs_Message", self, key, format(L.other, msg, "???"), color, texture, isEmphasized)
 		end
+	elseif player == myName then
+		if checkFlag(self, key, C.MESSAGE) or checkFlag(self, key, C.ME_ONLY) then
+			local isEmphasized = band(self.db.profile[key], C.EMPHASIZE) == C.EMPHASIZE or band(self.db.profile[key], C.ME_ONLY_EMPHASIZE) == C.ME_ONLY_EMPHASIZE
+			self:SendMessage("BigWigs_Message", self, key, format(L.you, msg), "blue", texture, isEmphasized)
+		end
+	elseif checkFlag(self, key, C.MESSAGE) and not checkFlag(self, key, C.ME_ONLY) then
+		-- Don't Emphasize if it's on other people when both EMPHASIZE and ME_ONLY_EMPHASIZE are enabled.
+		local isEmphasized = band(self.db.profile[key], C.EMPHASIZE) == C.EMPHASIZE and band(self.db.profile[key], C.ME_ONLY_EMPHASIZE) ~= C.ME_ONLY_EMPHASIZE
+		self:SendMessage("BigWigs_Message", self, key, format(L.other, msg, self:ColorName(player)), color, texture, isEmphasized)
 	end
 end
 
@@ -3028,14 +3043,15 @@ do
 		end
 		local textType = type(text)
 		local msg = textType == "string" and text or spells[text or key]
-		if checkFlag(self, key, C.BAR) then
+		local isBarEnabled = checkFlag(self, key, C.BAR)
+		if isBarEnabled then
 			self:SendMessage("BigWigs_StartBar", self, key, msg, time, icons[icon or textType == "number" and text or key], false, maxTime)
 		end
 		if checkFlag(self, key, C.COUNTDOWN) then
 			self:SendMessage("BigWigs_StartCountdown", self, key, msg, time)
 		end
 		local counter = msg:match(countString)
-		self:SendMessage("BigWigs_Timer", self, key, time, maxTime, msg, counter, icons[icon or textType == "number" and text or key])
+		self:SendMessage("BigWigs_Timer", self, key, time, maxTime, msg, counter and tonumber(counter) or 0, icons[icon or textType == "number" and text or key], false, isBarEnabled)
 	end
 
 	--- Display a cooldown bar.
@@ -3075,6 +3091,7 @@ do
 		end
 		local textType = type(text)
 		local msg = textType == "string" and text or spells[text or key]
+		local isBarEnabled = checkFlag(self, key, C.BAR)
 		if checkFlag(self, key, C.BAR) then
 			self:SendMessage("BigWigs_StartBar", self, key, msg, time, icons[icon or textType == "number" and text or key], true, maxTime)
 		end
@@ -3082,7 +3099,7 @@ do
 			self:SendMessage("BigWigs_StartCountdown", self, key, msg, time)
 		end
 		local counter = msg:match(countString)
-		self:SendMessage("BigWigs_CooldownTimer", self, key, time, maxTime, msg, counter, icons[icon or textType == "number" and text or key])
+		self:SendMessage("BigWigs_Timer", self, key, time, maxTime, msg, counter and tonumber(counter) or 0, icons[icon or textType == "number" and text or key], true, isBarEnabled)
 	end
 
 	--- Display a target bar.
@@ -3105,28 +3122,28 @@ do
 			time = length
 		end
 		local textType = type(text)
-		if not player and checkFlag(self, key, C.BAR) then
+		local isBarEnabled = checkFlag(self, key, C.BAR)
+		if not player and isBarEnabled then
 			self:SendMessage("BigWigs_StartBar", self, key, format(L.other, textType == "string" and text or spells[text or key], "???"), time, icons[icon or textType == "number" and text or key], false, maxTime)
 			return
 		end
 		if player == myName then
 			local msg = format(L.you, textType == "string" and text or spells[text or key])
-			if checkFlag(self, key, C.BAR) then
+			if isBarEnabled then
 				self:SendMessage("BigWigs_StartBar", self, key, msg, time, icons[icon or textType == "number" and text or key], false, maxTime)
 			end
 			if checkFlag(self, key, C.COUNTDOWN) then
 				self:SendMessage("BigWigs_StartCountdown", self, key, msg, time)
 			end
 			local counter = msg:match(countString)
-			self:SendMessage("BigWigs_TargetTimer", self, key, time, maxTime, msg, counter, icons[icon or textType == "number" and text or key], player)
+			self:SendMessage("BigWigs_TargetTimer", self, key, time, maxTime, msg, counter and tonumber(counter) or 0, icons[icon or textType == "number" and text or key], player, isBarEnabled)
 		else
-			local trimPlayer = gsub(player, "%-.+", "*")
-			local msg = format(L.other, textType == "string" and text or spells[text or key], trimPlayer)
-			if not checkFlag(self, key, C.ME_ONLY) and checkFlag(self, key, C.BAR) then
+			local msg = format(L.other, textType == "string" and text or spells[text or key], self:ColorName(player, nil, true))
+			if not checkFlag(self, key, C.ME_ONLY) and isBarEnabled then
 				self:SendMessage("BigWigs_StartBar", self, key, msg, time, icons[icon or textType == "number" and text or key], false, maxTime)
 			end
 			local counter = msg:match(countString)
-			self:SendMessage("BigWigs_TargetTimer", self, key, time, maxTime, msg, counter, icons[icon or textType == "number" and text or key], player)
+			self:SendMessage("BigWigs_TargetTimer", self, key, time, maxTime, msg, counter and tonumber(counter) or 0, icons[icon or textType == "number" and text or key], player, isBarEnabled)
 		end
 	end
 
@@ -3149,15 +3166,17 @@ do
 			time = length
 		end
 		local textType = type(text)
-		local msg = format(L.cast, textType == "string" and text or spells[text or key])
-		if checkFlag(self, key, C.CASTBAR) then
+		local rawText = textType == "string" and text or spells[text or key]
+		local msg = format(L.cast, rawText)
+		local isBarEnabled = checkFlag(self, key, C.CASTBAR)
+		if isBarEnabled then
 			self:SendMessage("BigWigs_StartBar", self, key, msg, time, icons[icon or textType == "number" and text or key], false, maxTime)
 		end
 		if checkFlag(self, key, C.CASTBAR_COUNTDOWN) then
 			self:SendMessage("BigWigs_StartCountdown", self, key, msg, time)
 		end
 		local counter = msg:match(countString)
-		self:SendMessage("BigWigs_CastTimer", self, key, time, maxTime, msg, counter, icons[icon or textType == "number" and text or key])
+		self:SendMessage("BigWigs_CastTimer", self, key, time, maxTime, msg, counter and tonumber(counter) or 0, icons[icon or textType == "number" and text or key], rawText, isBarEnabled)
 	end
 end
 
@@ -3172,7 +3191,7 @@ function boss:StopBar(text, player)
 			self:SendMessage("BigWigs_StopBar", self, msg)
 			self:SendMessage("BigWigs_StopCountdown", self, msg)
 		else
-			self:SendMessage("BigWigs_StopBar", self, format(L.other, msg, gsub(player, "%-.+", "*")))
+			self:SendMessage("BigWigs_StopBar", self, format(L.other, msg, self:ColorName(player, nil, true)))
 		end
 	else
 		self:SendMessage("BigWigs_StopBar", self, msg)
@@ -3458,7 +3477,7 @@ do
 		end
 		local startOffset = start + 0.2
 		for i = 1.2, startOffset do
-			Timer(seconds-i, printTime)
+			SimpleTimer(seconds-i, printTime)
 		end
 		self.sayCountdowns[key] = tbl
 	end
@@ -3482,7 +3501,7 @@ do
 		end
 		local startOffset = start + 0.2
 		for i = 1.2, startOffset do
-			Timer(seconds-i, printTime)
+			SimpleTimer(seconds-i, printTime)
 		end
 		self.sayCountdowns[key] = tbl
 	end
@@ -3497,7 +3516,51 @@ end
 -- @param func callback function to trigger after the delay
 -- @number delay how long to wait until triggering the function
 function boss:SimpleTimer(func, delay)
-	Timer(delay, func)
+	SimpleTimer(delay, func)
+end
+
+do
+	local Timer = BigWigsLoader.CTimerNewTimer
+	function boss:ScheduleTimer(func, delay, one, two, three, four, five, six, seven, eight)
+		if type(func) == "function" then
+			local timerId = Timer(delay, function() func(one, two, three, four, five, six, seven, eight) end)
+			scheduledEvents[self][timerId] = true
+			return timerId
+		else
+			local timerId = Timer(delay, function() self[func](self, one, two, three, four, five, six, seven, eight) end)
+			scheduledEvents[self][timerId] = true
+			return timerId
+		end
+	end
+end
+
+do
+	local Ticker = BigWigsLoader.CTimerNewTicker
+	function boss:ScheduleRepeatingTimer(func, delay, one, two, three, four, five, six, seven, eight)
+		if type(func) == "function" then
+			local timerId = Ticker(delay, function() func(one, two, three, four, five, six, seven, eight) end)
+			scheduledEvents[self][timerId] = true
+			return timerId
+		else
+			local timerId = Ticker(delay, function() self[func](self, one, two, three, four, five, six, seven, eight) end)
+			scheduledEvents[self][timerId] = true
+			return timerId
+		end
+	end
+end
+
+function boss:CancelTimer(timerId)
+	if scheduledEvents[self] and scheduledEvents[self][timerId] then
+		timerId:Cancel()
+		scheduledEvents[self][timerId] = nil
+	end
+end
+
+function boss:CancelAllTimers()
+	for k in next, scheduledEvents[self] do
+		k:Cancel()
+	end
+	scheduledEvents[self] = {}
 end
 
 --- Flash the screen edges.
@@ -3584,7 +3647,7 @@ do
 				else
 					msg = "B^".. msg
 				end
-				local _, result = SendAddonMessage("BigWigs", msg, IsInGroup(2) and "INSTANCE_CHAT" or "RAID")
+				local result = SendAddonMessage("BigWigs", msg, IsInGroup(2) and "INSTANCE_CHAT" or "RAID")
 				if type(result) == "number" and result ~= 0 then
 					local errorMsg = format("Failed to send boss comm %q. Error code: %d", msg, result)
 					core:Error(errorMsg)

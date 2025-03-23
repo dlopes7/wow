@@ -11,10 +11,12 @@ if L then
 	L.arathi_knight = "Chevalier arathi"
 	L.arathi_footman = "Fantassin arathi"
 	L.fervent_sharpshooter = "Tireuse de précision fervente"
+	L.war_lynx = "Lynx de guerre"
 	L.devout_priest = "Prêtre fervent"
 	L.fanatical_conjuror = "Conjuratrice fanatique"
 	L.lightspawn = "Rejeton de Lumière"
 	L.ardent_paladin = "Paladin ardent"
+	L.zealous_templar = "Templière zélée"
 	L.risen_mage = "Mage ressucité"
 	L.sir_braunpyke = "Baron Braunpique"
 
@@ -24,5 +26,5 @@ end
 
 L = BigWigs:NewBossLocale("Baron Braunpyke", "frFR")
 if L then
-	--L.charges = "%d charges"
+	L.charges = "%d charges"
 end

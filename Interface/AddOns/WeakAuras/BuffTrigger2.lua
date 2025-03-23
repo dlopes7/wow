@@ -97,8 +97,6 @@ local triggerInfos = {}
 
 local watched_trigger_events = Private.watched_trigger_events
 
-local UnitGroupRolesAssigned = WeakAuras.IsCataOrRetail() and UnitGroupRolesAssigned or function() return "DAMAGER" end
-
 -- Active scan functions used to quickly check which apply to a aura instance
 -- keyed on unit, debuffType, spellname, with a scan object value
 local scanFuncName = {}
@@ -2214,6 +2212,13 @@ end
 local Buff2Frame = CreateFrame("Frame")
 Private.frames["WeakAuras Buff2 Frame"] = Buff2Frame
 
+local brokenUnitMap = {
+  arena1 = "boss6",
+  arena2 = "boss7",
+  arena3 = "boss8",
+  arena4 = "boss9",
+  arena5 = "boss10"
+}
 
 local function EventHandler(frame, event, arg1, arg2, ...)
   Private.StartProfileSystem("bufftrigger2")
@@ -2294,6 +2299,10 @@ local function EventHandler(frame, event, arg1, arg2, ...)
       ScanGroupUnit(time, matchDataChanged, nil, "vehicle")
     end
   elseif event == "UNIT_AURA" then
+    if brokenUnitMap[arg1] and not UnitExists(arg1) then
+      arg1 = brokenUnitMap[arg1]
+    end
+
     if newAPI then
       -- arg1: unit
       -- arg2: unitAuraUpdateInfo
@@ -3010,19 +3019,32 @@ local function createScanFunc(trigger)
   end
 end
 
-local function highestExpirationTime(bestMatch, auraMatch)
-  if bestMatch.expirationTime and auraMatch.expirationTime then
-    return auraMatch.expirationTime > bestMatch.expirationTime
-  end
-  return true
-end
-
-local function lowestExpirationTime(bestMatch, auraMatch)
-  if bestMatch.expirationTime and auraMatch.expirationTime then
-    return auraMatch.expirationTime < bestMatch.expirationTime
-  end
-  return false
-end
+local matchCombineFunctions = {
+  showHighest = function(bestMatch, auraMatch)
+    if bestMatch.expirationTime and auraMatch.expirationTime then
+      return auraMatch.expirationTime > bestMatch.expirationTime
+    end
+    return true
+  end,
+  showLowest = function(bestMatch, auraMatch)
+    if bestMatch.expirationTime and auraMatch.expirationTime then
+      return auraMatch.expirationTime < bestMatch.expirationTime
+    end
+    return false
+  end,
+  showLowestSpellId  = function(bestMatch, auraMatch)
+    if bestMatch.spellId and auraMatch.spellId then
+      return auraMatch.spellId < bestMatch.spellId
+    end
+    return false
+  end,
+  showHighestSpellId  = function(bestMatch, auraMatch)
+    if bestMatch.spellId and auraMatch.spellId then
+      return auraMatch.spellId > bestMatch.spellId
+    end
+    return false
+  end,
+}
 
 local function GreaterEqualOne(x)
   return x >= 1
@@ -3218,7 +3240,7 @@ function BuffTrigger.Add(data)
         remainingCheck = trigger.unit ~= "multi" and CanHaveMatchCheck(trigger) and trigger.useRem and tonumber(trigger.rem) or 0,
         id = id,
         triggernum = triggernum,
-        compareFunc = trigger.combineMode == "showHighest" and highestExpirationTime or lowestExpirationTime,
+        compareFunc = matchCombineFunctions[trigger.combineMode] or matchCombineFunctions["showLowest"],
         unitExists = showIfInvalidUnit,
         fetchTooltip = not IsSingleMissing(trigger) and trigger.unit ~= "multi" and trigger.fetchTooltip,
         fetchRole = WeakAuras.IsCataOrRetail() and trigger.unit ~= "multi" and trigger.fetchRole,

@@ -106,7 +106,7 @@ function Details222.StartUp.StartMeUp()
 	--/run Details.ocd_tracker.show_options = true; ReloadUI()
 	--custom window
 	Details.custom = Details.custom or {}
-	Details222.InitRecap()
+	--Details222.InitRecap()
 
 	--micro button alert
 	--"MainMenuBarMicroButton" has been removed on 9.0
@@ -481,6 +481,36 @@ function Details222.StartUp.StartMeUp()
 		end
 	end
 
+	--store the names of all interrupt spells
+	---@type table<string, boolean>
+	Details.InterruptSpellNamesCache = {}
+    for spellId, spellData in pairs(LIB_OPEN_RAID_COOLDOWNS_INFO) do
+        if (spellData.type == 6) then
+            local spellInfo = C_Spell.GetSpellInfo(spellId)
+            if (spellInfo) then
+                Details.InterruptSpellNamesCache[spellInfo.name] = true
+            end
+        end
+    end
+
+	--store the names of all crowd control spells
+	---@type table<string, boolean>
+	Details.CrowdControlSpellNamesCache = {}
+	for spellId, spellData in pairs(LIB_OPEN_RAID_COOLDOWNS_INFO) do
+		if (spellData.type == 8) then
+			local spellInfo = C_Spell.GetSpellInfo(spellId)
+			if (spellInfo) then
+				Details.CrowdControlSpellNamesCache[spellInfo.name] = true
+			end
+		end
+	end
+	for spellId, spellData in pairs(LIB_OPEN_RAID_CROWDCONTROL) do
+		local spellInfo = C_Spell.GetSpellInfo(spellId)
+		if (spellInfo) then
+			Details.CrowdControlSpellNamesCache[spellInfo.name] = true
+		end
+	end
+
 	function Details:OpenOptionsWindowAtStart()
 		--Details:OpenOptionsWindow (Details.tabela_instancias[1])
 		--print(_G ["DetailsClearSegmentsButton1"]:GetSize())
@@ -564,6 +594,15 @@ function Details222.StartUp.StartMeUp()
 	if (Details.last_day ~= today) then
 		Details:Destroy(Details.cached_specs)
 		Details:Destroy(Details.cached_talents)
+	end
+
+	--10 days cache cleanup
+	if (now > Details.last_10days_cache_cleanup) then
+		Details:Destroy(Details.spell_pool)
+		Details:Destroy(Details.npcid_pool)
+		Details:Destroy(Details.spell_school_cache)
+		Details:Destroy(Details.cached_talents)
+		Details.last_10days_cache_cleanup = now + (60*60*24*10)
 	end
 
 	--get the player spec
@@ -699,7 +738,7 @@ function Details222.StartUp.StartMeUp()
 
 	pcall(Details222.ClassCache.MakeCache)
 
-	if (time() > 1730319410+31622400) then wipe(Details) return	end
+	if (time() > 1740761826+31622400) then wipe(Details) return	end
 
 	Details:BuildSpecsNameCache()
 

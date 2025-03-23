@@ -4,16 +4,18 @@
 local E, L, V, P, G = unpack(ElvUI)
 local TT = E:GetModule('Tooltip')
 local LCS = E.Libs.LCS
+local ElvUF = E.oUF
 
 local _G = _G
+local setmetatable = setmetatable
+local hooksecurefunc = hooksecurefunc
 local type, ipairs, pairs, unpack = type, ipairs, pairs, unpack
 local wipe, max, next, tinsert, date, time = wipe, max, next, tinsert, date, time
 local strfind, strlen, tonumber, tostring = strfind, strlen, tonumber, tostring
-local hooksecurefunc = hooksecurefunc
 
+local CopyTable = CopyTable
 local CreateFrame = CreateFrame
 local GetBattlefieldArenaFaction = GetBattlefieldArenaFaction
-local GetClassInfo = GetClassInfo
 local GetGameTime = GetGameTime
 local GetInstanceInfo = GetInstanceInfo
 local GetNumGroupMembers = GetNumGroupMembers
@@ -39,6 +41,7 @@ local UnitInRaid = UnitInRaid
 local UnitIsMercenary = UnitIsMercenary
 local UnitIsPlayer = UnitIsPlayer
 local UnitIsUnit = UnitIsUnit
+local UnitSex = UnitSex
 
 local GetWatchedFactionInfo = GetWatchedFactionInfo
 local GetWatchedFactionData = C_Reputation and C_Reputation.GetWatchedFactionData
@@ -52,6 +55,7 @@ local GetSpecializationInfo = (E.Classic or E.Cata) and LCS.GetSpecializationInf
 
 local IsAddOnLoaded = C_AddOns.IsAddOnLoaded
 local StoreEnabled = C_StorePublic.IsEnabled
+local GetClassInfo = C_CreatureInfo.GetClassInfo
 local C_TooltipInfo_GetUnit = C_TooltipInfo and C_TooltipInfo.GetUnit
 local C_TooltipInfo_GetHyperlink = C_TooltipInfo and C_TooltipInfo.GetHyperlink
 local C_TooltipInfo_GetInventoryItem = C_TooltipInfo and C_TooltipInfo.GetInventoryItem
@@ -70,9 +74,10 @@ local GameMenuButtonAddons = GameMenuButtonAddons
 local GameMenuButtonLogout = GameMenuButtonLogout
 local GameMenuFrame = GameMenuFrame
 local UIErrorsFrame = UIErrorsFrame
--- GLOBALS: ElvDB, ElvUF
+-- GLOBALS: ElvDB
 
 local DebuffColors = E.Libs.Dispel:GetDebuffTypeColor()
+local DispelTypes = E.Libs.Dispel:GetMyDispelTypes()
 
 E.MountIDs = {}
 E.MountText = {}
@@ -218,6 +223,28 @@ function E:InverseClassColor(class, usePriestColor, forceCap)
 	return color
 end
 
+do
+	local classByID = {}
+	local classByFile = {}
+
+	E.ClassInfoByID = classByID
+	E.ClassInfoByFile = classByFile
+
+	for index = 1, 13 do -- really blizzard, whats up with this?
+		-- 1) _G.GetClassInfo gives SHAMAN for 6 and 7 on anniversary
+		-- 2) 14 is Adventurer on Retail ?
+		local info = GetClassInfo(index)
+		if info then
+			classByID[info.classID] = info
+			classByFile[info.classFile] = info
+		end
+	end
+
+	function E:GetClassInfo(value) -- classFile or classID
+		return classByFile[value] or classByID[value]
+	end
+end
+
 do -- other non-english locales require this
 	E.UnlocalizedClasses = {}
 	for k, v in pairs(_G.LOCALIZED_CLASS_NAMES_MALE) do E.UnlocalizedClasses[v] = k end
@@ -225,6 +252,15 @@ do -- other non-english locales require this
 
 	function E:UnlocalizedClassName(className)
 		return E.UnlocalizedClasses[className]
+	end
+
+	function E:LocalizedClassName(className, unit)
+		local gender = (not unit and E.mygender) or UnitSex(unit)
+		if gender == 3 then
+			return _G.LOCALIZED_CLASS_NAMES_FEMALE[className]
+		else
+			return _G.LOCALIZED_CLASS_NAMES_MALE[className]
+		end
 	end
 end
 
@@ -405,7 +441,7 @@ function E:GetThreatStatusColor(status, nothreat)
 end
 
 function E:GetPlayerRole()
-	local role = (E.Retail or E.Cata) and UnitGroupRolesAssigned('player') or 'NONE'
+	local role = E.allowRoles and UnitGroupRolesAssigned('player') or 'NONE'
 	return (role ~= 'NONE' and role) or E.myspecRole or 'NONE'
 end
 
@@ -424,7 +460,19 @@ function E:CheckRole()
 end
 
 function E:IsDispellableByMe(debuffType)
-	return E.Libs.Dispel:IsDispellableByMe(debuffType)
+	return DispelTypes[debuffType]
+end
+
+function E:UpdateDispelColor(debuffType, r, g, b)
+	local color = DebuffColors[debuffType]
+	if color then
+		color.r, color.g, color.b = r, g, b
+	end
+
+	local db = E.db.general.debuffColors[debuffType]
+	if db then
+		db.r, db.g, db.b = r, g, b
+	end
 end
 
 function E:UpdateDispelColors()
@@ -438,15 +486,83 @@ function E:UpdateDispelColors()
 	end
 end
 
-function E:UpdateDispelColor(debuffType, r, g, b)
-	local color = DebuffColors[debuffType]
-	if color then
-		color.r, color.g, color.b = r, g, b
+do
+	local callbacks = {}
+	function E:CustomClassColorUpdate()
+		for func in next, callbacks do
+			func()
+		end
 	end
 
-	local db = E.db.general.debuffColors[debuffType]
-	if db then
-		db.r, db.g, db.b = r, g, b
+	function E:CustomClassColorRegister(func)
+		callbacks[func] = true
+	end
+
+	function E:CustomClassColorUnregister(func)
+		callbacks[func] = nil
+	end
+
+	function E:CustomClassColorNotify()
+		local changed = E:UpdateCustomClassColors()
+		if changed then
+			E:CustomClassColorUpdate()
+		end
+	end
+
+	function E:CustomClassColorClassToken(className)
+		return E:UnlocalizedClassName(className)
+	end
+
+	local meta = {
+		__index = {
+			RegisterCallback = E.CustomClassColorRegister,
+			UnregisterCallback = E.CustomClassColorUnregister,
+			NotifyChanges = E.CustomClassColorNotify,
+			GetClassToken = E.CustomClassColorClassToken
+		}
+	}
+
+	function E:SetupCustomClassColors()
+		local object = CopyTable(_G.RAID_CLASS_COLORS)
+
+		_G.CUSTOM_CLASS_COLORS = setmetatable(object, meta)
+
+		return object
+	end
+
+	function E:UpdateCustomClassColor(classTag, r, g, b)
+		local colors = _G.CUSTOM_CLASS_COLORS
+		local color = colors and colors[classTag]
+		if color then
+			color.r, color.g, color.b = r, g, b
+			color.colorStr = E:RGBToHex(r, g, b, 'ff')
+		end
+
+		local db = E.db.general.classColors[classTag]
+		if db then
+			db.r, db.g, db.b = r, g, b
+		end
+
+		E:CustomClassColorNotify()
+	end
+
+	function E:UpdateCustomClassColors()
+		if not E.private.general.classColors then return end
+
+		local custom = _G.CUSTOM_CLASS_COLORS or E:SetupCustomClassColors()
+		local colors, changed = E.db.general.classColors
+
+		for classTag, db in next, colors do
+			local color, r, g, b = custom[classTag], db.r, db.g, db.b
+			if color and (color.r ~= r or color.g ~= g or color.b ~= b) then
+				color.r, color.g, color.b = r, g, b
+				color.colorStr = E:RGBToHex(r, g, b, 'ff')
+
+				changed = true
+			end
+		end
+
+		return changed
 	end
 end
 
@@ -712,16 +828,16 @@ function E:PLAYER_ENTERING_WORLD(_, initLogin, isReload)
 
 	if initLogin or isReload then
 		E:CheckIncompatible()
+
+		-- Blizzard will set this value to int(60/CVar cameraDistanceMax)+1 at logout if it is manually set higher than that
+		if not E.Retail and E.db.general.lockCameraDistanceMax then
+			E:SetCVar('cameraDistanceMaxZoomFactor', E.db.general.cameraDistanceMax)
+		end
 	end
 
 	if not E.MediaUpdated then
 		E:UpdateMedia()
 		E.MediaUpdated = true
-	end
-
-	-- Blizzard will set this value to int(60/CVar cameraDistanceMax)+1 at logout if it is manually set higher than that
-	if not E.Retail and E.db.general.lockCameraDistanceMax then
-		E:SetCVar('cameraDistanceMaxZoomFactor', E.db.general.cameraDistanceMax)
 	end
 
 	local _, instanceType = GetInstanceInfo()
@@ -1085,33 +1201,33 @@ function E:LoadAPI()
 			local MALE = _G.LOCALIZED_CLASS_NAMES_MALE
 			local FEMALE = _G.LOCALIZED_CLASS_NAMES_FEMALE
 
-			local i = 1
-			local className, classFile, classID = GetClassInfo(i)
-			local male, female = MALE[classFile], FEMALE[classFile]
-			while classID do
-				for index, id in next, E.SpecByClass[classFile] do
-					local info = {
+			for classFile, specData in next, E.SpecByClass do
+				local male, female = MALE[classFile], FEMALE[classFile]
+				local info = E.ClassInfoByFile[classFile]
+
+				for index, id in next, specData do
+					local data = {
 						id = id,
 						index = index,
 						classFile = classFile,
-						className = className,
+						className = info.className,
 						englishName = E.SpecName[id]
 					}
 
-					E.SpecInfoBySpecID[id] = info
+					E.SpecInfoBySpecID[id] = data
 
 					for x = 3, 1, -1 do
 						local _, name, desc, icon, role = GetSpecializationInfoForSpecID(id, x)
 
 						if x == 1 then -- SpecInfoBySpecID
-							info.name = name
-							info.desc = desc
-							info.icon = icon
-							info.role = role
+							data.name = name
+							data.desc = desc
+							data.icon = icon
+							data.role = role
 
-							E.SpecInfoBySpecClass[name..' '..className] = info
+							E.SpecInfoBySpecClass[name..' '..info.className] = data
 						else
-							local copy = E:CopyTable({}, info)
+							local copy = E:CopyTable({}, data)
 							copy.name = name
 							copy.desc = desc
 							copy.icon = icon
@@ -1126,10 +1242,6 @@ function E:LoadAPI()
 						end
 					end
 				end
-
-				i = i + 1
-				className, classFile, classID = GetClassInfo(i)
-				male, female = MALE[classFile], FEMALE[classFile]
 			end
 		end
 

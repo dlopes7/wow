@@ -13,6 +13,20 @@ if L then
 	L.particularly_bad_guy = "지독한 악당"
 end
 
+L = BigWigs:NewBossLocale("Goblin Delve Trash", "koKR")
+if L then
+	L.goblin_trash = "고블린"
+
+	L.bopper_bot = "퍽퍽이 봇"
+	L.aerial_support_bot = "공중 지원 로봇"
+	L.masked_freelancer = "얼굴을 가린 청부업자"
+	L.underpaid_brute = "박봉에 시달리는 투사"
+	L.drill_sergeant = "훈련교관"
+	L.punchy_thug = "주먹패 폭력배"
+	L.flinging_flicker = "반짝임"
+	L.bomb_bot = "폭발로봇"
+end
+
 L = BigWigs:NewBossLocale("Kobold Delve Trash", "koKR")
 if L then
 	L.kobold_trash = "코볼트"
@@ -32,6 +46,7 @@ if L then
 	L.wandering_gutter = "방랑하는 도살자"
 	L.crazed_predator = "광기 어린 포식자"
 	L.deepwater_makura = "깊은물 마쿠라"
+	L.kobyss_trickster = "코비스 요술쟁이"
 end
 
 L = BigWigs:NewBossLocale("Nerubian Delve Trash", "koKR")
@@ -58,6 +73,17 @@ if L then
 	L.shadow_elemental = "암흑의 정령"
 end
 
+L = BigWigs:NewBossLocale("Old God Delve Trash", "koKR")
+if L then
+	L.old_god_trash = "고대 신"
+
+	L.dark_walker = "검은 방랑자"
+	L.hideous_amalgamation = "흉측한 융합체"
+	L.coagulated_mass = "응고된 덩어리"
+	L.silent_slitherer = "조용한 비단뱀"
+	L.amalgamized_mass = "융합된 덩어리"
+end
+
 L = BigWigs:NewBossLocale("The Underkeep Trash", "koKR")
 if L then
 	L.ascended_webfriar = "승천한 그물수사"
@@ -66,23 +92,20 @@ if L then
 	L.web_marauder = "거미줄 약탈자"
 end
 
-L = BigWigs:NewBossLocale("Delve Rares", "koKR")
+L = BigWigs:NewBossLocale("Underpin Rares", "koKR")
 if L then
-	L.rares = "희귀"
+	L.rares = "대지주"
 
-	L.stolen_loader = "도둑맞은 운반로봇"
-	L.invasive_sporecap = "침략하는 포자갓"
-	L.reno_jackson = "리노 잭슨"
-	L.sir_finley_mrgglton = "핀리 므르글턴 경"
 	L.treasure_wraith = "보물의 망령"
-	L.venombite = "맹독니"
-	L.kasdru = "카스드루"
-	L.tala = "탈라"
-	L.velo = "벨로"
-	L.anubvir = "아눕비르"
-	L.zekvir = "제크비르"
-	L.zekvirs_influence = "제크비르의 영향력"
-	L.zekvir_random = "제크비르 (무작위 등장)"
-	L.zekvir_breach = "제크비르 침투"
-	L.zekvir_breach_desc = "구렁에서 제크비르가 생성될 때 알림을 표시합니다."
+	L.treasure_crab = "보물 게"
+	L.hovering_menace = "부유하는 위협"
+	L.malfunctioning_pummeler = "오작동하는 난타기"
+	L.underpins_adoring_fan = "대지주를 흠모하는 추종자"
+	L.underpins_well_connected_friend = "대지주의 마당발 친구"
+	L.underpins_explosive_ally = "대지주의 폭발적인 아군"
+	L.underpins_bodyguards_intern = "대지주의 경호원 수습생"
+	L.aggressively_lost_hobgoblin = "난폭한 길 잃은 밥통고블린"
+	L.the_underpin = "대지주 (무작위 생성)"
+
+	--L.underpin_retreat_trigger = "People always messin' around on my perfectly legal, deeded land!"
 end

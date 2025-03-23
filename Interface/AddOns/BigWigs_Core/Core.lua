@@ -12,11 +12,6 @@ do
 	pluginPrototype = tbl.pluginPrototype
 
 	core.name = "BigWigs"
-
-	local at = LibStub("AceTimer-3.0")
-	at:Embed(core)
-	at:Embed(bossPrototype)
-	at:Embed(pluginPrototype)
 end
 
 local adb = LibStub("AceDB-3.0")
@@ -33,14 +28,13 @@ local coreEnabled = false
 local GetBestMapForUnit = loader.GetBestMapForUnit
 local SendAddonMessage = loader.SendAddonMessage
 local GetInstanceInfo = loader.GetInstanceInfo
-local UnitName = loader.UnitName
 local UnitGUID = loader.UnitGUID
 local UnitIsDeadOrGhost = loader.UnitIsDeadOrGhost
 
 -- Upvalues
 local next, type, setmetatable = next, type, setmetatable
 
-local pName = UnitName("player")
+local pName = loader.UnitName("player")
 
 -------------------------------------------------------------------------------
 -- Event handling
@@ -98,9 +92,9 @@ end
 --
 
 if loader.isRetail or loader.isCata then
-	function mod:ENCOUNTER_START(_, id)
+	function mod:ENCOUNTER_START(_, encounterId)
 		for _, module in next, bosses do
-			if module:GetEncounterID() == id and not module:IsEnabled() then
+			if module:IsEncounterID(encounterId) and not module:IsEnabled() then
 				module:Enable()
 				if UnitGUID("boss1") then -- Only if _START fired after IEEU
 					module:Engage()
@@ -109,9 +103,9 @@ if loader.isRetail or loader.isCata then
 		end
 	end
 else
-	function mod:ENCOUNTER_START(_, id)
+	function mod:ENCOUNTER_START(_, encounterId)
 		for _, module in next, bosses do
-			if module:GetEncounterID() == id then
+			if module:IsEncounterID(encounterId) then
 				if not module:IsEnabled() then
 					module:Enable()
 				end
@@ -125,53 +119,56 @@ end
 -- Target monitoring
 --
 
-local enablezones, enablemobs = {}, {}
-local function enableBossModule(module, sync)
-	if not module:IsEnabled() then
-		module:Enable()
-		if sync and not module.worldBoss then
-			module:Sync("Enable", module.moduleName)
+local enablemobs = {}
+
+local function UpdateMouseoverUnit()
+	local guid = UnitGUID("mouseover")
+	if not guid or UnitIsCorpse("mouseover") or UnitIsDead("mouseover") then return end
+	local _, _, _, _, _, mobIdString = strsplit("-", guid)
+	local mobId = tonumber(mobIdString)
+	if mobId then
+		local moduleNameOrTable = enablemobs[mobId]
+		if type(moduleNameOrTable) == "table" then
+			for i = 1, #moduleNameOrTable do
+				local moduleName = moduleNameOrTable[i]
+				local module = bosses[moduleName]
+				if module and not module:IsEnabled() and (not module.VerifyEnable or module:VerifyEnable("mouseover", mobId, GetBestMapForUnit("player"))) then
+					module:Enable()
+					if not module.worldBoss then
+						module:Sync("Enable", module.moduleName)
+					end
+				end
+			end
+		elseif moduleNameOrTable then
+			local module = bosses[moduleNameOrTable]
+			if module and not module:IsEnabled() and (not module.VerifyEnable or module:VerifyEnable("mouseover", mobId, GetBestMapForUnit("player"))) then
+				module:Enable()
+				if not module.worldBoss then
+					module:Sync("Enable", module.moduleName)
+				end
+			end
 		end
 	end
 end
 
-local function shouldReallyEnable(unit, moduleName, mobId, sync)
-	local module = bosses[moduleName]
-	if not module or module:IsEnabled() then return end
-	if (not module.VerifyEnable or module:VerifyEnable(unit, mobId, GetBestMapForUnit("player"))) then
-		enableBossModule(module, sync)
-	end
-end
-
-local function targetSeen(unit, targetModule, mobId, sync)
-	if type(targetModule) == "string" then
-		shouldReallyEnable(unit, targetModule, mobId, sync)
-	else
-		for i = 1, #targetModule do
-			local module = targetModule[i]
-			shouldReallyEnable(unit, module, mobId, sync)
+local function UnitTargetChanged(_, mobId, unitTarget)
+	if not UnitIsDead(unitTarget) then
+		local moduleNameOrTable = enablemobs[mobId]
+		if type(moduleNameOrTable) == "table" then
+			for i = 1, #moduleNameOrTable do
+				local moduleName = moduleNameOrTable[i]
+				local module = bosses[moduleName]
+				if module and not module:IsEnabled() and (not module.VerifyEnable or module:VerifyEnable(unitTarget, mobId, GetBestMapForUnit("player"))) then
+					module:Enable()
+				end
+			end
+		elseif moduleNameOrTable then
+			local module = bosses[moduleNameOrTable]
+			if module and not module:IsEnabled() and (not module.VerifyEnable or module:VerifyEnable(unitTarget, mobId, GetBestMapForUnit("player"))) then
+				module:Enable()
+			end
 		end
 	end
-end
-
-local function targetCheck(unit, sync)
-	local name = UnitName(unit)
-	if not name or UnitIsCorpse(unit) or UnitIsDead(unit) or UnitPlayerControlled(unit) then return end
-	local guid = UnitGUID(unit)
-	if not guid then
-		core:Error(("Found unit '%s' with name '%s' but no guid, tell the BigWigs authors."):format(unit, name))
-		return
-	end
-	local _, _, _, _, _, mobId = strsplit("-", guid)
-	local id = tonumber(mobId)
-	if id and enablemobs[id] then
-		targetSeen(unit, enablemobs[id], id, sync)
-	end
-end
-
-local function updateMouseover() targetCheck("mouseover", true) end
-local function unitTargetChanged(_, target)
-	targetCheck(target .. "target")
 end
 
 function core:RegisterEnableMob(module, ...)
@@ -205,14 +202,14 @@ local function bossComm(_, msg, extra, sender)
 	if msg == "Enable" and extra then
 		local m = bosses[extra]
 		if m and not m:IsEnabled() and sender ~= pName then
-			enableBossModule(m)
+			m:Enable()
 		end
 	end
 end
 
 function mod:RAID_BOSS_WHISPER(_, msg) -- Purely for Transcriptor to assist in logging purposes.
 	if msg ~= "" and IsInGroup() then
-		local _, result = SendAddonMessage("Transcriptor", msg, IsInGroup(2) and "INSTANCE_CHAT" or "RAID")
+		local result = SendAddonMessage("Transcriptor", msg, IsInGroup(2) and "INSTANCE_CHAT" or "RAID")
 		if type(result) == "number" and result ~= 0 then
 			core:Error("Failed to send TS comm. Error code: ".. result)
 		end
@@ -292,9 +289,7 @@ do
 			core.UnregisterEvent(mod, "ENCOUNTER_START")
 			core.UnregisterEvent(mod, "RAID_BOSS_WHISPER")
 			core.UnregisterEvent(mod, "UPDATE_MOUSEOVER_UNIT")
-			core.UnregisterEvent(mod, "UNIT_TARGET")
-
-			core:CancelAllTimers()
+			loader.UnregisterMessage(mod, "BigWigs_UNIT_TARGET")
 
 			core:SendMessage("BigWigs_StopConfigureMode")
 			if BigWigsOptions then
@@ -329,15 +324,15 @@ do
 			--core:Enable() -- We rely on the 0 second delay from the loader to re-enable the core
 		end
 	end
-	function core:Enable(unit)
+	function core:Enable()
 		if not coreEnabled then
 			coreEnabled = true
 
 			loader.RegisterMessage(mod, "BigWigs_BossComm", bossComm)
 			core.RegisterEvent(mod, "ENCOUNTER_START")
 			core.RegisterEvent(mod, "RAID_BOSS_WHISPER")
-			core.RegisterEvent(mod, "UPDATE_MOUSEOVER_UNIT", updateMouseover)
-			core.RegisterEvent(mod, "UNIT_TARGET", unitTargetChanged)
+			core.RegisterEvent(mod, "UPDATE_MOUSEOVER_UNIT", UpdateMouseoverUnit)
+			loader.RegisterMessage(mod, "BigWigs_UNIT_TARGET", UnitTargetChanged)
 			core.RegisterEvent(mod, "PLAYER_LEAVING_WORLD", DisableCore) -- Simple disable when leaving instances
 			if C_EventUtils.IsEventValid("PLAYER_MAP_CHANGED") then
 				core.RegisterEvent(mod, "PLAYER_MAP_CHANGED", CheckIfLeavingDelve)
@@ -355,9 +350,6 @@ do
 			end
 
 			core:SendMessage("BigWigs_CoreEnabled")
-		end
-		if type(unit) == "string" then
-			targetCheck(unit) -- Mainly for the Loader to tell the core to enable a world boss after loading the world boss addon
 		end
 	end
 end
@@ -631,17 +623,6 @@ do
 		end
 
 		core:SendMessage("BigWigs_BossModuleRegistered", module.moduleName, module)
-
-		local id = module.instanceId or -(module.mapId)
-		if type(id) == "table" then
-			for i = 1, #id do
-				if not enablezones[id[i]] then
-					enablezones[id[i]] = true
-				end
-			end
-		elseif not enablezones[id] then
-			enablezones[id] = true
-		end
 	end
 
 	function core:RegisterPlugin(module)

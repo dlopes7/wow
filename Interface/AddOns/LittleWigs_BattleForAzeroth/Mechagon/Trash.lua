@@ -1,4 +1,3 @@
-local isElevenDotOne = select(4, GetBuildInfo()) >= 110100 -- XXX remove when 11.1 is live
 --------------------------------------------------------------------------------
 -- Module Declaration
 --
@@ -75,7 +74,6 @@ if L then
 	L.rocket_tonk = "Rocket Tonk"
 	L.waste_processing_unit = "Waste Processing Unit"
 	L.metal_gunk = "Metal Gunk"
-	L.living_waste = "Living Waste" -- XXX remove when 11.1 is live
 	L.junkyard_d0g = "Junkyard D.0.G."
 	L.mechagon_tinkerer = "Mechagon Tinkerer"
 	L.anti_personnel_squirrel = "Anti-Personnel Squirrel"
@@ -89,227 +87,114 @@ end
 -- Initialization
 --
 
-if isElevenDotOne then
-	function mod:GetOptions()
-		return {
-			------ Junkyard ------
-			-- Scrapbone Shaman
-			300436, -- Grasping Hex
-			{300514, "DISPEL"}, -- Stoneskin
-			-- Scrapbone Grinder
-			{300414, "DISPEL"}, -- Enrage
-			-- Scrapbone Bully
-			300424, -- Shockwave
-			-- Saurolisk Bonenipper
-			299474, -- Ripping Slash
-			-- Malfunctioning Scrapbot
-			300102, -- Exhaust
-			294884, -- Gyro-Scrap
-			300129, -- Self-Destruct Protocol
-			-- Heavy Scrapbot
-			300177, -- Exhaust
-			300159, -- Gyro-Scrap
-			300171, -- Repair Protocol
-			-- Pistonhead Blaster
-			299525, -- Scrap Grenade
-			-- Pistonhead Scrapper
-			{299438, "TANK_HEALER"}, -- Sledgehammer
-			-- Weaponized Crawler
-			{300188, "SAY", "NAMEPLATE"}, -- Scrap Cannon
-			{300207, "CASTBAR", "NAMEPLATE"}, -- Shock Coil
-			-- Slime Elemental
-			300764, -- Slimebolt
-			300777, -- Slimewave
-			-- Toxic Monstrosity
-			{300687, "CASTBAR", "NAMEPLATE"}, -- Consume
-			-- Toxic Lurker
-			{300650, "DISPEL"}, -- Suffocating Smog
-			-- Pistonhead Mechanic
-			{299588, "DISPEL"}, -- Overclock
-			300087, -- Repair
-			-- Scraphound
-			299475, -- B.O.R.K.
-			-- Mechagon Renormalizer
-			{284219, "SAY", "DISPEL"}, -- Shrink
-			-- Mechagon Cavalry
-			301667, -- Rapid Fire
-			301681, -- Charge
-			-- Mechagon Trooper
-			299502, -- Nanoslicer
-			-- Anodized Coilbearer
-			{303941, "DISPEL"}, -- Defensive Countermeasure
-			------ Workshop ------
-			-- Bomb Tonk
-			{301088, "NAMEPLATE"}, -- Detonate
-			-- Rocket Tonk
-			{294103, "NAMEPLATE"}, -- Rocket Barrage
-			-- Waste Processing Unit
-			{1215409, "NAMEPLATE"}, -- Mega Drill
-			{1215411, "TANK_HEALER", "NAMEPLATE"}, -- Puncture
-			-- Metal Gunk
-			{1215412, "HEALER", "NAMEPLATE"}, -- Corrosive Gunk
-			-- Junkyard D.0.G.
-			{1217819, "NAMEPLATE"}, -- Fiery Jaws
-			-- Mechagon Tinkerer
-			{293827, "OFF"}, -- Giga-Wallop
-			-- Anti-Personnel Squirrel
-			293861, -- Anti-Personnel Squirrel
-			-- Defense Bot Mk III
-			{294195, "DISPEL", "NAMEPLATE"}, -- Arcing Zap
-			{297133, "DISPEL"}, -- Defensive Countermeasure
-			{297128, "NAMEPLATE"}, -- Short Out
-			-- Blastatron X-80
-			{293986, "NAMEPLATE"}, -- Sonic Pulse
-			{295169, "NAMEPLATE"}, -- Capacitor Discharge
-			-- Mechagon Mechanic
-			{293729, "NAMEPLATE"}, -- Tune Up
-			{293930, "DISPEL", "NAMEPLATE"}, -- Overclock
-			-- Workshop Defender
-			{293670, "TANK_HEALER", "NAMEPLATE"}, -- Chainblade
-			{293683, "NAMEPLATE"}, -- Shield Generator
-		}, {
-			------ Junkyard ------
-			[300436] = L.scrapbone_shaman,
-			[300414] = L.scrapbone_grinder,
-			[300424] = L.scrapbone_bully,
-			[299474] = L.saurolisk_bonenipper,
-			[294884] = L.malfunctioning_scrapbot,
-			[300177] = L.heavy_scrapbot,
-			[299525] = L.pistonhead_blaster,
-			[299438] = L.pistonhead_scrapper,
-			[300764] = L.slime_elemental,
-			[300650] = L.toxic_lurker,
-			[299588] = L.pistonhead_mechanic,
-			[299475] = L.scraphound,
-			[284219] = L.mechagon_renormalizer,
-			[301667] = L.mechagon_cavalry,
-			[299502] = L.mechagon_trooper,
-			[303941] = L.anodized_coilbearer,
-			------ Workshop ------
-			[301088] = L.bomb_tonk,
-			[294103] = L.rocket_tonk,
-			[1215409] = L.waste_processing_unit,
-			[1215412] = L.metal_gunk,
-			[1217819] = L.junkyard_d0g,
-			[293827] = L.mechagon_tinkerer,
-			[293861] = L.anti_personnel_squirrel,
-			[294195] = L.defense_bot_mk_iii,
-			[293986] = L.blastatron_x80,
-			[293729] = L.mechagon_mechanic,
-			[293670] = L.workshop_defender,
-		}
-	end
-else -- XXX remove this block when 11.1 is live
-	function mod:GetOptions()
-		return {
-			------ Junkyard ------
-			-- Scrapbone Shaman
-			300436, -- Grasping Hex
-			{300514, "DISPEL"}, -- Stoneskin
-			-- Scrapbone Grinder
-			{300414, "DISPEL"}, -- Enrage
-			-- Scrapbone Bully
-			300424, -- Shockwave
-			-- Saurolisk Bonenipper
-			299474, -- Ripping Slash
-			-- Malfunctioning Scrapbot
-			300102, -- Exhaust
-			294884, -- Gyro-Scrap
-			300129, -- Self-Destruct Protocol
-			-- Heavy Scrapbot
-			300177, -- Exhaust
-			300159, -- Gyro-Scrap
-			300171, -- Repair Protocol
-			-- Pistonhead Blaster
-			299525, -- Scrap Grenade
-			-- Pistonhead Scrapper
-			{299438, "TANK_HEALER"}, -- Sledgehammer
-			-- Weaponized Crawler
-			{300188, "SAY", "NAMEPLATE"}, -- Scrap Cannon
-			{300207, "CASTBAR", "NAMEPLATE"}, -- Shock Coil
-			-- Slime Elemental
-			300764, -- Slimebolt
-			300777, -- Slimewave
-			-- Toxic Monstrosity
-			{300687, "CASTBAR", "NAMEPLATE"}, -- Consume
-			-- Toxic Lurker
-			{300650, "DISPEL"}, -- Suffocating Smog
-			-- Pistonhead Mechanic
-			{299588, "DISPEL"}, -- Overclock
-			300087, -- Repair
-			-- Scraphound
-			299475, -- B.O.R.K.
-			-- Mechagon Renormalizer
-			{284219, "SAY", "DISPEL"}, -- Shrink
-			-- Mechagon Cavalry
-			301667, -- Rapid Fire
-			301681, -- Charge
-			-- Mechagon Trooper
-			299502, -- Nanoslicer
-			-- Anodized Coilbearer
-			{303941, "DISPEL"}, -- Defensive Countermeasure
-			------ Workshop ------
-			-- Bomb Tonk
-			{301088, "NAMEPLATE"}, -- Detonate
-			-- Rocket Tonk
-			{294103, "NAMEPLATE"}, -- Rocket Barrage
-			-- Waste Processing Unit
-			294324, -- Mega Drill
-			294290, -- Process Waste
-			-- Living Waste
-			294349, -- Volatile Waste
-			-- Junkyard D.0.G.
-			{294180, "DISPEL"}, -- Flaming Refuse
-			-- Mechagon Tinkerer
-			{293827, "OFF"}, -- Giga-Wallop
-			-- Anti-Personnel Squirrel
-			293861, -- Anti-Personnel Squirrel
-			-- Defense Bot Mk III
-			{294195, "DISPEL", "NAMEPLATE"}, -- Arcing Zap
-			{297133, "DISPEL"}, -- Defensive Countermeasure
-			{297128, "NAMEPLATE"}, -- Short Out
-			-- Blastatron X-80
-			294015, -- Launch High-Explosive Rockets
-			{293986, "NAMEPLATE"}, -- Sonic Pulse
-			{295169, "NAMEPLATE"}, -- Capacitor Discharge
-			-- Mechagon Mechanic
-			{293729, "NAMEPLATE"}, -- Tune Up
-			{293930, "DISPEL", "NAMEPLATE"}, -- Overclock
-			-- Workshop Defender
-			{293670, "TANK_HEALER", "NAMEPLATE"}, -- Chainblade
-			{293683, "NAMEPLATE"}, -- Shield Generator
-		}, {
-			------ Junkyard ------
-			[300436] = L.scrapbone_shaman,
-			[300414] = L.scrapbone_grinder,
-			[300424] = L.scrapbone_bully,
-			[299474] = L.saurolisk_bonenipper,
-			[294884] = L.malfunctioning_scrapbot,
-			[300177] = L.heavy_scrapbot,
-			[299525] = L.pistonhead_blaster,
-			[299438] = L.pistonhead_scrapper,
-			[300764] = L.slime_elemental,
-			[300650] = L.toxic_lurker,
-			[299588] = L.pistonhead_mechanic,
-			[299475] = L.scraphound,
-			[284219] = L.mechagon_renormalizer,
-			[301667] = L.mechagon_cavalry,
-			[299502] = L.mechagon_trooper,
-			[303941] = L.anodized_coilbearer,
-			------ Workshop ------
-			[301088] = L.bomb_tonk,
-			[294103] = L.rocket_tonk,
-			[294324] = L.waste_processing_unit,
-			[294349] = L.living_waste,
-			[294180] = L.junkyard_d0g,
-			[293827] = L.mechagon_tinkerer,
-			[293861] = L.anti_personnel_squirrel,
-			[294195] = L.defense_bot_mk_iii,
-			[294015] = L.blastatron_x80,
-			[293729] = L.mechagon_mechanic,
-			[293670] = L.workshop_defender,
-		}
-	end
+function mod:GetOptions()
+	return {
+		------ Junkyard ------
+		-- Scrapbone Shaman
+		300436, -- Grasping Hex
+		{300514, "DISPEL"}, -- Stoneskin
+		-- Scrapbone Grinder
+		{300414, "DISPEL"}, -- Enrage
+		-- Scrapbone Bully
+		300424, -- Shockwave
+		-- Saurolisk Bonenipper
+		299474, -- Ripping Slash
+		-- Malfunctioning Scrapbot
+		300102, -- Exhaust
+		294884, -- Gyro-Scrap
+		300129, -- Self-Destruct Protocol
+		-- Heavy Scrapbot
+		300177, -- Exhaust
+		300159, -- Gyro-Scrap
+		300171, -- Repair Protocol
+		-- Pistonhead Blaster
+		299525, -- Scrap Grenade
+		-- Pistonhead Scrapper
+		{299438, "TANK_HEALER"}, -- Sledgehammer
+		-- Weaponized Crawler
+		{300188, "SAY", "NAMEPLATE"}, -- Scrap Cannon
+		{300207, "CASTBAR", "NAMEPLATE"}, -- Shock Coil
+		-- Slime Elemental
+		300764, -- Slimebolt
+		300777, -- Slimewave
+		-- Toxic Monstrosity
+		{300687, "CASTBAR", "NAMEPLATE"}, -- Consume
+		-- Toxic Lurker
+		{300650, "DISPEL"}, -- Suffocating Smog
+		-- Pistonhead Mechanic
+		{299588, "DISPEL"}, -- Overclock
+		300087, -- Repair
+		-- Scraphound
+		299475, -- B.O.R.K.
+		-- Mechagon Renormalizer
+		{284219, "SAY", "DISPEL"}, -- Shrink
+		-- Mechagon Cavalry
+		301667, -- Rapid Fire
+		301681, -- Charge
+		-- Mechagon Trooper
+		299502, -- Nanoslicer
+		-- Anodized Coilbearer
+		{303941, "DISPEL"}, -- Defensive Countermeasure
+		------ Workshop ------
+		-- Bomb Tonk
+		{301088, "NAMEPLATE"}, -- Detonate
+		-- Rocket Tonk
+		{294103, "NAMEPLATE"}, -- Rocket Barrage
+		-- Waste Processing Unit
+		{1215409, "NAMEPLATE"}, -- Mega Drill
+		{1215411, "TANK_HEALER", "NAMEPLATE"}, -- Puncture
+		-- Metal Gunk
+		{1215412, "NAMEPLATE"}, -- Corrosive Gunk
+		-- Junkyard D.0.G.
+		{1217819, "DISPEL", "NAMEPLATE"}, -- Fiery Jaws
+		-- Mechagon Tinkerer
+		{293827, "OFF"}, -- Giga-Wallop
+		{293854, "NAMEPLATE"}, -- Activate Anti-Personnel Squirrel
+		-- Anti-Personnel Squirrel
+		293861, -- Anti-Personnel Squirrel
+		-- Defense Bot Mk III
+		{294195, "DISPEL", "NAMEPLATE"}, -- Arcing Zap
+		{297133, "DISPEL"}, -- Defensive Countermeasure
+		{297128, "NAMEPLATE"}, -- Short Out
+		-- Blastatron X-80
+		{293986, "NAMEPLATE"}, -- Sonic Pulse
+		{295169, "NAMEPLATE"}, -- Capacitor Discharge
+		-- Mechagon Mechanic
+		{293729, "NAMEPLATE"}, -- Tune Up
+		{293930, "DISPEL", "NAMEPLATE"}, -- Overclock
+		-- Workshop Defender
+		{293683, "NAMEPLATE"}, -- Shield Generator
+	}, {
+		------ Junkyard ------
+		[300436] = L.scrapbone_shaman,
+		[300414] = L.scrapbone_grinder,
+		[300424] = L.scrapbone_bully,
+		[299474] = L.saurolisk_bonenipper,
+		[294884] = L.malfunctioning_scrapbot,
+		[300177] = L.heavy_scrapbot,
+		[299525] = L.pistonhead_blaster,
+		[299438] = L.pistonhead_scrapper,
+		[300764] = L.slime_elemental,
+		[300650] = L.toxic_lurker,
+		[299588] = L.pistonhead_mechanic,
+		[299475] = L.scraphound,
+		[284219] = L.mechagon_renormalizer,
+		[301667] = L.mechagon_cavalry,
+		[299502] = L.mechagon_trooper,
+		[303941] = L.anodized_coilbearer,
+		------ Workshop ------
+		[301088] = L.bomb_tonk,
+		[294103] = L.rocket_tonk,
+		[1215409] = L.waste_processing_unit,
+		[1215412] = L.metal_gunk,
+		[1217819] = L.junkyard_d0g,
+		[293827] = L.mechagon_tinkerer,
+		[293861] = L.anti_personnel_squirrel,
+		[294195] = L.defense_bot_mk_iii,
+		[293986] = L.blastatron_x80,
+		[293729] = L.mechagon_mechanic,
+		[293683] = L.workshop_defender,
+	}
 end
 
 function mod:OnBossEnable()
@@ -402,39 +287,28 @@ function mod:OnBossEnable()
 	self:Death("RocketTonkDeath", 151659)
 
 	-- Waste Processing Unit
-	if isElevenDotOne then
-		self:RegisterEngageMob("WasteProcessingUnitEngaged", 144293)
-		self:Log("SPELL_CAST_START", "MegaDrill", 1215409)
-		self:Log("SPELL_CAST_START", "Puncture", 1215411)
-		self:Death("WasteProcessingUnitDeath", 144293)
-	else
-		self:Log("SPELL_CAST_START", "MegaDrillOld", 294324) -- XXX removed in 11.1
-		self:Log("SPELL_CAST_START", "ProcessWaste", 294290) -- XXX removed in 11.1
-	end
+	self:RegisterEngageMob("WasteProcessingUnitEngaged", 144293)
+	self:Log("SPELL_CAST_START", "MegaDrill", 1215409)
+	self:Log("SPELL_CAST_START", "Puncture", 1215411)
+	self:Death("WasteProcessingUnitDeath", 144293)
 
-	if isElevenDotOne then
-		-- Metal Gunk
-		self:RegisterEngageMob("MetalGunkEngaged", 236033)
-		self:Log("SPELL_CAST_SUCCESS", "CorrosiveGunk", 1215412)
-		self:Death("MetalGunkDeath", 236033)
-	else
-		-- Living Waste
-		self:Log("SPELL_CAST_START", "VolatileWaste", 294349) -- XXX removed in 11.1
-	end
+	-- Metal Gunk
+	self:RegisterEngageMob("MetalGunkEngaged", 236033)
+	self:Log("SPELL_CAST_START", "CorrosiveGunk", 1215412)
+	self:Log("SPELL_CAST_SUCCESS", "CorrosiveGunkSuccess", 1215412)
+	self:Death("MetalGunkDeath", 236033)
 
 	-- Junkyard D.0.G.
-	if isElevenDotOne then
-		self:RegisterEngageMob("JunkyardD0GEngaged", 151773)
-		self:Log("SPELL_CAST_START", "FieryJaws", 1217819)
-		self:Log("SPELL_CAST_SUCCESS", "FieryJawsSuccess", 1217819)
-		self:Death("JunkyardD0GDeath", 151773)
-	else
-		self:Log("SPELL_AURA_APPLIED", "FlamingRefuseApplied", 294180) -- XXX removed in 11.1
-	end
+	self:RegisterEngageMob("JunkyardD0GEngaged", 151773)
+	self:Log("SPELL_CAST_SUCCESS", "FieryJaws", 1217819)
+	self:Log("SPELL_AURA_APPLIED", "FieryJawsApplied", 1217821)
+	self:Death("JunkyardD0GDeath", 151773)
 
 	-- Mechagon Tinkerer
-	-- TODO Activate Anti-Personnel Squirrel-293854
+	self:RegisterEngageMob("MechagonTinkererEngaged", 144294)
+	self:Log("SPELL_CAST_SUCCESS", "ActivateAntiPersonnelSquirrel", 293854)
 	self:Log("SPELL_CAST_START", "GigaWallop", 293827)
+	self:Death("MechagonTinkererDeath", 144294)
 
 	-- Anti-Personnel Squirrel
 	self:Log("SPELL_CAST_START", "AntiPersonnelSquirrel", 293861)
@@ -451,9 +325,6 @@ function mod:OnBossEnable()
 	-- Blastatron X-80 / Spider Tank
 	self:RegisterEngageMob("BlastatronX80Engaged", 151476)
 	self:RegisterEngageMob("SpiderTankEngaged", 144296)
-	if not isElevenDotOne then
-		self:Log("SPELL_CAST_SUCCESS", "LaunchHighExplosiveRockets", 294015) -- XXX passive aura in 11.1, remove
-	end
 	self:Log("SPELL_CAST_START", "SonicPulse", 293986)
 	self:Log("SPELL_CAST_SUCCESS", "CapacitorDischarge", 295169)
 	self:Death("BlastatronX80Death", 151476)
@@ -461,17 +332,14 @@ function mod:OnBossEnable()
 
 	-- Mechagon Mechanic
 	self:RegisterEngageMob("MechagonMechanicEngaged", 144295)
-	self:Log("SPELL_CAST_START", "TuneUp", 293729)
+	self:Log("SPELL_CAST_SUCCESS", "TuneUp", 293729)
 	self:Log("SPELL_CAST_SUCCESS", "MechagonMechanicOverclock", 293930)
 	self:Log("SPELL_AURA_APPLIED", "MechagonMechanicOverclockApplied", 293930)
 	self:Death("MechagonMechanicDeath", 144295)
 
 	-- Workshop Defender
 	self:RegisterEngageMob("WorkshopDefenderEngaged", 144299)
-	self:Log("SPELL_CAST_SUCCESS", "Chainblade", 293670)
-	self:Log("SPELL_AURA_APPLIED", "ChainbladeApplied", 293670)
-	self:Log("SPELL_AURA_APPLIED_DOSE", "ChainbladeApplied", 293670)
-	self:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED") -- Shield Generator
+	self:Log("SPELL_CAST_SUCCESS", "ShieldGenerator", 293683)
 	self:Death("WorkshopDefenderDeath", 144299)
 end
 
@@ -758,17 +626,23 @@ end
 -- Bomb Tonk
 
 function mod:BombTonkEngaged(guid)
-	self:Nameplate(301088, 2.3, guid) -- Detonate
+	self:Nameplate(301088, 8.0, guid) -- Detonate
 end
 
-function mod:Detonate(args)
-	self:Message(args.spellId, "red", CL.casting:format(args.spellName))
-	self:Nameplate(args.spellId, 0, args.sourceGUID)
-	self:PlaySound(args.spellId, "alert")
+do
+	local prev = 0
+	function mod:Detonate(args)
+		self:Nameplate(args.spellId, 0, args.sourceGUID)
+		if args.time - prev > 1.5 then
+			prev = args.time
+			self:Message(args.spellId, "red", CL.casting:format(args.spellName))
+			self:PlaySound(args.spellId, "alert")
+		end
+	end
 end
 
 function mod:DetonateInterrupt(args)
-	self:Nameplate(301088, 15.6, args.destGUID)
+	self:Nameplate(301088, 22.3, args.destGUID)
 end
 
 function mod:BombTonkDeath(args)
@@ -778,7 +652,7 @@ end
 -- Rocket Tonk
 
 function mod:RocketTonkEngaged(guid)
-	self:Nameplate(294103, 2.3, guid) -- Rocket Barrage
+	self:Nameplate(294103, 2.2, guid) -- Rocket Barrage
 end
 
 do
@@ -800,30 +674,20 @@ end
 -- Waste Processing Unit
 
 function mod:WasteProcessingUnitEngaged(guid)
-	self:Nameplate(1215411, 2.9, guid) -- Puncture
-	self:Nameplate(1215409, 7.2, guid) -- Mega Drill
+	self:Nameplate(1215411, 8.5, guid) -- Puncture
+	self:Nameplate(1215409, 13.6, guid) -- Mega Drill
 end
 
 function mod:MegaDrill(args)
 	self:Message(args.spellId, "yellow")
-	self:Nameplate(args.spellId, 18.6, args.sourceGUID)
+	self:Nameplate(args.spellId, 25.1, args.sourceGUID)
 	self:PlaySound(args.spellId, "alarm")
 end
 
 function mod:Puncture(args)
 	self:Message(args.spellId, "purple")
-	self:Nameplate(args.spellId, 17.0, args.sourceGUID)
+	self:Nameplate(args.spellId, 22.7, args.sourceGUID)
 	self:PlaySound(args.spellId, "alert")
-end
-
-function mod:MegaDrillOld(args) -- XXX removed in 11.1
-	self:Message(args.spellId, "orange")
-	self:PlaySound(args.spellId, "alarm")
-end
-
-function mod:ProcessWaste(args) -- XXX removed in 11.1
-	self:Message(args.spellId, "purple")
-	self:PlaySound(args.spellId, "info")
 end
 
 function mod:WasteProcessingUnitDeath(args)
@@ -833,13 +697,13 @@ end
 -- Metal Gunk
 
 function mod:MetalGunkEngaged(guid)
-	self:Nameplate(1215412, 10.8, guid) -- Corrosive Gunk
+	self:Nameplate(1215412, 8.5, guid) -- Corrosive Gunk
 end
 
 do
 	local prev = 0
 	function mod:CorrosiveGunk(args)
-		self:Nameplate(args.spellId, 19.4, args.sourceGUID)
+		self:Nameplate(args.spellId, 0, args.sourceGUID)
 		if args.time - prev > 2 then
 			prev = args.time
 			self:Message(args.spellId, "red")
@@ -848,49 +712,32 @@ do
 	end
 end
 
-function mod:MetalGunkDeath(args)
-	self:ClearNameplate(args.destGUID)
+function mod:CorrosiveGunkSuccess(args)
+	self:Nameplate(args.spellId, 20.7, args.sourceGUID)
 end
 
--- Living Waste
-
-do
-	local prev = 0
-	function mod:VolatileWaste(args) -- XXX removed in 11.1
-		if args.time - prev > 5 then
-			prev = args.time
-			self:Message(args.spellId, "red")
-			self:PlaySound(args.spellId, "alert")
-		end
-	end
+function mod:MetalGunkDeath(args)
+	self:ClearNameplate(args.destGUID)
 end
 
 -- Junkyard D.0.G.
 
 function mod:JunkyardD0GEngaged(guid)
-	self:Nameplate(1217819, 5.0, guid) -- Fiery Jaws
+	self:Nameplate(1217819, 8.4, guid) -- Fiery Jaws
+end
+
+function mod:FieryJaws(args)
+	self:Nameplate(args.spellId, 19.4, args.sourceGUID)
 end
 
 do
 	local prev = 0
-	function mod:FieryJaws(args)
-		self:Nameplate(args.spellId, 0, args.sourceGUID)
-		if args.time - prev > 2.5 then
+	function mod:FieryJawsApplied(args)
+		if (self:Me(args.destGUID) or self:Dispeller("magic", nil, 1217819)) and args.time - prev > 3 then
 			prev = args.time
-			self:Message(args.spellId, "orange")
-			self:PlaySound(args.spellId, "alert")
+			self:StackMessage(1217819, "orange", args.destName, args.amount, 1)
+			self:PlaySound(1217819, "alert", nil, args.destName)
 		end
-	end
-end
-
-function mod:FieryJawsSuccess(args)
-	self:Nameplate(args.spellId, 10.1, args.sourceGUID)
-end
-
-function mod:FlamingRefuseApplied(args) -- XXX removed in 11.1
-	if self:Dispeller("magic") then
-		self:TargetMessage(args.spellId, "orange", args.destName)
-		self:PlaySound(args.spellId, "alert", nil, args.destName)
 	end
 end
 
@@ -899,6 +746,10 @@ function mod:JunkyardD0GDeath(args)
 end
 
 -- Mechagon Tinkerer
+
+function mod:MechagonTinkererEngaged(guid)
+	self:Nameplate(293854, 4.6, guid) -- Activate Anti-Personnel Squirrel
+end
 
 do
 	local prev = 0
@@ -912,32 +763,41 @@ do
 	end
 end
 
+function mod:ActivateAntiPersonnelSquirrel(args)
+	self:Nameplate(args.spellId, 14.5, args.sourceGUID)
+end
+
+function mod:MechagonTinkererDeath(args)
+	self:ClearNameplate(args.destGUID)
+end
 
 -- Anti-Personnel Squirrel
 
-function mod:AntiPersonnelSquirrel(args)
-	if self:Friendly(args.sourceFlags) then -- can be summoned by a Priest mind-controlling a Mechagon Tinkerer
-		self:Message(args.spellId, "green")
-	else
-		self:Message(args.spellId, "orange")
-		self:PlaySound(args.spellId, "alarm")
+do
+	local prev = 0
+	function mod:AntiPersonnelSquirrel(args)
+		if args.time - prev > 2 then
+			prev = args.time
+			self:Message(args.spellId, "orange")
+			self:PlaySound(args.spellId, "alarm")
+		end
 	end
 end
 
 -- Defense Bot Mk III
 
 function mod:DefenseBotMkIIIEngaged(guid)
-	-- Defensive Countermeasure cast at low HP
-	self:Nameplate(294195, 4.6, guid) -- Arcing Zap
-	self:Nameplate(297128, 10.8, guid) -- Short Out
+	-- Defensive Countermeasure cast at 30% HP
+	self:Nameplate(294195, 9.5, guid) -- Arcing Zap
+	self:Nameplate(297128, 10.7, guid) -- Short Out
 end
 
 function mod:DefenseBotMkIEngaged(guid)
-	self:Nameplate(294195, 4.6, guid) -- Arcing Zap
+	self:Nameplate(294195, 9.1, guid) -- Arcing Zap
 end
 
 function mod:ArcingZap(args)
-	self:Nameplate(args.spellId, 16.0, args.sourceGUID)
+	self:Nameplate(args.spellId, 21.6, args.sourceGUID)
 end
 
 do
@@ -966,7 +826,7 @@ end
 
 function mod:ShortOut(args)
 	self:Message(args.spellId, "red")
-	self:Nameplate(args.spellId, 26.7, args.sourceGUID)
+	self:Nameplate(args.spellId, 27.9, args.sourceGUID)
 	self:PlaySound(args.spellId, "alarm")
 end
 
@@ -976,45 +836,71 @@ end
 
 -- Blastatron X-80 / Spider Tank
 
-function mod:BlastatronX80Engaged(guid)
-	self:Nameplate(293986, 2.1, guid) -- Sonic Pulse
-	self:Nameplate(295169, 17.9, guid) -- Capacitor Discharge
-end
-
 function mod:SpiderTankEngaged(guid)
-	self:Nameplate(293986, 5.7, guid) -- Sonic Pulse
+	self:Nameplate(293986, 5.1, guid) -- Sonic Pulse
 end
 
-function mod:LaunchHighExplosiveRockets(args) -- XXX passive aura in 11.1, remove
-	self:Message(args.spellId, "orange")
-	self:PlaySound(args.spellId, "info")
-end
+do
+	local timer
 
-function mod:SonicPulse(args)
-	self:Message(args.spellId, "red")
-	if self:MobId(args.sourceGUID) == 151476 then -- Blastatron X-80
-		self:Nameplate(args.spellId, 5.2, args.sourceGUID)
-	else -- 144296, Spider Tank
-		self:Nameplate(args.spellId, 12.1, args.sourceGUID)
+	function mod:BlastatronX80Engaged(guid)
+		-- Sonic Pulse is cast immediately
+		self:CDBar(295169, 12.1) -- Capacitor Discharge
+		self:Nameplate(295169, 12.1, guid) -- Capacitor Discharge
+		timer = self:ScheduleTimer("BlastatronX80Death", 30)
 	end
-	self:PlaySound(args.spellId, "alarm")
-end
 
-function mod:CapacitorDischarge(args)
-	self:Message(args.spellId, "yellow")
-	self:Nameplate(args.spellId, 27.9, args.sourceGUID)
-	self:Bar(args.spellId, 4, CL.count:format(args.spellName, 1))
-	self:Bar(args.spellId, 8, CL.count:format(args.spellName, 2))
-	self:Bar(args.spellId, 12, CL.count:format(args.spellName, 3))
-	self:PlaySound(args.spellId, "long")
-end
+	function mod:SonicPulse(args)
+		self:Message(args.spellId, "red")
+		if self:MobId(args.sourceGUID) == 151476 then -- Blastatron X-80
+			if timer then
+				self:CancelTimer(timer)
+			end
+			if not self:IsMobEngaged(args.sourceGUID) then
+				-- this cast can beat the engage callback, so trigger it manually
+				self:BlastatronX80Engaged(args.sourceGUID)
+			else
+				timer = self:ScheduleTimer("BlastatronX80Death", 30)
+			end
+			self:CDBar(args.spellId, 6.0)
+			self:Nameplate(args.spellId, 6.0, args.sourceGUID)
+		else -- 144296, Spider Tank
+			self:Nameplate(args.spellId, 13.3, args.sourceGUID)
+		end
+		self:PlaySound(args.spellId, "alarm")
+	end
 
-function mod:BlastatronX80Death(args)
-	self:ClearNameplate(args.destGUID)
-	local capacitorDischarge = self:SpellName(295169)
-	self:StopBar(CL.count:format(capacitorDischarge, 1))
-	self:StopBar(CL.count:format(capacitorDischarge, 2))
-	self:StopBar(CL.count:format(capacitorDischarge, 3))
+	function mod:CapacitorDischarge(args)
+		if timer then
+			self:CancelTimer(timer)
+		end
+		self:Message(args.spellId, "yellow")
+		self:Bar(args.spellId, 4, CL.count:format(args.spellName, 1))
+		self:Bar(args.spellId, 8, CL.count:format(args.spellName, 2))
+		self:Bar(args.spellId, 12, CL.count:format(args.spellName, 3))
+		self:CDBar(293986, 12.01) -- Sonic Pulse
+		self:Nameplate(293986, 12.01, args.sourceGUID) -- Sonic Pulse
+		self:CDBar(args.spellId, 27.4)
+		self:Nameplate(args.spellId, 27.4, args.sourceGUID)
+		timer = self:ScheduleTimer("BlastatronX80Death", 30)
+		self:PlaySound(args.spellId, "long")
+	end
+
+	function mod:BlastatronX80Death(args)
+		if timer then
+			self:CancelTimer(timer)
+			timer = nil
+		end
+		self:StopBar(293986) -- Sonic Pulse
+		self:StopBar(295169) -- Capacitor Discharge
+		local capacitorDischarge = self:SpellName(295169)
+		self:StopBar(CL.count:format(capacitorDischarge, 1))
+		self:StopBar(CL.count:format(capacitorDischarge, 2))
+		self:StopBar(CL.count:format(capacitorDischarge, 3))
+		if args then
+			self:ClearNameplate(args.destGUID)
+		end
+	end
 end
 
 function mod:SpiderTankDeath(args)
@@ -1024,7 +910,7 @@ end
 -- Mechagon Mechanic
 
 function mod:MechagonMechanicEngaged(guid)
-	self:Nameplate(293729, 8.4, guid) -- Tune Up
+	-- Tune Up is not cast unless there are nearby Mechanical mobs
 	if self:Dispeller("enrage", true, 293930) then
 		self:Nameplate(293930, 15.0, guid) -- Overclock
 	end
@@ -1032,13 +918,13 @@ end
 
 function mod:TuneUp(args)
 	self:Message(args.spellId, "yellow", CL.casting:format(args.spellName))
-	self:Nameplate(args.spellId, 20.6, args.sourceGUID) -- TODO confirm CD starts here
+	self:Nameplate(args.spellId, 20.6, args.sourceGUID)
 	self:PlaySound(args.spellId, "alert")
 end
 
 function mod:MechagonMechanicOverclock(args)
 	if self:Dispeller("enrage", true, args.spellId) then
-		self:Nameplate(args.spellId, 15.2, args.sourceGUID)
+		self:Nameplate(args.spellId, 20.6, args.sourceGUID)
 	end
 end
 
@@ -1061,34 +947,17 @@ end
 -- Workshop Defender
 
 function mod:WorkshopDefenderEngaged(guid)
-	self:Nameplate(293683, 3.4, guid) -- Shield Generator
-	self:Nameplate(293670, 16.0, guid) -- Chainblade
-end
-
-function mod:Chainblade(args)
-	self:Nameplate(args.spellId, 16.9, args.sourceGUID)
-end
-
-function mod:ChainbladeApplied(args)
-	self:StackMessage(args.spellId, "red", args.destName, args.amount, 1)
-	self:PlaySound(args.spellId, "alert", nil, args.destName)
+	self:Nameplate(293683, 8.4, guid) -- Shield Generator
 end
 
 do
-	local prevCast, prev = nil, 0
-	function mod:UNIT_SPELLCAST_SUCCEEDED(_, unit, castGUID, spellId)
-		if spellId == 293683 and castGUID ~= prevCast then -- Shield Generator
-			local t = GetTime()
-			prevCast = castGUID
-			local unitGUID = self:UnitGUID(unit)
-			if unitGUID then
-				self:Nameplate(spellId, 21.8, unitGUID)
-			end
-			if t - prev > 3 then
-				prev = t
-				self:Message(spellId, "green")
-				self:PlaySound(spellId, "info")
-			end
+	local prev = 0
+	function mod:ShieldGenerator(args)
+		self:Nameplate(args.spellId, 21.8, args.sourceGUID)
+		if args.time - prev > 3 then
+			prev = args.time
+			self:Message(args.spellId, "green")
+			self:PlaySound(args.spellId, "info")
 		end
 	end
 end

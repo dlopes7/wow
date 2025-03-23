@@ -1,6 +1,16 @@
 local GlobalAddonName, ExRT = ...
 
 ExRT.Options.Changelog = [=[
+v.5140
+* Note: added autoload support for Liberation of Undermine
+* Reminder: updated timelines for Liberation of Undermine HC bosses
+
+v.5120
+* 11.1 update
+* Raid groups: added "split raid" option
+* Note: added "text align" option
+* Reminder: added option to send timeline history after boss fight 
+
 v.5100
 * Reminder: you can directly select only boss from recorded m+ run 
 * Reminder: added players from custom roster to advanced settings window if it opened via shift-click on assignments page with "custom roster" selected

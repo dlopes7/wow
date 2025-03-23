@@ -1,4 +1,3 @@
-local isElevenDotOne = select(4, GetBuildInfo()) >= 110100 -- XXX remove when 11.1 is live
 --------------------------------------------------------------------------------
 -- Module Declaration
 --
@@ -22,9 +21,11 @@ end
 -- Initialization
 --
 
+local inconspicuousPlantMarker = mod:AddMarkerOption(true, "npc", 8, 294850, 8) -- Inconspicuous Plant
 function mod:GetOptions()
 	return {
 		294853, -- Activate Plant
+		inconspicuousPlantMarker,
 		{294855, "ME_ONLY"}, -- Blossom Blast
 		{285440, "CASTBAR"}, -- "Hidden" Flame Cannon
 		{285454, "DISPEL"}, -- Discom-BOMB-ulator
@@ -35,11 +36,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "ActivatePlant", 294853)
 	self:Log("SPELL_CAST_SUCCESS", "BlossomBlast", 294855)
 	self:Log("SPELL_CAST_START", "HiddenFlameCannon", 285440)
-	if isElevenDotOne then
-		self:Log("SPELL_CAST_START", "DiscomBOMBulator", 285454)
-	else -- XXX remove in 11.1
-		self:Log("SPELL_CAST_SUCCESS", "DiscomBOMBulator", 285454)
-	end
+	self:Log("SPELL_CAST_START", "DiscomBOMBulator", 285454)
 	self:Log("SPELL_AURA_APPLIED", "DiscomBOMBulatorApplied", 285460)
 end
 
@@ -53,15 +50,36 @@ end
 -- Event Handlers
 --
 
-function mod:ActivatePlant(args)
-	self:Message(args.spellId, "cyan", nil, L["294853_icon"])
-	self:CDBar(args.spellId, 46.1, nil, L["294853_icon"])
-	self:PlaySound(args.spellId, "long")
-end
+do
+	local plantSummoned, plantGUID = false, nil
 
-function mod:BlossomBlast(args)
-	self:TargetMessage(args.spellId, "yellow", args.destName)
-	self:PlaySound(args.spellId, "alert", nil, args.destName)
+	function mod:ActivatePlant(args)
+		plantSummoned = true
+		self:Message(args.spellId, "cyan", nil, L["294853_icon"])
+		self:CDBar(args.spellId, 46.1, nil, L["294853_icon"])
+		if self:GetOption(inconspicuousPlantMarker) then
+			self:RegisterTargetEvents("MarkInconspicuousPlant")
+		end
+		self:PlaySound(args.spellId, "long")
+	end
+
+	function mod:BlossomBlast(args)
+		if plantSummoned then
+			-- grab the GUID from the first Blossom Blast cast after Activate Plant
+			plantSummoned = false
+			plantGUID = args.sourceGUID
+		end
+		self:TargetMessage(args.spellId, "yellow", args.destName)
+		self:PlaySound(args.spellId, "alert", nil, args.destName)
+	end
+
+	function mod:MarkInconspicuousPlant(_, unit, guid)
+		if plantGUID == guid then
+			plantGUID = nil
+			self:CustomIcon(inconspicuousPlantMarker, unit, 8)
+			self:UnregisterTargetEvents()
+		end
+	end
 end
 
 function mod:HiddenFlameCannon(args)
@@ -77,11 +95,7 @@ do
 	function mod:DiscomBOMBulator(args)
 		playerList = {}
 		self:Message(args.spellId, "orange")
-		if isElevenDotOne then
-			self:CDBar(args.spellId, 20.6)
-		else -- XXX remove in 11.1
-			self:CDBar(args.spellId, 18.2)
-		end
+		self:CDBar(args.spellId, 20.6)
 		self:PlaySound(args.spellId, "info")
 	end
 
