@@ -10,6 +10,14 @@ END
 VER 3 000000000000001C "knock" "134400"
 /rw BAIT DRILLS TO SIDES
 END
+VER 3 000000000000001D "ORDER" "135865"
+/raid 1: Flame & Coin
+/raid 2: Coin & Bomb
+/raid 3: Shock & Flame
+/raid 4: Shock & Bomb
+/raid 5: Flame & Bomb
+/raid 6: Coin & Shock
+END
 VER 3 0000000000000018 "ping" "134400"
 /ping
 END

@@ -50,8 +50,8 @@ LittleWigs_Cataclysm: enabled
 ElvUI_Options: enabled
 BigWigs_NerubarPalace: enabled
 BigWigs_KhazAlgar: enabled
-ConsolePort_Config: enabled
-ConsolePort_Cursor: enabled
+ConsolePort_Config: disabled
+ConsolePort_Cursor: disabled
 BigWigs_LiberationOfUndermine: enabled
 LittleWigs_MistsOfPandaria: enabled
 LittleWigs_Dragonflight: enabled

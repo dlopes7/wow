@@ -39,6 +39,10 @@ eventFrame:SetScript(
                 if LiquidUpdaterSaved.settings.readyCheckPopup == nil then LiquidUpdaterSaved.settings.readyCheckPopup = true end
                 if LiquidUpdaterSaved.settings.disableBigWigsAssignments == nil then LiquidUpdaterSaved.settings.disableBigWigsAssignments = true end
 
+                if not InCombatLockdown() then
+                    SetCVar("Sound_NumChannels", 128)
+                end
+
                 -- Minimap icon
                 LUP.LDB = LDB:NewDataObject(
                     "Aura Updater",

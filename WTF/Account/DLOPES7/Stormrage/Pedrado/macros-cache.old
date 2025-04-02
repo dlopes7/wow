@@ -1,0 +1,4 @@
+VER 3 0100000000000001 "flamestrike" "134400"
+#showtooltip Flamestrike
+/cast [@cursor] Flamestrike
+END

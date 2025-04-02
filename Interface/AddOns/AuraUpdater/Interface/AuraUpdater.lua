@@ -22,6 +22,12 @@ local allAurasUpdatedText
 local playerVersionsTable -- Table containing all the version information. Serialized before sent to others. Used as-is for displaying our own versions.
 local UpdateVersionsForUnit = function(_, _) end
 
+function LUP:GetInstalledAuraDataByUID(uid)
+    local installedAuraID = UIDToID[uid]
+    
+    return installedAuraID and WeakAuras.GetData(installedAuraID)
+end
+
 function LUP:GetVersionsTableForGUID(GUID)
     return guidToVersionsTable[GUID]
 end
@@ -389,11 +395,7 @@ end
 -- Checks if the user already has the aura installed
 -- If so, apply "load: never" settings from the existing aura (group) to the aura being imported
 -- If "forceenable" is included in the description of an aura, always uncheck "load: never"
-function LUP:ApplyLoadSettings(auraData)
-    local uid = auraData.uid
-    local installedAuraID = UIDToID[uid]
-    local installedAuraData = installedAuraID and WeakAuras.GetData(installedAuraID)
-
+function LUP:ApplyLoadSettings(auraData, installedAuraData)
     if installedAuraData and installedAuraData.load and not (installedAuraData.regionType == "group" or installedAuraData.regionType == "dynamicgroup") then
         auraData.load.use_never = installedAuraData.load.use_never
 
@@ -404,11 +406,7 @@ function LUP:ApplyLoadSettings(auraData)
 end
 
 -- Similar to ApplyLoadSettings: preserves sound settings in action tab
-function LUP:ApplySoundSettings(auraData)
-    local uid = auraData.uid
-    local installedAuraID = UIDToID[uid]
-    local installedAuraData = installedAuraID and WeakAuras.GetData(installedAuraID)
-
+function LUP:ApplySoundSettings(auraData, installedAuraData)
     if not (installedAuraData and installedAuraData.actions) then return end
 
     local start = installedAuraData.actions.start
@@ -435,6 +433,55 @@ function LUP:ApplySoundSettings(auraData)
         auraData.actions.finish.sound_channel = finish.sound_channel
         auraData.actions.finish.stop_sound = finish.stop_sound
         auraData.actions.finish.stop_sound_fade = finish.stop_sound_fade
+    end
+end
+
+-- Similar to the above: miscellaneous auras do not have an anchor associated with them
+-- We don't want users to have to uncheck "group arrangement", so apply position settings of installed miscellaneous auras
+-- We only do this for direct children of miscellaneous groups, not for children of children etc.
+function LUP:ApplyMiscellaneousPositionSettings(groupAuraData)
+    if not groupAuraData.c then return end
+
+    -- Collect names of miscellaneous auras
+    local miscellaneousAuraNames = {}
+
+    for _, childAuraData in pairs(groupAuraData.c) do
+        local isGroup = childAuraData.regionType == "group"
+        local isMiscellaneousGroup = isGroup and childAuraData.groupIcon == "map-icon-ignored-bluequestion" and childAuraData.id:match("Miscellaneous")
+        local miscellaneousGroupChildren = isMiscellaneousGroup and childAuraData.controlledChildren
+
+        if miscellaneousGroupChildren then
+            for _, auraName in ipairs(miscellaneousGroupChildren) do
+                miscellaneousAuraNames[auraName] = true
+            end
+        end
+    end
+
+    -- Fill UID to auraData table for miscellaneous auras
+    -- We want to use UIDs over IDs, since players may have renamed auras
+    local uidToAuraData = {}
+
+    for _, childAuraData in pairs(groupAuraData.c) do
+        local auraName = childAuraData.id
+
+        if miscellaneousAuraNames[auraName] then
+            uidToAuraData[childAuraData.uid] = childAuraData
+        end
+    end
+
+    -- Apply position settings
+    for uid, auraData in pairs(uidToAuraData) do
+        local installedAuraData = LUP:GetInstalledAuraDataByUID(uid)
+
+        if installedAuraData then
+            local xOffset = installedAuraData.xOffset
+            local yOffset = installedAuraData.yOffset
+
+            if xOffset and auraData.xOffset and yOffset and auraData.yOffset then
+                auraData.xOffset = xOffset
+                auraData.yOffset = yOffset
+            end
+        end
     end
 end
 

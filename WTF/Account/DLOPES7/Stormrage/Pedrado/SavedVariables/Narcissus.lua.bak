@@ -4,6 +4,7 @@ NarcissusDB_PC = {
 ["PlayerAlias"] = "",
 ["EquipmentSetDB"] = {
 },
+["ClassSetAcquired_Undermine"] = true,
 }
 NarciStatisticsDB_PC = {
 }

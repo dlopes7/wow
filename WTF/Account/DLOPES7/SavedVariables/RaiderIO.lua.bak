@@ -1,15 +1,15 @@
 
 RaiderIO_Config = {
+["minimapIcon"] = {
+["minimapPos"] = 180,
+["showInCompartment"] = true,
+["lock"] = false,
+["hide"] = false,
+},
 ["profilePoint"] = {
 ["y"] = 0,
 ["x"] = -16,
 ["point"] = "TOPLEFT",
-},
-["minimapIcon"] = {
-["minimapPos"] = 180,
-["showInCompartment"] = true,
-["hide"] = false,
-["lock"] = false,
 },
 ["dockReplay"] = false,
 ["replayPoint"] = {
@@ -18,30 +18,24 @@ RaiderIO_Config = {
 ["point"] = "BOTTOMRIGHT",
 },
 ["previouslyEnabledLogging"] = false,
-["lockReplay"] = true,
 ["enableReplay"] = false,
+["lockReplay"] = true,
 ["displayWeeklyGuildBest"] = false,
 }
-RaiderIO_LastCharacter = "us-Dragonfreema-stormrage"
+RaiderIO_LastCharacter = "us-Gordonfreems-illidan"
 RaiderIO_MissingCharacters = {
-["us-Pickle-demon-soul"] = true,
-["us-Krystalfrost-blackhand"] = true,
-["us-Soullessman-ghostlands"] = true,
-["us-Twindragon-malganis"] = true,
-["us-Lucenaa-malganis"] = true,
-["us-Fog-burning-blade"] = true,
-["us-Gavyno-area-52"] = true,
-["us-Dragonfreema-stormrage"] = true,
-["us-Genuwine-illidan"] = true,
-["us-Stareater-alleria"] = true,
-["us-Lunadriel-area-52"] = true,
-["us-Sibyla-chogall"] = true,
-["us-Mellidrus-mannoroth"] = true,
-["us-Rockfisher-duskwood"] = true,
-["us-Raelexi-doomhammer"] = true,
-["us-Biskitstorm-sargeras"] = true,
-["us-Dwarfshadow-sargeras"] = true,
-["us-Makinami-malganis"] = true,
+["us-Greywar-illidan"] = true,
+["us-Wamma-illidan"] = true,
+["us-Gordonfreems-illidan"] = true,
+["us-Eeldy-area-52"] = true,
+["us-Saphirenn-stormrage"] = true,
+["us-Vemk-sargeras"] = true,
+["us-Icritmypantz-zuljin"] = true,
+["us-Hoyettae-illidan"] = true,
+["us-Terÿ-dalaran"] = true,
+["us-party5-illidan"] = true,
+["us-Chlmydia-anetheron"] = true,
+["us-Darcpriest-stormrage"] = true,
 }
 RaiderIO_MissingServers = {
 }

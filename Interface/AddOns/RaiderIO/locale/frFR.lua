@@ -1,4 +1,4 @@
--- Generated from CurseForge on Sat Mar 22 20:08:48 UTC 2025
+-- Generated from CurseForge on Wed Apr  2 20:05:48 UTC 2025
 local ns = select(2, ...) ---@class ns @The addon namespace.
 
 if ns:IsSameLocale("frFR") then
@@ -72,14 +72,14 @@ L["DUNGEON_SHORT_NAME_ARAK"] = "AraK"
 --[[ L["DUNGEON_SHORT_NAME_AV"] = ""--]] 
 --[[Translation missing --]]
 --[[ L["DUNGEON_SHORT_NAME_BH"] = ""--]] 
-L["DUNGEON_SHORT_NAME_BREW"] = "HdB"
+L["DUNGEON_SHORT_NAME_BREW"] = "Hydro"
 L["DUNGEON_SHORT_NAME_BRH"] = "BdF"
 --[[Translation missing --]]
 --[[ L["DUNGEON_SHORT_NAME_COEN"] = ""--]] 
 L["DUNGEON_SHORT_NAME_COS"] = "CoS"
 L["DUNGEON_SHORT_NAME_COT"] = "CdF"
 L["DUNGEON_SHORT_NAME_DAWN"] = "LBA"
-L["DUNGEON_SHORT_NAME_DFC"] = "FdFN"
+L["DUNGEON_SHORT_NAME_DFC"] = "Faille"
 L["DUNGEON_SHORT_NAME_DHT"] = "FS"
 L["DUNGEON_SHORT_NAME_DOS"] = "AC"
 L["DUNGEON_SHORT_NAME_EB"] = "LFé"
@@ -105,7 +105,7 @@ L["DUNGEON_SHORT_NAME_HOV"] = "SdI"
 --[[Translation missing --]]
 --[[ L["DUNGEON_SHORT_NAME_LOWR"] = ""--]] 
 L["DUNGEON_SHORT_NAME_MISTS"] = "Brumes"
-L["DUNGEON_SHORT_NAME_ML"] = "LF"
+L["DUNGEON_SHORT_NAME_ML"] = "Filon"
 --[[Translation missing --]]
 --[[ L["DUNGEON_SHORT_NAME_MOS"] = ""--]] 
 L["DUNGEON_SHORT_NAME_NELT"] = "NELT"
@@ -114,7 +114,7 @@ L["DUNGEON_SHORT_NAME_NL"] = "RdN"
 --[[ L["DUNGEON_SHORT_NAME_NO"] = ""--]] 
 L["DUNGEON_SHORT_NAME_NW"] = "SN"
 L["DUNGEON_SHORT_NAME_PF"] = "MP"
-L["DUNGEON_SHORT_NAME_PSF"] = "PdlFs"
+L["DUNGEON_SHORT_NAME_PSF"] = "Prieuré"
 L["DUNGEON_SHORT_NAME_RISE"] = "AdIcdM"
 --[[Translation missing --]]
 --[[ L["DUNGEON_SHORT_NAME_RLP"] = ""--]] 
@@ -135,7 +135,7 @@ L["DUNGEON_SHORT_NAME_SV"] = "CAVE"
 --[[ L["DUNGEON_SHORT_NAME_TD"] = ""--]] 
 --[[Translation missing --]]
 --[[ L["DUNGEON_SHORT_NAME_TJS"] = ""--]] 
-L["DUNGEON_SHORT_NAME_TOP"] = "TdlS"
+L["DUNGEON_SHORT_NAME_TOP"] = "Théâtre"
 --[[Translation missing --]]
 --[[ L["DUNGEON_SHORT_NAME_TOS"] = ""--]] 
 L["DUNGEON_SHORT_NAME_TOTT"] = "TdM"

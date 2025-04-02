@@ -96,6 +96,6 @@ ElvUI_BuffHighlight: disabled
 kExtraBossFrames: disabled
 OPie_Classic: disabled
 Blizzard_CombatText: enabled
-ConsolePort_Config: enabled
-ConsolePort_Cursor: enabled
+ConsolePort_Config: disabled
+ConsolePort_Cursor: disabled
 BigWigs_LiberationOfUndermine: enabled

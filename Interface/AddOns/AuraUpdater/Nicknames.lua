@@ -57,8 +57,20 @@ local function RealmIncludedName(unit)
 end
 
 -- VuhDo
-local function UpdateVuhDoName(unit, nameText)
-    local name = LiquidUpdaterSaved.settings.CustomNames and AuraUpdater:GetNickname(unit) or UnitName(unit)
+local vuhDoPanelSettings = {}
+
+local function UpdateVuhDoName(unit, nameText, buttonName)
+    local name = LiquidUpdaterSaved.settings.vuhDoNicknames and AuraUpdater:GetNickname(unit) or UnitName(unit)
+
+    -- Respect the max character option (if set)
+    local panelNumber = buttonName and buttonName:match("^Vd(%d+)")
+    panelNumber = tonumber(panelNumber)
+
+    local maxChars = panelNumber and vuhDoPanelSettings[panelNumber] and vuhDoPanelSettings[panelNumber].maxChars
+    
+    if name and maxChars and maxChars > 0 then
+        name = name:sub(1, maxChars)
+    end
 
     nameText:SetFormattedText(name or "") -- SetText is hooked, so we use this instead
 end
@@ -74,7 +86,7 @@ local function RefreshVuhDoNameForUnit(unit)
                 local unitButtonName = button:GetName()
                 local nameText = _G[unitButtonName .. "BgBarIcBarHlBarTxPnlUnN"]
                 
-                UpdateVuhDoName(unit, nameText)
+                UpdateVuhDoName(unit, nameText, unitButtonName)
             end
 
             break
@@ -89,13 +101,21 @@ function LUP:RefreshAllVuhDoNames()
         for _, button in ipairs(unitButtons) do
             local unitButtonName = button:GetName()
             local nameText = _G[unitButtonName .. "BgBarIcBarHlBarTxPnlUnN"]
-            
-            UpdateVuhDoName(unit, nameText)
+
+            UpdateVuhDoName(unit, nameText, unitButtonName)
         end
      end
 end
 
 local function HookVuhDo()
+    if VUHDO_PANEL_SETUP then
+        for i, settings in pairs(VUHDO_PANEL_SETUP) do
+            local textSettings = type(settings) == "table" and settings.PANEL_COLOR and settings.PANEL_COLOR.TEXT
+
+            vuhDoPanelSettings[i] = textSettings
+        end
+    end
+
 	hooksecurefunc(
 		"VUHDO_getBarText",
 		function(unitHealthBar)
@@ -118,7 +138,7 @@ local function HookVuhDo()
 				function(self)
                     local unit = unitButton.raidid
 
-                    UpdateVuhDoName(unit, self)
+                    UpdateVuhDoName(unit, self, unitFrameName)
 				end
 			)
 
@@ -303,7 +323,8 @@ function LUP:UpdateNicknameForUnit(unit, nickname)
 
     -- Set nicknames in CustomNames addon if installed (used by several other addons)
     -- Check if the nickname already exists in CustomNames before we do, otherwise it spam prints
-    if CustomNames and LiquidUpdaterSaved.settings.CustomNames then
+    -- Don't delete any CustomNames nicknames (if nickname is nil)
+    if nickname and CustomNames and LiquidUpdaterSaved.settings.CustomNames then
         local customNamesNickname = CustomNames.Get(unit)
 
         if not customNamesNickname or customNamesNickname ~= nickname then

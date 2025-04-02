@@ -1,6 +1,8 @@
 
 BADBOY_BLACKLIST = {
-["dayFromCal"] = 22,
+["Player-60-0FAB1FAC"] = true,
+["dayFromCal"] = 2,
+["Player-57-0DEC569C"] = true,
 }
 BADBOY_OPTIONS = {
 ["tipSpam"] = false,

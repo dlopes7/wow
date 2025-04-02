@@ -79,8 +79,7 @@ function LUP:InitializeWeakAurasImporter()
                                 data.d.liquidVersion = version
                                 data.d.url = nil
                                 data.d.wagoID = nil
-                                data.d.preferToUpdate = true
-                                
+
                                 if data.c then
                                     for _, childData in pairs(data.c) do
                                         childData.url = nil

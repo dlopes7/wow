@@ -2,7 +2,6 @@
 ElvCharacterDB = {
 ["ConvertKeybindings"] = true,
 ["ChatEditHistory"] = {
-"/raid collect trash first",
 "/wa",
 "/p one sec iomporting WA",
 "/p cant get",
@@ -16,12 +15,13 @@ ElvCharacterDB = {
 "/p mb",
 "/p gotta destroy the barrels with the dead bees",
 "/p gg",
-"/key",
 "/p we are dead",
 "/p shiet",
 "/p do you neeeed",
 "/p ye",
 "/roll",
+"/key",
+"/p ty1!",
 },
 ["ChatHistoryLog"] = {
 },

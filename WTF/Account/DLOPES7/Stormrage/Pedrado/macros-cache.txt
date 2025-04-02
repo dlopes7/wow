@@ -1,0 +1,9 @@
+VER 3 0100000000000001 "flamestrike" "134400"
+#showtooltip Flamestrike
+/cast [@cursor] Flamestrike
+END
+VER 3 0100000000000002 "interrupt" "134400"
+#showtooltip Counterspell
+/stopcasting
+/cast [@focus, exists, harm]  Counterspell;  Counterspell
+END

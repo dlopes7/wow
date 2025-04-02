@@ -1,15 +1,15 @@
 
 RaiderIO_Config = {
-["minimapIcon"] = {
-["minimapPos"] = 180,
-["showInCompartment"] = true,
-["lock"] = false,
-["hide"] = false,
-},
 ["profilePoint"] = {
 ["y"] = 0,
 ["x"] = -16,
 ["point"] = "TOPLEFT",
+},
+["minimapIcon"] = {
+["minimapPos"] = 180,
+["showInCompartment"] = true,
+["hide"] = false,
+["lock"] = false,
 },
 ["dockReplay"] = false,
 ["replayPoint"] = {
@@ -17,18 +17,14 @@ RaiderIO_Config = {
 ["x"] = -223.9988861083984,
 ["point"] = "BOTTOMRIGHT",
 },
-["previouslyEnabledLogging"] = false,
-["enableReplay"] = false,
+["previouslyEnabledLogging"] = true,
 ["lockReplay"] = true,
+["enableReplay"] = false,
 ["displayWeeklyGuildBest"] = false,
 }
 RaiderIO_LastCharacter = "us-Pedrado-stormrage"
 RaiderIO_MissingCharacters = {
-["us-Sunwalkers-stormrage"] = true,
-["us-Gullyg-thunderlord"] = true,
-["us-Botein-stormrage"] = true,
-["us-Giggleswørth-stormrage"] = true,
-["us-Pedrado-stormrage"] = true,
+["us-Taterwagon-zuljin"] = true,
 }
 RaiderIO_MissingServers = {
 }

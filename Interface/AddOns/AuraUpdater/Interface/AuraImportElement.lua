@@ -46,13 +46,17 @@ function LUP:CreateAuraImportElement(parent)
 
                     -- Apply existing "load: never" settings to the aura data before importing
                     local modifiedAuraData = CopyTable(auraData)
+                    local installedAuraData = LUP:GetInstalledAuraDataByUID(modifiedAuraData.uid)
 
-                    LUP:ApplyLoadSettings(modifiedAuraData.d)
+                    LUP:ApplyLoadSettings(modifiedAuraData.d, installedAuraData)
+                    LUP:ApplyMiscellaneousPositionSettings(modifiedAuraData)
 
                     if modifiedAuraData.c then
                         for _, childAuraData in pairs(modifiedAuraData.c) do
-                            LUP:ApplyLoadSettings(childAuraData)
-                            LUP:ApplySoundSettings(childAuraData)
+                            local installedChildAuraData = LUP:GetInstalledAuraDataByUID(childAuraData.uid)
+
+                            LUP:ApplyLoadSettings(childAuraData, installedChildAuraData)
+                            LUP:ApplySoundSettings(childAuraData, installedChildAuraData)
                         end
                     end
 
@@ -78,6 +82,8 @@ function LUP:CreateAuraImportElement(parent)
                             local data = WeakAuras.GetData(id)
                             local version = LiquidUpdaterSaved.WeakAuras[displayName].d.liquidVersion
 
+                            data.preferToUpdate = true
+                            data.ignoreWagoUpdate = true
                             data.liquidVersion = version
 
                             LUP:ForceUpdateOnInit(customOnInit)

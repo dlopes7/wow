@@ -73,29 +73,29 @@ GladiusExDB = {
 },
 ["HealthBar"] = {
 },
-["party_PetBar"] = {
+["Clicks"] = {
 },
-["PetBar"] = {
+["Tags"] = {
 },
 ["party_Cooldowns"] = {
 },
 ["party_Clicks"] = {
 },
+["party_Auras"] = {
+},
 ["Announcements"] = {
-},
-["party_Interrupts"] = {
-},
-["Alerts"] = {
-},
-["TargetBar"] = {
 },
 ["party_Tags"] = {
 },
-["party_Auras"] = {
+["TargetBar"] = {
 },
-["Tags"] = {
+["Alerts"] = {
 },
-["Clicks"] = {
+["party_Interrupts"] = {
+},
+["PetBar"] = {
+},
+["party_PetBar"] = {
 },
 ["ClassIcon"] = {
 },
@@ -103,12 +103,12 @@ GladiusExDB = {
 ["profileKeys"] = {
 ["Pedrado - Stormrage"] = "Default",
 ["Dragonfreema - Stormrage"] = "Default",
-["Gordonfreems - Illidan"] = "Default",
+["Gordonfreema - Stormrage"] = "Default",
 ["Gords - Stormrage"] = "Default",
 ["Doutora - Illidan"] = "Default",
 ["Davi - Stormrage"] = "Default",
 ["Blazingly - Illidan"] = "Default",
-["Gordonfreema - Stormrage"] = "Default",
+["Gordonfreems - Illidan"] = "Default",
 },
 ["profiles"] = {
 ["Default"] = {

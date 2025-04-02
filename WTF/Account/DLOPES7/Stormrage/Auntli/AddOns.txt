@@ -181,6 +181,6 @@ WorldQuestTracker: disabled
 LittleWigs_Dragonflight: enabled
 BigWigs_Dragonflight: enabled
 BigWigs_KhazAlgar: enabled
-ConsolePort_Config: enabled
-ConsolePort_Cursor: enabled
+ConsolePort_Config: disabled
+ConsolePort_Cursor: disabled
 BigWigs_LiberationOfUndermine: enabled

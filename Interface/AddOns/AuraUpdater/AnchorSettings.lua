@@ -68,6 +68,8 @@ local function ApplySubtextSettings(settings, region)
             if not subtextSettings then break end
 
             subRegion.text:SetFont(subtextSettings.fontPath, subtextSettings.size, subtextSettings.type)
+            subRegion.text:SetShadowColor(unpack(subtextSettings.shadowColor))
+            subRegion.text:SetShadowOffset(subtextSettings.shadowXOffset, subtextSettings.shadowYOffset)
         end
     end
 end
@@ -123,7 +125,10 @@ local function GetBarSettings(groupName, auraName, previewCount)
                 {
                     fontPath = SharedMedia:Fetch("font", subRegion.text_font),
                     size = subRegion.text_fontSize,
-                    type = subRegion.text_fontType
+                    type = subRegion.text_fontType,
+                    shadowColor = subRegion.text_shadowColor,
+                    shadowXOffset = subRegion.text_shadowXOffset,
+                    shadowYOffset = subRegion.text_shadowYOffset
                 }
             )
         end
@@ -182,7 +187,10 @@ local function GetIconSettings(groupName, auraName, previewCount)
                 {
                     fontPath = SharedMedia:Fetch("font", subRegion.text_font),
                     size = subRegion.text_fontSize,
-                    type = subRegion.text_fontType
+                    type = subRegion.text_fontType,
+                    shadowColor = subRegion.text_shadowColor,
+                    shadowXOffset = subRegion.text_shadowXOffset,
+                    shadowYOffset = subRegion.text_shadowYOffset
                 }
             )
         end
@@ -231,6 +239,10 @@ local function GetTextSettings(groupName, auraName, previewCount)
     settings.fontPath = SharedMedia:Fetch("font", auraData.font)
     settings.height = auraData.fontSize
     settings.fontType = auraData.outline
+    
+    settings.shadowColor = auraData.shadowColor
+    settings.shadowXOffset = auraData.shadowXOffset
+    settings.shadowYOffset = auraData.shadowYOffset
 
     -- Calculate options offsets
     settings.optionsOffsets = {0, 0}
@@ -253,6 +265,8 @@ local function ApplyTextSettings(settings, newPositions, activeRegions)
 
         if region.regionType == "text" then
             region.text:SetFont(settings.fontPath, settings.height, settings.fontType)
+            region.text:SetShadowOffset(settings.shadowXOffset, settings.shadowYOffset)
+            region.text:SetShadowColor(unpack(settings.shadowColor))
 
             -- Required to force text positioning when no text replacements are present
             region:SetHeight(settings.height)
@@ -361,7 +375,10 @@ updateAnchorFunctions.Circles = function()
                 {
                     fontPath = SharedMedia:Fetch("font", subRegion.text_font),
                     size = subRegion.text_fontSize,
-                    type = subRegion.text_fontType
+                    type = subRegion.text_fontType,
+                    shadowColor = subRegion.text_shadowColor,
+                    shadowXOffset = subRegion.text_shadowXOffset,
+                    shadowYOffset = subRegion.text_shadowYOffset
                 }
             )
         end

@@ -1,5 +1,5 @@
 --
--- RaiderIO Client Data. Generated on Sat Mar 22 2025 21:11:59 GMT+0000 (Coordinated Universal Time)
+-- RaiderIO Client Data. Generated on Wed Apr 02 2025 23:34:01 GMT+0000 (Coordinated Universal Time)
 --
 local _, ns = ...
 ns.CLIENT_CHARACTERS = {
@@ -171,6 +171,119 @@ ns.CLIENT_CHARACTERS = {
       }
     }
   },
+  ["Pedrado-Stormrage"] = {
+    ["profile"] = {
+      ["name"] = "Pedrado",
+      ["realm"] = "Stormrage",
+      ["faction"] = "alliance",
+      ["race"] = 3,
+      ["class"] = 8
+    },
+    ["mythic_keystone"] = {
+      ["all"] = {
+        ["score"] = 2284.9,
+        ["color"] = "#2977d5",
+        ["best"] = {
+          ["zone_id"] = 15452,
+          ["level"] = 10,
+          ["upgrades"] = 1,
+          ["fraction"] = 0.899,
+          ["score"] = 323.78254229305514,
+          ["url"] = "https://raider.io/mythic-plus-runs/season-tww-2/6253011-10-operation-floodgate?utm_source=client"
+        },
+        ["bestFortified"] = {
+          ["zone_id"] = 15452,
+          ["level"] = 10,
+          ["upgrades"] = 1,
+          ["fraction"] = 0.899,
+          ["score"] = 323.78254229305514,
+          ["url"] = "https://raider.io/mythic-plus-runs/season-tww-2/6253011-10-operation-floodgate?utm_source=client"
+        },
+        ["bestTyrannical"] = {
+          ["zone_id"] = 800002,
+          ["level"] = 10,
+          ["upgrades"] = 0,
+          ["fraction"] = 1.176,
+          ["score"] = 298.3853362234962,
+          ["url"] = "https://raider.io/mythic-plus-runs/season-tww-2/7590324-10-operation-mechagon-workshop?utm_source=client"
+        },
+        ["runs"] = {
+          {
+            ["zone_id"] = 14882,
+            ["level"] = 7,
+            ["upgrades"] = 2,
+            ["fraction"] = 0.607,
+            ["score"] = 274.7331352676708,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-2/6944561-7-darkflame-cleft?utm_source=client"
+          },
+          {
+            ["zone_id"] = 14883,
+            ["level"] = 0,
+            ["upgrades"] = 0,
+            ["fraction"] = 0,
+            ["score"] = 0,
+            ["url"] = nil
+          },
+          {
+            ["zone_id"] = 14938,
+            ["level"] = 7,
+            ["upgrades"] = 2,
+            ["fraction"] = 0.683,
+            ["score"] = 271.88039883997635,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-2/6425348-7-the-rookery?utm_source=client"
+          },
+          {
+            ["zone_id"] = 14954,
+            ["level"] = 10,
+            ["upgrades"] = 0,
+            ["fraction"] = 1.256,
+            ["score"] = 295.3969389528134,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-2/5399917-10-priory-of-the-sacred-flame?utm_source=client"
+          },
+          {
+            ["zone_id"] = 14971,
+            ["level"] = 0,
+            ["upgrades"] = 0,
+            ["fraction"] = 0,
+            ["score"] = 0,
+            ["url"] = nil
+          },
+          {
+            ["zone_id"] = 14979,
+            ["level"] = 0,
+            ["upgrades"] = 0,
+            ["fraction"] = 0,
+            ["score"] = 0,
+            ["url"] = nil
+          },
+          {
+            ["zone_id"] = 15093,
+            ["level"] = 0,
+            ["upgrades"] = 0,
+            ["fraction"] = 0,
+            ["score"] = 0,
+            ["url"] = nil
+          },
+          {
+            ["zone_id"] = 15103,
+            ["level"] = 7,
+            ["upgrades"] = 2,
+            ["fraction"] = 0.732,
+            ["score"] = 270.0551729203296,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-2/5358094-7-cinderbrew-meadery?utm_source=client"
+          },
+          {
+            ["zone_id"] = 15452,
+            ["level"] = 10,
+            ["upgrades"] = 1,
+            ["fraction"] = 0.899,
+            ["score"] = 323.78254229305514,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-2/6253011-10-operation-floodgate?utm_source=client"
+          }
+        }
+      }
+    }
+  },
   ["Doutora-Illidan"] = {
     ["profile"] = {
       ["name"] = "Doutora",
@@ -181,23 +294,23 @@ ns.CLIENT_CHARACTERS = {
     },
     ["mythic_keystone"] = {
       ["all"] = {
-        ["score"] = 807.1,
-        ["color"] = "#59ff3e",
+        ["score"] = 1097.1,
+        ["color"] = "#39f434",
         ["best"] = {
-          ["zone_id"] = 14938,
+          ["zone_id"] = 14882,
           ["level"] = 8,
-          ["upgrades"] = 2,
-          ["fraction"] = 0.761,
-          ["score"] = 283.9708408792883,
-          ["url"] = "https://raider.io/mythic-plus-runs/season-tww-2/4225993-8-the-rookery?utm_source=client"
+          ["upgrades"] = 3,
+          ["fraction"] = 0.588,
+          ["score"] = 290.000001215229,
+          ["url"] = "https://raider.io/mythic-plus-runs/season-tww-2/5626990-8-darkflame-cleft?utm_source=client"
         },
         ["bestFortified"] = {
-          ["zone_id"] = 15103,
-          ["level"] = 7,
-          ["upgrades"] = 1,
-          ["fraction"] = 0.921,
-          ["score"] = 262.9675368336884,
-          ["url"] = "https://raider.io/mythic-plus-runs/season-tww-2/3525062-7-cinderbrew-meadery?utm_source=client"
+          ["zone_id"] = 14882,
+          ["level"] = 8,
+          ["upgrades"] = 3,
+          ["fraction"] = 0.588,
+          ["score"] = 290.000001215229,
+          ["url"] = "https://raider.io/mythic-plus-runs/season-tww-2/5626990-8-darkflame-cleft?utm_source=client"
         },
         ["bestTyrannical"] = {
           ["zone_id"] = 14938,
@@ -210,11 +323,11 @@ ns.CLIENT_CHARACTERS = {
         ["runs"] = {
           {
             ["zone_id"] = 14882,
-            ["level"] = 0,
-            ["upgrades"] = 0,
-            ["fraction"] = 0,
-            ["score"] = 0,
-            ["url"] = nil
+            ["level"] = 8,
+            ["upgrades"] = 3,
+            ["fraction"] = 0.588,
+            ["score"] = 290.000001215229,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-2/5626990-8-darkflame-cleft?utm_source=client"
           },
           {
             ["zone_id"] = 14883,
@@ -294,40 +407,40 @@ ns.CLIENT_CHARACTERS = {
     },
     ["mythic_keystone"] = {
       ["all"] = {
-        ["score"] = 2640.1,
-        ["color"] = "#ae39e2",
+        ["score"] = 2969.6,
+        ["color"] = "#d850a2",
         ["best"] = {
-          ["zone_id"] = 12841,
-          ["level"] = 11,
+          ["zone_id"] = 15452,
+          ["level"] = 13,
           ["upgrades"] = 1,
-          ["fraction"] = 0.941,
-          ["score"] = 337.2105535083555,
-          ["url"] = "https://raider.io/mythic-plus-runs/season-tww-2/2606409-11-theater-of-pain?utm_source=client"
+          ["fraction"] = 0.946,
+          ["score"] = 382.02929809656644,
+          ["url"] = "https://raider.io/mythic-plus-runs/season-tww-2/7619412-13-operation-floodgate?utm_source=client"
         },
         ["bestFortified"] = {
-          ["zone_id"] = 12841,
-          ["level"] = 11,
-          ["upgrades"] = 1,
-          ["fraction"] = 0.941,
-          ["score"] = 337.2105535083555,
-          ["url"] = "https://raider.io/mythic-plus-runs/season-tww-2/2606409-11-theater-of-pain?utm_source=client"
+          ["zone_id"] = 8064,
+          ["level"] = 12,
+          ["upgrades"] = 2,
+          ["fraction"] = 0.748,
+          ["score"] = 374.43518270327246,
+          ["url"] = "https://raider.io/mythic-plus-runs/season-tww-2/6314518-12-the-motherlode?utm_source=client"
         },
         ["bestTyrannical"] = {
-          ["zone_id"] = 800002,
-          ["level"] = 11,
+          ["zone_id"] = 15452,
+          ["level"] = 13,
           ["upgrades"] = 1,
-          ["fraction"] = 0.967,
-          ["score"] = 336.2389842472588,
-          ["url"] = "https://raider.io/mythic-plus-runs/season-tww-2/4465227-11-operation-mechagon-workshop?utm_source=client"
+          ["fraction"] = 0.946,
+          ["score"] = 382.02929809656644,
+          ["url"] = "https://raider.io/mythic-plus-runs/season-tww-2/7619412-13-operation-floodgate?utm_source=client"
         },
         ["runs"] = {
           {
             ["zone_id"] = 14882,
-            ["level"] = 10,
-            ["upgrades"] = 1,
-            ["fraction"] = 0.853,
-            ["score"] = 325.5207848042906,
-            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-2/4435761-10-darkflame-cleft?utm_source=client"
+            ["level"] = 12,
+            ["upgrades"] = 2,
+            ["fraction"] = 0.786,
+            ["score"] = 373.0343742796208,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-2/7378715-12-darkflame-cleft?utm_source=client"
           },
           {
             ["zone_id"] = 14883,
@@ -339,19 +452,19 @@ ns.CLIENT_CHARACTERS = {
           },
           {
             ["zone_id"] = 14938,
-            ["level"] = 10,
-            ["upgrades"] = 2,
-            ["fraction"] = 0.773,
-            ["score"] = 328.5118371693493,
-            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-2/2535007-10-the-rookery?utm_source=client"
+            ["level"] = 12,
+            ["upgrades"] = 1,
+            ["fraction"] = 0.916,
+            ["score"] = 368.14702937796056,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-2/7442777-12-the-rookery?utm_source=client"
           },
           {
             ["zone_id"] = 14954,
-            ["level"] = 10,
-            ["upgrades"] = 2,
-            ["fraction"] = 0.762,
-            ["score"] = 328.9156247645437,
-            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-2/3967503-10-priory-of-the-sacred-flame?utm_source=client"
+            ["level"] = 12,
+            ["upgrades"] = 1,
+            ["fraction"] = 0.942,
+            ["score"] = 367.1785185435769,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-2/5838481-12-priory-of-the-sacred-flame?utm_source=client"
           },
           {
             ["zone_id"] = 14971,
@@ -379,19 +492,19 @@ ns.CLIENT_CHARACTERS = {
           },
           {
             ["zone_id"] = 15103,
-            ["level"] = 11,
+            ["level"] = 12,
             ["upgrades"] = 1,
-            ["fraction"] = 0.976,
-            ["score"] = 335.88320968359903,
-            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-2/3863438-11-cinderbrew-meadery?utm_source=client"
+            ["fraction"] = 0.98,
+            ["score"] = 365.73737417333376,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-2/5785321-12-cinderbrew-meadery?utm_source=client"
           },
           {
             ["zone_id"] = 15452,
-            ["level"] = 10,
+            ["level"] = 13,
             ["upgrades"] = 1,
-            ["fraction"] = 0.947,
-            ["score"] = 321.9796261886048,
-            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-2/2653595-10-operation-floodgate?utm_source=client"
+            ["fraction"] = 0.946,
+            ["score"] = 382.02929809656644,
+            ["url"] = "https://raider.io/mythic-plus-runs/season-tww-2/7619412-13-operation-floodgate?utm_source=client"
           }
         }
       }
