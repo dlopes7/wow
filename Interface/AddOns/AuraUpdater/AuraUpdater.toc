@@ -1,11 +1,11 @@
 ## Interface: 110100
-## Version: 26
+## Version: 28
 ## Title: Aura Updater
 ## Author: Naemesis
 ## IconTexture: Interface\AddOns\AuraUpdater\Media\Textures\logo_secondary.blp
 ## SavedVariables: LiquidUpdaterSaved
 ## Dependencies: WeakAuras
-## OptionalDeps: ViragDevTool, Plater, RCLootCouncil, MRT, CustomNames, Liquid, Grid2, ElvUI, Cell, LiquidUpdater, VuhDo
+## OptionalDeps: ViragDevTool, DBM-Core, Plater, RCLootCouncil, MRT, CustomNames, Liquid, Grid2, ElvUI, Cell, LiquidUpdater, VuhDo
 ## Category: Liquid
 
 embeds.xml

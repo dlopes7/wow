@@ -1,10 +1,13 @@
 # BigWigs
 
-## [v378.4](https://github.com/BigWigsMods/BigWigs/tree/v378.4) (2025-03-24)
-[Full Changelog](https://github.com/BigWigsMods/BigWigs/compare/v378.3...v378.4) [Previous Releases](https://github.com/BigWigsMods/BigWigs/releases)
+## [v380](https://github.com/BigWigsMods/BigWigs/tree/v380) (2025-04-01)
+[Full Changelog](https://github.com/BigWigsMods/BigWigs/compare/v379.1...v380) [Previous Releases](https://github.com/BigWigsMods/BigWigs/releases)
 
-- Core/PluginPrototype: Create event table prior to enabling plugins  
-- Update zhTW (#1967)  
-- LiberationOfUndermine/Bandit: Tweak Stage 1 timer handling  
-- Update koKR (#1964)  
-- Update frFR (#1961)  
+- Bump version  
+- Update koKR (#1989)  
+- Update ptBR (#1987)  
+- Plugins/Countdown: Tweak  
+- Plugins/Countdown: Support countdowns from nameplate timers  
+- Loader: Tweak  
+- Loader: Use GUID to check enabled state  
+- Tweak  

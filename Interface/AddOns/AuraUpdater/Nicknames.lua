@@ -217,7 +217,7 @@ local function UpdateCellNicknames()
 
         -- Insert nickname if it doesn't already exist, and refresh unit frame if necessary
         if tInsertUnique(CellDB.nicknames.list, cellFormat) then
-            Cell:Fire("UpdateNicknames", "list-update", name, nickname)
+            Cell.Fire("UpdateNicknames", "list-update", name, nickname)
         end
     end
 end
@@ -364,7 +364,7 @@ function LUP:UpdateNicknameForUnit(unit, nickname)
             table.insert(CellDB.nicknames.list, newEntry)
         end
 
-        Cell:Fire("UpdateNicknames", "list-update", realmIncludedName, nickname)
+        Cell.Fire("UpdateNicknames", "list-update", realmIncludedName, nickname)
     end
 
     -- If we are using VuhDo, refresh the unit frame name for this unit

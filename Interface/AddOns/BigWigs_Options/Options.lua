@@ -1021,9 +1021,9 @@ local function populatePrivateAuraOptions(widget)
 
 	local reset = AceGUI:Create("Button")
 	reset:SetFullWidth(true)
-	reset:SetText(BigWigsAPI:GetLocale("BigWigs: Plugins").reset)
-	reset:SetUserData("label", BigWigsAPI:GetLocale("BigWigs: Plugins").reset)
-	reset:SetUserData("desc", BigWigsAPI:GetLocale("BigWigs: Plugins").resetSoundDesc)
+	reset:SetText(L.reset)
+	reset:SetUserData("label", L.reset)
+	reset:SetUserData("desc", L.resetSoundDesc)
 	reset:SetUserData("scrollFrame", widget)
 	reset:SetUserData("privateAuraSoundOptions", privateAuraSoundOptions)
 	reset:SetCallback("OnEnter", slaveOptionMouseOver)
@@ -1414,7 +1414,8 @@ do
 			onZoneShow(widget, tonumber(instanceIdOrMapId))
 		elseif bigwigsContent and not loader.currentExpansion.bigWigsBundled[value] then -- Any BigWigs content except bundled expansion headers
 			local addonState = loader:GetAddOnState(bigwigsContent)
-			local string = addonState == "MISSING" and L.missingAddOnPopup or addonState == "DISABLED" and L.disabledAddOn
+			local disabled = not loader:IsAddOnEnabled(bigwigsContent)
+			local string = addonState == "MISSING" and L.missingAddOnPopup or disabled and L.disabledAddOn
 			if string then
 				local container = AceGUI:Create("SimpleGroup")
 				container:SetFullWidth(true)
@@ -1426,9 +1427,9 @@ do
 				missing:SetFullWidth(true)
 				container:AddChild(missing)
 
-				if addonState == "DISABLED" then
+				if disabled then
 					local reload = AceGUI:Create("Button")
-					reload:SetText(BigWigsAPI:GetLocale("BigWigs: Plugins").enable)
+					reload:SetText(L.enable)
 					reload:SetAutoWidth(true)
 					reload:SetUserData("addonName", bigwigsContent)
 					reload:SetCallback("OnClick", function(reloadWidget)
@@ -1443,7 +1444,8 @@ do
 				value = "LittleWigs"
 			end
 			local addonState = loader:GetAddOnState(value)
-			local string = addonState == "MISSING" and L.missingAddOnPopup or addonState == "DISABLED" and L.disabledAddOn
+			local disabled = not loader:IsAddOnEnabled(value)
+			local string = addonState == "MISSING" and L.missingAddOnPopup or disabled and L.disabledAddOn
 			if not loader.usingLittleWigsRepo and string then
 				local container = AceGUI:Create("SimpleGroup")
 				container:SetFullWidth(true)
@@ -1455,9 +1457,9 @@ do
 				missing:SetFullWidth(true)
 				container:AddChild(missing)
 
-				if addonState == "DISABLED" then
+				if disabled then
 					local reload = AceGUI:Create("Button")
-					reload:SetText(BigWigsAPI:GetLocale("BigWigs: Plugins").enable)
+					reload:SetText(L.enable)
 					reload:SetAutoWidth(true)
 					reload:SetUserData("addonName", value)
 					reload:SetCallback("OnClick", function(reloadWidget)
